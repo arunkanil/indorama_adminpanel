@@ -1,0 +1,160 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between">
+      <h2>Activities</h2>
+      <div>
+        <!-- <button type="button" class="btn btn-danger" data-toggle="modal" [disabled]="disableButton"
+          (click)="deleteModal.show()">
+          Delete
+        </button>
+        <button type="button" [disabled]="disableButton" class="btn btn-info" data-toggle="modal"
+          (click)="openModal('Edit')">
+          Edit
+        </button> -->
+        <button type="button" [disabled]="!disableButton" class="btn btn-primary" data-toggle="modal"
+          (click)="openModal()">
+          Add New Activity
+        </button>
+      </div>
+    </div>
+    <!-- <p class="text-muted mx-3">
+      To approve a crop price simply select and edit the record without
+      modifying the data
+    </p> -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <ag-grid-angular #agGrid style="width: 100%; height: 65vh" id="myGrid" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #activitiesModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Activity</h4>
+        <button type="button" class="close" (click)="activitiesModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="activitiesForm" (ngSubmit)="activitiesSubmit()">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="ActivityType">Activity Type</label>
+                <select class="form-control" id="ActivityType" required ngModel
+                  name="ActivityType" formControlName="ActivityType">
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option value="FarmDemo">Farm Demo</option>
+                  <option value="GroupFarmerTraining">Group Farmer Training</option>
+                  <option value="MegaFarmerTraining">Mega Farmer Training</option>
+                  <option value="FarmDay">Farm Day</option>
+                  <option value="RetailersTraining">Retailers Training</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="area">Area</label>
+                <select class="form-control" id="area" required ngModel name="area" formControlName="area">
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option *ngFor="let item of Areas" value="{{ item.id }}">
+                    {{ item.attributes.Name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="Latitude">Latitude</label>
+                <input type="text" class="form-control" id="Latitude" name="Latitude" formControlName="Latitude"
+                  placeholder="Enter Latitude" />
+              </div>
+              <div class="form-group">
+                <label for="Longitude">Longitude</label>
+                <input type="text" class="form-control" id="Longitude" name="Longitude" formControlName="Longitude"
+                  placeholder="Enter Longitude" />
+              </div>
+              <div class="form-group">
+                <label for="NoOfAttendees">Number of attendees</label>
+                <input type="text" class="form-control" id="NoOfAttendees" name="NoOfAttendees"
+                  formControlName="NoOfAttendees" placeholder="Enter No. of attendees" />
+              </div>
+              <div class="form-group">
+                <label for="FarmerName">Farmer name</label>
+                <input type="text" class="form-control" id="FarmerName" name="FarmerName" formControlName="FarmerName"
+                  placeholder="Enter name" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="crop">Crop</label>
+                <select class="form-control" id="crop" required ngModel name="crop" formControlName="crop">
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option *ngFor="let item of Crops" value="{{ item.id }}">
+                    {{ item.attributes.Name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="ConditionOfCrop">Condition of crop</label>
+                <input type="text" class="form-control" id="ConditionOfCrop" name="ConditionOfCrop"
+                  formControlName="ConditionOfCrop" placeholder="Enter condition" />
+              </div>
+              <div class="form-group">
+                <label for="PlannedFarmDay">Planned farm day</label>
+                <input type="date" class="form-control" id="PlannedFarmDay" name="PlannedFarmDay" formControlName="PlannedFarmDay"
+                  placeholder="Enter Date" />
+              </div>
+              <div class="form-group">
+                <label for="Date">Date</label>
+                <input type="date" class="form-control" id="Date" name="Date" formControlName="Date"
+                  placeholder="Enter Date" />
+              </div>
+              <div class="form-group">
+                <label for="Time">Time</label>
+                <input type="time" class="form-control" id="Time" name="Time" formControlName="Time"
+                  placeholder="Enter Time" />
+              </div>
+              <div class="form-group">
+                <label for="Reason">Body</label>
+                <textarea class="form-control" id="Reason" rows="5" name="Reason" formControlName="Reason"
+                  placeholder="Enter body"></textarea>
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="activitiesModal.hide()">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !activitiesForm.valid">
+            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        Do you want to delete this record?
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">
+          No! Cancel.
+        </button>
+        <button type="button" class="btn btn-primary" (click)="deleteRecord()">
+          Yes! Delete.
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

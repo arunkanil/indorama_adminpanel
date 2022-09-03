@@ -1,0 +1,138 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between">
+      <h2>Best Crop Practices</h2>
+      <div>
+        <!-- <button
+          type="button"
+          class="btn btn-danger"
+          data-toggle="modal"
+          [disabled]="disableButton"
+          (click)="openModal()"
+        >
+          Delete
+        </button> -->
+        <!-- <button type="button" [disabled]="disableButton" class="btn btn-info" data-toggle="modal"
+          (click)="openModal('Edit')">
+          Edit
+        </button> -->
+        <button type="button" [disabled]="!disableButton" class="btn btn-primary" data-toggle="modal"
+          (click)="practicesModal.show()">
+          Add New
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-3" *ngFor="let item of rowData">
+          <div class="card">
+            <div class="img-container">
+              <img class="card-img-top" height="200" width="200"
+                src="http://13.89.242.79{{item?.attributes?.cropImage?.data?.attributes?.url}}" alt="Card image cap" />
+              <div class="overlay">
+                <div class="overlay-text"><a target="_blank"
+                    href="http://13.89.242.79{{item?.attributes?.media?.data?.attributes?.url}}" style="color: white;">Click
+                    to view file</a></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between">
+                <h5 class="card-title">
+                  {{item.attributes.crop.data.attributes.Name}}
+                </h5>
+                <div>
+                  <!-- <button type="button" class="btn btn-outline-primary p-1">
+                    <img src="../../../assets/edit.svg">
+                  </button> -->
+                  <button type="button" class="btn btn-outline-primary p-1" (click)="openModal(item)">
+                    <img src="../../../assets/deleteIcon.svg">
+                  </button>
+                </div>
+              </div>
+              <p class="card-text">
+                {{item.attributes.content}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-12">
+          <ag-grid-angular #agGrid style="width: 100%; height: 65vh" id="myGrid" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
+          </ag-grid-angular>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #practicesModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit Practice</h4>
+        <button type="button" class="close" (click)="practicesModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="practicesForm" (ngSubmit)="practicesSubmit()">
+          <div class="form-group">
+            <label for="crop">Crop</label>
+            <select class="form-control" id="crop" required ngModel name="crop" formControlName="crop">
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of Crops" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="content">Description</label>
+            <textarea type="text" class="form-control" id="content" maxlength="150" name="content" rows="3" formControlName="content"
+              placeholder="Enter content"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="File">PDF File</label>
+            <div><input type="file" id="File" accept=".pdf" name="File" (change)="onChange($event,true)"
+              formControlName="File" placeholder="Choose file" /></div>
+          </div>
+          <div class="form-group">
+            <label for="Image">Preview image</label>
+            <div>
+              <img *ngIf="imageUrl" src="{{ imageUrl }}" width="100" height="100" style="object-fit: cover" />
+            </div>
+            <input type="file" id="Image" accept=".jpg,.jpeg,.JPEG,.png" name="Image"
+              (change)="onChange($event,false)" formControlName="Image" placeholder="Choose image" />
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="practicesModal.hide()">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !practicesForm.valid">
+            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        Do you want to delete this record?
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">
+          No! Cancel.
+        </button>
+        <button type="button" class="btn btn-primary" (click)="deletePractice()">
+          Yes! Delete.
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

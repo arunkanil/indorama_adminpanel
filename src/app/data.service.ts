@@ -1,0 +1,3789 @@
+import { Injectable } from "@angular/core";
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpHeaders,
+} from "@angular/common/http";
+import { Observable, throwError } from "rxjs";
+import { environment } from "../environments/environment";
+import { Apollo, gql } from "apollo-angular";
+import { catchError } from "rxjs/operators";
+import { ToastrService } from "ngx-toastr";
+import { idText } from "typescript";
+
+const FarmDemosQuery = gql`
+  query {
+    farmDemos(pagination: { limit: 100 }, sort: "createdAt:desc") {
+      data {
+        id
+        attributes {
+          Farmer
+          FarmLocationLatitude
+          FarmLocationLongitude
+          lgas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          AreaOfField
+          isPesticidesUsed
+          FarmerPractise {
+            id
+            Yield
+            DateOfSowing
+            DateOfDemonstration
+            FirstUreaApplication
+            SecondUreaApplication
+          }
+          IndoramaPractise {
+            id
+            Yield
+            DateOfSowing
+            DateOfDemonstration
+            FirstUreaApplication
+            SecondUreaApplication
+          }
+          Images {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          DateOfHarvesting
+          Season
+          Status
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const FarmDemoQuery = gql`
+  query ($id: ID) {
+    farmDemo(id: $id) {
+      data {
+        id
+        attributes {
+          Farmer
+          FarmLocationLatitude
+          FarmLocationLongitude
+          lgas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          createdAt
+          AreaOfField
+          isPesticidesUsed
+          DateOfHarvesting
+          Season
+          FarmerPractise {
+            id
+            Yield
+            DateOfSowing
+            DateOfDemonstration
+            FirstUreaApplication
+            SecondUreaApplication
+          }
+          IndoramaPractise {
+            id
+            Yield
+            DateOfSowing
+            DateOfDemonstration
+            FirstUreaApplication
+            SecondUreaApplication
+          }
+          Status
+          Images {
+            data {
+              id
+              attributes {
+                name
+                previewUrl
+                url
+              }
+            }
+          }
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const AddFarmDemoMutation = gql`
+  mutation (
+    $farmer: String
+    $latitude: Float
+    $longitude: Float
+    $lga: ID
+    $state: ID
+    $crop: ID
+    $area: String
+    $farmerPractise: ComponentFarmDemoFarmDemoPractiseInput
+    $indoramaPractise: ComponentFarmDemoFarmDemoPractiseInput
+    $dateOfHarvesting: Date
+    $season: String
+    $Status: ENUM_FARMDEMO_STATUS
+    $isPesticidesUsed: Boolean
+    $images: [ID]
+  ) {
+    createFarmDemo(
+      data: {
+        Farmer: $farmer
+        FarmLocationLatitude: $latitude
+        FarmLocationLongitude: $longitude
+        lgas: $lga
+        state: $state
+        crop: $crop
+        Status: $Status
+        AreaOfField: $area
+        FarmerPractise: $farmerPractise
+        IndoramaPractise: $indoramaPractise
+        isPesticidesUsed: $isPesticidesUsed
+        DateOfHarvesting: $dateOfHarvesting
+        Season: $season
+        Images: $images
+      }
+    ) {
+      data {
+        id
+        attributes {
+          Farmer
+          FarmLocationLatitude
+          FarmLocationLongitude
+          lgas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Status
+          AreaOfField
+          isPesticidesUsed
+          FarmerPractise {
+            id
+            Yield
+            DateOfSowing
+            DateOfDemonstration
+            FirstUreaApplication
+            SecondUreaApplication
+          }
+          IndoramaPractise {
+            id
+            Yield
+            DateOfSowing
+            DateOfDemonstration
+            FirstUreaApplication
+            SecondUreaApplication
+          }
+          Images {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          DateOfHarvesting
+          Season
+        }
+      }
+    }
+  }
+`;
+const UpdateFarmDemo = gql`
+  mutation (
+    $id: ID!
+    $farmer: String
+    $latitude: Float
+    $longitude: Float
+    $lga: ID
+    $crop: ID
+    $area: String
+    $farmerPractise: ComponentFarmDemoFarmDemoPractiseInput
+    $indoramaPractise: ComponentFarmDemoFarmDemoPractiseInput
+    $dateOfHarvesting: Date
+    $season: String
+    $isPesticidesUsed: Boolean
+    $images: [ID]
+    $Status: ENUM_FARMDEMO_STATUS
+    $state: ID
+  ) {
+    updateFarmDemo(
+      id: $id
+      data: {
+        Farmer: $farmer
+        FarmLocationLatitude: $latitude
+        FarmLocationLongitude: $longitude
+        lgas: $lga
+        crop: $crop
+        Status: $Status
+        state: $state
+        AreaOfField: $area
+        FarmerPractise: $farmerPractise
+        IndoramaPractise: $indoramaPractise
+        isPesticidesUsed: $isPesticidesUsed
+        DateOfHarvesting: $dateOfHarvesting
+        Season: $season
+        Images: $images
+      }
+    ) {
+      data {
+        id
+        attributes {
+          Farmer
+          FarmLocationLatitude
+          FarmLocationLongitude
+          Status
+          Season
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lgas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          AreaOfField
+          isPesticidesUsed
+          FarmerPractise {
+            id
+            Yield
+            DateOfSowing
+            DateOfDemonstration
+            FirstUreaApplication
+            SecondUreaApplication
+          }
+          IndoramaPractise {
+            id
+            Yield
+            DateOfSowing
+            DateOfDemonstration
+            FirstUreaApplication
+            SecondUreaApplication
+          }
+          Images {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          DateOfHarvesting
+          Season
+        }
+      }
+    }
+  }
+`;
+const CropsQuery = gql`
+  query {
+    crops(pagination: { limit: 100 }, sort: "createdAt:desc") {
+      data {
+        id
+        attributes {
+          Name
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const CropsMutation = gql`
+  mutation ($Name: String) {
+    createCrop(data: { Name: $Name }) {
+      data {
+        id
+        attributes {
+          Name
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const UpdateCrops = gql`
+  mutation ($Name: String, $id: ID!, $isDelete: Boolean) {
+    updateCrop(id: $id, data: { Name: $Name, isDelete: $isDelete }) {
+      data {
+        id
+        attributes {
+          Name
+          isDelete
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const StatesQuery = gql`
+  query {
+    states(pagination: { limit: 100 }, sort: "createdAt:desc") {
+      data {
+        id
+        attributes {
+          Name
+          lgas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          markets {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const StatesMutation = gql`
+  mutation ($Name: String) {
+    createState(data: { Name: $Name }) {
+      data {
+        id
+        attributes {
+          Name
+          lgas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          markets {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const UpdateState = gql`
+  mutation ($Name: String, $id: ID!, $isDelete: Boolean) {
+    updateState(id: $id, data: { Name: $Name, isDelete: $isDelete }) {
+      data {
+        id
+        attributes {
+          Name
+          lgas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          markets {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          createdAt
+          updatedAt
+          isDelete
+        }
+      }
+    }
+  }
+`;
+const LGAquery = gql`
+  query ($id: ID) {
+    lgas(
+      pagination: { limit: 100 }
+      sort: "createdAt:desc"
+      filters: { state: { id: { eq: $id } } }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          areas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const LGAmutation = gql`
+  mutation ($Name: String, $state: ID) {
+    createLga(data: { Name: $Name, state: $state }) {
+      data {
+        id
+        attributes {
+          Name
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          areas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const UpdateLGA = gql`
+  mutation ($Name: String, $state: ID, $id: ID!, $isDelete: Boolean) {
+    updateLga(
+      id: $id
+      data: { Name: $Name, isDelete: $isDelete, state: $state }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          areas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const Villagesquery = gql`
+  query ($id: ID) {
+    villages(
+      pagination: { limit: 100 }
+      sort: "createdAt:desc"
+      filters: { area: { lga: { id: { eq: $id } } } }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          area {
+            data {
+              id
+              attributes {
+                Name
+                PostalCode
+                lga {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      state {
+                        data {
+                          id
+                          attributes {
+                            Name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          localizations {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+        __typename
+      }
+    }
+  }
+`;
+const VillageMutation = gql`
+  mutation ($Name: String, $area: ID) {
+    createVillage(data: { Name: $Name, area: $area }) {
+      data {
+        id
+        attributes {
+          Name
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const UpdateVillage = gql`
+  mutation ($Name: String, $area: ID, $id: ID!, $isDelete: Boolean) {
+    updateVillage(
+      id: $id
+      data: { Name: $Name, area: $area, isDelete: $isDelete }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          isDelete
+        }
+      }
+    }
+  }
+`;
+const Areasquery = gql`
+  query ($id: ID) {
+    areas(
+      pagination: { limit: 100 }
+      sort: "createdAt:desc"
+      filters: { lga: { id: { eq: $id } } }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          PostalCode
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          villages {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const AreaMutation = gql`
+  mutation ($Name: String, $PostalCode: Long, $lga: ID) {
+    createArea(data: { Name: $Name, PostalCode: $PostalCode, lga: $lga }) {
+      data {
+        id
+        attributes {
+          Name
+          PostalCode
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          villages {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const UpdateArea = gql`
+  mutation (
+    $Name: String
+    $lga: ID
+    $PostalCode: Long
+    $id: ID!
+    $isDelete: Boolean
+  ) {
+    updateArea(
+      id: $id
+      data: {
+        Name: $Name
+        PostalCode: $PostalCode
+        lga: $lga
+        isDelete: $isDelete
+      }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          PostalCode
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          villages {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const MarketQuery = gql`
+  query ($id: ID) {
+    markets(
+      pagination: { limit: 100 }
+      sort: "createdAt:desc"
+      filters: { state: { id: { eq: $id } } }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const MarketMutation = gql`
+  mutation ($Name: String, $state: ID) {
+    createMarket(data: { Name: $Name, state: $state }) {
+      data {
+        id
+        attributes {
+          Name
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const UpdateMarket = gql`
+  mutation ($Name: String, $state: ID, $id: ID!, $isDelete: Boolean) {
+    updateMarket(
+      id: $id
+      data: { Name: $Name, isDelete: $isDelete, state: $state }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const CropPricesQuery = gql`
+  query {
+    cropPrices(
+      publicationState: PREVIEW
+      pagination: { limit: 100 }
+      sort: "createdAt:desc"
+    ) {
+      data {
+        id
+        attributes {
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Price
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Unit
+          market {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Image {
+            data {
+              id
+              attributes {
+                name
+                alternativeText
+                caption
+                width
+                height
+                url
+                previewUrl
+              }
+            }
+          }
+          createdAt
+          updatedAt
+          publishedAt
+        }
+      }
+    }
+  }
+`;
+const UpdateCropPriceMutation = gql`
+  mutation updateCropPrice(
+    $id: ID!
+    $crop: ID
+    $price: Float
+    $state: ID
+    $unit: String
+    $market: ID
+    $image: ID
+    $published: DateTime
+  ) {
+    updateCropPrice(
+      id: $id
+      data: {
+        crop: $crop
+        Price: $price
+        state: $state
+        Unit: $unit
+        market: $market
+        Image: $image
+        publishedAt: $published
+      }
+    ) {
+      data {
+        id
+        attributes {
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Price
+          Unit
+          state {
+            data {
+              attributes {
+                Name
+              }
+            }
+          }
+          market {
+            data {
+              attributes {
+                Name
+              }
+            }
+          }
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const CropPriceMutation = gql`
+  mutation addCropPrice(
+    $crop: ID
+    $price: Float
+    $state: ID
+    $unit: String
+    $market: ID
+    $image: ID
+    $published: DateTime
+  ) {
+    createCropPrice(
+      data: {
+        crop: $crop
+        Price: $price
+        state: $state
+        Unit: $unit
+        market: $market
+        Image: $image
+        publishedAt: $published
+      }
+    ) {
+      data {
+        id
+        attributes {
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Price
+          Unit
+          state {
+            data {
+              attributes {
+                Name
+              }
+            }
+          }
+          market {
+            data {
+              attributes {
+                Name
+              }
+            }
+          }
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const RetailerQuery = gql`
+  query {
+    usersPermissionsUsers(
+      pagination: { limit: 100 }
+      sort: "createdAt:desc"
+      filters: { UserType: { eq: "Retailer" } }
+    ) {
+      data {
+        id
+        attributes {
+          username
+          Name
+          email
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          retailer_products {
+            data {
+              attributes {
+                ItemName
+                Price
+                Unit
+                Images {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          UserType
+          Bio
+          Latitude
+          Longitude
+          UserType
+          prof_pic {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          ContactNumber
+        }
+      }
+    }
+  }
+`;
+const SoilTestQuery = gql`
+  query {
+    soilTests {
+      data {
+        id
+        attributes {
+          SoilTestID
+          Status
+          ReasonForSoilTest
+          ContactNumber
+          nutrient
+          Farmer {
+            data {
+              attributes {
+                username
+                email
+                agronomist {
+                  data {
+                    id
+                    attributes {
+                      users_permissions_user {
+                        data {
+                          id
+                          attributes {
+                            username
+                            email
+                            Name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          area {
+            data {
+              attributes {
+                Name
+                PostalCode
+              }
+            }
+          }
+          soil_test_samples {
+            data {
+              attributes {
+                SampleID
+              }
+            }
+          }
+          PreferredCollectionDate
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const SingleSoilTestQuery = gql`
+  query ($id: ID) {
+    soilTest(id: $id) {
+      data {
+        id
+        attributes {
+          SoilTestID
+          Status
+          ReasonForSoilTest
+          ContactNumber
+          nutrient
+          Farmer {
+            data {
+              id
+              attributes {
+                username
+                email
+                agronomist {
+                  data {
+                    id
+                    attributes {
+                      users_permissions_user {
+                        data {
+                          id
+                          attributes {
+                            username
+                            email
+                            Name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          area {
+            data {
+              id
+              attributes {
+                Name
+                PostalCode
+              }
+            }
+          }
+          soil_test_samples {
+            data {
+              id
+              attributes {
+                SampleID
+                QuantityOfSamples
+                createdAt
+                updatedAt
+                SampleAddedBy {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+                soil_test_results {
+                  data {
+                    id
+                    attributes {
+                      soil_test_sample {
+                        data {
+                          id
+                          attributes {
+                            SampleID
+                          }
+                        }
+                      }
+                      phObserved
+                      OrganicCarbonObserved
+                      TotalNitrogenObserved
+                      PhosphorousObserved
+                      PotassiumObserved
+                      CalciumObserved
+                      MagnesiumObserved
+                      ZincObserved
+                      SulphurObserved
+                      IronObserved
+                      CopperObserved
+                      BoronObserved
+                      ManganeseObserved
+                      updatedAt
+                    }
+                  }
+                }
+              }
+            }
+          }
+          PreferredCollectionDate
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const UpdateSoilTest = gql`
+  mutation updateSoilTest(
+    $soilTestId: ID!
+    $contactNumber: String
+    $preferredCollectionDate: DateTime
+    $reason: String
+    $farmerID: ID
+    $areaID: ID
+    $lgaID: ID
+    $soilTestDisplayID: String
+    $status: ENUM_SOILTEST_STATUS
+    $nutrient: String
+  ) {
+    updateSoilTest(
+      id: $soilTestId
+      data: {
+        ContactNumber: $contactNumber
+        PreferredCollectionDate: $preferredCollectionDate
+        ReasonForSoilTest: $reason
+        Farmer: $farmerID
+        area: $areaID
+        lga: $lgaID
+        SoilTestID: $soilTestDisplayID
+        Status: $status
+        nutrient: $nutrient
+      }
+    ) {
+      data {
+        id
+        attributes {
+          ContactNumber
+          PreferredCollectionDate
+          ReasonForSoilTest
+          Farmer {
+            data {
+              id
+              attributes {
+                username
+                Name
+              }
+            }
+          }
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          SoilTestID
+          Status
+          nutrient
+        }
+      }
+    }
+  }
+`;
+const UsersQuery = gql`
+  query ($UserType: String) {
+    usersPermissionsUsers(
+      pagination: { limit: 1000 }
+      sort: "createdAt:desc"
+      filters: { UserType: { eq: $UserType } }
+    ) {
+      data {
+        id
+        attributes {
+          username
+          Name
+          email
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          retailer_categories {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          retailer_products {
+            data {
+              attributes {
+                ItemName
+                Price
+                Unit
+                Images {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          UserType
+          Bio
+          Latitude
+          Longitude
+          UserType
+          prof_pic {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          ContactNumber
+        }
+      }
+    }
+  }
+`;
+const AddSoilTestResult = gql`
+  mutation soilTestAddResult(
+    $soilTestSampleID: ID
+    $ph: String
+    $Carbon: String
+    $Nitrogen: String
+    $phosphorous: String
+    $pottassium: String
+    $calcium: String
+    $magnesium: String
+    $zinc: String
+    $sulphur: String
+    $iron: String
+    $copper: String
+    $boron: String
+    $manganese: String
+  ) {
+    createSoilTestResult(
+      data: {
+        soil_test_sample: $soilTestSampleID
+        phObserved: $ph
+        OrganicCarbonObserved: $Carbon
+        TotalNitrogenObserved: $Nitrogen
+        PhosphorousObserved: $phosphorous
+        PotassiumObserved: $pottassium
+        CalciumObserved: $calcium
+        MagnesiumObserved: $magnesium
+        ZincObserved: $zinc
+        SulphurObserved: $sulphur
+        IronObserved: $iron
+        CopperObserved: $copper
+        BoronObserved: $boron
+        ManganeseObserved: $manganese
+      }
+    ) {
+      data {
+        attributes {
+          soil_test_sample {
+            data {
+              id
+              attributes {
+                SampleID
+              }
+            }
+          }
+          phObserved
+          OrganicCarbonObserved
+          TotalNitrogenObserved
+          PhosphorousObserved
+          PotassiumObserved
+          CalciumObserved
+          MagnesiumObserved
+          ZincObserved
+          SulphurObserved
+          CopperObserved
+          IronObserved
+          BoronObserved
+          ManganeseObserved
+        }
+      }
+    }
+  }
+`;
+const UpdateSoilTestResult = gql`
+  mutation soilTestAddResult(
+    $id: ID!
+    $soilTestSampleID: ID
+    $ph: String
+    $Carbon: String
+    $Nitrogen: String
+    $phosphorous: String
+    $pottassium: String
+    $calcium: String
+    $magnesium: String
+    $zinc: String
+    $sulphur: String
+    $iron: String
+    $copper: String
+    $boron: String
+    $manganese: String
+  ) {
+    updateSoilTestResult(
+      id: $id
+      data: {
+        soil_test_sample: $soilTestSampleID
+        phObserved: $ph
+        OrganicCarbonObserved: $Carbon
+        TotalNitrogenObserved: $Nitrogen
+        PhosphorousObserved: $phosphorous
+        PotassiumObserved: $pottassium
+        CalciumObserved: $calcium
+        MagnesiumObserved: $magnesium
+        ZincObserved: $zinc
+        SulphurObserved: $sulphur
+        IronObserved: $iron
+        CopperObserved: $copper
+        BoronObserved: $boron
+        ManganeseObserved: $manganese
+      }
+    ) {
+      data {
+        attributes {
+          soil_test_sample {
+            data {
+              id
+              attributes {
+                SampleID
+              }
+            }
+          }
+          phObserved
+          OrganicCarbonObserved
+          TotalNitrogenObserved
+          PhosphorousObserved
+          PotassiumObserved
+          CalciumObserved
+          MagnesiumObserved
+          ZincObserved
+          SulphurObserved
+          CopperObserved
+          IronObserved
+          BoronObserved
+          ManganeseObserved
+        }
+      }
+    }
+  }
+`;
+const GetSingleRetailerQuery = gql`
+  query ($id: ID) {
+    usersPermissionsUsers(filters: { id: { eq: $id } }) {
+      data {
+        id
+        attributes {
+          username
+          Name
+          email
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          retailer_categories {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          retailer_products {
+            data {
+              id
+              attributes {
+                ItemName
+                Price
+                Unit
+                Images {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          UserType
+          Bio
+          Latitude
+          Longitude
+          UserType
+          prof_pic {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          createdAt
+          updatedAt
+          blocked
+          ContactNumber
+        }
+      }
+    }
+  }
+`;
+const updateRetailerProfPic = gql`
+  mutation editRetailer($id: ID!, $prof_pic: ID) {
+    updateUsersPermissionsUser(id: $id, data: { prof_pic: $prof_pic }) {
+      data {
+        id
+        attributes {
+          username
+          Name
+          email
+          prof_pic {
+            data {
+              id
+              attributes {
+                name
+                url
+              }
+            }
+          }
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          retailer_categories {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          retailer_products {
+            data {
+              attributes {
+                ItemName
+                Price
+                Unit
+                Images {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          UserType
+          Bio
+          Latitude
+          Longitude
+          UserType
+          prof_pic {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          ContactNumber
+        }
+      }
+    }
+  }
+`;
+const updateRetailerQuery = gql`
+  mutation editRetailer(
+    $id: ID!
+    $name: String
+    $village: ID
+    $lga: ID
+    $UserType: ENUM_USERSPERMISSIONSUSER_USERTYPE
+    $categories: [ID]
+    $bio: String
+    $latitude: Float
+    $longitude: Float
+    $profpic: ID
+    $blocked: Boolean
+    $contactNumber: String
+  ) {
+    updateUsersPermissionsUser(
+      id: $id
+      data: {
+        Name: $name
+        village: $village
+        lga: $lga
+        UserType: $UserType
+        retailer_categories: $categories
+        Bio: $bio
+        blocked: $blocked
+        Latitude: $latitude
+        Longitude: $longitude
+        prof_pic: $profpic
+        ContactNumber: $contactNumber
+      }
+    ) {
+      data {
+        id
+        attributes {
+          username
+          Name
+          email
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                    }
+                  }
+                }
+              }
+            }
+          }
+          retailer_categories {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          retailer_products {
+            data {
+              attributes {
+                ItemName
+                Price
+                Unit
+                Images {
+                  data {
+                    attributes {
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          UserType
+          Bio
+          Latitude
+          Longitude
+          UserType
+          prof_pic {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          ContactNumber
+          blocked
+        }
+      }
+    }
+  }
+`;
+const getRetailerCategories = gql`
+  query {
+    retailerCategories {
+      data {
+        id
+        attributes {
+          CategoryName
+          createdAt
+          CategoryImage {
+            data {
+              id
+              attributes {
+                name
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const createdRetailerProducts = gql`
+  mutation (
+    $ItemName: String
+    $Price: Int
+    $Unit: String
+    $Images: [ID]
+    $retailer_category: ID
+    $retailers: [ID]
+  ) {
+    createRetailerProduct(
+      data: {
+        ItemName: $ItemName
+        Price: $Price
+        Unit: $Unit
+        Images: $Images
+        retailer_category: $retailer_category
+        retailers: $retailers
+      }
+    ) {
+      data {
+        id
+        attributes {
+          ItemName
+          Unit
+          Price
+          Images {
+            data {
+              id
+            }
+          }
+          retailer_category {
+            data {
+              id
+            }
+          }
+          retailers {
+            data {
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const updateRetailerProducts = gql`
+  mutation editRetailerProduct(
+    $productId: ID!
+    $itemName: String
+    $price: Int
+    $unit: String
+    $images: [ID]
+    $isApproved: Boolean
+    $retailer: [ID]
+    $retailer_category: ID
+  ) {
+    updateRetailerProduct(
+      id: $productId
+      data: {
+        ItemName: $itemName
+        Price: $price
+        Unit: $unit
+        Images: $images
+        isApproved: $isApproved
+        retailers: $retailer
+        retailer_category: $retailer_category
+      }
+    ) {
+      data {
+        attributes {
+          ItemName
+          Price
+          Unit
+          retailers {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          retailer_category {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          isApproved
+        }
+      }
+    }
+  }
+`;
+const DeleteStatesMutation = gql`
+  mutation ($id: ID!) {
+    deleteState(id: $id) {
+      data {
+        attributes {
+          Name
+        }
+      }
+    }
+  }
+`;
+const DeleteLGAMutation = gql`
+  mutation ($id: ID!) {
+    deleteLga(id: $id) {
+      data {
+        attributes {
+          Name
+        }
+      }
+    }
+  }
+`;
+const DeleteAreaMutation = gql`
+  mutation ($id: ID!) {
+    deleteArea(id: $id) {
+      data {
+        attributes {
+          Name
+        }
+      }
+    }
+  }
+`;
+const DeleteVillageMutation = gql`
+  mutation ($id: ID!) {
+    deleteVillage(id: $id) {
+      data {
+        attributes {
+          Name
+        }
+      }
+    }
+  }
+`;
+const DeleteCropMutation = gql`
+  mutation ($id: ID!) {
+    deleteCrop(id: $id) {
+      data {
+        attributes {
+          Name
+        }
+      }
+    }
+  }
+`;
+const DeleteMarketMutation = gql`
+  mutation ($id: ID!) {
+    deleteMarket(id: $id) {
+      data {
+        attributes {
+          Name
+        }
+      }
+    }
+  }
+`;
+const DeleteFarmdemo = gql`
+  mutation ($id: ID!) {
+    deleteFarmDemo(id: $id) {
+      data {
+        attributes {
+          Farmer
+          DateOfHarvesting
+        }
+      }
+    }
+  }
+`;
+const DeleteRetailerProduct = gql`
+  mutation ($id: ID!) {
+    deleteRetailerProduct(id: $id) {
+      data {
+        attributes {
+          ItemName
+          Price
+        }
+      }
+    }
+  }
+`;
+const DeleteFile = gql`
+  mutation ($id: ID!) {
+    deleteUploadFile(id: $id) {
+      data {
+        id
+      }
+    }
+  }
+`;
+const DeleteUser = gql`
+  mutation ($id: ID!) {
+    deleteUsersPermissionsUser(id: $id) {
+      data {
+        id
+        attributes {
+          username
+        }
+      }
+    }
+  }
+`;
+const DeleteBestPractice = gql`
+  mutation ($id: ID!) {
+    deleteBestCropPractise(id: $id) {
+      data {
+        attributes {
+          content
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const DeleteActivity = gql`
+  mutation ($id: ID!) {
+    deleteActivity(id: $id) {
+      data {
+        attributes {
+          FarmerName
+          Date
+          Latitude
+          Longitude
+          NoOfAttendees
+        }
+      }
+    }
+  }
+`;
+const DeleteMarketplaceProduct = gql`
+  mutation ($id: ID!) {
+    deleteMarketplaceProduct(id: $id) {
+      data {
+        attributes {
+          ItemName
+          Price
+          AvailableQty
+        }
+      }
+    }
+  }
+`;
+const CreateAgronomist = gql`
+  mutation ($areas: [ID], $user: ID) {
+    createAgronomist(data: { areas: $areas, users_permissions_user: $user }) {
+      data {
+        id
+        attributes {
+          users_permissions_user {
+            data {
+              id
+              attributes {
+                username
+                Name
+                UserType
+              }
+            }
+          }
+          areas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const getAgronomist = gql`
+  query ($user: ID) {
+    agronomists(filters: { users_permissions_user: { id: { eq: $user } } }) {
+      data {
+        id
+        attributes {
+          users_permissions_user {
+            data {
+              id
+              attributes {
+                username
+                Name
+                UserType
+              }
+            }
+          }
+          areas {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const queryUsersLarge = gql`
+  query ($UserType: String, $village: ID, $lga: ID, $area: ID, $state: ID) {
+    usersPermissionsUsers(
+      pagination: { limit: 10000 }
+      sort: "createdAt:desc"
+      filters: {
+        UserType: { eq: $UserType }
+        village: {
+          or: [{ id: { eq: $village } }, { area: { id: { eq: $area } } }]
+        }
+        lga: { or: [{ id: { eq: $lga } }, { state: { id: { eq: $state } } }] }
+      }
+    ) {
+      data {
+        id
+        attributes {
+          Name
+          ContactNumber
+        }
+      }
+    }
+  }
+`;
+const getIndoramaUpdates = gql`
+  query ($isDelete: Boolean, $isActive: Boolean, $id: ID) {
+    newsAndUpdates(
+      sort: "createdAt:desc"
+      pagination: { limit: 100 }
+      filters: {
+        isActive: { eq: $isActive }
+        isDelete: { eq: $isDelete }
+        id: { eq: $id }
+      }
+    ) {
+      data {
+        id
+        attributes {
+          Title
+          Body
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          isActive
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const UpdateIndoramaUpdates = gql`
+  mutation (
+    $id: ID!
+    $Title: String
+    $Body: String
+    $isDelete: Boolean
+    $isActive: Boolean
+    $Images: [ID]
+  ) {
+    updateNewsAndUpdate(
+      id: $id
+      data: {
+        Title: $Title
+        Body: $Body
+        isActive: $isActive
+        isDelete: $isDelete
+        Images: $Images
+      }
+    ) {
+      data {
+        id
+        attributes {
+          Title
+          Body
+          isActive
+          isDelete
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const CreateIndoramaUpdates = gql`
+  mutation ($Title: String, $Body: String, $Images: [ID]) {
+    createNewsAndUpdate(
+      data: {
+        Title: $Title
+        Body: $Body
+        isActive: true
+        isDelete: false
+        Images: $Images
+      }
+    ) {
+      data {
+        id
+        attributes {
+          Title
+          Body
+          isActive
+          isDelete
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const GetMarketplace = gql`
+  query ($pageNumber: Int, $pageSize: Int, $categoryFilter: [ID]) {
+    marketplaceProducts(
+      filters: { marketplace_category: { id: { in: $categoryFilter } } }
+      pagination: { page: $pageNumber, pageSize: $pageSize }
+      sort: "createdAt:desc"
+    ) {
+      data {
+        id
+        attributes {
+          ItemName
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          seller {
+            data {
+              attributes {
+                Name
+                username
+                ContactNumber
+              }
+            }
+          }
+          description
+          contactNumber
+          Price
+          AvailableQty
+          Unit
+          marketplace_category {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const GetMarketplaceSingleProduct = gql`
+  query ($id: ID!) {
+    marketplaceProduct(id: $id) {
+      data {
+        id
+        attributes {
+          ItemName
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          seller {
+            data {
+              attributes {
+                Name
+                username
+                ContactNumber
+              }
+            }
+          }
+          description
+          contactNumber
+          Price
+          AvailableQty
+          Unit
+          marketplace_category {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const CreateMarketplaceProduct = gql`
+  mutation sellItemMarketplace(
+    $itemName: String
+    $images: [ID]
+    $userId: ID
+    $contactNumber: String
+    $price: Int
+    $availableQty: Int
+    $unit: String
+    $category: ID
+    $description: String
+  ) {
+    createMarketplaceProduct(
+      data: {
+        ItemName: $itemName
+        Images: $images
+        seller: $userId
+        contactNumber: $contactNumber
+        Price: $price
+        AvailableQty: $availableQty
+        Unit: $unit
+        marketplace_category: $category
+        description: $description
+      }
+    ) {
+      data {
+        id
+        attributes {
+          ItemName
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          seller {
+            data {
+              id
+              attributes {
+                Name
+                username
+              }
+            }
+          }
+          description
+          contactNumber
+          Price
+          AvailableQty
+          Unit
+          marketplace_category {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          createdAt
+        }
+      }
+    }
+  }
+`;
+const UpdateMarketplaceProduct = gql`
+  mutation updateMarketplaceProduct(
+    $itemName: String
+    $images: [ID]
+    $contactNumber: String
+    $price: Int
+    $id: ID!
+    $availableQty: Int
+    $unit: String
+    $category: ID
+    $description: String
+  ) {
+    updateMarketplaceProduct(
+      id: $id
+      data: {
+        ItemName: $itemName
+        Images: $images
+        contactNumber: $contactNumber
+        Price: $price
+        AvailableQty: $availableQty
+        Unit: $unit
+        marketplace_category: $category
+        description: $description
+      }
+    ) {
+      data {
+        id
+        attributes {
+          ItemName
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          seller {
+            data {
+              id
+              attributes {
+                Name
+                username
+              }
+            }
+          }
+          description
+          contactNumber
+          Price
+          AvailableQty
+          Unit
+          marketplace_category {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          createdAt
+        }
+      }
+    }
+  }
+`;
+const UpdateMarketplaceProductImg = gql`
+  mutation updateMarketplaceProduct($images: [ID], $id: ID!) {
+    updateMarketplaceProduct(id: $id, data: { Images: $images }) {
+      data {
+        id
+        attributes {
+          ItemName
+          Images {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          seller {
+            data {
+              id
+              attributes {
+                Name
+                username
+              }
+            }
+          }
+          description
+          contactNumber
+          Price
+          AvailableQty
+          Unit
+          marketplace_category {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
+          createdAt
+        }
+      }
+    }
+  }
+`;
+const GetBestCropPractices = gql`
+  query getBestCropPractises($cropFilter: ID, $page: Int, $pageSize: Int) {
+    bestCropPractises(
+      filters: { crop: { id: { eq: $cropFilter } } }
+      pagination: { page: $page, pageSize: $pageSize }
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+        }
+      }
+      data {
+        id
+        attributes {
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          media {
+            data {
+              id
+              attributes {
+                name
+                formats
+                url
+                size
+                mime
+                ext
+              }
+            }
+          }
+          content
+          cropImage {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const CreateBestCropPractices = gql`
+  mutation ($crop: ID, $media: ID, $content: String, $cropImage: ID) {
+    createBestCropPractise(
+      data: {
+        crop: $crop
+        media: $media
+        content: $content
+        cropImage: $cropImage
+      }
+    ) {
+      data {
+        id
+        attributes {
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          media {
+            data {
+              id
+              attributes {
+                name
+                formats
+                url
+                size
+                mime
+                ext
+              }
+            }
+          }
+          content
+          cropImage {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const GetMarketplaceCategories = gql`
+  query {
+    marketplaceCategories(
+      filters: { isDelete: { eq: false }, isActive: { eq: true } }
+      sort: "CategoryName:asc"
+    ) {
+      data {
+        id
+        attributes {
+          CategoryName
+          CategoryImage {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          isDelete
+          isActive
+        }
+      }
+    }
+  }
+`;
+const GetActivities = gql`
+  query getActivities($page: Int, $pageSize: Int) {
+    activities(
+      sort: "createdAt:asc"
+      pagination: { page: $page, pageSize: $pageSize }
+    ) {
+      data {
+        id
+        attributes {
+          FarmerName
+          Date
+          Latitude
+          Longitude
+          NoOfAttendees
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          ConditionOfCrop
+          PlannedFarmDay
+          Reason
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          ActivityType
+          Time
+          createdAt
+        }
+      }
+    }
+  }
+`;
+const GetSingleActivity = gql`
+  query getActivities($id: ID) {
+    activity(id: $id) {
+      data {
+        id
+        attributes {
+          FarmerName
+          Date
+          Latitude
+          Longitude
+          NoOfAttendees
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          ConditionOfCrop
+          PlannedFarmDay
+          Reason
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          ActivityType
+          Time
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const CreateActivities = gql`
+  mutation (
+    $FarmerName: String
+    $Date: Date
+    $Latitude: Float
+    $Longitude: Float
+    $NoOfAttendees: Int
+    $crop: ID
+    $ConditionOfCrop: String
+    $PlannedFarmDay: Date
+    $Reason: String
+    $area: ID
+    $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
+    $Time: String
+  ) {
+    createActivity(
+      data: {
+        FarmerName: $FarmerName
+        Date: $Date
+        Latitude: $Latitude
+        Longitude: $Longitude
+        NoOfAttendees: $NoOfAttendees
+        crop: $crop
+        ConditionOfCrop: $ConditionOfCrop
+        PlannedFarmDay: $PlannedFarmDay
+        Reason: $Reason
+        area: $area
+        ActivityType: $ActivityType
+        Time: $Time
+      }
+    ) {
+      data {
+        id
+        attributes {
+          FarmerName
+          Date
+          Latitude
+          Longitude
+          NoOfAttendees
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          ConditionOfCrop
+          PlannedFarmDay
+          Reason
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          ActivityType
+          Time
+        }
+      }
+    }
+  }
+`;
+const UpdateActivity = gql`
+  mutation (
+    $FarmerName: String
+    $Date: Date
+    $Latitude: Float
+    $Longitude: Float
+    $NoOfAttendees: Int
+    $crop: ID
+    $ConditionOfCrop: String
+    $PlannedFarmDay: Date
+    $Reason: String
+    $area: ID
+    $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
+    $Time: String
+    $id: ID!
+  ) {
+    updateActivity(
+      id: $id
+      data: {
+        FarmerName: $FarmerName
+        Date: $Date
+        Latitude: $Latitude
+        Longitude: $Longitude
+        NoOfAttendees: $NoOfAttendees
+        crop: $crop
+        ConditionOfCrop: $ConditionOfCrop
+        PlannedFarmDay: $PlannedFarmDay
+        Reason: $Reason
+        area: $area
+        ActivityType: $ActivityType
+        Time: $Time
+      }
+    ) {
+      data {
+        id
+        attributes {
+          FarmerName
+          Date
+          Latitude
+          Longitude
+          NoOfAttendees
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          ConditionOfCrop
+          PlannedFarmDay
+          Reason
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          ActivityType
+          Time
+        }
+      }
+    }
+  }
+`;
+@Injectable({
+  providedIn: "root",
+})
+export class DataService {
+  baseURL = environment.apiUrl;
+  params: URLSearchParams = new URLSearchParams();
+
+  constructor(
+    private http: HttpClient,
+    private apollo: Apollo,
+    private toastr: ToastrService
+  ) {}
+
+  handleError(error: HttpErrorResponse) {
+    let errorMessage = "Unknown error!";
+    console.log(error);
+    window.alert(error.error.error.message);
+    // if (error.error instanceof ErrorEvent) {
+    //   // Client-side errors
+    //   errorMessage = `Error: ${error.error.message}`;
+    // } else {
+    //   // Server-side errors
+    //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    // }
+    if (error.status !== 200) {
+      this.toastr.error(error.error.error.Message);
+      return throwError(errorMessage);
+    }
+  }
+
+  Login(data): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+    };
+    return this.http.post(this.baseURL + `auth/login/`, data, httpOptions1);
+  }
+  createRetailer(data): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+    };
+    return this.http.post(this.baseURL + `api/users`, data, httpOptions1);
+  }
+  sendMessage(data): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    };
+    return this.http
+      .post(
+        `https://www.bulksmsnigeria.com/api/v1/sms/create`,
+        data,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+  getFarmDemos() {
+    return this.apollo.watchQuery({
+      query: FarmDemosQuery,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getSingleFarmDemo(id) {
+    return this.apollo.watchQuery({
+      query: FarmDemoQuery,
+      variables: {
+        id: id,
+      },
+      fetchPolicy: "no-cache",
+    });
+  }
+  getCrops() {
+    return this.apollo.watchQuery({
+      query: CropsQuery,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getStates() {
+    return this.apollo.watchQuery({
+      query: StatesQuery,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getLGAs(id?) {
+    return this.apollo.watchQuery({
+      query: LGAquery,
+      fetchPolicy: "no-cache",
+      variables: {
+        id: id,
+      },
+    });
+  }
+  getVillages(id?) {
+    return this.apollo.watchQuery({
+      query: Villagesquery,
+      fetchPolicy: "no-cache",
+      variables: {
+        id: id,
+      },
+    });
+  }
+  getAreas(id?) {
+    return this.apollo.watchQuery({
+      query: Areasquery,
+      fetchPolicy: "no-cache",
+      variables: {
+        id: id,
+      },
+    });
+  }
+  getMarkets(id?) {
+    return this.apollo.watchQuery({
+      query: MarketQuery,
+      fetchPolicy: "no-cache",
+      variables: {
+        id: id,
+      },
+    });
+  }
+  getCropPrices() {
+    return this.apollo.watchQuery({
+      query: CropPricesQuery,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getRetailers() {
+    return this.apollo.watchQuery({
+      query: RetailerQuery,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getRetailerCategories() {
+    return this.apollo.watchQuery({
+      query: getRetailerCategories,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getUsers(UserType?) {
+    return this.apollo.watchQuery({
+      query: UsersQuery,
+      fetchPolicy: "no-cache",
+      variables: {
+        UserType: UserType,
+      },
+    });
+  }
+  getUsersLarge(UserType?, data?) {
+    return this.apollo.watchQuery({
+      query: queryUsersLarge,
+      fetchPolicy: "no-cache",
+      variables: {
+        UserType: UserType,
+        village: data.village ? data.village : null,
+        lga: data.lga ? data.lga : null,
+        area: data.area ? data.area : null,
+        state: data.state ? data.state : null,
+      },
+    });
+  }
+  getsoilTests() {
+    return this.apollo.watchQuery({
+      query: SoilTestQuery,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getsingleSoilTests(id) {
+    return this.apollo.watchQuery({
+      query: SingleSoilTestQuery,
+      fetchPolicy: "no-cache",
+      variables: {
+        id: id,
+      },
+    });
+  }
+  getsingleRetailer(id) {
+    return this.apollo.watchQuery({
+      query: GetSingleRetailerQuery,
+      fetchPolicy: "no-cache",
+      variables: {
+        id: id,
+      },
+    });
+  }
+
+  AddFarmdemo(farmdemo) {
+    return this.apollo.mutate({
+      mutation: AddFarmDemoMutation,
+      variables: {
+        farmer: farmdemo.Farmer,
+        latitude: parseFloat(farmdemo.FarmLocationLatitude),
+        longitude: parseFloat(farmdemo.FarmLocationLongitude),
+        lga: farmdemo.lga,
+        state: farmdemo.state,
+        crop: farmdemo.Crops,
+        area: farmdemo.AreaOfField,
+        farmerPractise: farmdemo.ComponentFarmDemoFarmDemoPractiseInput,
+        indoramaPractise: farmdemo.ComponentFarmDemoFarmDemoPractiseInput,
+        dateOfHarvesting: farmdemo.dateOfHarvesting,
+        season: farmdemo.Season,
+        Status: farmdemo.Status,
+        isPesticidesUsed: farmdemo.isPesticidesUsed == "true" ? true : false,
+        images: farmdemo.images,
+      },
+      errorPolicy: "all",
+    });
+  }
+
+  AddStates(state) {
+    return this.apollo.mutate({
+      mutation: StatesMutation,
+      variables: {
+        Name: state.state,
+      },
+      errorPolicy: "all",
+    });
+  }
+  AddLGA(lga) {
+    return this.apollo.mutate({
+      mutation: LGAmutation,
+      variables: {
+        Name: lga.lga,
+        state: lga.state,
+      },
+      errorPolicy: "all",
+    });
+  }
+  AddArea(area) {
+    return this.apollo.mutate({
+      mutation: AreaMutation,
+      variables: {
+        Name: area.area,
+        lga: area.lga,
+        PostalCode: area.PostalCode,
+      },
+      errorPolicy: "all",
+    });
+  }
+  AddMarket(market) {
+    return this.apollo.mutate({
+      mutation: MarketMutation,
+      variables: {
+        Name: market.market,
+        state: market.state,
+      },
+      errorPolicy: "all",
+    });
+  }
+  AddCrop(crop) {
+    return this.apollo.mutate({
+      mutation: CropsMutation,
+      variables: {
+        Name: crop.crop,
+      },
+      errorPolicy: "all",
+    });
+  }
+  Addvillage(village) {
+    return this.apollo.mutate({
+      mutation: VillageMutation,
+      variables: {
+        Name: village.village,
+        area: village.area,
+      },
+      errorPolicy: "all",
+    });
+  }
+  AddCropPrice(price, image) {
+    return this.apollo.mutate({
+      mutation: CropPriceMutation,
+      variables: {
+        crop: price.crop,
+        price: parseFloat(price.Price),
+        unit: price.Unit,
+        state: price.state,
+        market: price.market,
+        image: image,
+        published: new Date(),
+      },
+      errorPolicy: "all",
+    });
+  }
+  AddIndoramaUpdates(price, imageid) {
+    return this.apollo.mutate({
+      mutation: CreateIndoramaUpdates,
+      variables: {
+        Title: price.Title,
+        Body: price.Body,
+        Images: imageid ? imageid : price.Image,
+      },
+      errorPolicy: "all",
+    });
+  }
+  createBestCropPractise(price, imageid, media) {
+    return this.apollo.mutate({
+      mutation: CreateBestCropPractices,
+      variables: {
+        crop: price.crop,
+        content: price.content,
+        cropImage: imageid,
+        media: media,
+      },
+      errorPolicy: "all",
+    });
+  }
+  createMarketplaceProduct(price, imageid) {
+    return this.apollo.mutate({
+      mutation: CreateMarketplaceProduct,
+      variables: {
+        itemName: price.itemName,
+        images: imageid,
+        userId: price.userId,
+        contactNumber: String(price.contactNumber),
+        price: price.price,
+        availableQty: parseInt(price.availableQty),
+        unit: price.unit,
+        category: parseInt(price.category),
+        description: price.description,
+      },
+      errorPolicy: "all",
+    });
+  }
+  updateMarketplaceProduct(price, id, imageid?) {
+    return this.apollo.mutate({
+      mutation: UpdateMarketplaceProduct,
+      variables: {
+        id: id,
+        itemName: price.itemName,
+        images: imageid,
+        // userId: price.userId,
+        contactNumber: String(price.contactNumber),
+        price: price.price,
+        availableQty: parseInt(price.availableQty),
+        unit: price.unit,
+        category: parseInt(price.category),
+        description: price.description,
+      },
+      errorPolicy: "all",
+    });
+  }
+  updateMarketplaceProductImg(id, imageid?) {
+    return this.apollo.mutate({
+      mutation: UpdateMarketplaceProductImg,
+      variables: {
+        id: id,
+        images: imageid,
+      },
+      errorPolicy: "all",
+    });
+  }
+  createActivity(price) {
+    return this.apollo.mutate({
+      mutation: CreateActivities,
+      variables: {
+        FarmerName: price.FarmerName,
+        Date: price.Date,
+        Latitude: parseFloat(price.Latitude),
+        Longitude: parseFloat(price.Longitude),
+        NoOfAttendees: parseInt(price.NoOfAttendees),
+        crop: price.crop,
+        ConditionOfCrop: price.ConditionOfCrop,
+        PlannedFarmDay: price.PlannedFarmDay,
+        Reason: price.Reason,
+        area: price.area,
+        ActivityType: price.ActivityType,
+        Time: price.Time,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getAgronomist(id?) {
+    return this.apollo.watchQuery({
+      query: getAgronomist,
+      variables: {
+        user: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getIndoramaUpdates(id?) {
+    return this.apollo.watchQuery({
+      query: getIndoramaUpdates,
+      variables: {
+        id: id,
+        isActive: true,
+        isDelete: false,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getMarketplace(pageNumber?, pageSize?, categoryFilter?) {
+    return this.apollo.watchQuery({
+      query: GetMarketplace,
+      variables: {
+        pageNumber: pageNumber,
+        pageSize: pageSize,
+        categoryFilter: categoryFilter,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getSingleMarketplaceProduct(id) {
+    return this.apollo.watchQuery({
+      query: GetMarketplaceSingleProduct,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getBestCropPractises(page?, pageSize?, cropFilter?) {
+    return this.apollo.watchQuery({
+      query: GetBestCropPractices,
+      variables: {
+        page: page,
+        pageSize: pageSize,
+        cropFilter: cropFilter,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getActivities(page?, pageSize?) {
+    return this.apollo.watchQuery({
+      query: GetActivities,
+      variables: {
+        page: page,
+        pageSize: pageSize,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getActivity(id?) {
+    return this.apollo.watchQuery({
+      query: GetSingleActivity,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getMarketplaceCategories(id?) {
+    return this.apollo.watchQuery({
+      query: GetMarketplaceCategories,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  createAgronomist(data, id) {
+    return this.apollo.mutate({
+      mutation: CreateAgronomist,
+      variables: {
+        areas: data.area,
+        user: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateCropPrice(price, id, imageid) {
+    return this.apollo.mutate({
+      mutation: UpdateCropPriceMutation,
+      variables: {
+        id: id,
+        crop: price.crop,
+        price: parseFloat(price.Price),
+        unit: price.Unit,
+        state: price.state,
+        market: price.market,
+        published: new Date(),
+        image: imageid ? imageid : price.Image,
+      },
+      errorPolicy: "all",
+    });
+  }
+  AddSoilTestResult(result) {
+    return this.apollo.mutate({
+      mutation: AddSoilTestResult,
+      variables: {
+        soilTestSampleID: result.soil_test_sample,
+        zinc: result.ZincObserved,
+        boron: result.BoronObserved,
+        iron: result.IronObserved,
+        calcium: result.CalciumObserved,
+        Carbon: result.OrganicCarbonObserved,
+        phosphorous: result.PhosphorousObserved,
+        magnesium: result.MagnesiumObserved,
+        ph: result.phObserved,
+        copper: result.CopperObserved,
+        Nitrogen: result.TotalNitrogenObserved,
+        manganese: result.ManganeseObserved,
+        pottassium: result.PotassiumObserved,
+        sulphur: result.SulphurObserved,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateSoilTestResult(result) {
+    return this.apollo.mutate({
+      mutation: UpdateSoilTestResult,
+      variables: {
+        id: result.id,
+        zinc: result.ZincObserved,
+        boron: result.BoronObserved,
+        iron: result.IronObserved,
+        calcium: result.CalciumObserved,
+        Carbon: result.OrganicCarbonObserved,
+        phosphorous: result.PhosphorousObserved,
+        magnesium: result.MagnesiumObserved,
+        ph: result.phObserved,
+        copper: result.CopperObserved,
+        Nitrogen: result.TotalNitrogenObserved,
+        manganese: result.ManganeseObserved,
+        pottassium: result.PotassiumObserved,
+        sulphur: result.SulphurObserved,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateCrop(crop, id) {
+    return this.apollo.mutate({
+      mutation: UpdateCrops,
+      variables: {
+        Name: crop.crop,
+        isDelete: crop.isDelete,
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateState(data, id) {
+    return this.apollo.mutate({
+      mutation: UpdateState,
+      variables: {
+        Name: data.state,
+        isDelete: data.isDelete,
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateLGA(data, id) {
+    return this.apollo.mutate({
+      mutation: UpdateLGA,
+      variables: {
+        Name: data.lga,
+        state: data.state,
+        isDelete: data.isDelete,
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateMarket(data, id) {
+    return this.apollo.mutate({
+      mutation: UpdateMarket,
+      variables: {
+        Name: data.market,
+        state: data.state,
+        isDelete: data.isDelete,
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateArea(area, id) {
+    return this.apollo.mutate({
+      mutation: UpdateArea,
+      variables: {
+        Name: area.area,
+        lga: area.lga,
+        PostalCode: area.PostalCode,
+        isDelete: area.isDelete,
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  Updatevillage(village, id) {
+    return this.apollo.mutate({
+      mutation: UpdateVillage,
+      variables: {
+        Name: village.village,
+        area: village.area,
+        isDelete: village.isDelete,
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateSoilTest(test, soilTestId) {
+    return this.apollo.mutate({
+      mutation: UpdateSoilTest,
+      variables: {
+        soilTestId: soilTestId,
+        contactNumber: test.ContactNumber,
+        preferredCollectionDate: test.PreferredCollectionDate,
+        reason: test.ReasonForSoilTest,
+        farmerID: test.Farmer,
+        areaID: test.area,
+        lgaID: test.lga,
+        soilTestDisplayID: test.soilTestDisplayID,
+        status: test.Status,
+        nutrient: test.nutrient,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateFarmDemo(data, id) {
+    return this.apollo.mutate({
+      mutation: UpdateFarmDemo,
+      variables: {
+        id: id,
+        farmer: data.Farmer,
+        longitude: parseFloat(data.FarmLocationLongitude),
+        latitude: parseFloat(data.FarmLocationLatitude),
+        lga: data.lga,
+        state: data.state,
+        crop: data.Crops,
+        area: data.AreaOfField,
+        farmerPractise: {
+          Yield: parseFloat(data.Yield_F),
+          DateOfSowing: data.DateOfSowing_F,
+          DateOfDemonstration: data.DateOfDemonstration_F,
+          FirstUreaApplication: data.FirstUreaApplication_F,
+          SecondUreaApplication: data.SecondUreaApplication_F,
+        },
+        indoramaPractise: {
+          Yield: parseFloat(data.Yield_I),
+          DateOfSowing: data.DateOfSowing_I,
+          DateOfDemonstration: data.DateOfDemonstration_I,
+          FirstUreaApplication: data.FirstUreaApplication_I,
+          SecondUreaApplication: data.SecondUreaApplication_I,
+        },
+        // isPesticidesUsed: data.isPesticidesUsed,
+        images: data.images,
+        season: data.Season,
+        Status: data.Status,
+        dateOfHarvesting: data.DateOfHarvesting,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateRetailer(data, id) {
+    return this.apollo.mutate({
+      mutation: updateRetailerQuery,
+      variables: {
+        id: id,
+        categories: data.retailer_categories,
+        name: data.Name,
+        latitude: parseFloat(data.Latitude),
+        longitude: parseFloat(data.Longitude),
+        village: data.village,
+        lga: data.lga,
+        bio: data.Bio,
+        blocked: data.blocked == "true" ? true : false,
+        UserType: data?.UserType,
+        contactNumber: data.ContactNumber,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateRetailerPic(id, image) {
+    return this.apollo.mutate({
+      mutation: updateRetailerProfPic,
+      variables: {
+        id: id,
+        prof_pic: image,
+      },
+      errorPolicy: "all",
+    });
+  }
+  AddFarmdemoPic(id, image) {
+    return this.apollo.mutate({
+      mutation: UpdateFarmDemo,
+      variables: {
+        id: id,
+        images: image,
+      },
+      errorPolicy: "all",
+    });
+  }
+  addRetailerProducts(data, retailer_category, retailer, image) {
+    return this.apollo.mutate({
+      mutation: createdRetailerProducts,
+      variables: {
+        ItemName: data.itemName,
+        Price: parseInt(data.price),
+        Unit: data.unit,
+        Images: image,
+        isApproved: true,
+        retailer_category: retailer_category,
+        retailers: retailer,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateRetailerProducts(data, retailer_category, retailer) {
+    return this.apollo.mutate({
+      mutation: updateRetailerProducts,
+      variables: {
+        productId: data.id,
+        itemName: data.itemName,
+        price: parseInt(data.price),
+        unit: data.unit,
+        // images: data.,
+        isApproved: true,
+        retailer_category: retailer_category,
+        retailer: retailer,
+      },
+      errorPolicy: "all",
+    });
+  }
+  UpdateIndoramaUpdates(price?, id?, imageid?) {
+    return this.apollo.mutate({
+      mutation: UpdateIndoramaUpdates,
+      variables: {
+        id: id,
+        Title: price?.Title,
+        isDelete: price?.isDelete,
+        Body: price?.Body,
+        Images: imageid ? imageid : price?.Image,
+      },
+      errorPolicy: "all",
+    });
+  }
+  updateActivity(price, id) {
+    return this.apollo.mutate({
+      mutation: UpdateActivity,
+      variables: {
+        id: id,
+        FarmerName: price.FarmerName,
+        Date: price.Date,
+        Latitude: parseFloat(price.Latitude),
+        Longitude: parseFloat(price.Longitude),
+        NoOfAttendees: parseInt(price.NoOfAttendees),
+        crop: price.crop,
+        ConditionOfCrop: price.ConditionOfCrop,
+        PlannedFarmDay: price.PlannedFarmDay,
+        Reason: price.Reason,
+        area: price.area,
+        ActivityType: price.ActivityType,
+        Time: price.Time,
+      },
+      errorPolicy: "all",
+    });
+  }
+  upload(file: any): Observable<any> {
+    const formData = new FormData();
+    for (var i = 0; i < file.length; i++) {
+      // formData.append("file[]",  file[i]);
+      formData.append("files", file[i], file[i]?.name);
+    }
+    // formData.append("files", file, file?.name);
+    console.log(formData);
+    const httpOptions1: Object = {
+      observe: "response",
+    };
+    return this.http.post(this.baseURL + `api/upload`, formData, httpOptions1);
+  }
+  deleteArea(id) {
+    return this.apollo.mutate({
+      mutation: DeleteAreaMutation,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteVillage(id) {
+    return this.apollo.mutate({
+      mutation: DeleteVillageMutation,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteLGA(id) {
+    return this.apollo.mutate({
+      mutation: DeleteLGAMutation,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteState(id) {
+    return this.apollo.mutate({
+      mutation: DeleteStatesMutation,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteMarket(id) {
+    return this.apollo.mutate({
+      mutation: DeleteMarketMutation,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteCrop(id) {
+    return this.apollo.mutate({
+      mutation: DeleteCropMutation,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteFarmDemo(id) {
+    return this.apollo.mutate({
+      mutation: DeleteFarmdemo,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteProduct(id) {
+    return this.apollo.mutate({
+      mutation: DeleteRetailerProduct,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteFile(id) {
+    return this.apollo.mutate({
+      mutation: DeleteFile,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteUser(id) {
+    return this.apollo.mutate({
+      mutation: DeleteUser,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteBestPractice(id) {
+    return this.apollo.mutate({
+      mutation: DeleteBestPractice,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  deleteActivity(id) {
+    return this.apollo.mutate({
+      mutation: DeleteActivity,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  DeleteMarketplaceProduct(id) {
+    return this.apollo.mutate({
+      mutation: DeleteMarketplaceProduct,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+}

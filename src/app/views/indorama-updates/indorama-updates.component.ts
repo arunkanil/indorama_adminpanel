@@ -1,0 +1,207 @@
+import { Component, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+import { FormBuilder, Validators } from "@angular/forms";
+import { ToastrService } from "ngx-toastr";
+import { DataService } from "../../data.service";
+import { IndoramaUpdatesColumn } from "../../constants/columnMetadata";
+import { ModalDirective } from "ngx-bootstrap/modal";
+
+@Component({
+  templateUrl: "indorama-updates.component.html",
+})
+export class IndoramaUpdatesComponent {
+  rowSelection: string;
+  constructor(
+    public dataservice: DataService,
+    public router: Router,
+    private fb: FormBuilder,
+    private toastr: ToastrService
+  ) {
+    this.columnDefs = [...IndoramaUpdatesColumn];
+    this.rowSelection = "single";
+  }
+  @ViewChild("cropPriceModal") public cropPriceModal: ModalDirective;
+  @ViewChild("detailsModal") public detailsModal: ModalDirective;
+  @ViewChild("deleteModal") public deleteModal: ModalDirective;
+
+  loading = true;
+  btnLoading = false;
+  disableButton = true;
+  orders: any = {};
+  columnDefs = [];
+  imageUrl;
+
+  newsForm = this.fb.group({
+    Title: ["", Validators.required],
+    Body: ["", Validators.required],
+    Image: [""],
+  });
+  rowData: any = [];
+  selectedRows: any = [];
+  selectedYear: any = new Date().getFullYear();
+  years: any = [];
+  private gridApi;
+  private gridColumnApi;
+  filter: any = {};
+  file: any = null;
+
+  ngOnInit(): void {
+    this.loading = true;
+    console.log(this.router);
+    this.getUpdates();
+  }
+  getUpdates(id?) {
+    this.dataservice
+      .getIndoramaUpdates(id)
+      .valueChanges.subscribe((result: any) => {
+        console.log("getIndoramaUpdates", result.data.newsAndUpdates.data);
+        this.rowData = result.data.newsAndUpdates.data;
+      });
+  }
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+    this.gridApi.sizeColumnsToFit();
+  }
+  onRowClicked(event: any) {
+    console.log("row", event.data);
+  }
+  onSelectionChanged(event: any) {
+    this.selectedRows = this.gridApi.getSelectedRows();
+    if (this.selectedRows.length > 0) {
+      this.disableButton = false;
+    } else {
+      this.disableButton = true;
+    }
+  }
+  // On file Select
+  onChange(event: any) {
+    this.file = event.target.files[0];
+    console.log(event.target.files[0]);
+  }
+  openModal(data: any) {
+    this.imageUrl = null;
+    this.cropPriceModal.show();
+    if (data) {
+      this.newsForm = this.fb.group({
+        Title: [
+          this.selectedRows[0].attributes.Title,
+          Validators.required,
+        ],
+        Body: [
+          this.selectedRows[0].attributes.Body,
+          Validators.required,
+        ],
+        Image: [
+          this.selectedRows[0].attributes.Images?.data[0]?.id,
+          Validators.required,
+        ],
+      });
+      this.imageUrl = this.selectedRows[0].attributes.Images?.data[0]?.attributes
+        ?.url
+        ? "https://indoramaapp.untanglestrategy.com" +
+          this.selectedRows[0].attributes.Images?.data[0]?.attributes?.url
+        : null;
+    } else {
+      this.newsForm = this.fb.group({
+        Title: ["", Validators.required],
+        Body: ["", Validators.required],
+        Image: ["", Validators.required],
+      });
+      this.imageUrl = null;
+    }
+  }
+  deleteRecord() {
+    let resp = {}
+    this.dataservice
+      .UpdateIndoramaUpdates({isDelete: true}, this.selectedRows[0].id, null)
+      .subscribe((result: any) => {
+        resp = result.data;
+        console.log("response", result);
+        if (result.data.updateNewsAndUpdate) {
+          this.toastr.success("Success!");
+          this.getUpdates();
+          this.file = null;
+          this.deleteModal.hide();
+          this.gridApi.deselectAll();
+        } else {
+          this.toastr.error("Failed. Please check the fields!");
+        }
+      });
+  }
+  cropPriceSubmit() {
+    let resp = {};
+    console.log(this.newsForm.value);
+    if (!this.disableButton) {
+      if (this.file) {
+        this.dataservice.upload(this.file).subscribe((response: any) => {
+          if (response.status == 200) {
+            console.log(response);
+            this.dataservice
+              .UpdateIndoramaUpdates(
+                this.newsForm.value,
+                this.selectedRows[0].id,
+                response.body[0]?.id
+              )
+              .subscribe((result: any) => {
+                resp = result.data;
+                console.log("response", result);
+                if (result.data.updateNewsAndUpdate) {
+                  this.toastr.success("Success!");
+                  this.file = null;
+                  this.getUpdates();
+                  this.cropPriceModal.hide();
+                  this.gridApi.deselectAll();
+                } else {
+                  this.toastr.error("Failed. Please check the fields!");
+                }
+              });
+          }
+        });
+      } else {
+        this.dataservice
+          .UpdateIndoramaUpdates(
+            this.newsForm.value,
+            this.selectedRows[0].id,
+            null
+          )
+          .subscribe((result: any) => {
+            resp = result.data;
+            console.log("response", result);
+            if (result.data.updateNewsAndUpdate) {
+              this.toastr.success("Success!");
+              this.file = null;
+              this.cropPriceModal.hide();
+              this.gridApi.deselectAll();
+              this.getUpdates();
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
+          });
+      }
+    } else {
+      this.dataservice.upload(this.file).subscribe((response: any) => {
+        if (response.status == 200) {
+          console.log(response);
+          this.dataservice
+            .AddIndoramaUpdates(this.newsForm.value, response.body[0]?.id)
+            .subscribe((result: any) => {
+              resp = result.data;
+              console.log("response", result);
+              if (result.data.createNewsAndUpdate) {
+                this.toastr.success("Success!");
+                this.file = null;
+                this.cropPriceModal.hide();
+                this.getUpdates();
+                this.gridApi.deselectAll();
+              } else {
+                this.toastr.error("Failed. Please check the fields!");
+              }
+            });
+        } else {
+          this.toastr.error("Image failed to upload!");
+        }
+      });
+    }
+  }
+}

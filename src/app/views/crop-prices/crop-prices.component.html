@@ -1,0 +1,111 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between">
+      <h2>Crop Prices Home</h2>
+      <div>
+        <!-- <button
+          type="button"
+          class="btn btn-danger"
+          data-toggle="modal"
+          [disabled]="disableButton"
+          (click)="openModal()"
+        >
+          Delete
+        </button> -->
+        <button type="button" [disabled]="disableButton" class="btn btn-info" data-toggle="modal"
+          (click)="openModal('Edit')">
+          Edit
+        </button>
+        <button type="button" [disabled]="!disableButton" class="btn btn-primary" data-toggle="modal"
+          (click)="openModal()">
+          Add New Price
+        </button>
+      </div>
+    </div>
+    <p class="text-muted mx-3">
+      To approve a crop price simply select and edit the record without
+      modifying the data
+    </p>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <ag-grid-angular #agGrid style="width: 100%; height: 65vh" id="myGrid" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #cropPriceModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit Crop Price</h4>
+        <button type="button" class="close" (click)="cropPriceModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="cropPriceForm" (ngSubmit)="cropPriceSubmit()">
+          <div class="form-group">
+            <label for="state">State</label>
+            <select class="form-control" id="state" (change)="filterMarkets($event)" required ngModel name="state" formControlName="state">
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of States" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="market">Market</label>
+            <select class="form-control" id="market" required ngModel name="market" formControlName="market">
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of Markets" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="crop">Crop</label>
+            <select class="form-control" id="crop" required ngModel name="crop" formControlName="crop">
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of Crops" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="name">Price</label>
+            <input type="text" class="form-control" id="Price" name="Price" formControlName="Price"
+              placeholder="Enter price" />
+          </div>
+          <div class="form-group">
+            <label for="name">Unit</label>
+            <input type="text" class="form-control" id="Unit" name="Unit" formControlName="Unit"
+              placeholder="Enter unit" />
+          </div>
+          <div class="form-group">
+            <label for="Image">Image</label>
+            <div>
+              <img *ngIf="imageUrl" src="{{ imageUrl }}" width="100" height="100" style="object-fit: cover" />
+            </div>
+            <input type="file" class="form-control" id="Image" accept=".jpg,.jpeg,.JPEG,.png" name="Image"
+              (change)="onChange($event)" formControlName="Image" placeholder="Choose image" />
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="cropPriceModal.hide()">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !cropPriceForm.valid">
+            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

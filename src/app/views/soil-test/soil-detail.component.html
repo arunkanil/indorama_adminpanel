@@ -1,0 +1,795 @@
+<div class="animated fadeIn">
+  <!-- <div
+    bsModal
+    #deleteModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          Do you want to delete this request?
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="deleteModal.hide()"
+          >
+            No! Cancel.
+          </button>
+          <button type="button" class="btn btn-primary" (click)="deleteAgent()">
+            Yes! Delete.
+          </button>
+        </div>
+      </div>
+    </div>
+  </div> -->
+  <div class="card">
+    <div
+      class="card-header"
+      style="display: flex; justify-content: space-between"
+    >
+      <h2>Soil Test Details</h2>
+      <span>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          (click)="myModal.show()"
+        >
+          Edit
+        </button>
+        <!-- <button
+          type="button"
+          class="btn btn-danger"
+          data-toggle="modal"
+          (click)="deleteModal.show()"
+        >
+          Delete
+        </button> -->
+      </span>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div style="display: flex; justify-content: space-between">
+              <h4>Request details</h4>
+            </div>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>ID</td>
+                  <td>STR{{ details?.id }}</td>
+                </tr>
+                <!-- <tr>
+                  <td>Test ID</td>
+                  <td>{{ details?.attributes?.SoilTestID }}</td>
+                </tr> -->
+                <tr>
+                  <td>Farmer</td>
+                  <td>
+                    {{ details?.attributes?.Farmer?.data.attributes.Name }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td>
+                    {{ details?.attributes?.Farmer?.data.attributes.email }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Contact number</td>
+                  <td>{{ details?.attributes?.ContactNumber }}</td>
+                </tr>
+                <tr>
+                  <td>Agronomist</td>
+                  <td>
+                    {{
+                      details?.attributes?.Farmer?.data?.attributes?.agronomist
+                        ?.data?.attributes?.users_permissions_user?.data
+                        ?.attributes?.Name
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Reason for testing</td>
+                  <td>{{ details?.attributes?.ReasonForSoilTest }}</td>
+                </tr>
+                <tr>
+                  <td>Preffered nutrient</td>
+                  <td>{{ details?.attributes?.nutrient }}</td>
+                </tr>
+                <tr>
+                  <td>Area</td>
+                  <td>{{ details?.attributes?.area?.data.attributes.Name }}</td>
+                </tr>
+                <tr>
+                  <td>PostalCode</td>
+                  <td>
+                    {{ details?.attributes?.area?.data.attributes.PostalCode }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>LGA</td>
+                  <td>{{ details?.attributes?.lga?.data.attributes.Name }}</td>
+                </tr>
+                <tr>
+                  <td>State</td>
+                  <td>
+                    {{
+                      details?.attributes?.lga?.data?.attributes?.state?.data
+                        ?.attributes?.Name
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Preffered date for sample collection</td>
+                  <td>
+                    {{
+                      dateConverterMin(
+                        details?.attributes?.PreferredCollectionDate
+                      )
+                    }}
+                  </td>
+                </tr>
+                <tr>
+                  <td>Created at</td>
+                  <td>{{ dateConvertor(details?.attributes?.createdAt) }}</td>
+                </tr>
+                <tr>
+                  <td>Last updated</td>
+                  <td>{{ dateConvertor(details?.attributes?.updatedAt) }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <h4>Samples</h4>
+          <div class="row">
+            <div
+              class="col-4"
+              *ngFor="let item of details?.attributes?.soil_test_samples?.data"
+            >
+              <div class="card">
+                <div class="card-body">
+                  <div style="display: flex; justify-content: space-between">
+                    <h5 class="card-title">
+                      Sample ID : {{ item?.attributes?.SampleID }}
+                    </h5>
+                    <button
+                      type="button"
+                      *ngIf="item?.attributes?.soil_test_results?.data[0]"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      (click)="openModal(item, 'edit')"
+                    >
+                      Edit results
+                    </button>
+                    <button
+                      type="button"
+                      *ngIf="!item?.attributes?.soil_test_results?.data[0]"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      (click)="openModal(item, 'add')"
+                    >
+                      Add results
+                    </button>
+                  </div>
+                  <p class="card-text">
+                    Quantity of samples :
+                    {{ item?.attributes?.QuantityOfSamples }}
+                  </p>
+                  <p class="card-text">
+                    Created on :
+                    {{ dateConvertor(item?.attributes?.createdAt) }}
+                  </p>
+                  <p class="card-text">
+                    Added by :
+                    {{
+                      item?.attributes?.SampleAddedBy?.data?.attributes?.Name
+                    }}
+                  </p>
+                  <table class="table">
+                    <tbody>
+                      <tr>
+                        <th>Parameter</th>
+                        <th>Value observed</th>
+                      </tr>
+                      <tr>
+                        <td>pH</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.phObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Organic Carbon</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.OrganicCarbonObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Total Nitrogen</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.TotalNitrogenObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Phosphorous</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.PhosphorousObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Pottasium</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.PotassiumObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Calcium</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.CalciumObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Magnesium</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.MagnesiumObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Zinc</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.ZincObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Sulphur</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.SulphurObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Iron</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.IronObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Copper</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.CopperObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Boron</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.BoronObserved
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Manganese</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.ManganeseObserved
+                          }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="col">
+          <div style="display: flex; justify-content: space-between">
+            <h4>Test Results</h4>
+          </div>
+          <table class="table" *ngFor="let item of details.attributes.soil_test_samples.data">
+            <tbody>
+              <tr>
+                <th>Parameter</th>
+                <th>Value observed</th>
+              </tr>
+              <tr>
+                <td>pH</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.phObserved }}</td>
+              </tr>
+              <tr>
+                <td>Organic Carbon</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.OrganicCarbonObserved }}</td>
+              </tr>
+              <tr>
+                <td>Total Nitrogen</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.TotalNitrogenObserved }}</td>
+              </tr>
+              <tr>
+                <td>Phosphorous</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.PhosphorousObserved }}</td>
+              </tr>
+              <tr>
+                <td>Pottasium</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.PotassiumObserved }}</td>
+              </tr>
+              <tr>
+                <td>Calcium</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.CalciumObserved }}</td>
+              </tr>
+              <tr>
+                <td>Magnesium</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.MagnesiumObserved }}</td>
+              </tr>
+              <tr>
+                <td>Zinc</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.ZincObserved }}</td>
+              </tr>
+              <tr>
+                <td>Sulphur</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.SulphurObserved }}</td>
+              </tr>
+              <tr>
+                <td>Iron</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.IronObserved }}</td>
+              </tr>
+              <tr>
+                <td>Copper</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.CopperObserved }}</td>
+              </tr>
+              <tr>
+                <td>Boron</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.BoronObserved }}</td>
+              </tr>
+              <tr>
+                <td>Manganese</td>
+                <td>{{ item?.attributes?.soil_test_results?.data[0].attributes.ManganeseObserved }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            (click)="commentModal.show()"
+          >
+            Add Comment
+          </button>
+        </div> -->
+        </div>
+      </div>
+      <div
+        bsModal
+        #myModal="bs-modal"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="myModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Edit details</h4>
+              <button
+                type="button"
+                class="close"
+                (click)="myModal.hide()"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="agentForm" (ngSubmit)="FormSubmit()">
+                <div class="form-group">
+                  <label for="Farmer">Farmer</label>
+                  <select
+                    class="form-control"
+                    id="Farmer"
+                    required
+                    ngModel
+                    name="Farmer"
+                    formControlName="Farmer"
+                  >
+                    <option value="" disabled selected hidden>Choose...</option>
+                    <option *ngFor="let item of Farmers" value="{{ item.id }}">
+                      {{ item.attributes.Name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="market">Contact Number</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="ContactNumber"
+                    name="ContactNumber"
+                    formControlName="ContactNumber"
+                    placeholder="Enter contact number"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="ReasonForSoilTest">Reason for test</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="ReasonForSoilTest"
+                    name="ReasonForSoilTest"
+                    formControlName="ReasonForSoilTest"
+                    placeholder="Enter contact number"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="nutrient">Testing for</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nutrient"
+                    name="nutrient"
+                    formControlName="nutrient"
+                    placeholder="Enter nutrient"
+                  />
+                </div>
+                <!-- <div class="form-group">
+                  <label for="PreferredCollectionDate"
+                    >Preferred Collection Date</label
+                  >
+                  <input
+                    type="datetime-local"
+                    class="form-control"
+                    id="PreferredCollectionDate"
+                    name="PreferredCollectionDate"
+                    formControlName="PreferredCollectionDate"
+                    placeholder="Enter PreferredCollectionDate"
+                  />
+                </div> -->
+
+                <div class="form-group">
+                  <label for="Status">Status</label>
+                  <select
+                    class="form-control"
+                    id="Status"
+                    required
+                    ngModel
+                    name="Status"
+                    formControlName="Status"
+                  >
+                    <option value="" disabled selected hidden>Choose...</option>
+                    <option value="NEW_REQUEST">NEW_REQUEST</option>
+                    <option value="SAMPLE_COLLECTED">SAMPLE_COLLECTED</option>
+                    <option value="RESULTS_ADDED">RESULTS_ADDED</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="state">State</label>
+                  <select
+                    class="form-control"
+                    id="state"
+                    required
+                    ngModel
+                    (change)="filterLGA($event)"
+                    name="state"
+                    formControlName="state"
+                  >
+                    <option value="" disabled selected hidden>Choose...</option>
+                    <option *ngFor="let item of States" value="{{ item.id }}">
+                      {{ item.attributes.Name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="lga">LGA</label>
+                  <select
+                    class="form-control"
+                    id="lga"
+                    required
+                    (change)="filterArea($event)"
+                    ngModel
+                    name="lga"
+                    formControlName="lga"
+                  >
+                    <option value="" disabled selected hidden>Choose...</option>
+                    <option *ngFor="let item of LGA" value="{{ item.id }}">
+                      {{ item.attributes.Name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="area">Area</label>
+                  <select
+                    class="form-control"
+                    id="area"
+                    required
+                    ngModel
+                    name="area"
+                    formControlName="area"
+                  >
+                    <option value="" disabled selected hidden>Choose...</option>
+                    <option *ngFor="let item of Areas" value="{{ item.id }}">
+                      {{ item.attributes.Name }}
+                    </option>
+                  </select>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="myModal.hide()"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary ml-2"
+                  [disabled]="btnLoading || !agentForm.valid"
+                >
+                  <span
+                    *ngIf="btnLoading"
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Save changes
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        bsModal
+        #resultModal="bs-modal"
+        class="modal fade"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="resultModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Add/Edit result</h4>
+              <button
+                type="button"
+                class="close"
+                (click)="resultModal.hide()"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form [formGroup]="resultForm" (ngSubmit)="ResultSubmit()">
+                <div class="row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="soil_test_sample">Soil Test ID</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="soil_test_sample"
+                        disabled="true"
+                        name="soil_test_sample"
+                        formControlName="soil_test_sample"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="phObserved">ph Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="phObserved"
+                        name="phObserved"
+                        formControlName="phObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="OrganicCarbonObserved"
+                        >Organic Carbon Observed</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="OrganicCarbonObserved"
+                        name="OrganicCarbonObserved"
+                        formControlName="OrganicCarbonObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="TotalNitrogenObserved"
+                        >Total Nitrogen Observed</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="TotalNitrogenObserved"
+                        name="TotalNitrogenObserved"
+                        formControlName="TotalNitrogenObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="ManganeseObserved">Manganese Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="ManganeseObserved"
+                        name="ManganeseObserved"
+                        formControlName="ManganeseObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="PhosphorousObserved"
+                        >Phosphorous Observed</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="PhosphorousObserved"
+                        name="PhosphorousObserved"
+                        formControlName="PhosphorousObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="PotassiumObserved">Potassium Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="PotassiumObserved"
+                        name="PotassiumObserved"
+                        formControlName="PotassiumObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="CalciumObserved">Calcium Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="CalciumObserved"
+                        name="CalciumObserved"
+                        formControlName="CalciumObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="MagnesiumObserved">Magnesium Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="MagnesiumObserved"
+                        name="MagnesiumObserved"
+                        formControlName="MagnesiumObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="ZincObserved">Zinc Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="ZincObserved"
+                        name="ZincObserved"
+                        formControlName="ZincObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="SulphurObserved">Sulphur Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="SulphurObserved"
+                        name="SulphurObserved"
+                        formControlName="SulphurObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="IronObserved">Iron Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="IronObserved"
+                        name="IronObserved"
+                        formControlName="IronObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="CopperObserved">Copper Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="CopperObserved"
+                        name="CopperObserved"
+                        formControlName="CopperObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="BoronObserved">Boron Observed</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="BoronObserved"
+                        name="BoronObserved"
+                        formControlName="BoronObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  (click)="resultModal.hide()"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-primary ml-2"
+                  [disabled]="btnLoading"
+                >
+                  <span
+                    *ngIf="btnLoading"
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  Save changes
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

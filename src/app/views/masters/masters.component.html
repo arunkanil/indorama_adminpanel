@@ -1,0 +1,579 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div
+      class="card-header"
+      style="display: flex; justify-content: space-between"
+    >
+      <h2>{{ this.route.snapshot.data.title }} Master</h2>
+      <div>
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-toggle="modal"
+          [disabled]="disableButton"
+          (click)="deleteModal.show()"
+        >
+          Delete
+        </button>
+        <button
+          type="button"
+          [disabled]="disableButton"
+          class="btn btn-info"
+          data-toggle="modal"
+          (click)="openModal('Edit')"
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [disabled]="!disableButton"
+          data-toggle="modal"
+          (click)="openModal()"
+        >
+          Add New {{ this.route.snapshot.data.title }}
+        </button>
+      </div>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 65vh"
+            id="myGrid"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefs"
+            [rowData]="rowData"
+            [context]="context"
+            [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)"
+            [frameworkComponents]="frameworkComponents"
+            (gridReady)="onGridReady($event)"
+            animateRows="true"
+          >
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #stateModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit State</h4>
+        <button
+          type="button"
+          class="close"
+          (click)="stateModal.hide()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="stateForm" (ngSubmit)="stateSubmit()">
+          <div class="form-group">
+            <label for="name">State</label>
+            <input
+              type="text"
+              class="form-control"
+              id="state"
+              name="state"
+              formControlName="state"
+              placeholder="Enter State Name"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="stateModal.hide()"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary ml-2"
+            [disabled]="btnLoading || !stateForm.valid"
+          >
+            <span
+              *ngIf="btnLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #lgaModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit LGA</h4>
+        <button
+          type="button"
+          class="close"
+          (click)="lgaModal.hide()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="lgaForm" (ngSubmit)="lgaSubmit()">
+          <div class="form-group">
+            <label for="lga">LGA</label>
+            <input
+              type="text"
+              class="form-control"
+              id="lga"
+              name="lga"
+              formControlName="lga"
+              placeholder="Enter LGA Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <select
+              class="form-control"
+              id="state"
+              required
+              ngModel
+              name="state"
+              formControlName="state"
+            >
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of States" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="lgaModal.hide()"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary ml-2"
+            [disabled]="btnLoading || !lgaForm.valid"
+          >
+            <span
+              *ngIf="btnLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #areaModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit Area</h4>
+        <button
+          type="button"
+          class="close"
+          (click)="areaModal.hide()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="areaForm" (ngSubmit)="areaSubmit()">
+          <div class="form-group">
+            <label for="area">Area Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="area"
+              name="area"
+              formControlName="area"
+              placeholder="Enter Area Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="area">Postal code</label>
+            <input
+              type="text"
+              class="form-control"
+              id="PostalCode"
+              name="PostalCode"
+              formControlName="PostalCode"
+              placeholder="Enter Postal Code"
+            />
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <select
+              class="form-control"
+              id="state"
+              required
+              ngModel
+              name="state"
+              formControlName="state"
+              (change)="filterLGA($event)"
+            >
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of States" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="lga">LGA</label>
+            <select
+              class="form-control"
+              id="lga"
+              required
+              ngModel
+              name="lga"
+              formControlName="lga"
+            >
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of LGA" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="areaModal.hide()"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary ml-2"
+            [disabled]="btnLoading || !areaForm.valid"
+          >
+            <span
+              *ngIf="btnLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #marketModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit Market</h4>
+        <button
+          type="button"
+          class="close"
+          (click)="marketModal.hide()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="marketForm" (ngSubmit)="marketSubmit()">
+          <div class="form-group">
+            <label for="market">Market</label>
+            <input
+              type="text"
+              class="form-control"
+              id="market"
+              name="market"
+              formControlName="market"
+              placeholder="Enter Market Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <select
+              class="form-control"
+              id="state"
+              required
+              ngModel
+              name="state"
+              formControlName="state"
+            >
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of States" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="marketModal.hide()"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary ml-2"
+            [disabled]="btnLoading || !marketForm.valid"
+          >
+            <span
+              *ngIf="btnLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #cropModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit Crop</h4>
+        <button
+          type="button"
+          class="close"
+          (click)="cropModal.hide()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="cropForm" (ngSubmit)="cropSubmit()">
+          <div class="form-group">
+            <label for="name">Crop</label>
+            <input
+              type="text"
+              class="form-control"
+              id="crop"
+              name="crop"
+              formControlName="crop"
+              placeholder="Enter Crop Name"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="cropModal.hide()"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary ml-2"
+            [disabled]="btnLoading || !cropForm.valid"
+          >
+            <span
+              *ngIf="btnLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div
+  bsModal
+  #villageModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit Village</h4>
+        <button
+          type="button"
+          class="close"
+          (click)="villageModal.hide()"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="villageForm" (ngSubmit)="vilageSubmit()">
+          <div class="form-group">
+            <label for="market">Village Name</label>
+            <input
+              type="text"
+              class="form-control"
+              id="village"
+              name="village"
+              formControlName="village"
+              placeholder="Enter Village Name"
+            />
+          </div>
+          <div class="form-group">
+            <label for="state">State</label>
+            <select
+              class="form-control"
+              id="state"
+              ngModel
+              name="state"
+              (change)="filterLGA($event)"
+              formControlName="state"
+            >
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of States" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="lga">LGA</label>
+            <select
+              class="form-control"
+              id="lga"
+              ngModel
+              (change)="filterArea($event)"
+              name="lga"
+              formControlName="lga"
+            >
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of LGA" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="area">Area</label>
+            <select
+              class="form-control"
+              id="area"
+              ngModel
+              (change)="filterVillage($event)"
+              name="area"
+              formControlName="area"
+            >
+              <option value="" disabled selected hidden>Choose...</option>
+              <option *ngFor="let item of Areas" value="{{ item.id }}">
+                {{ item.attributes.Name }}
+              </option>
+            </select>
+          </div>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="villageModal.hide()"
+          >
+            Close
+          </button>
+          <button
+            type="submit"
+            class="btn btn-primary ml-2"
+            [disabled]="btnLoading || !villageForm.valid"
+          >
+            <span
+              *ngIf="btnLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  bsModal
+  #deleteModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        Do you want to delete this record?
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="deleteModal.hide()"
+        >
+          No! Cancel.
+        </button>
+        <button type="button" class="btn btn-primary" (click)="deleteRecord()">
+          Yes! Delete.
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

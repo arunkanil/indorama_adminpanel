@@ -1,0 +1,97 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between">
+      <h2>Indorama Updates</h2>
+      <div>
+        <button type="button" class="btn btn-danger" data-toggle="modal" [disabled]="disableButton"
+          (click)="deleteModal.show()">
+          Delete
+        </button>
+        <button type="button" [disabled]="disableButton" class="btn btn-info" data-toggle="modal"
+          (click)="openModal('Edit')">
+          Edit
+        </button>
+        <button type="button" [disabled]="!disableButton" class="btn btn-primary" data-toggle="modal"
+          (click)="openModal()">
+          Add New Update
+        </button>
+      </div>
+    </div>
+    <!-- <p class="text-muted mx-3">
+      To approve a crop price simply select and edit the record without
+      modifying the data
+    </p> -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <ag-grid-angular #agGrid style="width: 100%; height: 65vh" id="myGrid" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #cropPriceModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add/Edit News</h4>
+        <button type="button" class="close" (click)="cropPriceModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newsForm" (ngSubmit)="cropPriceSubmit()">
+          <div class="form-group">
+            <label for="Title">Title</label>
+            <input type="text" class="form-control" id="Title" name="Title" formControlName="Title"
+              placeholder="Enter title" />
+          </div>
+          <div class="form-group">
+            <label for="Body">Body</label>
+            <textarea  class="form-control" id="Body" rows="5" name="Body" formControlName="Body"
+              placeholder="Enter Body" ></textarea>
+          </div>
+          <div class="form-group">
+            <label for="Image">Image</label>
+            <div>
+              <img *ngIf="imageUrl" src="{{ imageUrl }}" width="100" height="100" style="object-fit: cover" />
+            </div>
+            <input type="file" class="form-control" id="Image" accept=".jpg,.jpeg,.JPEG,.png" name="Image"
+              (change)="onChange($event)" formControlName="Image" placeholder="Choose image" />
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="cropPriceModal.hide()">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !newsForm.valid">
+            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        Do you want to delete this record?
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">
+          No! Cancel.
+        </button>
+        <button type="button" class="btn btn-primary" (click)="deleteRecord()">
+          Yes! Delete.
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

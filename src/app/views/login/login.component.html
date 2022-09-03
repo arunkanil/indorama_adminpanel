@@ -1,0 +1,79 @@
+<!-- <div class="app-body bg-image">
+  <main class="main d-flex align-items-center" style="background-color: rgba(0, 0, 0, 0.8);">
+    <div class="login-box">
+      <div class="card p-4" style="width: fit-content;">
+        <div class="card-body">
+          <form>
+            <h1>Login</h1>
+            <p class="text-muted">Welcome back! Please log in to your account</p>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-user"></i></span>
+              </div>
+              <input type="text" class="form-control" placeholder="Username" autocomplete="username" required>
+            </div>
+            <div class="input-group mb-4">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="icon-lock"></i></span>
+              </div>
+              <input type="password" class="form-control" placeholder="Password" autocomplete="current-password"
+                required>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <button type="button" class="btn btn-primary px-4">Login</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div> -->
+<!-- <div class="bg-image"> -->
+<div class="d-md-flex h-md-100 align-items-center">
+  <div class="col-md-6 p-0 bg-black h-md-100 login-screen">
+    <div class="text-white d-md-flex align-items-center h-100 text-center justify-content-center">
+      <div class="container-fluid bg-image" style=" height: 100vh ">
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6 p-0 bg-white h-md-100">
+    <div class="d-md-flex align-items-center h-md-100 justify-content-center">
+      <div class="container-fluid fallback-image" style=" height: 100vh ">
+        <form class="login-box" #usForm="ngForm" (ngSubmit)="onSubmit()" style="
+        background: #ffffff75;
+        padding: 20px;
+        border-radius: 10px;
+    ">
+          <img src='assets/img/brand/logo.png' width="300" style="margin-bottom: 25px;"/>
+          <h3 class="mt-3">Admin Panel</h3>
+          <p class="text-muted">Welcome back! Please log in to your account</p>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-user"></i></span>
+            </div>
+            <input type="text" class="form-control" placeholder="Username" id="login" maxlength="80" size="30" ngModel
+              value="" name="identifier" required>
+          </div>
+          <div class="input-group mb-4">
+            <div class="input-group-prepend">
+              <span class="input-group-text"><i class="icon-lock"></i></span>
+            </div>
+            <input type="password" class="form-control" placeholder="Password" id="password" size="30" ngModel
+              name="password" value="" required>
+          </div>
+          <!-- <div class="row"> -->
+          <!-- <div class="col-6"> -->
+          <button type="submit" class="btn btn-lg px-4" style="background-color: #108D51; color: white;">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true">
+            </span>Login
+          </button>
+          <!-- </div> -->
+          <!-- </div> -->
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </div> -->

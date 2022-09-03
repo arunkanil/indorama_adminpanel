@@ -1,0 +1,252 @@
+<div class="animated fadeIn">
+  <div *ngIf="loading" class="text-center">
+    <div class="spinner-border" style="width: 3rem; height: 3rem" role="status">
+      <span class="visually-hidden"></span>
+    </div>
+  </div>
+  <div *ngIf="!loading">
+    <div class="card">
+      <div
+        class="card-header"
+        style="display: flex; justify-content: space-between"
+      >
+        <h2>Farm Demo</h2>
+        <button
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          (click)="myModal.show()"
+        >
+          New
+        </button>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-12">
+            <ag-grid-angular
+              #agGrid
+              style="width: 100%; height: 500px"
+              id="myGrid"
+              class="ag-theme-alpine"
+              [columnDefs]="columnDefs"
+              [rowData]="rowData"
+              [rowSelection]="rowSelection"
+              (gridReady)="onGridReady($event)"
+              (selectionChanged)="onSelectionChanged($event)"
+              animateRows="true"
+            >
+            </ag-grid-angular>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      bsModal
+      #myModal="bs-modal"
+      class="modal fade"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add New Farm demo</h4>
+            <button
+              type="button"
+              class="close"
+              (click)="myModal.hide()"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="addForm" (ngSubmit)="FormSubmit()">
+              <div class="row">
+                <div class="col">
+                  <div class="form-group">
+                    <label for="Farmer">Farmer Name</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Farmer"
+                      name="Farmer"
+                      formControlName="Farmer"
+                      placeholder="Enter farmer name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="Crops">Crops</label>
+                    <select
+                      class="form-control"
+                      id="Crops"
+                      required
+                      ngModel
+                      name="Crops"
+                      formControlName="Crops"
+                      (change)="filterLGA($event)"
+                    >
+                      <option value="" disabled selected hidden>
+                        Choose...
+                      </option>
+                      <option *ngFor="let item of Crops" value="{{ item.id }}">
+                        {{ item.attributes.Name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="state">State</label>
+                    <select
+                      class="form-control"
+                      id="state"
+                      required
+                      ngModel
+                      name="state"
+                      formControlName="state"
+                      (change)="filterLGA($event)"
+                    >
+                      <option value="" disabled selected hidden>
+                        Choose...
+                      </option>
+                      <option *ngFor="let item of States" value="{{ item.id }}">
+                        {{ item.attributes.Name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="lga">LGA</label>
+                    <select
+                      class="form-control"
+                      id="lga"
+                      required
+                      ngModel
+                      name="lga"
+                      formControlName="lga"
+                    >
+                      <option value="" disabled selected hidden>
+                        Choose...
+                      </option>
+                      <option *ngFor="let item of LGA" value="{{ item.id }}">
+                        {{ item.attributes.Name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="Status">Status</label>
+                    <select
+                      class="form-control"
+                      id="Status"
+                      required
+                      ngModel
+                      name="Status"
+                      formControlName="Status"
+                    >
+                      <option value="" disabled selected hidden>
+                        Choose...
+                      </option>
+                      <option value="COMPLETED">COMPLETED</option>
+                      <option value="ONGOING">ONGOING</option>
+                      <option value="CANCELLED">CANCELLED</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-group">
+                    <label for="Season">Season</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="Season"
+                      name="Season"
+                      formControlName="Season"
+                      placeholder="Enter Season name"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="AreaOfField">Area of field</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="AreaOfField"
+                      name="AreaOfField"
+                      formControlName="AreaOfField"
+                      placeholder="Enter area"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="FarmLocationLatitude"
+                      >Farm Location Latitude</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="FarmLocationLatitude"
+                      name="FarmLocationLatitude"
+                      formControlName="FarmLocationLatitude"
+                      placeholder="Enter Farm Location Latitude"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="FarmLocationLongitude"
+                      >FarmLocationLongitude</label
+                    >
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="FarmLocationLongitude"
+                      name="FarmLocationLongitude"
+                      formControlName="FarmLocationLongitude"
+                      placeholder="Enter Farm Location Longitude"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="isPesticidesUsed">Pesticides used?</label>
+                    <select
+                      class="form-control"
+                      id="isPesticidesUsed"
+                      required
+                      ngModel
+                      name="isPesticidesUsed"
+                      formControlName="isPesticidesUsed"
+                    >
+                      <option value="" disabled selected hidden>
+                        Choose...
+                      </option>
+                      <option value="true">Yes</option>
+                      <option value="false">No</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                (click)="myModal.hide()"
+              >
+                Close
+              </button>
+              <button
+                type="submit"
+                class="btn btn-primary ml-2"
+                [disabled]="btnLoading || !addForm.valid"
+              >
+                <span
+                  *ngIf="btnLoading"
+                  class="spinner-border spinner-border-sm"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Save changes
+              </button>
+            </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+  </div>
+  <!-- /.modal -->
+</div>

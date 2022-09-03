@@ -1,0 +1,103 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between">
+      <h2>Marketplace</h2>
+      <div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" (click)="openModal()">
+          Add New listing
+        </button>
+      </div>
+    </div>
+    <!-- <p class="text-muted mx-3">
+      To approve a crop price simply select and edit the record without
+      modifying the data
+    </p> -->
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <ag-grid-angular #agGrid style="width: 100%; height: 65vh" id="myGrid" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #productModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Add Listing</h4>
+        <button type="button" class="close" (click)="productModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="productForm" (ngSubmit)="productSubmit()">
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                <label for="category">Category</label>
+                <select class="form-control" id="category" required ngModel name="category" formControlName="category">
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option *ngFor="let item of Categories" value="{{ item.id }}">
+                    {{ item.attributes.CategoryName }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="itemName">Title</label>
+                <input type="text" class="form-control" id="itemName" name="itemName" formControlName="itemName"
+                  placeholder="Enter title" />
+              </div>
+              <div class="form-group">
+                <label for="price">Price</label>
+                <input type="number" class="form-control" id="price" name="price" formControlName="price"
+                  placeholder="Enter price" />
+              </div>
+              <div class="form-group">
+                <label for="unit">Unit</label>
+                <input type="text" class="form-control" id="unit" name="unit" formControlName="unit"
+                  placeholder="Enter unit" />
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="availableQty">Quantity</label>
+                <input type="text" class="form-control" id="availableQty" name="availableQty"
+                  formControlName="availableQty" placeholder="Enter available quantity" />
+              </div>
+              <div class="form-group">
+                <label for="contactNumber">Contact Number</label>
+                <input type="number" class="form-control" id="contactNumber" name="contactNumber"
+                  formControlName="contactNumber" placeholder="Enter Contact number" />
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" rows="5" name="description"
+                  formControlName="description" placeholder="Enter description"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="images">Image</label>
+                <div>
+                  <img *ngIf="imageUrl" src="{{ imageUrl }}" width="100" height="100" style="object-fit: cover" />
+                </div>
+                <input type="file" id="images" multiple accept=".jpg,.jpeg,.JPEG,.png" name="images" (change)="onChange($event)"
+                  formControlName="images" placeholder="Choose images" />
+              </div>
+            </div>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="productModal.hide()">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !productForm.valid">
+            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
