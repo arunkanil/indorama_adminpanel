@@ -16,19 +16,19 @@ export const navItems: INavData[] = [
   {
     name: "Marketplace",
     url: "/marketplace/all",
-    icon: "icon-basket-loaded",
+    icon: "icon-cursor",
     role: "",
   },
   {
     name: "Indorama Updates",
     url: "/indorama_updates/all",
-    icon: "icon-note",
+    icon: "icon-cursor",
     role: "",
   },
   {
     name: "SMS Campaigns",
     url: "/sms-campaigns/all",
-    icon: "icon-phone",
+    icon: "icon-cursor",
     role: "",
   },
   {
@@ -40,13 +40,13 @@ export const navItems: INavData[] = [
   {
     name: "Soil Analysis",
     url: "/soiltest/customers",
-    icon: "icon-phone",
+    icon: "icon-cursor",
     role: "",
   },
   {
     name: "Crop Prices",
     url: "/cropprices/all",
-    icon: "icon-phone",
+    icon: "icon-cursor",
     role: "",
   },
   {
@@ -76,7 +76,7 @@ export const navItems: INavData[] = [
   {
     name: "Masters",
     url: "/soiltest/enquiries",
-    icon: 'icon-puzzle',
+    icon: 'icon-cursor',
     role: "",
     children: [
       {

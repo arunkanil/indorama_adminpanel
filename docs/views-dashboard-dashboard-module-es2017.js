@@ -5680,13 +5680,15 @@ function split(string, separator, limit) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DashboardModule", function() { return DashboardModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "8Y7J");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "s7LF");
-/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ng2-charts */ "hrfs");
-/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "FE24");
-/* harmony import */ var ngx_bootstrap_buttons__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap/buttons */ "aHM3");
-/* harmony import */ var _dashboard_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./dashboard.component */ "l70X");
-/* harmony import */ var _dashboard_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dashboard-routing.module */ "jUYC");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "SVse");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "8Y7J");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "s7LF");
+/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ng2-charts */ "hrfs");
+/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "FE24");
+/* harmony import */ var ngx_bootstrap_buttons__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-bootstrap/buttons */ "aHM3");
+/* harmony import */ var _dashboard_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dashboard.component */ "l70X");
+/* harmony import */ var _dashboard_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./dashboard-routing.module */ "jUYC");
+
 
 
 
@@ -5698,15 +5700,16 @@ __webpack_require__.r(__webpack_exports__);
 let DashboardModule = class DashboardModule {
 };
 DashboardModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
         imports: [
-            _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
-            _dashboard_routing_module__WEBPACK_IMPORTED_MODULE_7__["DashboardRoutingModule"],
-            ng2_charts__WEBPACK_IMPORTED_MODULE_3__["ChartsModule"],
-            ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_4__["BsDropdownModule"],
-            ngx_bootstrap_buttons__WEBPACK_IMPORTED_MODULE_5__["ButtonsModule"].forRoot()
+            _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+            _dashboard_routing_module__WEBPACK_IMPORTED_MODULE_8__["DashboardRoutingModule"],
+            ng2_charts__WEBPACK_IMPORTED_MODULE_4__["ChartsModule"],
+            ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_5__["BsDropdownModule"],
+            ngx_bootstrap_buttons__WEBPACK_IMPORTED_MODULE_6__["ButtonsModule"].forRoot()
         ],
-        declarations: [_dashboard_component__WEBPACK_IMPORTED_MODULE_6__["DashboardComponent"]]
+        declarations: [_dashboard_component__WEBPACK_IMPORTED_MODULE_7__["DashboardComponent"]]
     })
 ], DashboardModule);
 
@@ -37193,7 +37196,7 @@ var without = Object(_baseRest_js__WEBPACK_IMPORTED_MODULE_1__["default"])(funct
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <!-- <div class=\"row\">\r\n    <div class=\"col-sm-6 col-lg-3\">\r\n      <div class=\"card text-white bg-info\">\r\n        <div class=\"card-body pb-0\">\r\n          <button type=\"button\" class=\"btn btn-transparent p-0 float-right\">\r\n            <i class=\"icon-location-pin\"></i>\r\n          </button>\r\n          <div class=\"text-value\">9.823</div>\r\n          <div>Members online</div>\r\n        </div>\r\n        <div class=\"chart-wrapper mt-3 mx-3\" style=\"height:70px;\">\r\n          <canvas baseChart class=\"chart\"\r\n          [datasets]=\"lineChart2Data\"\r\n          [labels]=\"lineChart2Labels\"\r\n          [options]=\"lineChart2Options\"\r\n          [colors]=\"lineChart2Colours\"\r\n          [legend]=\"lineChart2Legend\"\r\n          [chartType]=\"lineChart2Type\"></canvas>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-sm-6 col-lg-3\">\r\n      <div class=\"card text-white bg-primary\">\r\n        <div class=\"card-body pb-0\">\r\n          <div class=\"btn-group float-right\" dropdown>\r\n            <button type=\"button\" class=\"btn btn-transparent dropdown-toggle p-0\" dropdownToggle>\r\n              <i class=\"icon-settings\"></i>\r\n            </button>\r\n            <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu>\r\n              <a class=\"dropdown-item\" href=\"#\">Action</a>\r\n              <a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n              <a class=\"dropdown-item\" href=\"#\">Something else here</a>\r\n              <a class=\"dropdown-item\" href=\"#\">Something else here</a>\r\n            </div>\r\n          </div>\r\n          <div class=\"text-value\">9.823</div>\r\n          <div>Members online</div>\r\n        </div>\r\n        <div class=\"chart-wrapper mt-3 mx-3\" style=\"height:70px;\">\r\n          <canvas baseChart class=\"chart\"\r\n                  [datasets]=\"lineChart1Data\"\r\n                  [labels]=\"lineChart1Labels\"\r\n                  [options]=\"lineChart1Options\"\r\n                  [colors]=\"lineChart1Colours\"\r\n                  [legend]=\"lineChart1Legend\"\r\n                  [chartType]=\"lineChart1Type\"></canvas>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-sm-6 col-lg-3\">\r\n      <div class=\"card text-white bg-warning\">\r\n        <div class=\"card-body pb-0\">\r\n          <div class=\"btn-group float-right\" dropdown>\r\n            <button type=\"button\" class=\"btn btn-transparent dropdown-toggle p-0\" dropdownToggle>\r\n              <i class=\"icon-settings\"></i>\r\n            </button>\r\n            <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu>\r\n              <a class=\"dropdown-item\" href=\"#\">Action</a>\r\n              <a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n              <a class=\"dropdown-item\" href=\"#\">Something else here</a>\r\n            </div>\r\n          </div>\r\n          <div class=\"text-value\">9.823</div>\r\n          <div>Members online</div>\r\n        </div>\r\n        <div class=\"chart-wrapper mt-3\" style=\"height:70px;\">\r\n          <canvas baseChart class=\"chart\"\r\n          [datasets]=\"lineChart3Data\"\r\n          [labels]=\"lineChart3Labels\"\r\n          [options]=\"lineChart3Options\"\r\n          [colors]=\"lineChart3Colours\"\r\n          [legend]=\"lineChart3Legend\"\r\n          [chartType]=\"lineChart3Type\"></canvas>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-sm-6 col-lg-3\">\r\n      <div class=\"card text-white bg-danger\">\r\n        <div class=\"card-body pb-0\">\r\n          <div class=\"btn-group float-right\" dropdown>\r\n            <button type=\"button\" class=\"btn btn-transparent dropdown-toggle p-0\" dropdownToggle>\r\n              <i class=\"icon-settings\"></i>\r\n            </button>\r\n            <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu>\r\n              <a class=\"dropdown-item\" href=\"#\">Action</a>\r\n              <a class=\"dropdown-item\" href=\"#\">Another action</a>\r\n              <a class=\"dropdown-item\" href=\"#\">Something else here</a>\r\n            </div>\r\n          </div>\r\n          <div class=\"text-value\">9.823</div>\r\n          <div>Members online</div>\r\n        </div>\r\n        <div class=\"chart-wrapper mt-3 mx-3\" style=\"height:70px;\">\r\n          <canvas baseChart class=\"chart\"\r\n          [datasets]=\"barChart1Data\"\r\n          [labels]=\"barChart1Labels\"\r\n          [options]=\"barChart1Options\"\r\n          [colors]=\"barChart1Colours\"\r\n          [legend]=\"barChart1Legend\"\r\n          [chartType]=\"barChart1Type\"></canvas>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div> -->\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-5\">\r\n          <h4 class=\"card-title mb-0\">Soil Analysis</h4>\r\n          <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n        </div>\r\n        <div class=\"col-sm-7 d-none d-md-block\">\r\n          <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\" id=\"option1\">Day</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n              id=\"option2\">Month</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\" id=\"option3\">Year</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-info\">\r\n            <small class=\"text-muted\">No. of soil tests</small>\r\n            <br>\r\n            <strong class=\"h4\">9,123</strong>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-danger\">\r\n            <small class=\"text-muted\">No. of samples collected</small>\r\n            <br>\r\n            <strong class=\"h4\">22,643</strong>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-danger\">\r\n            <small class=\"text-muted\">No. of samples analysed</small>\r\n            <br>\r\n            <strong class=\"h4\">22,643</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-6\">\r\n          <div class=\"progress-group mb-4\">\r\n            <div class=\"progress-group-prepend\">\r\n              <span class=\"progress-group-text\">\r\n                Abia\r\n              </span>\r\n            </div>\r\n            <div class=\"progress-group-bars\">\r\n              <div class=\"progress progress-xs\">\r\n                <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 78%\" aria-valuenow=\"78\"\r\n                  aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"progress-group mb-4\">\r\n            <div class=\"progress-group-prepend\">\r\n              <span class=\"progress-group-text\">\r\n                Adamawa\r\n              </span>\r\n            </div>\r\n            <div class=\"progress-group-bars\">\r\n              <div class=\"progress progress-xs\">\r\n                <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 94%\" aria-valuenow=\"94\"\r\n                  aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"progress-group mb-4\">\r\n            <div class=\"progress-group-prepend\">\r\n              <span class=\"progress-group-text\">\r\n                Akwa Ibom\r\n              </span>\r\n            </div>\r\n            <div class=\"progress-group-bars\">\r\n              <div class=\"progress progress-xs\">\r\n                <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 67%\" aria-valuenow=\"67\"\r\n                  aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"progress-group mb-4\">\r\n            <div class=\"progress-group-prepend\">\r\n              <span class=\"progress-group-text\">\r\n                Bauchi\r\n              </span>\r\n            </div>\r\n            <div class=\"progress-group-bars\">\r\n              <div class=\"progress progress-xs\">\r\n                <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 91%\" aria-valuenow=\"91\"\r\n                  aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"progress-group mb-4\">\r\n            <div class=\"progress-group-prepend\">\r\n              <span class=\"progress-group-text\">\r\n                Bayelsa\r\n              </span>\r\n            </div>\r\n            <div class=\"progress-group-bars\">\r\n              <div class=\"progress progress-xs\">\r\n                <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 73%\" aria-valuenow=\"73\"\r\n                  aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"progress-group mb-4\">\r\n            <div class=\"progress-group-prepend\">\r\n              <span class=\"progress-group-text\">\r\n                Cross River\r\n              </span>\r\n            </div>\r\n            <div class=\"progress-group-bars\">\r\n              <div class=\"progress progress-xs\">\r\n                <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 82%\" aria-valuenow=\"82\"\r\n                  aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"progress-group mb-4\">\r\n            <div class=\"progress-group-prepend\">\r\n              <span class=\"progress-group-text\">\r\n                Delta\r\n              </span>\r\n            </div>\r\n            <div class=\"progress-group-bars\">\r\n              <div class=\"progress progress-xs\">\r\n                <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 100%\" aria-valuenow=\"69\"\r\n                  aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <!-- <div class=\"chart-wrapper\" style=\"height:300px;margin-top:40px;\">\r\n        <canvas baseChart class=\"chart\" [datasets]=\"mainChartData\" [labels]=\"mainChartLabels\"\r\n          [options]=\"mainChartOptions\" [colors]=\"mainChartColours\" [legend]=\"mainChartLegend\"\r\n          [chartType]=\"mainChartType\"></canvas>\r\n      </div> -->\r\n    </div>\r\n  </div>\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-5\">\r\n          <h4 class=\"card-title mb-0\">Crop Prices</h4>\r\n          <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n        </div>\r\n        <div class=\"col-sm-7 d-none d-md-block\">\r\n          \r\n          <div class=\"btn-group float-right\" dropdown>\r\n            <button dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\">\r\n              Rice<span class=\"caret\"></span>\r\n            </button>\r\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\r\n              <li role=\"menuitem\"><a class=\"dropdown-item\" href=\"#\">Rice</a></li>\r\n              <li role=\"menuitem\"><a class=\"dropdown-item\" href=\"#\">Maize</a></li>\r\n              <li role=\"menuitem\"><a class=\"dropdown-item\" href=\"#\">Millets</a></li>\r\n            </ul>\r\n          </div>\r\n          <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\" id=\"option1\">Day</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n              id=\"option2\">Month</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\" id=\"option3\">Year</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"chart-wrapper\" style=\"height:300px;margin-top:40px;\">\r\n        <canvas baseChart class=\"chart\" [datasets]=\"mainChartData\" [labels]=\"mainChartLabels\"\r\n          [options]=\"mainChartOptions\" [colors]=\"mainChartColours\" [legend]=\"mainChartLegend\"\r\n          [chartType]=\"mainChartType\"></canvas>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <div class=\"card\">\r\n        <div class=\"card-body\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-5\">\r\n              <h4 class=\"card-title mb-0\">Farm Demo</h4>\r\n              <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n            </div>\r\n            <div class=\"col-sm-7 d-none d-md-block\">\r\n              <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\"\r\n                  id=\"option1\">Day</label>\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n                  id=\"option2\">Month</label>\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\"\r\n                  id=\"option3\">Year</label>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-info\">\r\n                    <small class=\"text-muted\">No. of Farm demo conducted</small>\r\n                    <br>\r\n                    <strong class=\"h4\">9,123</strong>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-danger\">\r\n                    <small class=\"text-muted\">No. of ongoing Farm demo</small>\r\n                    <br>\r\n                    <strong class=\"h4\">22,643</strong>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <hr class=\"mt-0\">\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Monday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 34%\" aria-valuenow=\"34\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 78%\" aria-valuenow=\"78\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Tuesday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 56%\" aria-valuenow=\"56\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 94%\" aria-valuenow=\"94\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Wednesday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 12%\" aria-valuenow=\"12\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 67%\" aria-valuenow=\"67\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Thursday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 91%\" aria-valuenow=\"91\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Friday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 22%\" aria-valuenow=\"22\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 73%\" aria-valuenow=\"73\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Saturday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 53%\" aria-valuenow=\"53\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 82%\" aria-valuenow=\"82\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Sunday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 9%\" aria-valuenow=\"9\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 69%\" aria-valuenow=\"69\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-warning\">\r\n                    <small class=\"text-muted\">Pageviews</small>\r\n                    <br>\r\n                    <strong class=\"h4\">78,623</strong>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-success\">\r\n                    <small class=\"text-muted\">Organic</small>\r\n                    <br>\r\n                    <strong class=\"h4\">49,123</strong>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <hr class=\"mt-0\">\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header\">\r\n                  <i class=\"icon-user progress-group-icon\"></i>\r\n                  <div>Male</div>\r\n                  <div class=\"ml-auto font-weight-bold\">43%</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-5\">\r\n                <div class=\"progress-group-header\">\r\n                  <i class=\"icon-user-female progress-group-icon\"></i>\r\n                  <div>Female</div>\r\n                  <div class=\"ml-auto font-weight-bold\">37%</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-globe progress-group-icon\"></i>\r\n                  <div>Organic Search</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">191.235</div>\r\n                  <div class=\"text-muted small\">(56%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 56%\" aria-valuenow=\"56\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-facebook progress-group-icon\"></i>\r\n                  <div>Facebook</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">51.223</div>\r\n                  <div class=\"text-muted small\">(15%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 15%\" aria-valuenow=\"15\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-twitter progress-group-icon\"></i>\r\n                  <div>Twitter</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">37.564</div>\r\n                  <div class=\"text-muted small\">(11%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 11%\" aria-valuenow=\"11\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-linkedin progress-group-icon\"></i>\r\n                  <div>LinkedIn</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">27.319</div>\r\n                  <div class=\"text-muted small\">(8%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 8%\" aria-valuenow=\"8\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <br>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-5\">\r\n          <h4 class=\"card-title mb-0\">Soil Analysis</h4>\r\n          <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n        </div>\r\n        <div class=\"col-sm-7 d-none d-md-block\">\r\n          <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\" id=\"option1\">Day</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n              id=\"option2\">Month</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\" id=\"option3\">Year</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-primary\">\r\n            <small class=\"text-muted\">No. of soil tests</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTests?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-danger\">\r\n            <small class=\"text-muted\">No. of samples collected</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTestSamples?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-info\">\r\n            <small class=\"text-muted\">No. of samples analysed</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTestResults?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"progress-group mb-4 col-4\" *ngFor=\"let item of States\">\r\n          <div class=\"progress-group-prepend\">\r\n            <span class=\"progress-group-text\">\r\n              {{ item.attributes.Name }}\r\n            </span>\r\n          </div>\r\n          <div class=\"progress-group-bars\">\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 34%\" aria-valuenow=\"34\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 78%\" aria-valuenow=\"78\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-primary\" role=\"progressbar\" style=\"width: 68%\" aria-valuenow=\"78\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-5\">\r\n          <h4 class=\"card-title mb-0\">Crop Prices</h4>\r\n          <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n        </div>\r\n        <div class=\"col-sm-7 d-none d-md-block\">\r\n\r\n          <div class=\"btn-group float-right\" dropdown>\r\n            <button dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\">Rice<span\r\n                class=\"caret\"></span></button>\r\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\r\n              <li role=\"menuitem\" *ngFor=\"let item of Crops\">\r\n                <a class=\"dropdown-item\" onclick=\"getCropPrices(item)\">{{ item.attributes.Name }}</a>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\" id=\"option1\">Day</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n              id=\"option2\">Month</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\" id=\"option3\">Year</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"chart-wrapper\" style=\"height:300px;margin-top:40px;\">\r\n        <canvas baseChart class=\"chart\" [datasets]=\"mainChartData\" [labels]=\"mainChartLabels\"\r\n          [options]=\"mainChartOptions\" [colors]=\"mainChartColours\" [legend]=\"mainChartLegend\"\r\n          [chartType]=\"mainChartType\"></canvas>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <div class=\"card\">\r\n        <div class=\"card-body\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-5\">\r\n              <h4 class=\"card-title mb-0\">Farm Demo</h4>\r\n              <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n            </div>\r\n            <div class=\"col-sm-7 d-none d-md-block\">\r\n              <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\"\r\n                  id=\"option1\">Day</label>\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n                  id=\"option2\">Month</label>\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\"\r\n                  id=\"option3\">Year</label>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-info\">\r\n                    <small class=\"text-muted\">No. of Farm demo conducted</small>\r\n                    <br>\r\n                    <strong class=\"h4\">{{DashboardStats?.farmDemos?.meta?.pagination?.total}}</strong>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-danger\">\r\n                    <small class=\"text-muted\">No. of ongoing Farm demo</small>\r\n                    <br>\r\n                    <strong class=\"h4\">22,643</strong>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <hr class=\"mt-0\">\r\n              <!-- <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Monday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 34%\" aria-valuenow=\"34\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 78%\" aria-valuenow=\"78\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Tuesday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 56%\" aria-valuenow=\"56\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 94%\" aria-valuenow=\"94\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Wednesday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 12%\" aria-valuenow=\"12\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 67%\" aria-valuenow=\"67\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Thursday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 91%\" aria-valuenow=\"91\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Friday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 22%\" aria-valuenow=\"22\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 73%\" aria-valuenow=\"73\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Saturday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 53%\" aria-valuenow=\"53\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 82%\" aria-valuenow=\"82\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Sunday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 9%\" aria-valuenow=\"9\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 69%\" aria-valuenow=\"69\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div> -->\r\n            </div>\r\n            <!-- <div class=\"col-sm-6\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-warning\">\r\n                    <small class=\"text-muted\">Pageviews</small>\r\n                    <br>\r\n                    <strong class=\"h4\">78,623</strong>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-success\">\r\n                    <small class=\"text-muted\">Organic</small>\r\n                    <br>\r\n                    <strong class=\"h4\">49,123</strong>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <hr class=\"mt-0\">\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header\">\r\n                  <i class=\"icon-user progress-group-icon\"></i>\r\n                  <div>Male</div>\r\n                  <div class=\"ml-auto font-weight-bold\">43%</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-5\">\r\n                <div class=\"progress-group-header\">\r\n                  <i class=\"icon-user-female progress-group-icon\"></i>\r\n                  <div>Female</div>\r\n                  <div class=\"ml-auto font-weight-bold\">37%</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-globe progress-group-icon\"></i>\r\n                  <div>Organic Search</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">191.235</div>\r\n                  <div class=\"text-muted small\">(56%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 56%\" aria-valuenow=\"56\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-facebook progress-group-icon\"></i>\r\n                  <div>Facebook</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">51.223</div>\r\n                  <div class=\"text-muted small\">(15%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 15%\" aria-valuenow=\"15\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-twitter progress-group-icon\"></i>\r\n                  <div>Twitter</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">37.564</div>\r\n                  <div class=\"text-muted small\">(11%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 11%\" aria-valuenow=\"11\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-linkedin progress-group-icon\"></i>\r\n                  <div>LinkedIn</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">27.319</div>\r\n                  <div class=\"text-muted small\">(8%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 8%\" aria-valuenow=\"8\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div> -->\r\n          </div>\r\n          <br>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>");
 
 /***/ }),
 
@@ -59508,206 +59511,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @coreui/coreui-plugin-chartjs-custom-tooltips */ "H++W");
 /* harmony import */ var _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../data.service */ "R7Hv");
+
 
 
 
 
 
 let DashboardComponent = class DashboardComponent {
-    constructor() {
-        this.radioModel = 'Month';
-        // lineChart1
-        this.lineChart1Data = [
-            {
-                data: [65, 59, 84, 84, 51, 55, 40],
-                label: 'Series A'
-            }
-        ];
-        this.lineChart1Labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChart1Options = {
-            tooltips: {
-                enabled: false,
-                custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"]
-            },
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        gridLines: {
-                            color: 'transparent',
-                            zeroLineColor: 'transparent'
-                        },
-                        ticks: {
-                            fontSize: 2,
-                            fontColor: 'transparent',
-                        }
-                    }],
-                yAxes: [{
-                        display: false,
-                        ticks: {
-                            display: false,
-                            min: 40 - 5,
-                            max: 84 + 5,
-                        }
-                    }],
-            },
-            elements: {
-                line: {
-                    borderWidth: 1
-                },
-                point: {
-                    radius: 4,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                },
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.lineChart1Colours = [
-            {
-                backgroundColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--primary'),
-                borderColor: 'rgba(255,255,255,.55)'
-            }
-        ];
-        this.lineChart1Legend = false;
-        this.lineChart1Type = 'line';
-        // lineChart2
-        this.lineChart2Data = [
-            {
-                data: [1, 18, 9, 17, 34, 22, 11],
-                label: 'Series A'
-            }
-        ];
-        this.lineChart2Labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChart2Options = {
-            tooltips: {
-                enabled: false,
-                custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"]
-            },
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        gridLines: {
-                            color: 'transparent',
-                            zeroLineColor: 'transparent'
-                        },
-                        ticks: {
-                            fontSize: 2,
-                            fontColor: 'transparent',
-                        }
-                    }],
-                yAxes: [{
-                        display: false,
-                        ticks: {
-                            display: false,
-                            min: 1 - 5,
-                            max: 34 + 5,
-                        }
-                    }],
-            },
-            elements: {
-                line: {
-                    tension: 0.00001,
-                    borderWidth: 1
-                },
-                point: {
-                    radius: 4,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                },
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.lineChart2Colours = [
-            {
-                backgroundColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--info'),
-                borderColor: 'rgba(255,255,255,.55)'
-            }
-        ];
-        this.lineChart2Legend = false;
-        this.lineChart2Type = 'line';
-        // lineChart3
-        this.lineChart3Data = [
-            {
-                data: [78, 81, 80, 45, 34, 12, 40],
-                label: 'Series A'
-            }
-        ];
-        this.lineChart3Labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-        this.lineChart3Options = {
-            tooltips: {
-                enabled: false,
-                custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"]
-            },
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        display: false
-                    }],
-                yAxes: [{
-                        display: false
-                    }]
-            },
-            elements: {
-                line: {
-                    borderWidth: 2
-                },
-                point: {
-                    radius: 0,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                },
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.lineChart3Colours = [
-            {
-                backgroundColor: 'rgba(255,255,255,.2)',
-                borderColor: 'rgba(255,255,255,.55)',
-            }
-        ];
-        this.lineChart3Legend = false;
-        this.lineChart3Type = 'line';
-        // barChart1
-        this.barChart1Data = [
-            {
-                data: [78, 81, 80, 45, 34, 12, 40, 78, 81, 80, 45, 34, 12, 40, 12, 40],
-                label: 'Series A',
-                barPercentage: 0.6,
-            }
-        ];
-        this.barChart1Labels = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'];
-        this.barChart1Options = {
-            tooltips: {
-                enabled: false,
-                custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"]
-            },
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [{
-                        display: false,
-                    }],
-                yAxes: [{
-                        display: false
-                    }]
-            },
-            legend: {
-                display: false
-            }
-        };
-        this.barChart1Colours = [
-            {
-                backgroundColor: 'rgba(255,255,255,.3)',
-                borderWidth: 0
-            }
-        ];
-        this.barChart1Legend = false;
-        this.barChart1Type = 'bar';
+    constructor(dataservice) {
+        this.dataservice = dataservice;
+        this.States = [];
+        this.Crops = [];
+        this.radioModel = "Month";
         // mainChart
         this.mainChartElements = 27;
         this.mainChartData1 = [];
@@ -59716,161 +59532,212 @@ let DashboardComponent = class DashboardComponent {
         this.mainChartData = [
             {
                 data: this.mainChartData1,
-                label: 'Current'
+                label: "Current",
             },
             {
                 data: this.mainChartData2,
-                label: 'Previous'
+                label: "Previous",
             },
             {
                 data: this.mainChartData3,
-                label: 'BEP'
-            }
+                label: "BEP",
+            },
         ];
         /* tslint:disable:max-line-length */
-        this.mainChartLabels = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday', 'Monday', 'Thursday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        this.mainChartLabels = [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Monday",
+            "Thursday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+        ];
         /* tslint:enable:max-line-length */
         this.mainChartOptions = {
             tooltips: {
                 enabled: false,
                 custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"],
                 intersect: true,
-                mode: 'index',
-                position: 'nearest',
+                mode: "index",
+                position: "nearest",
                 callbacks: {
                     labelColor: function (tooltipItem, chart) {
-                        return { backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor };
-                    }
-                }
+                        return {
+                            backgroundColor: chart.data.datasets[tooltipItem.datasetIndex].borderColor,
+                        };
+                    },
+                },
             },
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                xAxes: [{
+                xAxes: [
+                    {
                         gridLines: {
                             drawOnChartArea: false,
                         },
                         ticks: {
                             callback: function (value) {
                                 return value.charAt(0);
-                            }
-                        }
-                    }],
-                yAxes: [{
+                            },
+                        },
+                    },
+                ],
+                yAxes: [
+                    {
                         ticks: {
                             beginAtZero: true,
                             maxTicksLimit: 5,
                             stepSize: Math.ceil(250 / 5),
-                            max: 250
-                        }
-                    }]
+                            max: 250,
+                        },
+                    },
+                ],
             },
             elements: {
                 line: {
-                    borderWidth: 2
+                    borderWidth: 2,
                 },
                 point: {
                     radius: 0,
                     hitRadius: 10,
                     hoverRadius: 4,
                     hoverBorderWidth: 3,
-                }
+                },
             },
             legend: {
-                display: false
-            }
+                display: false,
+            },
         };
         this.mainChartColours = [
             {
-                backgroundColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["hexToRgba"])(Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--info'), 10),
-                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--info'),
-                pointHoverBackgroundColor: '#fff'
+                // brandInfo
+                backgroundColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["hexToRgba"])(Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])("--info"), 10),
+                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])("--info"),
+                pointHoverBackgroundColor: "#fff",
             },
             {
-                backgroundColor: 'transparent',
-                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--success'),
-                pointHoverBackgroundColor: '#fff'
+                // brandSuccess
+                backgroundColor: "transparent",
+                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])("--success"),
+                pointHoverBackgroundColor: "#fff",
             },
             {
-                backgroundColor: 'transparent',
-                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--danger'),
-                pointHoverBackgroundColor: '#fff',
+                // brandDanger
+                backgroundColor: "transparent",
+                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])("--danger"),
+                pointHoverBackgroundColor: "#fff",
                 borderWidth: 1,
-                borderDash: [8, 5]
-            }
+                borderDash: [8, 5],
+            },
         ];
         this.mainChartLegend = false;
-        this.mainChartType = 'line';
+        this.mainChartType = "line";
         // social box charts
         this.brandBoxChartData1 = [
             {
                 data: [65, 59, 84, 84, 51, 55, 40],
-                label: 'Facebook'
-            }
+                label: "Facebook",
+            },
         ];
         this.brandBoxChartData2 = [
             {
                 data: [1, 13, 9, 17, 34, 41, 38],
-                label: 'Twitter'
-            }
+                label: "Twitter",
+            },
         ];
         this.brandBoxChartData3 = [
             {
                 data: [78, 81, 80, 45, 34, 12, 40],
-                label: 'LinkedIn'
-            }
+                label: "LinkedIn",
+            },
         ];
         this.brandBoxChartData4 = [
             {
                 data: [35, 23, 56, 22, 97, 23, 64],
-                label: 'Google+'
-            }
+                label: "Google+",
+            },
         ];
-        this.brandBoxChartLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+        this.brandBoxChartLabels = [
+            "January",
+            "February",
+            "March",
+            "April",
+            "May",
+            "June",
+            "July",
+        ];
         this.brandBoxChartOptions = {
             tooltips: {
                 enabled: false,
-                custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"]
+                custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"],
             },
             responsive: true,
             maintainAspectRatio: false,
             scales: {
-                xAxes: [{
+                xAxes: [
+                    {
                         display: false,
-                    }],
-                yAxes: [{
+                    },
+                ],
+                yAxes: [
+                    {
                         display: false,
-                    }]
+                    },
+                ],
             },
             elements: {
                 line: {
-                    borderWidth: 2
+                    borderWidth: 2,
                 },
                 point: {
                     radius: 0,
                     hitRadius: 10,
                     hoverRadius: 4,
                     hoverBorderWidth: 3,
-                }
+                },
             },
             legend: {
-                display: false
-            }
+                display: false,
+            },
         };
         this.brandBoxChartColours = [
             {
-                backgroundColor: 'rgba(255,255,255,.1)',
-                borderColor: 'rgba(255,255,255,.55)',
-                pointHoverBackgroundColor: '#fff'
-            }
+                backgroundColor: "rgba(255,255,255,.1)",
+                borderColor: "rgba(255,255,255,.55)",
+                pointHoverBackgroundColor: "#fff",
+            },
         ];
         this.brandBoxChartLegend = false;
-        this.brandBoxChartType = 'line';
+        this.brandBoxChartType = "line";
     }
     random(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
     ngOnInit() {
+        this.getData();
         // generate random values for mainChart
         for (let i = 0; i <= this.mainChartElements; i++) {
             this.mainChartData1.push(this.random(50, 200));
@@ -59878,11 +59745,33 @@ let DashboardComponent = class DashboardComponent {
             this.mainChartData3.push(65);
         }
     }
+    getData() {
+        this.dataservice.getCrops().valueChanges.subscribe((result) => {
+            this.Crops = result.data.crops.data;
+            console.log(this.Crops);
+        });
+        this.dataservice.getStates().valueChanges.subscribe((result) => {
+            this.States = result.data.states.data;
+        });
+        this.dataservice
+            .getDashboardStats()
+            .valueChanges.subscribe((result) => {
+            this.DashboardStats = result.data;
+            console.log(this.DashboardStats);
+        });
+    }
+    getCropPrices(crop) {
+        console.log(crop);
+    }
 };
+DashboardComponent.ctorParameters = () => [
+    { type: _data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"] }
+];
 DashboardComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        template: _raw_loader_dashboard_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
-    })
+        template: _raw_loader_dashboard_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+    }),
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"]])
 ], DashboardComponent);
 
 

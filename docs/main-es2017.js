@@ -3338,6 +3338,85 @@ const UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     }
   }
 `;
+const getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  query dashboardAPI {
+    crops {
+      data {
+        id
+        attributes {
+          Name
+          crop_prices {
+            data {
+              id
+              attributes {
+                Price
+                publishedAt
+              }
+            }
+          }
+        }
+      }
+    }
+    soilTests {
+      meta {
+        pagination {
+          total
+        }
+      }
+    }
+    soilTestSamples {
+      meta {
+        pagination {
+          total
+        }
+      }
+    }
+    soilTestResults {
+      meta {
+        pagination {
+          total
+        }
+      }
+      data {
+        id
+        attributes {
+          soil_test_sample {
+            data {
+              attributes {
+                soil_test {
+                  data {
+                    attributes {
+                      lga {
+                        data {
+                          attributes {
+                            state {
+                              data {
+                                attributes {
+                                  Name
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    farmDemos {
+      meta {
+        pagination {
+          total
+        }
+      }
+    }
+  }
+`;
 let DataService = class DataService {
     constructor(http, apollo, toastr) {
         this.http = http;
@@ -3385,6 +3464,12 @@ let DataService = class DataService {
         return this.http
             .post(`https://www.bulksmsnigeria.com/api/v1/sms/create`, data, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    getDashboardStats() {
+        return this.apollo.watchQuery({
+            query: getDashboardStats,
+            fetchPolicy: "no-cache",
+        });
     }
     getFarmDemos() {
         return this.apollo.watchQuery({
@@ -4532,19 +4617,19 @@ const navItems = [
     {
         name: "Marketplace",
         url: "/marketplace/all",
-        icon: "icon-basket-loaded",
+        icon: "icon-cursor",
         role: "",
     },
     {
         name: "Indorama Updates",
         url: "/indorama_updates/all",
-        icon: "icon-note",
+        icon: "icon-cursor",
         role: "",
     },
     {
         name: "SMS Campaigns",
         url: "/sms-campaigns/all",
-        icon: "icon-phone",
+        icon: "icon-cursor",
         role: "",
     },
     {
@@ -4556,13 +4641,13 @@ const navItems = [
     {
         name: "Soil Analysis",
         url: "/soiltest/customers",
-        icon: "icon-phone",
+        icon: "icon-cursor",
         role: "",
     },
     {
         name: "Crop Prices",
         url: "/cropprices/all",
-        icon: "icon-phone",
+        icon: "icon-cursor",
         role: "",
     },
     {
@@ -4592,7 +4677,7 @@ const navItems = [
     {
         name: "Masters",
         url: "/soiltest/enquiries",
-        icon: 'icon-puzzle',
+        icon: 'icon-cursor',
         role: "",
         children: [
             {

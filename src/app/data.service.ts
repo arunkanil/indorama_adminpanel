@@ -2908,6 +2908,85 @@ const UpdateActivity = gql`
     }
   }
 `;
+const getDashboardStats = gql`
+  query dashboardAPI {
+    crops {
+      data {
+        id
+        attributes {
+          Name
+          crop_prices {
+            data {
+              id
+              attributes {
+                Price
+                publishedAt
+              }
+            }
+          }
+        }
+      }
+    }
+    soilTests {
+      meta {
+        pagination {
+          total
+        }
+      }
+    }
+    soilTestSamples {
+      meta {
+        pagination {
+          total
+        }
+      }
+    }
+    soilTestResults {
+      meta {
+        pagination {
+          total
+        }
+      }
+      data {
+        id
+        attributes {
+          soil_test_sample {
+            data {
+              attributes {
+                soil_test {
+                  data {
+                    attributes {
+                      lga {
+                        data {
+                          attributes {
+                            state {
+                              data {
+                                attributes {
+                                  Name
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    farmDemos {
+      meta {
+        pagination {
+          total
+        }
+      }
+    }
+  }
+`;
 @Injectable({
   providedIn: "root",
 })
@@ -2965,6 +3044,12 @@ export class DataService {
         httpOptions1
       )
       .pipe(catchError(this.handleError));
+  }
+  getDashboardStats() {
+    return this.apollo.watchQuery({
+      query: getDashboardStats,
+      fetchPolicy: "no-cache",
+    });
   }
   getFarmDemos() {
     return this.apollo.watchQuery({

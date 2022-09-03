@@ -190,7 +190,7 @@ export class CustomerDetailComponent implements OnInit {
   }
   showImages(url) {
     console.log(url);
-    this.fullImage = "http://13.89.242.79" + url;
+    this.fullImage = "https://indoramaapp.untanglestrategy.com" + url;
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);

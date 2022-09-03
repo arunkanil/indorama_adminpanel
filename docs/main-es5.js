@@ -1,5 +1,5 @@
 (function () {
-  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69;
+  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70;
 
   function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -777,6 +777,8 @@
       var CreateActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["\n  mutation (\n    $FarmerName: String\n    $Date: Date\n    $Latitude: Float\n    $Longitude: Float\n    $NoOfAttendees: Int\n    $crop: ID\n    $ConditionOfCrop: String\n    $PlannedFarmDay: Date\n    $Reason: String\n    $area: ID\n    $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE\n    $Time: String\n  ) {\n    createActivity(\n      data: {\n        FarmerName: $FarmerName\n        Date: $Date\n        Latitude: $Latitude\n        Longitude: $Longitude\n        NoOfAttendees: $NoOfAttendees\n        crop: $crop\n        ConditionOfCrop: $ConditionOfCrop\n        PlannedFarmDay: $PlannedFarmDay\n        Reason: $Reason\n        area: $area\n        ActivityType: $ActivityType\n        Time: $Time\n      }\n    ) {\n      data {\n        id\n        attributes {\n          FarmerName\n          Date\n          Latitude\n          Longitude\n          NoOfAttendees\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ConditionOfCrop\n          PlannedFarmDay\n          Reason\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ActivityType\n          Time\n        }\n      }\n    }\n  }\n"])));
       var UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["\n  mutation (\n    $FarmerName: String\n    $Date: Date\n    $Latitude: Float\n    $Longitude: Float\n    $NoOfAttendees: Int\n    $crop: ID\n    $ConditionOfCrop: String\n    $PlannedFarmDay: Date\n    $Reason: String\n    $area: ID\n    $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE\n    $Time: String\n    $id: ID!\n  ) {\n    updateActivity(\n      id: $id\n      data: {\n        FarmerName: $FarmerName\n        Date: $Date\n        Latitude: $Latitude\n        Longitude: $Longitude\n        NoOfAttendees: $NoOfAttendees\n        crop: $crop\n        ConditionOfCrop: $ConditionOfCrop\n        PlannedFarmDay: $PlannedFarmDay\n        Reason: $Reason\n        area: $area\n        ActivityType: $ActivityType\n        Time: $Time\n      }\n    ) {\n      data {\n        id\n        attributes {\n          FarmerName\n          Date\n          Latitude\n          Longitude\n          NoOfAttendees\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ConditionOfCrop\n          PlannedFarmDay\n          Reason\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ActivityType\n          Time\n        }\n      }\n    }\n  }\n"])));
 
+      var _getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["\n  query dashboardAPI {\n    crops {\n      data {\n        id\n        attributes {\n          Name\n          crop_prices {\n            data {\n              id\n              attributes {\n                Price\n                publishedAt\n              }\n            }\n          }\n        }\n      }\n    }\n    soilTests {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestSamples {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestResults {\n      meta {\n        pagination {\n          total\n        }\n      }\n      data {\n        id\n        attributes {\n          soil_test_sample {\n            data {\n              attributes {\n                soil_test {\n                  data {\n                    attributes {\n                      lga {\n                        data {\n                          attributes {\n                            state {\n                              data {\n                                attributes {\n                                  Name\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n    farmDemos {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
+
       var DataService = /*#__PURE__*/function () {
         function DataService(http, apollo, toastr) {
           _classCallCheck(this, DataService);
@@ -833,6 +835,14 @@
               }
             };
             return this.http.post("https://www.bulksmsnigeria.com/api/v1/sms/create", data, httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "getDashboardStats",
+          value: function getDashboardStats() {
+            return this.apollo.watchQuery({
+              query: _getDashboardStats,
+              fetchPolicy: "no-cache"
+            });
           }
         }, {
           key: "getFarmDemos",
@@ -2331,17 +2341,17 @@
       }, {
         name: "Marketplace",
         url: "/marketplace/all",
-        icon: "icon-basket-loaded",
+        icon: "icon-cursor",
         role: ""
       }, {
         name: "Indorama Updates",
         url: "/indorama_updates/all",
-        icon: "icon-note",
+        icon: "icon-cursor",
         role: ""
       }, {
         name: "SMS Campaigns",
         url: "/sms-campaigns/all",
-        icon: "icon-phone",
+        icon: "icon-cursor",
         role: ""
       }, {
         name: "Farm Demo",
@@ -2351,12 +2361,12 @@
       }, {
         name: "Soil Analysis",
         url: "/soiltest/customers",
-        icon: "icon-phone",
+        icon: "icon-cursor",
         role: ""
       }, {
         name: "Crop Prices",
         url: "/cropprices/all",
-        icon: "icon-phone",
+        icon: "icon-cursor",
         role: ""
       }, {
         name: "Retailers",
@@ -2381,7 +2391,7 @@
       }, {
         name: "Masters",
         url: "/soiltest/enquiries",
-        icon: 'icon-puzzle',
+        icon: 'icon-cursor',
         role: "",
         children: [{
           name: "States",
