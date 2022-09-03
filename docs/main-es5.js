@@ -1,5 +1,5 @@
 (function () {
-  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70;
+  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71;
 
   function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -779,6 +779,8 @@
 
       var _getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["\n  query dashboardAPI {\n    crops {\n      data {\n        id\n        attributes {\n          Name\n          crop_prices {\n            data {\n              id\n              attributes {\n                Price\n                publishedAt\n              }\n            }\n          }\n        }\n      }\n    }\n    soilTests {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestSamples {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestResults {\n      meta {\n        pagination {\n          total\n        }\n      }\n      data {\n        id\n        attributes {\n          soil_test_sample {\n            data {\n              attributes {\n                soil_test {\n                  data {\n                    attributes {\n                      lga {\n                        data {\n                          attributes {\n                            state {\n                              data {\n                                attributes {\n                                  Name\n                                }\n                              }\n                            }\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n    farmDemos {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
 
+      var _getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["\n  query ($id: ID, $market: ID) {\n    cropPrices(\n      publicationState: LIVE\n      pagination: { limit: 100 }\n      sort: \"publishedAt:desc\"\n      filters: { crop: { id: { eq: $id } }, market: { id: { eq: $market } } }\n    ) {\n      data {\n        id\n        attributes {\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Price\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Unit\n          market {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          publishedAt\n        }\n      }\n    }\n  }\n"])));
+
       var DataService = /*#__PURE__*/function () {
         function DataService(http, apollo, toastr) {
           _classCallCheck(this, DataService);
@@ -842,6 +844,18 @@
             return this.apollo.watchQuery({
               query: _getDashboardStats,
               fetchPolicy: "no-cache"
+            });
+          }
+        }, {
+          key: "getCropPricesDashboard",
+          value: function getCropPricesDashboard(id, market) {
+            return this.apollo.watchQuery({
+              query: _getCropPricesDashboard,
+              fetchPolicy: "no-cache",
+              variables: {
+                id: id,
+                market: market
+              }
             });
           }
         }, {
@@ -2158,7 +2172,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-sms-campaigns-sms-campaigns-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-sms-campaigns-sms-campaigns-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-sms-campaigns-sms-campaigns-module")]).then(__webpack_require__.bind(null,
             /*! ./views/sms-campaigns/sms-campaigns.module */
             "0OHv")).then(function (m) {
               return m.SMSCampaignsModule;
@@ -2169,7 +2183,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-farm-demo-farm-demo-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-farm-demo-farm-demo-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-farm-demo-farm-demo-module")]).then(__webpack_require__.bind(null,
             /*! ./views/farm-demo/farm-demo.module */
             "6rTd")).then(function (m) {
               return m.FarmDemoModule;
@@ -2180,7 +2194,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-activities-activities-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-activities-activities-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-activities-activities-module")]).then(__webpack_require__.bind(null,
             /*! ./views/activities/activities.module */
             "ve2J")).then(function (m) {
               return m.ActivitiesModule;
@@ -2191,7 +2205,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-surveys-surveys-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-surveys-surveys-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-surveys-surveys-module")]).then(__webpack_require__.bind(null,
             /*! ./views/surveys/surveys.module */
             "8dM2")).then(function (m) {
               return m.SurveysModule;
@@ -2202,7 +2216,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-marketplace-marketplace-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-marketplace-marketplace-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-marketplace-marketplace-module")]).then(__webpack_require__.bind(null,
             /*! ./views/marketplace/marketplace.module */
             "4Ywq")).then(function (m) {
               return m.MarketplaceModule;
@@ -2213,7 +2227,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-best-crop-practices-best-crop-practices-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-best-crop-practices-best-crop-practices-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-best-crop-practices-best-crop-practices-module")]).then(__webpack_require__.bind(null,
             /*! ./views/best-crop-practices/best-crop-practices.module */
             "mjQe")).then(function (m) {
               return m.BestCropPracticesModule;
@@ -2224,7 +2238,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-indorama-updates-indorama-updates-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-indorama-updates-indorama-updates-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-indorama-updates-indorama-updates-module")]).then(__webpack_require__.bind(null,
             /*! ./views/indorama-updates/indorama-updates.module */
             "eFNz")).then(function (m) {
               return m.IndoramaUpdatesModule;
@@ -2235,7 +2249,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-soil-test-soil-test-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-soil-test-soil-test-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-soil-test-soil-test-module")]).then(__webpack_require__.bind(null,
             /*! ./views/soil-test/soil-test.module */
             "/dPm")).then(function (m) {
               return m.SoilTestModule;
@@ -2246,7 +2260,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-crop-prices-crop-prices-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-crop-prices-crop-prices-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-crop-prices-crop-prices-module")]).then(__webpack_require__.bind(null,
             /*! ./views/crop-prices/crop-prices.module */
             "N8R/")).then(function (m) {
               return m.CropPricesModule;
@@ -2255,9 +2269,9 @@
         }, {
           path: 'dashboard',
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | views-dashboard-dashboard-module */
-            "views-dashboard-dashboard-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("views-dashboard-dashboard-module")]).then(__webpack_require__.bind(null,
             /*! ./views/dashboard/dashboard.module */
             "6dU7")).then(function (m) {
               return m.DashboardModule;
@@ -2268,7 +2282,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-retailers-retailers-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null,
             /*! ./views/retailers/retailers.module */
             "d3Ph")).then(function (m) {
               return m.RetailersModule;
@@ -2279,7 +2293,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-users-users-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null,
             /*! ./views/users/users.module */
             "QSsw")).then(function (m) {
               return m.UsersModule;
@@ -2290,7 +2304,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-masters-masters-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-masters-masters-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e2833486"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~f563f99c"), __webpack_require__.e("views-masters-masters-module")]).then(__webpack_require__.bind(null,
             /*! ./views/masters/masters.module */
             "NPE9")).then(function (m) {
               return m.MastersModule;

@@ -2987,6 +2987,51 @@ const getDashboardStats = gql`
     }
   }
 `;
+const getCropPricesDashboard = gql`
+  query ($id: ID, $market: ID) {
+    cropPrices(
+      publicationState: LIVE
+      pagination: { limit: 100 }
+      sort: "publishedAt:desc"
+      filters: { crop: { id: { eq: $id } }, market: { id: { eq: $market } } }
+    ) {
+      data {
+        id
+        attributes {
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Price
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Unit
+          market {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          createdAt
+          updatedAt
+          publishedAt
+        }
+      }
+    }
+  }
+`;
 @Injectable({
   providedIn: "root",
 })
@@ -3049,6 +3094,16 @@ export class DataService {
     return this.apollo.watchQuery({
       query: getDashboardStats,
       fetchPolicy: "no-cache",
+    });
+  }
+  getCropPricesDashboard(id, market?) {
+    return this.apollo.watchQuery({
+      query: getCropPricesDashboard,
+      fetchPolicy: "no-cache",
+      variables: {
+        id: id,
+        market: market,
+      },
     });
   }
   getFarmDemos() {

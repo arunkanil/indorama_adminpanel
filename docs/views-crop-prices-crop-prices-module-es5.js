@@ -368,8 +368,13 @@
         }, {
           key: "onChange",
           value: function onChange(event) {
-            this.file = event.target.files[0];
-            console.log(event.target.files[0]);
+            this.file = [];
+
+            for (var i = 0; i < event.target.files.length; i++) {
+              this.file.push(event.target.files[i]);
+            }
+
+            console.log(this.file);
           }
         }, {
           key: "openModal",

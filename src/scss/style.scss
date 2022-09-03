@@ -155,3 +155,7 @@ img:hover {
 .img-container:hover .overlay {
   opacity: 1;
 }
+.dropdown-menu {
+  max-height: 300px;
+  overflow-y: scroll;
+}

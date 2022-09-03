@@ -37196,7 +37196,7 @@ var without = Object(_baseRest_js__WEBPACK_IMPORTED_MODULE_1__["default"])(funct
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-5\">\r\n          <h4 class=\"card-title mb-0\">Soil Analysis</h4>\r\n          <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n        </div>\r\n        <div class=\"col-sm-7 d-none d-md-block\">\r\n          <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\" id=\"option1\">Day</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n              id=\"option2\">Month</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\" id=\"option3\">Year</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-primary\">\r\n            <small class=\"text-muted\">No. of soil tests</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTests?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-danger\">\r\n            <small class=\"text-muted\">No. of samples collected</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTestSamples?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-info\">\r\n            <small class=\"text-muted\">No. of samples analysed</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTestResults?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"progress-group mb-4 col-4\" *ngFor=\"let item of States\">\r\n          <div class=\"progress-group-prepend\">\r\n            <span class=\"progress-group-text\">\r\n              {{ item.attributes.Name }}\r\n            </span>\r\n          </div>\r\n          <div class=\"progress-group-bars\">\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 34%\" aria-valuenow=\"34\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 78%\" aria-valuenow=\"78\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-primary\" role=\"progressbar\" style=\"width: 68%\" aria-valuenow=\"78\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-5\">\r\n          <h4 class=\"card-title mb-0\">Crop Prices</h4>\r\n          <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n        </div>\r\n        <div class=\"col-sm-7 d-none d-md-block\">\r\n\r\n          <div class=\"btn-group float-right\" dropdown>\r\n            <button dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\">Rice<span\r\n                class=\"caret\"></span></button>\r\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\r\n              <li role=\"menuitem\" *ngFor=\"let item of Crops\">\r\n                <a class=\"dropdown-item\" onclick=\"getCropPrices(item)\">{{ item.attributes.Name }}</a>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\" id=\"option1\">Day</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n              id=\"option2\">Month</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\" id=\"option3\">Year</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"chart-wrapper\" style=\"height:300px;margin-top:40px;\">\r\n        <canvas baseChart class=\"chart\" [datasets]=\"mainChartData\" [labels]=\"mainChartLabels\"\r\n          [options]=\"mainChartOptions\" [colors]=\"mainChartColours\" [legend]=\"mainChartLegend\"\r\n          [chartType]=\"mainChartType\"></canvas>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <div class=\"card\">\r\n        <div class=\"card-body\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-5\">\r\n              <h4 class=\"card-title mb-0\">Farm Demo</h4>\r\n              <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n            </div>\r\n            <div class=\"col-sm-7 d-none d-md-block\">\r\n              <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\"\r\n                  id=\"option1\">Day</label>\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n                  id=\"option2\">Month</label>\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\"\r\n                  id=\"option3\">Year</label>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-info\">\r\n                    <small class=\"text-muted\">No. of Farm demo conducted</small>\r\n                    <br>\r\n                    <strong class=\"h4\">{{DashboardStats?.farmDemos?.meta?.pagination?.total}}</strong>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-danger\">\r\n                    <small class=\"text-muted\">No. of ongoing Farm demo</small>\r\n                    <br>\r\n                    <strong class=\"h4\">22,643</strong>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <hr class=\"mt-0\">\r\n              <!-- <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Monday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 34%\" aria-valuenow=\"34\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 78%\" aria-valuenow=\"78\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Tuesday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 56%\" aria-valuenow=\"56\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 94%\" aria-valuenow=\"94\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Wednesday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 12%\" aria-valuenow=\"12\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 67%\" aria-valuenow=\"67\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Thursday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 91%\" aria-valuenow=\"91\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Friday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 22%\" aria-valuenow=\"22\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 73%\" aria-valuenow=\"73\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Saturday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 53%\" aria-valuenow=\"53\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 82%\" aria-valuenow=\"82\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Sunday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 9%\" aria-valuenow=\"9\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 69%\" aria-valuenow=\"69\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div> -->\r\n            </div>\r\n            <!-- <div class=\"col-sm-6\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-warning\">\r\n                    <small class=\"text-muted\">Pageviews</small>\r\n                    <br>\r\n                    <strong class=\"h4\">78,623</strong>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-success\">\r\n                    <small class=\"text-muted\">Organic</small>\r\n                    <br>\r\n                    <strong class=\"h4\">49,123</strong>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <hr class=\"mt-0\">\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header\">\r\n                  <i class=\"icon-user progress-group-icon\"></i>\r\n                  <div>Male</div>\r\n                  <div class=\"ml-auto font-weight-bold\">43%</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-5\">\r\n                <div class=\"progress-group-header\">\r\n                  <i class=\"icon-user-female progress-group-icon\"></i>\r\n                  <div>Female</div>\r\n                  <div class=\"ml-auto font-weight-bold\">37%</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-globe progress-group-icon\"></i>\r\n                  <div>Organic Search</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">191.235</div>\r\n                  <div class=\"text-muted small\">(56%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 56%\" aria-valuenow=\"56\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-facebook progress-group-icon\"></i>\r\n                  <div>Facebook</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">51.223</div>\r\n                  <div class=\"text-muted small\">(15%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 15%\" aria-valuenow=\"15\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-twitter progress-group-icon\"></i>\r\n                  <div>Twitter</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">37.564</div>\r\n                  <div class=\"text-muted small\">(11%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 11%\" aria-valuenow=\"11\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-linkedin progress-group-icon\"></i>\r\n                  <div>LinkedIn</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">27.319</div>\r\n                  <div class=\"text-muted small\">(8%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 8%\" aria-valuenow=\"8\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div> -->\r\n          </div>\r\n          <br>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-5\">\r\n          <h4 class=\"card-title mb-0\">Soil Analysis</h4>\r\n          <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n        </div>\r\n        <div class=\"col-sm-7 d-none d-md-block\">\r\n          <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\" id=\"option1\">Day</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n              id=\"option2\">Month</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\" id=\"option3\">Year</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-primary\">\r\n            <small class=\"text-muted\">No. of soil tests</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTests?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-danger\">\r\n            <small class=\"text-muted\">No. of samples collected</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTestSamples?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-sm-4\">\r\n          <div class=\"callout callout-info\">\r\n            <small class=\"text-muted\">No. of samples analysed</small>\r\n            <br>\r\n            <strong class=\"h4\">{{DashboardStats?.soilTestResults?.meta?.pagination?.total}}</strong>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"progress-group mb-4 col-4\" *ngFor=\"let item of States\">\r\n          <div class=\"progress-group-prepend\">\r\n            <span class=\"progress-group-text\">\r\n              {{ item.attributes.Name }}\r\n            </span>\r\n          </div>\r\n          <div class=\"progress-group-bars\">\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 34%\" aria-valuenow=\"34\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 78%\" aria-valuenow=\"78\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n            <div class=\"progress progress-xs\">\r\n              <div class=\"progress-bar bg-primary\" role=\"progressbar\" style=\"width: 68%\" aria-valuenow=\"78\"\r\n                aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"card\">\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-sm-5\">\r\n          <h4 class=\"card-title mb-0\">Crop Prices</h4>\r\n          <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n        </div>\r\n        <div class=\"col-sm-7 d-none d-md-block\">\r\n\r\n          <div class=\"btn-group float-right\" dropdown>\r\n            <button dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\">{{selectedCrop.attributes.Name}}<span\r\n                class=\"caret\"></span></button>\r\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\r\n              <li role=\"menuitem\" *ngFor=\"let item of Crops\">\r\n                <a class=\"dropdown-item\" (click)=\"selectCrop(item)\">{{ item.attributes.Name }}</a>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <div class=\"btn-group float-right mx-2\" dropdown>\r\n            <button dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\">{{selectedMarket.attributes.Name}}<span\r\n                class=\"caret\"></span></button>\r\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\r\n              <li role=\"menuitem\" *ngFor=\"let item of Markets\">\r\n                <a class=\"dropdown-item\" (click)=\"selectMarket(item)\">{{ item.attributes.Name }}</a>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <div class=\"btn-group float-right\" dropdown>\r\n            <button dropdownToggle type=\"button\" class=\"btn btn-primary dropdown-toggle\">{{selectedState.attributes.Name}}<span\r\n                class=\"caret\"></span></button>\r\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\r\n              <li role=\"menuitem\" *ngFor=\"let item of States\">\r\n                <a class=\"dropdown-item\" (click)=\"selectState(item)\">{{ item.attributes.Name }}</a>\r\n              </li>\r\n            </ul>\r\n          </div>\r\n          <!-- <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\" id=\"option1\">Day</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n              id=\"option2\">Month</label>\r\n            <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\" id=\"option3\">Year</label>\r\n          </div> -->\r\n        </div>\r\n      </div>\r\n      <div class=\"chart-wrapper\" style=\"height:300px;margin-top:40px;\">\r\n        <canvas baseChart class=\"chart\" [datasets]=\"mainChartData\" [labels]=\"mainChartLabels\"\r\n          [options]=\"mainChartOptions\" [colors]=\"mainChartColours\" [legend]=\"mainChartLegend\"\r\n          [chartType]=\"mainChartType\"></canvas>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\">\r\n    <div class=\"col-md-12\">\r\n      <div class=\"card\">\r\n        <div class=\"card-body\">\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-5\">\r\n              <h4 class=\"card-title mb-0\">Farm Demo</h4>\r\n              <!-- <div class=\"small text-muted\">November 2017</div> -->\r\n            </div>\r\n            <div class=\"col-sm-7 d-none d-md-block\">\r\n              <div class=\"btn-group btn-group-toggle float-right mr-3\" data-toggle=\"buttons\">\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Day\"\r\n                  id=\"option1\">Day</label>\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Month\"\r\n                  id=\"option2\">Month</label>\r\n                <label class=\"btn btn-outline-secondary\" [(ngModel)]=\"radioModel\" btnRadio=\"Year\"\r\n                  id=\"option3\">Year</label>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-info\">\r\n                    <small class=\"text-muted\">No. of Farm demo conducted</small>\r\n                    <br>\r\n                    <strong class=\"h4\">{{DashboardStats?.farmDemos?.meta?.pagination?.total}}</strong>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-danger\">\r\n                    <small class=\"text-muted\">No. of ongoing Farm demo</small>\r\n                    <br>\r\n                    <strong class=\"h4\"></strong>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <hr class=\"mt-0\">\r\n              <!-- <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Monday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 34%\" aria-valuenow=\"34\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 78%\" aria-valuenow=\"78\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Tuesday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 56%\" aria-valuenow=\"56\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 94%\" aria-valuenow=\"94\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Wednesday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 12%\" aria-valuenow=\"12\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 67%\" aria-valuenow=\"67\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Thursday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 91%\" aria-valuenow=\"91\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Friday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 22%\" aria-valuenow=\"22\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 73%\" aria-valuenow=\"73\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Saturday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 53%\" aria-valuenow=\"53\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 82%\" aria-valuenow=\"82\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-4\">\r\n                <div class=\"progress-group-prepend\">\r\n                  <span class=\"progress-group-text\">\r\n                    Sunday\r\n                  </span>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-info\" role=\"progressbar\" style=\"width: 9%\" aria-valuenow=\"9\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-danger\" role=\"progressbar\" style=\"width: 69%\" aria-valuenow=\"69\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div> -->\r\n            </div>\r\n            <!-- <div class=\"col-sm-6\">\r\n              <div class=\"row\">\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-warning\">\r\n                    <small class=\"text-muted\">Pageviews</small>\r\n                    <br>\r\n                    <strong class=\"h4\">78,623</strong>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-sm-6\">\r\n                  <div class=\"callout callout-success\">\r\n                    <small class=\"text-muted\">Organic</small>\r\n                    <br>\r\n                    <strong class=\"h4\">49,123</strong>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <hr class=\"mt-0\">\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header\">\r\n                  <i class=\"icon-user progress-group-icon\"></i>\r\n                  <div>Male</div>\r\n                  <div class=\"ml-auto font-weight-bold\">43%</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group mb-5\">\r\n                <div class=\"progress-group-header\">\r\n                  <i class=\"icon-user-female progress-group-icon\"></i>\r\n                  <div>Female</div>\r\n                  <div class=\"ml-auto font-weight-bold\">37%</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-warning\" role=\"progressbar\" style=\"width: 43%\" aria-valuenow=\"43\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-globe progress-group-icon\"></i>\r\n                  <div>Organic Search</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">191.235</div>\r\n                  <div class=\"text-muted small\">(56%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 56%\" aria-valuenow=\"56\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-facebook progress-group-icon\"></i>\r\n                  <div>Facebook</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">51.223</div>\r\n                  <div class=\"text-muted small\">(15%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 15%\" aria-valuenow=\"15\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-twitter progress-group-icon\"></i>\r\n                  <div>Twitter</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">37.564</div>\r\n                  <div class=\"text-muted small\">(11%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 11%\" aria-valuenow=\"11\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"progress-group\">\r\n                <div class=\"progress-group-header align-items-end\">\r\n                  <i class=\"icon-social-linkedin progress-group-icon\"></i>\r\n                  <div>LinkedIn</div>\r\n                  <div class=\"ml-auto font-weight-bold mr-2\">27.319</div>\r\n                  <div class=\"text-muted small\">(8%)</div>\r\n                </div>\r\n                <div class=\"progress-group-bars\">\r\n                  <div class=\"progress progress-xs\">\r\n                    <div class=\"progress-bar bg-success\" role=\"progressbar\" style=\"width: 8%\" aria-valuenow=\"8\"\r\n                      aria-valuemin=\"0\" aria-valuemax=\"100\"></div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div> -->\r\n          </div>\r\n          <br>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>");
 
 /***/ }),
 
@@ -59512,6 +59512,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @coreui/coreui-plugin-chartjs-custom-tooltips */ "H++W");
 /* harmony import */ var _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../data.service */ "R7Hv");
+/* harmony import */ var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../constants/columnMetadata */ "7nfi");
+
 
 
 
@@ -59523,57 +59525,23 @@ let DashboardComponent = class DashboardComponent {
         this.dataservice = dataservice;
         this.States = [];
         this.Crops = [];
+        this.Markets = [];
+        this.cropPrices = [];
+        this.selectedCrop = { attributes: { Name: "Crop" } };
+        this.selectedMarket = { attributes: { Name: "Market" } };
+        this.selectedState = { attributes: { Name: "State" } };
         this.radioModel = "Month";
         // mainChart
         this.mainChartElements = 27;
         this.mainChartData1 = [];
-        this.mainChartData2 = [];
-        this.mainChartData3 = [];
         this.mainChartData = [
             {
                 data: this.mainChartData1,
-                label: "Current",
-            },
-            {
-                data: this.mainChartData2,
-                label: "Previous",
-            },
-            {
-                data: this.mainChartData3,
-                label: "BEP",
+                label: "Price",
             },
         ];
         /* tslint:disable:max-line-length */
-        this.mainChartLabels = [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-            "Monday",
-            "Thursday",
-            "Wednesday",
-            "Thursday",
-            "Friday",
-            "Saturday",
-            "Sunday",
-        ];
+        this.mainChartLabels = [];
         /* tslint:enable:max-line-length */
         this.mainChartOptions = {
             tooltips: {
@@ -59602,16 +59570,6 @@ let DashboardComponent = class DashboardComponent {
                             callback: function (value) {
                                 return value.charAt(0);
                             },
-                        },
-                    },
-                ],
-                yAxes: [
-                    {
-                        ticks: {
-                            beginAtZero: true,
-                            maxTicksLimit: 5,
-                            stepSize: Math.ceil(250 / 5),
-                            max: 250,
                         },
                     },
                 ],
@@ -59655,95 +59613,12 @@ let DashboardComponent = class DashboardComponent {
         ];
         this.mainChartLegend = false;
         this.mainChartType = "line";
-        // social box charts
-        this.brandBoxChartData1 = [
-            {
-                data: [65, 59, 84, 84, 51, 55, 40],
-                label: "Facebook",
-            },
-        ];
-        this.brandBoxChartData2 = [
-            {
-                data: [1, 13, 9, 17, 34, 41, 38],
-                label: "Twitter",
-            },
-        ];
-        this.brandBoxChartData3 = [
-            {
-                data: [78, 81, 80, 45, 34, 12, 40],
-                label: "LinkedIn",
-            },
-        ];
-        this.brandBoxChartData4 = [
-            {
-                data: [35, 23, 56, 22, 97, 23, 64],
-                label: "Google+",
-            },
-        ];
-        this.brandBoxChartLabels = [
-            "January",
-            "February",
-            "March",
-            "April",
-            "May",
-            "June",
-            "July",
-        ];
-        this.brandBoxChartOptions = {
-            tooltips: {
-                enabled: false,
-                custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"],
-            },
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                xAxes: [
-                    {
-                        display: false,
-                    },
-                ],
-                yAxes: [
-                    {
-                        display: false,
-                    },
-                ],
-            },
-            elements: {
-                line: {
-                    borderWidth: 2,
-                },
-                point: {
-                    radius: 0,
-                    hitRadius: 10,
-                    hoverRadius: 4,
-                    hoverBorderWidth: 3,
-                },
-            },
-            legend: {
-                display: false,
-            },
-        };
-        this.brandBoxChartColours = [
-            {
-                backgroundColor: "rgba(255,255,255,.1)",
-                borderColor: "rgba(255,255,255,.55)",
-                pointHoverBackgroundColor: "#fff",
-            },
-        ];
-        this.brandBoxChartLegend = false;
-        this.brandBoxChartType = "line";
     }
     random(min, max) {
         return Math.floor(Math.random() * (max - min + 1) + min);
     }
     ngOnInit() {
         this.getData();
-        // generate random values for mainChart
-        for (let i = 0; i <= this.mainChartElements; i++) {
-            this.mainChartData1.push(this.random(50, 200));
-            this.mainChartData2.push(this.random(80, 100));
-            this.mainChartData3.push(65);
-        }
     }
     getData() {
         this.dataservice.getCrops().valueChanges.subscribe((result) => {
@@ -59753,6 +59628,7 @@ let DashboardComponent = class DashboardComponent {
         this.dataservice.getStates().valueChanges.subscribe((result) => {
             this.States = result.data.states.data;
         });
+        this.getMarkets();
         this.dataservice
             .getDashboardStats()
             .valueChanges.subscribe((result) => {
@@ -59760,8 +59636,45 @@ let DashboardComponent = class DashboardComponent {
             console.log(this.DashboardStats);
         });
     }
+    getMarkets(id) {
+        this.dataservice.getMarkets(id).valueChanges.subscribe((result) => {
+            console.log("getMarkets", result.data.markets.data);
+            this.Markets = result.data.markets.data;
+        });
+    }
+    selectState(event) {
+        this.selectedState = event;
+        this.getMarkets(event.id);
+    }
+    selectMarket(event) {
+        var _a, _b;
+        this.selectedMarket = event;
+        if (((_a = this.selectedCrop) === null || _a === void 0 ? void 0 : _a.id) && ((_b = this.selectedMarket) === null || _b === void 0 ? void 0 : _b.id)) {
+            this.getCropPrices(this.selectedCrop);
+        }
+    }
+    selectCrop(event) {
+        this.selectedCrop = event;
+        this.getCropPrices(event);
+    }
     getCropPrices(crop) {
+        var _a;
         console.log(crop);
+        this.dataservice
+            .getCropPricesDashboard(crop === null || crop === void 0 ? void 0 : crop.id, (_a = this.selectedMarket) === null || _a === void 0 ? void 0 : _a.id)
+            .valueChanges.subscribe((result) => {
+            this.cropPrices = result.data.cropPrices.data;
+            console.log(this.cropPrices);
+            this.mainChartData1 = this.cropPrices.map((item) => item.attributes.Price);
+            this.mainChartLabels = this.cropPrices.map((item) => Object(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_6__["dateConverterMin"])(item.attributes.publishedAt));
+            this.mainChartData = [
+                {
+                    data: this.mainChartData1,
+                    label: "Price",
+                },
+            ];
+            console.log(this.mainChartData1, this.mainChartLabels);
+        });
     }
 };
 DashboardComponent.ctorParameters = () => [

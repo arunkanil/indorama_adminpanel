@@ -73,20 +73,38 @@
         <div class="col-sm-7 d-none d-md-block">
 
           <div class="btn-group float-right" dropdown>
-            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">Rice<span
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{selectedCrop.attributes.Name}}<span
                 class="caret"></span></button>
             <ul *dropdownMenu class="dropdown-menu" role="menu">
               <li role="menuitem" *ngFor="let item of Crops">
-                <a class="dropdown-item" (click)="getCropPrices(item)">{{ item.attributes.Name }}</a>
+                <a class="dropdown-item" (click)="selectCrop(item)">{{ item.attributes.Name }}</a>
               </li>
             </ul>
           </div>
-          <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
+          <div class="btn-group float-right mx-2" dropdown>
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{selectedMarket.attributes.Name}}<span
+                class="caret"></span></button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem" *ngFor="let item of Markets">
+                <a class="dropdown-item" (click)="selectMarket(item)">{{ item.attributes.Name }}</a>
+              </li>
+            </ul>
+          </div>
+          <div class="btn-group float-right" dropdown>
+            <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{selectedState.attributes.Name}}<span
+                class="caret"></span></button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem" *ngFor="let item of States">
+                <a class="dropdown-item" (click)="selectState(item)">{{ item.attributes.Name }}</a>
+              </li>
+            </ul>
+          </div>
+          <!-- <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
             <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Day" id="option1">Day</label>
             <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Month"
               id="option2">Month</label>
             <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Year" id="option3">Year</label>
-          </div>
+          </div> -->
         </div>
       </div>
       <div class="chart-wrapper" style="height:300px;margin-top:40px;">
@@ -130,7 +148,7 @@
                   <div class="callout callout-danger">
                     <small class="text-muted">No. of ongoing Farm demo</small>
                     <br>
-                    <strong class="h4">22,643</strong>
+                    <strong class="h4"></strong>
                   </div>
                 </div>
               </div>
