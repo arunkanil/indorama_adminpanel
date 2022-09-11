@@ -51,6 +51,10 @@ export const routes: Routes = [
         loadChildren: () => import('./views/farm-demo/farm-demo.module').then(m => m.FarmDemoModule)
       },
       {
+        path: 'chat',
+        loadChildren: () => import('./views/chat/chat.module').then(m => m.ChatModule)
+      },
+      {
         path: 'activities',
         loadChildren: () => import('./views/activities/activities.module').then(m => m.ActivitiesModule)
       },

@@ -3032,6 +3032,245 @@ const getCropPricesDashboard = gql`
     }
   }
 `;
+const getallChats = gql`
+  query ($limit: Int, $start: Int, $key: String) {
+    chats(
+      filters: {
+        members: {
+          or: [{ username: { containsi: $key } }, { Name: { containsi: $key } }]
+        }
+      }
+      sort: "updatedAt:desc"
+      pagination: { limit: $limit, start: $start }
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+      data {
+        id
+        attributes {
+          isAskIndorama
+          members {
+            data {
+              id
+              attributes {
+                username
+                Name
+                UserType
+                Name
+                prof_pic {
+                  data {
+                    id
+                    attributes {
+                      name
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          chatInitiatedBy {
+            data {
+              id
+              attributes {
+                username
+                Name
+                UserType
+                Name
+                prof_pic {
+                  data {
+                    id
+                    attributes {
+                      name
+                      url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const getChatMessages = gql`
+  query ($id: ID!) {
+    chat(id: $id) {
+      data {
+        id
+        attributes {
+          messages {
+            data {
+              id
+              attributes {
+                message
+                createdAt
+                updatedAt
+                image_attachment {
+                  data {
+                    id
+                    attributes {
+                      name
+                      width
+                      height
+                      url
+                    }
+                  }
+                }
+                from_user {
+                  data {
+                    id
+                    attributes {
+                      username
+                      Name
+                      UserType
+                      prof_pic {
+                        data {
+                          id
+                          attributes {
+                            url
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                to_user {
+                  data {
+                    id
+                    attributes {
+                      username
+                      Name
+                      UserType
+                      prof_pic {
+                        data {
+                          id
+                          attributes {
+                            url
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+                chat {
+                  data {
+                    id
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+const getSurveys = gql`
+  query ($limit: Int, $start: Int) {
+    surveyForms(
+      sort: "updatedAt:desc"
+      pagination: { limit: $limit, start: $start }
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+      data {
+        id
+        attributes {
+          SurveyTitle
+          SurveyDescription
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const CreateSurveys = gql`
+  mutation (
+    $SurveyTitle: String
+    $SurveyDescription: String
+    $Fields: [SurveyFormFieldsDynamicZoneInput!]
+  ) {
+    createSurveyForm(
+      data: {
+        SurveyTitle: $SurveyTitle
+        SurveyDescription: $SurveyDescription
+        Fields: $Fields
+      }
+    ) {
+      data {
+        id
+        attributes {
+          SurveyTitle
+          SurveyDescription
+          Fields {
+            __typename
+          }
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const getSurveyResults = gql`
+  query ($limit: Int, $start: Int, $id: ID) {
+    surveyResults(
+      sort: "updatedAt:desc"
+      pagination: { limit: $limit, start: $start }
+      filters: { survey_form: { id: { eq: $id } } }
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+      data {
+        id
+        attributes {
+          survey_form {
+            data {
+              id
+              attributes {
+                SurveyTitle
+              }
+            }
+          }
+          user {
+            data {
+              id
+              attributes {
+                Name
+                username
+              }
+            }
+          }
+          SurveyResponse
+          createdAt
+        }
+      }
+    }
+  }
+`;
 @Injectable({
   providedIn: "root",
 })
@@ -3104,6 +3343,59 @@ export class DataService {
         id: id,
         market: market,
       },
+    });
+  }
+  getallChats(limit?, start?, key?) {
+    return this.apollo.watchQuery({
+      query: getallChats,
+      fetchPolicy: "no-cache",
+      variables: {
+        limit: limit,
+        start: start,
+        key: key ? key : undefined,
+      },
+    });
+  }
+  getSurveys(limit?, start?, key?) {
+    return this.apollo.watchQuery({
+      query: getSurveys,
+      fetchPolicy: "no-cache",
+      variables: {
+        limit: limit,
+        start: start,
+        key: key ? key : undefined,
+      },
+    });
+  }
+
+  getSurveyResults(id) {
+    return this.apollo.watchQuery({
+      query: getSurveyResults,
+      fetchPolicy: "no-cache",
+      variables: {
+        limit: 10000,
+        id: id
+      },
+    });
+  }
+  createSurveys(SurveyTitle, SurveyDescription, Fields) {
+    return this.apollo.mutate({
+      mutation: CreateSurveys,
+      fetchPolicy: "no-cache",
+      variables: {
+        SurveyTitle: SurveyTitle,
+        SurveyDescription: SurveyDescription,
+        Fields: Fields,
+      },
+    });
+  }
+  getChatMessages(id) {
+    return this.apollo.watchQuery({
+      query: getChatMessages,
+      variables: {
+        id: id,
+      },
+      fetchPolicy: "no-cache",
     });
   }
   getFarmDemos() {

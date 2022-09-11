@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { NewSurveyComponent } from './surveys-add.component';
+import { SurveyDetailsComponent } from './surveys-detail.component';
 import { SurveysComponent } from './surveys.component';
 
 const routes: Routes = [
@@ -21,6 +22,10 @@ const routes: Routes = [
         path: 'new_survey',
         // canActivate: [AuthGuard],
         component: NewSurveyComponent,
+      },{
+        path: 'survey_details/:id',
+        // canActivate: [AuthGuard],
+        component: SurveyDetailsComponent,
       },
     ]
   }

@@ -26,8 +26,8 @@
       /* harmony export (binding) */
 
 
-      __webpack_require__.d(__webpack_exports__, "CustomerDetailComponent", function () {
-        return CustomerDetailComponent;
+      __webpack_require__.d(__webpack_exports__, "FarmDemoDetailComponent", function () {
+        return FarmDemoDetailComponent;
       });
       /* harmony import */
 
@@ -84,9 +84,9 @@
       /*! ../../constants/columnMetadata */
       "7nfi");
 
-      var CustomerDetailComponent = /*#__PURE__*/function () {
-        function CustomerDetailComponent(dataservice, activatedRouter, router, fb, toastr) {
-          _classCallCheck(this, CustomerDetailComponent);
+      var FarmDemoDetailComponent = /*#__PURE__*/function () {
+        function FarmDemoDetailComponent(dataservice, activatedRouter, router, fb, toastr) {
+          _classCallCheck(this, FarmDemoDetailComponent);
 
           this.dataservice = dataservice;
           this.activatedRouter = activatedRouter;
@@ -132,7 +132,7 @@
           });
         }
 
-        _createClass(CustomerDetailComponent, [{
+        _createClass(FarmDemoDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
             this.getLists();
@@ -330,10 +330,10 @@
           }
         }]);
 
-        return CustomerDetailComponent;
+        return FarmDemoDetailComponent;
       }();
 
-      CustomerDetailComponent.ctorParameters = function () {
+      FarmDemoDetailComponent.ctorParameters = function () {
         return [{
           type: _data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"]
         }, {
@@ -347,7 +347,7 @@
         }];
       };
 
-      CustomerDetailComponent.propDecorators = {
+      FarmDemoDetailComponent.propDecorators = {
         myModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
           args: ["myModal"]
@@ -361,9 +361,9 @@
           args: ["commentModal"]
         }]
       };
-      CustomerDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+      FarmDemoDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         template: _raw_loader_farm_demo_detail_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"], ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]])], CustomerDetailComponent);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"], ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]])], FarmDemoDetailComponent);
       /***/
     },
 
@@ -2920,7 +2920,7 @@
 
       FarmDemoModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], ag_grid_angular__WEBPACK_IMPORTED_MODULE_15__["AgGridModule"].withComponents([]), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], _farm_demo_routing_module__WEBPACK_IMPORTED_MODULE_14__["FarmDemoRoutingModule"], ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_8__["BsDropdownModule"].forRoot(), ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_6__["TabsModule"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_13__["NgSelectModule"], angular_responsive_carousel__WEBPACK_IMPORTED_MODULE_4__["IvyCarouselModule"], angular_ng_autocomplete__WEBPACK_IMPORTED_MODULE_18__["AutocompleteLibModule"], ngx_bootstrap_collapse__WEBPACK_IMPORTED_MODULE_7__["CollapseModule"].forRoot(), ngx_bootstrap_pagination__WEBPACK_IMPORTED_MODULE_9__["PaginationModule"].forRoot(), ngx_bootstrap_popover__WEBPACK_IMPORTED_MODULE_10__["PopoverModule"].forRoot(), ngx_bootstrap_carousel__WEBPACK_IMPORTED_MODULE_19__["CarouselModule"].forRoot(), ngx_bootstrap_progressbar__WEBPACK_IMPORTED_MODULE_11__["ProgressbarModule"].forRoot(), ngx_bootstrap_tooltip__WEBPACK_IMPORTED_MODULE_12__["TooltipModule"].forRoot(), ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_16__["ModalModule"].forRoot()],
-        declarations: [_farm_demo_component__WEBPACK_IMPORTED_MODULE_5__["FarmDemoComponent"], _farm_demo_detail_component__WEBPACK_IMPORTED_MODULE_17__["CustomerDetailComponent"]]
+        declarations: [_farm_demo_component__WEBPACK_IMPORTED_MODULE_5__["FarmDemoComponent"], _farm_demo_detail_component__WEBPACK_IMPORTED_MODULE_17__["FarmDemoDetailComponent"]]
       })], FarmDemoModule);
       /***/
     },
@@ -4832,7 +4832,7 @@
           }
         }, {
           path: 'demo_details/:id',
-          component: _farm_demo_detail_component__WEBPACK_IMPORTED_MODULE_4__["CustomerDetailComponent"],
+          component: _farm_demo_detail_component__WEBPACK_IMPORTED_MODULE_4__["FarmDemoDetailComponent"],
           data: {
             title: 'Farm Demo Details'
           }

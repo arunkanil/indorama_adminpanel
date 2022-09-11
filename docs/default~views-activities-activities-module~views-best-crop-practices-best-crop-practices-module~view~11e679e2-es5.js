@@ -1152,7 +1152,7 @@
         resizable: true,
         sortable: true
       }, {
-        field: "attributes.market.data.attributes.Name",
+        field: "attributes.SurveyTitle",
         headerName: "Survey Title",
         resizable: true,
         sortable: true,

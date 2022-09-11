@@ -14,7 +14,7 @@ import { NgSelectModule } from "@ng-select/ng-select";
 import { FarmDemoRoutingModule } from "./farm-demo-routing.module";
 import { AgGridModule } from "ag-grid-angular";
 import { ModalModule } from "ngx-bootstrap/modal";
-import { CustomerDetailComponent } from "./farm-demo-detail.component";
+import { FarmDemoDetailComponent } from "./farm-demo-detail.component";
 import { AutocompleteLibModule } from "angular-ng-autocomplete";
 import { CarouselModule } from "ngx-bootstrap/carousel";
 
@@ -38,6 +38,6 @@ import { CarouselModule } from "ngx-bootstrap/carousel";
     TooltipModule.forRoot(),
     ModalModule.forRoot(),
   ],
-  declarations: [FarmDemoComponent, CustomerDetailComponent],
+  declarations: [FarmDemoComponent, FarmDemoDetailComponent],
 })
 export class FarmDemoModule {}

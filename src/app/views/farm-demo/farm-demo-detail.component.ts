@@ -9,7 +9,7 @@ import { dateConverter, dateConverterMin } from "../../constants/columnMetadata"
 @Component({
   templateUrl: "farm-demo-detail.component.html",
 })
-export class CustomerDetailComponent implements OnInit {
+export class FarmDemoDetailComponent implements OnInit {
   constructor(
     public dataservice: DataService,
     private activatedRouter: ActivatedRoute,

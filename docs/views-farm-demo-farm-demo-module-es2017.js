@@ -4,12 +4,12 @@
 /*!***************************************************************!*\
   !*** ./src/app/views/farm-demo/farm-demo-detail.component.ts ***!
   \***************************************************************/
-/*! exports provided: CustomerDetailComponent */
+/*! exports provided: FarmDemoDetailComponent */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerDetailComponent", function() { return CustomerDetailComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FarmDemoDetailComponent", function() { return FarmDemoDetailComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_farm_demo_detail_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./farm-demo-detail.component.html */ "DQdZ");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "8Y7J");
@@ -28,7 +28,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-let CustomerDetailComponent = class CustomerDetailComponent {
+let FarmDemoDetailComponent = class FarmDemoDetailComponent {
     constructor(dataservice, activatedRouter, router, fb, toastr) {
         this.dataservice = dataservice;
         this.activatedRouter = activatedRouter;
@@ -268,19 +268,19 @@ let CustomerDetailComponent = class CustomerDetailComponent {
         }
     }
 };
-CustomerDetailComponent.ctorParameters = () => [
+FarmDemoDetailComponent.ctorParameters = () => [
     { type: _data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"] },
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"] }
 ];
-CustomerDetailComponent.propDecorators = {
+FarmDemoDetailComponent.propDecorators = {
     myModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["myModal",] }],
     deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }],
     commentModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["commentModal",] }]
 };
-CustomerDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+FarmDemoDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         template: _raw_loader_farm_demo_detail_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
     }),
@@ -289,7 +289,7 @@ CustomerDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"],
         ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]])
-], CustomerDetailComponent);
+], FarmDemoDetailComponent);
 
 
 
@@ -1809,7 +1809,7 @@ FarmDemoModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
             ngx_bootstrap_tooltip__WEBPACK_IMPORTED_MODULE_12__["TooltipModule"].forRoot(),
             ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_16__["ModalModule"].forRoot(),
         ],
-        declarations: [_farm_demo_component__WEBPACK_IMPORTED_MODULE_5__["FarmDemoComponent"], _farm_demo_detail_component__WEBPACK_IMPORTED_MODULE_17__["CustomerDetailComponent"]],
+        declarations: [_farm_demo_component__WEBPACK_IMPORTED_MODULE_5__["FarmDemoComponent"], _farm_demo_detail_component__WEBPACK_IMPORTED_MODULE_17__["FarmDemoDetailComponent"]],
     })
 ], FarmDemoModule);
 
@@ -3029,7 +3029,7 @@ const routes = [
             },
             {
                 path: 'demo_details/:id',
-                component: _farm_demo_detail_component__WEBPACK_IMPORTED_MODULE_4__["CustomerDetailComponent"],
+                component: _farm_demo_detail_component__WEBPACK_IMPORTED_MODULE_4__["FarmDemoDetailComponent"],
                 data: {
                     title: 'Farm Demo Details'
                 }

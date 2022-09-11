@@ -11,7 +11,7 @@
           (click)="openModal('Edit')">
           Edit
         </button> -->
-        <a type="button" [disabled]="!disableButton" class="btn btn-primary" data-toggle="modal" href="/#/surveys/new_survey">
+        <a type="button" class="btn btn-primary" data-toggle="modal" href="/#/surveys/new_survey">
           Add New Survey
         </a>
       </div>
@@ -28,93 +28,6 @@
             (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
           </ag-grid-angular>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div bsModal #cropPriceModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h4 class="modal-title">Add/Edit Listing</h4>
-        <button type="button" class="close" (click)="cropPriceModal.hide()" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="cropPriceForm" (ngSubmit)="cropPriceSubmit()">
-          <div class="form-group">
-            <label for="state">Category</label>
-            <select class="form-control" id="state" (change)="filterMarkets($event)" required ngModel name="state"
-              formControlName="state">
-              <option value="" disabled selected hidden>Choose...</option>
-              <option *ngFor="let item of States" value="{{ item.id }}">
-                {{ item.attributes.Name }}
-              </option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="name">Title</label>
-            <input type="text" class="form-control" id="Title" name="Title" formControlName="Title"
-              placeholder="Enter title" />
-          </div>
-          <div class="form-group">
-            <label for="name">Price</label>
-            <input type="text" class="form-control" id="Price" name="Price" formControlName="Price"
-              placeholder="Enter price" />
-          </div>
-          <div class="form-group">
-            <label for="name">Unit</label>
-            <input type="text" class="form-control" id="Unit" name="Unit" formControlName="Unit"
-              placeholder="Enter unit" />
-          </div>
-          <div class="form-group">
-            <label for="name">Quantity</label>
-            <input type="text" class="form-control" id="Quantity" name="Quantity" formControlName="Quantity"
-              placeholder="Enter quantity" />
-          </div>
-          <div class="form-group">
-            <label for="name">Contact Number</label>
-            <input type="number" class="form-control" id="ContactNumber" name="ContactNumber"
-              formControlName="ContactNumber" placeholder="Enter Contact number" />
-          </div>
-          <div class="form-group">
-            <label for="Image">Image</label>
-            <div>
-              <img *ngIf="imageUrl" src="{{ imageUrl }}" width="100" height="100" style="object-fit: cover" />
-            </div>
-            <input type="file" class="form-control" id="Image" accept=".jpg,.jpeg,.JPEG,.png" name="Image"
-              (change)="onChange($event)" formControlName="Image" placeholder="Choose image" />
-          </div>
-          <button type="button" class="btn btn-secondary" (click)="cropPriceModal.hide()">
-            Close
-          </button>
-          <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !cropPriceForm.valid">
-            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-            Save changes
-          </button>
-        </form>
-      </div>
-    </div>
-    <!-- /.modal-content -->
-  </div>
-  <!-- /.modal-dialog -->
-</div>
-<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-sm">
-    <div class="modal-content">
-      <div class="modal-body text-center">
-        Do you want to delete this record?
-      </div>
-      <div class="modal-footer justify-content-around">
-        <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">
-          No! Cancel.
-        </button>
-        <button type="button" class="btn btn-primary" (click)="deleteRecord()">
-          Yes! Delete.
-        </button>
       </div>
     </div>
   </div>

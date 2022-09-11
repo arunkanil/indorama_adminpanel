@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { FarmDemoComponent } from './farm-demo.component';
-import { CustomerDetailComponent } from './farm-demo-detail.component';
+import { FarmDemoDetailComponent } from './farm-demo-detail.component';
 import { AuthGuard } from '../login/auth.guard';
 
 const routes: Routes = [
@@ -24,7 +24,7 @@ const routes: Routes = [
       },
       {
         path: 'demo_details/:id',
-        component: CustomerDetailComponent,
+        component: FarmDemoDetailComponent,
         data: {
           title: 'Farm Demo Details'
         }
