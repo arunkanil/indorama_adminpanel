@@ -80,6 +80,12 @@ export const navItems: INavData[] = [
     role: "",
   },
   {
+    name: "Advertisement",
+    url: "/advertisement/all",
+    icon: "icon-cursor",
+    role: "",
+  },
+  {
     name: "Masters",
     url: "/soiltest/enquiries",
     icon: 'icon-cursor',

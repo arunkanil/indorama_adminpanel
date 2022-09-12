@@ -103,7 +103,7 @@
 
               <div class="position-relative">
                 <div class="chat-messages p-4">
-                  <div *ngFor="let item of messageData?.attributes?.messages?.data" class="chat-message-right pb-4">
+                  <div *ngFor="let item of messageData?.attributes?.messages?.data" class="chat-message-left pb-4">
                     <div>
                       <img *ngIf="item?.attributes?.from_user?.data?.attributes?.prof_pic?.data?.attributes?.url"
                         src="https://indoramaapp.untanglestrategy.com{{item?.attributes?.from_user?.data?.attributes?.prof_pic?.data?.attributes?.url}}"

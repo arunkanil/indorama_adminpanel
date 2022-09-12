@@ -1,0 +1,112 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between">
+      <h2>Best Crop Practices</h2>
+      <div>
+      </div>
+    </div>
+    <div class="card-body">
+      <p class="text-muted">Images to uploaded need to be of 375 x 80 resolution</p>
+      <div class="row">
+        <div class="col-6">
+          <div class="card">
+            <div class="img-container">
+              <img class="card-img-top" height="200" width="200"
+                src="https://indoramaapp.untanglestrategy.com{{retailerAdvertisement?.attributes?.Image?.data?.attributes?.url}}" alt="Card image cap" />
+              <div class="overlay">
+                <div class="overlay-text"><a target="_blank"
+                    href="https://indoramaapp.untanglestrategy.com{{retailerAdvertisement?.attributes?.Image?.data?.attributes?.url}}" style="color: white;">Click
+                    to view file</a></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between">
+                <h5 class="card-title">
+                  Retailer Advertisement
+                </h5>
+                <div>
+                  <!-- <button type="button" class="btn btn-outline-primary p-1">
+                    <img src="../../../assets/edit.svg">
+                  </button> -->
+                  <button type="button" class="btn btn-outline-primary p-1" (click)="openModal(true)">
+                    Change
+                  </button>
+                </div>
+              </div>
+              <p class="card-text">
+                {{retailerAdvertisement?.attributes?.url}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="card">
+            <div class="img-container">
+              <img class="card-img-top" height="200" width="200"
+                src="https://indoramaapp.untanglestrategy.com{{advertisement?.attributes?.AdImage?.data?.attributes?.url}}" alt="Card image cap" />
+              <div class="overlay">
+                <div class="overlay-text"><a target="_blank"
+                    href="https://indoramaapp.untanglestrategy.com{{advertisement?.attributes?.AdImage?.data?.attributes?.url}}" style="color: white;">Click
+                    to view file</a></div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div style="display: flex; justify-content: space-between">
+                <h5 class="card-title">
+                  Dashboard Advertisement
+                </h5>
+                <div>
+                  <!-- <button type="button" class="btn btn-outline-primary p-1">
+                    <img src="../../../assets/edit.svg">
+                  </button> -->
+                  <button type="button" class="btn btn-outline-primary p-1" (click)="openModal(false)">
+                    Change
+                  </button>
+                </div>
+              </div>
+              <p class="card-text">
+                {{advertisement?.attributes?.url}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div bsModal #advertisementModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Change Advertisement</h4>
+        <button type="button" class="close" (click)="advertisementModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="advertisementForm" (ngSubmit)="advertisementSubmit()">
+          <div class="form-group">
+            <label for="content">Redirect URL (Optional)</label>
+            <textarea type="text" class="form-control" id="clickUrl" maxlength="150" name="clickUrl" rows="3" formControlName="clickUrl"
+              placeholder="Enter URL"></textarea>
+          </div>
+          <div class="form-group">
+            <label for="File">Image</label>
+            <div><input type="file" id="File" accept=".jpg, .jpeg, .png" name="File" (change)="onChange($event)"
+              formControlName="File" placeholder="Choose file" /></div>
+          </div>
+          <button type="button" class="btn btn-secondary" (click)="advertisementModal.hide()">
+            Close
+          </button>
+          <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !advertisementForm.valid">
+            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            Save changes
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>

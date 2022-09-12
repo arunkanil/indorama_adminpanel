@@ -1,5 +1,5 @@
 (function () {
-  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76;
+  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80, _templateObject81;
 
   function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -789,7 +789,17 @@
 
       var CreateSurveys = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["\n  mutation (\n    $SurveyTitle: String\n    $SurveyDescription: String\n    $Fields: [SurveyFormFieldsDynamicZoneInput!]\n  ) {\n    createSurveyForm(\n      data: {\n        SurveyTitle: $SurveyTitle\n        SurveyDescription: $SurveyDescription\n        Fields: $Fields\n      }\n    ) {\n      data {\n        id\n        attributes {\n          SurveyTitle\n          SurveyDescription\n          Fields {\n            __typename\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
 
-      var _getSurveyResults = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject76 || (_templateObject76 = _taggedTemplateLiteral(["\n  query ($limit: Int, $start: Int, $id: ID) {\n    surveyResults(\n      sort: \"updatedAt:desc\"\n      pagination: { limit: $limit, start: $start }\n      filters: { survey_form: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          survey_form {\n            data {\n              id\n              attributes {\n                SurveyTitle\n              }\n            }\n          }\n          user {\n            data {\n              id\n              attributes {\n                Name\n                username\n              }\n            }\n          }\n          SurveyResponse\n          createdAt\n        }\n      }\n    }\n  }\n"])));
+      var _getSurveyResults = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject76 || (_templateObject76 = _taggedTemplateLiteral(["\n  query ($limit: Int, $start: Int, $id: ID) {\n    surveyResults(\n      sort: \"updatedAt:desc\"\n      pagination: { limit: $limit, start: $start }\n      filters: { survey_form: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          SurveyResponse\n          createdAt\n        }\n      }\n    }\n  }\n"])));
+
+      var _deleteSurvey = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject77 || (_templateObject77 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    deleteSurveyForm(id: $id) {\n      data {\n        attributes {\n          SurveyTitle\n          SurveyDescription\n        }\n      }\n    }\n  }\n"])));
+
+      var _getDashboardAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject78 || (_templateObject78 = _taggedTemplateLiteral(["\n  query {\n    advertisement {\n      data {\n        id\n        attributes {\n          AdImage {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+
+      var _getRetailerAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject79 || (_templateObject79 = _taggedTemplateLiteral(["\n  query {\n    retailerAdvertisement {\n      data {\n        id\n        attributes {\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+
+      var _updateDashboardAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject80 || (_templateObject80 = _taggedTemplateLiteral(["\n  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {\n    updateAdvertisement(\n      data: { AdImage: $imageId, url: $clickUrl, isActive: true }\n    ) {\n      data {\n        id\n        attributes {\n          AdImage {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+
+      var _updateRetailerAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["\n  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {\n    updateRetailerAdvertisement(\n      data: { Image: $imageId, url: $clickUrl, isActive: true }\n    ) {\n      data {\n        id\n        attributes {\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
 
       var DataService = /*#__PURE__*/function () {
         function DataService(http, apollo, toastr) {
@@ -847,6 +857,17 @@
               }
             };
             return this.http.post("https://www.bulksmsnigeria.com/api/v1/sms/create", data, httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "getSurveyDetails",
+          value: function getSurveyDetails(data) {
+            var httpOptions1 = {
+              observe: "response",
+              headers: {
+                Authorization: "Bearer ".concat(localStorage.getItem("token"))
+              }
+            };
+            return this.http.get("http://13.89.242.79/api/survey-forms/".concat(data, "?populate=Fields"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getDashboardStats",
@@ -917,6 +938,17 @@
                 SurveyDescription: SurveyDescription,
                 Fields: Fields
               }
+            });
+          }
+        }, {
+          key: "deleteSurvey",
+          value: function deleteSurvey(id) {
+            return this.apollo.mutate({
+              mutation: _deleteSurvey,
+              variables: {
+                id: id
+              },
+              errorPolicy: "all"
             });
           }
         }, {
@@ -1894,6 +1926,46 @@
               errorPolicy: "all"
             });
           }
+        }, {
+          key: "getDashboardAd",
+          value: function getDashboardAd() {
+            return this.apollo.watchQuery({
+              query: _getDashboardAd,
+              fetchPolicy: "no-cache"
+            });
+          }
+        }, {
+          key: "getRetailerAd",
+          value: function getRetailerAd() {
+            return this.apollo.watchQuery({
+              query: _getRetailerAd,
+              fetchPolicy: "no-cache"
+            });
+          }
+        }, {
+          key: "updateRetailerAd",
+          value: function updateRetailerAd(url, image) {
+            return this.apollo.mutate({
+              mutation: _updateRetailerAd,
+              variables: {
+                clickUrl: url,
+                imageId: image
+              },
+              errorPolicy: "all"
+            });
+          }
+        }, {
+          key: "updateDashboardAd",
+          value: function updateDashboardAd(url, image) {
+            return this.apollo.mutate({
+              mutation: _updateDashboardAd,
+              variables: {
+                clickUrl: url,
+                imageId: image
+              },
+              errorPolicy: "all"
+            });
+          }
         }]);
 
         return DataService;
@@ -2244,7 +2316,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-sms-campaigns-sms-campaigns-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-sms-campaigns-sms-campaigns-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-sms-campaigns-sms-campaigns-module")]).then(__webpack_require__.bind(null,
             /*! ./views/sms-campaigns/sms-campaigns.module */
             "0OHv")).then(function (m) {
               return m.SMSCampaignsModule;
@@ -2255,7 +2327,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-farm-demo-farm-demo-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-farm-demo-farm-demo-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-farm-demo-farm-demo-module")]).then(__webpack_require__.bind(null,
             /*! ./views/farm-demo/farm-demo.module */
             "6rTd")).then(function (m) {
               return m.FarmDemoModule;
@@ -2266,7 +2338,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-chat-chat-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-chat-chat-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-chat-chat-module")]).then(__webpack_require__.bind(null,
             /*! ./views/chat/chat.module */
             "jykL")).then(function (m) {
               return m.ChatModule;
@@ -2277,7 +2349,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-activities-activities-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-activities-activities-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-activities-activities-module")]).then(__webpack_require__.bind(null,
             /*! ./views/activities/activities.module */
             "ve2J")).then(function (m) {
               return m.ActivitiesModule;
@@ -2288,7 +2360,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-surveys-surveys-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-surveys-surveys-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-surveys-surveys-module")]).then(__webpack_require__.bind(null,
             /*! ./views/surveys/surveys.module */
             "8dM2")).then(function (m) {
               return m.SurveysModule;
@@ -2299,7 +2371,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-marketplace-marketplace-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-marketplace-marketplace-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-marketplace-marketplace-module")]).then(__webpack_require__.bind(null,
             /*! ./views/marketplace/marketplace.module */
             "4Ywq")).then(function (m) {
               return m.MarketplaceModule;
@@ -2310,7 +2382,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-best-crop-practices-best-crop-practices-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-best-crop-practices-best-crop-practices-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-best-crop-practices-best-crop-practices-module")]).then(__webpack_require__.bind(null,
             /*! ./views/best-crop-practices/best-crop-practices.module */
             "mjQe")).then(function (m) {
               return m.BestCropPracticesModule;
@@ -2321,7 +2393,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-indorama-updates-indorama-updates-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-indorama-updates-indorama-updates-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-indorama-updates-indorama-updates-module")]).then(__webpack_require__.bind(null,
             /*! ./views/indorama-updates/indorama-updates.module */
             "eFNz")).then(function (m) {
               return m.IndoramaUpdatesModule;
@@ -2332,7 +2404,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-soil-test-soil-test-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-soil-test-soil-test-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-soil-test-soil-test-module")]).then(__webpack_require__.bind(null,
             /*! ./views/soil-test/soil-test.module */
             "/dPm")).then(function (m) {
               return m.SoilTestModule;
@@ -2343,7 +2415,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-crop-prices-crop-prices-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-crop-prices-crop-prices-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-crop-prices-crop-prices-module")]).then(__webpack_require__.bind(null,
             /*! ./views/crop-prices/crop-prices.module */
             "N8R/")).then(function (m) {
               return m.CropPricesModule;
@@ -2361,11 +2433,22 @@
             });
           }
         }, {
+          path: 'advertisement',
+          loadChildren: function loadChildren() {
+            return Promise.all(
+            /*! import() | views-advertisement-advertisement-module */
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-advertisement-advertisement-module")]).then(__webpack_require__.bind(null,
+            /*! ./views/advertisement/advertisement.module */
+            "Th2f")).then(function (m) {
+              return m.AdvertisementModule;
+            });
+          }
+        }, {
           path: 'retailers',
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-retailers-retailers-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null,
             /*! ./views/retailers/retailers.module */
             "d3Ph")).then(function (m) {
               return m.RetailersModule;
@@ -2376,7 +2459,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-users-users-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null,
             /*! ./views/users/users.module */
             "QSsw")).then(function (m) {
               return m.UsersModule;
@@ -2387,7 +2470,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-masters-masters-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-masters-masters-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-masters-masters-module")]).then(__webpack_require__.bind(null,
             /*! ./views/masters/masters.module */
             "NPE9")).then(function (m) {
               return m.MastersModule;
@@ -2488,6 +2571,11 @@
       }, {
         name: "Chat",
         url: "/chat/all",
+        icon: "icon-cursor",
+        role: ""
+      }, {
+        name: "Advertisement",
+        url: "/advertisement/all",
         icon: "icon-cursor",
         role: ""
       }, {

@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n    <div class=\"card\">\r\n      <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n        <h2>Survey details</h2>\r\n        <span>\r\n          <div>\r\n            <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"myModal.show()\">\r\n              Create Survey\r\n            </button>\r\n            <!-- <button\r\n            type=\"button\"\r\n            class=\"btn btn-danger\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"deleteModal.show()\"\r\n          >\r\n            Delete\r\n          </button> -->\r\n          </div>\r\n        </span>\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <div class=\"row\">\r\n          <form [formGroup]=\"addForm\" (ngSubmit)=\"FormSubmit()\" style=\"width: 100%;\">\r\n            <div class=\"form-group\">\r\n              <label for=\"title\">Survey Title</label>\r\n              <input type=\"text\" class=\"form-control\" id=\"title\" name=\"title\" formControlName=\"title\"\r\n                placeholder=\"Enter survey title\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"title\">Survey Description</label>\r\n              <textarea type=\"text\" class=\"form-control\" rows=\"4\" id=\"description\" name=\"description\"\r\n                formControlName=\"description\" placeholder=\"Enter survey description\"></textarea>\r\n            </div>\r\n            <h6>Survey Questions</h6>\r\n            <div class=\"row\">\r\n              <div class=\"col\">\r\n                <div class=\"card\">\r\n                  <div class=\"card-body\">\r\n                    <div style=\"display: flex; justify-content: space-between\">\r\n                      <h5 class=\"card-title\">What is your category?</h5>\r\n                      <button type=\"button\" class=\"btn btn-outline-danger\" data-toggle=\"modal\">\r\n                        Delete\r\n                      </button>\r\n                    </div>\r\n                    <p class=\"card-text\">\r\n                      Question type : Dropdown\r\n                    </p>\r\n                    <p class=\"card-text\">\r\n                      Required : True\r\n                    </p>\r\n                    <p class=\"card-text\">\r\n                      Options : <span class=\"badge badge-success\">Farmer</span> <span\r\n                        class=\"badge badge-success\">Retailer</span>\r\n                    </p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col\">\r\n                <div class=\"form-group\">\r\n                  <label for=\"title\">Question</label>\r\n                  <input type=\"text\" class=\"form-control\" id=\"question\" name=\"question\" formControlName=\"question\"\r\n                    placeholder=\"Enter your question\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col\">\r\n                <div class=\"form-group\">\r\n                  <label for=\"title\">Question type</label>\r\n                  <select class=\"form-control\" id=\"question_type\" name=\"question_type\" formControlName=\"question_type\">\r\n                    <option value=\"\" disabled selected hidden>\r\n                      Choose...\r\n                    </option>\r\n                    <option value=\"text\">Text</option>\r\n                    <option value=\"dropdown\">Dropdown</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n              <div class=\"col\">\r\n                <div class=\"form-group\">\r\n                  <label for=\"title\">Field type</label>\r\n                  <select class=\"form-control\" id=\"question_type\" name=\"question_type\" formControlName=\"question_type\">\r\n                    <option value=\"\" disabled selected hidden>\r\n                      Choose...\r\n                    </option>\r\n                    <option value=\"long\">Long</option>\r\n                    <option value=\"short\">Short</option>\r\n                  </select>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col\">\r\n                <div class=\"form-group\">\r\n                  <label for=\"title\">Options</label>\r\n                  <input type=\"text\" class=\"form-control\" id=\"question\" name=\"question\" formControlName=\"question\"\r\n                    placeholder=\"Enter options seperated by comma ( , )\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <div class=\"form-check\">\r\n                <input class=\"form-check-input\" type=\"checkbox\" id=\"flexSwitchCheckDefault\">\r\n                <label class=\"form-check-label\" for=\"flexSwitchCheckDefault\">Required field</label>\r\n              </div>\r\n            </div>\r\n            <button type=\"button\" class=\"btn btn-outline-primary ml-2\">\r\n              <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n              Add question\r\n            </button>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Survey details</h2>\r\n      <span>\r\n        <div>\r\n          <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"myModal.show()\">\r\n            Download responses\r\n          </button>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-danger\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"deleteModal.show()\"\r\n          >\r\n            Delete\r\n          </button>\r\n        </div>\r\n      </span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Title</label>\r\n          <h5>{{questions?.attributes?.SurveyTitle}}</h5>\r\n        </div>\r\n      </div>\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Description</label>\r\n          <h5>{{questions?.attributes?.SurveyDescription}}</h5>\r\n        </div>\r\n      </div>\r\n      <h6>Survey Questions</h6>\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <div class=\"card\">\r\n            <div class=\"card-body\" *ngFor=\"let item of questions?.attributes?.Fields;let indexOfelement=index;\">\r\n              <div style=\"display: flex; justify-content: space-between\">\r\n                <h5 class=\"card-title\">{{item.FieldName}}</h5>\r\n                <!-- <button type=\"button\" class=\"btn btn-outline-danger\" data-toggle=\"modal\"\r\n                  (click)=\"deleteQuestion(indexOfelement)\">\r\n                  Delete\r\n                </button> -->\r\n              </div>\r\n              <p class=\"card-text\">\r\n                Question type : {{returnQuesType(item.__component)}}\r\n              </p>\r\n              <p class=\"card-text\">\r\n                Field type : {{item.FieldType}}\r\n              </p>\r\n              <p class=\"card-text\">\r\n                Required : {{item.Mandatory}}\r\n              </p>\r\n              <p *ngIf=\"item.Values\" class=\"card-text\">\r\n                Options : <span *ngFor=\"let option of item.Values\" class=\"badge badge-success mx-1\">{{option}}</span>\r\n              </p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n    bsModal\r\n    #deleteModal=\"bs-modal\"\r\n    class=\"modal fade\"\r\n    tabindex=\"-1\"\r\n    role=\"dialog\"\r\n    aria-labelledby=\"myModalLabel\"\r\n    aria-hidden=\"true\"\r\n  >\r\n    <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-body text-center\">\r\n          This will permanently delete the survey. Are you sure?\r\n        </div>\r\n        <div class=\"modal-footer justify-content-around\">\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"deleteModal.hide()\"\r\n          >\r\n            No! Cancel.\r\n          </button>\r\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteSurvey()\">\r\n            Yes! Delete.\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>");
 
 /***/ }),
 
@@ -402,10 +402,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _raw_loader_surveys_detail_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./surveys-detail.component.html */ "1V3F");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "8Y7J");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "iInd");
-/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-toastr */ "EApP");
-/* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../data.service */ "R7Hv");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "s7LF");
-/* harmony import */ var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../constants/columnMetadata */ "7nfi");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-bootstrap/modal */ "LqlI");
+/* harmony import */ var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-toastr */ "EApP");
+/* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../data.service */ "R7Hv");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "s7LF");
+/* harmony import */ var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../constants/columnMetadata */ "7nfi");
+
 
 
 
@@ -424,39 +426,73 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         this.loading = true;
         this.btnLoading = false;
         this.rowData = [];
-        this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["dateConverter"];
+        this.questions = {};
+        this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverter"];
     }
     ngOnInit() {
         this.activatedRouter.params.subscribe((params) => {
             this.id = params["id"];
         });
+        this.getSurveyDetails();
         this.getSurveyResults();
+    }
+    getSurveyDetails() {
+        this.dataservice.getSurveyDetails(this.id).subscribe((result) => {
+            console.log("getSurveyDetails", result.body.data);
+            this.questions = result.body.data;
+        });
     }
     getSurveyResults() {
         this.dataservice
             .getSurveyResults(this.id)
             .valueChanges.subscribe((result) => {
-            console.log("getSurveyResults", result.data.surveyForms.data);
-            this.rowData = result.data.surveyForms.data;
+            console.log("getSurveyResults", result.data.surveyResults.data);
+            this.rowData = result.data.surveyResults.data;
+        });
+    }
+    returnQuesType(data) {
+        if (data == "survey.survey-selection-component") {
+            return "Dropdown";
+        }
+        else {
+            return "Text";
+        }
+    }
+    deleteSurvey() {
+        this.dataservice
+            .deleteSurvey(this.id)
+            .subscribe((result) => {
+            console.log("response", result);
+            if (result.data.deleteSurveyForm) {
+                this.toastr.success("Success!");
+                this.deleteModal.hide();
+                this.router.navigate(["/surveys/all"]);
+            }
+            else {
+                this.toastr.error("Failed!");
+            }
         });
     }
 };
 SurveyDetailsComponent.ctorParameters = () => [
-    { type: _data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"] },
+    { type: _data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"] },
-    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"] }
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"] },
+    { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
+SurveyDetailsComponent.propDecorators = {
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }]
+};
 SurveyDetailsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         template: _raw_loader_surveys_detail_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"],
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"],
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-        _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"],
-        ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"]])
+        _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"],
+        ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])
 ], SurveyDetailsComponent);
 
 

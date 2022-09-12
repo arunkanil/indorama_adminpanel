@@ -17,11 +17,13 @@ export class SurveyDetailsComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {}
+  @ViewChild("deleteModal") public deleteModal: ModalDirective;
 
   id: any;
   loading = true;
   btnLoading = false;
   rowData: any = [];
+  questions: any = {};
 
   dateConverter = dateConverter;
 
@@ -29,14 +31,42 @@ export class SurveyDetailsComponent implements OnInit {
     this.activatedRouter.params.subscribe((params) => {
       this.id = params["id"];
     });
+    this.getSurveyDetails();
     this.getSurveyResults();
+  }
+  getSurveyDetails() {
+    this.dataservice.getSurveyDetails(this.id).subscribe((result: any) => {
+      console.log("getSurveyDetails", result.body.data);
+      this.questions = result.body.data;
+    });
   }
   getSurveyResults() {
     this.dataservice
       .getSurveyResults(this.id)
       .valueChanges.subscribe((result: any) => {
-        console.log("getSurveyResults", result.data.surveyForms.data);
-        this.rowData = result.data.surveyForms.data;
+        console.log("getSurveyResults", result.data.surveyResults.data);
+        this.rowData = result.data.surveyResults.data;
       });
+  }
+  returnQuesType(data) {
+    if (data == "survey.survey-selection-component") {
+      return "Dropdown";
+    } else {
+      return "Text";
+    }
+  }
+  deleteSurvey() {
+    this.dataservice
+    .deleteSurvey(this.id)
+    .subscribe((result: any) => {
+      console.log("response", result);
+      if (result.data.deleteSurveyForm) {
+        this.toastr.success("Success!");
+        this.deleteModal.hide();
+        this.router.navigate(["/surveys/all"]);
+      } else {
+        this.toastr.error("Failed!");
+      }
+    });
   }
 }

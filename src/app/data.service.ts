@@ -3247,25 +3247,114 @@ const getSurveyResults = gql`
       data {
         id
         attributes {
-          survey_form {
-            data {
-              id
-              attributes {
-                SurveyTitle
-              }
-            }
-          }
-          user {
-            data {
-              id
-              attributes {
-                Name
-                username
-              }
-            }
-          }
           SurveyResponse
           createdAt
+        }
+      }
+    }
+  }
+`;
+const deleteSurvey = gql`
+  mutation ($id: ID!) {
+    deleteSurveyForm(id: $id) {
+      data {
+        attributes {
+          SurveyTitle
+          SurveyDescription
+        }
+      }
+    }
+  }
+`;
+const getDashboardAd = gql`
+  query {
+    advertisement {
+      data {
+        id
+        attributes {
+          AdImage {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          url
+          isActive
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const getRetailerAd = gql`
+  query {
+    retailerAdvertisement {
+      data {
+        id
+        attributes {
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          url
+          isActive
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const updateDashboardAd = gql`
+  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {
+    updateAdvertisement(
+      data: { AdImage: $imageId, url: $clickUrl, isActive: true }
+    ) {
+      data {
+        id
+        attributes {
+          AdImage {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          url
+          isActive
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const updateRetailerAd = gql`
+  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {
+    updateRetailerAdvertisement(
+      data: { Image: $imageId, url: $clickUrl, isActive: true }
+    ) {
+      data {
+        id
+        attributes {
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          url
+          isActive
+          createdAt
+          updatedAt
         }
       }
     }
@@ -3329,6 +3418,20 @@ export class DataService {
       )
       .pipe(catchError(this.handleError));
   }
+  getSurveyDetails(data): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    return this.http
+      .get(
+        `http://13.89.242.79/api/survey-forms/${data}?populate=Fields`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
   getDashboardStats() {
     return this.apollo.watchQuery({
       query: getDashboardStats,
@@ -3374,7 +3477,7 @@ export class DataService {
       fetchPolicy: "no-cache",
       variables: {
         limit: 10000,
-        id: id
+        id: id,
       },
     });
   }
@@ -3387,6 +3490,15 @@ export class DataService {
         SurveyDescription: SurveyDescription,
         Fields: Fields,
       },
+    });
+  }
+  deleteSurvey(id) {
+    return this.apollo.mutate({
+      mutation: deleteSurvey,
+      variables: {
+        id: id,
+      },
+      errorPolicy: "all",
     });
   }
   getChatMessages(id) {
@@ -4214,6 +4326,38 @@ export class DataService {
       mutation: DeleteMarketplaceProduct,
       variables: {
         id: id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  getDashboardAd() {
+    return this.apollo.watchQuery({
+      query: getDashboardAd,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getRetailerAd() {
+    return this.apollo.watchQuery({
+      query: getRetailerAd,
+      fetchPolicy: "no-cache",
+    });
+  }
+  updateRetailerAd(url, image) {
+    return this.apollo.mutate({
+      mutation: updateRetailerAd,
+      variables: {
+        clickUrl: url,
+        imageId: image,
+      },
+      errorPolicy: "all",
+    });
+  }
+  updateDashboardAd(url, image) {
+    return this.apollo.mutate({
+      mutation: updateDashboardAd,
+      variables: {
+        clickUrl: url,
+        imageId: image,
       },
       errorPolicy: "all",
     });

@@ -3677,25 +3677,114 @@ const getSurveyResults = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
       data {
         id
         attributes {
-          survey_form {
-            data {
-              id
-              attributes {
-                SurveyTitle
-              }
-            }
-          }
-          user {
-            data {
-              id
-              attributes {
-                Name
-                username
-              }
-            }
-          }
           SurveyResponse
           createdAt
+        }
+      }
+    }
+  }
+`;
+const deleteSurvey = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  mutation ($id: ID!) {
+    deleteSurveyForm(id: $id) {
+      data {
+        attributes {
+          SurveyTitle
+          SurveyDescription
+        }
+      }
+    }
+  }
+`;
+const getDashboardAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  query {
+    advertisement {
+      data {
+        id
+        attributes {
+          AdImage {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          url
+          isActive
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const getRetailerAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  query {
+    retailerAdvertisement {
+      data {
+        id
+        attributes {
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          url
+          isActive
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const updateDashboardAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {
+    updateAdvertisement(
+      data: { AdImage: $imageId, url: $clickUrl, isActive: true }
+    ) {
+      data {
+        id
+        attributes {
+          AdImage {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          url
+          isActive
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const updateRetailerAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {
+    updateRetailerAdvertisement(
+      data: { Image: $imageId, url: $clickUrl, isActive: true }
+    ) {
+      data {
+        id
+        attributes {
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
+          url
+          isActive
+          createdAt
+          updatedAt
         }
       }
     }
@@ -3749,6 +3838,17 @@ let DataService = class DataService {
             .post(`https://www.bulksmsnigeria.com/api/v1/sms/create`, data, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
+    getSurveyDetails(data) {
+        const httpOptions1 = {
+            observe: "response",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        };
+        return this.http
+            .get(`http://13.89.242.79/api/survey-forms/${data}?populate=Fields`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
     getDashboardStats() {
         return this.apollo.watchQuery({
             query: getDashboardStats,
@@ -3793,7 +3893,7 @@ let DataService = class DataService {
             fetchPolicy: "no-cache",
             variables: {
                 limit: 10000,
-                id: id
+                id: id,
             },
         });
     }
@@ -3806,6 +3906,15 @@ let DataService = class DataService {
                 SurveyDescription: SurveyDescription,
                 Fields: Fields,
             },
+        });
+    }
+    deleteSurvey(id) {
+        return this.apollo.mutate({
+            mutation: deleteSurvey,
+            variables: {
+                id: id,
+            },
+            errorPolicy: "all",
         });
     }
     getChatMessages(id) {
@@ -4636,6 +4745,38 @@ let DataService = class DataService {
             errorPolicy: "all",
         });
     }
+    getDashboardAd() {
+        return this.apollo.watchQuery({
+            query: getDashboardAd,
+            fetchPolicy: "no-cache",
+        });
+    }
+    getRetailerAd() {
+        return this.apollo.watchQuery({
+            query: getRetailerAd,
+            fetchPolicy: "no-cache",
+        });
+    }
+    updateRetailerAd(url, image) {
+        return this.apollo.mutate({
+            mutation: updateRetailerAd,
+            variables: {
+                clickUrl: url,
+                imageId: image,
+            },
+            errorPolicy: "all",
+        });
+    }
+    updateDashboardAd(url, image) {
+        return this.apollo.mutate({
+            mutation: updateDashboardAd,
+            variables: {
+                clickUrl: url,
+                imageId: image,
+            },
+            errorPolicy: "all",
+        });
+    }
 };
 DataService.ctorParameters = () => [
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
@@ -4870,59 +5011,63 @@ const routes = [
         children: [
             {
                 path: 'sms-campaigns',
-                loadChildren: () => Promise.all(/*! import() | views-sms-campaigns-sms-campaigns-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-sms-campaigns-sms-campaigns-module")]).then(__webpack_require__.bind(null, /*! ./views/sms-campaigns/sms-campaigns.module */ "0OHv")).then(m => m.SMSCampaignsModule)
+                loadChildren: () => Promise.all(/*! import() | views-sms-campaigns-sms-campaigns-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-sms-campaigns-sms-campaigns-module")]).then(__webpack_require__.bind(null, /*! ./views/sms-campaigns/sms-campaigns.module */ "0OHv")).then(m => m.SMSCampaignsModule)
             },
             {
                 path: 'farmdemo',
-                loadChildren: () => Promise.all(/*! import() | views-farm-demo-farm-demo-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-farm-demo-farm-demo-module")]).then(__webpack_require__.bind(null, /*! ./views/farm-demo/farm-demo.module */ "6rTd")).then(m => m.FarmDemoModule)
+                loadChildren: () => Promise.all(/*! import() | views-farm-demo-farm-demo-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-farm-demo-farm-demo-module")]).then(__webpack_require__.bind(null, /*! ./views/farm-demo/farm-demo.module */ "6rTd")).then(m => m.FarmDemoModule)
             },
             {
                 path: 'chat',
-                loadChildren: () => Promise.all(/*! import() | views-chat-chat-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-chat-chat-module")]).then(__webpack_require__.bind(null, /*! ./views/chat/chat.module */ "jykL")).then(m => m.ChatModule)
+                loadChildren: () => Promise.all(/*! import() | views-chat-chat-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-chat-chat-module")]).then(__webpack_require__.bind(null, /*! ./views/chat/chat.module */ "jykL")).then(m => m.ChatModule)
             },
             {
                 path: 'activities',
-                loadChildren: () => Promise.all(/*! import() | views-activities-activities-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-activities-activities-module")]).then(__webpack_require__.bind(null, /*! ./views/activities/activities.module */ "ve2J")).then(m => m.ActivitiesModule)
+                loadChildren: () => Promise.all(/*! import() | views-activities-activities-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-activities-activities-module")]).then(__webpack_require__.bind(null, /*! ./views/activities/activities.module */ "ve2J")).then(m => m.ActivitiesModule)
             },
             {
                 path: 'surveys',
-                loadChildren: () => Promise.all(/*! import() | views-surveys-surveys-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-surveys-surveys-module")]).then(__webpack_require__.bind(null, /*! ./views/surveys/surveys.module */ "8dM2")).then(m => m.SurveysModule)
+                loadChildren: () => Promise.all(/*! import() | views-surveys-surveys-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-surveys-surveys-module")]).then(__webpack_require__.bind(null, /*! ./views/surveys/surveys.module */ "8dM2")).then(m => m.SurveysModule)
             },
             {
                 path: 'marketplace',
-                loadChildren: () => Promise.all(/*! import() | views-marketplace-marketplace-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-marketplace-marketplace-module")]).then(__webpack_require__.bind(null, /*! ./views/marketplace/marketplace.module */ "4Ywq")).then(m => m.MarketplaceModule)
+                loadChildren: () => Promise.all(/*! import() | views-marketplace-marketplace-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-marketplace-marketplace-module")]).then(__webpack_require__.bind(null, /*! ./views/marketplace/marketplace.module */ "4Ywq")).then(m => m.MarketplaceModule)
             },
             {
                 path: 'best-crop-practices',
-                loadChildren: () => Promise.all(/*! import() | views-best-crop-practices-best-crop-practices-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-best-crop-practices-best-crop-practices-module")]).then(__webpack_require__.bind(null, /*! ./views/best-crop-practices/best-crop-practices.module */ "mjQe")).then(m => m.BestCropPracticesModule)
+                loadChildren: () => Promise.all(/*! import() | views-best-crop-practices-best-crop-practices-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-best-crop-practices-best-crop-practices-module")]).then(__webpack_require__.bind(null, /*! ./views/best-crop-practices/best-crop-practices.module */ "mjQe")).then(m => m.BestCropPracticesModule)
             },
             {
                 path: 'indorama_updates',
-                loadChildren: () => Promise.all(/*! import() | views-indorama-updates-indorama-updates-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-indorama-updates-indorama-updates-module")]).then(__webpack_require__.bind(null, /*! ./views/indorama-updates/indorama-updates.module */ "eFNz")).then(m => m.IndoramaUpdatesModule)
+                loadChildren: () => Promise.all(/*! import() | views-indorama-updates-indorama-updates-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-indorama-updates-indorama-updates-module")]).then(__webpack_require__.bind(null, /*! ./views/indorama-updates/indorama-updates.module */ "eFNz")).then(m => m.IndoramaUpdatesModule)
             },
             {
                 path: 'soiltest',
-                loadChildren: () => Promise.all(/*! import() | views-soil-test-soil-test-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-soil-test-soil-test-module")]).then(__webpack_require__.bind(null, /*! ./views/soil-test/soil-test.module */ "/dPm")).then(m => m.SoilTestModule)
+                loadChildren: () => Promise.all(/*! import() | views-soil-test-soil-test-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-soil-test-soil-test-module")]).then(__webpack_require__.bind(null, /*! ./views/soil-test/soil-test.module */ "/dPm")).then(m => m.SoilTestModule)
             },
             {
                 path: 'cropprices',
-                loadChildren: () => Promise.all(/*! import() | views-crop-prices-crop-prices-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-crop-prices-crop-prices-module")]).then(__webpack_require__.bind(null, /*! ./views/crop-prices/crop-prices.module */ "N8R/")).then(m => m.CropPricesModule)
+                loadChildren: () => Promise.all(/*! import() | views-crop-prices-crop-prices-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-crop-prices-crop-prices-module")]).then(__webpack_require__.bind(null, /*! ./views/crop-prices/crop-prices.module */ "N8R/")).then(m => m.CropPricesModule)
             },
             {
                 path: 'dashboard',
                 loadChildren: () => Promise.all(/*! import() | views-dashboard-dashboard-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("views-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./views/dashboard/dashboard.module */ "6dU7")).then(m => m.DashboardModule)
             },
             {
+                path: 'advertisement',
+                loadChildren: () => Promise.all(/*! import() | views-advertisement-advertisement-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-advertisement-advertisement-module")]).then(__webpack_require__.bind(null, /*! ./views/advertisement/advertisement.module */ "Th2f")).then(m => m.AdvertisementModule)
+            },
+            {
                 path: 'retailers',
-                loadChildren: () => Promise.all(/*! import() | views-retailers-retailers-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null, /*! ./views/retailers/retailers.module */ "d3Ph")).then(m => m.RetailersModule)
+                loadChildren: () => Promise.all(/*! import() | views-retailers-retailers-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null, /*! ./views/retailers/retailers.module */ "d3Ph")).then(m => m.RetailersModule)
             },
             {
                 path: 'users',
-                loadChildren: () => Promise.all(/*! import() | views-users-users-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null, /*! ./views/users/users.module */ "QSsw")).then(m => m.UsersModule)
+                loadChildren: () => Promise.all(/*! import() | views-users-users-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null, /*! ./views/users/users.module */ "QSsw")).then(m => m.UsersModule)
             },
             {
                 path: 'masters',
-                loadChildren: () => Promise.all(/*! import() | views-masters-masters-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~9bd4eebf"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~e8c0c07c"), __webpack_require__.e("views-masters-masters-module")]).then(__webpack_require__.bind(null, /*! ./views/masters/masters.module */ "NPE9")).then(m => m.MastersModule)
+                loadChildren: () => Promise.all(/*! import() | views-masters-masters-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-masters-masters-module")]).then(__webpack_require__.bind(null, /*! ./views/masters/masters.module */ "NPE9")).then(m => m.MastersModule)
             }
         ]
     },
@@ -5027,6 +5172,12 @@ const navItems = [
     {
         name: "Chat",
         url: "/chat/all",
+        icon: "icon-cursor",
+        role: "",
+    },
+    {
+        name: "Advertisement",
+        url: "/advertisement/all",
         icon: "icon-cursor",
         role: "",
     },
