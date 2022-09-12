@@ -3463,12 +3463,13 @@ const getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"
   }
 `;
 const getallChats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($limit: Int, $start: Int, $key: String) {
+  query ($limit: Int, $start: Int, $key: String, $isAskIndorama: Boolean) {
     chats(
       filters: {
         members: {
           or: [{ username: { containsi: $key } }, { Name: { containsi: $key } }]
         }
+        isAskIndorama: { eq: $isAskIndorama }
       }
       sort: "updatedAt:desc"
       pagination: { limit: $limit, start: $start }
@@ -3865,7 +3866,7 @@ let DataService = class DataService {
             },
         });
     }
-    getallChats(limit, start, key) {
+    getallChats(limit, start, key, isAskIndorama) {
         return this.apollo.watchQuery({
             query: getallChats,
             fetchPolicy: "no-cache",
@@ -3873,6 +3874,7 @@ let DataService = class DataService {
                 limit: limit,
                 start: start,
                 key: key ? key : undefined,
+                isAskIndorama: isAskIndorama ? isAskIndorama : undefined
             },
         });
     }

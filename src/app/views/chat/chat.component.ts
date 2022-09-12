@@ -23,34 +23,56 @@ export class ChatComponent {
   pageSize = 10;
   count = 0;
   key = null;
+  selectedList = "All Chats";
+  listCheck = false;
 
   ngOnInit(): void {
     console.log(this.router);
     this.getallChats(this.pageSize, this.pageSize * this.count, this.key);
   }
-  getallChats(limit?, start?, key?) {
+  getallChats(limit?, start?, key?, isAskIndorama?) {
     console.log(limit, start);
     this.loading = true;
     this.dataservice
-      .getallChats(limit, start, key)
+      .getallChats(limit, start, key, isAskIndorama)
       .valueChanges.subscribe((result: any) => {
         this.chatData = this.chatData.concat(result?.data?.chats.data);
         console.log("getallChats", this.chatData);
         this.loading = false;
       });
   }
+  toggleChat(data) {
+    if (data) {
+      this.chatData = [];
+      this.selectedList = "Ask Indorama";
+      this.listCheck = data;
+      this.getallChats(this.pageSize, 0, undefined, true);
+    } else {
+      this.chatData = [];
+      this.selectedList = "All Chats";
+      this.listCheck = data;
+      this.getallChats(this.pageSize, 0, undefined, false);
+    }
+  }
   searchChats() {
     this.chatData = [];
-    this.getallChats(this.pageSize,0,this.key);
+    this.count = 0;
+    this.getallChats(this.pageSize, 0, this.key, this.listCheck);
   }
-  clearSearch(){
+  clearSearch() {
     this.chatData = [];
-    this.key = null;
-    this.getallChats(this.pageSize,0);
+    this.count = 0;
+    this.key = undefined;
+    this.getallChats(this.pageSize, 0, undefined, this.listCheck);
   }
   loadMoreChats() {
     this.count++;
-    this.getallChats(this.pageSize, this.pageSize * this.count);
+    this.getallChats(
+      this.pageSize,
+      this.pageSize * this.count,
+      this.key,
+      this.listCheck
+    );
   }
   convertDate(data) {
     return new Date(data).toLocaleDateString();

@@ -2,6 +2,16 @@
   <div class="card">
     <div class="card-header" style="display: flex; justify-content: space-between">
       <h2>Chat Home</h2>
+      <div class="btn-group float-right" dropdown>
+        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{selectedList}}<span
+            class="caret"></span></button>
+        <ul *dropdownMenu class="dropdown-menu" role="menu">
+          <li role="menuitem">
+            <a class="dropdown-item" (click)="toggleChat(false)">All Chats</a>
+            <a class="dropdown-item" (click)="toggleChat(true)">Ask Indorama</a>
+          </li>
+        </ul>
+      </div>
     </div>
     <main class="content">
       <div class="container-fluid p-0">
