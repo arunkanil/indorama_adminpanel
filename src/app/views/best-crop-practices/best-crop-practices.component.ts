@@ -3,8 +3,6 @@ import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
-// import { ActionRenderer } from "../../utils/StatusRenderer";
-
 import { CropPricesColumn } from "../../constants/columnMetadata";
 import { ModalDirective } from "ngx-bootstrap/modal";
 
@@ -40,13 +38,8 @@ export class BestCropPracticesComponent {
     File: ["", Validators.required],
     Image: ["", Validators.required],
   });
-  // frameworkComponents = {
-  //   statusRenderer: ActionRenderer,
-  // };
   rowData: any = [];
   selectedRows: any = [];
-  private gridApi;
-  private gridColumnApi;
   filter: any = {};
   file: any = null;
   image: any = null;
@@ -62,39 +55,26 @@ export class BestCropPracticesComponent {
     this.dataservice
       .getBestCropPractises()
       .valueChanges.subscribe((result: any) => {
-        console.log("getBestCropPractises", result.data.bestCropPractises.data);
         this.rowData = result.data.bestCropPractises.data;
       });
   }
   getCrops() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
-  }
-  onGridReady(params) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    this.gridApi.sizeColumnsToFit();
-  }
-  onRowClicked(event: any) {
-    console.log("row", event.data);
-  }
-  onSelectionChanged(event: any) {
-    this.selectedRows = this.gridApi.getSelectedRows();
-    if (this.selectedRows.length > 0) {
-      this.disableButton = false;
-    } else {
-      this.disableButton = true;
-    }
-    console.log(this.selectedRows, this.selectedRows[0].attributes.Name);
   }
   // On file Select
   onChange(event: any, check) {
     if (check == true) {
-      this.file = event.target.files[0];
+      this.file = [];
+      for (var i = 0; i < event.target.files.length; i++) {
+        this.file.push(event.target.files[i]);
+      }
     } else {
-      this.image = event.target.files[0];
+      this.image = [];
+      for (var i = 0; i < event.target.files.length; i++) {
+        this.image.push(event.target.files[i]);
+      }
     }
     console.log(this.file, this.image);
   }
@@ -108,9 +88,13 @@ export class BestCropPracticesComponent {
       .subscribe((result: any) => {
         console.log("response", result);
         if (result.data.deleteBestCropPractise) {
+          this.dataservice
+            .getBestCropPractises()
+            .valueChanges.subscribe((result: any) => {
+              this.rowData = result.data.bestCropPractises.data;
+            });
           this.toastr.success("Success!");
           this.deleteModal.hide();
-          this.getBestCropPractises();
         } else {
           this.toastr.error("Failed!");
         }
@@ -137,7 +121,11 @@ export class BestCropPracticesComponent {
                 console.log("response", result);
                 if (result.data.createBestCropPractise) {
                   this.toastr.success("Success!");
-                  this.getBestCropPractises();
+                  this.dataservice
+                    .getBestCropPractises()
+                    .valueChanges.subscribe((result: any) => {
+                      this.rowData = result.data.bestCropPractises.data;
+                    });
                   this.practicesModal.hide();
                 } else {
                   this.toastr.error("Failed. Please check the fields!");

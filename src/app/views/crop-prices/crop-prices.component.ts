@@ -28,6 +28,8 @@ export class CropPricesComponent {
   loading = true;
   btnLoading = false;
   disableButton = true;
+  disableNextButton = false;
+  disablePrevButton = true;
   title = "Verification";
   orders: any = {};
   columnDefs = [];
@@ -35,7 +37,9 @@ export class CropPricesComponent {
   Markets: any = [];
   Crops: any = [];
   imageUrl;
-
+  meta;
+  pageSize = 100;
+  count = 1;
   cropPriceForm = this.fb.group({
     crop: ["", Validators.required],
     state: ["", Validators.required],
@@ -65,16 +69,47 @@ export class CropPricesComponent {
     this.getStates();
   }
   getCropPrices() {
-    this.dataservice.getCropPrices().valueChanges.subscribe((result: any) => {
-      console.log("getCropPrices", result.data.cropPrices.data);
+    this.dataservice.getCropPrices(1,this.pageSize).valueChanges.subscribe((result: any) => {
       this.rowData = result.data.cropPrices.data;
+      this.meta = result.data.cropPrices.meta;
+      if (this.meta?.pagination?.pageCount <= 1) {
+        this.disablePrevButton = true;
+        this.disableNextButton = true;
+      }
     });
   }
   getCrops() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getCropPrices(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.cropPrices.meta;
+        this.rowData = result.data.cropPrices.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getCropPrices(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.cropPrices.meta;
+        this.rowData = result.data.cropPrices.data;
+      });
   }
   getStates() {
     this.dataservice.getStates().valueChanges.subscribe((result: any) => {
@@ -166,24 +201,24 @@ export class CropPricesComponent {
           if (response.status == 200) {
             console.log(response);
             this.dataservice
-          .UpdateCropPrice(
-            this.cropPriceForm.value,
-            this.selectedRows[0].id,
-            response.body[0]?.id
-          )
-          .subscribe((result: any) => {
-            resp = result.data;
-            console.log("response", result);
-            if (result.data.updateCropPrice) {
-              this.toastr.success("Success!");
-              this.getCropPrices();
-              this.file = null;
-              this.cropPriceModal.hide();
-              this.gridApi.deselectAll();
-            } else {
-              this.toastr.error("Failed. Please check the fields!");
-            }
-          });
+              .UpdateCropPrice(
+                this.cropPriceForm.value,
+                this.selectedRows[0].id,
+                response.body[0]?.id
+              )
+              .subscribe((result: any) => {
+                resp = result.data;
+                console.log("response", result);
+                if (result.data.updateCropPrice) {
+                  this.toastr.success("Success!");
+                  this.getCropPrices();
+                  this.file = null;
+                  this.cropPriceModal.hide();
+                  this.gridApi.deselectAll();
+                } else {
+                  this.toastr.error("Failed. Please check the fields!");
+                }
+              });
           }
         });
       } else {

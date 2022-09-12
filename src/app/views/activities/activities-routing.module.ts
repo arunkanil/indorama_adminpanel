@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'all',
         // canActivate: [AuthGuard],
         component: ActivitiesComponent,
+        data: {
+          // roles: 'MANAGER',
+          title: 'Activities'
+        }
       },
       {
         path: 'activity_details/:id',

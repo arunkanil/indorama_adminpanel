@@ -193,10 +193,12 @@
           });
           this.loading = true;
           this.btnLoading = false;
-          this.orders = {};
+          this.disableNextButton = false;
+          this.disablePrevButton = true;
+          this.pageSize = 100;
+          this.count = 1;
           this.columnDefs = [];
           this.rowData = [];
-          this.agents = [];
           this.localities = [];
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["SoilAnalysisColumns"]);
           this.rowSelection = "single";
@@ -213,17 +215,55 @@
             var _this = this;
 
             this.loading = true;
-            this.dataservice.getsoilTests().valueChanges.subscribe(function (result) {
+            this.dataservice.getsoilTests(1, this.pageSize).valueChanges.subscribe(function (result) {
+              var _a, _b;
+
               console.log("getCustomers", result.data.soilTests.data);
               _this.rowData = result.data.soilTests.data;
-            }); // this.dataservice.getLocalities().valueChanges.subscribe((result: any) => {
-            //   console.log("getLocalities", result.data.localities);
-            //   this.localities = result.data.localities;
-            // });
-            // this.dataservice.getAgents().valueChanges.subscribe((result: any) => {
-            //   console.log("getAgents", result.data.teleCallerContacts);
-            //   this.agents = result.data.teleCallerContacts;
-            // });
+              _this.meta = result.data.soilTests.meta;
+
+              if (((_b = (_a = _this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
+                _this.disablePrevButton = true;
+                _this.disableNextButton = true;
+              }
+            });
+          }
+        }, {
+          key: "loadNext",
+          value: function loadNext() {
+            var _this2 = this;
+
+            this.count++;
+            this.disablePrevButton = false;
+
+            if (this.count === this.meta.pagination.pageCount) {
+              this.disableNextButton = true;
+            }
+
+            this.dataservice.getsoilTests(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this2.meta = result.data.soilTests.meta;
+              _this2.rowData = result.data.soilTests.data;
+            });
+          }
+        }, {
+          key: "loadPrev",
+          value: function loadPrev() {
+            var _this3 = this;
+
+            this.count--;
+
+            if (this.count < this.meta.pagination.pageCount) {
+              this.disableNextButton = false;
+            }
+
+            if (this.count === 1) {
+              this.disablePrevButton = true;
+            }
+
+            this.dataservice.getsoilTests(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this3.meta = result.data.soilTests.meta;
+              _this3.rowData = result.data.soilTests.data;
+            });
           }
         }, {
           key: "onGridReady",
@@ -387,7 +427,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Soil Analysis Home</h2>\r\n      <!-- <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"myModal.show()\">\r\n        New\r\n      </button> -->\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 500px\" id=\"myGrid\" class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\r\n            (gridReady)=\"onGridReady($event)\" (selectionChanged)=\"onSelectionChanged($event)\" animateRows=\"true\">\r\n          </ag-grid-angular>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div bsModal #myModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n    aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n          <h4 class=\"modal-title\">Add New Customer</h4>\r\n          <button type=\"button\" class=\"close\" (click)=\"myModal.hide()\" aria-label=\"Close\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n          </button>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n          <form [formGroup]=\"customerForm\" (ngSubmit)=\"FormSubmit()\">\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name of Bride</label>\r\n              <input type=\"text\" class=\"form-control\" id=\"NameOfBride\" name=\"NameOfBride\" formControlName=\"NameOfBride\"\r\n                placeholder=\"Enter bride's name\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name of Father</label>\r\n              <input type=\"text\" class=\"form-control\" id=\"NameOfFather\" name=\"NameOfFather\"\r\n                formControlName=\"NameOfFather\" placeholder=\"Enter father's name\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name of Mother</label>\r\n              <input type=\"text\" class=\"form-control\" id=\"NameOfMother\" name=\"NameOfMother\"\r\n                formControlName=\"NameOfMother\" placeholder=\"Enter mother's name\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Contact number 1</label>\r\n              <input type=\"text\" class=\"form-control\" id=\"Contact_Number_1\" name=\"Contact_Number_1\"\r\n                formControlName=\"Contact_Number_1\" placeholder=\"Enter primary contact number\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Contact number 2</label>\r\n              <input type=\"text\" class=\"form-control\" id=\"Contact_Number_2\" name=\"Contact_Number_2\"\r\n                formControlName=\"Contact_Number_2\" placeholder=\"Enter secondary contact number\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"email\">Marriage date</label>\r\n              <input type=\"date\" class=\"form-control\" id=\"MarriageDate\" name=\"MarriageDate\"\r\n                formControlName=\"MarriageDate\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"group\">Marriage month</label>\r\n              <select class=\"form-control\" id=\"MarriageMonth\" required ngModel name=\"MarriageMonth\" formControlName=\"MarriageMonth\">\r\n                <option value=\"\" disabled selected hidden>Choose...</option>\r\n                <option *ngFor=\"let item of Months\" value=\"{{ item.id }}\">\r\n                  {{ item.Name }}\r\n                </option>\r\n              </select>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"group\">Agent</label>\r\n              <select class=\"form-control\" id=\"tele_caller_contact\" required ngModel name=\"tele_caller_contact\" formControlName=\"tele_caller_contact\">\r\n                <option value=\"\" disabled selected hidden>Choose...</option>\r\n                <option *ngFor=\"let item of agents\" value=\"{{ item.id }}\">\r\n                  {{ item.Name }}\r\n                </option>\r\n              </select>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">House Name</label>\r\n              <input type=\"text\" class=\"form-control\" id=\"HouseName\" name=\"HouseName\"\r\n                formControlName=\"HouseName\" placeholder=\"Enter House Name\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Landmark</label>\r\n              <input type=\"text\" class=\"form-control\" id=\"Landmark\" name=\"Landmark\"\r\n                formControlName=\"Landmark\" placeholder=\"Enter Landmark\" />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"locality\">Name of locality</label>\r\n              <!-- <input type=\"text\" class=\"form-control\" id=\"locality\" name=\"locality\" formControlName=\"locality\"\r\n                placeholder=\"Enter locality\" /> -->\r\n                <select class=\"form-control\" id=\"locality\" required ngModel name=\"locality\" formControlName=\"locality\">\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of localities\" value=\"{{ item.id }}\">\r\n                    {{ item.Name }}\r\n                  </option>\r\n                </select>\r\n            </div>\r\n            <button type=\"button\" class=\"btn btn-secondary\" (click)=\"myModal.hide()\">\r\n              Close\r\n            </button>\r\n            <button type=\"submit\" class=\"btn btn-primary ml-2\" [disabled]=\"btnLoading || !customerForm.valid\">\r\n              <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n              Save changes\r\n            </button>\r\n          </form>\r\n        </div>\r\n      </div>\r\n      <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n  </div>\r\n  <!-- /.modal -->\r\n</div>";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Soil Analysis Home</h2>\r\n      <!-- <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"myModal.show()\">\r\n        New\r\n      </button> -->\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 500px\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div\r\n    bsModal\r\n    #myModal=\"bs-modal\"\r\n    class=\"modal fade\"\r\n    tabindex=\"-1\"\r\n    role=\"dialog\"\r\n    aria-labelledby=\"myModalLabel\"\r\n    aria-hidden=\"true\"\r\n  >\r\n    <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-header\">\r\n          <h4 class=\"modal-title\">Add New Customer</h4>\r\n          <button\r\n            type=\"button\"\r\n            class=\"close\"\r\n            (click)=\"myModal.hide()\"\r\n            aria-label=\"Close\"\r\n          >\r\n            <span aria-hidden=\"true\">&times;</span>\r\n          </button>\r\n        </div>\r\n        <div class=\"modal-body\">\r\n          <form [formGroup]=\"customerForm\" (ngSubmit)=\"FormSubmit()\">\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name of Bride</label>\r\n              <input\r\n                type=\"text\"\r\n                class=\"form-control\"\r\n                id=\"NameOfBride\"\r\n                name=\"NameOfBride\"\r\n                formControlName=\"NameOfBride\"\r\n                placeholder=\"Enter bride's name\"\r\n              />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name of Father</label>\r\n              <input\r\n                type=\"text\"\r\n                class=\"form-control\"\r\n                id=\"NameOfFather\"\r\n                name=\"NameOfFather\"\r\n                formControlName=\"NameOfFather\"\r\n                placeholder=\"Enter father's name\"\r\n              />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Name of Mother</label>\r\n              <input\r\n                type=\"text\"\r\n                class=\"form-control\"\r\n                id=\"NameOfMother\"\r\n                name=\"NameOfMother\"\r\n                formControlName=\"NameOfMother\"\r\n                placeholder=\"Enter mother's name\"\r\n              />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Contact number 1</label>\r\n              <input\r\n                type=\"text\"\r\n                class=\"form-control\"\r\n                id=\"Contact_Number_1\"\r\n                name=\"Contact_Number_1\"\r\n                formControlName=\"Contact_Number_1\"\r\n                placeholder=\"Enter primary contact number\"\r\n              />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Contact number 2</label>\r\n              <input\r\n                type=\"text\"\r\n                class=\"form-control\"\r\n                id=\"Contact_Number_2\"\r\n                name=\"Contact_Number_2\"\r\n                formControlName=\"Contact_Number_2\"\r\n                placeholder=\"Enter secondary contact number\"\r\n              />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"email\">Marriage date</label>\r\n              <input\r\n                type=\"date\"\r\n                class=\"form-control\"\r\n                id=\"MarriageDate\"\r\n                name=\"MarriageDate\"\r\n                formControlName=\"MarriageDate\"\r\n              />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"group\">Marriage month</label>\r\n              <select\r\n                class=\"form-control\"\r\n                id=\"MarriageMonth\"\r\n                required\r\n                ngModel\r\n                name=\"MarriageMonth\"\r\n                formControlName=\"MarriageMonth\"\r\n              >\r\n                <option value=\"\" disabled selected hidden>Choose...</option>\r\n                <option *ngFor=\"let item of Months\" value=\"{{ item.id }}\">\r\n                  {{ item.Name }}\r\n                </option>\r\n              </select>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"group\">Agent</label>\r\n              <select\r\n                class=\"form-control\"\r\n                id=\"tele_caller_contact\"\r\n                required\r\n                ngModel\r\n                name=\"tele_caller_contact\"\r\n                formControlName=\"tele_caller_contact\"\r\n              >\r\n                <option value=\"\" disabled selected hidden>Choose...</option>\r\n                <option *ngFor=\"let item of agents\" value=\"{{ item.id }}\">\r\n                  {{ item.Name }}\r\n                </option>\r\n              </select>\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">House Name</label>\r\n              <input\r\n                type=\"text\"\r\n                class=\"form-control\"\r\n                id=\"HouseName\"\r\n                name=\"HouseName\"\r\n                formControlName=\"HouseName\"\r\n                placeholder=\"Enter House Name\"\r\n              />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"name\">Landmark</label>\r\n              <input\r\n                type=\"text\"\r\n                class=\"form-control\"\r\n                id=\"Landmark\"\r\n                name=\"Landmark\"\r\n                formControlName=\"Landmark\"\r\n                placeholder=\"Enter Landmark\"\r\n              />\r\n            </div>\r\n            <div class=\"form-group\">\r\n              <label for=\"locality\">Name of locality</label>\r\n              <!-- <input type=\"text\" class=\"form-control\" id=\"locality\" name=\"locality\" formControlName=\"locality\"\r\n                placeholder=\"Enter locality\" /> -->\r\n              <select\r\n                class=\"form-control\"\r\n                id=\"locality\"\r\n                required\r\n                ngModel\r\n                name=\"locality\"\r\n                formControlName=\"locality\"\r\n              >\r\n                <option value=\"\" disabled selected hidden>Choose...</option>\r\n                <option *ngFor=\"let item of localities\" value=\"{{ item.id }}\">\r\n                  {{ item.Name }}\r\n                </option>\r\n              </select>\r\n            </div>\r\n            <button\r\n              type=\"button\"\r\n              class=\"btn btn-secondary\"\r\n              (click)=\"myModal.hide()\"\r\n            >\r\n              Close\r\n            </button>\r\n            <button\r\n              type=\"submit\"\r\n              class=\"btn btn-primary ml-2\"\r\n              [disabled]=\"btnLoading || !customerForm.valid\"\r\n            >\r\n              <span\r\n                *ngIf=\"btnLoading\"\r\n                class=\"spinner-border spinner-border-sm\"\r\n                role=\"status\"\r\n                aria-hidden=\"true\"\r\n              ></span>\r\n              Save changes\r\n            </button>\r\n          </form>\r\n        </div>\r\n      </div>\r\n      <!-- /.modal-content -->\r\n    </div>\r\n    <!-- /.modal-dialog -->\r\n  </div>\r\n  <!-- /.modal -->\r\n</div>\r\n";
       /***/
     },
 
@@ -510,7 +550,7 @@
         _createClass(SoilTestDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this2 = this;
+            var _this4 = this;
 
             this.getLists();
             this.getAreas();
@@ -520,95 +560,95 @@
             this.getVillages();
             this.getFarmers();
             this.activatedRouter.params.subscribe(function (params) {
-              _this2.id = params["id"];
+              _this4.id = params["id"];
             });
             this.getTest();
           }
         }, {
           key: "getTest",
           value: function getTest() {
-            var _this3 = this;
+            var _this5 = this;
 
             this.dataservice.getsingleSoilTests(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
 
               console.log("getsingleSoilTests", result.data.soilTest.data);
-              _this3.details = result.data.soilTest.data;
-              _this3.agentForm = _this3.fb.group({
-                ContactNumber: [(_a = _this3.details.attributes) === null || _a === void 0 ? void 0 : _a.ContactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+              _this5.details = result.data.soilTest.data;
+              _this5.agentForm = _this5.fb.group({
+                ContactNumber: [(_a = _this5.details.attributes) === null || _a === void 0 ? void 0 : _a.ContactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 // PreferredCollectionDate: [
                 //   this.details?.attributes?.PreferredCollectionDate,
                 //   Validators.required,
                 // ],
-                ReasonForSoilTest: [(_c = (_b = _this3.details) === null || _b === void 0 ? void 0 : _b.attributes) === null || _c === void 0 ? void 0 : _c.ReasonForSoilTest, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                Status: [(_e = (_d = _this3.details) === null || _d === void 0 ? void 0 : _d.attributes) === null || _e === void 0 ? void 0 : _e.Status, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                nutrient: [(_g = (_f = _this3.details) === null || _f === void 0 ? void 0 : _f.attributes) === null || _g === void 0 ? void 0 : _g.nutrient, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                Farmer: [(_j = (_h = _this3.details) === null || _h === void 0 ? void 0 : _h.attributes) === null || _j === void 0 ? void 0 : _j.Farmer.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                area: [(_l = (_k = _this3.details) === null || _k === void 0 ? void 0 : _k.attributes) === null || _l === void 0 ? void 0 : _l.area.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                state: [(_o = (_m = _this3.details) === null || _m === void 0 ? void 0 : _m.attributes) === null || _o === void 0 ? void 0 : _o.lga.data.attributes.state.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                lga: [(_q = (_p = _this3.details) === null || _p === void 0 ? void 0 : _p.attributes) === null || _q === void 0 ? void 0 : _q.lga.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+                ReasonForSoilTest: [(_c = (_b = _this5.details) === null || _b === void 0 ? void 0 : _b.attributes) === null || _c === void 0 ? void 0 : _c.ReasonForSoilTest, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                Status: [(_e = (_d = _this5.details) === null || _d === void 0 ? void 0 : _d.attributes) === null || _e === void 0 ? void 0 : _e.Status, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                nutrient: [(_g = (_f = _this5.details) === null || _f === void 0 ? void 0 : _f.attributes) === null || _g === void 0 ? void 0 : _g.nutrient, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                Farmer: [(_j = (_h = _this5.details) === null || _h === void 0 ? void 0 : _h.attributes) === null || _j === void 0 ? void 0 : _j.Farmer.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                area: [(_l = (_k = _this5.details) === null || _k === void 0 ? void 0 : _k.attributes) === null || _l === void 0 ? void 0 : _l.area.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                state: [(_o = (_m = _this5.details) === null || _m === void 0 ? void 0 : _m.attributes) === null || _o === void 0 ? void 0 : _o.lga.data.attributes.state.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                lga: [(_q = (_p = _this5.details) === null || _p === void 0 ? void 0 : _p.attributes) === null || _q === void 0 ? void 0 : _q.lga.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
               });
-              _this3.loading = false;
+              _this5.loading = false;
             });
           }
         }, {
           key: "getCrops",
           value: function getCrops() {
-            var _this4 = this;
+            var _this6 = this;
 
             this.dataservice.getCrops().valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
-              _this4.Crops = result.data.crops.data;
+              _this6.Crops = result.data.crops.data;
             });
           }
         }, {
           key: "getStates",
           value: function getStates() {
-            var _this5 = this;
+            var _this7 = this;
 
             this.dataservice.getStates().valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
-              _this5.States = result.data.states.data;
+              _this7.States = result.data.states.data;
             });
           }
         }, {
           key: "getLGAs",
           value: function getLGAs(id) {
-            var _this6 = this;
+            var _this8 = this;
 
             this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
-              _this6.LGA = result.data.lgas.data;
+              _this8.LGA = result.data.lgas.data;
             });
           }
         }, {
           key: "getAreas",
           value: function getAreas(id) {
-            var _this7 = this;
+            var _this9 = this;
 
             this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
-              _this7.Areas = result.data.areas.data;
+              _this9.Areas = result.data.areas.data;
             });
           }
         }, {
           key: "getFarmers",
           value: function getFarmers() {
-            var _this8 = this;
+            var _this10 = this;
 
             this.dataservice.getUsers("Farmer").valueChanges.subscribe(function (result) {
               console.log("getFarmers", result.data.usersPermissionsUsers.data);
-              _this8.Farmers = result.data.usersPermissionsUsers.data;
+              _this10.Farmers = result.data.usersPermissionsUsers.data;
             });
           }
         }, {
           key: "getVillages",
           value: function getVillages() {
-            var _this9 = this;
+            var _this11 = this;
 
             this.dataservice.getVillages().valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
-              _this9.Villages = result.data.villages.data;
+              _this11.Villages = result.data.villages.data;
             });
           }
         }, {
@@ -650,7 +690,7 @@
         }, {
           key: "FormSubmit",
           value: function FormSubmit() {
-            var _this10 = this;
+            var _this12 = this;
 
             var resp = {};
             console.log(this.agentForm.value);
@@ -659,13 +699,13 @@
               console.log("response", result);
 
               if (result.data.updateSoilTest) {
-                _this10.toastr.success("Test updated successfully!");
+                _this12.toastr.success("Test updated successfully!");
 
-                _this10.myModal.hide();
+                _this12.myModal.hide();
 
-                _this10.getTest();
+                _this12.getTest();
               } else {
-                _this10.toastr.error("Failed. Please check the fields!");
+                _this12.toastr.error("Failed. Please check the fields!");
               }
             });
           }
@@ -682,7 +722,7 @@
         }, {
           key: "ResultSubmit",
           value: function ResultSubmit() {
-            var _this11 = this;
+            var _this13 = this;
 
             if (this.flag == "edit") {
               console.log("edit", this.resultForm.value);
@@ -693,13 +733,13 @@
                 console.log("response", result);
 
                 if (result.data.updateSoilTestResult) {
-                  _this11.toastr.success("Result updated successfully!");
+                  _this13.toastr.success("Result updated successfully!");
 
-                  _this11.resultModal.hide();
+                  _this13.resultModal.hide();
 
-                  _this11.getTest();
+                  _this13.getTest();
                 } else {
-                  _this11.toastr.error("Failed. Please check the fields!");
+                  _this13.toastr.error("Failed. Please check the fields!");
                 }
               });
             } else {
@@ -711,13 +751,13 @@
                 console.log("response", result);
 
                 if (result.data.createSoilTestResult) {
-                  _this11.toastr.success("Result added successfully!");
+                  _this13.toastr.success("Result added successfully!");
 
-                  _this11.resultModal.hide();
+                  _this13.resultModal.hide();
 
-                  _this11.getTest();
+                  _this13.getTest();
                 } else {
-                  _this11.toastr.error("Failed. Please check the fields!");
+                  _this13.toastr.error("Failed. Please check the fields!");
                 }
               });
             }

@@ -28,8 +28,11 @@ export class UsersComponent {
 
   loading = true;
   btnLoading = false;
-  title = "Verification";
-  orders: any = {};
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 100;
+  count = 1;
   columnDefs = [];
   commentForm = this.fb.group({
     UserType: ["", Validators.required],
@@ -44,9 +47,6 @@ export class UsersComponent {
     village: ["", Validators.required],
     state: [""],
   });
-  // frameworkComponents = {
-  //   statusRenderer: ActionRenderer,
-  // };
   rowData: any = [];
 
   Villages: any = [];
@@ -94,10 +94,44 @@ export class UsersComponent {
     });
   }
   getRetailers() {
-    this.dataservice.getUsers().valueChanges.subscribe((result: any) => {
-      console.log("getRetailers", result.data.usersPermissionsUsers.data);
-      this.rowData = result.data.usersPermissionsUsers.data;
-    });
+    this.dataservice
+      .getUsers(1, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.rowData = result.data.usersPermissionsUsers.data;
+        this.meta = result.data.usersPermissionsUsers.meta;
+        if (this.meta?.pagination?.pageCount <= 1) {
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+      });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getUsers(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.usersPermissionsUsers.meta;
+        this.rowData = result.data.usersPermissionsUsers.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getUsers(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.usersPermissionsUsers.meta;
+        this.rowData = result.data.usersPermissionsUsers.data;
+      });
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);

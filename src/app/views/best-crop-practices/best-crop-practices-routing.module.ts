@@ -19,7 +19,7 @@ const routes: Routes = [
         component: BestCropPracticesComponent,
         data: {
           roles: 'KP_CALLER',
-          title: 'Profile'
+          title: 'Best Crop Practices'
         }
       },
     ]

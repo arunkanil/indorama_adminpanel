@@ -62,7 +62,11 @@
         }, {
           path: 'all',
           // canActivate: [AuthGuard],
-          component: _indorama_updates_component__WEBPACK_IMPORTED_MODULE_3__["IndoramaUpdatesComponent"]
+          component: _indorama_updates_component__WEBPACK_IMPORTED_MODULE_3__["IndoramaUpdatesComponent"],
+          data: {
+            roles: 'KP_CALLER',
+            title: 'Indorama Updates'
+          }
         }]
       }];
 
@@ -168,7 +172,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Indorama Updates</h2>\r\n      <div>\r\n        <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" [disabled]=\"disableButton\"\r\n          (click)=\"deleteModal.show()\">\r\n          Delete\r\n        </button>\r\n        <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button>\r\n        <button type=\"button\" [disabled]=\"!disableButton\" class=\"btn btn-primary\" data-toggle=\"modal\"\r\n          (click)=\"openModal()\">\r\n          Add New Update\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 65vh\" id=\"myGrid\" class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\" (gridReady)=\"onGridReady($event)\" animateRows=\"true\">\r\n          </ag-grid-angular>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div bsModal #cropPriceModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit News</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"cropPriceModal.hide()\" aria-label=\"Close\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"newsForm\" (ngSubmit)=\"cropPriceSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"Title\">Title</label>\r\n            <input type=\"text\" class=\"form-control\" id=\"Title\" name=\"Title\" formControlName=\"Title\"\r\n              placeholder=\"Enter title\" />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Body\">Body</label>\r\n            <textarea  class=\"form-control\" id=\"Body\" rows=\"5\" name=\"Body\" formControlName=\"Body\"\r\n              placeholder=\"Enter Body\" ></textarea>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Image\">Image</label>\r\n            <div>\r\n              <img *ngIf=\"imageUrl\" src=\"{{ imageUrl }}\" width=\"100\" height=\"100\" style=\"object-fit: cover\" />\r\n            </div>\r\n            <input type=\"file\" class=\"form-control\" id=\"Image\" accept=\".jpg,.jpeg,.JPEG,.png\" name=\"Image\"\r\n              (change)=\"onChange($event)\" formControlName=\"Image\" placeholder=\"Choose image\" />\r\n          </div>\r\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"cropPriceModal.hide()\">\r\n            Close\r\n          </button>\r\n          <button type=\"submit\" class=\"btn btn-primary ml-2\" [disabled]=\"btnLoading || !newsForm.valid\">\r\n            <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n<div bsModal #deleteModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        Do you want to delete this record?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"deleteModal.hide()\">\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteRecord()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Indorama Updates</h2>\r\n      <div>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-danger\"\r\n          data-toggle=\"modal\"\r\n          [disabled]=\"disableButton\"\r\n          (click)=\"deleteModal.show()\"\r\n        >\r\n          Delete\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"disableButton\"\r\n          class=\"btn btn-info\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\"\r\n        >\r\n          Edit\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"!disableButton\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Add New Update\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #cropPriceModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit News</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"cropPriceModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"newsForm\" (ngSubmit)=\"cropPriceSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"Title\">Title</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"Title\"\r\n              name=\"Title\"\r\n              formControlName=\"Title\"\r\n              placeholder=\"Enter title\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Body\">Body</label>\r\n            <textarea\r\n              class=\"form-control\"\r\n              id=\"Body\"\r\n              rows=\"5\"\r\n              name=\"Body\"\r\n              formControlName=\"Body\"\r\n              placeholder=\"Enter Body\"\r\n            ></textarea>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Image\">Image</label>\r\n            <div>\r\n              <img\r\n                *ngIf=\"imageUrl\"\r\n                src=\"{{ imageUrl }}\"\r\n                width=\"100\"\r\n                height=\"100\"\r\n                style=\"object-fit: cover\"\r\n              />\r\n            </div>\r\n            <input\r\n              type=\"file\"\r\n              class=\"form-control\"\r\n              id=\"Image\"\r\n              accept=\".jpg,.jpeg,.JPEG,.png\"\r\n              name=\"Image\"\r\n              (change)=\"onChange($event)\"\r\n              formControlName=\"Image\"\r\n              placeholder=\"Choose image\"\r\n            />\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"cropPriceModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !newsForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n<div\r\n  bsModal\r\n  #deleteModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        Do you want to delete this record?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-secondary\"\r\n          (click)=\"deleteModal.hide()\"\r\n        >\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteRecord()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
@@ -249,6 +253,10 @@
           this.loading = true;
           this.btnLoading = false;
           this.disableButton = true;
+          this.disableNextButton = false;
+          this.disablePrevButton = true;
+          this.pageSize = 100;
+          this.count = 1;
           this.orders = {};
           this.columnDefs = [];
           this.newsForm = this.fb.group({
@@ -271,16 +279,60 @@
           value: function ngOnInit() {
             this.loading = true;
             console.log(this.router);
-            this.getUpdates();
+            this.getUpdates(undefined, 1, this.pageSize);
           }
         }, {
           key: "getUpdates",
-          value: function getUpdates(id) {
+          value: function getUpdates(id, page, pageSize) {
             var _this = this;
 
-            this.dataservice.getIndoramaUpdates(id).valueChanges.subscribe(function (result) {
-              console.log("getIndoramaUpdates", result.data.newsAndUpdates.data);
+            this.dataservice.getIndoramaUpdates(id, page, pageSize).valueChanges.subscribe(function (result) {
+              var _a, _b;
+
               _this.rowData = result.data.newsAndUpdates.data;
+              _this.meta = result.data.newsAndUpdates.meta;
+
+              if (((_b = (_a = _this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
+                _this.disablePrevButton = true;
+                _this.disableNextButton = true;
+              }
+            });
+          }
+        }, {
+          key: "loadNext",
+          value: function loadNext() {
+            var _this2 = this;
+
+            this.count++;
+            this.disablePrevButton = false;
+
+            if (this.count === this.meta.pagination.pageCount) {
+              this.disableNextButton = true;
+            }
+
+            this.dataservice.getIndoramaUpdates(undefined, this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this2.meta = result.data.newsAndUpdates.meta;
+              _this2.rowData = result.data.newsAndUpdates.data;
+            });
+          }
+        }, {
+          key: "loadPrev",
+          value: function loadPrev() {
+            var _this3 = this;
+
+            this.count--;
+
+            if (this.count < this.meta.pagination.pageCount) {
+              this.disableNextButton = false;
+            }
+
+            if (this.count === 1) {
+              this.disablePrevButton = true;
+            }
+
+            this.dataservice.getIndoramaUpdates(undefined, this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this3.meta = result.data.newsAndUpdates.meta;
+              _this3.rowData = result.data.newsAndUpdates.data;
             });
           }
         }, {
@@ -310,8 +362,11 @@
         }, {
           key: "onChange",
           value: function onChange(event) {
-            this.file = event.target.files[0];
-            console.log(event.target.files[0]);
+            this.file = [];
+
+            for (var i = 0; i < event.target.files.length; i++) {
+              this.file.push(event.target.files[i]);
+            }
           }
         }, {
           key: "openModal",
@@ -340,7 +395,7 @@
         }, {
           key: "deleteRecord",
           value: function deleteRecord() {
-            var _this2 = this;
+            var _this4 = this;
 
             var resp = {};
             this.dataservice.UpdateIndoramaUpdates({
@@ -350,24 +405,24 @@
               console.log("response", result);
 
               if (result.data.updateNewsAndUpdate) {
-                _this2.toastr.success("Success!");
+                _this4.toastr.success("Success!");
 
-                _this2.getUpdates();
+                _this4.getUpdates();
 
-                _this2.file = null;
+                _this4.file = null;
 
-                _this2.deleteModal.hide();
+                _this4.deleteModal.hide();
 
-                _this2.gridApi.deselectAll();
+                _this4.gridApi.deselectAll();
               } else {
-                _this2.toastr.error("Failed. Please check the fields!");
+                _this4.toastr.error("Failed. Please check the fields!");
               }
             });
           }
         }, {
           key: "cropPriceSubmit",
           value: function cropPriceSubmit() {
-            var _this3 = this;
+            var _this5 = this;
 
             var resp = {};
             console.log(this.newsForm.value);
@@ -380,22 +435,22 @@
                   if (response.status == 200) {
                     console.log(response);
 
-                    _this3.dataservice.UpdateIndoramaUpdates(_this3.newsForm.value, _this3.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                    _this5.dataservice.UpdateIndoramaUpdates(_this5.newsForm.value, _this5.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                       resp = result.data;
                       console.log("response", result);
 
                       if (result.data.updateNewsAndUpdate) {
-                        _this3.toastr.success("Success!");
+                        _this5.toastr.success("Success!");
 
-                        _this3.file = null;
+                        _this5.file = null;
 
-                        _this3.getUpdates();
+                        _this5.getUpdates();
 
-                        _this3.cropPriceModal.hide();
+                        _this5.cropPriceModal.hide();
 
-                        _this3.gridApi.deselectAll();
+                        _this5.gridApi.deselectAll();
                       } else {
-                        _this3.toastr.error("Failed. Please check the fields!");
+                        _this5.toastr.error("Failed. Please check the fields!");
                       }
                     });
                   }
@@ -406,17 +461,17 @@
                   console.log("response", result);
 
                   if (result.data.updateNewsAndUpdate) {
-                    _this3.toastr.success("Success!");
+                    _this5.toastr.success("Success!");
 
-                    _this3.file = null;
+                    _this5.file = null;
 
-                    _this3.cropPriceModal.hide();
+                    _this5.cropPriceModal.hide();
 
-                    _this3.gridApi.deselectAll();
+                    _this5.gridApi.deselectAll();
 
-                    _this3.getUpdates();
+                    _this5.getUpdates();
                   } else {
-                    _this3.toastr.error("Failed. Please check the fields!");
+                    _this5.toastr.error("Failed. Please check the fields!");
                   }
                 });
               }
@@ -427,26 +482,26 @@
                 if (response.status == 200) {
                   console.log(response);
 
-                  _this3.dataservice.AddIndoramaUpdates(_this3.newsForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                  _this5.dataservice.AddIndoramaUpdates(_this5.newsForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                     resp = result.data;
                     console.log("response", result);
 
                     if (result.data.createNewsAndUpdate) {
-                      _this3.toastr.success("Success!");
+                      _this5.toastr.success("Success!");
 
-                      _this3.file = null;
+                      _this5.file = null;
 
-                      _this3.cropPriceModal.hide();
+                      _this5.cropPriceModal.hide();
 
-                      _this3.getUpdates();
+                      _this5.getUpdates();
 
-                      _this3.gridApi.deselectAll();
+                      _this5.gridApi.deselectAll();
                     } else {
-                      _this3.toastr.error("Failed. Please check the fields!");
+                      _this5.toastr.error("Failed. Please check the fields!");
                     }
                   });
                 } else {
-                  _this3.toastr.error("Image failed to upload!");
+                  _this5.toastr.error("Image failed to upload!");
                 }
               });
             }

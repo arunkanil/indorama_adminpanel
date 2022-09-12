@@ -442,8 +442,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const FarmDemosQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query {
-    farmDemos(pagination: { limit: 100 }, sort: "createdAt:desc") {
+  query ($page: Int, $pageSize: Int) {
+    farmDemos(
+      pagination: { page: $page, pageSize: $pageSize }
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1284,12 +1295,20 @@ const UpdateMarket = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const CropPricesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query {
+  query ($page: Int, $pageSize: Int) {
     cropPrices(
       publicationState: PREVIEW
-      pagination: { limit: 100 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1466,12 +1485,20 @@ const CropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const RetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query {
+  query ($page: Int, $pageSize: Int) {
     usersPermissionsUsers(
-      pagination: { limit: 100 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { UserType: { eq: "Retailer" } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1537,8 +1564,19 @@ const RetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const SoilTestQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query {
-    soilTests {
+  query ($page: Int, $pageSize: Int) {
+    soilTests(
+      pagination: { page: $page, pageSize: $pageSize }
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1798,12 +1836,20 @@ const UpdateSoilTest = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const UsersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($UserType: String) {
+  query ($UserType: String, $page: Int, $pageSize: Int) {
     usersPermissionsUsers(
-      pagination: { limit: 1000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { UserType: { eq: $UserType } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -2637,16 +2683,30 @@ const queryUsersLarge = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const getIndoramaUpdates = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($isDelete: Boolean, $isActive: Boolean, $id: ID) {
+  query (
+    $isDelete: Boolean
+    $isActive: Boolean
+    $id: ID
+    $page: Int
+    $pageSize: Int
+  ) {
     newsAndUpdates(
       sort: "createdAt:desc"
-      pagination: { limit: 100 }
+      pagination: { page: $page, pageSize: $pageSize }
       filters: {
         isActive: { eq: $isActive }
         isDelete: { eq: $isDelete }
         id: { eq: $id }
       }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -2745,6 +2805,14 @@ const GetMarketplace = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
       pagination: { page: $pageNumber, pageSize: $pageSize }
       sort: "createdAt:desc"
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -3129,9 +3197,17 @@ const GetMarketplaceCategories = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gq
 const GetActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query getActivities($page: Int, $pageSize: Int) {
     activities(
-      sort: "createdAt:asc"
+      sort: "createdAt:desc"
       pagination: { page: $page, pageSize: $pageSize }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -3607,10 +3683,10 @@ const getChatMessages = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const getSurveys = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($limit: Int, $start: Int) {
+  query ($page: Int, $pageSize: Int) {
     surveyForms(
       sort: "updatedAt:desc"
-      pagination: { limit: $limit, start: $start }
+      pagination: { page: $page, pageSize: $pageSize }
     ) {
       meta {
         pagination {
@@ -3874,7 +3950,7 @@ let DataService = class DataService {
                 limit: limit,
                 start: start,
                 key: key ? key : undefined,
-                isAskIndorama: isAskIndorama ? isAskIndorama : undefined
+                isAskIndorama: isAskIndorama ? isAskIndorama : undefined,
             },
         });
     }
@@ -3928,10 +4004,14 @@ let DataService = class DataService {
             fetchPolicy: "no-cache",
         });
     }
-    getFarmDemos() {
+    getFarmDemos(page, pageSize) {
         return this.apollo.watchQuery({
             query: FarmDemosQuery,
             fetchPolicy: "no-cache",
+            variables: {
+                page: page,
+                pageSize: pageSize,
+            },
         });
     }
     getSingleFarmDemo(id) {
@@ -3991,16 +4071,24 @@ let DataService = class DataService {
             },
         });
     }
-    getCropPrices() {
+    getCropPrices(page, pageSize) {
         return this.apollo.watchQuery({
             query: CropPricesQuery,
             fetchPolicy: "no-cache",
+            variables: {
+                page: page,
+                pageSize: pageSize,
+            },
         });
     }
-    getRetailers() {
+    getRetailers(page, pageSize) {
         return this.apollo.watchQuery({
             query: RetailerQuery,
             fetchPolicy: "no-cache",
+            variables: {
+                page: page,
+                pageSize: pageSize,
+            },
         });
     }
     getRetailerCategories() {
@@ -4009,12 +4097,14 @@ let DataService = class DataService {
             fetchPolicy: "no-cache",
         });
     }
-    getUsers(UserType) {
+    getUsers(page, pageSize, UserType) {
         return this.apollo.watchQuery({
             query: UsersQuery,
             fetchPolicy: "no-cache",
             variables: {
                 UserType: UserType,
+                page: page,
+                pageSize: pageSize,
             },
         });
     }
@@ -4031,10 +4121,14 @@ let DataService = class DataService {
             },
         });
     }
-    getsoilTests() {
+    getsoilTests(page, pageSize) {
         return this.apollo.watchQuery({
             query: SoilTestQuery,
             fetchPolicy: "no-cache",
+            variables: {
+                page: page,
+                pageSize: pageSize,
+            },
         });
     }
     getsingleSoilTests(id) {
@@ -4248,13 +4342,15 @@ let DataService = class DataService {
             errorPolicy: "all",
         });
     }
-    getIndoramaUpdates(id) {
+    getIndoramaUpdates(id, page, pageSize) {
         return this.apollo.watchQuery({
             query: getIndoramaUpdates,
             variables: {
                 id: id,
                 isActive: true,
                 isDelete: false,
+                page: page,
+                pageSize: pageSize,
             },
             errorPolicy: "all",
         });

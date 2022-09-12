@@ -26,6 +26,10 @@ export class ActivitiesComponent {
   loading = true;
   btnLoading = false;
   disableButton = true;
+  disableNextButton = false;
+  disablePrevButton = true;
+  count = 1;
+
   orders: any = {};
   columnDefs = [];
   States: any = [];
@@ -47,6 +51,8 @@ export class ActivitiesComponent {
     Reason: ["", Validators.required],
   });
   rowData: any = [];
+  meta;
+  pageSize = 100;
   private gridApi;
   private gridColumnApi;
 
@@ -58,10 +64,45 @@ export class ActivitiesComponent {
     this.getStates();
   }
   getActivities() {
-    this.dataservice.getActivities().valueChanges.subscribe((result: any) => {
-      console.log("getActivities", result.data.activities.data);
-      this.rowData = result.data.activities.data;
-    });
+    this.dataservice
+      .getActivities(1, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        console.log("getActivities", result.data.activities.data);
+        this.meta = result.data.activities.meta;
+        if(this.meta?.pagination?.pageCount <= 1 ){
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+        this.rowData = result.data.activities.data;
+      });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getActivities(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.activities.meta;
+        this.rowData = result.data.activities.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getActivities(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.activities.meta;
+        this.rowData = result.data.activities.data;
+      });
   }
   getCrops() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
@@ -92,7 +133,7 @@ export class ActivitiesComponent {
   onSelectionChanged(event: any) {
     let selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows, selectedRows[0].attributes.Name);
-    this.router.navigate(["/activities/activity_details",selectedRows[0].id], {
+    this.router.navigate(["/activities/activity_details", selectedRows[0].id], {
       state: { data: selectedRows },
     });
   }
@@ -103,19 +144,19 @@ export class ActivitiesComponent {
     let resp = {};
     console.log(this.activitiesForm.value);
     this.dataservice
-    .createActivity(this.activitiesForm.value)
-    .subscribe((result: any) => {
-      resp = result.data;
-      console.log("response", result);
-      if (result.data.createActivity) {
-        this.toastr.success("Success!");
-        this.getActivities();
-        this.activitiesForm.reset();
-        this.activitiesModal.hide();
-        this.gridApi.deselectAll();
-      } else {
-        this.toastr.error("Failed. Please check the fields!");
-      }
-    });
+      .createActivity(this.activitiesForm.value)
+      .subscribe((result: any) => {
+        resp = result.data;
+        console.log("response", result);
+        if (result.data.createActivity) {
+          this.toastr.success("Success!");
+          this.getActivities();
+          this.activitiesForm.reset();
+          this.activitiesModal.hide();
+          this.gridApi.deselectAll();
+        } else {
+          this.toastr.error("Failed. Please check the fields!");
+        }
+      });
   }
 }

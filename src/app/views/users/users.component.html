@@ -30,6 +30,26 @@
             animateRows="true"
           >
           </ag-grid-angular>
+          <button
+            type="button"
+            [disabled]="disableNextButton"
+            class="btn btn-primary float-right m-2"
+            (click)="loadNext()"
+          >
+            Next
+          </button>
+          <span class="float-right mt-3"
+            >Page {{ meta?.pagination?.page }} of
+            {{ meta?.pagination?.pageCount }}</span
+          >
+          <button
+            type="button"
+            [disabled]="disablePrevButton"
+            class="btn btn-primary float-right m-2"
+            (click)="loadPrev()"
+          >
+            Prev
+          </button>
         </div>
       </div>
     </div>
@@ -96,11 +116,15 @@
               </div>
               <div class="form-group">
                 <label for="UserType">User type</label>
-                <select class="form-control" id="UserType" required ngModel name="UserType"
-                  formControlName="UserType">
-                  <option value="" disabled selected hidden>
-                    Choose...
-                  </option>
+                <select
+                  class="form-control"
+                  id="UserType"
+                  required
+                  ngModel
+                  name="UserType"
+                  formControlName="UserType"
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
                   <option value="Farmer">Farmer</option>
                   <option value="Retailer">Retailer</option>
                   <option value="Agronomist">Agronomist</option>
@@ -128,7 +152,6 @@
                   placeholder="Enter email"
                 />
               </div>
-              
             </div>
             <div class="col">
               <div class="form-group">

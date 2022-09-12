@@ -23,6 +23,11 @@ export class SurveysComponent {
   loading = true;
   btnLoading = false;
   disableButton = true;
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 100;
+  count = 1;
   columnDefs = [];
 
   cropPriceForm = this.fb.group({
@@ -45,15 +50,48 @@ export class SurveysComponent {
   ngOnInit(): void {
     this.loading = true;
     console.log(this.router);
-    this.getSurveys();
+    this.getSurveys(1, this.pageSize);
   }
-  getSurveys() {
-    this.dataservice.getSurveys().valueChanges.subscribe((result: any) => {
-      console.log("getSurveys", result.data.surveyForms.data);
-      this.rowData = result.data.surveyForms.data;
-    });
+  getSurveys(page?, pageSize?) {
+    this.dataservice
+      .getSurveys(page, pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.rowData = result.data.surveyForms.data;
+        this.meta = result.data.surveyForms.meta;
+        if (this.meta?.pagination?.pageCount <= 1) {
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+      });
   }
-  
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getSurveys(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.surveyForms.meta;
+        this.rowData = result.data.surveyForms.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getSurveys(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.surveyForms.meta;
+        this.rowData = result.data.surveyForms.data;
+      });
+  }
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;

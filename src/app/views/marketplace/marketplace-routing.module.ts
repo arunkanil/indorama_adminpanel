@@ -16,6 +16,10 @@ const routes: Routes = [
         path: 'all',
         // canActivate: [AuthGuard],
         component: MarketplaceComponent,
+        data: {
+          // roles: 'MANAGER',
+          title: 'Marketplace'
+        }
       },
       {
         path: 'marketplace_details/:id',

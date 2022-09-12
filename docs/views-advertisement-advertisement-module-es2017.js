@@ -251,7 +251,7 @@ const routes = [
                 component: _advertisement_component__WEBPACK_IMPORTED_MODULE_3__["AdvertisementComponent"],
                 data: {
                     roles: 'KP_CALLER',
-                    title: 'Profile'
+                    title: 'Advertisement'
                 }
             },
         ]

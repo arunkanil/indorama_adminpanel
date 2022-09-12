@@ -338,7 +338,7 @@
           component: _chat_component__WEBPACK_IMPORTED_MODULE_3__["ChatComponent"],
           data: {
             // roles: 'KP_CALLER',
-            title: 'Profile'
+            title: 'Chats'
           }
         }]
       }];

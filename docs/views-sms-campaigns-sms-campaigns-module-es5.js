@@ -112,7 +112,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>SMS Campaigns</h2>\r\n      <div>\r\n        <!-- <button\r\n          type=\"button\"\r\n          class=\"btn btn-danger\"\r\n          data-toggle=\"modal\"\r\n          [disabled]=\"disableButton\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Delete\r\n        </button> -->\r\n        <!-- <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button> -->\r\n        <button type=\"button\" [disabled]=\"!disableButton\" class=\"btn btn-primary\" data-toggle=\"modal\"\r\n          (click)=\"openModal()\">\r\n          Create new campaign\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 65vh\" id=\"myGrid\" class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\" (gridReady)=\"onGridReady($event)\" animateRows=\"true\">\r\n          </ag-grid-angular>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div bsModal #messageModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">New Campaign</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"messageModal.hide()\" aria-label=\"Close\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"messageForm\" (ngSubmit)=\"sendMessage()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"state\">State</label>\r\n                <select class=\"form-control\" id=\"state\" ngModel (change)=\"filterLGA($event)\" name=\"state\"\r\n                  formControlName=\"state\">\r\n                  <option value=\"\" disabled selected hidden>\r\n                    Choose...\r\n                  </option>\r\n                  <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"area\">Area</label>\r\n                <select class=\"form-control\" id=\"area\" ngModel (change)=\"filterVillage($event)\" name=\"area\" formControlName=\"area\">\r\n                  <option value=\"\" disabled selected hidden>\r\n                    Choose...\r\n                  </option>\r\n                  <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"lga\">LGA</label>\r\n                <select class=\"form-control\" id=\"lga\" ngModel (change)=\"filterArea($event)\" name=\"lga\" formControlName=\"lga\">\r\n                  <option value=\"\" disabled selected hidden>\r\n                    Choose...\r\n                  </option>\r\n                  <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"village\">Village</label>\r\n                <select class=\"form-control\" id=\"village\" ngModel name=\"village\" formControlName=\"village\">\r\n                  <option value=\"\" disabled selected hidden>\r\n                    Choose...\r\n                  </option>\r\n                  <option *ngFor=\"let item of Villages\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            Farmers selected : {{NoOfContacts}}\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <button type=\"button\" class=\"btn btn-secondary\" (click)=\"clearSearch()\">\r\n              Clear\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-primary ml-2\" (click)=\"getUsers()\">\r\n              <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n              Search\r\n            </button>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">Message body</label>\r\n            <textarea rows=\"5\" class=\"form-control\" id=\"body\" name=\"body\" formControlName=\"body\"\r\n              placeholder=\"Max 160 characters\"></textarea>\r\n          </div>\r\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"messageModal.hide()\">\r\n            Close\r\n          </button>\r\n          <button type=\"submit\" class=\"btn btn-primary ml-2\" [disabled]=\"btnLoading || !messageForm.valid\">\r\n            <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n            Create\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>SMS Campaigns</h2>\r\n      <div>\r\n        <!-- <button\r\n          type=\"button\"\r\n          class=\"btn btn-danger\"\r\n          data-toggle=\"modal\"\r\n          [disabled]=\"disableButton\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Delete\r\n        </button> -->\r\n        <!-- <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button> -->\r\n        <button type=\"button\" [disabled]=\"!disableButton\" class=\"btn btn-primary\" data-toggle=\"modal\"\r\n          (click)=\"openModal()\">\r\n          Create new campaign\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 65vh\" id=\"myGrid\" class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\" (gridReady)=\"onGridReady($event)\" animateRows=\"true\">\r\n          </ag-grid-angular>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div bsModal #messageModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">New Campaign</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"messageModal.hide()\" aria-label=\"Close\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"messageForm\" (ngSubmit)=\"sendMessage()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"state\">State</label>\r\n                <select class=\"form-control\" id=\"state\" ngModel (change)=\"filterLGA($event)\" name=\"state\"\r\n                  formControlName=\"state\">\r\n                  <option value=\"\" disabled selected hidden>\r\n                    Choose...\r\n                  </option>\r\n                  <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"area\">Area</label>\r\n                <select class=\"form-control\" id=\"area\" ngModel (change)=\"filterVillage($event)\" name=\"area\" formControlName=\"area\">\r\n                  <option value=\"\" disabled selected hidden>\r\n                    Choose...\r\n                  </option>\r\n                  <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"lga\">LGA</label>\r\n                <select class=\"form-control\" id=\"lga\" ngModel (change)=\"filterArea($event)\" name=\"lga\" formControlName=\"lga\">\r\n                  <option value=\"\" disabled selected hidden>\r\n                    Choose...\r\n                  </option>\r\n                  <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"village\">Village</label>\r\n                <select class=\"form-control\" id=\"village\" ngModel name=\"village\" formControlName=\"village\">\r\n                  <option value=\"\" disabled selected hidden>\r\n                    Choose...\r\n                  </option>\r\n                  <option *ngFor=\"let item of Villages\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            Farmers selected : {{NoOfContacts}}\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <button type=\"button\" class=\"btn btn-secondary\" (click)=\"clearSearch()\">\r\n              Clear\r\n            </button>\r\n            <button type=\"button\" class=\"btn btn-primary ml-2\" (click)=\"getUsers()\">\r\n              <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n              Search\r\n            </button>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">Message body</label>\r\n            <textarea rows=\"5\" class=\"form-control\" id=\"body\" name=\"body\" formControlName=\"body\"\r\n              placeholder=\"Max 160 characters\"></textarea>\r\n          </div>\r\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"messageModal.hide()\">\r\n            Close\r\n          </button>\r\n          <button type=\"submit\" class=\"btn btn-primary ml-2\" [disabled]=\"btnLoading || !messageForm.valid\">\r\n            <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n            Create\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>";
       /***/
     },
 
@@ -194,8 +194,10 @@
           this.loading = true;
           this.btnLoading = false;
           this.disableButton = true;
-          this.title = "Verification";
-          this.orders = {};
+          this.disableNextButton = false;
+          this.disablePrevButton = true;
+          this.pageSize = 100;
+          this.count = 1;
           this.columnDefs = [];
           this.Farmers = [];
           this.Villages = [];
@@ -234,49 +236,93 @@
           value: function getCropPrices() {
             var _this = this;
 
-            this.dataservice.getCropPrices().valueChanges.subscribe(function (result) {
-              console.log("getCropPrices", result.data.cropPrices.data);
+            this.dataservice.getCropPrices(1, this.pageSize).valueChanges.subscribe(function (result) {
+              var _a, _b;
+
               _this.rowData = result.data.cropPrices.data;
+              _this.meta = result.data.cropPrices.meta;
+
+              if (((_b = (_a = _this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
+                _this.disablePrevButton = true;
+                _this.disableNextButton = true;
+              }
+            });
+          }
+        }, {
+          key: "loadNext",
+          value: function loadNext() {
+            var _this2 = this;
+
+            this.count++;
+            this.disablePrevButton = false;
+
+            if (this.count === this.meta.pagination.pageCount) {
+              this.disableNextButton = true;
+            }
+
+            this.dataservice.getCropPrices(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this2.meta = result.data.cropPrices.meta;
+              _this2.rowData = result.data.cropPrices.data;
+            });
+          }
+        }, {
+          key: "loadPrev",
+          value: function loadPrev() {
+            var _this3 = this;
+
+            this.count--;
+
+            if (this.count < this.meta.pagination.pageCount) {
+              this.disableNextButton = false;
+            }
+
+            if (this.count === 1) {
+              this.disablePrevButton = true;
+            }
+
+            this.dataservice.getCropPrices(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this3.meta = result.data.cropPrices.meta;
+              _this3.rowData = result.data.cropPrices.data;
             });
           }
         }, {
           key: "getStates",
           value: function getStates() {
-            var _this2 = this;
+            var _this4 = this;
 
             this.dataservice.getStates().valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
-              _this2.States = result.data.states.data;
+              _this4.States = result.data.states.data;
             });
           }
         }, {
           key: "getLGAs",
           value: function getLGAs(stateid) {
-            var _this3 = this;
+            var _this5 = this;
 
             this.dataservice.getLGAs(stateid).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
-              _this3.LGA = result.data.lgas.data;
+              _this5.LGA = result.data.lgas.data;
             });
           }
         }, {
           key: "getAreas",
           value: function getAreas(lgaid) {
-            var _this4 = this;
+            var _this6 = this;
 
             this.dataservice.getAreas(lgaid).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
-              _this4.Areas = result.data.areas.data;
+              _this6.Areas = result.data.areas.data;
             });
           }
         }, {
           key: "getVillages",
           value: function getVillages(areaid) {
-            var _this5 = this;
+            var _this7 = this;
 
             this.dataservice.getVillages(areaid).valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
-              _this5.Villages = result.data.villages.data;
+              _this7.Villages = result.data.villages.data;
             });
           }
         }, {
@@ -289,22 +335,22 @@
         }, {
           key: "getUsers",
           value: function getUsers() {
-            var _this6 = this;
+            var _this8 = this;
 
             this.dataservice.getUsersLarge("Farmer", this.messageForm.value).valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.usersPermissionsUsers.data);
-              _this6.Farmers = Array.from(result.data.usersPermissionsUsers.data, function (x) {
+              _this8.Farmers = Array.from(result.data.usersPermissionsUsers.data, function (x) {
                 return x.attributes.ContactNumber;
               });
 
-              for (var i = 0; i < _this6.Farmers.length; i++) {
-                if (_this6.Farmers[i]) {
-                  _this6.to = _this6.to + _this6.Farmers[i] + ",";
+              for (var i = 0; i < _this8.Farmers.length; i++) {
+                if (_this8.Farmers[i]) {
+                  _this8.to = _this8.to + _this8.Farmers[i] + ",";
                 }
               }
 
-              _this6.NoOfContacts = _this6.Farmers.length;
-              console.log("farmers", _this6.Farmers, _this6.to);
+              _this8.NoOfContacts = _this8.Farmers.length;
+              console.log("farmers", _this8.Farmers, _this8.to);
             });
           }
         }, {
@@ -454,7 +500,7 @@
           // canActivate: [AuthGuard],
           component: _sms_campaigns_component__WEBPACK_IMPORTED_MODULE_3__["SMSCampaignsComponent"],
           data: {
-            title: 'SMS'
+            title: 'SMS Campaign'
           }
         }]
       }];

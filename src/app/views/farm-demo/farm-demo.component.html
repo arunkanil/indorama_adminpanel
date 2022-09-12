@@ -36,6 +36,26 @@
               animateRows="true"
             >
             </ag-grid-angular>
+            <button
+              type="button"
+              [disabled]="disableNextButton"
+              class="btn btn-primary float-right m-2"
+              (click)="loadNext()"
+            >
+              Next
+            </button>
+            <span class="float-right mt-3"
+              >Page {{ meta?.pagination?.page }} of
+              {{ meta?.pagination?.pageCount }}</span
+            >
+            <button
+              type="button"
+              [disabled]="disablePrevButton"
+              class="btn btn-primary float-right m-2"
+              (click)="loadPrev()"
+            >
+              Prev
+            </button>
           </div>
         </div>
       </div>

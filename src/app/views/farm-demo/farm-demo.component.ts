@@ -38,6 +38,11 @@ export class FarmDemoComponent {
   });
   loading = false;
   btnLoading = false;
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 100;
+  count = 1;
   columnDefs = [];
   rowData: any = [];
   Villages: any = [];
@@ -55,9 +60,14 @@ export class FarmDemoComponent {
   }
   getLists() {
     this.loading = true;
-    this.dataservice.getFarmDemos().valueChanges.subscribe((result: any) => {
+    this.dataservice.getFarmDemos(1,this.pageSize).valueChanges.subscribe((result: any) => {
       console.log("getFarmDemos", result.data.farmDemos.data);
       this.rowData = result.data.farmDemos.data;
+      this.meta = result.data.farmDemos.meta;
+      if (this.meta?.pagination?.pageCount <= 1) {
+        this.disablePrevButton = true;
+        this.disableNextButton = true;
+      }
       this.loading = false;
     });
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
@@ -76,6 +86,34 @@ export class FarmDemoComponent {
       console.log("getVillages", result.data.villages.data);
       this.Villages = result.data.villages.data;
     });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getFarmDemos(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.farmDemos.meta;
+        this.rowData = result.data.farmDemos.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getFarmDemos(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.farmDemos.meta;
+        this.rowData = result.data.farmDemos.data;
+      });
   }
   getLGAs(id?){
     this.dataservice.getLGAs(id).valueChanges.subscribe((result: any) => {

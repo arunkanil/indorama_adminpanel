@@ -15,6 +15,10 @@ const routes: Routes = [
         path: 'all',
         // canActivate: [AuthGuard],
         component: IndoramaUpdatesComponent,
+        data: {
+          roles: 'KP_CALLER',
+          title: 'Indorama Updates'
+        }
       },
     ]
   }

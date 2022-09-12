@@ -37,10 +37,13 @@ export class SoilHomeComponent {
   });
   loading = true;
   btnLoading = false;
-  orders: any = {};
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 100;
+  count = 1;
   columnDefs = [];
   rowData: any = [];
-  agents: any = [];
   localities: any = [];
   private gridApi;
   private gridColumnApi;
@@ -50,18 +53,43 @@ export class SoilHomeComponent {
   }
   getLists() {
     this.loading = true;
-    this.dataservice.getsoilTests().valueChanges.subscribe((result: any) => {
+    this.dataservice.getsoilTests(1,this.pageSize).valueChanges.subscribe((result: any) => {
       console.log("getCustomers", result.data.soilTests.data);
       this.rowData = result.data.soilTests.data;
+      this.meta = result.data.soilTests.meta;
+      if (this.meta?.pagination?.pageCount <= 1) {
+        this.disablePrevButton = true;
+        this.disableNextButton = true;
+      }
     });
-    // this.dataservice.getLocalities().valueChanges.subscribe((result: any) => {
-    //   console.log("getLocalities", result.data.localities);
-    //   this.localities = result.data.localities;
-    // });
-    // this.dataservice.getAgents().valueChanges.subscribe((result: any) => {
-    //   console.log("getAgents", result.data.teleCallerContacts);
-    //   this.agents = result.data.teleCallerContacts;
-    // });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getsoilTests(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.soilTests.meta;
+        this.rowData = result.data.soilTests.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getsoilTests(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.soilTests.meta;
+        this.rowData = result.data.soilTests.data;
+      });
   }
   onGridReady(params) {
     this.gridApi = params.api;

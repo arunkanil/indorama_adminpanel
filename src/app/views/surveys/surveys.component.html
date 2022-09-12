@@ -1,6 +1,9 @@
 <div class="animated fadeIn">
   <div class="card">
-    <div class="card-header" style="display: flex; justify-content: space-between">
+    <div
+      class="card-header"
+      style="display: flex; justify-content: space-between"
+    >
       <h2>Surveys</h2>
       <div>
         <!-- <button type="button" class="btn btn-danger" data-toggle="modal" [disabled]="disableButton"
@@ -11,7 +14,12 @@
           (click)="openModal('Edit')">
           Edit
         </button> -->
-        <a type="button" class="btn btn-primary" data-toggle="modal" href="/#/surveys/new_survey">
+        <a
+          type="button"
+          class="btn btn-primary"
+          data-toggle="modal"
+          href="/#/surveys/new_survey"
+        >
           Add New Survey
         </a>
       </div>
@@ -23,10 +31,39 @@
     <div class="card-body">
       <div class="row">
         <div class="col-12">
-          <ag-grid-angular #agGrid style="width: 100%; height: 65vh" id="myGrid" class="ag-theme-alpine"
-            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
-            (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 65vh"
+            id="myGrid"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefs"
+            [rowData]="rowData"
+            [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)"
+            (gridReady)="onGridReady($event)"
+            animateRows="true"
+          >
           </ag-grid-angular>
+          <button
+            type="button"
+            [disabled]="disableNextButton"
+            class="btn btn-primary float-right m-2"
+            (click)="loadNext()"
+          >
+            Next
+          </button>
+          <span class="float-right mt-3"
+            >Page {{ meta?.pagination?.page }} of
+            {{ meta?.pagination?.pageCount }}</span
+          >
+          <button
+            type="button"
+            [disabled]="disablePrevButton"
+            class="btn btn-primary float-right m-2"
+            (click)="loadPrev()"
+          >
+            Prev
+          </button>
         </div>
       </div>
     </div>

@@ -118,7 +118,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div bsModal #deleteModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"editModalLabel\"\r\n    aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-body text-center\">\r\n          Do you want to delete this listing?\r\n        </div>\r\n        <div class=\"modal-footer justify-content-around\">\r\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"deleteModal.hide()\">\r\n            No! Cancel.\r\n          </button>\r\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"DeleteMarketplaceProduct()\">\r\n            Yes! Delete.\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Listing Details</h2>\r\n      <span>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"editModal.show()\">\r\n          Edit\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" (click)=\"deleteModal.show()\">\r\n          Delete\r\n        </button>\r\n      </span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <div class=\"row\">\r\n            <table class=\"table table-striped\">\r\n              <tbody>\r\n                <tr>\r\n                  <td>ID</td>\r\n                  <td>{{ details?.id }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Item name</td>\r\n                  <td>\r\n                    {{ details?.attributes?.ItemName }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Category</td>\r\n                  <td>{{ details?.attributes?.marketplace_category?.data?.attributes?.CategoryName }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Contact number</td>\r\n                  <td>{{ details?.attributes?.contactNumber }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Price</td>\r\n                  <td>\r\n                    {{\r\n                    details?.attributes?.Price}}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Available quantity</td>\r\n                  <td>{{ details?.attributes?.AvailableQty }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Unit</td>\r\n                  <td>\r\n                    {{ details?.attributes?.Unit }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Posted by</td>\r\n                  <td>{{ details?.attributes?.seller?.data?.attributes?.Name }} - {{\r\n                    details?.attributes?.seller?.data?.attributes?.username }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Description</td>\r\n                  <td>\r\n                    {{details?.attributes?.description}}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Created at</td>\r\n                  <td>{{ dateConvertor(details?.attributes?.createdAt) }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Last updated</td>\r\n                  <td>{{ dateConvertor(details?.attributes?.updatedAt) }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Images</td>\r\n                  <td>\r\n                    <span *ngFor=\"let item of details?.attributes?.Images.data\">\r\n                      <img src=\"https://indoramaapp.untanglestrategy.com{{ item?.attributes?.url }}\"\r\n                        (click)=\"showImages(item?.attributes?.url)\" alt=\"\"\r\n                        style=\"height: 100px; width: 200px; padding-left: 5px; padding-right: 5px;\" />\r\n                      <!-- <button type=\"button\" class=\"btn btn-outline-danger\" data-toggle=\"modal\"\r\n                        (click)=\"removePic(item)\">\r\n                        Delete\r\n                      </button> -->\r\n                    </span>\r\n                    <div class=\"mt-4\" style=\"display: flex;\">\r\n                      <input type=\"file\" id=\"prof_pic\" style=\"width: 250px;\" accept=\".jpg,.jpeg,.JPEG,.png\" multiple\r\n                        name=\"prof_pic\" (change)=\"onChange($event)\" placeholder=\"Choose image\" />\r\n                      <button type=\"button\" [disabled]=\"btnLoading || !productForm.valid\"\r\n                        class=\"btn btn-outline-primary\" data-toggle=\"modal\" (click)=\"uploadImages()\">\r\n                        <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\"\r\n                          aria-hidden=\"true\"></span>\r\n                        Upload\r\n                      </button>\r\n                    </div>\r\n                  </td>\r\n                </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n        <div bsModal #editModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\n          aria-labelledby=\"editModalLabel\" aria-hidden=\"true\">\r\n          <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n            <div class=\"modal-content\">\r\n              <div class=\"modal-header\">\r\n                <h4 class=\"modal-title\">Edit details</h4>\r\n                <button type=\"button\" class=\"close\" (click)=\"editModal.hide()\" aria-label=\"Close\">\r\n                  <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n              </div>\r\n              <div class=\"modal-body\">\r\n                <form [formGroup]=\"productForm\" (ngSubmit)=\"productSubmit()\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col\">\r\n                      <div class=\"form-group\">\r\n                        <label for=\"category\">Category</label>\r\n                        <select class=\"form-control\" id=\"category\" required ngModel name=\"category\"\r\n                          formControlName=\"category\">\r\n                          <option value=\"\" disabled selected hidden>Choose...</option>\r\n                          <option *ngFor=\"let item of Categories\" value=\"{{ item.id }}\">\r\n                            {{ item.attributes.CategoryName }}\r\n                          </option>\r\n                        </select>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"itemName\">Title</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"itemName\" name=\"itemName\" formControlName=\"itemName\"\r\n                          placeholder=\"Enter title\" />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"price\">Price</label>\r\n                        <input type=\"number\" class=\"form-control\" id=\"price\" name=\"price\" formControlName=\"price\"\r\n                          placeholder=\"Enter price\" />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"unit\">Unit</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"unit\" name=\"unit\" formControlName=\"unit\"\r\n                          placeholder=\"Enter unit\" />\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col\">\r\n                      <div class=\"form-group\">\r\n                        <label for=\"availableQty\">Quantity</label>\r\n                        <input type=\"text\" class=\"form-control\" id=\"availableQty\" name=\"availableQty\"\r\n                          formControlName=\"availableQty\" placeholder=\"Enter available quantity\" />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"contactNumber\">Contact Number</label>\r\n                        <input type=\"number\" class=\"form-control\" id=\"contactNumber\" name=\"contactNumber\"\r\n                          formControlName=\"contactNumber\" placeholder=\"Enter Contact number\" />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"description\">Description</label>\r\n                        <textarea class=\"form-control\" id=\"description\" rows=\"5\" name=\"description\"\r\n                          formControlName=\"description\" placeholder=\"Enter description\"></textarea>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <button type=\"button\" class=\"btn btn-secondary\" (click)=\"productModal.hide()\">\r\n                    Close\r\n                  </button>\r\n                  <button type=\"submit\" class=\"btn btn-primary ml-2\" [disabled]=\"btnLoading || !productForm.valid\">\r\n                    <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\"\r\n                      aria-hidden=\"true\"></span>\r\n                    Save changes\r\n                  </button>\r\n                </form>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div\r\n    bsModal\r\n    #deleteModal=\"bs-modal\"\r\n    class=\"modal fade\"\r\n    tabindex=\"-1\"\r\n    role=\"dialog\"\r\n    aria-labelledby=\"editModalLabel\"\r\n    aria-hidden=\"true\"\r\n  >\r\n    <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-body text-center\">\r\n          Do you want to delete this listing?\r\n        </div>\r\n        <div class=\"modal-footer justify-content-around\">\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"deleteModal.hide()\"\r\n          >\r\n            No! Cancel.\r\n          </button>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-primary\"\r\n            (click)=\"DeleteMarketplaceProduct()\"\r\n          >\r\n            Yes! Delete.\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Listing Details</h2>\r\n      <span>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"editModal.show()\"\r\n        >\r\n          Edit\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-danger\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"deleteModal.show()\"\r\n        >\r\n          Delete\r\n        </button>\r\n      </span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <div class=\"row\">\r\n            <table class=\"table table-striped\">\r\n              <tbody>\r\n                <tr>\r\n                  <td>ID</td>\r\n                  <td>{{ details?.id }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Item name</td>\r\n                  <td>\r\n                    {{ details?.attributes?.ItemName }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Category</td>\r\n                  <td>\r\n                    {{\r\n                      details?.attributes?.marketplace_category?.data\r\n                        ?.attributes?.CategoryName\r\n                    }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Contact number</td>\r\n                  <td>{{ details?.attributes?.contactNumber }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Price</td>\r\n                  <td>\r\n                    {{ details?.attributes?.Price }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Available quantity</td>\r\n                  <td>{{ details?.attributes?.AvailableQty }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Unit</td>\r\n                  <td>\r\n                    {{ details?.attributes?.Unit }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Posted by</td>\r\n                  <td>\r\n                    {{ details?.attributes?.seller?.data?.attributes?.Name }} -\r\n                    {{\r\n                      details?.attributes?.seller?.data?.attributes?.username\r\n                    }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Description</td>\r\n                  <td>\r\n                    {{ details?.attributes?.description }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Created at</td>\r\n                  <td>{{ dateConvertor(details?.attributes?.createdAt) }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Last updated</td>\r\n                  <td>{{ dateConvertor(details?.attributes?.updatedAt) }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Images</td>\r\n                  <td>\r\n                    <span *ngFor=\"let item of details?.attributes?.Images.data\">\r\n                      <a\r\n                        href=\"https://indoramaapp.untanglestrategy.com{{\r\n                          item?.attributes?.url\r\n                        }}\" target=\"_blank\"\r\n                        ><img\r\n                          src=\"https://indoramaapp.untanglestrategy.com{{\r\n                            item?.attributes?.url\r\n                          }}\"\r\n                          alt=\"\"\r\n                          style=\"\r\n                            height: 100px;\r\n                            width: 200px;\r\n                            padding-left: 5px;\r\n                            padding-right: 5px;\r\n                          \"\r\n                      /></a>\r\n                      <!-- <button type=\"button\" class=\"btn btn-outline-danger\" data-toggle=\"modal\"\r\n                        (click)=\"removePic(item)\">\r\n                        Delete\r\n                      </button> -->\r\n                    </span>\r\n                    <div class=\"mt-4\" style=\"display: flex\">\r\n                      <input\r\n                        type=\"file\"\r\n                        id=\"prof_pic\"\r\n                        style=\"width: 250px\"\r\n                        accept=\".jpg,.jpeg,.JPEG,.png\"\r\n                        multiple\r\n                        name=\"prof_pic\"\r\n                        (change)=\"onChange($event)\"\r\n                        placeholder=\"Choose image\"\r\n                      />\r\n                      <button\r\n                        type=\"button\"\r\n                        [disabled]=\"btnLoading || !productForm.valid\"\r\n                        class=\"btn btn-outline-primary\"\r\n                        data-toggle=\"modal\"\r\n                        (click)=\"uploadImages()\"\r\n                      >\r\n                        <span\r\n                          *ngIf=\"btnLoading\"\r\n                          class=\"spinner-border spinner-border-sm\"\r\n                          role=\"status\"\r\n                          aria-hidden=\"true\"\r\n                        ></span>\r\n                        Upload\r\n                      </button>\r\n                    </div>\r\n                  </td>\r\n                </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n        <div\r\n          bsModal\r\n          #editModal=\"bs-modal\"\r\n          class=\"modal fade\"\r\n          tabindex=\"-1\"\r\n          role=\"dialog\"\r\n          aria-labelledby=\"editModalLabel\"\r\n          aria-hidden=\"true\"\r\n        >\r\n          <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n            <div class=\"modal-content\">\r\n              <div class=\"modal-header\">\r\n                <h4 class=\"modal-title\">Edit details</h4>\r\n                <button\r\n                  type=\"button\"\r\n                  class=\"close\"\r\n                  (click)=\"editModal.hide()\"\r\n                  aria-label=\"Close\"\r\n                >\r\n                  <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n              </div>\r\n              <div class=\"modal-body\">\r\n                <form [formGroup]=\"productForm\" (ngSubmit)=\"productSubmit()\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col\">\r\n                      <div class=\"form-group\">\r\n                        <label for=\"category\">Category</label>\r\n                        <select\r\n                          class=\"form-control\"\r\n                          id=\"category\"\r\n                          required\r\n                          ngModel\r\n                          name=\"category\"\r\n                          formControlName=\"category\"\r\n                        >\r\n                          <option value=\"\" disabled selected hidden>\r\n                            Choose...\r\n                          </option>\r\n                          <option\r\n                            *ngFor=\"let item of Categories\"\r\n                            value=\"{{ item.id }}\"\r\n                          >\r\n                            {{ item.attributes.CategoryName }}\r\n                          </option>\r\n                        </select>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"itemName\">Title</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          class=\"form-control\"\r\n                          id=\"itemName\"\r\n                          name=\"itemName\"\r\n                          formControlName=\"itemName\"\r\n                          placeholder=\"Enter title\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"price\">Price</label>\r\n                        <input\r\n                          type=\"number\"\r\n                          class=\"form-control\"\r\n                          id=\"price\"\r\n                          name=\"price\"\r\n                          formControlName=\"price\"\r\n                          placeholder=\"Enter price\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"unit\">Unit</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          class=\"form-control\"\r\n                          id=\"unit\"\r\n                          name=\"unit\"\r\n                          formControlName=\"unit\"\r\n                          placeholder=\"Enter unit\"\r\n                        />\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col\">\r\n                      <div class=\"form-group\">\r\n                        <label for=\"availableQty\">Quantity</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          class=\"form-control\"\r\n                          id=\"availableQty\"\r\n                          name=\"availableQty\"\r\n                          formControlName=\"availableQty\"\r\n                          placeholder=\"Enter available quantity\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"contactNumber\">Contact Number</label>\r\n                        <input\r\n                          type=\"number\"\r\n                          class=\"form-control\"\r\n                          id=\"contactNumber\"\r\n                          name=\"contactNumber\"\r\n                          formControlName=\"contactNumber\"\r\n                          placeholder=\"Enter Contact number\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"description\">Description</label>\r\n                        <textarea\r\n                          class=\"form-control\"\r\n                          id=\"description\"\r\n                          rows=\"5\"\r\n                          name=\"description\"\r\n                          formControlName=\"description\"\r\n                          placeholder=\"Enter description\"\r\n                        ></textarea>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <button\r\n                    type=\"button\"\r\n                    class=\"btn btn-secondary\"\r\n                    (click)=\"productModal.hide()\"\r\n                  >\r\n                    Close\r\n                  </button>\r\n                  <button\r\n                    type=\"submit\"\r\n                    class=\"btn btn-primary ml-2\"\r\n                    [disabled]=\"btnLoading || !productForm.valid\"\r\n                  >\r\n                    <span\r\n                      *ngIf=\"btnLoading\"\r\n                      class=\"spinner-border spinner-border-sm\"\r\n                      role=\"status\"\r\n                      aria-hidden=\"true\"\r\n                    ></span>\r\n                    Save changes\r\n                  </button>\r\n                </form>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
@@ -130,7 +130,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Marketplace</h2>\r\n      <div>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"openModal()\">\r\n          Add New listing\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 65vh\" id=\"myGrid\" class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\" (gridReady)=\"onGridReady($event)\" animateRows=\"true\">\r\n          </ag-grid-angular>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div bsModal #productModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add Listing</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"productModal.hide()\" aria-label=\"Close\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"productForm\" (ngSubmit)=\"productSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"category\">Category</label>\r\n                <select class=\"form-control\" id=\"category\" required ngModel name=\"category\" formControlName=\"category\">\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of Categories\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.CategoryName }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"itemName\">Title</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"itemName\" name=\"itemName\" formControlName=\"itemName\"\r\n                  placeholder=\"Enter title\" />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input type=\"number\" class=\"form-control\" id=\"price\" name=\"price\" formControlName=\"price\"\r\n                  placeholder=\"Enter price\" />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"unit\">Unit</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"unit\" name=\"unit\" formControlName=\"unit\"\r\n                  placeholder=\"Enter unit\" />\r\n              </div>\r\n            </div>\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"availableQty\">Quantity</label>\r\n                <input type=\"text\" class=\"form-control\" id=\"availableQty\" name=\"availableQty\"\r\n                  formControlName=\"availableQty\" placeholder=\"Enter available quantity\" />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"contactNumber\">Contact Number</label>\r\n                <input type=\"number\" class=\"form-control\" id=\"contactNumber\" name=\"contactNumber\"\r\n                  formControlName=\"contactNumber\" placeholder=\"Enter Contact number\" />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"description\">Description</label>\r\n                <textarea class=\"form-control\" id=\"description\" rows=\"5\" name=\"description\"\r\n                  formControlName=\"description\" placeholder=\"Enter description\"></textarea>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"images\">Image</label>\r\n                <div>\r\n                  <img *ngIf=\"imageUrl\" src=\"{{ imageUrl }}\" width=\"100\" height=\"100\" style=\"object-fit: cover\" />\r\n                </div>\r\n                <input type=\"file\" id=\"images\" multiple accept=\".jpg,.jpeg,.JPEG,.png\" name=\"images\" (change)=\"onChange($event)\"\r\n                  formControlName=\"images\" placeholder=\"Choose images\" />\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"productModal.hide()\">\r\n            Close\r\n          </button>\r\n          <button type=\"submit\" class=\"btn btn-primary ml-2\" [disabled]=\"btnLoading || !productForm.valid\">\r\n            <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Marketplace</h2>\r\n      <div>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Add New listing\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #productModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add Listing</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"productModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"productForm\" (ngSubmit)=\"productSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"category\">Category</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"category\"\r\n                  required\r\n                  ngModel\r\n                  name=\"category\"\r\n                  formControlName=\"category\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of Categories\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.CategoryName }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"itemName\">Title</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"itemName\"\r\n                  name=\"itemName\"\r\n                  formControlName=\"itemName\"\r\n                  placeholder=\"Enter title\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price</label>\r\n                <input\r\n                  type=\"number\"\r\n                  class=\"form-control\"\r\n                  id=\"price\"\r\n                  name=\"price\"\r\n                  formControlName=\"price\"\r\n                  placeholder=\"Enter price\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"unit\">Unit</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"unit\"\r\n                  name=\"unit\"\r\n                  formControlName=\"unit\"\r\n                  placeholder=\"Enter unit\"\r\n                />\r\n              </div>\r\n            </div>\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"availableQty\">Quantity</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"availableQty\"\r\n                  name=\"availableQty\"\r\n                  formControlName=\"availableQty\"\r\n                  placeholder=\"Enter available quantity\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"contactNumber\">Contact Number</label>\r\n                <input\r\n                  type=\"number\"\r\n                  class=\"form-control\"\r\n                  id=\"contactNumber\"\r\n                  name=\"contactNumber\"\r\n                  formControlName=\"contactNumber\"\r\n                  placeholder=\"Enter Contact number\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"description\">Description</label>\r\n                <textarea\r\n                  class=\"form-control\"\r\n                  id=\"description\"\r\n                  rows=\"5\"\r\n                  name=\"description\"\r\n                  formControlName=\"description\"\r\n                  placeholder=\"Enter description\"\r\n                ></textarea>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"images\">Image</label>\r\n                <div>\r\n                  <img\r\n                    *ngIf=\"imageUrl\"\r\n                    src=\"{{ imageUrl }}\"\r\n                    width=\"100\"\r\n                    height=\"100\"\r\n                    style=\"object-fit: cover\"\r\n                  />\r\n                </div>\r\n                <input\r\n                  type=\"file\"\r\n                  id=\"images\"\r\n                  multiple\r\n                  accept=\".jpg,.jpeg,.JPEG,.png\"\r\n                  name=\"images\"\r\n                  (change)=\"onChange($event)\"\r\n                  formControlName=\"images\"\r\n                  placeholder=\"Choose images\"\r\n                />\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"productModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !productForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
@@ -184,7 +184,11 @@
         }, {
           path: 'all',
           // canActivate: [AuthGuard],
-          component: _marketplace_component__WEBPACK_IMPORTED_MODULE_4__["MarketplaceComponent"]
+          component: _marketplace_component__WEBPACK_IMPORTED_MODULE_4__["MarketplaceComponent"],
+          data: {
+            // roles: 'MANAGER',
+            title: 'Marketplace'
+          }
         }, {
           path: 'marketplace_details/:id',
           // canActivate: [AuthGuard],
@@ -283,6 +287,10 @@
           this.toastr = toastr;
           this.loading = true;
           this.btnLoading = false;
+          this.disableNextButton = false;
+          this.disablePrevButton = true;
+          this.pageSize = 100;
+          this.count = 1;
           this.columnDefs = [];
           this.Categories = [];
           this.productForm = this.fb.group({
@@ -316,19 +324,63 @@
           value: function getMarketplace() {
             var _this = this;
 
-            this.dataservice.getMarketplace().valueChanges.subscribe(function (result) {
-              console.log("getMarketplace", result.data.marketplaceProducts.data);
+            this.dataservice.getMarketplace(1, this.pageSize).valueChanges.subscribe(function (result) {
+              var _a, _b;
+
               _this.rowData = result.data.marketplaceProducts.data;
+              _this.meta = result.data.marketplaceProducts.meta;
+
+              if (((_b = (_a = _this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
+                _this.disablePrevButton = true;
+                _this.disableNextButton = true;
+              }
+            });
+          }
+        }, {
+          key: "loadNext",
+          value: function loadNext() {
+            var _this2 = this;
+
+            this.count++;
+            this.disablePrevButton = false;
+
+            if (this.count === this.meta.pagination.pageCount) {
+              this.disableNextButton = true;
+            }
+
+            this.dataservice.getMarketplace(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this2.meta = result.data.marketplaceProducts.meta;
+              _this2.rowData = result.data.marketplaceProducts.data;
+            });
+          }
+        }, {
+          key: "loadPrev",
+          value: function loadPrev() {
+            var _this3 = this;
+
+            this.count--;
+
+            if (this.count < this.meta.pagination.pageCount) {
+              this.disableNextButton = false;
+            }
+
+            if (this.count === 1) {
+              this.disablePrevButton = true;
+            }
+
+            this.dataservice.getMarketplace(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this3.meta = result.data.marketplaceProducts.meta;
+              _this3.rowData = result.data.marketplaceProducts.data;
             });
           }
         }, {
           key: "getCategories",
           value: function getCategories() {
-            var _this2 = this;
+            var _this4 = this;
 
             this.dataservice.getMarketplaceCategories().valueChanges.subscribe(function (result) {
               console.log("getCategories", result.data.marketplaceCategories.data);
-              _this2.Categories = result.data.marketplaceCategories.data;
+              _this4.Categories = result.data.marketplaceCategories.data;
             });
           }
         }, {
@@ -373,7 +425,7 @@
         }, {
           key: "productSubmit",
           value: function productSubmit() {
-            var _this3 = this;
+            var _this5 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -382,36 +434,36 @@
               if (response.status == 200) {
                 console.log(response);
 
-                _this3.dataservice.createMarketplaceProduct(_this3.productForm.value, response.body.map(function (a) {
+                _this5.dataservice.createMarketplaceProduct(_this5.productForm.value, response.body.map(function (a) {
                   return a.id;
                 })).subscribe(function (result) {
                   resp = result.data;
                   console.log("response", result);
 
                   if (result.data.createMarketplaceProduct) {
-                    _this3.toastr.success("Success!");
+                    _this5.toastr.success("Success!");
 
-                    _this3.getMarketplace();
+                    _this5.getMarketplace();
 
-                    _this3.file = null;
+                    _this5.file = null;
 
-                    _this3.productForm.reset();
+                    _this5.productForm.reset();
 
-                    _this3.productModal.hide();
+                    _this5.productModal.hide();
 
-                    _this3.gridApi.deselectAll();
+                    _this5.gridApi.deselectAll();
 
-                    _this3.btnLoading = false;
+                    _this5.btnLoading = false;
                   } else {
-                    _this3.toastr.error("Failed. Please check the fields!");
+                    _this5.toastr.error("Failed. Please check the fields!");
 
-                    _this3.btnLoading = false;
+                    _this5.btnLoading = false;
                   }
                 });
               } else {
-                _this3.toastr.error("Image failed to upload!");
+                _this5.toastr.error("Image failed to upload!");
 
-                _this3.btnLoading = false;
+                _this5.btnLoading = false;
               }
             });
           }
@@ -550,10 +602,10 @@
         _createClass(MarketplaceDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this4 = this;
+            var _this6 = this;
 
             this.activatedRouter.params.subscribe(function (params) {
-              _this4.id = params["id"];
+              _this6.id = params["id"];
             });
             this.getSingleMarketplaceProduct();
             this.getCategories();
@@ -561,36 +613,36 @@
         }, {
           key: "getSingleMarketplaceProduct",
           value: function getSingleMarketplaceProduct() {
-            var _this5 = this;
+            var _this7 = this;
 
             this.dataservice.getSingleMarketplaceProduct(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 
               console.log("getSingleMarketplaceProduct", result.data.marketplaceProduct.data);
-              _this5.details = result.data.marketplaceProduct.data;
-              _this5.productForm = _this5.fb.group({
-                itemName: [(_a = _this5.details.attributes) === null || _a === void 0 ? void 0 : _a.ItemName, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+              _this7.details = result.data.marketplaceProduct.data;
+              _this7.productForm = _this7.fb.group({
+                itemName: [(_a = _this7.details.attributes) === null || _a === void 0 ? void 0 : _a.ItemName, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 // images: [this.details.attributes?.Images?.data, Validators.required],
                 // userId: [this.details?.attributes?.seller?.data?.attributes?.Name],
-                contactNumber: [(_b = _this5.details.attributes) === null || _b === void 0 ? void 0 : _b.contactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                price: [(_c = _this5.details.attributes) === null || _c === void 0 ? void 0 : _c.Price, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                availableQty: [(_d = _this5.details.attributes) === null || _d === void 0 ? void 0 : _d.AvailableQty, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                unit: [(_e = _this5.details.attributes) === null || _e === void 0 ? void 0 : _e.Unit, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                category: [(_h = (_g = (_f = _this5.details.attributes) === null || _f === void 0 ? void 0 : _f.marketplace_category) === null || _g === void 0 ? void 0 : _g.data) === null || _h === void 0 ? void 0 : _h.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                description: [(_j = _this5.details.attributes) === null || _j === void 0 ? void 0 : _j.description, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+                contactNumber: [(_b = _this7.details.attributes) === null || _b === void 0 ? void 0 : _b.contactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                price: [(_c = _this7.details.attributes) === null || _c === void 0 ? void 0 : _c.Price, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                availableQty: [(_d = _this7.details.attributes) === null || _d === void 0 ? void 0 : _d.AvailableQty, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                unit: [(_e = _this7.details.attributes) === null || _e === void 0 ? void 0 : _e.Unit, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                category: [(_h = (_g = (_f = _this7.details.attributes) === null || _f === void 0 ? void 0 : _f.marketplace_category) === null || _g === void 0 ? void 0 : _g.data) === null || _h === void 0 ? void 0 : _h.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                description: [(_j = _this7.details.attributes) === null || _j === void 0 ? void 0 : _j.description, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
               });
-              console.log(_this5.productForm);
-              _this5.loading = false;
+              console.log(_this7.productForm);
+              _this7.loading = false;
             });
           }
         }, {
           key: "getCategories",
           value: function getCategories() {
-            var _this6 = this;
+            var _this8 = this;
 
             this.dataservice.getMarketplaceCategories().valueChanges.subscribe(function (result) {
               console.log("getCategories", result.data.marketplaceCategories.data);
-              _this6.Categories = result.data.marketplaceCategories.data;
+              _this8.Categories = result.data.marketplaceCategories.data;
             });
           }
         }, {
@@ -620,7 +672,7 @@
         }, {
           key: "productSubmit",
           value: function productSubmit() {
-            var _this7 = this;
+            var _this9 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -630,24 +682,24 @@
               console.log("response", result);
 
               if (result.data.updateMarketplaceProduct) {
-                _this7.toastr.success("Activity updated successfully!");
+                _this9.toastr.success("Activity updated successfully!");
 
-                _this7.editModal.hide();
+                _this9.editModal.hide();
 
-                _this7.btnLoading = false;
+                _this9.btnLoading = false;
 
-                _this7.getSingleMarketplaceProduct();
+                _this9.getSingleMarketplaceProduct();
               } else {
-                _this7.toastr.error("Failed. Please check the fields!");
+                _this9.toastr.error("Failed. Please check the fields!");
 
-                _this7.btnLoading = false;
+                _this9.btnLoading = false;
               }
             });
           }
         }, {
           key: "uploadImages",
           value: function uploadImages() {
-            var _this8 = this;
+            var _this10 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -655,47 +707,47 @@
               if (response.status == 200) {
                 console.log(response);
 
-                _this8.dataservice.updateMarketplaceProductImg(_this8.id, response.body.map(function (a) {
+                _this10.dataservice.updateMarketplaceProductImg(_this10.id, response.body.map(function (a) {
                   return a.id;
                 })).subscribe(function (result) {
                   resp = result.data;
                   console.log("response", result);
 
                   if (result.data.updateMarketplaceProduct) {
-                    _this8.toastr.success("Activity updated successfully!");
+                    _this10.toastr.success("Activity updated successfully!");
 
-                    _this8.btnLoading = false;
+                    _this10.btnLoading = false;
 
-                    _this8.getSingleMarketplaceProduct();
+                    _this10.getSingleMarketplaceProduct();
                   } else {
-                    _this8.toastr.error("Failed. Please check the fields!");
+                    _this10.toastr.error("Failed. Please check the fields!");
 
-                    _this8.btnLoading = false;
+                    _this10.btnLoading = false;
                   }
                 });
               } else {
-                _this8.toastr.error("Image failed to upload!");
+                _this10.toastr.error("Image failed to upload!");
 
-                _this8.btnLoading = false;
+                _this10.btnLoading = false;
               }
             });
           }
         }, {
           key: "DeleteMarketplaceProduct",
           value: function DeleteMarketplaceProduct() {
-            var _this9 = this;
+            var _this11 = this;
 
             this.dataservice.DeleteMarketplaceProduct(this.id).subscribe(function (result) {
               console.log("response", result);
 
               if (result.data.deleteMarketplaceProduct) {
-                _this9.toastr.success("Success!");
+                _this11.toastr.success("Success!");
 
-                _this9.deleteModal.hide();
+                _this11.deleteModal.hide();
 
-                _this9.router.navigate(["/marketplace/all"]);
+                _this11.router.navigate(["/marketplace/all"]);
               } else {
-                _this9.toastr.error("Failed!");
+                _this11.toastr.error("Failed!");
               }
             });
           }

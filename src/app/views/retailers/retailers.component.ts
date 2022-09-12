@@ -28,8 +28,11 @@ export class RetailersComponent {
 
   loading = true;
   btnLoading = false;
-  title = "Verification";
-  orders: any = {};
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 100;
+  count = 1;
   columnDefs = [];
   commentForm = this.fb.group({
     UserType: ["Retailer"],
@@ -68,7 +71,6 @@ export class RetailersComponent {
     this.getLGAs();
     this.getStates();
     this.getVillages();
-    this.getRetailers();
   }
   getStates() {
     this.dataservice.getStates().valueChanges.subscribe((result: any) => {
@@ -95,10 +97,42 @@ export class RetailersComponent {
     });
   }
   getRetailers() {
-    this.dataservice.getRetailers().valueChanges.subscribe((result: any) => {
-      console.log("getRetailers", result.data.usersPermissionsUsers.data);
+    this.dataservice.getRetailers(1,this.pageSize).valueChanges.subscribe((result: any) => {
       this.rowData = result.data.usersPermissionsUsers.data;
+      this.meta = result.data.usersPermissionsUsers.meta;
+      if (this.meta?.pagination?.pageCount <= 1) {
+        this.disablePrevButton = true;
+        this.disableNextButton = true;
+      }
     });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getRetailers(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.usersPermissionsUsers.meta;
+        this.rowData = result.data.usersPermissionsUsers.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getRetailers(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.usersPermissionsUsers.meta;
+        this.rowData = result.data.usersPermissionsUsers.data;
+      });
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);

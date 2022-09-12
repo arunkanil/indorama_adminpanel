@@ -27,6 +27,11 @@ export class IndoramaUpdatesComponent {
   loading = true;
   btnLoading = false;
   disableButton = true;
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 100;
+  count = 1;
   orders: any = {};
   columnDefs = [];
   imageUrl;
@@ -48,13 +53,45 @@ export class IndoramaUpdatesComponent {
   ngOnInit(): void {
     this.loading = true;
     console.log(this.router);
-    this.getUpdates();
+    this.getUpdates(undefined, 1, this.pageSize);
   }
-  getUpdates(id?) {
+  getUpdates(id?, page?, pageSize?) {
     this.dataservice
-      .getIndoramaUpdates(id)
+      .getIndoramaUpdates(id, page, pageSize)
       .valueChanges.subscribe((result: any) => {
-        console.log("getIndoramaUpdates", result.data.newsAndUpdates.data);
+        this.rowData = result.data.newsAndUpdates.data;
+        this.meta = result.data.newsAndUpdates.meta;
+        if (this.meta?.pagination?.pageCount <= 1) {
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+      });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getIndoramaUpdates(undefined, this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.newsAndUpdates.meta;
+        this.rowData = result.data.newsAndUpdates.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getIndoramaUpdates(undefined, this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.newsAndUpdates.meta;
         this.rowData = result.data.newsAndUpdates.data;
       });
   }
@@ -76,29 +113,25 @@ export class IndoramaUpdatesComponent {
   }
   // On file Select
   onChange(event: any) {
-    this.file = event.target.files[0];
-    console.log(event.target.files[0]);
+    this.file = [];
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.file.push(event.target.files[i]);
+    }
   }
   openModal(data: any) {
     this.imageUrl = null;
     this.cropPriceModal.show();
     if (data) {
       this.newsForm = this.fb.group({
-        Title: [
-          this.selectedRows[0].attributes.Title,
-          Validators.required,
-        ],
-        Body: [
-          this.selectedRows[0].attributes.Body,
-          Validators.required,
-        ],
+        Title: [this.selectedRows[0].attributes.Title, Validators.required],
+        Body: [this.selectedRows[0].attributes.Body, Validators.required],
         Image: [
           this.selectedRows[0].attributes.Images?.data[0]?.id,
           Validators.required,
         ],
       });
-      this.imageUrl = this.selectedRows[0].attributes.Images?.data[0]?.attributes
-        ?.url
+      this.imageUrl = this.selectedRows[0].attributes.Images?.data[0]
+        ?.attributes?.url
         ? "https://indoramaapp.untanglestrategy.com" +
           this.selectedRows[0].attributes.Images?.data[0]?.attributes?.url
         : null;
@@ -112,9 +145,9 @@ export class IndoramaUpdatesComponent {
     }
   }
   deleteRecord() {
-    let resp = {}
+    let resp = {};
     this.dataservice
-      .UpdateIndoramaUpdates({isDelete: true}, this.selectedRows[0].id, null)
+      .UpdateIndoramaUpdates({ isDelete: true }, this.selectedRows[0].id, null)
       .subscribe((result: any) => {
         resp = result.data;
         console.log("response", result);

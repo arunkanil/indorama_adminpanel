@@ -17,7 +17,7 @@ const routes: Routes = [
         // canActivate: [AuthGuard],
         component: SMSCampaignsComponent,
         data: {
-          title: 'SMS'
+          title: 'SMS Campaign'
         }
       },
     ]

@@ -12,8 +12,19 @@ import { ToastrService } from "ngx-toastr";
 import { idText } from "typescript";
 
 const FarmDemosQuery = gql`
-  query {
-    farmDemos(pagination: { limit: 100 }, sort: "createdAt:desc") {
+  query ($page: Int, $pageSize: Int) {
+    farmDemos(
+      pagination: { page: $page, pageSize: $pageSize }
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -854,12 +865,20 @@ const UpdateMarket = gql`
   }
 `;
 const CropPricesQuery = gql`
-  query {
+  query ($page: Int, $pageSize: Int) {
     cropPrices(
       publicationState: PREVIEW
-      pagination: { limit: 100 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1036,12 +1055,20 @@ const CropPriceMutation = gql`
   }
 `;
 const RetailerQuery = gql`
-  query {
+  query ($page: Int, $pageSize: Int) {
     usersPermissionsUsers(
-      pagination: { limit: 100 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { UserType: { eq: "Retailer" } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1107,8 +1134,19 @@ const RetailerQuery = gql`
   }
 `;
 const SoilTestQuery = gql`
-  query {
-    soilTests {
+  query ($page: Int, $pageSize: Int) {
+    soilTests(
+      pagination: { page: $page, pageSize: $pageSize }
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1368,12 +1406,20 @@ const UpdateSoilTest = gql`
   }
 `;
 const UsersQuery = gql`
-  query ($UserType: String) {
+  query ($UserType: String, $page: Int, $pageSize: Int) {
     usersPermissionsUsers(
-      pagination: { limit: 1000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { UserType: { eq: $UserType } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -2207,16 +2253,30 @@ const queryUsersLarge = gql`
   }
 `;
 const getIndoramaUpdates = gql`
-  query ($isDelete: Boolean, $isActive: Boolean, $id: ID) {
+  query (
+    $isDelete: Boolean
+    $isActive: Boolean
+    $id: ID
+    $page: Int
+    $pageSize: Int
+  ) {
     newsAndUpdates(
       sort: "createdAt:desc"
-      pagination: { limit: 100 }
+      pagination: { page: $page, pageSize: $pageSize }
       filters: {
         isActive: { eq: $isActive }
         isDelete: { eq: $isDelete }
         id: { eq: $id }
       }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -2315,6 +2375,14 @@ const GetMarketplace = gql`
       pagination: { page: $pageNumber, pageSize: $pageSize }
       sort: "createdAt:desc"
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -2699,9 +2767,17 @@ const GetMarketplaceCategories = gql`
 const GetActivities = gql`
   query getActivities($page: Int, $pageSize: Int) {
     activities(
-      sort: "createdAt:asc"
+      sort: "createdAt:desc"
       pagination: { page: $page, pageSize: $pageSize }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -3177,10 +3253,10 @@ const getChatMessages = gql`
   }
 `;
 const getSurveys = gql`
-  query ($limit: Int, $start: Int) {
+  query ($page: Int, $pageSize: Int) {
     surveyForms(
       sort: "updatedAt:desc"
-      pagination: { limit: $limit, start: $start }
+      pagination: { page: $page, pageSize: $pageSize }
     ) {
       meta {
         pagination {
@@ -3457,7 +3533,7 @@ export class DataService {
         limit: limit,
         start: start,
         key: key ? key : undefined,
-        isAskIndorama : isAskIndorama ? isAskIndorama : undefined
+        isAskIndorama: isAskIndorama ? isAskIndorama : undefined,
       },
     });
   }
@@ -3512,10 +3588,14 @@ export class DataService {
       fetchPolicy: "no-cache",
     });
   }
-  getFarmDemos() {
+  getFarmDemos(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: FarmDemosQuery,
       fetchPolicy: "no-cache",
+      variables: {
+        page: page,
+        pageSize: pageSize,
+      },
     });
   }
   getSingleFarmDemo(id) {
@@ -3575,16 +3655,24 @@ export class DataService {
       },
     });
   }
-  getCropPrices() {
+  getCropPrices(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: CropPricesQuery,
       fetchPolicy: "no-cache",
+      variables: {
+        page: page,
+        pageSize: pageSize,
+      },
     });
   }
-  getRetailers() {
+  getRetailers(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: RetailerQuery,
       fetchPolicy: "no-cache",
+      variables: {
+        page: page,
+        pageSize: pageSize,
+      },
     });
   }
   getRetailerCategories() {
@@ -3593,12 +3681,14 @@ export class DataService {
       fetchPolicy: "no-cache",
     });
   }
-  getUsers(UserType?) {
+  getUsers(page?, pageSize?, UserType?) {
     return this.apollo.watchQuery({
       query: UsersQuery,
       fetchPolicy: "no-cache",
       variables: {
         UserType: UserType,
+        page: page,
+        pageSize: pageSize,
       },
     });
   }
@@ -3615,10 +3705,14 @@ export class DataService {
       },
     });
   }
-  getsoilTests() {
+  getsoilTests(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: SoilTestQuery,
       fetchPolicy: "no-cache",
+      variables: {
+        page: page,
+        pageSize: pageSize,
+      },
     });
   }
   getsingleSoilTests(id) {
@@ -3834,13 +3928,15 @@ export class DataService {
       errorPolicy: "all",
     });
   }
-  getIndoramaUpdates(id?) {
+  getIndoramaUpdates(id?, page?, pageSize?) {
     return this.apollo.watchQuery({
       query: getIndoramaUpdates,
       variables: {
         id: id,
         isActive: true,
         isDelete: false,
+        page: page,
+        pageSize: pageSize,
       },
       errorPolicy: "all",
     });

@@ -8426,6 +8426,10 @@
           });
           this.loading = false;
           this.btnLoading = false;
+          this.disableNextButton = false;
+          this.disablePrevButton = true;
+          this.pageSize = 100;
+          this.count = 1;
           this.columnDefs = [];
           this.rowData = [];
           this.Villages = [];
@@ -8450,9 +8454,18 @@
             var _this21 = this;
 
             this.loading = true;
-            this.dataservice.getFarmDemos().valueChanges.subscribe(function (result) {
+            this.dataservice.getFarmDemos(1, this.pageSize).valueChanges.subscribe(function (result) {
+              var _a, _b;
+
               console.log("getFarmDemos", result.data.farmDemos.data);
               _this21.rowData = result.data.farmDemos.data;
+              _this21.meta = result.data.farmDemos.meta;
+
+              if (((_b = (_a = _this21.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
+                _this21.disablePrevButton = true;
+                _this21.disableNextButton = true;
+              }
+
               _this21.loading = false;
             });
             this.dataservice.getCrops().valueChanges.subscribe(function (result) {
@@ -8473,13 +8486,50 @@
             });
           }
         }, {
+          key: "loadNext",
+          value: function loadNext() {
+            var _this22 = this;
+
+            this.count++;
+            this.disablePrevButton = false;
+
+            if (this.count === this.meta.pagination.pageCount) {
+              this.disableNextButton = true;
+            }
+
+            this.dataservice.getFarmDemos(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this22.meta = result.data.farmDemos.meta;
+              _this22.rowData = result.data.farmDemos.data;
+            });
+          }
+        }, {
+          key: "loadPrev",
+          value: function loadPrev() {
+            var _this23 = this;
+
+            this.count--;
+
+            if (this.count < this.meta.pagination.pageCount) {
+              this.disableNextButton = false;
+            }
+
+            if (this.count === 1) {
+              this.disablePrevButton = true;
+            }
+
+            this.dataservice.getFarmDemos(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this23.meta = result.data.farmDemos.meta;
+              _this23.rowData = result.data.farmDemos.data;
+            });
+          }
+        }, {
           key: "getLGAs",
           value: function getLGAs(id) {
-            var _this22 = this;
+            var _this24 = this;
 
             this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
-              _this22.LGA = result.data.lgas.data;
+              _this24.LGA = result.data.lgas.data;
             });
           }
         }, {
@@ -8507,7 +8557,7 @@
         }, {
           key: "FormSubmit",
           value: function FormSubmit() {
-            var _this23 = this;
+            var _this25 = this;
 
             var resp = {};
             console.log(this.addForm.value);
@@ -8516,13 +8566,13 @@
               console.log("response", result);
 
               if (result.data.createFarmDemo) {
-                _this23.toastr.success("Farm demo added successfully!");
+                _this25.toastr.success("Farm demo added successfully!");
 
-                _this23.getLists();
+                _this25.getLists();
 
-                _this23.myModal.hide();
+                _this25.myModal.hide();
               } else {
-                _this23.toastr.error("Failed. Please check the fields!");
+                _this25.toastr.error("Failed. Please check the fields!");
               }
             });
           }
@@ -9353,15 +9403,15 @@
         }, {
           key: "defaultFilterFunction",
           value: function defaultFilterFunction() {
-            var _this24 = this;
+            var _this26 = this;
 
             return this.data.filter(function (item) {
               if (typeof item === 'string') {
                 // string logic, check equality of strings
-                return item.toLowerCase().indexOf(_this24.query.toLowerCase()) > -1;
+                return item.toLowerCase().indexOf(_this26.query.toLowerCase()) > -1;
               } else if (typeof item === 'object' && item instanceof Object) {
                 // object logic, check property equality
-                return item[_this24.searchKeyword] ? item[_this24.searchKeyword].toLowerCase().indexOf(_this24.query.toLowerCase()) > -1 : "";
+                return item[_this26.searchKeyword] ? item[_this26.searchKeyword].toLowerCase().indexOf(_this26.query.toLowerCase()) > -1 : "";
               }
             });
           }
@@ -9383,7 +9433,7 @@
         }, {
           key: "select",
           value: function select(item) {
-            var _this25 = this;
+            var _this27 = this;
 
             this.query = !this.isTypeString(item) ? item[this.searchKeyword] : item;
             this.isOpen = true;
@@ -9400,7 +9450,7 @@
                 if (!(existingHistory instanceof Array)) existingHistory = []; // check if selected item exists in existingHistory
 
                 if (!existingHistory.some(function (existingItem) {
-                  return !_this25.isTypeString(existingItem) ? existingItem[_this25.searchKeyword] == item[_this25.searchKeyword] : existingItem == item;
+                  return !_this27.isTypeString(existingItem) ? existingItem[_this27.searchKeyword] == item[_this27.searchKeyword] : existingItem == item;
                 })) {
                   existingHistory.unshift(item);
                   localStorage.setItem("".concat(this.historyIdentifier), JSON.stringify(existingHistory)); // check if items don't exceed max allowed number
@@ -9416,7 +9466,7 @@
                     var copiedExistingHistory = existingHistory.slice(); // copy original existingHistory array
 
                     var selectedIndex = copiedExistingHistory.map(function (el) {
-                      return el[_this25.searchKeyword];
+                      return el[_this27.searchKeyword];
                     }).indexOf(item[this.searchKeyword]);
                     copiedExistingHistory.splice(selectedIndex, 1);
                     copiedExistingHistory.splice(0, 0, item);
@@ -9485,10 +9535,10 @@
         }, {
           key: "handleScroll",
           value: function handleScroll() {
-            var _this26 = this;
+            var _this28 = this;
 
             this.renderer.listen(this.filteredListElement.nativeElement, 'scroll', function () {
-              _this26.scrollToEnd();
+              _this28.scrollToEnd();
             });
           }
           /**
@@ -9690,13 +9740,13 @@
         }, {
           key: "listenEventStream",
           value: function listenEventStream() {
-            var _this27 = this;
+            var _this29 = this;
 
             // key up event
             this.inputKeyUp$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (e) {
               return !isArrowUpDown(e.keyCode) && !isEnter(e.keyCode) && !isESC(e.keyCode) && !isTab(e.keyCode);
             }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(this.debounceTime)).subscribe(function (e) {
-              _this27.onKeyUp(e);
+              _this29.onKeyUp(e);
             }); // cursor up & down
 
             this.inputKeyDown$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (e) {
@@ -9704,7 +9754,7 @@
             })).subscribe(function (e) {
               e.preventDefault();
 
-              _this27.onFocusItem(e);
+              _this29.onFocusItem(e);
             }); // enter keyup
 
             this.inputKeyUp$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (e) {
@@ -9715,25 +9765,25 @@
             this.inputKeyDown$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (e) {
               return isEnter(e.keyCode);
             })).subscribe(function (e) {
-              _this27.onHandleEnter();
+              _this29.onHandleEnter();
             }); // ESC
 
             this.inputKeyUp$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (e) {
               return isESC(e.keyCode);
             }, Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["debounceTime"])(100))).subscribe(function (e) {
-              _this27.onEsc();
+              _this29.onEsc();
             }); // TAB
 
             this.inputKeyDown$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (e) {
               return isTab(e.keyCode);
             })).subscribe(function (e) {
-              _this27.onTab();
+              _this29.onTab();
             }); // delete
 
             this.inputKeyDown$.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["filter"])(function (e) {
               return isBackspace(e.keyCode) || isDelete(e.keyCode);
             })).subscribe(function (e) {
-              _this27.onDelete();
+              _this29.onDelete();
             });
           }
           /**
@@ -9925,12 +9975,12 @@
         }, {
           key: "saveHistory",
           value: function saveHistory(selected) {
-            var _this28 = this;
+            var _this30 = this;
 
             if (this.historyIdentifier) {
               // check if selected item exists in historyList
               if (!this.historyList.some(function (item) {
-                return !_this28.isTypeString(item) ? item[_this28.searchKeyword] == selected[_this28.searchKeyword] : item == selected;
+                return !_this30.isTypeString(item) ? item[_this30.searchKeyword] == selected[_this30.searchKeyword] : item == selected;
               })) {
                 this.saveHistoryToLocalStorage([selected].concat(_toConsumableArray(this.historyList))); // check if items don't exceed max allowed number
 
@@ -9945,7 +9995,7 @@
                   var copiedHistoryList = this.historyList.slice(); // copy original historyList array
 
                   var selectedIndex = copiedHistoryList.map(function (item) {
-                    return item[_this28.searchKeyword];
+                    return item[_this30.searchKeyword];
                   }).indexOf(selected[this.searchKeyword]);
                   copiedHistoryList.splice(selectedIndex, 1);
                   copiedHistoryList.splice(0, 0, selected);
@@ -10555,7 +10605,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div *ngIf=\"loading\" class=\"text-center\">\r\n    <div class=\"spinner-border\" style=\"width: 3rem; height: 3rem\" role=\"status\">\r\n      <span class=\"visually-hidden\"></span>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"!loading\">\r\n    <div class=\"card\">\r\n      <div\r\n        class=\"card-header\"\r\n        style=\"display: flex; justify-content: space-between\"\r\n      >\r\n        <h2>Farm Demo</h2>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"myModal.show()\"\r\n        >\r\n          New\r\n        </button>\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12\">\r\n            <ag-grid-angular\r\n              #agGrid\r\n              style=\"width: 100%; height: 500px\"\r\n              id=\"myGrid\"\r\n              class=\"ag-theme-alpine\"\r\n              [columnDefs]=\"columnDefs\"\r\n              [rowData]=\"rowData\"\r\n              [rowSelection]=\"rowSelection\"\r\n              (gridReady)=\"onGridReady($event)\"\r\n              (selectionChanged)=\"onSelectionChanged($event)\"\r\n              animateRows=\"true\"\r\n            >\r\n            </ag-grid-angular>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div\r\n      bsModal\r\n      #myModal=\"bs-modal\"\r\n      class=\"modal fade\"\r\n      tabindex=\"-1\"\r\n      role=\"dialog\"\r\n      aria-labelledby=\"myModalLabel\"\r\n      aria-hidden=\"true\"\r\n    >\r\n      <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n          <div class=\"modal-header\">\r\n            <h4 class=\"modal-title\">Add New Farm demo</h4>\r\n            <button\r\n              type=\"button\"\r\n              class=\"close\"\r\n              (click)=\"myModal.hide()\"\r\n              aria-label=\"Close\"\r\n            >\r\n              <span aria-hidden=\"true\">&times;</span>\r\n            </button>\r\n          </div>\r\n          <div class=\"modal-body\">\r\n            <form [formGroup]=\"addForm\" (ngSubmit)=\"FormSubmit()\">\r\n              <div class=\"row\">\r\n                <div class=\"col\">\r\n                  <div class=\"form-group\">\r\n                    <label for=\"Farmer\">Farmer Name</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"Farmer\"\r\n                      name=\"Farmer\"\r\n                      formControlName=\"Farmer\"\r\n                      placeholder=\"Enter farmer name\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"Crops\">Crops</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"Crops\"\r\n                      required\r\n                      ngModel\r\n                      name=\"Crops\"\r\n                      formControlName=\"Crops\"\r\n                      (change)=\"filterLGA($event)\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\r\n                        {{ item.attributes.Name }}\r\n                      </option>\r\n                    </select>\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"state\">State</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"state\"\r\n                      required\r\n                      ngModel\r\n                      name=\"state\"\r\n                      formControlName=\"state\"\r\n                      (change)=\"filterLGA($event)\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                        {{ item.attributes.Name }}\r\n                      </option>\r\n                    </select>\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"lga\">LGA</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"lga\"\r\n                      required\r\n                      ngModel\r\n                      name=\"lga\"\r\n                      formControlName=\"lga\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\r\n                        {{ item.attributes.Name }}\r\n                      </option>\r\n                    </select>\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"Status\">Status</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"Status\"\r\n                      required\r\n                      ngModel\r\n                      name=\"Status\"\r\n                      formControlName=\"Status\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option value=\"COMPLETED\">COMPLETED</option>\r\n                      <option value=\"ONGOING\">ONGOING</option>\r\n                      <option value=\"CANCELLED\">CANCELLED</option>\r\n                    </select>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col\">\r\n                  <div class=\"form-group\">\r\n                    <label for=\"Season\">Season</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"Season\"\r\n                      name=\"Season\"\r\n                      formControlName=\"Season\"\r\n                      placeholder=\"Enter Season name\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"AreaOfField\">Area of field</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"AreaOfField\"\r\n                      name=\"AreaOfField\"\r\n                      formControlName=\"AreaOfField\"\r\n                      placeholder=\"Enter area\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"FarmLocationLatitude\"\r\n                      >Farm Location Latitude</label\r\n                    >\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"FarmLocationLatitude\"\r\n                      name=\"FarmLocationLatitude\"\r\n                      formControlName=\"FarmLocationLatitude\"\r\n                      placeholder=\"Enter Farm Location Latitude\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"FarmLocationLongitude\"\r\n                      >FarmLocationLongitude</label\r\n                    >\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"FarmLocationLongitude\"\r\n                      name=\"FarmLocationLongitude\"\r\n                      formControlName=\"FarmLocationLongitude\"\r\n                      placeholder=\"Enter Farm Location Longitude\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"isPesticidesUsed\">Pesticides used?</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"isPesticidesUsed\"\r\n                      required\r\n                      ngModel\r\n                      name=\"isPesticidesUsed\"\r\n                      formControlName=\"isPesticidesUsed\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option value=\"true\">Yes</option>\r\n                      <option value=\"false\">No</option>\r\n                    </select>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <button\r\n                type=\"button\"\r\n                class=\"btn btn-secondary\"\r\n                (click)=\"myModal.hide()\"\r\n              >\r\n                Close\r\n              </button>\r\n              <button\r\n                type=\"submit\"\r\n                class=\"btn btn-primary ml-2\"\r\n                [disabled]=\"btnLoading || !addForm.valid\"\r\n              >\r\n                <span\r\n                  *ngIf=\"btnLoading\"\r\n                  class=\"spinner-border spinner-border-sm\"\r\n                  role=\"status\"\r\n                  aria-hidden=\"true\"\r\n                ></span>\r\n                Save changes\r\n              </button>\r\n            </form>\r\n          </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n      </div>\r\n      <!-- /.modal-dialog -->\r\n    </div>\r\n  </div>\r\n  <!-- /.modal -->\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div *ngIf=\"loading\" class=\"text-center\">\r\n    <div class=\"spinner-border\" style=\"width: 3rem; height: 3rem\" role=\"status\">\r\n      <span class=\"visually-hidden\"></span>\r\n    </div>\r\n  </div>\r\n  <div *ngIf=\"!loading\">\r\n    <div class=\"card\">\r\n      <div\r\n        class=\"card-header\"\r\n        style=\"display: flex; justify-content: space-between\"\r\n      >\r\n        <h2>Farm Demo</h2>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"myModal.show()\"\r\n        >\r\n          New\r\n        </button>\r\n      </div>\r\n      <div class=\"card-body\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12\">\r\n            <ag-grid-angular\r\n              #agGrid\r\n              style=\"width: 100%; height: 500px\"\r\n              id=\"myGrid\"\r\n              class=\"ag-theme-alpine\"\r\n              [columnDefs]=\"columnDefs\"\r\n              [rowData]=\"rowData\"\r\n              [rowSelection]=\"rowSelection\"\r\n              (gridReady)=\"onGridReady($event)\"\r\n              (selectionChanged)=\"onSelectionChanged($event)\"\r\n              animateRows=\"true\"\r\n            >\r\n            </ag-grid-angular>\r\n            <button\r\n              type=\"button\"\r\n              [disabled]=\"disableNextButton\"\r\n              class=\"btn btn-primary float-right m-2\"\r\n              (click)=\"loadNext()\"\r\n            >\r\n              Next\r\n            </button>\r\n            <span class=\"float-right mt-3\"\r\n              >Page {{ meta?.pagination?.page }} of\r\n              {{ meta?.pagination?.pageCount }}</span\r\n            >\r\n            <button\r\n              type=\"button\"\r\n              [disabled]=\"disablePrevButton\"\r\n              class=\"btn btn-primary float-right m-2\"\r\n              (click)=\"loadPrev()\"\r\n            >\r\n              Prev\r\n            </button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div\r\n      bsModal\r\n      #myModal=\"bs-modal\"\r\n      class=\"modal fade\"\r\n      tabindex=\"-1\"\r\n      role=\"dialog\"\r\n      aria-labelledby=\"myModalLabel\"\r\n      aria-hidden=\"true\"\r\n    >\r\n      <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n        <div class=\"modal-content\">\r\n          <div class=\"modal-header\">\r\n            <h4 class=\"modal-title\">Add New Farm demo</h4>\r\n            <button\r\n              type=\"button\"\r\n              class=\"close\"\r\n              (click)=\"myModal.hide()\"\r\n              aria-label=\"Close\"\r\n            >\r\n              <span aria-hidden=\"true\">&times;</span>\r\n            </button>\r\n          </div>\r\n          <div class=\"modal-body\">\r\n            <form [formGroup]=\"addForm\" (ngSubmit)=\"FormSubmit()\">\r\n              <div class=\"row\">\r\n                <div class=\"col\">\r\n                  <div class=\"form-group\">\r\n                    <label for=\"Farmer\">Farmer Name</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"Farmer\"\r\n                      name=\"Farmer\"\r\n                      formControlName=\"Farmer\"\r\n                      placeholder=\"Enter farmer name\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"Crops\">Crops</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"Crops\"\r\n                      required\r\n                      ngModel\r\n                      name=\"Crops\"\r\n                      formControlName=\"Crops\"\r\n                      (change)=\"filterLGA($event)\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\r\n                        {{ item.attributes.Name }}\r\n                      </option>\r\n                    </select>\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"state\">State</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"state\"\r\n                      required\r\n                      ngModel\r\n                      name=\"state\"\r\n                      formControlName=\"state\"\r\n                      (change)=\"filterLGA($event)\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                        {{ item.attributes.Name }}\r\n                      </option>\r\n                    </select>\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"lga\">LGA</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"lga\"\r\n                      required\r\n                      ngModel\r\n                      name=\"lga\"\r\n                      formControlName=\"lga\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\r\n                        {{ item.attributes.Name }}\r\n                      </option>\r\n                    </select>\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"Status\">Status</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"Status\"\r\n                      required\r\n                      ngModel\r\n                      name=\"Status\"\r\n                      formControlName=\"Status\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option value=\"COMPLETED\">COMPLETED</option>\r\n                      <option value=\"ONGOING\">ONGOING</option>\r\n                      <option value=\"CANCELLED\">CANCELLED</option>\r\n                    </select>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col\">\r\n                  <div class=\"form-group\">\r\n                    <label for=\"Season\">Season</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"Season\"\r\n                      name=\"Season\"\r\n                      formControlName=\"Season\"\r\n                      placeholder=\"Enter Season name\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"AreaOfField\">Area of field</label>\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"AreaOfField\"\r\n                      name=\"AreaOfField\"\r\n                      formControlName=\"AreaOfField\"\r\n                      placeholder=\"Enter area\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"FarmLocationLatitude\"\r\n                      >Farm Location Latitude</label\r\n                    >\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"FarmLocationLatitude\"\r\n                      name=\"FarmLocationLatitude\"\r\n                      formControlName=\"FarmLocationLatitude\"\r\n                      placeholder=\"Enter Farm Location Latitude\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"FarmLocationLongitude\"\r\n                      >FarmLocationLongitude</label\r\n                    >\r\n                    <input\r\n                      type=\"text\"\r\n                      class=\"form-control\"\r\n                      id=\"FarmLocationLongitude\"\r\n                      name=\"FarmLocationLongitude\"\r\n                      formControlName=\"FarmLocationLongitude\"\r\n                      placeholder=\"Enter Farm Location Longitude\"\r\n                    />\r\n                  </div>\r\n                  <div class=\"form-group\">\r\n                    <label for=\"isPesticidesUsed\">Pesticides used?</label>\r\n                    <select\r\n                      class=\"form-control\"\r\n                      id=\"isPesticidesUsed\"\r\n                      required\r\n                      ngModel\r\n                      name=\"isPesticidesUsed\"\r\n                      formControlName=\"isPesticidesUsed\"\r\n                    >\r\n                      <option value=\"\" disabled selected hidden>\r\n                        Choose...\r\n                      </option>\r\n                      <option value=\"true\">Yes</option>\r\n                      <option value=\"false\">No</option>\r\n                    </select>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <button\r\n                type=\"button\"\r\n                class=\"btn btn-secondary\"\r\n                (click)=\"myModal.hide()\"\r\n              >\r\n                Close\r\n              </button>\r\n              <button\r\n                type=\"submit\"\r\n                class=\"btn btn-primary ml-2\"\r\n                [disabled]=\"btnLoading || !addForm.valid\"\r\n              >\r\n                <span\r\n                  *ngIf=\"btnLoading\"\r\n                  class=\"spinner-border spinner-border-sm\"\r\n                  role=\"status\"\r\n                  aria-hidden=\"true\"\r\n                ></span>\r\n                Save changes\r\n              </button>\r\n            </form>\r\n          </div>\r\n        </div>\r\n        <!-- /.modal-content -->\r\n      </div>\r\n      <!-- /.modal-dialog -->\r\n    </div>\r\n  </div>\r\n  <!-- /.modal -->\r\n</div>\r\n";
       /***/
     }
   }]);

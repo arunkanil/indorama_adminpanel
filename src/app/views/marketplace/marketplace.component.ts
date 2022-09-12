@@ -26,6 +26,11 @@ export class MarketplaceComponent {
 
   loading = true;
   btnLoading = false;
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 100;
+  count = 1;
   columnDefs = [];
   Categories: any = [];
 
@@ -53,10 +58,42 @@ export class MarketplaceComponent {
     this.getCategories();
   }
   getMarketplace() {
-    this.dataservice.getMarketplace().valueChanges.subscribe((result: any) => {
-      console.log("getMarketplace", result.data.marketplaceProducts.data);
+    this.dataservice.getMarketplace(1,this.pageSize).valueChanges.subscribe((result: any) => {
       this.rowData = result.data.marketplaceProducts.data;
+      this.meta = result.data.marketplaceProducts.meta;
+      if (this.meta?.pagination?.pageCount <= 1) {
+        this.disablePrevButton = true;
+        this.disableNextButton = true;
+      }
     });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getMarketplace(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.marketplaceProducts.meta;
+        this.rowData = result.data.marketplaceProducts.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getMarketplace(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.marketplaceProducts.meta;
+        this.rowData = result.data.marketplaceProducts.data;
+      });
   }
   getCategories() {
     this.dataservice

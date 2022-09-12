@@ -27,8 +27,11 @@ export class SMSCampaignsComponent {
   loading = true;
   btnLoading = false;
   disableButton = true;
-  title = "Verification";
-  orders: any = {};
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 100;
+  count = 1;
   columnDefs = [];
   Farmers: any = [];
   Villages: any = [];
@@ -61,10 +64,42 @@ export class SMSCampaignsComponent {
     this.getVillages();
   }
   getCropPrices() {
-    this.dataservice.getCropPrices().valueChanges.subscribe((result: any) => {
-      console.log("getCropPrices", result.data.cropPrices.data);
+    this.dataservice.getCropPrices(1,this.pageSize).valueChanges.subscribe((result: any) => {
       this.rowData = result.data.cropPrices.data;
+      this.meta = result.data.cropPrices.meta;
+      if (this.meta?.pagination?.pageCount <= 1) {
+        this.disablePrevButton = true;
+        this.disableNextButton = true;
+      }
     });
+  }
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.dataservice
+      .getCropPrices(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.cropPrices.meta;
+        this.rowData = result.data.cropPrices.data;
+      });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.dataservice
+      .getCropPrices(this.count, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.meta = result.data.cropPrices.meta;
+        this.rowData = result.data.cropPrices.data;
+      });
   }
   getStates() {
     this.dataservice.getStates().valueChanges.subscribe((result: any) => {

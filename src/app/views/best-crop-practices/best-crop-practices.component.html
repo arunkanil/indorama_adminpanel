@@ -3,19 +3,6 @@
     <div class="card-header" style="display: flex; justify-content: space-between">
       <h2>Best Crop Practices</h2>
       <div>
-        <!-- <button
-          type="button"
-          class="btn btn-danger"
-          data-toggle="modal"
-          [disabled]="disableButton"
-          (click)="openModal()"
-        >
-          Delete
-        </button> -->
-        <!-- <button type="button" [disabled]="disableButton" class="btn btn-info" data-toggle="modal"
-          (click)="openModal('Edit')">
-          Edit
-        </button> -->
         <button type="button" [disabled]="!disableButton" class="btn btn-primary" data-toggle="modal"
           (click)="practicesModal.show()">
           Add New
@@ -41,9 +28,6 @@
                   {{item.attributes.crop.data.attributes.Name}}
                 </h5>
                 <div>
-                  <!-- <button type="button" class="btn btn-outline-primary p-1">
-                    <img src="../../../assets/edit.svg">
-                  </button> -->
                   <button type="button" class="btn btn-outline-primary p-1" (click)="openModal(item)">
                     <img src="../../../assets/deleteIcon.svg">
                   </button>
@@ -55,12 +39,6 @@
             </div>
           </div>
         </div>
-        <!-- <div class="col-12">
-          <ag-grid-angular #agGrid style="width: 100%; height: 65vh" id="myGrid" class="ag-theme-alpine"
-            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
-            (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
-          </ag-grid-angular>
-        </div> -->
       </div>
     </div>
   </div>

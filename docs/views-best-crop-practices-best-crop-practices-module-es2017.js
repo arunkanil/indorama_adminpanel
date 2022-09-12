@@ -32,7 +32,7 @@ const routes = [
                 component: _best_crop_practices_component__WEBPACK_IMPORTED_MODULE_3__["BestCropPracticesComponent"],
                 data: {
                     roles: 'KP_CALLER',
-                    title: 'Profile'
+                    title: 'Best Crop Practices'
                 }
             },
         ]
@@ -77,7 +77,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { ActionRenderer } from "../../utils/StatusRenderer";
 
 
 let BestCropPracticesComponent = class BestCropPracticesComponent {
@@ -99,9 +98,6 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
             File: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
-        // frameworkComponents = {
-        //   statusRenderer: ActionRenderer,
-        // };
         this.rowData = [];
         this.selectedRows = [];
         this.filter = {};
@@ -120,41 +116,27 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
         this.dataservice
             .getBestCropPractises()
             .valueChanges.subscribe((result) => {
-            console.log("getBestCropPractises", result.data.bestCropPractises.data);
             this.rowData = result.data.bestCropPractises.data;
         });
     }
     getCrops() {
         this.dataservice.getCrops().valueChanges.subscribe((result) => {
-            console.log("getCrops", result.data.crops.data);
             this.Crops = result.data.crops.data;
         });
-    }
-    onGridReady(params) {
-        this.gridApi = params.api;
-        this.gridColumnApi = params.columnApi;
-        this.gridApi.sizeColumnsToFit();
-    }
-    onRowClicked(event) {
-        console.log("row", event.data);
-    }
-    onSelectionChanged(event) {
-        this.selectedRows = this.gridApi.getSelectedRows();
-        if (this.selectedRows.length > 0) {
-            this.disableButton = false;
-        }
-        else {
-            this.disableButton = true;
-        }
-        console.log(this.selectedRows, this.selectedRows[0].attributes.Name);
     }
     // On file Select
     onChange(event, check) {
         if (check == true) {
-            this.file = event.target.files[0];
+            this.file = [];
+            for (var i = 0; i < event.target.files.length; i++) {
+                this.file.push(event.target.files[i]);
+            }
         }
         else {
-            this.image = event.target.files[0];
+            this.image = [];
+            for (var i = 0; i < event.target.files.length; i++) {
+                this.image.push(event.target.files[i]);
+            }
         }
         console.log(this.file, this.image);
     }
@@ -168,9 +150,13 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
             .subscribe((result) => {
             console.log("response", result);
             if (result.data.deleteBestCropPractise) {
+                this.dataservice
+                    .getBestCropPractises()
+                    .valueChanges.subscribe((result) => {
+                    this.rowData = result.data.bestCropPractises.data;
+                });
                 this.toastr.success("Success!");
                 this.deleteModal.hide();
-                this.getBestCropPractises();
             }
             else {
                 this.toastr.error("Failed!");
@@ -200,7 +186,11 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
                             console.log("response", result);
                             if (result.data.createBestCropPractise) {
                                 this.toastr.success("Success!");
-                                this.getBestCropPractises();
+                                this.dataservice
+                                    .getBestCropPractises()
+                                    .valueChanges.subscribe((result) => {
+                                    this.rowData = result.data.bestCropPractises.data;
+                                });
                                 this.practicesModal.hide();
                             }
                             else {
@@ -255,7 +245,7 @@ BestCropPracticesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decora
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Best Crop Practices</h2>\r\n      <div>\r\n        <!-- <button\r\n          type=\"button\"\r\n          class=\"btn btn-danger\"\r\n          data-toggle=\"modal\"\r\n          [disabled]=\"disableButton\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Delete\r\n        </button> -->\r\n        <!-- <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button> -->\r\n        <button type=\"button\" [disabled]=\"!disableButton\" class=\"btn btn-primary\" data-toggle=\"modal\"\r\n          (click)=\"practicesModal.show()\">\r\n          Add New\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-3\" *ngFor=\"let item of rowData\">\r\n          <div class=\"card\">\r\n            <div class=\"img-container\">\r\n              <img class=\"card-img-top\" height=\"200\" width=\"200\"\r\n                src=\"https://indoramaapp.untanglestrategy.com{{item?.attributes?.cropImage?.data?.attributes?.url}}\" alt=\"Card image cap\" />\r\n              <div class=\"overlay\">\r\n                <div class=\"overlay-text\"><a target=\"_blank\"\r\n                    href=\"https://indoramaapp.untanglestrategy.com{{item?.attributes?.media?.data?.attributes?.url}}\" style=\"color: white;\">Click\r\n                    to view file</a></div>\r\n              </div>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <div style=\"display: flex; justify-content: space-between\">\r\n                <h5 class=\"card-title\">\r\n                  {{item.attributes.crop.data.attributes.Name}}\r\n                </h5>\r\n                <div>\r\n                  <!-- <button type=\"button\" class=\"btn btn-outline-primary p-1\">\r\n                    <img src=\"../../../assets/edit.svg\">\r\n                  </button> -->\r\n                  <button type=\"button\" class=\"btn btn-outline-primary p-1\" (click)=\"openModal(item)\">\r\n                    <img src=\"../../../assets/deleteIcon.svg\">\r\n                  </button>\r\n                </div>\r\n              </div>\r\n              <p class=\"card-text\">\r\n                {{item.attributes.content}}\r\n              </p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!-- <div class=\"col-12\">\r\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 65vh\" id=\"myGrid\" class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\" (gridReady)=\"onGridReady($event)\" animateRows=\"true\">\r\n          </ag-grid-angular>\r\n        </div> -->\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div bsModal #practicesModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit Practice</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"practicesModal.hide()\" aria-label=\"Close\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"practicesForm\" (ngSubmit)=\"practicesSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"crop\">Crop</label>\r\n            <select class=\"form-control\" id=\"crop\" required ngModel name=\"crop\" formControlName=\"crop\">\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"content\">Description</label>\r\n            <textarea type=\"text\" class=\"form-control\" id=\"content\" maxlength=\"150\" name=\"content\" rows=\"3\" formControlName=\"content\"\r\n              placeholder=\"Enter content\"></textarea>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"File\">PDF File</label>\r\n            <div><input type=\"file\" id=\"File\" accept=\".pdf\" name=\"File\" (change)=\"onChange($event,true)\"\r\n              formControlName=\"File\" placeholder=\"Choose file\" /></div>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Image\">Preview image</label>\r\n            <div>\r\n              <img *ngIf=\"imageUrl\" src=\"{{ imageUrl }}\" width=\"100\" height=\"100\" style=\"object-fit: cover\" />\r\n            </div>\r\n            <input type=\"file\" id=\"Image\" accept=\".jpg,.jpeg,.JPEG,.png\" name=\"Image\"\r\n              (change)=\"onChange($event,false)\" formControlName=\"Image\" placeholder=\"Choose image\" />\r\n          </div>\r\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"practicesModal.hide()\">\r\n            Close\r\n          </button>\r\n          <button type=\"submit\" class=\"btn btn-primary ml-2\" [disabled]=\"btnLoading || !practicesForm.valid\">\r\n            <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n<div bsModal #deleteModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        Do you want to delete this record?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"deleteModal.hide()\">\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deletePractice()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Best Crop Practices</h2>\r\n      <div>\r\n        <button type=\"button\" [disabled]=\"!disableButton\" class=\"btn btn-primary\" data-toggle=\"modal\"\r\n          (click)=\"practicesModal.show()\">\r\n          Add New\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-3\" *ngFor=\"let item of rowData\">\r\n          <div class=\"card\">\r\n            <div class=\"img-container\">\r\n              <img class=\"card-img-top\" height=\"200\" width=\"200\"\r\n                src=\"https://indoramaapp.untanglestrategy.com{{item?.attributes?.cropImage?.data?.attributes?.url}}\" alt=\"Card image cap\" />\r\n              <div class=\"overlay\">\r\n                <div class=\"overlay-text\"><a target=\"_blank\"\r\n                    href=\"https://indoramaapp.untanglestrategy.com{{item?.attributes?.media?.data?.attributes?.url}}\" style=\"color: white;\">Click\r\n                    to view file</a></div>\r\n              </div>\r\n            </div>\r\n            <div class=\"card-body\">\r\n              <div style=\"display: flex; justify-content: space-between\">\r\n                <h5 class=\"card-title\">\r\n                  {{item.attributes.crop.data.attributes.Name}}\r\n                </h5>\r\n                <div>\r\n                  <button type=\"button\" class=\"btn btn-outline-primary p-1\" (click)=\"openModal(item)\">\r\n                    <img src=\"../../../assets/deleteIcon.svg\">\r\n                  </button>\r\n                </div>\r\n              </div>\r\n              <p class=\"card-text\">\r\n                {{item.attributes.content}}\r\n              </p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div bsModal #practicesModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit Practice</h4>\r\n        <button type=\"button\" class=\"close\" (click)=\"practicesModal.hide()\" aria-label=\"Close\">\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"practicesForm\" (ngSubmit)=\"practicesSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"crop\">Crop</label>\r\n            <select class=\"form-control\" id=\"crop\" required ngModel name=\"crop\" formControlName=\"crop\">\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"content\">Description</label>\r\n            <textarea type=\"text\" class=\"form-control\" id=\"content\" maxlength=\"150\" name=\"content\" rows=\"3\" formControlName=\"content\"\r\n              placeholder=\"Enter content\"></textarea>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"File\">PDF File</label>\r\n            <div><input type=\"file\" id=\"File\" accept=\".pdf\" name=\"File\" (change)=\"onChange($event,true)\"\r\n              formControlName=\"File\" placeholder=\"Choose file\" /></div>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Image\">Preview image</label>\r\n            <div>\r\n              <img *ngIf=\"imageUrl\" src=\"{{ imageUrl }}\" width=\"100\" height=\"100\" style=\"object-fit: cover\" />\r\n            </div>\r\n            <input type=\"file\" id=\"Image\" accept=\".jpg,.jpeg,.JPEG,.png\" name=\"Image\"\r\n              (change)=\"onChange($event,false)\" formControlName=\"Image\" placeholder=\"Choose image\" />\r\n          </div>\r\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"practicesModal.hide()\">\r\n            Close\r\n          </button>\r\n          <button type=\"submit\" class=\"btn btn-primary ml-2\" [disabled]=\"btnLoading || !practicesForm.valid\">\r\n            <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\"></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n<div bsModal #deleteModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\">\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        Do you want to delete this record?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button type=\"button\" class=\"btn btn-secondary\" (click)=\"deleteModal.hide()\">\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deletePractice()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>");
 
 /***/ }),
 

@@ -19,7 +19,7 @@ const routes: Routes = [
         component: ChatComponent,
         data: {
           // roles: 'KP_CALLER',
-          title: 'Profile'
+          title: 'Chats'
         }
       },
     ]

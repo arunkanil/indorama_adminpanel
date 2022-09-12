@@ -136,7 +136,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Surveys</h2>\r\n      <div>\r\n        <!-- <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" [disabled]=\"disableButton\"\r\n          (click)=\"deleteModal.show()\">\r\n          Delete\r\n        </button>\r\n        <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button> -->\r\n        <a type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" href=\"/#/surveys/new_survey\">\r\n          Add New Survey\r\n        </a>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 65vh\" id=\"myGrid\" class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\" (gridReady)=\"onGridReady($event)\" animateRows=\"true\">\r\n          </ag-grid-angular>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Surveys</h2>\r\n      <div>\r\n        <!-- <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" [disabled]=\"disableButton\"\r\n          (click)=\"deleteModal.show()\">\r\n          Delete\r\n        </button>\r\n        <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button> -->\r\n        <a\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          href=\"/#/surveys/new_survey\"\r\n        >\r\n          Add New Survey\r\n        </a>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
@@ -397,15 +397,27 @@
         }, {
           path: 'all',
           // canActivate: [AuthGuard],
-          component: _surveys_component__WEBPACK_IMPORTED_MODULE_5__["SurveysComponent"]
+          component: _surveys_component__WEBPACK_IMPORTED_MODULE_5__["SurveysComponent"],
+          data: {
+            // roles: 'MANAGER',
+            title: 'Surveys'
+          }
         }, {
           path: 'new_survey',
           // canActivate: [AuthGuard],
-          component: _surveys_add_component__WEBPACK_IMPORTED_MODULE_3__["NewSurveyComponent"]
+          component: _surveys_add_component__WEBPACK_IMPORTED_MODULE_3__["NewSurveyComponent"],
+          data: {
+            // roles: 'MANAGER',
+            title: 'New Survey'
+          }
         }, {
           path: 'survey_details/:id',
           // canActivate: [AuthGuard],
-          component: _surveys_detail_component__WEBPACK_IMPORTED_MODULE_4__["SurveyDetailsComponent"]
+          component: _surveys_detail_component__WEBPACK_IMPORTED_MODULE_4__["SurveyDetailsComponent"],
+          data: {
+            // roles: 'MANAGER',
+            title: 'Survey details'
+          }
         }]
       }];
 
@@ -491,6 +503,10 @@
           this.loading = true;
           this.btnLoading = false;
           this.disableButton = true;
+          this.disableNextButton = false;
+          this.disablePrevButton = true;
+          this.pageSize = 100;
+          this.count = 1;
           this.columnDefs = [];
           this.cropPriceForm = this.fb.group({
             crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
@@ -515,16 +531,60 @@
           value: function ngOnInit() {
             this.loading = true;
             console.log(this.router);
-            this.getSurveys();
+            this.getSurveys(1, this.pageSize);
           }
         }, {
           key: "getSurveys",
-          value: function getSurveys() {
+          value: function getSurveys(page, pageSize) {
             var _this3 = this;
 
-            this.dataservice.getSurveys().valueChanges.subscribe(function (result) {
-              console.log("getSurveys", result.data.surveyForms.data);
+            this.dataservice.getSurveys(page, pageSize).valueChanges.subscribe(function (result) {
+              var _a, _b;
+
               _this3.rowData = result.data.surveyForms.data;
+              _this3.meta = result.data.surveyForms.meta;
+
+              if (((_b = (_a = _this3.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
+                _this3.disablePrevButton = true;
+                _this3.disableNextButton = true;
+              }
+            });
+          }
+        }, {
+          key: "loadNext",
+          value: function loadNext() {
+            var _this4 = this;
+
+            this.count++;
+            this.disablePrevButton = false;
+
+            if (this.count === this.meta.pagination.pageCount) {
+              this.disableNextButton = true;
+            }
+
+            this.dataservice.getSurveys(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this4.meta = result.data.surveyForms.meta;
+              _this4.rowData = result.data.surveyForms.data;
+            });
+          }
+        }, {
+          key: "loadPrev",
+          value: function loadPrev() {
+            var _this5 = this;
+
+            this.count--;
+
+            if (this.count < this.meta.pagination.pageCount) {
+              this.disableNextButton = false;
+            }
+
+            if (this.count === 1) {
+              this.disablePrevButton = true;
+            }
+
+            this.dataservice.getSurveys(this.count, this.pageSize).valueChanges.subscribe(function (result) {
+              _this5.meta = result.data.surveyForms.meta;
+              _this5.rowData = result.data.surveyForms.data;
             });
           }
         }, {
@@ -658,10 +718,10 @@
         _createClass(SurveyDetailsComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this4 = this;
+            var _this6 = this;
 
             this.activatedRouter.params.subscribe(function (params) {
-              _this4.id = params["id"];
+              _this6.id = params["id"];
             });
             this.getSurveyDetails();
             this.getSurveyResults();
@@ -669,21 +729,21 @@
         }, {
           key: "getSurveyDetails",
           value: function getSurveyDetails() {
-            var _this5 = this;
+            var _this7 = this;
 
             this.dataservice.getSurveyDetails(this.id).subscribe(function (result) {
               console.log("getSurveyDetails", result.body.data);
-              _this5.questions = result.body.data;
+              _this7.questions = result.body.data;
             });
           }
         }, {
           key: "getSurveyResults",
           value: function getSurveyResults() {
-            var _this6 = this;
+            var _this8 = this;
 
             this.dataservice.getSurveyResults(this.id).valueChanges.subscribe(function (result) {
               console.log("getSurveyResults", result.data.surveyResults.data);
-              _this6.rowData = result.data.surveyResults.data;
+              _this8.rowData = result.data.surveyResults.data;
             });
           }
         }, {
@@ -698,19 +758,19 @@
         }, {
           key: "deleteSurvey",
           value: function deleteSurvey() {
-            var _this7 = this;
+            var _this9 = this;
 
             this.dataservice.deleteSurvey(this.id).subscribe(function (result) {
               console.log("response", result);
 
               if (result.data.deleteSurveyForm) {
-                _this7.toastr.success("Success!");
+                _this9.toastr.success("Success!");
 
-                _this7.deleteModal.hide();
+                _this9.deleteModal.hide();
 
-                _this7.router.navigate(["/surveys/all"]);
+                _this9.router.navigate(["/surveys/all"]);
               } else {
-                _this7.toastr.error("Failed!");
+                _this9.toastr.error("Failed!");
               }
             });
           }
