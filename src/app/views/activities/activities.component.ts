@@ -30,7 +30,6 @@ export class ActivitiesComponent {
   disablePrevButton = true;
   count = 1;
 
-  orders: any = {};
   columnDefs = [];
   States: any = [];
   Areas: any = [];
@@ -67,9 +66,8 @@ export class ActivitiesComponent {
     this.dataservice
       .getActivities(1, this.pageSize)
       .valueChanges.subscribe((result: any) => {
-        console.log("getActivities", result.data.activities.data);
         this.meta = result.data.activities.meta;
-        if(this.meta?.pagination?.pageCount <= 1 ){
+        if (this.meta?.pagination?.pageCount <= 1) {
           this.disablePrevButton = true;
           this.disableNextButton = true;
         }
@@ -106,19 +104,16 @@ export class ActivitiesComponent {
   }
   getCrops() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
   }
   getStates() {
     this.dataservice.getStates().valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
       this.States = result.data.states.data;
     });
   }
   getAreas(lgaid?) {
     this.dataservice.getAreas(lgaid).valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
       this.Areas = result.data.areas.data;
     });
   }
@@ -132,7 +127,6 @@ export class ActivitiesComponent {
   }
   onSelectionChanged(event: any) {
     let selectedRows = this.gridApi.getSelectedRows();
-    console.log(selectedRows, selectedRows[0].attributes.Name);
     this.router.navigate(["/activities/activity_details", selectedRows[0].id], {
       state: { data: selectedRows },
     });
@@ -142,20 +136,21 @@ export class ActivitiesComponent {
   }
   activitiesSubmit() {
     let resp = {};
-    console.log(this.activitiesForm.value);
+    this.btnLoading = true;
     this.dataservice
       .createActivity(this.activitiesForm.value)
       .subscribe((result: any) => {
         resp = result.data;
-        console.log("response", result);
         if (result.data.createActivity) {
           this.toastr.success("Success!");
-          this.getActivities();
+          this.dataservice.getActivities(1, this.pageSize).refetch();
           this.activitiesForm.reset();
+          this.btnLoading = false;
           this.activitiesModal.hide();
           this.gridApi.deselectAll();
         } else {
           this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
         }
       });
   }

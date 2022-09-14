@@ -214,7 +214,9 @@ let MarketplaceComponent = class MarketplaceComponent {
         this.getCategories();
     }
     getMarketplace() {
-        this.dataservice.getMarketplace(1, this.pageSize).valueChanges.subscribe((result) => {
+        this.dataservice
+            .getMarketplace(1, this.pageSize)
+            .valueChanges.subscribe((result) => {
             var _a, _b;
             this.rowData = result.data.marketplaceProducts.data;
             this.meta = result.data.marketplaceProducts.meta;
@@ -299,7 +301,7 @@ let MarketplaceComponent = class MarketplaceComponent {
                     console.log("response", result);
                     if (result.data.createMarketplaceProduct) {
                         this.toastr.success("Success!");
-                        this.getMarketplace();
+                        this.dataservice.getMarketplace(1, this.pageSize).refetch();
                         this.file = null;
                         this.productForm.reset();
                         this.productModal.hide();
@@ -476,7 +478,7 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
                 this.toastr.success("Activity updated successfully!");
                 this.editModal.hide();
                 this.btnLoading = false;
-                this.getSingleMarketplaceProduct();
+                this.dataservice.getSingleMarketplaceProduct(this.id).refetch();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");
@@ -498,7 +500,7 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
                     if (result.data.updateMarketplaceProduct) {
                         this.toastr.success("Activity updated successfully!");
                         this.btnLoading = false;
-                        this.getSingleMarketplaceProduct();
+                        this.dataservice.getSingleMarketplaceProduct(this.id).refetch();
                     }
                     else {
                         this.toastr.error("Failed. Please check the fields!");
@@ -513,7 +515,9 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
         });
     }
     DeleteMarketplaceProduct() {
-        this.dataservice.DeleteMarketplaceProduct(this.id).subscribe((result) => {
+        this.dataservice
+            .DeleteMarketplaceProduct(this.id)
+            .subscribe((result) => {
             console.log("response", result);
             if (result.data.deleteMarketplaceProduct) {
                 this.toastr.success("Success!");

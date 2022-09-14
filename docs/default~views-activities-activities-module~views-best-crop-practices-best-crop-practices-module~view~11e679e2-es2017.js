@@ -615,6 +615,9 @@ const SoilAnalysisColumns = [
             buttons: ["reset"],
         },
         width: "auto",
+        cellRenderer: (data) => {
+            return data.value.replaceAll("_", " ");
+        },
     },
     {
         field: "attributes.createdAt",

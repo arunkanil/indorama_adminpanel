@@ -443,7 +443,7 @@
                   if (result.data.createMarketplaceProduct) {
                     _this5.toastr.success("Success!");
 
-                    _this5.getMarketplace();
+                    _this5.dataservice.getMarketplace(1, _this5.pageSize).refetch();
 
                     _this5.file = null;
 
@@ -688,7 +688,7 @@
 
                 _this9.btnLoading = false;
 
-                _this9.getSingleMarketplaceProduct();
+                _this9.dataservice.getSingleMarketplaceProduct(_this9.id).refetch();
               } else {
                 _this9.toastr.error("Failed. Please check the fields!");
 
@@ -718,7 +718,7 @@
 
                     _this10.btnLoading = false;
 
-                    _this10.getSingleMarketplaceProduct();
+                    _this10.dataservice.getSingleMarketplaceProduct(_this10.id).refetch();
                   } else {
                     _this10.toastr.error("Failed. Please check the fields!");
 

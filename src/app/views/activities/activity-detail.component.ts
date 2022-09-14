@@ -62,27 +62,33 @@ export class ActivityDetailComponent implements OnInit {
     this.dataservice
       .getActivity(this.id)
       .valueChanges.subscribe((result: any) => {
-        console.log("getActivity", result.data.activity.data);
-        this.details = result.data.activity.data;
+        console.log("getActivity", result?.data?.activity?.data);
+        this.details = result?.data?.activity?.data;
         this.activitiesForm = this.fb.group({
-          ActivityType: [this.details.attributes?.ActivityType,Validators.required,],
-          Latitude: [this.details.attributes?.Latitude, Validators.required],
-          Longitude: [this.details.attributes?.Longitude, Validators.required],
-          NoOfAttendees: [this.details.attributes?.NoOfAttendees,Validators.required,],
-          area: [this.details.attributes?.area?.data?.id, Validators.required],
-          crop: [this.details.attributes?.crop?.data?.id],
-          FarmerName: [this.details.attributes?.FarmerName],
-          PlannedFarmDay: [this.details.attributes?.PlannedFarmDay],
-          ConditionOfCrop: [this.details.attributes?.ConditionOfCrop],
-          Date: [this.details.attributes?.Date, Validators.required],
-          Time: [this.details.attributes?.Time, Validators.required],
-          Reason: [this.details.attributes?.Reason, Validators.required],
+          ActivityType: [
+            this.details?.attributes?.ActivityType,
+            Validators.required,
+          ],
+          Latitude: [this.details?.attributes?.Latitude, Validators.required],
+          Longitude: [this.details?.attributes?.Longitude, Validators.required],
+          NoOfAttendees: [
+            this.details?.attributes?.NoOfAttendees,
+            Validators.required,
+          ],
+          area: [this.details?.attributes?.area?.data?.id, Validators.required],
+          crop: [this.details?.attributes?.crop?.data?.id],
+          FarmerName: [this.details?.attributes?.FarmerName],
+          PlannedFarmDay: [this.details?.attributes?.PlannedFarmDay],
+          ConditionOfCrop: [this.details?.attributes?.ConditionOfCrop],
+          Date: [this.details?.attributes?.Date, Validators.required],
+          Time: [this.details?.attributes?.Time, Validators.required],
+          Reason: [this.details?.attributes?.Reason, Validators.required],
         });
         this.maplink =
           "https://maps.google.com/?q=" +
-          this.details.attributes.Latitude?.toString() +
+          this.details?.attributes?.Latitude?.toString() +
           "," +
-          this.details.attributes.Longitude?.toString();
+          this.details?.attributes?.Longitude?.toString();
         this.loading = false;
       });
   }
@@ -109,6 +115,7 @@ export class ActivityDetailComponent implements OnInit {
   FormSubmit() {
     let resp = {};
     console.log(this.activitiesForm.value);
+    this.btnLoading = true;
     this.dataservice
       .updateActivity(this.activitiesForm.value, this.id)
       .subscribe((result: any) => {
@@ -116,14 +123,16 @@ export class ActivityDetailComponent implements OnInit {
         console.log("response", result);
         if (result.data.updateActivity) {
           this.toastr.success("Activity updated successfully!");
+          this.btnLoading = false;
           this.editModal.hide();
-          this.getActivity();
+          this.dataservice.getActivity(this.id).refetch();
         } else {
           this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
         }
       });
   }
-  deleteActivity(){
+  deleteActivity() {
     this.dataservice.deleteActivity(this.id).subscribe((result: any) => {
       console.log("response", result);
       if (result.data.deleteActivity) {

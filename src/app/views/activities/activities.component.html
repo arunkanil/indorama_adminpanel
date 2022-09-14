@@ -94,7 +94,7 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="ActivityType">Activity Type</label>
+                <label for="ActivityType">Activity Type <span class="danger">*</span></label>
                 <select
                   class="form-control"
                   id="ActivityType"
@@ -116,7 +116,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="area">Area</label>
+                <label for="area">Area <span class="danger">*</span></label>
                 <select
                   class="form-control"
                   id="area"
@@ -132,7 +132,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="Latitude">Latitude</label>
+                <label for="Latitude">Latitude <span class="danger">*</span></label>
                 <input
                   type="text"
                   class="form-control"
@@ -143,7 +143,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="Longitude">Longitude</label>
+                <label for="Longitude">Longitude <span class="danger">*</span></label>
                 <input
                   type="text"
                   class="form-control"
@@ -154,7 +154,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="NoOfAttendees">Number of attendees</label>
+                <label for="NoOfAttendees">Number of attendees <span class="danger">*</span></label>
                 <input
                   type="text"
                   class="form-control"
@@ -164,6 +164,19 @@
                   placeholder="Enter No. of attendees"
                 />
               </div>
+              <div class="form-group">
+                <label for="Reason">Body <span class="danger">*</span></label>
+                <textarea
+                  class="form-control"
+                  id="Reason"
+                  rows="5"
+                  name="Reason"
+                  formControlName="Reason"
+                  placeholder="Enter body"
+                ></textarea>
+              </div>
+            </div>
+            <div class="col">
               <div class="form-group">
                 <label for="FarmerName">Farmer name</label>
                 <input
@@ -175,14 +188,11 @@
                   placeholder="Enter name"
                 />
               </div>
-            </div>
-            <div class="col">
               <div class="form-group">
                 <label for="crop">Crop</label>
                 <select
                   class="form-control"
                   id="crop"
-                  required
                   ngModel
                   name="crop"
                   formControlName="crop"
@@ -216,7 +226,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="Date">Date</label>
+                <label for="Date">Date <span class="danger">*</span></label>
                 <input
                   type="date"
                   class="form-control"
@@ -227,7 +237,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="Time">Time</label>
+                <label for="Time">Time <span class="danger">*</span></label>
                 <input
                   type="time"
                   class="form-control"
@@ -236,17 +246,6 @@
                   formControlName="Time"
                   placeholder="Enter Time"
                 />
-              </div>
-              <div class="form-group">
-                <label for="Reason">Body</label>
-                <textarea
-                  class="form-control"
-                  id="Reason"
-                  rows="5"
-                  name="Reason"
-                  formControlName="Reason"
-                  placeholder="Enter body"
-                ></textarea>
               </div>
             </div>
           </div>

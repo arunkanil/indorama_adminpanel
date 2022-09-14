@@ -127,20 +127,37 @@
                   <div class="row">
                     <div class="col">
                       <div class="form-group">
-                        <label for="ActivityType">Activity Type</label>
-                        <select class="form-control" id="ActivityType" required ngModel name="ActivityType"
-                          formControlName="ActivityType">
+                        <label for="ActivityType">Activity Type <span class="danger">*</span></label>
+                        <select
+                          class="form-control"
+                          id="ActivityType"
+                          required
+                          ngModel
+                          name="ActivityType"
+                          formControlName="ActivityType"
+                        >
                           <option value="" disabled selected hidden>Choose...</option>
                           <option value="FarmDemo">Farm Demo</option>
-                          <option value="GroupFarmerTraining">Group Farmer Training</option>
-                          <option value="MegaFarmerTraining">Mega Farmer Training</option>
+                          <option value="GroupFarmerTraining">
+                            Group Farmer Training
+                          </option>
+                          <option value="MegaFarmerTraining">
+                            Mega Farmer Training
+                          </option>
                           <option value="FarmDay">Farm Day</option>
                           <option value="RetailersTraining">Retailers Training</option>
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="area">Area</label>
-                        <select class="form-control" id="area" required ngModel name="area" formControlName="area">
+                        <label for="area">Area <span class="danger">*</span></label>
+                        <select
+                          class="form-control"
+                          id="area"
+                          required
+                          ngModel
+                          name="area"
+                          formControlName="area"
+                        >
                           <option value="" disabled selected hidden>Choose...</option>
                           <option *ngFor="let item of Areas" value="{{ item.id }}">
                             {{ item.attributes.Name }}
@@ -148,30 +165,71 @@
                         </select>
                       </div>
                       <div class="form-group">
-                        <label for="Latitude">Latitude</label>
-                        <input type="text" class="form-control" id="Latitude" name="Latitude" formControlName="Latitude"
-                          placeholder="Enter Latitude" />
+                        <label for="Latitude">Latitude <span class="danger">*</span></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="Latitude"
+                          name="Latitude"
+                          formControlName="Latitude"
+                          placeholder="Enter Latitude"
+                        />
                       </div>
                       <div class="form-group">
-                        <label for="Longitude">Longitude</label>
-                        <input type="text" class="form-control" id="Longitude" name="Longitude"
-                          formControlName="Longitude" placeholder="Enter Longitude" />
+                        <label for="Longitude">Longitude <span class="danger">*</span></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="Longitude"
+                          name="Longitude"
+                          formControlName="Longitude"
+                          placeholder="Enter Longitude"
+                        />
                       </div>
                       <div class="form-group">
-                        <label for="NoOfAttendees">Number of attendees</label>
-                        <input type="text" class="form-control" id="NoOfAttendees" name="NoOfAttendees"
-                          formControlName="NoOfAttendees" placeholder="Enter No. of attendees" />
+                        <label for="NoOfAttendees">Number of attendees <span class="danger">*</span></label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="NoOfAttendees"
+                          name="NoOfAttendees"
+                          formControlName="NoOfAttendees"
+                          placeholder="Enter No. of attendees"
+                        />
                       </div>
                       <div class="form-group">
-                        <label for="FarmerName">Farmer name</label>
-                        <input type="text" class="form-control" id="FarmerName" name="FarmerName"
-                          formControlName="FarmerName" placeholder="Enter name" />
+                        <label for="Reason">Body <span class="danger">*</span></label>
+                        <textarea
+                          class="form-control"
+                          id="Reason"
+                          rows="5"
+                          name="Reason"
+                          formControlName="Reason"
+                          placeholder="Enter body"
+                        ></textarea>
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-group">
+                        <label for="FarmerName">Farmer name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="FarmerName"
+                          name="FarmerName"
+                          formControlName="FarmerName"
+                          placeholder="Enter name"
+                        />
+                      </div>
+                      <div class="form-group">
                         <label for="crop">Crop</label>
-                        <select class="form-control" id="crop" required ngModel name="crop" formControlName="crop">
+                        <select
+                          class="form-control"
+                          id="crop"
+                          ngModel
+                          name="crop"
+                          formControlName="crop"
+                        >
                           <option value="" disabled selected hidden>Choose...</option>
                           <option *ngFor="let item of Crops" value="{{ item.id }}">
                             {{ item.attributes.Name }}
@@ -180,37 +238,68 @@
                       </div>
                       <div class="form-group">
                         <label for="ConditionOfCrop">Condition of crop</label>
-                        <input type="text" class="form-control" id="ConditionOfCrop" name="ConditionOfCrop"
-                          formControlName="ConditionOfCrop" placeholder="Enter condition" />
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="ConditionOfCrop"
+                          name="ConditionOfCrop"
+                          formControlName="ConditionOfCrop"
+                          placeholder="Enter condition"
+                        />
                       </div>
                       <div class="form-group">
                         <label for="PlannedFarmDay">Planned farm day</label>
-                        <input type="date" class="form-control" id="PlannedFarmDay" name="PlannedFarmDay"
-                          formControlName="PlannedFarmDay" placeholder="Enter Date" />
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="PlannedFarmDay"
+                          name="PlannedFarmDay"
+                          formControlName="PlannedFarmDay"
+                          placeholder="Enter Date"
+                        />
                       </div>
                       <div class="form-group">
-                        <label for="Date">Date</label>
-                        <input type="date" class="form-control" id="Date" name="Date" formControlName="Date"
-                          placeholder="Enter Date" />
+                        <label for="Date">Date <span class="danger">*</span></label>
+                        <input
+                          type="date"
+                          class="form-control"
+                          id="Date"
+                          name="Date"
+                          formControlName="Date"
+                          placeholder="Enter Date"
+                        />
                       </div>
                       <div class="form-group">
-                        <label for="Time">Time</label>
-                        <input type="time" class="form-control" id="Time" name="Time" formControlName="Time"
-                          placeholder="Enter Time" />
-                      </div>
-                      <div class="form-group">
-                        <label for="Reason">Body</label>
-                        <textarea class="form-control" id="Reason" rows="5" name="Reason" formControlName="Reason"
-                          placeholder="Enter body"></textarea>
+                        <label for="Time">Time <span class="danger">*</span></label>
+                        <input
+                          type="time"
+                          class="form-control"
+                          id="Time"
+                          name="Time"
+                          formControlName="Time"
+                          placeholder="Enter Time"
+                        />
                       </div>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-secondary" (click)="activitiesModal.hide()">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    (click)="activitiesModal.hide()"
+                  >
                     Close
                   </button>
-                  <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !activitiesForm.valid">
-                    <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status"
-                      aria-hidden="true"></span>
+                  <button
+                    type="submit"
+                    class="btn btn-primary ml-2"
+                    [disabled]="btnLoading || !activitiesForm.valid"
+                  >
+                    <span
+                      *ngIf="btnLoading"
+                      class="spinner-border spinner-border-sm"
+                      role="status"
+                      aria-hidden="true"
+                    ></span>
                     Save changes
                   </button>
                 </form>

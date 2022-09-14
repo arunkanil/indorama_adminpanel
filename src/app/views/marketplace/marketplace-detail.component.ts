@@ -126,7 +126,7 @@ export class MarketplaceDetailComponent implements OnInit {
           this.toastr.success("Activity updated successfully!");
           this.editModal.hide();
           this.btnLoading = false;
-          this.getSingleMarketplaceProduct();
+          this.dataservice.getSingleMarketplaceProduct(this.id).refetch();
         } else {
           this.toastr.error("Failed. Please check the fields!");
           this.btnLoading = false;
@@ -150,7 +150,7 @@ export class MarketplaceDetailComponent implements OnInit {
             if (result.data.updateMarketplaceProduct) {
               this.toastr.success("Activity updated successfully!");
               this.btnLoading = false;
-              this.getSingleMarketplaceProduct();
+              this.dataservice.getSingleMarketplaceProduct(this.id).refetch();
             } else {
               this.toastr.error("Failed. Please check the fields!");
               this.btnLoading = false;
@@ -163,15 +163,17 @@ export class MarketplaceDetailComponent implements OnInit {
     });
   }
   DeleteMarketplaceProduct() {
-    this.dataservice.DeleteMarketplaceProduct(this.id).subscribe((result: any) => {
-      console.log("response", result);
-      if (result.data.deleteMarketplaceProduct) {
-        this.toastr.success("Success!");
-        this.deleteModal.hide();
-        this.router.navigate(["/marketplace/all"]);
-      } else {
-        this.toastr.error("Failed!");
-      }
-    });
+    this.dataservice
+      .DeleteMarketplaceProduct(this.id)
+      .subscribe((result: any) => {
+        console.log("response", result);
+        if (result.data.deleteMarketplaceProduct) {
+          this.toastr.success("Success!");
+          this.deleteModal.hide();
+          this.router.navigate(["/marketplace/all"]);
+        } else {
+          this.toastr.error("Failed!");
+        }
+      });
   }
 }

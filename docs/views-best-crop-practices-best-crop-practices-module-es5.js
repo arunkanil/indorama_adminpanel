@@ -238,9 +238,7 @@
               console.log("response", result);
 
               if (result.data.deleteBestCropPractise) {
-                _this3.dataservice.getBestCropPractises().valueChanges.subscribe(function (result) {
-                  _this3.rowData = result.data.bestCropPractises.data;
-                });
+                _this3.dataservice.getBestCropPractises().refetch();
 
                 _this3.toastr.success("Success!");
 
@@ -281,9 +279,7 @@
                       if (result.data.createBestCropPractise) {
                         _this4.toastr.success("Success!");
 
-                        _this4.dataservice.getBestCropPractises().valueChanges.subscribe(function (result) {
-                          _this4.rowData = result.data.bestCropPractises.data;
-                        });
+                        _this4.dataservice.getBestCropPractises().refetch();
 
                         _this4.practicesModal.hide();
                       } else {

@@ -3903,14 +3903,16 @@ export class DataService {
     return this.apollo.mutate({
       mutation: CreateActivities,
       variables: {
-        FarmerName: price.FarmerName,
+        FarmerName: price.FarmerName ? price.FarmerName : undefined,
         Date: price.Date,
         Latitude: parseFloat(price.Latitude),
         Longitude: parseFloat(price.Longitude),
         NoOfAttendees: parseInt(price.NoOfAttendees),
-        crop: price.crop,
-        ConditionOfCrop: price.ConditionOfCrop,
-        PlannedFarmDay: price.PlannedFarmDay,
+        crop: price.crop ? price.crop : undefined,
+        ConditionOfCrop: price.ConditionOfCrop
+          ? price.ConditionOfCrop
+          : undefined,
+        PlannedFarmDay: price.PlannedFarmDay ? price.PlannedFarmDay : undefined,
         Reason: price.Reason,
         area: price.area,
         ActivityType: price.ActivityType,

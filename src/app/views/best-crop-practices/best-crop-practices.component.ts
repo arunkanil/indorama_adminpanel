@@ -88,11 +88,7 @@ export class BestCropPracticesComponent {
       .subscribe((result: any) => {
         console.log("response", result);
         if (result.data.deleteBestCropPractise) {
-          this.dataservice
-            .getBestCropPractises()
-            .valueChanges.subscribe((result: any) => {
-              this.rowData = result.data.bestCropPractises.data;
-            });
+          this.dataservice.getBestCropPractises().refetch();
           this.toastr.success("Success!");
           this.deleteModal.hide();
         } else {
@@ -121,11 +117,7 @@ export class BestCropPracticesComponent {
                 console.log("response", result);
                 if (result.data.createBestCropPractise) {
                   this.toastr.success("Success!");
-                  this.dataservice
-                    .getBestCropPractises()
-                    .valueChanges.subscribe((result: any) => {
-                      this.rowData = result.data.bestCropPractises.data;
-                    });
+                  this.dataservice.getBestCropPractises().refetch();
                   this.practicesModal.hide();
                 } else {
                   this.toastr.error("Failed. Please check the fields!");

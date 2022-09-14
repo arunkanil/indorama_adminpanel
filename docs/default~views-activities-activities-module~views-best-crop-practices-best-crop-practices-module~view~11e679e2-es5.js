@@ -690,7 +690,10 @@
           filterOptions: ["contains"],
           buttons: ["reset"]
         },
-        width: "auto"
+        width: "auto",
+        cellRenderer: function cellRenderer(data) {
+          return data.value.replaceAll("_", " ");
+        }
       }, {
         field: "attributes.createdAt",
         headerName: "Requested on",

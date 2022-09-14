@@ -150,11 +150,7 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
             .subscribe((result) => {
             console.log("response", result);
             if (result.data.deleteBestCropPractise) {
-                this.dataservice
-                    .getBestCropPractises()
-                    .valueChanges.subscribe((result) => {
-                    this.rowData = result.data.bestCropPractises.data;
-                });
+                this.dataservice.getBestCropPractises().refetch();
                 this.toastr.success("Success!");
                 this.deleteModal.hide();
             }
@@ -186,11 +182,7 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
                             console.log("response", result);
                             if (result.data.createBestCropPractise) {
                                 this.toastr.success("Success!");
-                                this.dataservice
-                                    .getBestCropPractises()
-                                    .valueChanges.subscribe((result) => {
-                                    this.rowData = result.data.bestCropPractises.data;
-                                });
+                                this.dataservice.getBestCropPractises().refetch();
                                 this.practicesModal.hide();
                             }
                             else {

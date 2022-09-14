@@ -58,14 +58,16 @@ export class MarketplaceComponent {
     this.getCategories();
   }
   getMarketplace() {
-    this.dataservice.getMarketplace(1,this.pageSize).valueChanges.subscribe((result: any) => {
-      this.rowData = result.data.marketplaceProducts.data;
-      this.meta = result.data.marketplaceProducts.meta;
-      if (this.meta?.pagination?.pageCount <= 1) {
-        this.disablePrevButton = true;
-        this.disableNextButton = true;
-      }
-    });
+    this.dataservice
+      .getMarketplace(1, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.rowData = result.data.marketplaceProducts.data;
+        this.meta = result.data.marketplaceProducts.meta;
+        if (this.meta?.pagination?.pageCount <= 1) {
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+      });
   }
   loadNext() {
     this.count++;
@@ -113,9 +115,12 @@ export class MarketplaceComponent {
   }
   onSelectionChanged(event: any) {
     this.selectedRows = this.gridApi.getSelectedRows();
-    this.router.navigate(["/marketplace/marketplace_details",this.selectedRows[0].id], {
-      state: { data: this.selectedRows },
-    });
+    this.router.navigate(
+      ["/marketplace/marketplace_details", this.selectedRows[0].id],
+      {
+        state: { data: this.selectedRows },
+      }
+    );
   }
   // On file Select
   onChange(event: any) {
@@ -145,7 +150,7 @@ export class MarketplaceComponent {
             console.log("response", result);
             if (result.data.createMarketplaceProduct) {
               this.toastr.success("Success!");
-              this.getMarketplace();
+              this.dataservice.getMarketplace(1, this.pageSize).refetch();
               this.file = null;
               this.productForm.reset();
               this.productModal.hide();

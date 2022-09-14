@@ -93,7 +93,7 @@ const routes = [
                 // canActivate: [AuthGuard],
                 component: _users_component__WEBPACK_IMPORTED_MODULE_3__["UsersComponent"],
                 data: {
-                    title: 'Retailers'
+                    title: 'Users'
                 }
             },
             {
