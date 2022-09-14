@@ -100,6 +100,9 @@ export class SurveysComponent {
   onRowClicked(event: any) {
     console.log("row", event.data);
   }
+  goToNewSurvey(){
+    this.router.navigate(["/surveys/new_survey"]);
+  }
   onSelectionChanged(event: any) {
     this.selectedRows = this.gridApi.getSelectedRows();
     console.log(this.selectedRows);

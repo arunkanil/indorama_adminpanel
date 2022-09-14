@@ -14,14 +14,14 @@
           (click)="openModal('Edit')">
           Edit
         </button> -->
-        <a
+        <button
           type="button"
           class="btn btn-primary"
           data-toggle="modal"
-          href="/#/surveys/new_survey"
+          (click)="goToNewSurvey()"
         >
           Add New Survey
-        </a>
+      </button>
       </div>
     </div>
     <!-- <p class="text-muted mx-3">
