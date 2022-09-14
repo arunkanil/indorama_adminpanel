@@ -14,6 +14,7 @@ import { SMSCampaignsRoutingModule } from './sms-campaigns-routing.module';
 // Angular
 import { AgGridModule } from 'ag-grid-angular';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SMSCampaignsDetailComponent } from './sms-campaigns-detail.component';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
   ],
   declarations: [
     SMSCampaignsComponent,
+    SMSCampaignsDetailComponent
   ]
 })
 export class SMSCampaignsModule { }

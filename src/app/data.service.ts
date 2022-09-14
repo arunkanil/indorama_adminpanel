@@ -3437,6 +3437,150 @@ const updateRetailerAd = gql`
     }
   }
 `;
+const getSmsCampaigns = gql`
+  query ($page: Int, $pageSize: Int, $id: ID) {
+    smsCampaigns(
+      sort: "updatedAt:desc"
+      pagination: { page: $page, pageSize: $pageSize }
+      filters: { id: { eq: $id } }
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+      data {
+        id
+        attributes {
+          message
+          isAllFarmers
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          recipients {
+            data {
+              id
+              attributes {
+                Name
+                ContactNumber
+              }
+            }
+          }
+          apiKey
+          SMSGatewayResponse
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
+const createSMSCampaign = gql`
+  mutation createSMSCampaign(
+    $message: String
+    $state: ID
+    $lga: ID
+    $area: ID
+    $village: ID
+    $isAllFarmers: Boolean
+  ) {
+    createSmsCampaign(
+      data: {
+        message: $message
+        state: $state
+        lga: $lga
+        area: $area
+        village: $village
+        isAllFarmers: $isAllFarmers
+      }
+    ) {
+      data {
+        id
+        attributes {
+          message
+          state {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          lga {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          recipients {
+            data {
+              id
+              attributes {
+                Name
+                ContactNumber
+              }
+            }
+          }
+          apiKey
+          SMSGatewayResponse
+          isAllFarmers
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  }
+`;
 @Injectable({
   providedIn: "root",
 })
@@ -3453,7 +3597,6 @@ export class DataService {
   handleError(error: HttpErrorResponse) {
     let errorMessage = "Unknown error!";
     console.log(error);
-    window.alert(error.error.error.message);
     // if (error.error instanceof ErrorEvent) {
     //   // Client-side errors
     //   errorMessage = `Error: ${error.error.message}`;
@@ -3461,8 +3604,10 @@ export class DataService {
     //   // Server-side errors
     //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     // }
+    if (error.error.message) this.toastr.error(error.error.message);
     if (error.status !== 200) {
       this.toastr.error(error.error.error.Message);
+      this.toastr.error(error.error.message);
       return throwError(errorMessage);
     }
   }
@@ -3479,19 +3624,10 @@ export class DataService {
     };
     return this.http.post(this.baseURL + `api/users`, data, httpOptions1);
   }
-  sendMessage(data): Observable<any> {
-    const httpOptions1: Object = {
-      observe: "response",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    };
+  fetchMessage(api_token, message_id): Observable<any> {
     return this.http
-      .post(
-        `https://www.bulksmsnigeria.com/api/v1/sms/create`,
-        data,
-        httpOptions1
+      .get(
+        `https://www.bulksmsnigeria.com/api/v2/delivery?api_token=${api_token}&message_id=${message_id}`
       )
       .pipe(catchError(this.handleError));
   }
@@ -3548,7 +3684,31 @@ export class DataService {
       },
     });
   }
-
+  getSmsCampaigns(page?, pageSize?, id?) {
+    return this.apollo.watchQuery({
+      query: getSmsCampaigns,
+      fetchPolicy: "no-cache",
+      variables: {
+        page: page,
+        pageSize: pageSize,
+        id: id,
+      },
+    });
+  }
+  createSMSCampaign(data) {
+    return this.apollo.mutate({
+      mutation: createSMSCampaign,
+      fetchPolicy: "no-cache",
+      variables: {
+        message: data.message,
+        state: data.state ? data.state : undefined,
+        lga: data.lga ? data.lga : undefined,
+        area: data.area ? data.area : undefined,
+        village: data.village ? data.village : undefined,
+        isAllFarmers: !data.isAllFarmers,
+      },
+    });
+  }
   getSurveyResults(id) {
     return this.apollo.watchQuery({
       query: getSurveyResults,

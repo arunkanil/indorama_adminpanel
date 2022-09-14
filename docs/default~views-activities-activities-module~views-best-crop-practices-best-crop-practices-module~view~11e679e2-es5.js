@@ -116,6 +116,12 @@
       /* harmony export (binding) */
 
 
+      __webpack_require__.d(__webpack_exports__, "DeliveryReportColumn", function () {
+        return DeliveryReportColumn;
+      });
+      /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "MarketplaceColumn", function () {
         return MarketplaceColumn;
       });
@@ -1013,7 +1019,7 @@
         maxWidth: 100,
         sortable: true
       }, {
-        field: "attributes.Name",
+        field: "attributes.message",
         headerName: "Message",
         minWidth: 150,
         resizable: true,
@@ -1024,10 +1030,42 @@
           buttons: ["reset"]
         }
       }, {
-        field: "attributes.Name",
-        headerName: "Campaign",
-        maxWidth: 250,
+        field: "attributes.createdAt",
+        headerName: "Created at",
         resizable: true,
+        maxWidth: 250,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+          filterOptions: ["contains"],
+          buttons: ["reset"]
+        },
+        cellRenderer: function cellRenderer(data) {
+          return data.value ? new Date(data.value).toLocaleString() : "";
+        }
+      }];
+      var DeliveryReportColumn = [{
+        valueGetter: "node.rowIndex + 1",
+        headerName: "No.",
+        resizable: true,
+        maxWidth: 100,
+        sortable: true
+      }, {
+        field: "recipient",
+        headerName: "Recipient",
+        minWidth: 150,
+        resizable: true,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+          filterOptions: ["contains"],
+          buttons: ["reset"]
+        }
+      }, {
+        field: "delivery_status",
+        headerName: "Delivery status",
+        resizable: true,
+        maxWidth: 250,
         sortable: true,
         filter: "agTextColumnFilter",
         filterParams: {

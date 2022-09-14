@@ -1,5 +1,5 @@
 (function () {
-  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80, _templateObject81;
+  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80, _templateObject81, _templateObject82, _templateObject83;
 
   function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -801,6 +801,10 @@
 
       var _updateRetailerAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["\n  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {\n    updateRetailerAdvertisement(\n      data: { Image: $imageId, url: $clickUrl, isActive: true }\n    ) {\n      data {\n        id\n        attributes {\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
 
+      var _getSmsCampaigns = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject82 || (_templateObject82 = _taggedTemplateLiteral(["\n  query ($page: Int, $pageSize: Int, $id: ID) {\n    smsCampaigns(\n      sort: \"updatedAt:desc\"\n      pagination: { page: $page, pageSize: $pageSize }\n      filters: { id: { eq: $id } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          message\n          isAllFarmers\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          recipients {\n            data {\n              id\n              attributes {\n                Name\n                ContactNumber\n              }\n            }\n          }\n          apiKey\n          SMSGatewayResponse\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+
+      var _createSMSCampaign = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject83 || (_templateObject83 = _taggedTemplateLiteral(["\n  mutation createSMSCampaign(\n    $message: String\n    $state: ID\n    $lga: ID\n    $area: ID\n    $village: ID\n    $isAllFarmers: Boolean\n  ) {\n    createSmsCampaign(\n      data: {\n        message: $message\n        state: $state\n        lga: $lga\n        area: $area\n        village: $village\n        isAllFarmers: $isAllFarmers\n      }\n    ) {\n      data {\n        id\n        attributes {\n          message\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          recipients {\n            data {\n              id\n              attributes {\n                Name\n                ContactNumber\n              }\n            }\n          }\n          apiKey\n          SMSGatewayResponse\n          isAllFarmers\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+
       var DataService = /*#__PURE__*/function () {
         function DataService(http, apollo, toastr) {
           _classCallCheck(this, DataService);
@@ -816,8 +820,7 @@
           key: "handleError",
           value: function handleError(error) {
             var errorMessage = "Unknown error!";
-            console.log(error);
-            window.alert(error.error.error.message); // if (error.error instanceof ErrorEvent) {
+            console.log(error); // if (error.error instanceof ErrorEvent) {
             //   // Client-side errors
             //   errorMessage = `Error: ${error.error.message}`;
             // } else {
@@ -825,8 +828,11 @@
             //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
             // }
 
+            if (error.error.message) this.toastr.error(error.error.message);
+
             if (error.status !== 200) {
               this.toastr.error(error.error.error.Message);
+              this.toastr.error(error.error.message);
               return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["throwError"])(errorMessage);
             }
           }
@@ -847,16 +853,9 @@
             return this.http.post(this.baseURL + "api/users", data, httpOptions1);
           }
         }, {
-          key: "sendMessage",
-          value: function sendMessage(data) {
-            var httpOptions1 = {
-              observe: "response",
-              headers: {
-                "Content-Type": "application/json",
-                Accept: "application/json"
-              }
-            };
-            return this.http.post("https://www.bulksmsnigeria.com/api/v1/sms/create", data, httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          key: "fetchMessage",
+          value: function fetchMessage(api_token, message_id) {
+            return this.http.get("https://www.bulksmsnigeria.com/api/v2/delivery?api_token=".concat(api_token, "&message_id=").concat(message_id)).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getSurveyDetails",
@@ -913,6 +912,35 @@
                 limit: limit,
                 start: start,
                 key: key ? key : undefined
+              }
+            });
+          }
+        }, {
+          key: "getSmsCampaigns",
+          value: function getSmsCampaigns(page, pageSize, id) {
+            return this.apollo.watchQuery({
+              query: _getSmsCampaigns,
+              fetchPolicy: "no-cache",
+              variables: {
+                page: page,
+                pageSize: pageSize,
+                id: id
+              }
+            });
+          }
+        }, {
+          key: "createSMSCampaign",
+          value: function createSMSCampaign(data) {
+            return this.apollo.mutate({
+              mutation: _createSMSCampaign,
+              fetchPolicy: "no-cache",
+              variables: {
+                message: data.message,
+                state: data.state ? data.state : undefined,
+                lga: data.lga ? data.lga : undefined,
+                area: data.area ? data.area : undefined,
+                village: data.village ? data.village : undefined,
+                isAllFarmers: !data.isAllFarmers
               }
             });
           }

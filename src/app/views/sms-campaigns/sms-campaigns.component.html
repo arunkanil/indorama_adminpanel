@@ -1,6 +1,9 @@
 <div class="animated fadeIn">
   <div class="card">
-    <div class="card-header" style="display: flex; justify-content: space-between">
+    <div
+      class="card-header"
+      style="display: flex; justify-content: space-between"
+    >
       <h2>SMS Campaigns</h2>
       <div>
         <!-- <button
@@ -16,8 +19,13 @@
           (click)="openModal('Edit')">
           Edit
         </button> -->
-        <button type="button" [disabled]="!disableButton" class="btn btn-primary" data-toggle="modal"
-          (click)="openModal()">
+        <button
+          type="button"
+          [disabled]="!disableButton"
+          class="btn btn-primary"
+          data-toggle="modal"
+          (click)="openModal()"
+        >
           Create new campaign
         </button>
       </div>
@@ -29,9 +37,18 @@
     <div class="card-body">
       <div class="row">
         <div class="col-12">
-          <ag-grid-angular #agGrid style="width: 100%; height: 65vh" id="myGrid" class="ag-theme-alpine"
-            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
-            (selectionChanged)="onSelectionChanged($event)" (gridReady)="onGridReady($event)" animateRows="true">
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 65vh"
+            id="myGrid"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefs"
+            [rowData]="rowData"
+            [rowSelection]="rowSelection"
+            (selectionChanged)="onSelectionChanged($event)"
+            (gridReady)="onGridReady($event)"
+            animateRows="true"
+          >
           </ag-grid-angular>
           <button
             type="button"
@@ -58,13 +75,25 @@
     </div>
   </div>
 </div>
-<div bsModal #messageModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
+<div
+  bsModal
+  #messageModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h4 class="modal-title">New Campaign</h4>
-        <button type="button" class="close" (click)="messageModal.hide()" aria-label="Close">
+        <button
+          type="button"
+          class="close"
+          (click)="messageModal.hide()"
+          aria-label="Close"
+        >
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
@@ -73,12 +102,35 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
+                <label class="switch">
+                  <input
+                    type="checkbox"
+                    id="isAllFarmers"
+                    maxlength="160"
+                    name="isAllFarmers"
+                    formControlName="isAllFarmers"
+                  />
+                  <div class="slider round">
+                    <span class="on">Filter</span>
+                    <span class="off">All</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="messageForm.value?.isAllFarmers" class="row">
+            <div class="col">
+              <div class="form-group">
                 <label for="state">State</label>
-                <select class="form-control" id="state" ngModel (change)="filterLGA($event)" name="state"
-                  formControlName="state">
-                  <option value="" disabled selected hidden>
-                    Choose...
-                  </option>
+                <select
+                  class="form-control"
+                  id="state"
+                  ngModel
+                  (change)="filterLGA($event)"
+                  name="state"
+                  formControlName="state"
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
                   <option *ngFor="let item of States" value="{{ item.id }}">
                     {{ item.attributes.Name }}
                   </option>
@@ -86,10 +138,15 @@
               </div>
               <div class="form-group">
                 <label for="area">Area</label>
-                <select class="form-control" id="area" ngModel (change)="filterVillage($event)" name="area" formControlName="area">
-                  <option value="" disabled selected hidden>
-                    Choose...
-                  </option>
+                <select
+                  class="form-control"
+                  id="area"
+                  ngModel
+                  (change)="filterVillage($event)"
+                  name="area"
+                  formControlName="area"
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
                   <option *ngFor="let item of Areas" value="{{ item.id }}">
                     {{ item.attributes.Name }}
                   </option>
@@ -99,10 +156,15 @@
             <div class="col">
               <div class="form-group">
                 <label for="lga">LGA</label>
-                <select class="form-control" id="lga" ngModel (change)="filterArea($event)" name="lga" formControlName="lga">
-                  <option value="" disabled selected hidden>
-                    Choose...
-                  </option>
+                <select
+                  class="form-control"
+                  id="lga"
+                  ngModel
+                  (change)="filterArea($event)"
+                  name="lga"
+                  formControlName="lga"
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
                   <option *ngFor="let item of LGA" value="{{ item.id }}">
                     {{ item.attributes.Name }}
                   </option>
@@ -110,10 +172,14 @@
               </div>
               <div class="form-group">
                 <label for="village">Village</label>
-                <select class="form-control" id="village" ngModel name="village" formControlName="village">
-                  <option value="" disabled selected hidden>
-                    Choose...
-                  </option>
+                <select
+                  class="form-control"
+                  id="village"
+                  ngModel
+                  name="village"
+                  formControlName="village"
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
                   <option *ngFor="let item of Villages" value="{{ item.id }}">
                     {{ item.attributes.Name }}
                   </option>
@@ -121,28 +187,59 @@
               </div>
             </div>
           </div>
+          <!-- <div class="form-group">Farmers selected : {{ NoOfContacts }}</div>
           <div class="form-group">
-            Farmers selected : {{NoOfContacts}}
-          </div>
-          <div class="form-group">
-            <button type="button" class="btn btn-secondary" (click)="clearSearch()">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              (click)="clearSearch()"
+            >
               Clear
             </button>
-            <button type="button" class="btn btn-primary ml-2" (click)="getUsers()">
-              <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <button
+              type="button"
+              class="btn btn-primary ml-2"
+              (click)="getUsers()"
+            >
+              <span
+                *ngIf="btnLoading"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
               Search
             </button>
-          </div>
+          </div> -->
           <div class="form-group">
             <label for="name">Message body</label>
-            <textarea rows="5" class="form-control" id="body" name="body" formControlName="body"
-              placeholder="Max 160 characters"></textarea>
+            <textarea
+              rows="5"
+              class="form-control"
+              id="message"
+              maxlength="160"
+              name="message"
+              formControlName="message"
+              placeholder="Max 160 characters"
+            ></textarea>
           </div>
-          <button type="button" class="btn btn-secondary" (click)="messageModal.hide()">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="messageModal.hide()"
+          >
             Close
           </button>
-          <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !messageForm.valid">
-            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          <button
+            type="submit"
+            class="btn btn-primary ml-2"
+            [disabled]="btnLoading || !messageForm.valid"
+          >
+            <span
+              *ngIf="btnLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
             Create
           </button>
         </form>

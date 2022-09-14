@@ -1056,7 +1056,7 @@ export const SmsColumn = [
     sortable: true,
   },
   {
-    field: "attributes.Name",
+    field: "attributes.message",
     headerName: "Message",
     minWidth: 150,
     resizable: true,
@@ -1067,10 +1067,34 @@ export const SmsColumn = [
       buttons: ["reset"],
     },
   },
-  {
-    field: "attributes.Name",
-    headerName: "Campaign",
+   {
+    field: "attributes.createdAt",
+    headerName: "Created at",
+    resizable: true,
     maxWidth: 250,
+    sortable: true,
+    filter: "agTextColumnFilter",
+    filterParams: {
+      filterOptions: ["contains"],
+      buttons: ["reset"],
+    },
+    cellRenderer: (data) => {
+      return data.value ? new Date(data.value).toLocaleString() : "";
+    },
+  },
+];
+export const DeliveryReportColumn = [
+  {
+    valueGetter: "node.rowIndex + 1",
+    headerName: "No.",
+    resizable: true,
+    maxWidth: 100,
+    sortable: true,
+  },
+  {
+    field: "recipient",
+    headerName: "Recipient",
+    minWidth: 150,
     resizable: true,
     sortable: true,
     filter: "agTextColumnFilter",
@@ -1078,6 +1102,21 @@ export const SmsColumn = [
       filterOptions: ["contains"],
       buttons: ["reset"],
     },
+  },
+   {
+    field: "delivery_status",
+    headerName: "Delivery status",
+    resizable: true,
+    maxWidth: 250,
+    sortable: true,
+    filter: "agTextColumnFilter",
+    filterParams: {
+      filterOptions: ["contains"],
+      buttons: ["reset"],
+    },
+    // cellRenderer: (data) => {
+    //   return data.value ? new Date(data.value).toLocaleString() : "";
+    // },
   },
 ];
 export const MarketplaceColumn = [

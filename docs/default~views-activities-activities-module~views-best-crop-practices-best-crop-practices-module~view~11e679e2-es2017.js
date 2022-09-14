@@ -4,7 +4,7 @@
 /*!*********************************************!*\
   !*** ./src/app/constants/columnMetadata.ts ***!
   \*********************************************/
-/*! exports provided: filterParams, AgentsColumn, RetailersColumn, UsersColumn, FarmDemoColumn, SoilHomeColumn, SoilAnalysisColumns, dateConverter, dateConverterMin, StateMasterColumn, LGAMasterColumn, AreaMasterColumn, VillageMasterColumn, MarketMasterColumn, CropMasterColumn, CropPricesColumn, SmsColumn, MarketplaceColumn, IndoramaUpdatesColumn, SurveysColumn, ActivitiesColumn */
+/*! exports provided: filterParams, AgentsColumn, RetailersColumn, UsersColumn, FarmDemoColumn, SoilHomeColumn, SoilAnalysisColumns, dateConverter, dateConverterMin, StateMasterColumn, LGAMasterColumn, AreaMasterColumn, VillageMasterColumn, MarketMasterColumn, CropMasterColumn, CropPricesColumn, SmsColumn, DeliveryReportColumn, MarketplaceColumn, IndoramaUpdatesColumn, SurveysColumn, ActivitiesColumn */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26,6 +26,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CropMasterColumn", function() { return CropMasterColumn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CropPricesColumn", function() { return CropPricesColumn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SmsColumn", function() { return SmsColumn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeliveryReportColumn", function() { return DeliveryReportColumn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MarketplaceColumn", function() { return MarketplaceColumn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IndoramaUpdatesColumn", function() { return IndoramaUpdatesColumn; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SurveysColumn", function() { return SurveysColumn; });
@@ -978,7 +979,7 @@ const SmsColumn = [
         sortable: true,
     },
     {
-        field: "attributes.Name",
+        field: "attributes.message",
         headerName: "Message",
         minWidth: 150,
         resizable: true,
@@ -990,10 +991,46 @@ const SmsColumn = [
         },
     },
     {
-        field: "attributes.Name",
-        headerName: "Campaign",
-        maxWidth: 250,
+        field: "attributes.createdAt",
+        headerName: "Created at",
         resizable: true,
+        maxWidth: 250,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+            filterOptions: ["contains"],
+            buttons: ["reset"],
+        },
+        cellRenderer: (data) => {
+            return data.value ? new Date(data.value).toLocaleString() : "";
+        },
+    },
+];
+const DeliveryReportColumn = [
+    {
+        valueGetter: "node.rowIndex + 1",
+        headerName: "No.",
+        resizable: true,
+        maxWidth: 100,
+        sortable: true,
+    },
+    {
+        field: "recipient",
+        headerName: "Recipient",
+        minWidth: 150,
+        resizable: true,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+            filterOptions: ["contains"],
+            buttons: ["reset"],
+        },
+    },
+    {
+        field: "delivery_status",
+        headerName: "Delivery status",
+        resizable: true,
+        maxWidth: 250,
         sortable: true,
         filter: "agTextColumnFilter",
         filterParams: {

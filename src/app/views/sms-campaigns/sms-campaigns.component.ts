@@ -48,7 +48,8 @@ export class SMSCampaignsComponent {
   NoOfContacts;
 
   messageForm = this.fb.group({
-    body: ["", Validators.required],
+    isAllFarmers: [false],
+    message: ["", Validators.required],
     village: [""],
     area: [""],
     lga: [""],
@@ -57,21 +58,23 @@ export class SMSCampaignsComponent {
   ngOnInit(): void {
     this.loading = true;
     console.log(this.router);
-    this.getCropPrices();
+    this.getSmsCampaigns();
     this.getAreas();
     this.getLGAs();
     this.getStates();
     this.getVillages();
   }
-  getCropPrices() {
-    this.dataservice.getCropPrices(1,this.pageSize).valueChanges.subscribe((result: any) => {
-      this.rowData = result.data.cropPrices.data;
-      this.meta = result.data.cropPrices.meta;
-      if (this.meta?.pagination?.pageCount <= 1) {
-        this.disablePrevButton = true;
-        this.disableNextButton = true;
-      }
-    });
+  getSmsCampaigns() {
+    this.dataservice
+      .getSmsCampaigns(1, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.rowData = result.data.smsCampaigns.data;
+        this.meta = result.data.smsCampaigns.meta;
+        if (this.meta?.pagination?.pageCount <= 1) {
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+      });
   }
   loadNext() {
     this.count++;
@@ -80,10 +83,10 @@ export class SMSCampaignsComponent {
       this.disableNextButton = true;
     }
     this.dataservice
-      .getCropPrices(this.count, this.pageSize)
+      .getSmsCampaigns(this.count, this.pageSize)
       .valueChanges.subscribe((result: any) => {
-        this.meta = result.data.cropPrices.meta;
-        this.rowData = result.data.cropPrices.data;
+        this.meta = result.data.smsCampaigns.meta;
+        this.rowData = result.data.smsCampaigns.data;
       });
   }
   loadPrev() {
@@ -95,10 +98,10 @@ export class SMSCampaignsComponent {
       this.disablePrevButton = true;
     }
     this.dataservice
-      .getCropPrices(this.count, this.pageSize)
+      .getSmsCampaigns(this.count, this.pageSize)
       .valueChanges.subscribe((result: any) => {
-        this.meta = result.data.cropPrices.meta;
-        this.rowData = result.data.cropPrices.data;
+        this.meta = result.data.smsCampaigns.meta;
+        this.rowData = result.data.smsCampaigns.data;
       });
   }
   getStates() {
@@ -127,29 +130,6 @@ export class SMSCampaignsComponent {
         this.Villages = result.data.villages.data;
       });
   }
-  clearSearch() {
-    this.messageForm.reset();
-    this.Farmers = [];
-    this.NoOfContacts = 0;
-  }
-  getUsers() {
-    this.dataservice
-      .getUsersLarge("Farmer", this.messageForm.value)
-      .valueChanges.subscribe((result: any) => {
-        console.log("getVillages", result.data.usersPermissionsUsers.data);
-        this.Farmers = Array.from(
-          result.data.usersPermissionsUsers.data,
-          (x: any) => x.attributes.ContactNumber
-        );
-        for (let i = 0; i < this.Farmers.length; i++) {
-          if (this.Farmers[i]) {
-            this.to = this.to + this.Farmers[i] + ",";
-          }
-        }
-        this.NoOfContacts = this.Farmers.length;
-        console.log("farmers", this.Farmers, this.to);
-      });
-  }
   filterLGA(event) {
     this.getLGAs(event.target.value);
   }
@@ -174,31 +154,27 @@ export class SMSCampaignsComponent {
     } else {
       this.disableButton = true;
     }
-    console.log(this.selectedRows, this.selectedRows[0].attributes.Name);
+    this.router.navigate(["/sms-campaigns/details", this.selectedRows[0].id], {
+      state: { data: this.selectedRows },
+    });
+    console.log(this.selectedRows, this.selectedRows[0]);
   }
   openModal(data: any) {
     this.messageModal.show();
   }
   sendMessage() {
     console.log(this.messageForm.value, "sendmessage");
-    let request = {
-      api_token: "sw4evLMU9UOK1WFHsarICwcvDnyGN3sVSANPo2VyWX7q6CZ5sNr9OCYKRyQ5",
-      to: this.to,
-      from: "INDORAMA",
-      body: this.messageForm.value?.body,
-    };
     this.dataservice
-    .sendMessage(request)
-    .subscribe((result: any) => {
-      console.log("response", result);
-      // this.toastr.success("Success!");
-      // if (result.data.deleteRetailerProduct) {
-      //   this.toastr.success("Success!");
-      //   this.deleteModal.hide();
-      //   this.getTest();
-      // } else {
-      //   this.toastr.error("Failed!");
-      // }
-    });
+      .createSMSCampaign(this.messageForm.value)
+      .subscribe((result: any) => {
+        console.log("response", result);
+        if (result.data.createSmsCampaign) {
+          this.toastr.success("Success!");
+          this.messageModal.hide();
+          this.getSmsCampaigns();
+        } else {
+          this.toastr.error("Failed!");
+        }
+      });
   }
 }
