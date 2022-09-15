@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Survey details</h2>\r\n      <span>\r\n        <div>\r\n          <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"myModal.show()\">\r\n            Download responses\r\n          </button>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-danger\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"deleteModal.show()\"\r\n          >\r\n            Delete\r\n          </button>\r\n        </div>\r\n      </span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Title</label>\r\n          <h5>{{questions?.attributes?.SurveyTitle}}</h5>\r\n        </div>\r\n      </div>\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Description</label>\r\n          <h5>{{questions?.attributes?.SurveyDescription}}</h5>\r\n        </div>\r\n      </div>\r\n      <h6>Survey Questions</h6>\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <div class=\"card\">\r\n            <div class=\"card-body\" *ngFor=\"let item of questions?.attributes?.Fields;let indexOfelement=index;\">\r\n              <div style=\"display: flex; justify-content: space-between\">\r\n                <h5 class=\"card-title\">{{item.FieldName}}</h5>\r\n                <!-- <button type=\"button\" class=\"btn btn-outline-danger\" data-toggle=\"modal\"\r\n                  (click)=\"deleteQuestion(indexOfelement)\">\r\n                  Delete\r\n                </button> -->\r\n              </div>\r\n              <p class=\"card-text\">\r\n                Question type : {{returnQuesType(item.__component)}}\r\n              </p>\r\n              <p class=\"card-text\">\r\n                Field type : {{item.FieldType}}\r\n              </p>\r\n              <p class=\"card-text\">\r\n                Required : {{item.Mandatory}}\r\n              </p>\r\n              <p *ngIf=\"item.Values\" class=\"card-text\">\r\n                Options : <span *ngFor=\"let option of item.Values\" class=\"badge badge-success mx-1\">{{option}}</span>\r\n              </p>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n    bsModal\r\n    #deleteModal=\"bs-modal\"\r\n    class=\"modal fade\"\r\n    tabindex=\"-1\"\r\n    role=\"dialog\"\r\n    aria-labelledby=\"myModalLabel\"\r\n    aria-hidden=\"true\"\r\n  >\r\n    <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-body text-center\">\r\n          This will permanently delete the survey. Are you sure?\r\n        </div>\r\n        <div class=\"modal-footer justify-content-around\">\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"deleteModal.hide()\"\r\n          >\r\n            No! Cancel.\r\n          </button>\r\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteSurvey()\">\r\n            Yes! Delete.\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Survey details</h2>\r\n      <span>\r\n        <div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-primary\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"myModal.show()\"\r\n          >\r\n            Download responses\r\n          </button>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-danger\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"deleteModal.show()\"\r\n          >\r\n            Delete\r\n          </button>\r\n        </div>\r\n      </span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Title</label>\r\n          <h5>{{ questions?.attributes?.SurveyTitle }}</h5>\r\n        </div>\r\n      </div>\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Description</label>\r\n          <h5>{{ questions?.attributes?.SurveyDescription }}</h5>\r\n        </div>\r\n      </div>\r\n      <h6>Survey Questions</h6>\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <div class=\"card\">\r\n            <div\r\n              class=\"card-body\"\r\n              *ngFor=\"\r\n                let item of questions?.attributes?.Fields;\r\n                let indexOfelement = index\r\n              \"\r\n            >\r\n              <div style=\"display: flex; justify-content: space-between\">\r\n                <div>\r\n                  <h5 class=\"card-title\">{{ item.FieldName }}</h5>\r\n                  <p class=\"card-text\">\r\n                    Question type : {{ returnQuesType(item.__component) }}\r\n                  </p>\r\n                  <p class=\"card-text\">Field type : {{ item.FieldType }}</p>\r\n                  <p class=\"card-text\">Required : {{ item.Mandatory }}</p>\r\n                  <p *ngIf=\"item.Values\" class=\"card-text\">\r\n                    Options :\r\n                    <span\r\n                      *ngFor=\"let option of item.Values\"\r\n                      class=\"badge badge-success mx-1\"\r\n                      >{{ option }}</span\r\n                    >\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"chart-wrapper\">\r\n                <canvas\r\n                  baseChart\r\n                  class=\"chart\"\r\n                  [data]=\"returnChartdata(item.FieldKey)\"\r\n                  [labels]=\"returnChartLabels(item.FieldKey)\"\r\n                  [chartType]=\"pieChartType\"\r\n                  (chartClick)=\"chartClicked($event)\"\r\n                ></canvas>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #deleteModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        This will permanently delete the survey. Are you sure?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-secondary\"\r\n          (click)=\"deleteModal.hide()\"\r\n        >\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteSurvey()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -27,25 +27,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "SVse");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/forms */ "s7LF");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ "8Y7J");
-/* harmony import */ var _surveys_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./surveys.component */ "sw6f");
-/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "FE24");
-/* harmony import */ var ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-bootstrap/tabs */ "2ZVE");
-/* harmony import */ var _surveys_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./surveys-routing.module */ "jJ9Y");
-/* harmony import */ var ag_grid_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ag-grid-angular */ "YFAK");
-/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ngx-bootstrap/modal */ "LqlI");
-/* harmony import */ var _surveys_detail_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./surveys-detail.component */ "tUeK");
-/* harmony import */ var _surveys_add_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./surveys-add.component */ "eqIL");
+/* harmony import */ var ag_grid_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ag-grid-angular */ "YFAK");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ngx-bootstrap/modal */ "LqlI");
+/* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "FE24");
+/* harmony import */ var ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ngx-bootstrap/tabs */ "2ZVE");
+/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ng2-charts */ "hrfs");
+/* harmony import */ var _surveys_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./surveys.component */ "sw6f");
+/* harmony import */ var _surveys_routing_module__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./surveys-routing.module */ "jJ9Y");
+/* harmony import */ var _surveys_detail_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./surveys-detail.component */ "tUeK");
+/* harmony import */ var _surveys_add_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./surveys-add.component */ "eqIL");
 
 
 
 
 
-// Dropdowns Component
 
 
-// Buttons Routing
 
-// Angular
+
 
 
 
@@ -56,15 +55,16 @@ SurveysModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
-            ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_6__["TabsModule"],
+            ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_7__["TabsModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
-            ag_grid_angular__WEBPACK_IMPORTED_MODULE_8__["AgGridModule"].withComponents([]),
-            _surveys_routing_module__WEBPACK_IMPORTED_MODULE_7__["SurveysRoutingModule"],
-            ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_5__["BsDropdownModule"].forRoot(),
-            ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["ModalModule"].forRoot(),
+            ag_grid_angular__WEBPACK_IMPORTED_MODULE_4__["AgGridModule"].withComponents([]),
+            _surveys_routing_module__WEBPACK_IMPORTED_MODULE_10__["SurveysRoutingModule"],
+            ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_6__["BsDropdownModule"].forRoot(),
+            ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_5__["ModalModule"].forRoot(),
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"],
+            ng2_charts__WEBPACK_IMPORTED_MODULE_8__["ChartsModule"]
         ],
-        declarations: [_surveys_component__WEBPACK_IMPORTED_MODULE_4__["SurveysComponent"], _surveys_detail_component__WEBPACK_IMPORTED_MODULE_10__["SurveyDetailsComponent"], _surveys_add_component__WEBPACK_IMPORTED_MODULE_11__["NewSurveyComponent"]],
+        declarations: [_surveys_component__WEBPACK_IMPORTED_MODULE_9__["SurveysComponent"], _surveys_detail_component__WEBPACK_IMPORTED_MODULE_11__["SurveyDetailsComponent"], _surveys_add_component__WEBPACK_IMPORTED_MODULE_12__["NewSurveyComponent"]],
     })
 ], SurveysModule);
 
@@ -461,6 +461,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../data.service */ "R7Hv");
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "s7LF");
 /* harmony import */ var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../constants/columnMetadata */ "7nfi");
+/* harmony import */ var ng2_charts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ng2-charts */ "hrfs");
 
 
 
@@ -470,6 +471,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+const unique = (value, index, self) => {
+    return self.indexOf(value) === index;
+};
 let SurveyDetailsComponent = class SurveyDetailsComponent {
     constructor(dataservice, activatedRouter, router, fb, toastr) {
         this.dataservice = dataservice;
@@ -482,6 +487,10 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         this.rowData = [];
         this.questions = {};
         this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverter"];
+        // Pie
+        this.pieChartLabels = [];
+        this.pieChartData = [300, 500, 100, 45, 300, 500, 100, 45];
+        this.pieChartType = "pie";
     }
     ngOnInit() {
         this.activatedRouter.params.subscribe((params) => {
@@ -497,11 +506,35 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         });
     }
     getSurveyResults() {
+        let data = {};
         this.dataservice
             .getSurveyResults(this.id)
             .valueChanges.subscribe((result) => {
-            console.log("getSurveyResults", result.data.surveyResults.data);
+            var _a, _b;
             this.rowData = result.data.surveyResults.data;
+            console.log("getSurveyResults", this.rowData);
+            let Fields = (_b = (_a = this.questions) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Fields;
+            console.log(Fields, "Fields");
+            for (let i = 0; i < Fields.length; i++) {
+                let ans = this.rowData.map((x) => x.attributes.SurveyResponse[Fields[i].FieldKey]);
+                let unique_ans = this.rowData
+                    .map((x) => x.attributes.SurveyResponse[Fields[i].FieldKey])
+                    .filter(unique);
+                let count = 0;
+                let counted_obj = {};
+                for (let j = 0; j < unique_ans.length; j++) {
+                    count = 0;
+                    for (let k = 0; k < ans.length; k++) {
+                        if (unique_ans[j] == ans[k]) {
+                            count++;
+                        }
+                    }
+                    counted_obj[unique_ans[j]] = count;
+                }
+                data[Fields[i].FieldKey] = counted_obj;
+            }
+            this.resultsProcessed = data;
+            console.log(this.resultsProcessed);
         });
     }
     returnQuesType(data) {
@@ -512,10 +545,14 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
             return "Text";
         }
     }
+    returnChartLabels(data) {
+        return Object.keys(this.resultsProcessed[data]);
+    }
+    returnChartdata(data) {
+        return Object.values(this.resultsProcessed[data]);
+    }
     deleteSurvey() {
-        this.dataservice
-            .deleteSurvey(this.id)
-            .subscribe((result) => {
+        this.dataservice.deleteSurvey(this.id).subscribe((result) => {
             console.log("response", result);
             if (result.data.deleteSurveyForm) {
                 this.toastr.success("Success!");
@@ -536,7 +573,8 @@ SurveyDetailsComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 SurveyDetailsComponent.propDecorators = {
-    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }]
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }],
+    chart: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: [ng2_charts__WEBPACK_IMPORTED_MODULE_9__["BaseChartDirective"],] }]
 };
 SurveyDetailsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

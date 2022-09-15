@@ -1,10 +1,18 @@
 <div class="animated fadeIn">
   <div class="card">
-    <div class="card-header" style="display: flex; justify-content: space-between">
+    <div
+      class="card-header"
+      style="display: flex; justify-content: space-between"
+    >
       <h2>Survey details</h2>
       <span>
         <div>
-          <button type="button" class="btn btn-primary" data-toggle="modal" (click)="myModal.show()">
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-toggle="modal"
+            (click)="myModal.show()"
+          >
             Download responses
           </button>
           <button
@@ -22,39 +30,54 @@
       <div class="row p-2">
         <div class="form-group">
           <label for="title">Survey Title</label>
-          <h5>{{questions?.attributes?.SurveyTitle}}</h5>
+          <h5>{{ questions?.attributes?.SurveyTitle }}</h5>
         </div>
       </div>
       <div class="row p-2">
         <div class="form-group">
           <label for="title">Survey Description</label>
-          <h5>{{questions?.attributes?.SurveyDescription}}</h5>
+          <h5>{{ questions?.attributes?.SurveyDescription }}</h5>
         </div>
       </div>
       <h6>Survey Questions</h6>
       <div class="row">
         <div class="col">
           <div class="card">
-            <div class="card-body" *ngFor="let item of questions?.attributes?.Fields;let indexOfelement=index;">
+            <div
+              class="card-body"
+              *ngFor="
+                let item of questions?.attributes?.Fields;
+                let indexOfelement = index
+              "
+            >
               <div style="display: flex; justify-content: space-between">
-                <h5 class="card-title">{{item.FieldName}}</h5>
-                <!-- <button type="button" class="btn btn-outline-danger" data-toggle="modal"
-                  (click)="deleteQuestion(indexOfelement)">
-                  Delete
-                </button> -->
+                <div>
+                  <h5 class="card-title">{{ item.FieldName }}</h5>
+                  <p class="card-text">
+                    Question type : {{ returnQuesType(item.__component) }}
+                  </p>
+                  <p class="card-text">Field type : {{ item.FieldType }}</p>
+                  <p class="card-text">Required : {{ item.Mandatory }}</p>
+                  <p *ngIf="item.Values" class="card-text">
+                    Options :
+                    <span
+                      *ngFor="let option of item.Values"
+                      class="badge badge-success mx-1"
+                      >{{ option }}</span
+                    >
+                  </p>
+                </div>
               </div>
-              <p class="card-text">
-                Question type : {{returnQuesType(item.__component)}}
-              </p>
-              <p class="card-text">
-                Field type : {{item.FieldType}}
-              </p>
-              <p class="card-text">
-                Required : {{item.Mandatory}}
-              </p>
-              <p *ngIf="item.Values" class="card-text">
-                Options : <span *ngFor="let option of item.Values" class="badge badge-success mx-1">{{option}}</span>
-              </p>
+              <div class="chart-wrapper">
+                <canvas
+                  baseChart
+                  class="chart"
+                  [data]="returnChartdata(item.FieldKey)"
+                  [labels]="returnChartLabels(item.FieldKey)"
+                  [chartType]="pieChartType"
+                  (chartClick)="chartClicked($event)"
+                ></canvas>
+              </div>
             </div>
           </div>
         </div>
@@ -63,31 +86,31 @@
   </div>
 </div>
 <div
-    bsModal
-    #deleteModal="bs-modal"
-    class="modal fade"
-    tabindex="-1"
-    role="dialog"
-    aria-labelledby="myModalLabel"
-    aria-hidden="true"
-  >
-    <div class="modal-dialog modal-dialog-centered modal-sm">
-      <div class="modal-content">
-        <div class="modal-body text-center">
-          This will permanently delete the survey. Are you sure?
-        </div>
-        <div class="modal-footer justify-content-around">
-          <button
-            type="button"
-            class="btn btn-secondary"
-            (click)="deleteModal.hide()"
-          >
-            No! Cancel.
-          </button>
-          <button type="button" class="btn btn-primary" (click)="deleteSurvey()">
-            Yes! Delete.
-          </button>
-        </div>
+  bsModal
+  #deleteModal="bs-modal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-sm">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        This will permanently delete the survey. Are you sure?
+      </div>
+      <div class="modal-footer justify-content-around">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="deleteModal.hide()"
+        >
+          No! Cancel.
+        </button>
+        <button type="button" class="btn btn-primary" (click)="deleteSurvey()">
+          Yes! Delete.
+        </button>
       </div>
     </div>
   </div>
+</div>
