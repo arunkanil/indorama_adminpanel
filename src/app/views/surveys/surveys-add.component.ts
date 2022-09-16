@@ -81,17 +81,24 @@ export class NewSurveyComponent implements OnInit {
   formSubmit() {
     let resp = {};
     console.log(this.addForm.value);
-    this.dataservice
-      .createSurveys(this.SurveyTitle, this.SurveyDescription, this.questions)
-      .subscribe((result: any) => {
-        resp = result.data;
-        console.log("response", result);
-        if (result.data.createSurveyForm) {
-          this.toastr.success("Farm demo added successfully!");
-          this.router.navigate(["/surveys/all"]);
-        } else {
-          this.toastr.error("Failed. Please check the fields!");
-        }
-      });
+    if (this.SurveyTitle && this.SurveyDescription) {
+      this.dataservice
+        .createSurveys(this.SurveyTitle, this.SurveyDescription, this.questions)
+        .subscribe(
+          (result: any) => {
+            resp = result.data;
+            console.log("response", result);
+            if (result.data.createSurveyForm) {
+              this.toastr.success("Farm demo added successfully!");
+              this.router.navigate(["/surveys/all"]);
+            }
+          },
+          (error) => {
+            this.toastr.error("Failed. Please check the fields!");
+          }
+        );
+    } else {
+      this.toastr.error("Please add both title & Description");
+    }
   }
 }

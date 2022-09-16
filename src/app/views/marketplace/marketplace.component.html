@@ -89,7 +89,7 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="category">Category</label>
+                <label for="category">Category <span class="danger">*</span></label>
                 <select
                   class="form-control"
                   id="category"
@@ -105,7 +105,7 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="itemName">Title</label>
+                <label for="itemName">Title <span class="danger">*</span></label>
                 <input
                   type="text"
                   class="form-control"
@@ -116,7 +116,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="price">Price</label>
+                <label for="price">Price <span class="danger">*</span></label>
                 <input
                   type="number"
                   class="form-control"
@@ -127,7 +127,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="unit">Unit</label>
+                <label for="unit">Unit <span class="danger">*</span></label>
                 <input
                   type="text"
                   class="form-control"
@@ -140,7 +140,7 @@
             </div>
             <div class="col">
               <div class="form-group">
-                <label for="availableQty">Quantity</label>
+                <label for="availableQty">Quantity <span class="danger">*</span></label>
                 <input
                   type="text"
                   class="form-control"
@@ -151,7 +151,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="contactNumber">Contact Number</label>
+                <label for="contactNumber">Contact Number <span class="danger">*</span></label>
                 <input
                   type="number"
                   class="form-control"
@@ -162,7 +162,7 @@
                 />
               </div>
               <div class="form-group">
-                <label for="description">Description</label>
+                <label for="description">Description <span class="danger">*</span></label>
                 <textarea
                   class="form-control"
                   id="description"
@@ -173,7 +173,7 @@
                 ></textarea>
               </div>
               <div class="form-group">
-                <label for="images">Image</label>
+                <label for="images">Image <span class="danger">*</span></label>
                 <div>
                   <img
                     *ngIf="imageUrl"

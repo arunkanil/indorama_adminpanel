@@ -168,7 +168,7 @@ export class UserDetailComponent implements OnInit {
   }
   getFarmers() {
     this.dataservice
-      .getUsers("Farmer")
+      .getUsers(undefined,undefined,"Farmer")
       .valueChanges.subscribe((result: any) => {
         console.log("getFarmers", result.data.usersPermissionsUsers.data);
         this.Farmers = result.data.usersPermissionsUsers.data;
@@ -242,8 +242,11 @@ export class UserDetailComponent implements OnInit {
       });
   }
   onChange(event: any) {
-    this.file = event.target.files[0];
-    console.log(event.target.files[0]);
+    this.file = [];
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.file.push(event.target.files[i]);
+    }
+    console.log(this.file);
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);

@@ -1,10 +1,18 @@
 <div class="animated fadeIn">
   <div class="card">
-    <div class="card-header" style="display: flex; justify-content: space-between">
+    <div
+      class="card-header"
+      style="display: flex; justify-content: space-between"
+    >
       <h2>Chat Home</h2>
       <div class="btn-group float-right" dropdown>
-        <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">{{selectedList}}<span
-            class="caret"></span></button>
+        <button
+          dropdownToggle
+          type="button"
+          class="btn btn-primary dropdown-toggle"
+        >
+          {{ selectedList }}<span class="caret"></span>
+        </button>
         <ul *dropdownMenu class="dropdown-menu" role="menu">
           <li role="menuitem">
             <a class="dropdown-item" (click)="toggleChat(false)">All Chats</a>
@@ -15,59 +23,126 @@
     </div>
     <main class="content">
       <div class="container-fluid p-0">
-
         <!-- <h1 class="h3 mb-3">Messages</h1> -->
 
         <div class="card">
           <div class="row g-0">
-            <div class="col-12 col-lg-5 col-xl-3 border-right" style="max-height: 90vh; overflow-y:scroll;">
+            <div
+              class="col-12 col-lg-5 col-xl-3 border-right"
+              style="max-height: 90vh; overflow-y: scroll"
+            >
               <div class="px-4 d-none d-md-block">
                 <div class="d-flex align-items-center">
                   <div class="flex-grow-1">
-                    <input ngModel type="text" class="form-control my-3" (change)="onChange($event)"
-                      placeholder="Search...">
-                    <button class="btn btn-primary" (click)="searchChats()">Search</button>
-                    <button class="btn btn-secondary" (click)="clearSearch()">Clear</button>
+                    <input
+                      ngModel
+                      type="text"
+                      class="form-control my-3"
+                      #searchfield
+                      (change)="onChange($event)"
+                      placeholder="Search..."
+                    />
+                    <button class="btn btn-primary" (click)="searchChats()">
+                      Search
+                    </button>
+                    <button class="btn btn-secondary" (click)="clearSearch()">
+                      Clear
+                    </button>
                   </div>
                 </div>
               </div>
-              <a *ngFor="let item of chatData" class="list-group-item list-group-item-action border-0"
-                (click)="getChatMessages(item)">
+              <a
+                *ngFor="let item of chatData"
+                class="list-group-item list-group-item-action border-0"
+                (click)="getChatMessages(item)"
+              >
                 <!-- <div class="badge bg-success float-right">5</div> -->
                 <div class="d-flex align-items-start">
-                  <img *ngIf="item?.attributes?.chatInitiatedBy?.data?.attributes?.prof_pic.data?.attributes?.url"
-                    src="https://indoramaapp.untanglestrategy.com{{item?.attributes?.chatInitiatedBy?.data?.attributes?.prof_pic?.data?.attributes?.url}}"
-                    class="rounded-circle mr-1" alt="profile pic" width="40" height="40">
-                  <img *ngIf="!item?.attributes?.chatInitiatedBy?.data?.attributes?.prof_pic.data?.attributes?.url"
-                    src="../../../assets/img/avatars/6.png" class="rounded-circle mr-1" alt="profile pic" width="40"
-                    height="40">
+                  <img
+                    *ngIf="
+                      item?.attributes?.chatInitiatedBy?.data?.attributes
+                        ?.prof_pic.data?.attributes?.url
+                    "
+                    src="https://indoramaapp.untanglestrategy.com{{
+                      item?.attributes?.chatInitiatedBy?.data?.attributes
+                        ?.prof_pic?.data?.attributes?.url
+                    }}"
+                    class="rounded-circle mr-1"
+                    alt="profile pic"
+                    width="40"
+                    height="40"
+                  />
+                  <img
+                    *ngIf="
+                      !item?.attributes?.chatInitiatedBy?.data?.attributes
+                        ?.prof_pic.data?.attributes?.url
+                    "
+                    src="../../../assets/img/avatars/6.png"
+                    class="rounded-circle mr-1"
+                    alt="profile pic"
+                    width="40"
+                    height="40"
+                  />
                   <div class="flex-grow-1 ml-3">
-                    {{item?.attributes?.chatInitiatedBy?.data?.attributes?.Name}}
-                    <div class="small">{{item?.attributes?.members?.data[1]?.attributes?.Name}} -
-                      {{item?.attributes?.members?.data[0]?.attributes?.Name}}</div>
+                    {{
+                      item?.attributes?.chatInitiatedBy?.data?.attributes?.Name
+                    }}
+                    <div class="small">
+                      {{ item?.attributes?.members?.data[1]?.attributes?.Name }}
+                      -
+                      {{ item?.attributes?.members?.data[0]?.attributes?.Name }}
+                    </div>
                   </div>
                 </div>
               </a>
-              <button class="btn btn-primary" (click)="loadMoreChats()" style="float: right;">Load more</button>
+              <button
+                class="btn btn-primary"
+                (click)="loadMoreChats()"
+                style="float: right"
+              >
+                Load more
+              </button>
 
-              <hr class="d-block d-lg-none mt-1 mb-0">
+              <hr class="d-block d-lg-none mt-1 mb-0" />
             </div>
             <div class="col-12 col-lg-7 col-xl-9">
               <div class="py-2 px-4 border-bottom d-none d-lg-block">
-                <div class="d-flex align-items-center py-1" style="justify-content: space-between;">
+                <div
+                  class="d-flex align-items-center py-1"
+                  style="justify-content: space-between"
+                >
                   <div>
                     <!-- <div class="position-relative">
                       <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1"
                         alt="Sharon Lessman" width="40" height="40">
                     </div> -->
                     <div class="flex-grow-1 pl-3">
-                      <img *ngIf="chatMembers[0]?.attributes?.prof_pic.data?.attributes?.url"
-                        src="https://indoramaapp.untanglestrategy.com{{chatMembers[0]?.attributes?.prof_pic.data?.attributes?.url}}"
-                        class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                      <img *ngIf="!chatMembers[0]?.attributes?.prof_pic.data?.attributes?.url"
-                        src="../../../assets/img/avatars/6.png" class="rounded-circle mr-1" alt="profile pic" width="40"
-                        height="40">
-                      <strong>{{chatMembers[0]?.attributes?.Name}}</strong>
+                      <img
+                        *ngIf="
+                          chatMembers[0]?.attributes?.prof_pic.data?.attributes
+                            ?.url
+                        "
+                        src="https://indoramaapp.untanglestrategy.com{{
+                          chatMembers[0]?.attributes?.prof_pic.data?.attributes
+                            ?.url
+                        }}"
+                        class="rounded-circle mr-1"
+                        alt="Sharon Lessman"
+                        width="40"
+                        height="40"
+                      />
+                      <img
+                        *ngIf="
+                          !chatMembers[0]?.attributes?.prof_pic.data?.attributes
+                            ?.url
+                        "
+                        src="../../../assets/img/avatars/6.png"
+                        class="rounded-circle mr-1"
+                        alt="profile pic"
+                        width="40"
+                        height="40"
+                      />
+                      <strong>{{ chatMembers[0]?.attributes?.Name }}</strong>
                       <!-- <div class="text-muted small"><em>Typing...</em></div> -->
                     </div>
                   </div>
@@ -76,13 +151,32 @@
                       
                     </div> -->
                     <div class="flex-grow-1 pl-3">
-                      <img *ngIf="chatMembers[1]?.attributes?.prof_pic.data?.attributes?.url"
-                        src="https://indoramaapp.untanglestrategy.com{{chatMembers[1]?.attributes?.prof_pic.data?.attributes?.url}}"
-                        class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-                      <img *ngIf="!chatMembers[1]?.attributes?.prof_pic.data?.attributes?.url"
-                        src="../../../assets/img/avatars/6.png" class="rounded-circle mr-1" alt="profile pic" width="40"
-                        height="40">
-                      <strong>{{chatMembers[1]?.attributes?.Name}}</strong>
+                      <img
+                        *ngIf="
+                          chatMembers[1]?.attributes?.prof_pic.data?.attributes
+                            ?.url
+                        "
+                        src="https://indoramaapp.untanglestrategy.com{{
+                          chatMembers[1]?.attributes?.prof_pic.data?.attributes
+                            ?.url
+                        }}"
+                        class="rounded-circle mr-1"
+                        alt="Sharon Lessman"
+                        width="40"
+                        height="40"
+                      />
+                      <img
+                        *ngIf="
+                          !chatMembers[1]?.attributes?.prof_pic.data?.attributes
+                            ?.url
+                        "
+                        src="../../../assets/img/avatars/6.png"
+                        class="rounded-circle mr-1"
+                        alt="profile pic"
+                        width="40"
+                        height="40"
+                      />
+                      <strong>{{ chatMembers[1]?.attributes?.Name }}</strong>
                       <!-- <div class="text-muted small"><em>Typing...</em></div> -->
                     </div>
                     <!-- <button class="btn btn-primary btn-lg mr-1 px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24"
@@ -113,24 +207,70 @@
 
               <div class="position-relative">
                 <div class="chat-messages p-4">
-                  <div *ngFor="let item of messageData?.attributes?.messages?.data" class="chat-message-left pb-4">
+                  <div
+                    *ngFor="let item of messageData?.attributes?.messages?.data"
+                    class="chat-message-left pb-4"
+                  >
                     <div>
-                      <img *ngIf="item?.attributes?.from_user?.data?.attributes?.prof_pic?.data?.attributes?.url"
-                        src="https://indoramaapp.untanglestrategy.com{{item?.attributes?.from_user?.data?.attributes?.prof_pic?.data?.attributes?.url}}"
-                        class="rounded-circle mr-1" alt="Chris Wood" width="40" height="40">
-                      <img *ngIf="!item?.attributes?.from_user?.data?.attributes?.prof_pic?.data?.attributes?.url"
-                        src="../../../assets/img/avatars/6.png" class="rounded-circle mr-1" alt="Chris Wood" width="40"
-                        height="40">
+                      <img
+                        *ngIf="
+                          item?.attributes?.from_user?.data?.attributes
+                            ?.prof_pic?.data?.attributes?.url
+                        "
+                        src="https://indoramaapp.untanglestrategy.com{{
+                          item?.attributes?.from_user?.data?.attributes
+                            ?.prof_pic?.data?.attributes?.url
+                        }}"
+                        class="rounded-circle mr-1"
+                        alt="Chris Wood"
+                        width="40"
+                        height="40"
+                      />
+                      <img
+                        *ngIf="
+                          !item?.attributes?.from_user?.data?.attributes
+                            ?.prof_pic?.data?.attributes?.url
+                        "
+                        src="../../../assets/img/avatars/6.png"
+                        class="rounded-circle mr-1"
+                        alt="Chris Wood"
+                        width="40"
+                        height="40"
+                      />
                       <div class="text-muted small text-nowrap mt-2">
-                        {{convertDate(item?.attributes?.createdAt)}}<br>{{convertTime(item?.attributes?.createdAt)}}
+                        {{ convertDate(item?.attributes?.createdAt) }}<br />{{
+                          convertTime(item?.attributes?.createdAt)
+                        }}
                       </div>
                     </div>
                     <div class="flex-shrink-1 bg-light rounded py-2 px-3 mr-3">
-                      <div class="font-weight-bold mb-1">{{item?.attributes?.from_user?.data?.attributes?.Name}}</div>
-                      <img *ngIf="item?.attributes?.image_attachment?.data?.attributes?.url"
-                        src="https://indoramaapp.untanglestrategy.com{{item?.attributes?.image_attachment?.data?.attributes?.url}}"
-                        class="mr-1" alt="Chris Wood" width="100%" height="100">
-                      <div>{{item?.attributes?.message}}</div>
+                      <div class="font-weight-bold mb-1">
+                        {{
+                          item?.attributes?.from_user?.data?.attributes?.Name
+                        }}
+                      </div>
+                      <a
+                        href="https://indoramaapp.untanglestrategy.com{{
+                          item?.attributes?.image_attachment?.data?.attributes
+                            ?.url
+                        }}" target="_blank"
+                      >
+                        <img
+                          *ngIf="
+                            item?.attributes?.image_attachment?.data?.attributes
+                              ?.url
+                          "
+                          src="https://indoramaapp.untanglestrategy.com{{
+                            item?.attributes?.image_attachment?.data?.attributes
+                              ?.url
+                          }}"
+                          class="mr-1"
+                          alt="Chris Wood"
+                          width="100%"
+                          height="100"
+                        />
+                      </a>
+                      <div>{{ item?.attributes?.message }}</div>
                     </div>
                   </div>
                   <!-- <div class="chat-message-left pb-4">
@@ -144,7 +284,6 @@
                       Sit meis deleniti eu, pri vidit meliore docendi ut, an eum erat animal commodo.
                     </div>
                   </div> -->
-
                 </div>
               </div>
 
@@ -154,7 +293,6 @@
                 <button class="btn btn-primary">Send</button>
               </div>
             </div> -->
-
             </div>
           </div>
         </div>

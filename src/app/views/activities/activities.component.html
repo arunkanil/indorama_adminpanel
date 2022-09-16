@@ -45,7 +45,9 @@
             animateRows="true"
           >
           </ag-grid-angular>
-          <span class="float-left mt-3">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>
+          <span class="float-left mt-3"
+            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span
+          >
           <button
             type="button"
             [disabled]="disableNextButton"
@@ -54,7 +56,10 @@
           >
             Next
           </button>
-          <span class="float-right mt-3">Page {{meta?.pagination?.page}} of {{meta?.pagination?.pageCount}}</span>
+          <span class="float-right mt-3"
+            >Page {{ meta?.pagination?.page }} of
+            {{ meta?.pagination?.pageCount }}</span
+          >
           <button
             type="button"
             [disabled]="disablePrevButton"
@@ -95,7 +100,9 @@
           <div class="row">
             <div class="col">
               <div class="form-group">
-                <label for="ActivityType">Activity Type <span class="danger">*</span></label>
+                <label for="ActivityType"
+                  >Activity Type <span class="danger">*</span></label
+                >
                 <select
                   class="form-control"
                   id="ActivityType"
@@ -133,9 +140,11 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="Latitude">Latitude <span class="danger">*</span></label>
+                <label for="Latitude"
+                  >Latitude <span class="danger">*</span></label
+                >
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
                   id="Latitude"
                   name="Latitude"
@@ -144,9 +153,11 @@
                 />
               </div>
               <div class="form-group">
-                <label for="Longitude">Longitude <span class="danger">*</span></label>
+                <label for="Longitude"
+                  >Longitude <span class="danger">*</span></label
+                >
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
                   id="Longitude"
                   name="Longitude"
@@ -155,9 +166,11 @@
                 />
               </div>
               <div class="form-group">
-                <label for="NoOfAttendees">Number of attendees <span class="danger">*</span></label>
+                <label for="NoOfAttendees"
+                  >Number of attendees <span class="danger">*</span></label
+                >
                 <input
-                  type="text"
+                  type="number"
                   class="form-control"
                   id="NoOfAttendees"
                   name="NoOfAttendees"
@@ -206,14 +219,17 @@
               </div>
               <div class="form-group">
                 <label for="ConditionOfCrop">Condition of crop</label>
-                <input
-                  type="text"
+                <select
                   class="form-control"
                   id="ConditionOfCrop"
                   name="ConditionOfCrop"
                   formControlName="ConditionOfCrop"
-                  placeholder="Enter condition"
-                />
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option value="Good">Good</option>
+                  <option value="VeryGood">Very Good</option>
+                  <option value="Excellent">Excellent</option>
+                </select>
               </div>
               <div class="form-group">
                 <label for="PlannedFarmDay">Planned farm day</label>

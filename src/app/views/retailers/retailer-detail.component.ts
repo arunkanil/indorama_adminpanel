@@ -151,7 +151,7 @@ export class RetailerDetailComponent implements OnInit {
   }
   getFarmers() {
     this.dataservice
-      .getUsers("Farmer")
+      .getUsers(undefined, undefined, "Farmer")
       .valueChanges.subscribe((result: any) => {
         console.log("getFarmers", result.data.usersPermissionsUsers.data);
         this.Farmers = result.data.usersPermissionsUsers.data;
@@ -181,7 +181,7 @@ export class RetailerDetailComponent implements OnInit {
       unit: [data?.attributes?.Unit, Validators.required],
     });
   }
-  openDeleteModal(data){
+  openDeleteModal(data) {
     this.deleteObj = data;
     this.deleteModal.show();
   }
@@ -225,8 +225,11 @@ export class RetailerDetailComponent implements OnInit {
       });
   }
   onChange(event: any) {
-    this.file = event.target.files[0];
-    console.log(event.target.files[0]);
+    this.file = [];
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.file.push(event.target.files[i]);
+    }
+    console.log(this.file);
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);
@@ -234,16 +237,13 @@ export class RetailerDetailComponent implements OnInit {
   filterVillage(event) {
     this.getVillages(event.target.value);
   }
-  uploadProfPic(){
+  uploadProfPic() {
     let resp = {};
     this.dataservice.upload(this.file).subscribe((response: any) => {
       if (response.status == 200) {
         console.log(response);
         this.dataservice
-          .UpdateRetailerPic(
-            this.id,
-            response.body[0]?.id
-          )
+          .UpdateRetailerPic(this.id, response.body[0]?.id)
           .subscribe((result: any) => {
             resp = result.data;
             console.log("response", result);
@@ -292,16 +292,16 @@ export class RetailerDetailComponent implements OnInit {
   }
   deleteProduct() {
     this.dataservice
-    .deleteProduct(this.deleteObj.id)
-    .subscribe((result: any) => {
-      console.log("response", result);
-      if (result.data.deleteRetailerProduct) {
-        this.toastr.success("Success!");
-        this.deleteModal.hide();
-        this.getTest();
-      } else {
-        this.toastr.error("Failed!");
-      }
-    });
+      .deleteProduct(this.deleteObj.id)
+      .subscribe((result: any) => {
+        console.log("response", result);
+        if (result.data.deleteRetailerProduct) {
+          this.toastr.success("Success!");
+          this.deleteModal.hide();
+          this.getTest();
+        } else {
+          this.toastr.error("Failed!");
+        }
+      });
   }
 }

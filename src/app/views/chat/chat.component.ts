@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component,ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
@@ -13,7 +13,7 @@ export class ChatComponent {
     public router: Router,
     private toastr: ToastrService
   ) {}
-
+  @ViewChild('searchfield') searchfield;
   chatData: any = [];
   messageData: any = [];
   chatMembers: any = [];
@@ -63,6 +63,7 @@ export class ChatComponent {
     this.chatData = [];
     this.count = 0;
     this.key = undefined;
+    this.searchfield.nativeElement.value = ' ';
     this.getallChats(this.pageSize, 0, undefined, this.listCheck);
   }
   loadMoreChats() {

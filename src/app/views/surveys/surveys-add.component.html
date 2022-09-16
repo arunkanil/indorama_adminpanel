@@ -41,10 +41,10 @@
                 </button>
               </div>
               <p class="card-text">
-                Question type : {{item.__typename}}
+                Question type : {{item.__typename == "ComponentSurveySurveyTextComponent"? "Text" : "Dropdown"}}
               </p>
               <p class="card-text">
-                Required : {{item.Mandatory}}
+                Required : {{item.Mandatory? "Yes" : "No"}}
               </p>
               <p *ngIf="item.Values" class="card-text">
                 Options : <span *ngFor="let option of item.Values" class="badge badge-success mx-1">{{option}}</span>
