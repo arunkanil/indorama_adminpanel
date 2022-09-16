@@ -4062,7 +4062,18 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`http://13.89.242.79/api/survey-forms/${data}?populate=Fields`, httpOptions1)
+            .get(`https://indoramaapp.untanglestrategy.com/api/survey-forms/${data}?populate=Fields`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadResponses(data) {
+        const httpOptions1 = {
+            observe: "response",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        };
+        return this.http
+            .get(`https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     getDashboardStats() {

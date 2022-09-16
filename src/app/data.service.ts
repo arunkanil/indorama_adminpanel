@@ -3640,7 +3640,21 @@ export class DataService {
     };
     return this.http
       .get(
-        `http://13.89.242.79/api/survey-forms/${data}?populate=Fields`,
+        `https://indoramaapp.untanglestrategy.com/api/survey-forms/${data}?populate=Fields`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+  downloadResponses(data): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    };
+    return this.http
+      .get(
+        `https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=${data}`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));

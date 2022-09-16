@@ -33,9 +33,6 @@ export class SurveyDetailsComponent implements OnInit {
 
   dateConverter = dateConverter;
 
-  // Pie
-  public pieChartLabels: string[] = [];
-  public pieChartData: number[] = [300, 500, 100, 45, 300, 500, 100, 45];
   public pieChartType = "pie";
   public resultsProcessed;
 
@@ -52,7 +49,6 @@ export class SurveyDetailsComponent implements OnInit {
       this.questions = result.body.data;
     });
   }
-
   getSurveyResults() {
     let data = {};
     this.dataservice
@@ -61,7 +57,6 @@ export class SurveyDetailsComponent implements OnInit {
         this.rowData = result.data.surveyResults.data;
         console.log("getSurveyResults", this.rowData);
         let Fields = this.questions?.attributes?.Fields;
-        console.log(Fields, "Fields");
         for (let i = 0; i < Fields.length; i++) {
           let ans = this.rowData.map(
             (x) => x.attributes.SurveyResponse[Fields[i].FieldKey]
@@ -111,6 +106,19 @@ export class SurveyDetailsComponent implements OnInit {
       } else {
         this.toastr.error("Failed!");
       }
+    });
+  }
+  downloadResponses() {
+    this.btnLoading = true;
+    this.dataservice.downloadResponses(this.id).subscribe((result: any) => {
+      console.log("downloadResponses", result.body);
+      let url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
+      this.btnLoading = false;
+      window.open(url, "_blank");
+    },
+    (error) =>{
+      this.btnLoading = true;
+      this.toastr.error("Failed!");
     });
   }
 }

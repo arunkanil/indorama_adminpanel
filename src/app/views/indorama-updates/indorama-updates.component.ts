@@ -30,7 +30,9 @@ export class IndoramaUpdatesComponent {
   disableNextButton = false;
   disablePrevButton = true;
   meta;
-  pageSize = 100;
+  pageSize = 20;
+  from = 1;
+  to = 20;
   count = 1;
   orders: any = {};
   columnDefs = [];
@@ -69,7 +71,12 @@ export class IndoramaUpdatesComponent {
   }
   loadNext() {
     this.count++;
-    this.disablePrevButton = false;
+     this.disablePrevButton = false;
+    this.from = this.from + this.pageSize;
+    this.to =
+      this.to + this.pageSize > this.meta?.pagination?.total
+        ? this.meta?.pagination?.total
+        : this.to + this.pageSize;
     if (this.count === this.meta.pagination.pageCount) {
       this.disableNextButton = true;
     }
@@ -88,6 +95,8 @@ export class IndoramaUpdatesComponent {
     if (this.count === 1) {
       this.disablePrevButton = true;
     }
+    this.from = this.from - this.pageSize;
+    this.to = this.to - this.rowData.length;
     this.dataservice
       .getIndoramaUpdates(undefined, this.count, this.pageSize)
       .valueChanges.subscribe((result: any) => {

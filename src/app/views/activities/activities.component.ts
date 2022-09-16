@@ -51,7 +51,9 @@ export class ActivitiesComponent {
   });
   rowData: any = [];
   meta;
-  pageSize = 100;
+  pageSize = 20;
+  from = 1;
+  to = 20;
   private gridApi;
   private gridColumnApi;
 
@@ -76,7 +78,12 @@ export class ActivitiesComponent {
   }
   loadNext() {
     this.count++;
-    this.disablePrevButton = false;
+     this.disablePrevButton = false;
+    this.from = this.from + this.pageSize;
+    this.to =
+      this.to + this.pageSize > this.meta?.pagination?.total
+        ? this.meta?.pagination?.total
+        : this.to + this.pageSize;
     if (this.count === this.meta.pagination.pageCount) {
       this.disableNextButton = true;
     }
@@ -85,6 +92,7 @@ export class ActivitiesComponent {
       .valueChanges.subscribe((result: any) => {
         this.meta = result.data.activities.meta;
         this.rowData = result.data.activities.data;
+       
       });
   }
   loadPrev() {
@@ -95,6 +103,8 @@ export class ActivitiesComponent {
     if (this.count === 1) {
       this.disablePrevButton = true;
     }
+    this.from = this.from - this.pageSize;
+    this.to = this.to - this.rowData.length;
     this.dataservice
       .getActivities(this.count, this.pageSize)
       .valueChanges.subscribe((result: any) => {

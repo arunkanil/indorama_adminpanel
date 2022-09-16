@@ -5430,7 +5430,9 @@ let FarmDemoComponent = class FarmDemoComponent {
         this.btnLoading = false;
         this.disableNextButton = false;
         this.disablePrevButton = true;
-        this.pageSize = 100;
+        this.pageSize = 20;
+        this.from = 1;
+        this.to = 20;
         this.count = 1;
         this.columnDefs = [];
         this.rowData = [];
@@ -5478,8 +5480,13 @@ let FarmDemoComponent = class FarmDemoComponent {
         });
     }
     loadNext() {
+        var _a, _b, _c, _d;
         this.count++;
         this.disablePrevButton = false;
+        this.from = this.from + this.pageSize;
+        this.to =
+            this.to + this.pageSize > ((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.total)
+                ? (_d = (_c = this.meta) === null || _c === void 0 ? void 0 : _c.pagination) === null || _d === void 0 ? void 0 : _d.total : this.to + this.pageSize;
         if (this.count === this.meta.pagination.pageCount) {
             this.disableNextButton = true;
         }
@@ -5498,6 +5505,8 @@ let FarmDemoComponent = class FarmDemoComponent {
         if (this.count === 1) {
             this.disablePrevButton = true;
         }
+        this.from = this.from - this.pageSize;
+        this.to = this.to - this.rowData.length;
         this.dataservice
             .getFarmDemos(this.count, this.pageSize)
             .valueChanges.subscribe((result) => {

@@ -26,7 +26,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Survey details</h2>\r\n      <span>\r\n        <div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-primary\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"myModal.show()\"\r\n          >\r\n            Download responses\r\n          </button>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-danger\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"deleteModal.show()\"\r\n          >\r\n            Delete\r\n          </button>\r\n        </div>\r\n      </span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Title</label>\r\n          <h5>{{ questions?.attributes?.SurveyTitle }}</h5>\r\n        </div>\r\n      </div>\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Description</label>\r\n          <h5>{{ questions?.attributes?.SurveyDescription }}</h5>\r\n        </div>\r\n      </div>\r\n      <h6>Survey Questions</h6>\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <div class=\"card\">\r\n            <div\r\n              class=\"card-body\"\r\n              *ngFor=\"\r\n                let item of questions?.attributes?.Fields;\r\n                let indexOfelement = index\r\n              \"\r\n            >\r\n              <div style=\"display: flex; justify-content: space-between\">\r\n                <div>\r\n                  <h5 class=\"card-title\">{{ item.FieldName }}</h5>\r\n                  <p class=\"card-text\">\r\n                    Question type : {{ returnQuesType(item.__component) }}\r\n                  </p>\r\n                  <p class=\"card-text\">Field type : {{ item.FieldType }}</p>\r\n                  <p class=\"card-text\">Required : {{ item.Mandatory }}</p>\r\n                  <p *ngIf=\"item.Values\" class=\"card-text\">\r\n                    Options :\r\n                    <span\r\n                      *ngFor=\"let option of item.Values\"\r\n                      class=\"badge badge-success mx-1\"\r\n                      >{{ option }}</span\r\n                    >\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"chart-wrapper\">\r\n                <canvas\r\n                  baseChart\r\n                  class=\"chart\"\r\n                  [data]=\"returnChartdata(item.FieldKey)\"\r\n                  [labels]=\"returnChartLabels(item.FieldKey)\"\r\n                  [chartType]=\"pieChartType\"\r\n                  (chartClick)=\"chartClicked($event)\"\r\n                ></canvas>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #deleteModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        This will permanently delete the survey. Are you sure?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-secondary\"\r\n          (click)=\"deleteModal.hide()\"\r\n        >\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteSurvey()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Survey details</h2>\r\n      <span>\r\n        <div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-primary\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"downloadResponses()\"\r\n            [disabled]=\"btnLoading\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Download responses\r\n          </button>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-danger\"\r\n            data-toggle=\"modal\"\r\n            (click)=\"deleteModal.show()\"\r\n          >\r\n            Delete\r\n          </button>\r\n        </div>\r\n      </span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Title</label>\r\n          <h5>{{ questions?.attributes?.SurveyTitle }}</h5>\r\n        </div>\r\n      </div>\r\n      <div class=\"row p-2\">\r\n        <div class=\"form-group\">\r\n          <label for=\"title\">Survey Description</label>\r\n          <h5>{{ questions?.attributes?.SurveyDescription }}</h5>\r\n        </div>\r\n      </div>\r\n      <h6>Survey Questions</h6>\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <div class=\"card\">\r\n            <div\r\n              class=\"card-body\"\r\n              *ngFor=\"\r\n                let item of questions?.attributes?.Fields;\r\n                let indexOfelement = index\r\n              \"\r\n            >\r\n              <div style=\"display: flex; justify-content: space-between\">\r\n                <div>\r\n                  <h5 class=\"card-title\">{{ item.FieldName }}</h5>\r\n                  <p class=\"card-text\">\r\n                    Question type : {{ returnQuesType(item.__component) }}\r\n                  </p>\r\n                  <p class=\"card-text\">Field type : {{ item.FieldType }}</p>\r\n                  <p class=\"card-text\">Required : {{ item.Mandatory }}</p>\r\n                  <p *ngIf=\"item.Values\" class=\"card-text\">\r\n                    Options :\r\n                    <span\r\n                      *ngFor=\"let option of item.Values\"\r\n                      class=\"badge badge-success mx-1\"\r\n                      >{{ option }}</span\r\n                    >\r\n                  </p>\r\n                </div>\r\n              </div>\r\n              <div class=\"chart-wrapper\">\r\n                <canvas\r\n                  baseChart\r\n                  class=\"chart\"\r\n                  [data]=\"returnChartdata(item.FieldKey)\"\r\n                  [labels]=\"returnChartLabels(item.FieldKey)\"\r\n                  [chartType]=\"pieChartType\"\r\n                  (chartClick)=\"chartClicked($event)\"\r\n                ></canvas>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #deleteModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        This will permanently delete the survey. Are you sure?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-secondary\"\r\n          (click)=\"deleteModal.hide()\"\r\n        >\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteSurvey()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
@@ -139,7 +139,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Surveys</h2>\r\n      <div>\r\n        <!-- <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" [disabled]=\"disableButton\"\r\n          (click)=\"deleteModal.show()\">\r\n          Delete\r\n        </button>\r\n        <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button> -->\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"goToNewSurvey()\"\r\n        >\r\n          Add New Survey\r\n      </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Surveys</h2>\r\n      <div>\r\n        <!-- <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" [disabled]=\"disableButton\"\r\n          (click)=\"deleteModal.show()\">\r\n          Delete\r\n        </button>\r\n        <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button> -->\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"goToNewSurvey()\"\r\n        >\r\n          Add New Survey\r\n      </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
@@ -508,7 +508,9 @@
           this.disableButton = true;
           this.disableNextButton = false;
           this.disablePrevButton = true;
-          this.pageSize = 100;
+          this.pageSize = 20;
+          this.from = 1;
+          this.to = 20;
           this.count = 1;
           this.columnDefs = [];
           this.cropPriceForm = this.fb.group({
@@ -558,8 +560,12 @@
           value: function loadNext() {
             var _this4 = this;
 
+            var _a, _b, _c, _d;
+
             this.count++;
             this.disablePrevButton = false;
+            this.from = this.from + this.pageSize;
+            this.to = this.to + this.pageSize > ((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.total) ? (_d = (_c = this.meta) === null || _c === void 0 ? void 0 : _c.pagination) === null || _d === void 0 ? void 0 : _d.total : this.to + this.pageSize;
 
             if (this.count === this.meta.pagination.pageCount) {
               this.disableNextButton = true;
@@ -585,6 +591,8 @@
               this.disablePrevButton = true;
             }
 
+            this.from = this.from - this.pageSize;
+            this.to = this.to - this.rowData.length;
             this.dataservice.getSurveys(this.count, this.pageSize).valueChanges.subscribe(function (result) {
               _this5.meta = result.data.surveyForms.meta;
               _this5.rowData = result.data.surveyForms.data;
@@ -730,10 +738,7 @@
           this.btnLoading = false;
           this.rowData = [];
           this.questions = {};
-          this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverter"]; // Pie
-
-          this.pieChartLabels = [];
-          this.pieChartData = [300, 500, 100, 45, 300, 500, 100, 45];
+          this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverter"];
           this.pieChartType = "pie";
         }
 
@@ -770,7 +775,6 @@
               _this8.rowData = result.data.surveyResults.data;
               console.log("getSurveyResults", _this8.rowData);
               var Fields = (_b = (_a = _this8.questions) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Fields;
-              console.log(Fields, "Fields");
 
               var _loop = function _loop(i) {
                 var ans = _this8.rowData.map(function (x) {
@@ -843,6 +847,23 @@
               } else {
                 _this9.toastr.error("Failed!");
               }
+            });
+          }
+        }, {
+          key: "downloadResponses",
+          value: function downloadResponses() {
+            var _this10 = this;
+
+            this.btnLoading = true;
+            this.dataservice.downloadResponses(this.id).subscribe(function (result) {
+              console.log("downloadResponses", result.body);
+              var url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
+              _this10.btnLoading = false;
+              window.open(url, "_blank");
+            }, function (error) {
+              _this10.btnLoading = true;
+
+              _this10.toastr.error("Failed!");
             });
           }
         }]);

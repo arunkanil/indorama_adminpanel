@@ -866,7 +866,18 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("http://13.89.242.79/api/survey-forms/".concat(data, "?populate=Fields"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("https://indoramaapp.untanglestrategy.com/api/survey-forms/".concat(data, "?populate=Fields"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadResponses",
+          value: function downloadResponses(data) {
+            var httpOptions1 = {
+              observe: "response",
+              headers: {
+                Authorization: "Bearer ".concat(localStorage.getItem("token"))
+              }
+            };
+            return this.http.get("https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getDashboardStats",
