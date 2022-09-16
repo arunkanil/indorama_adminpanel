@@ -3415,72 +3415,33 @@ const UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query dashboardAPI {
-    crops {
-      data {
-        id
-        attributes {
-          Name
-          crop_prices {
-            data {
-              id
-              attributes {
-                Price
-                publishedAt
-              }
-            }
-          }
-        }
-      }
-    }
-    soilTests {
+  query dashboardAPI($state: ID) {
+    soilTests(filters: { lga: { state: { id: { eq: $state } } } }) {
       meta {
         pagination {
           total
         }
       }
     }
-    soilTestSamples {
+    soilTestSamples(
+      filters: { soil_test: { lga: { state: { id: { eq: $state } } } } }
+    ) {
       meta {
         pagination {
           total
         }
       }
     }
-    soilTestResults {
+    soilTestResults(
+      filters: {
+        soil_test_sample: {
+          soil_test: { lga: { state: { id: { eq: $state } } } }
+        }
+      }
+    ) {
       meta {
         pagination {
           total
-        }
-      }
-      data {
-        id
-        attributes {
-          soil_test_sample {
-            data {
-              attributes {
-                soil_test {
-                  data {
-                    attributes {
-                      lga {
-                        data {
-                          attributes {
-                            state {
-                              data {
-                                attributes {
-                                  Name
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
         }
       }
     }
@@ -3533,6 +3494,28 @@ const getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"
           createdAt
           updatedAt
           publishedAt
+        }
+      }
+    }
+  }
+`;
+const getFarmDemoStatsDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  query dashboardAPI($state: ID, $status: String) {
+    all: farmDemos(filters: { state: { id: { eq: $state } } }) {
+      meta {
+        pagination {
+          total
+        }
+      }
+    }
+    status: farmDemos(
+      filters: {
+        and: [{ state: { id: { eq: $state } } }, { Status: { eq: $status } }]
+      }
+    ) {
+      meta {
+        pagination {
+          total
         }
       }
     }
@@ -4069,17 +4052,42 @@ let DataService = class DataService {
         const httpOptions1 = {
             observe: "response",
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTIsImlhdCI6MTY2MzMyOTc5MywiZXhwIjoxNjY1OTIxNzkzfQ.uUhAEh4DsVjQ1F-xKHCNmoeEsoIGG_f6tIi7wHVCAFc`,
             },
         };
         return this.http
             .get(`https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
-    getDashboardStats() {
+    getSoilTestStats(data) {
+        const httpOptions1 = {
+            observe: "response",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        };
+        return this.http
+            .get(`https://indoramaapp.untanglestrategy.com/api/dashboard-soil-npk?stateId=${data}`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    getFarmDemoYieldStats(data) {
+        const httpOptions1 = {
+            observe: "response",
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        };
+        return this.http
+            .get(`https://indoramaapp.untanglestrategy.com/api/dashboard-farm-demo?stateId=${data}`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    getDashboardStats(data) {
         return this.apollo.watchQuery({
             query: getDashboardStats,
             fetchPolicy: "no-cache",
+            variables: {
+                state: data,
+            },
         });
     }
     getCropPricesDashboard(id, market) {
@@ -4089,6 +4097,16 @@ let DataService = class DataService {
             variables: {
                 id: id,
                 market: market,
+            },
+        });
+    }
+    getFarmDemoStatsDashboard(state, status) {
+        return this.apollo.watchQuery({
+            query: getFarmDemoStatsDashboard,
+            fetchPolicy: "no-cache",
+            variables: {
+                state: state,
+                status: status,
             },
         });
     }

@@ -644,7 +644,7 @@
           value: function getFarmers() {
             var _this10 = this;
 
-            this.dataservice.getUsers("Farmer").valueChanges.subscribe(function (result) {
+            this.dataservice.getUsers(undefined, undefined, "Farmer").valueChanges.subscribe(function (result) {
               console.log("getFarmers", result.data.usersPermissionsUsers.data);
               _this10.Farmers = result.data.usersPermissionsUsers.data;
             });

@@ -136,7 +136,7 @@ export class SoilTestDetailComponent implements OnInit {
   }
   getFarmers() {
     this.dataservice
-      .getUsers("Farmer")
+      .getUsers(undefined,undefined,"Farmer")
       .valueChanges.subscribe((result: any) => {
         console.log("getFarmers", result.data.usersPermissionsUsers.data);
         this.Farmers = result.data.usersPermissionsUsers.data;

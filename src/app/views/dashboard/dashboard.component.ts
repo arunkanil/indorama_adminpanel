@@ -1,22 +1,27 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { getStyle, hexToRgba } from "@coreui/coreui/dist/js/coreui-utilities";
 import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
 import { DataService } from "../../data.service";
 import { dateConverterMin } from "../../constants/columnMetadata";
+import { BaseChartDirective } from "ng2-charts";
 
 @Component({
   templateUrl: "dashboard.component.html",
 })
 export class DashboardComponent implements OnInit {
   constructor(public dataservice: DataService) {}
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   States: any = [];
   Crops: any = [];
   Markets: any = [];
   cropPrices: any = [];
   DashboardStats: any;
+  FarmDemoStats: any;
   selectedCrop: any = { attributes: { Name: "Crop" } };
   selectedMarket: any = { attributes: { Name: "Market" } };
   selectedState: any = { attributes: { Name: "State" } };
+  selectedStateST: any = { attributes: { Name: "State" } };
+  selectedStateFD: any = { attributes: { Name: "State" } };
   radioModel: string = "Month";
 
   // mainChart
@@ -115,12 +120,27 @@ export class DashboardComponent implements OnInit {
   public mainChartLegend = false;
   public mainChartType = "line";
 
-  public random(min: number, max: number) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
-  }
+  public barChartOptions: any = {
+    scaleShowVerticalLines: false,
+    responsive: true,
+  };
+  public barChartType = "bar";
+  public barChartLegend = true;
+  public barChartLabels: string[] = [
+    "Very Low",
+    "Low",
+    "Medium",
+    "High",
+    "Very High",
+  ];
+  public barChartData: any[] = [];
+
+  public barChartLabels_farmdemo: string[] = ["Yield"];
+  public barChartData_farmdemo: any[] = [];
 
   ngOnInit(): void {
     this.getData();
+    console.log(this.barChartData);
   }
   getData() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
@@ -162,22 +182,90 @@ export class DashboardComponent implements OnInit {
     console.log(crop);
     this.dataservice
       .getCropPricesDashboard(crop?.id, this.selectedMarket?.id)
+      .valueChanges.subscribe(
+        (result: any) => {
+          this.cropPrices = result.data.cropPrices.data;
+          this.mainChartData1 = this.cropPrices.map(
+            (item) => item.attributes.Price
+          );
+          this.mainChartLabels = this.cropPrices.map((item) =>
+            dateConverterMin(item.attributes.publishedAt)
+          );
+          this.mainChartData = [
+            {
+              data: this.mainChartData1,
+              label: "Price",
+            },
+          ];
+        },
+        (error) => {
+          console.log("downloadResponses", error);
+        }
+      );
+  }
+  getSoilTestStats(event) {
+    this.selectedStateST = event;
+    this.dataservice
+      .getDashboardStats(event.id)
       .valueChanges.subscribe((result: any) => {
-        this.cropPrices = result.data.cropPrices.data;
-        console.log(this.cropPrices);
-        this.mainChartData1 = this.cropPrices.map(
-          (item) => item.attributes.Price
-        );
-        this.mainChartLabels = this.cropPrices.map((item) =>
-          dateConverterMin(item.attributes.publishedAt)
-        );
-        this.mainChartData = [
+        this.DashboardStats = result.data;
+      });
+    this.dataservice.getSoilTestStats(event.id).subscribe(
+      (result: any) => {
+        console.log(result.body, "result");
+        let keys = ["very_low", "low", "medium", "high", "very_high"];
+        let nutrients = ["nitrogen_N", "phosphorous_P", "pottassium_K"];
+        this.barChartData = [];
+        for (let j = 0; j < nutrients.length; j++) {
+          let count = [];
+          for (let i = 0; i < keys.length; i++) {
+            count.push(result.body[nutrients[j]][keys[i]].length);
+          }
+          let labeldata = nutrients[j].split("_");
+          this.barChartData.push({ data: count, label: labeldata[0] });
+          console.log(count, nutrients[j], this.barChartData);
+        }
+        this.chart?.update();
+      },
+      (error) => {
+        console.log("downloadResponses", error);
+      }
+    );
+  }
+  getFarmDemoStatsDashboard(data) {
+    this.selectedStateFD = data;
+    this.dataservice
+      .getFarmDemoStatsDashboard(data.id, "ONGOING")
+      .valueChanges.subscribe((result: any) => {
+        this.FarmDemoStats = result.data;
+      });
+    this.barChartData_farmdemo = [];
+    this.dataservice.getFarmDemoYieldStats(data.id).subscribe(
+      (result: any) => {
+        this.barChartData_farmdemo = [
           {
-            data: this.mainChartData1,
-            label: "Price",
+            data: [
+              parseInt(
+                result.body.farmDemoYieldTrend.indorama_practice_yield_avg
+              ),
+            ],
+            label: "indorama_practice_yield_avg",
+          },
+          {
+            data: [
+              parseInt(
+                result.body.farmDemoYieldTrend.farmer_practice_yield_avg
+              ),
+            ],
+            label: "farmer_practice_yield_avg",
           },
         ];
-        console.log(this.mainChartData1, this.mainChartLabels);
-      });
+        console.log(this.barChartData_farmdemo);
+        this.chart?.update();
+      },
+      (error) => {
+        console.log("downloadResponses", error);
+      }
+    );
   }
 }

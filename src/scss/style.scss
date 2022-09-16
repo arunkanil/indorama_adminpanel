@@ -158,6 +158,7 @@ img:hover {
 .dropdown-menu {
   max-height: 300px;
   overflow-y: scroll;
+  inset: 100% auto auto -100% !important;
 }
 .danger {
   color: red;
