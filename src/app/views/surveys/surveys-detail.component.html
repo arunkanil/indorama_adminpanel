@@ -63,7 +63,7 @@
                   <p class="card-text">
                     Question type : {{ returnQuesType(item.__component) }}
                   </p>
-                  <p class="card-text">Field type : {{ item.FieldType }}</p>
+                  <p class="card-text">Field type : {{ returnFieldType(item.FieldType) }}</p>
                   <p class="card-text">Required : {{ item.Mandatory }}</p>
                   <p *ngIf="item.Values" class="card-text">
                     Options :

@@ -81,7 +81,7 @@ export class SurveyDetailsComponent implements OnInit {
           data[Fields[i].FieldKey] = counted_obj;
         }
         this.resultsProcessed = data;
-        console.log(this.resultsProcessed,"resultsProcessed");
+        console.log(this.resultsProcessed, "resultsProcessed");
         this.chart?.update();
       });
   }
@@ -90,6 +90,16 @@ export class SurveyDetailsComponent implements OnInit {
       return "Dropdown";
     } else {
       return "Text";
+    }
+  }
+  returnFieldType(data) {
+    switch (data) {
+      case "TextLong":
+        return "Long Answer";
+      case "TextShort":
+        return "Short Answer";
+      case "Selection":
+        return "Selection";
     }
   }
   returnChartLabels(data) {

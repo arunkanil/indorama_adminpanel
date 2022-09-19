@@ -104,6 +104,9 @@ export class ActivityDetailComponent implements OnInit {
       this.Areas = result.data.areas.data;
     });
   }
+  returnActivityType(data) {
+    if(data) return data.replace(/([A-Z])/g, " $1").trim();
+  }
   dateConvertor(date) {
     return new Date(date);
   }

@@ -98,7 +98,7 @@ export class NewSurveyComponent implements OnInit {
           }
         );
     } else {
-      this.toastr.error("Please add both title & Description");
+      this.toastr.error("Please add both title & description");
     }
   }
 }

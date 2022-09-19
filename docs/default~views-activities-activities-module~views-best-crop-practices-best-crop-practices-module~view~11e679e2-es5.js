@@ -735,7 +735,6 @@
       function dateConverterMin(date) {
         if (date) {
           return new Date(date).toDateString();
-          ;
         } else {
           return "No data";
         }
@@ -987,6 +986,21 @@
           buttons: ["reset"]
         }
       }, {
+        field: "attributes.Rejected",
+        headerName: "Status",
+        resizable: true,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+          filterOptions: ["contains"],
+          buttons: ["reset"]
+        },
+        cellRenderer: function cellRenderer(data) {
+          if (data.value == true) return "Rejected";
+          if (data.value == false) return "Approved";
+          if (data.value == null) return "Pending";
+        }
+      }, {
         field: "attributes.createdAt",
         headerName: "Created at",
         resizable: true,
@@ -1235,6 +1249,9 @@
         filterParams: {
           filterOptions: ["contains"],
           buttons: ["reset"]
+        },
+        cellRenderer: function cellRenderer(data) {
+          return data.value.replace(/([A-Z])/g, " $1").trim();
         }
       }, {
         field: "attributes.Date",

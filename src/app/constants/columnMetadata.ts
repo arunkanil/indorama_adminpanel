@@ -26,7 +26,6 @@ export var filterParams = {
   buttons: ["reset"],
 };
 
-
 function monthRenderer(params) {
   switch (params.data.MarriageMonth) {
     case 0:
@@ -651,7 +650,7 @@ export const SoilAnalysisColumns = [
     },
     width: "auto",
     cellRenderer: (data) => {
-      return data.value.replaceAll("_"," ");
+      return data.value.replaceAll("_", " ");
     },
   },
   {
@@ -676,7 +675,7 @@ export function dateConverter(date) {
 }
 export function dateConverterMin(date) {
   if (date) {
-    return new Date(date).toDateString();;
+    return new Date(date).toDateString();
   } else {
     return "No data";
   }
@@ -1010,6 +1009,22 @@ export const CropPricesColumn = [
     },
   },
   {
+    field: "attributes.Rejected",
+    headerName: "Status",
+    resizable: true,
+    sortable: true,
+    filter: "agTextColumnFilter",
+    filterParams: {
+      filterOptions: ["contains"],
+      buttons: ["reset"],
+    },
+    cellRenderer: (data) => {
+      if (data.value == true) return "Rejected";
+      if (data.value == false) return "Approved";
+      if (data.value == null) return "Pending";
+    },
+  },
+  {
     field: "attributes.createdAt",
     headerName: "Created at",
     resizable: true,
@@ -1034,9 +1049,7 @@ export const CropPricesColumn = [
       buttons: ["reset"],
     },
     cellRenderer: (data) => {
-      return data.value
-        ? new Date(data.value).toString()
-        : "Not Published";
+      return data.value ? new Date(data.value).toString() : "Not Published";
     },
   },
   // {
@@ -1070,7 +1083,7 @@ export const SmsColumn = [
       buttons: ["reset"],
     },
   },
-   {
+  {
     field: "attributes.createdAt",
     headerName: "Created at",
     resizable: true,
@@ -1106,7 +1119,7 @@ export const DeliveryReportColumn = [
       buttons: ["reset"],
     },
   },
-   {
+  {
     field: "delivery_status",
     headerName: "Delivery status",
     resizable: true,
@@ -1315,7 +1328,7 @@ export const SurveysColumn = [
       return data.value ? new Date(data.value).toString() : "";
     },
   },
-]
+];
 export const ActivitiesColumn = [
   {
     field: "id",
@@ -1335,6 +1348,9 @@ export const ActivitiesColumn = [
       filterOptions: ["contains"],
       buttons: ["reset"],
     },
+    cellRenderer: (data) => {
+      return data.value.replace(/([A-Z])/g, " $1").trim();
+    },
   },
   {
     field: "attributes.Date",
@@ -1349,7 +1365,6 @@ export const ActivitiesColumn = [
     cellRenderer: (data) => {
       return data.value ? new Date(data.value).toDateString() : "";
     },
-    
   },
   {
     field: "attributes.Time",

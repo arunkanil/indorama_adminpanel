@@ -1296,11 +1296,17 @@ const UpdateMarket = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const CropPricesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($page: Int, $pageSize: Int, $publicationState: PublicationState) {
+  query (
+    $page: Int
+    $pageSize: Int
+    $publicationState: PublicationState
+    $publishedAt: DateTime
+  ) {
     cropPrices(
       publicationState: $publicationState
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
+      filters: { publishedAt: { eq: $publishedAt } }
     ) {
       meta {
         pagination {
@@ -1331,6 +1337,7 @@ const CropPricesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
             }
           }
           Unit
+          Rejected
           market {
             data {
               id
@@ -1370,6 +1377,7 @@ const UpdateCropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql
     $unit: String
     $market: ID
     $image: ID
+    $Rejected: Boolean
     $published: DateTime
   ) {
     updateCropPrice(
@@ -1381,6 +1389,7 @@ const UpdateCropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql
         Unit: $unit
         market: $market
         Image: $image
+        Rejected: $Rejected
         publishedAt: $published
       }
     ) {
@@ -1411,6 +1420,7 @@ const UpdateCropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql
               }
             }
           }
+          Rejected
           Image {
             data {
               id
@@ -1440,6 +1450,7 @@ const CropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         Price: $price
         state: $state
         Unit: $unit
+        Rejected: false
         market: $market
         Image: $image
         publishedAt: $published
@@ -4265,13 +4276,15 @@ let DataService = class DataService {
             },
         });
     }
-    getCropPrices(page, pageSize) {
+    getCropPrices(page, pageSize, PublicationState, publishedAt) {
         return this.apollo.watchQuery({
             query: CropPricesQuery,
             fetchPolicy: "no-cache",
             variables: {
                 page: page,
                 pageSize: pageSize,
+                publicationState: PublicationState,
+                publishedAt: publishedAt,
             },
         });
     }
@@ -4620,18 +4633,19 @@ let DataService = class DataService {
             errorPolicy: "all",
         });
     }
-    UpdateCropPrice(price, id, imageid) {
+    UpdateCropPrice(price, id, imageid, Rejected, published) {
         return this.apollo.mutate({
             mutation: UpdateCropPriceMutation,
             variables: {
                 id: id,
-                crop: price.crop,
-                price: parseFloat(price.Price),
-                unit: price.Unit,
-                state: price.state,
-                market: price.market,
-                published: new Date(),
-                image: imageid ? imageid : price.Image,
+                crop: price === null || price === void 0 ? void 0 : price.crop,
+                price: (price === null || price === void 0 ? void 0 : price.Price) ? parseFloat(price === null || price === void 0 ? void 0 : price.Price) : undefined,
+                unit: price === null || price === void 0 ? void 0 : price.Unit,
+                state: price === null || price === void 0 ? void 0 : price.state,
+                market: price === null || price === void 0 ? void 0 : price.market,
+                published: published,
+                Rejected: Rejected,
+                image: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image,
             },
             errorPolicy: "all",
         });

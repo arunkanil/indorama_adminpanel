@@ -23,15 +23,17 @@ export class CropPricesComponent {
     this.rowSelection = "single";
   }
   @ViewChild("cropPriceModal") public cropPriceModal: ModalDirective;
-  @ViewChild("detailsModal") public detailsModal: ModalDirective;
+  @ViewChild("approveModal") public approveModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
   disableButton = true;
   disableNextButton = false;
   disablePrevButton = true;
-  title = "Verification";
-  orders: any = {};
+  selectedList = "All";
+  listCheck = false;
+  publicationState = "PREVIEW";
+  toApprove = undefined;
   columnDefs = [];
   States: any = [];
   Markets: any = [];
@@ -72,7 +74,7 @@ export class CropPricesComponent {
   }
   getCropPrices() {
     this.dataservice
-      .getCropPrices(1, this.pageSize)
+      .getCropPrices(1, this.pageSize, this.publicationState, this.toApprove)
       .valueChanges.subscribe((result: any) => {
         this.rowData = result.data.cropPrices.data;
         this.meta = result.data.cropPrices.meta;
@@ -99,7 +101,12 @@ export class CropPricesComponent {
       this.disableNextButton = true;
     }
     this.dataservice
-      .getCropPrices(this.count, this.pageSize)
+      .getCropPrices(
+        this.count,
+        this.pageSize,
+        this.publicationState,
+        this.toApprove
+      )
       .valueChanges.subscribe((result: any) => {
         this.meta = result.data.cropPrices.meta;
         this.rowData = result.data.cropPrices.data;
@@ -116,7 +123,12 @@ export class CropPricesComponent {
     this.from = this.from - this.pageSize;
     this.to = this.to - this.rowData.length;
     this.dataservice
-      .getCropPrices(this.count, this.pageSize)
+      .getCropPrices(
+        this.count,
+        this.pageSize,
+        this.publicationState,
+        this.toApprove
+      )
       .valueChanges.subscribe((result: any) => {
         this.meta = result.data.cropPrices.meta;
         this.rowData = result.data.cropPrices.data;
@@ -137,6 +149,19 @@ export class CropPricesComponent {
   filterMarkets(event) {
     this.getMarkets(event.target.value);
   }
+  toggleCropPrices(data) {
+    if (data) {
+      this.selectedList = "Approval Pending";
+      this.publicationState = "PREVIEW";
+      this.toApprove = null;
+      this.getCropPrices();
+    } else {
+      this.selectedList = "All";
+      this.publicationState = "PREVIEW";
+      this.toApprove = undefined;
+      this.getCropPrices();
+    }
+  }
   onGridReady(params) {
     this.gridApi = params.api;
     this.gridColumnApi = params.columnApi;
@@ -152,7 +177,6 @@ export class CropPricesComponent {
     } else {
       this.disableButton = true;
     }
-    console.log(this.selectedRows, this.selectedRows[0].attributes.Name);
   }
   // On file Select
   onChange(event: any) {
@@ -161,6 +185,38 @@ export class CropPricesComponent {
       this.file.push(event.target.files[i]);
     }
     console.log(this.file);
+  }
+  approveOrReject(check) {
+    let published = null;
+    if (!check) published = new Date();
+    this.dataservice
+      .UpdateCropPrice(
+        undefined,
+        this.selectedRows[0].id,
+        undefined,
+        check,
+        published
+      )
+      .subscribe(
+        (result: any) => {
+          console.log("response", result);
+          if (result.data.updateCropPrice) {
+            this.toastr.success("Success!");
+            this.getCropPrices();
+            this.file = null;
+            this.approveModal.hide();
+            this.gridApi.deselectAll();
+            this.btnLoading = false;
+          }
+        },
+        (error) => {
+          this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
+        }
+      );
+  }
+  openApproveModal(data) {
+    this.approveModal.show();
   }
   openModal(data: any) {
     this.imageUrl = null;
