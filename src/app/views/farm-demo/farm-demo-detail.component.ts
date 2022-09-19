@@ -201,16 +201,18 @@ export class FarmDemoDetailComponent implements OnInit {
       this.LGA = result.data.lgas.data;
     });
   }
-  deleteActivity() {
-    this.dataservice.deleteActivity(this.id).subscribe((result: any) => {
+  deleteFarmDemo() {
+    this.dataservice.deleteFarmDemo(this.id).subscribe((result: any) => {
       console.log("response", result);
-      if (result.data.deleteActivity) {
+      if (result.data.deleteFarmDemo) {
         this.toastr.success("Success!");
         this.deleteModal.hide();
         this.router.navigate(["/farmdemo/all"]);
       } else {
         this.toastr.error("Failed!");
       }
+    },(error) => {
+      this.toastr.error("Something went wrong!");
     });
   }
   onChange(event: any) {

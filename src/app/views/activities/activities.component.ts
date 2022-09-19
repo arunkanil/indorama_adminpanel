@@ -39,7 +39,7 @@ export class ActivitiesComponent {
     ActivityType: ["", Validators.required],
     Latitude: ["", Validators.required],
     Longitude: ["", Validators.required],
-    NoOfAttendees: ["", Validators.required],
+    NoOfAttendees: ["", [Validators.max(9999999),Validators.min(1),Validators.required]],
     area: ["", Validators.required],
     crop: [""],
     FarmerName: [""],

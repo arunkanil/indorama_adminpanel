@@ -114,6 +114,7 @@ const FarmDemoQuery = gql`
             }
           }
           createdAt
+          updatedAt
           AreaOfField
           isPesticidesUsed
           DateOfHarvesting
@@ -865,9 +866,9 @@ const UpdateMarket = gql`
   }
 `;
 const CropPricesQuery = gql`
-  query ($page: Int, $pageSize: Int) {
+  query ($page: Int, $pageSize: Int, $publicationState: PublicationState) {
     cropPrices(
-      publicationState: PREVIEW
+      publicationState: $publicationState
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
     ) {
@@ -3632,7 +3633,7 @@ export class DataService {
     const httpOptions1: Object = {
       observe: "response",
       headers: {
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTIsImlhdCI6MTY2MzMyOTc5MywiZXhwIjoxNjY1OTIxNzkzfQ.uUhAEh4DsVjQ1F-xKHCNmoeEsoIGG_f6tIi7wHVCAFc`,
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     };
     return this.http
@@ -4645,7 +4646,7 @@ export class DataService {
     return this.apollo.mutate({
       mutation: updateRetailerAd,
       variables: {
-        clickUrl: url,
+        // clickUrl: url,
         imageId: image,
       },
       errorPolicy: "all",
@@ -4655,7 +4656,7 @@ export class DataService {
     return this.apollo.mutate({
       mutation: updateDashboardAd,
       variables: {
-        clickUrl: url,
+        // clickUrl: url,
         imageId: image,
       },
       errorPolicy: "all",

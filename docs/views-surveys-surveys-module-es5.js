@@ -1,4 +1,8 @@
 (function () {
+  function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+  function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
   function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
   function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -749,73 +753,137 @@
 
         _createClass(SurveyDetailsComponent, [{
           key: "ngOnInit",
-          value: function ngOnInit() {
-            var _this6 = this;
+          value: function () {
+            var _ngOnInit = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+              var _this6 = this;
 
-            this.activatedRouter.params.subscribe(function (params) {
-              _this6.id = params["id"];
-            });
-            this.getSurveyDetails();
-            this.getSurveyResults();
-          }
+              return regeneratorRuntime.wrap(function _callee$(_context) {
+                while (1) {
+                  switch (_context.prev = _context.next) {
+                    case 0:
+                      this.activatedRouter.params.subscribe(function (params) {
+                        _this6.id = params["id"];
+                      });
+                      _context.next = 3;
+                      return this.getSurveyDetails();
+
+                    case 3:
+                      _context.next = 5;
+                      return this.getSurveyResults();
+
+                    case 5:
+                    case "end":
+                      return _context.stop();
+                  }
+                }
+              }, _callee, this);
+            }));
+
+            function ngOnInit() {
+              return _ngOnInit.apply(this, arguments);
+            }
+
+            return ngOnInit;
+          }()
         }, {
           key: "getSurveyDetails",
-          value: function getSurveyDetails() {
-            var _this7 = this;
+          value: function () {
+            var _getSurveyDetails = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+              var _this7 = this;
 
-            this.dataservice.getSurveyDetails(this.id).subscribe(function (result) {
-              console.log("getSurveyDetails", result.body.data);
-              _this7.questions = result.body.data;
-            });
-          }
+              return regeneratorRuntime.wrap(function _callee2$(_context2) {
+                while (1) {
+                  switch (_context2.prev = _context2.next) {
+                    case 0:
+                      this.dataservice.getSurveyDetails(this.id).subscribe(function (result) {
+                        console.log("getSurveyDetails", result.body.data);
+                        _this7.questions = result.body.data;
+                      });
+
+                    case 1:
+                    case "end":
+                      return _context2.stop();
+                  }
+                }
+              }, _callee2, this);
+            }));
+
+            function getSurveyDetails() {
+              return _getSurveyDetails.apply(this, arguments);
+            }
+
+            return getSurveyDetails;
+          }()
         }, {
           key: "getSurveyResults",
-          value: function getSurveyResults() {
-            var _this8 = this;
+          value: function () {
+            var _getSurveyResults = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+              var _this8 = this;
 
-            var data = {};
-            this.dataservice.getSurveyResults(this.id).valueChanges.subscribe(function (result) {
-              var _a, _b;
+              var data;
+              return regeneratorRuntime.wrap(function _callee3$(_context3) {
+                while (1) {
+                  switch (_context3.prev = _context3.next) {
+                    case 0:
+                      data = {};
+                      this.dataservice.getSurveyResults(this.id).valueChanges.subscribe(function (result) {
+                        var _a, _b, _c;
 
-              _this8.rowData = result.data.surveyResults.data;
-              console.log("getSurveyResults", _this8.rowData);
-              var Fields = (_b = (_a = _this8.questions) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Fields;
+                        _this8.rowData = result.data.surveyResults.data;
+                        console.log("getSurveyResults", _this8.rowData);
+                        var Fields = (_b = (_a = _this8.questions) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Fields;
+                        console.log(Fields, "fields");
 
-              var _loop = function _loop(i) {
-                var ans = _this8.rowData.map(function (x) {
-                  return x.attributes.SurveyResponse[Fields[i].FieldKey];
-                });
+                        var _loop = function _loop(i) {
+                          var ans = _this8.rowData.map(function (x) {
+                            return x.attributes.SurveyResponse[Fields[i].FieldKey];
+                          });
 
-                var unique_ans = _this8.rowData.map(function (x) {
-                  return x.attributes.SurveyResponse[Fields[i].FieldKey];
-                }).filter(unique);
+                          var unique_ans = _this8.rowData.map(function (x) {
+                            return x.attributes.SurveyResponse[Fields[i].FieldKey];
+                          }).filter(unique);
 
-                var count = 0;
-                var counted_obj = {};
+                          var count = 0;
+                          var counted_obj = {};
 
-                for (var j = 0; j < unique_ans.length; j++) {
-                  count = 0;
+                          for (var j = 0; j < unique_ans.length; j++) {
+                            count = 0;
 
-                  for (var k = 0; k < ans.length; k++) {
-                    if (unique_ans[j] == ans[k]) {
-                      count++;
-                    }
+                            for (var k = 0; k < ans.length; k++) {
+                              if (unique_ans[j] == ans[k]) {
+                                count++;
+                              }
+                            }
+
+                            counted_obj[unique_ans[j]] = count;
+                          }
+
+                          data[Fields[i].FieldKey] = counted_obj;
+                        };
+
+                        for (var i = 0; i < Fields.length; i++) {
+                          _loop(i);
+                        }
+
+                        _this8.resultsProcessed = data;
+                        console.log(_this8.resultsProcessed, "resultsProcessed");
+                        (_c = _this8.chart) === null || _c === void 0 ? void 0 : _c.update();
+                      });
+
+                    case 2:
+                    case "end":
+                      return _context3.stop();
                   }
-
-                  counted_obj[unique_ans[j]] = count;
                 }
+              }, _callee3, this);
+            }));
 
-                data[Fields[i].FieldKey] = counted_obj;
-              };
+            function getSurveyResults() {
+              return _getSurveyResults.apply(this, arguments);
+            }
 
-              for (var i = 0; i < Fields.length; i++) {
-                _loop(i);
-              }
-
-              _this8.resultsProcessed = data;
-              console.log(_this8.resultsProcessed);
-            });
-          }
+            return getSurveyResults;
+          }()
         }, {
           key: "returnQuesType",
           value: function returnQuesType(data) {
@@ -828,11 +896,13 @@
         }, {
           key: "returnChartLabels",
           value: function returnChartLabels(data) {
+            // console.log(Object.keys(this.resultsProcessed[data]));
             return Object.keys(this.resultsProcessed[data]);
           }
         }, {
           key: "returnChartdata",
           value: function returnChartdata(data) {
+            // console.log(Object.values(this.resultsProcessed[data]));
             return Object.values(this.resultsProcessed[data]);
           }
         }, {

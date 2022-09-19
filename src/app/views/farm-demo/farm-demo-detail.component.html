@@ -24,7 +24,7 @@
           <button
             type="button"
             class="btn btn-primary"
-            (click)="deleteActivity()"
+            (click)="deleteFarmDemo()"
           >
             Yes! Delete.
           </button>
@@ -102,13 +102,9 @@
                 <td>{{ details?.attributes?.isPesticidesUsed }}</td>
               </tr>
               <tr>
-                <td>Created on</td>
-                <td>{{ dateConverter(details?.attributes?.createdAt) }}</td>
-              </tr>
-              <tr>
                 <td>Date of Harvesting</td>
                 <td>
-                  {{ dateConverter(details?.attributes?.DateOfHarvesting) }}
+                  {{ dateConverterMin(details?.attributes?.DateOfHarvesting) }}
                 </td>
               </tr>
               <tr>
@@ -120,6 +116,14 @@
                 <td>
                   <span class="badge">{{ details?.attributes?.Status }}</span>
                 </td>
+              </tr>
+              <tr>
+                <td>Created on</td>
+                <td>{{ dateConverter(details?.attributes?.createdAt) }}</td>
+              </tr>
+              <tr>
+                <td>Updated on</td>
+                <td>{{ dateConverter(details?.attributes?.updatedAt) }}</td>
               </tr>
             </tbody>
           </table>

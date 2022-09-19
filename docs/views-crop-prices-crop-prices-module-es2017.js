@@ -200,7 +200,9 @@ let CropPricesComponent = class CropPricesComponent {
         this.getStates();
     }
     getCropPrices() {
-        this.dataservice.getCropPrices(1, this.pageSize).valueChanges.subscribe((result) => {
+        this.dataservice
+            .getCropPrices(1, this.pageSize)
+            .valueChanges.subscribe((result) => {
             var _a, _b;
             this.rowData = result.data.cropPrices.data;
             this.meta = result.data.cropPrices.meta;
@@ -333,6 +335,7 @@ let CropPricesComponent = class CropPricesComponent {
     }
     cropPriceSubmit() {
         let resp = {};
+        this.btnLoading = true;
         console.log(this.cropPriceForm.value);
         if (!this.disableButton) {
             if (this.file) {
@@ -351,10 +354,11 @@ let CropPricesComponent = class CropPricesComponent {
                                 this.file = null;
                                 this.cropPriceModal.hide();
                                 this.gridApi.deselectAll();
+                                this.btnLoading = false;
                             }
-                            else {
-                                this.toastr.error("Failed. Please check the fields!");
-                            }
+                        }, (error) => {
+                            this.toastr.error("Failed. Please check the fields!");
+                            this.btnLoading = false;
                         });
                     }
                 });
@@ -371,10 +375,11 @@ let CropPricesComponent = class CropPricesComponent {
                         this.file = null;
                         this.cropPriceModal.hide();
                         this.gridApi.deselectAll();
+                        this.btnLoading = false;
                     }
-                    else {
-                        this.toastr.error("Failed. Please check the fields!");
-                    }
+                }, (error) => {
+                    this.toastr.error("Failed. Please check the fields!");
+                    this.btnLoading = false;
                 });
             }
         }
@@ -395,9 +400,10 @@ let CropPricesComponent = class CropPricesComponent {
                             this.cropPriceModal.hide();
                             this.gridApi.deselectAll();
                         }
-                        else {
-                            this.toastr.error("Failed. Please check the fields!");
-                        }
+                        this.btnLoading = false;
+                    }, (error) => {
+                        this.toastr.error("Failed. Please check the fields!");
+                        this.btnLoading = false;
                     });
                 }
                 else {

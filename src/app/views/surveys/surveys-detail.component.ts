@@ -36,20 +36,20 @@ export class SurveyDetailsComponent implements OnInit {
   public pieChartType = "pie";
   public resultsProcessed;
 
-  ngOnInit(): void {
+  async ngOnInit() {
     this.activatedRouter.params.subscribe((params) => {
       this.id = params["id"];
     });
-    this.getSurveyDetails();
-    this.getSurveyResults();
+    await this.getSurveyDetails();
+    await this.getSurveyResults();
   }
-  getSurveyDetails() {
+  async getSurveyDetails() {
     this.dataservice.getSurveyDetails(this.id).subscribe((result: any) => {
       console.log("getSurveyDetails", result.body.data);
       this.questions = result.body.data;
     });
   }
-  getSurveyResults() {
+  async getSurveyResults() {
     let data = {};
     this.dataservice
       .getSurveyResults(this.id)
@@ -57,6 +57,7 @@ export class SurveyDetailsComponent implements OnInit {
         this.rowData = result.data.surveyResults.data;
         console.log("getSurveyResults", this.rowData);
         let Fields = this.questions?.attributes?.Fields;
+        console.log(Fields, "fields");
         for (let i = 0; i < Fields.length; i++) {
           let ans = this.rowData.map(
             (x) => x.attributes.SurveyResponse[Fields[i].FieldKey]
@@ -80,7 +81,8 @@ export class SurveyDetailsComponent implements OnInit {
           data[Fields[i].FieldKey] = counted_obj;
         }
         this.resultsProcessed = data;
-        console.log(this.resultsProcessed);
+        console.log(this.resultsProcessed,"resultsProcessed");
+        this.chart?.update();
       });
   }
   returnQuesType(data) {
@@ -91,9 +93,11 @@ export class SurveyDetailsComponent implements OnInit {
     }
   }
   returnChartLabels(data) {
+    // console.log(Object.keys(this.resultsProcessed[data]));
     return Object.keys(this.resultsProcessed[data]);
   }
   returnChartdata(data) {
+    // console.log(Object.values(this.resultsProcessed[data]));
     return Object.values(this.resultsProcessed[data]);
   }
   deleteSurvey() {
@@ -110,15 +114,17 @@ export class SurveyDetailsComponent implements OnInit {
   }
   downloadResponses() {
     this.btnLoading = true;
-    this.dataservice.downloadResponses(this.id).subscribe((result: any) => {
-      console.log("downloadResponses", result.body);
-      let url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
-      this.btnLoading = false;
-      window.open(url, "_blank");
-    },
-    (error) =>{
-      this.btnLoading = true;
-      this.toastr.error("Failed!");
-    });
+    this.dataservice.downloadResponses(this.id).subscribe(
+      (result: any) => {
+        console.log("downloadResponses", result.body);
+        let url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
+        this.btnLoading = false;
+        window.open(url, "_blank");
+      },
+      (error) => {
+        this.btnLoading = true;
+        this.toastr.error("Failed!");
+      }
+    );
   }
 }

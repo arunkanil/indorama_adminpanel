@@ -538,6 +538,9 @@
         filterParams: {
           filterOptions: ["contains"],
           buttons: ["reset"]
+        },
+        cellRenderer: function cellRenderer(data) {
+          return data.value ? new Date(data.value).toDateString() : "";
         }
       }];
       var SoilHomeColumn = [{
@@ -687,6 +690,14 @@
         },
         width: "auto"
       }, {
+        field: "attributes.nutrient",
+        headerName: "Testing for",
+        sortable: true,
+        minWidth: 150,
+        resizable: true,
+        filter: "agDateColumnFilter",
+        filterParams: filterParams
+      }, {
         field: "attributes.Status",
         headerName: "Status",
         resizable: true,
@@ -709,16 +720,8 @@
         filter: "agDateColumnFilter",
         filterParams: filterParams,
         cellRenderer: function cellRenderer(data) {
-          return data.value ? new Date(data.value).toDateString() : "";
+          return data.value ? new Date(data.value).toString() : "";
         }
-      }, {
-        field: "attributes.nutrient",
-        headerName: "Testing for",
-        sortable: true,
-        minWidth: 150,
-        resizable: true,
-        filter: "agDateColumnFilter",
-        filterParams: filterParams
       }];
 
       function dateConverter(date) {
@@ -994,7 +997,7 @@
           buttons: ["reset"]
         },
         cellRenderer: function cellRenderer(data) {
-          return data.value ? new Date(data.value).toLocaleString() : "";
+          return data.value ? new Date(data.value).toString() : "";
         }
       }, {
         field: "attributes.publishedAt",
@@ -1007,7 +1010,7 @@
           buttons: ["reset"]
         },
         cellRenderer: function cellRenderer(data) {
-          return data.value ? new Date(data.value).toLocaleString() : "Not Published";
+          return data.value ? new Date(data.value).toString() : "Not Published";
         }
       }];
       var SmsColumn = [{
@@ -1041,7 +1044,7 @@
           buttons: ["reset"]
         },
         cellRenderer: function cellRenderer(data) {
-          return data.value ? new Date(data.value).toLocaleString() : "";
+          return data.value ? new Date(data.value).toString() : "";
         }
       }];
       var DeliveryReportColumn = [{
@@ -1151,7 +1154,7 @@
           buttons: ["reset"]
         },
         cellRenderer: function cellRenderer(data) {
-          return data.value ? new Date(data.value).toLocaleString() : "";
+          return data.value ? new Date(data.value).toString() : "";
         }
       }];
       var IndoramaUpdatesColumn = [{
@@ -1182,7 +1185,7 @@
           buttons: ["reset"]
         },
         cellRenderer: function cellRenderer(data) {
-          return data.value ? new Date(data.value).toLocaleString() : "";
+          return data.value ? new Date(data.value).toString() : "";
         }
       }];
       var SurveysColumn = [{
@@ -1213,7 +1216,7 @@
           buttons: ["reset"]
         },
         cellRenderer: function cellRenderer(data) {
-          return data.value ? new Date(data.value).toLocaleString() : "";
+          return data.value ? new Date(data.value).toString() : "";
         }
       }];
       var ActivitiesColumn = [{
@@ -1242,6 +1245,9 @@
         filterParams: {
           filterOptions: ["contains"],
           buttons: ["reset"]
+        },
+        cellRenderer: function cellRenderer(data) {
+          return data.value ? new Date(data.value).toDateString() : "";
         }
       }, {
         field: "attributes.Time",
@@ -1274,7 +1280,7 @@
           buttons: ["reset"]
         },
         cellRenderer: function cellRenderer(data) {
-          return data.value ? new Date(data.value).toLocaleString() : "";
+          return data.value ? new Date(data.value).toString() : "";
         }
       }];
       /***/

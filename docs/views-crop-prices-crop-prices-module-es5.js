@@ -467,6 +467,7 @@
             var _this7 = this;
 
             var resp = {};
+            this.btnLoading = true;
             console.log(this.cropPriceForm.value);
 
             if (!this.disableButton) {
@@ -491,9 +492,13 @@
                         _this7.cropPriceModal.hide();
 
                         _this7.gridApi.deselectAll();
-                      } else {
-                        _this7.toastr.error("Failed. Please check the fields!");
+
+                        _this7.btnLoading = false;
                       }
+                    }, function (error) {
+                      _this7.toastr.error("Failed. Please check the fields!");
+
+                      _this7.btnLoading = false;
                     });
                   }
                 });
@@ -512,9 +517,13 @@
                     _this7.cropPriceModal.hide();
 
                     _this7.gridApi.deselectAll();
-                  } else {
-                    _this7.toastr.error("Failed. Please check the fields!");
+
+                    _this7.btnLoading = false;
                   }
+                }, function (error) {
+                  _this7.toastr.error("Failed. Please check the fields!");
+
+                  _this7.btnLoading = false;
                 });
               }
             } else {
@@ -538,9 +547,13 @@
                       _this7.cropPriceModal.hide();
 
                       _this7.gridApi.deselectAll();
-                    } else {
-                      _this7.toastr.error("Failed. Please check the fields!");
                     }
+
+                    _this7.btnLoading = false;
+                  }, function (error) {
+                    _this7.toastr.error("Failed. Please check the fields!");
+
+                    _this7.btnLoading = false;
                   });
                 } else {
                   _this7.toastr.error("Image failed to upload!");

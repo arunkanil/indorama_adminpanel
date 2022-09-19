@@ -502,28 +502,29 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverter"];
         this.pieChartType = "pie";
     }
-    ngOnInit() {
+    async ngOnInit() {
         this.activatedRouter.params.subscribe((params) => {
             this.id = params["id"];
         });
-        this.getSurveyDetails();
-        this.getSurveyResults();
+        await this.getSurveyDetails();
+        await this.getSurveyResults();
     }
-    getSurveyDetails() {
+    async getSurveyDetails() {
         this.dataservice.getSurveyDetails(this.id).subscribe((result) => {
             console.log("getSurveyDetails", result.body.data);
             this.questions = result.body.data;
         });
     }
-    getSurveyResults() {
+    async getSurveyResults() {
         let data = {};
         this.dataservice
             .getSurveyResults(this.id)
             .valueChanges.subscribe((result) => {
-            var _a, _b;
+            var _a, _b, _c;
             this.rowData = result.data.surveyResults.data;
             console.log("getSurveyResults", this.rowData);
             let Fields = (_b = (_a = this.questions) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Fields;
+            console.log(Fields, "fields");
             for (let i = 0; i < Fields.length; i++) {
                 let ans = this.rowData.map((x) => x.attributes.SurveyResponse[Fields[i].FieldKey]);
                 let unique_ans = this.rowData
@@ -543,7 +544,8 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
                 data[Fields[i].FieldKey] = counted_obj;
             }
             this.resultsProcessed = data;
-            console.log(this.resultsProcessed);
+            console.log(this.resultsProcessed, "resultsProcessed");
+            (_c = this.chart) === null || _c === void 0 ? void 0 : _c.update();
         });
     }
     returnQuesType(data) {
@@ -555,9 +557,11 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         }
     }
     returnChartLabels(data) {
+        // console.log(Object.keys(this.resultsProcessed[data]));
         return Object.keys(this.resultsProcessed[data]);
     }
     returnChartdata(data) {
+        // console.log(Object.values(this.resultsProcessed[data]));
         return Object.values(this.resultsProcessed[data]);
     }
     deleteSurvey() {

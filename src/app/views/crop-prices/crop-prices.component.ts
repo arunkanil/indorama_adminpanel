@@ -71,14 +71,16 @@ export class CropPricesComponent {
     this.getStates();
   }
   getCropPrices() {
-    this.dataservice.getCropPrices(1,this.pageSize).valueChanges.subscribe((result: any) => {
-      this.rowData = result.data.cropPrices.data;
-      this.meta = result.data.cropPrices.meta;
-      if (this.meta?.pagination?.pageCount <= 1) {
-        this.disablePrevButton = true;
-        this.disableNextButton = true;
-      }
-    });
+    this.dataservice
+      .getCropPrices(1, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.rowData = result.data.cropPrices.data;
+        this.meta = result.data.cropPrices.meta;
+        if (this.meta?.pagination?.pageCount <= 1) {
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+      });
   }
   getCrops() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
@@ -87,7 +89,7 @@ export class CropPricesComponent {
   }
   loadNext() {
     this.count++;
-     this.disablePrevButton = false;
+    this.disablePrevButton = false;
     this.from = this.from + this.pageSize;
     this.to =
       this.to + this.pageSize > this.meta?.pagination?.total
@@ -203,6 +205,7 @@ export class CropPricesComponent {
   }
   cropPriceSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.cropPriceForm.value);
     if (!this.disableButton) {
       if (this.file) {
@@ -215,19 +218,24 @@ export class CropPricesComponent {
                 this.selectedRows[0].id,
                 response.body[0]?.id
               )
-              .subscribe((result: any) => {
-                resp = result.data;
-                console.log("response", result);
-                if (result.data.updateCropPrice) {
-                  this.toastr.success("Success!");
-                  this.getCropPrices();
-                  this.file = null;
-                  this.cropPriceModal.hide();
-                  this.gridApi.deselectAll();
-                } else {
+              .subscribe(
+                (result: any) => {
+                  resp = result.data;
+                  console.log("response", result);
+                  if (result.data.updateCropPrice) {
+                    this.toastr.success("Success!");
+                    this.getCropPrices();
+                    this.file = null;
+                    this.cropPriceModal.hide();
+                    this.gridApi.deselectAll();
+                    this.btnLoading = false;
+                  }
+                },
+                (error) => {
                   this.toastr.error("Failed. Please check the fields!");
+                  this.btnLoading = false;
                 }
-              });
+              );
           }
         });
       } else {
@@ -237,19 +245,24 @@ export class CropPricesComponent {
             this.selectedRows[0].id,
             null
           )
-          .subscribe((result: any) => {
-            resp = result.data;
-            console.log("response", result);
-            if (result.data.updateCropPrice) {
-              this.toastr.success("Success!");
-              this.getCropPrices();
-              this.file = null;
-              this.cropPriceModal.hide();
-              this.gridApi.deselectAll();
-            } else {
+          .subscribe(
+            (result: any) => {
+              resp = result.data;
+              console.log("response", result);
+              if (result.data.updateCropPrice) {
+                this.toastr.success("Success!");
+                this.getCropPrices();
+                this.file = null;
+                this.cropPriceModal.hide();
+                this.gridApi.deselectAll();
+                this.btnLoading = false;
+              }
+            },
+            (error) => {
               this.toastr.error("Failed. Please check the fields!");
+              this.btnLoading = false;
             }
-          });
+          );
       }
     } else {
       this.dataservice.upload(this.file).subscribe((response: any) => {
@@ -257,19 +270,24 @@ export class CropPricesComponent {
           console.log(response);
           this.dataservice
             .AddCropPrice(this.cropPriceForm.value, response.body[0]?.id)
-            .subscribe((result: any) => {
-              resp = result.data;
-              console.log("response", result);
-              if (result.data.createCropPrice) {
-                this.toastr.success("Success!");
-                this.getCropPrices();
-                this.file = null;
-                this.cropPriceModal.hide();
-                this.gridApi.deselectAll();
-              } else {
+            .subscribe(
+              (result: any) => {
+                resp = result.data;
+                console.log("response", result);
+                if (result.data.createCropPrice) {
+                  this.toastr.success("Success!");
+                  this.getCropPrices();
+                  this.file = null;
+                  this.cropPriceModal.hide();
+                  this.gridApi.deselectAll();
+                }
+                this.btnLoading = false;
+              },
+              (error) => {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
               }
-            });
+            );
         } else {
           this.toastr.error("Image failed to upload!");
         }

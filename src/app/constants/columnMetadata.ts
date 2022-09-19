@@ -423,6 +423,9 @@ export const FarmDemoColumn = [
       filterOptions: ["contains"],
       buttons: ["reset"],
     },
+    cellRenderer: (data) => {
+      return data.value ? new Date(data.value).toDateString() : "";
+    },
   },
   // {
   //   field: "tele_caller_contact.Name",
@@ -627,6 +630,16 @@ export const SoilAnalysisColumns = [
     width: "auto",
   },
   {
+    field: "attributes.nutrient",
+    headerName: "Testing for",
+    sortable: true,
+    minWidth: 150,
+    resizable: true,
+    filter: "agDateColumnFilter",
+    filterParams: filterParams,
+    // cellRenderer: fullNameGetter,
+  },
+  {
     field: "attributes.Status",
     headerName: "Status",
     resizable: true,
@@ -650,18 +663,8 @@ export const SoilAnalysisColumns = [
     filter: "agDateColumnFilter",
     filterParams: filterParams,
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toDateString() : "";
+      return data.value ? new Date(data.value).toString() : "";
     },
-  },
-  {
-    field: "attributes.nutrient",
-    headerName: "Testing for",
-    sortable: true,
-    minWidth: 150,
-    resizable: true,
-    filter: "agDateColumnFilter",
-    filterParams: filterParams,
-    // cellRenderer: fullNameGetter,
   },
 ];
 export function dateConverter(date) {
@@ -1017,7 +1020,7 @@ export const CropPricesColumn = [
       buttons: ["reset"],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toLocaleString() : "";
+      return data.value ? new Date(data.value).toString() : "";
     },
   },
   {
@@ -1032,7 +1035,7 @@ export const CropPricesColumn = [
     },
     cellRenderer: (data) => {
       return data.value
-        ? new Date(data.value).toLocaleString()
+        ? new Date(data.value).toString()
         : "Not Published";
     },
   },
@@ -1079,7 +1082,7 @@ export const SmsColumn = [
       buttons: ["reset"],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toLocaleString() : "";
+      return data.value ? new Date(data.value).toString() : "";
     },
   },
 ];
@@ -1115,7 +1118,7 @@ export const DeliveryReportColumn = [
       buttons: ["reset"],
     },
     // cellRenderer: (data) => {
-    //   return data.value ? new Date(data.value).toLocaleString() : "";
+    //   return data.value ? new Date(data.value).toString() : "";
     // },
   },
 ];
@@ -1205,7 +1208,7 @@ export const MarketplaceColumn = [
       buttons: ["reset"],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toLocaleString() : "";
+      return data.value ? new Date(data.value).toString() : "";
     },
   },
   // {
@@ -1220,7 +1223,7 @@ export const MarketplaceColumn = [
   //   },
   //   cellRenderer: (data) => {
   //     return data.value
-  //       ? new Date(data.value).toLocaleString()
+  //       ? new Date(data.value).toString()
   //       : "Not Published";
   //   },
   // },
@@ -1265,7 +1268,7 @@ export const IndoramaUpdatesColumn = [
       buttons: ["reset"],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toLocaleString() : "";
+      return data.value ? new Date(data.value).toString() : "";
     },
   },
   // {
@@ -1309,7 +1312,7 @@ export const SurveysColumn = [
       buttons: ["reset"],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toLocaleString() : "";
+      return data.value ? new Date(data.value).toString() : "";
     },
   },
 ]
@@ -1343,6 +1346,10 @@ export const ActivitiesColumn = [
       filterOptions: ["contains"],
       buttons: ["reset"],
     },
+    cellRenderer: (data) => {
+      return data.value ? new Date(data.value).toDateString() : "";
+    },
+    
   },
   {
     field: "attributes.Time",
@@ -1377,7 +1384,7 @@ export const ActivitiesColumn = [
       buttons: ["reset"],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toLocaleString() : "";
+      return data.value ? new Date(data.value).toString() : "";
     },
   },
 ];

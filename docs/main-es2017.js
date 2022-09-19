@@ -544,6 +544,7 @@ const FarmDemoQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
             }
           }
           createdAt
+          updatedAt
           AreaOfField
           isPesticidesUsed
           DateOfHarvesting
@@ -1295,9 +1296,9 @@ const UpdateMarket = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const CropPricesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($page: Int, $pageSize: Int) {
+  query ($page: Int, $pageSize: Int, $publicationState: PublicationState) {
     cropPrices(
-      publicationState: PREVIEW
+      publicationState: $publicationState
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
     ) {
@@ -4052,7 +4053,7 @@ let DataService = class DataService {
         const httpOptions1 = {
             observe: "response",
             headers: {
-                Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OTIsImlhdCI6MTY2MzMyOTc5MywiZXhwIjoxNjY1OTIxNzkzfQ.uUhAEh4DsVjQ1F-xKHCNmoeEsoIGG_f6tIi7wHVCAFc`,
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
         };
         return this.http
@@ -5054,7 +5055,7 @@ let DataService = class DataService {
         return this.apollo.mutate({
             mutation: updateRetailerAd,
             variables: {
-                clickUrl: url,
+                // clickUrl: url,
                 imageId: image,
             },
             errorPolicy: "all",
@@ -5064,7 +5065,7 @@ let DataService = class DataService {
         return this.apollo.mutate({
             mutation: updateDashboardAd,
             variables: {
-                clickUrl: url,
+                // clickUrl: url,
                 imageId: image,
             },
             errorPolicy: "all",
