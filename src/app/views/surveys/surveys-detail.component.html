@@ -37,55 +37,79 @@
       <div class="row p-2">
         <div class="form-group">
           <label for="title">Survey Title</label>
-          <h5>{{ questions?.attributes?.SurveyTitle }}</h5>
+          <h6>{{ questions?.attributes?.SurveyTitle }}</h6>
         </div>
       </div>
-      <div class="row p-2">
+      <div class="row p-2 mb-3">
         <div class="form-group">
           <label for="title">Survey Description</label>
-          <h5>{{ questions?.attributes?.SurveyDescription }}</h5>
+          <h6>{{ questions?.attributes?.SurveyDescription }}</h6>
         </div>
       </div>
-      <h6>Survey Questions</h6>
+      <h5 class="mb-3">Survey Questions & Responses</h5>
       <div class="row">
         <div class="col">
-          <div class="card">
-            <div
-              class="card-body"
-              *ngFor="
-                let item of questions?.attributes?.Fields;
-                let indexOfelement = index
-              "
-            >
-              <div style="display: flex; justify-content: space-between">
-                <div>
-                  <h5 class="card-title">{{ item.FieldName }}</h5>
-                  <p class="card-text">
-                    Question type : {{ returnQuesType(item.__component) }}
-                  </p>
-                  <p class="card-text">
-                    Field type : {{ returnFieldType(item.FieldType) }}
-                  </p>
-                  <p class="card-text">Required : {{ item.Mandatory }}</p>
-                  <p *ngIf="item.Values" class="card-text">
-                    Options :
-                    <span
-                      *ngFor="let option of item.Values"
-                      class="badge badge-success mx-1"
-                      >{{ option }}</span
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive"
+          ></apx-chart>
+        </div>
+        <div class="col">
+          <div
+            class="col-12"
+            *ngFor="
+              let item of questions?.attributes?.Fields;
+              let indexOfelement = index
+            "
+          >
+            <div class="card">
+              <div class="card-body">
+                <div style="display: flex; justify-content: space-between">
+                  <div>
+                    <h5 class="card-title">{{ item.FieldName }}</h5>
+                    <p class="card-text">
+                      Question type : {{ returnQuesType(item.__component) }}
+                    </p>
+                    <p class="card-text">
+                      Field type : {{ returnFieldType(item.FieldType) }}
+                    </p>
+                    <p class="card-text">
+                      Required : {{ item.Mandatory ? "Yes" : "No" }}
+                    </p>
+                    <p *ngIf="item.Values" class="card-text">
+                      Options :
+                      <span
+                        *ngFor="let option of item.Values"
+                        class="badge badge-success mx-1"
+                        >{{ option }}</span
+                      >
+                    </p>
+                    <button
+                      type="button"
+                      class="btn btn-primary"
+                      data-toggle="modal"
+                      (click)="loadResponses(item.FieldKey)"
                     >
-                  </p>
+                      Load pie chart
+                    </button>
+                  </div>
                 </div>
-              </div>
-              <div *ngIf="returnChartdata(item.FieldKey).length > 0" class="chart-wrapper">
-                <canvas
+                <div
+                  *ngIf="returnChartdata(item.FieldKey).length > 0"
+                  class="chart-wrapper"
+                >
+                  <!-- <canvas
                   baseChart
                   class="chart"
                   [data]="returnChartdata(item.FieldKey)"
                   [labels]="returnChartLabels(item.FieldKey)"
+                  [options]="pieChartOptions"
                   [chartType]="pieChartType"
                   (chartHover)="chartHovered($event)"
-                ></canvas>
+                ></canvas> -->
+                </div>
               </div>
             </div>
           </div>

@@ -156,7 +156,7 @@ export class ActivitiesComponent {
         resp = result.data;
         if (result.data.createActivity) {
           this.toastr.success("Success!");
-          this.dataservice.getActivities(1, this.pageSize).refetch();
+          this.getActivities();
           this.activitiesForm.reset();
           this.btnLoading = false;
           this.activitiesModal.hide();

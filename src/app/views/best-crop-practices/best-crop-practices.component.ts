@@ -119,6 +119,7 @@ export class BestCropPracticesComponent {
                   this.toastr.success("Success!");
                   this.dataservice.getBestCropPractises().refetch();
                   this.practicesModal.hide();
+                  this.btnLoading = false;
                 } else {
                   this.toastr.error("Failed. Please check the fields!");
                   this.btnLoading = false;

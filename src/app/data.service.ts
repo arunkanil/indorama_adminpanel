@@ -353,6 +353,14 @@ const UpdateFarmDemo = gql`
 const CropsQuery = gql`
   query {
     crops(pagination: { limit: 100 }, sort: "createdAt:desc") {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -396,6 +404,14 @@ const UpdateCrops = gql`
 const StatesQuery = gql`
   query {
     states(pagination: { limit: 100 }, sort: "createdAt:desc") {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -491,6 +507,14 @@ const LGAquery = gql`
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -582,6 +606,14 @@ const Villagesquery = gql`
       sort: "createdAt:desc"
       filters: { area: { lga: { id: { eq: $id } } } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -676,6 +708,14 @@ const Areasquery = gql`
       sort: "createdAt:desc"
       filters: { lga: { id: { eq: $id } } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -805,6 +845,14 @@ const MarketQuery = gql`
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1172,23 +1220,7 @@ const SoilTestQuery = gql`
               attributes {
                 username
                 email
-                agronomist {
-                  data {
-                    id
-                    attributes {
-                      users_permissions_user {
-                        data {
-                          id
-                          attributes {
-                            username
-                            email
-                            Name
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+
                 Name
               }
             }
@@ -1249,23 +1281,7 @@ const SingleSoilTestQuery = gql`
               attributes {
                 username
                 email
-                agronomist {
-                  data {
-                    id
-                    attributes {
-                      users_permissions_user {
-                        data {
-                          id
-                          attributes {
-                            username
-                            email
-                            Name
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+                
                 Name
               }
             }
@@ -4203,7 +4219,7 @@ export class DataService {
         cropFilter: cropFilter,
       },
       errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      // fetchPolicy: "no-cache",
     });
   }
   getActivities(page?, pageSize?) {

@@ -2908,6 +2908,27 @@ let DashboardComponent = class DashboardComponent {
         this.barChartOptions = {
             scaleShowVerticalLines: false,
             responsive: true,
+            scales: {
+                xAxes: [
+                    {
+                        gridLines: {
+                            drawOnChartArea: false,
+                        },
+                        ticks: {
+                            callback: function (value) {
+                                return value.charAt(0);
+                            },
+                        },
+                    },
+                ],
+                yAxes: [
+                    {
+                        ticks: {
+                            beginAtZero: true,
+                        },
+                    },
+                ],
+            },
         };
         this.barChartType = "bar";
         this.barChartLegend = true;

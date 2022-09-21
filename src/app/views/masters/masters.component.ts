@@ -47,6 +47,13 @@ export class mastersComponent {
   loading = true;
   disableButton = true;
   btnLoading = false;
+  disableNextButton = false;
+  disablePrevButton = true;
+  meta;
+  pageSize = 20;
+  from = 1;
+  to = 20;
+  count = 1;
   Villages: any = [];
   LGA: any = [];
   Areas: any = [];
@@ -98,6 +105,11 @@ export class mastersComponent {
         this.dataservice.getVillages().valueChanges.subscribe((result: any) => {
           console.log("getVillages", result.data.villages.data);
           this.rowData = result.data.villages.data;
+          this.meta = result.data.villages.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/Areas":
@@ -105,6 +117,11 @@ export class mastersComponent {
         this.dataservice.getAreas().valueChanges.subscribe((result: any) => {
           console.log("getAreas", result.data.areas.data);
           this.rowData = result.data.areas.data;
+          this.meta = result.data.areas.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/LGA":
@@ -112,6 +129,11 @@ export class mastersComponent {
         this.dataservice.getLGAs().valueChanges.subscribe((result: any) => {
           console.log("getLGAs", result.data.lgas.data);
           this.rowData = result.data.lgas.data;
+          this.meta = result.data.lgas.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/States":
@@ -119,6 +141,11 @@ export class mastersComponent {
         this.dataservice.getStates().valueChanges.subscribe((result: any) => {
           console.log("getStates", result.data.states.data);
           this.rowData = result.data.states.data;
+          this.meta = result.data.states.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/Markets":
@@ -126,6 +153,11 @@ export class mastersComponent {
         this.dataservice.getMarkets().valueChanges.subscribe((result: any) => {
           console.log("getMarkets", result.data.markets.data);
           this.rowData = result.data.markets.data;
+          this.meta = result.data.markets.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/Crops":
@@ -133,6 +165,11 @@ export class mastersComponent {
         this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
           console.log("getCrops", result.data.crops.data);
           this.rowData = result.data.crops.data;
+          this.meta = result.data.crops.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
     }
@@ -336,6 +373,41 @@ export class mastersComponent {
         }
         break;
     }
+  }
+  loadNext() {
+    this.count++;
+     this.disablePrevButton = false;
+    this.from = this.from + this.pageSize;
+    this.to =
+      this.to + this.pageSize > this.meta?.pagination?.total
+        ? this.meta?.pagination?.total
+        : this.to + this.pageSize;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    // this.dataservice
+    //   .getFarmDemos(this.count, this.pageSize)
+    //   .valueChanges.subscribe((result: any) => {
+    //     this.meta = result.data.farmDemos.meta;
+    //     this.rowData = result.data.farmDemos.data;
+    //   });
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.from = this.from - this.pageSize;
+    this.to = this.to - this.rowData.length;
+    // this.dataservice
+    //   .getFarmDemos(this.count, this.pageSize)
+    //   .valueChanges.subscribe((result: any) => {
+    //     this.meta = result.data.farmDemos.meta;
+    //     this.rowData = result.data.farmDemos.data;
+    //   });
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);

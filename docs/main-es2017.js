@@ -783,6 +783,14 @@ const UpdateFarmDemo = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 const CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query {
     crops(pagination: { limit: 100 }, sort: "createdAt:desc") {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -826,6 +834,14 @@ const UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 const StatesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query {
     states(pagination: { limit: 100 }, sort: "createdAt:desc") {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -921,6 +937,14 @@ const LGAquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1012,6 +1036,14 @@ const Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
       sort: "createdAt:desc"
       filters: { area: { lga: { id: { eq: $id } } } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1106,6 +1138,14 @@ const Areasquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
       sort: "createdAt:desc"
       filters: { lga: { id: { eq: $id } } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1235,6 +1275,14 @@ const MarketQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
       data {
         id
         attributes {
@@ -1602,23 +1650,7 @@ const SoilTestQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
               attributes {
                 username
                 email
-                agronomist {
-                  data {
-                    id
-                    attributes {
-                      users_permissions_user {
-                        data {
-                          id
-                          attributes {
-                            username
-                            email
-                            Name
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+
                 Name
               }
             }
@@ -1679,23 +1711,7 @@ const SingleSoilTestQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
               attributes {
                 username
                 email
-                agronomist {
-                  data {
-                    id
-                    attributes {
-                      users_permissions_user {
-                        data {
-                          id
-                          attributes {
-                            username
-                            email
-                            Name
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
+                
                 Name
               }
             }
@@ -4611,7 +4627,6 @@ let DataService = class DataService {
                 cropFilter: cropFilter,
             },
             errorPolicy: "all",
-            fetchPolicy: "no-cache",
         });
     }
     getActivities(page, pageSize) {

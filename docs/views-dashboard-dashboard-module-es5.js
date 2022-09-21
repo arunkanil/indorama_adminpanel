@@ -3554,7 +3554,24 @@
           this.mainChartType = "line";
           this.barChartOptions = {
             scaleShowVerticalLines: false,
-            responsive: true
+            responsive: true,
+            scales: {
+              xAxes: [{
+                gridLines: {
+                  drawOnChartArea: false
+                },
+                ticks: {
+                  callback: function callback(value) {
+                    return value.charAt(0);
+                  }
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true
+                }
+              }]
+            }
           };
           this.barChartType = "bar";
           this.barChartLegend = true;

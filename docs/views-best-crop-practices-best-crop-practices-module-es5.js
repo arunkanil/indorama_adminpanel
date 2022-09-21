@@ -282,6 +282,8 @@
                         _this4.dataservice.getBestCropPractises().refetch();
 
                         _this4.practicesModal.hide();
+
+                        _this4.btnLoading = false;
                       } else {
                         _this4.toastr.error("Failed. Please check the fields!");
 

@@ -5,11 +5,13 @@ import { AgGridModule } from "ag-grid-angular";
 import { ModalModule } from "ngx-bootstrap/modal";
 import { BsDropdownModule } from "ngx-bootstrap/dropdown";
 import { TabsModule } from "ngx-bootstrap/tabs";
-import { ChartsModule } from 'ng2-charts';
+import { ChartsModule } from "ng2-charts";
+import ApexCharts from "apexcharts";
 import { SurveysComponent } from "./surveys.component";
 import { SurveysRoutingModule } from "./surveys-routing.module";
 import { SurveyDetailsComponent } from "./surveys-detail.component";
 import { NewSurveyComponent } from "./surveys-add.component";
+import { NgApexchartsModule } from "ng-apexcharts";
 
 @NgModule({
   imports: [
@@ -21,7 +23,8 @@ import { NewSurveyComponent } from "./surveys-add.component";
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    NgApexchartsModule,
   ],
   declarations: [SurveysComponent, SurveyDetailsComponent, NewSurveyComponent],
 })

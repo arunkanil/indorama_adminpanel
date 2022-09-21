@@ -123,6 +123,27 @@ export class DashboardComponent implements OnInit {
   public barChartOptions: any = {
     scaleShowVerticalLines: false,
     responsive: true,
+    scales: {
+      xAxes: [
+        {
+          gridLines: {
+            drawOnChartArea: false,
+          },
+          ticks: {
+            callback: function (value: any) {
+              return value.charAt(0);
+            },
+          },
+        },
+      ],
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
   };
   public barChartType = "bar";
   public barChartLegend = true;

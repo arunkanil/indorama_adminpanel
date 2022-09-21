@@ -6,6 +6,21 @@ import { DataService } from "../../data.service";
 import { FormBuilder, Validators } from "@angular/forms";
 import { dateConverter } from "../../constants/columnMetadata";
 import { BaseChartDirective } from "ng2-charts";
+import { ChartConfiguration } from "chart.js";
+import {
+  ChartComponent,
+  ApexAxisChartSeries,
+  ApexChart,
+  ApexXAxis,
+  ApexTitleSubtitle,
+} from "ng-apexcharts";
+
+export type ChartOptions = {
+  series: ApexNonAxisChartSeries;
+  chart: ApexChart;
+  responsive: ApexResponsive[];
+  labels: any;
+};
 
 const unique = (value, index, self) => {
   return self.indexOf(value) === index;
@@ -21,9 +36,33 @@ export class SurveyDetailsComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.chartOptions = {
+      chart: {
+        width: 580,
+        type: "pie",
+      },
+      series: [10, 10, 22, 10, 10],
+      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      responsive: [
+        {
+          breakpoint: 480,
+          options: {
+            chart: {
+              width: 200,
+            },
+            legend: {
+              position: "bottom",
+            },
+          },
+        },
+      ],
+    };
+  }
+  @ViewChild("chart") chart: ChartComponent;
+  public chartOptions: Partial<ChartOptions>;
   @ViewChild("deleteModal") public deleteModal: ModalDirective;
-  @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
+  // @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   id: any;
   loading = true;
@@ -34,6 +73,24 @@ export class SurveyDetailsComponent implements OnInit {
   dateConverter = dateConverter;
 
   public pieChartType = "pie";
+  public pieChartOptions: ChartConfiguration["options"] = {
+    responsive: true,
+
+    plugins: {
+      legend: {
+        display: true,
+        position: "top",
+      },
+      datalabels: {
+        formatter: (value, ctx) => {
+          console.log(value, "datalabels", ctx);
+          if (ctx.chart.data.labels) {
+            return ctx.chart.data.labels[ctx.dataIndex];
+          }
+        },
+      },
+    },
+  };
   public resultsProcessed = {};
 
   async ngOnInit() {
@@ -41,7 +98,6 @@ export class SurveyDetailsComponent implements OnInit {
       this.id = params["id"];
     });
     this.getSurveyDetails();
-    this.getSurveyResults();
   }
   async getSurveyDetails() {
     console.log("start getSurveyDetails");
@@ -49,6 +105,7 @@ export class SurveyDetailsComponent implements OnInit {
       console.log("getSurveyDetails", result.body.data);
       this.questions = result.body.data;
       console.log("finished getSurveyDetails");
+      this.getSurveyResults();
     });
   }
   async getSurveyResults() {
@@ -85,7 +142,7 @@ export class SurveyDetailsComponent implements OnInit {
         }
         this.resultsProcessed = data;
         console.log(this.resultsProcessed, "resultsProcessed");
-        this.chart?.update();
+        // this.chart?.update();
       });
   }
   returnQuesType(data) {
@@ -105,12 +162,15 @@ export class SurveyDetailsComponent implements OnInit {
         return "Selection";
     }
   }
-  returnChartLabels(data) {
+  loadResponses(data) {
     // console.log(Object.keys(this.resultsProcessed[data]));
     if (this.resultsProcessed.hasOwnProperty(data)) {
-      return Object.keys(this.resultsProcessed[data]);
+      // return Object.keys(this.resultsProcessed[data]);
+      this.chartOptions.series = Object.values(this.resultsProcessed[data]);
+      this.chartOptions.labels = Object.keys(this.resultsProcessed[data]);
     } else {
-      return [];
+      // return [];
+      this.toastr.error("No data");
     }
   }
   returnChartdata(data) {

@@ -534,7 +534,7 @@
               if (result.data.createActivity) {
                 _this13.toastr.success("Success!");
 
-                _this13.dataservice.getActivities(1, _this13.pageSize).refetch();
+                _this13.getActivities();
 
                 _this13.activitiesForm.reset();
 
