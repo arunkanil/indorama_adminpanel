@@ -165,12 +165,9 @@
               </li>
             </ul>
           </div>
-          <!-- <div class="btn-group btn-group-toggle float-right mr-3" data-toggle="buttons">
-            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Day" id="option1">Day</label>
-            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Month"
-              id="option2">Month</label>
-            <label class="btn btn-outline-secondary" [(ngModel)]="radioModel" btnRadio="Year" id="option3">Year</label>
-          </div> -->
+          <div class="btn-group float-right">
+            <button type="button" class="btn btn-link" (click)="clearFilter()">Clear</button>
+          </div>
         </div>
       </div>
       <div class="chart-wrapper" style="height: 300px; margin-top: 40px">

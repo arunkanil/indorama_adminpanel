@@ -4376,6 +4376,7 @@ let DataService = class DataService {
                 images: farmdemo.images,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddStates(state) {
@@ -4385,6 +4386,7 @@ let DataService = class DataService {
                 Name: state.state,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddLGA(lga) {
@@ -4395,6 +4397,7 @@ let DataService = class DataService {
                 state: lga.state,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddArea(area) {
@@ -4406,6 +4409,7 @@ let DataService = class DataService {
                 PostalCode: area.PostalCode,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddMarket(market) {
@@ -4416,6 +4420,7 @@ let DataService = class DataService {
                 state: market.state,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddCrop(crop) {
@@ -4425,6 +4430,7 @@ let DataService = class DataService {
                 Name: crop.crop,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     Addvillage(village) {
@@ -4435,6 +4441,7 @@ let DataService = class DataService {
                 area: village.area,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddCropPrice(price, image) {
@@ -4450,6 +4457,7 @@ let DataService = class DataService {
                 published: new Date(),
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddIndoramaUpdates(price, imageid) {
@@ -4461,6 +4469,7 @@ let DataService = class DataService {
                 Images: imageid ? imageid : price.Image,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     createBestCropPractise(price, imageid, media) {
@@ -4473,6 +4482,7 @@ let DataService = class DataService {
                 media: media,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     createMarketplaceProduct(price, imageid) {
@@ -4490,6 +4500,7 @@ let DataService = class DataService {
                 description: price.description,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     updateMarketplaceProduct(price, id, imageid) {
@@ -4508,6 +4519,7 @@ let DataService = class DataService {
                 description: price.description,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     updateMarketplaceProductImg(id, imageid) {
@@ -4518,6 +4530,7 @@ let DataService = class DataService {
                 images: imageid,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     createActivity(price) {
@@ -4540,6 +4553,7 @@ let DataService = class DataService {
                 Time: price.Time,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     getAgronomist(id) {
@@ -4549,6 +4563,7 @@ let DataService = class DataService {
                 user: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     getIndoramaUpdates(id, page, pageSize) {
@@ -4562,6 +4577,7 @@ let DataService = class DataService {
                 pageSize: pageSize,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     getMarketplace(pageNumber, pageSize, categoryFilter) {
@@ -4573,6 +4589,7 @@ let DataService = class DataService {
                 categoryFilter: categoryFilter,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     getSingleMarketplaceProduct(id) {
@@ -4582,6 +4599,7 @@ let DataService = class DataService {
                 id: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     getBestCropPractises(page, pageSize, cropFilter) {
@@ -4593,11 +4611,13 @@ let DataService = class DataService {
                 cropFilter: cropFilter,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     getActivities(page, pageSize) {
         return this.apollo.watchQuery({
             query: GetActivities,
+            fetchPolicy: "no-cache",
             variables: {
                 page: page,
                 pageSize: pageSize,
@@ -4608,6 +4628,7 @@ let DataService = class DataService {
     getActivity(id) {
         return this.apollo.watchQuery({
             query: GetSingleActivity,
+            fetchPolicy: "no-cache",
             variables: {
                 id: id,
             },
@@ -4617,6 +4638,7 @@ let DataService = class DataService {
     getMarketplaceCategories(id) {
         return this.apollo.watchQuery({
             query: GetMarketplaceCategories,
+            fetchPolicy: "no-cache",
             variables: {
                 id: id,
             },
@@ -4631,6 +4653,7 @@ let DataService = class DataService {
                 user: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateCropPrice(price, id, imageid, Rejected, published) {
@@ -4648,6 +4671,7 @@ let DataService = class DataService {
                 image: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddSoilTestResult(result) {
@@ -4670,6 +4694,7 @@ let DataService = class DataService {
                 sulphur: result.SulphurObserved,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateSoilTestResult(result) {
@@ -4692,6 +4717,7 @@ let DataService = class DataService {
                 sulphur: result.SulphurObserved,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateCrop(crop, id) {
@@ -4703,6 +4729,7 @@ let DataService = class DataService {
                 id: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateState(data, id) {
@@ -4714,6 +4741,7 @@ let DataService = class DataService {
                 id: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateLGA(data, id) {
@@ -4726,6 +4754,7 @@ let DataService = class DataService {
                 id: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateMarket(data, id) {
@@ -4738,6 +4767,7 @@ let DataService = class DataService {
                 id: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateArea(area, id) {
@@ -4751,6 +4781,7 @@ let DataService = class DataService {
                 id: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     Updatevillage(village, id) {
@@ -4763,6 +4794,7 @@ let DataService = class DataService {
                 id: id,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateSoilTest(test, soilTestId) {
@@ -4781,6 +4813,7 @@ let DataService = class DataService {
                 nutrient: test.nutrient,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateFarmDemo(data, id) {
@@ -4816,6 +4849,7 @@ let DataService = class DataService {
                 dateOfHarvesting: data.DateOfHarvesting,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateRetailer(data, id) {
@@ -4835,6 +4869,7 @@ let DataService = class DataService {
                 contactNumber: data.ContactNumber,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateRetailerPic(id, image) {
@@ -4845,6 +4880,7 @@ let DataService = class DataService {
                 prof_pic: image,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     AddFarmdemoPic(id, image) {
@@ -4855,6 +4891,7 @@ let DataService = class DataService {
                 images: image,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     addRetailerProducts(data, retailer_category, retailer, image) {
@@ -4870,6 +4907,7 @@ let DataService = class DataService {
                 retailers: retailer,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateRetailerProducts(data, retailer_category, retailer) {
@@ -4886,6 +4924,7 @@ let DataService = class DataService {
                 retailer: retailer,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     UpdateIndoramaUpdates(price, id, imageid) {
@@ -4899,6 +4938,7 @@ let DataService = class DataService {
                 Images: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     updateActivity(price, id) {
@@ -4920,6 +4960,7 @@ let DataService = class DataService {
                 Time: price.Time,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     upload(file) {
@@ -5073,11 +5114,13 @@ let DataService = class DataService {
                 imageId: image,
             },
             errorPolicy: "all",
+            fetchPolicy: "no-cache",
         });
     }
     updateDashboardAd(url, image) {
         return this.apollo.mutate({
             mutation: updateDashboardAd,
+            fetchPolicy: "no-cache",
             variables: {
                 // clickUrl: url,
                 imageId: image,

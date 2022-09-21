@@ -178,6 +178,17 @@ export class DashboardComponent implements OnInit {
     this.selectedCrop = event;
     this.getCropPrices(event);
   }
+  clearFilter() {
+    this.selectedCrop = { attributes: { Name: "Crop" } };
+    this.selectedMarket = { attributes: { Name: "Market" } };
+    this.selectedState = { attributes: { Name: "State" } };
+    this.mainChartData = [
+      {
+        data: [],
+        label: "Price",
+      },
+    ];
+  }
   getCropPrices(crop) {
     console.log(crop);
     this.dataservice
@@ -249,7 +260,7 @@ export class DashboardComponent implements OnInit {
                 result.body.farmDemoYieldTrend.indorama_practice_yield_avg
               ),
             ],
-            label: "indorama_practice_yield_avg",
+            label: "Indorama practice yield",
           },
           {
             data: [
@@ -257,7 +268,7 @@ export class DashboardComponent implements OnInit {
                 result.body.farmDemoYieldTrend.farmer_practice_yield_avg
               ),
             ],
-            label: "farmer_practice_yield_avg",
+            label: "Farmer practice yield",
           },
         ];
         console.log(this.barChartData_farmdemo);

@@ -34,23 +34,26 @@ export class SurveyDetailsComponent implements OnInit {
   dateConverter = dateConverter;
 
   public pieChartType = "pie";
-  public resultsProcessed;
+  public resultsProcessed = {};
 
   async ngOnInit() {
     this.activatedRouter.params.subscribe((params) => {
       this.id = params["id"];
     });
-    await this.getSurveyDetails();
-    await this.getSurveyResults();
+    this.getSurveyDetails();
+    this.getSurveyResults();
   }
   async getSurveyDetails() {
+    console.log("start getSurveyDetails");
     this.dataservice.getSurveyDetails(this.id).subscribe((result: any) => {
       console.log("getSurveyDetails", result.body.data);
       this.questions = result.body.data;
+      console.log("finished getSurveyDetails");
     });
   }
   async getSurveyResults() {
     let data = {};
+    console.log("start getSurveyResults");
     this.dataservice
       .getSurveyResults(this.id)
       .valueChanges.subscribe((result: any) => {
@@ -104,11 +107,19 @@ export class SurveyDetailsComponent implements OnInit {
   }
   returnChartLabels(data) {
     // console.log(Object.keys(this.resultsProcessed[data]));
-    return Object.keys(this.resultsProcessed[data]);
+    if (this.resultsProcessed.hasOwnProperty(data)) {
+      return Object.keys(this.resultsProcessed[data]);
+    } else {
+      return [];
+    }
   }
   returnChartdata(data) {
     // console.log(Object.values(this.resultsProcessed[data]));
-    return Object.values(this.resultsProcessed[data]);
+    if (this.resultsProcessed.hasOwnProperty(data)) {
+      return Object.values(this.resultsProcessed[data]);
+    } else {
+      return [];
+    }
   }
   deleteSurvey() {
     this.dataservice.deleteSurvey(this.id).subscribe((result: any) => {
@@ -121,6 +132,9 @@ export class SurveyDetailsComponent implements OnInit {
         this.toastr.error("Failed!");
       }
     });
+  }
+  chartHovered(event) {
+    console.log(event);
   }
   downloadResponses() {
     this.btnLoading = true;

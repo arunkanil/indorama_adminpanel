@@ -39,7 +39,10 @@ export class ActivitiesComponent {
     ActivityType: ["", Validators.required],
     Latitude: ["", Validators.required],
     Longitude: ["", Validators.required],
-    NoOfAttendees: ["", [Validators.max(9999999),Validators.min(1),Validators.required]],
+    NoOfAttendees: [
+      "",
+      [Validators.max(9999999), Validators.min(1), Validators.required],
+    ],
     area: ["", Validators.required],
     crop: [""],
     FarmerName: [""],
@@ -65,6 +68,7 @@ export class ActivitiesComponent {
     this.getStates();
   }
   getActivities() {
+    console.log("jshdbfkjhsdfkjsdf");
     this.dataservice
       .getActivities(1, this.pageSize)
       .valueChanges.subscribe((result: any) => {
@@ -78,7 +82,7 @@ export class ActivitiesComponent {
   }
   loadNext() {
     this.count++;
-     this.disablePrevButton = false;
+    this.disablePrevButton = false;
     this.from = this.from + this.pageSize;
     this.to =
       this.to + this.pageSize > this.meta?.pagination?.total
@@ -92,7 +96,6 @@ export class ActivitiesComponent {
       .valueChanges.subscribe((result: any) => {
         this.meta = result.data.activities.meta;
         this.rowData = result.data.activities.data;
-       
       });
   }
   loadPrev() {

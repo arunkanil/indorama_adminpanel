@@ -1241,7 +1241,8 @@
                 isPesticidesUsed: farmdemo.isPesticidesUsed == "true" ? true : false,
                 images: farmdemo.images
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1252,7 +1253,8 @@
               variables: {
                 Name: state.state
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1264,7 +1266,8 @@
                 Name: lga.lga,
                 state: lga.state
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1277,7 +1280,8 @@
                 lga: area.lga,
                 PostalCode: area.PostalCode
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1289,7 +1293,8 @@
                 Name: market.market,
                 state: market.state
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1300,7 +1305,8 @@
               variables: {
                 Name: crop.crop
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1312,7 +1318,8 @@
                 Name: village.village,
                 area: village.area
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1329,7 +1336,8 @@
                 image: image,
                 published: new Date()
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1342,7 +1350,8 @@
                 Body: price.Body,
                 Images: imageid ? imageid : price.Image
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1356,7 +1365,8 @@
                 cropImage: imageid,
                 media: media
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1375,7 +1385,8 @@
                 category: parseInt(price.category),
                 description: price.description
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1395,7 +1406,8 @@
                 category: parseInt(price.category),
                 description: price.description
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1407,7 +1419,8 @@
                 id: id,
                 images: imageid
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1429,7 +1442,8 @@
                 ActivityType: price.ActivityType,
                 Time: price.Time
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1440,7 +1454,8 @@
               variables: {
                 user: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1455,7 +1470,8 @@
                 page: page,
                 pageSize: pageSize
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1468,7 +1484,8 @@
                 pageSize: pageSize,
                 categoryFilter: categoryFilter
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1479,7 +1496,8 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1492,7 +1510,8 @@
                 pageSize: pageSize,
                 cropFilter: cropFilter
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1500,6 +1519,7 @@
           value: function getActivities(page, pageSize) {
             return this.apollo.watchQuery({
               query: GetActivities,
+              fetchPolicy: "no-cache",
               variables: {
                 page: page,
                 pageSize: pageSize
@@ -1512,6 +1532,7 @@
           value: function getActivity(id) {
             return this.apollo.watchQuery({
               query: GetSingleActivity,
+              fetchPolicy: "no-cache",
               variables: {
                 id: id
               },
@@ -1523,6 +1544,7 @@
           value: function getMarketplaceCategories(id) {
             return this.apollo.watchQuery({
               query: GetMarketplaceCategories,
+              fetchPolicy: "no-cache",
               variables: {
                 id: id
               },
@@ -1538,7 +1560,8 @@
                 areas: data.area,
                 user: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1557,7 +1580,8 @@
                 Rejected: Rejected,
                 image: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1581,7 +1605,8 @@
                 pottassium: result.PotassiumObserved,
                 sulphur: result.SulphurObserved
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1605,7 +1630,8 @@
                 pottassium: result.PotassiumObserved,
                 sulphur: result.SulphurObserved
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1618,7 +1644,8 @@
                 isDelete: crop.isDelete,
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1631,7 +1658,8 @@
                 isDelete: data.isDelete,
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1645,7 +1673,8 @@
                 isDelete: data.isDelete,
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1659,7 +1688,8 @@
                 isDelete: data.isDelete,
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1674,7 +1704,8 @@
                 isDelete: area.isDelete,
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1688,7 +1719,8 @@
                 isDelete: village.isDelete,
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1708,7 +1740,8 @@
                 status: test.Status,
                 nutrient: test.nutrient
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1745,7 +1778,8 @@
                 Status: data.Status,
                 dateOfHarvesting: data.DateOfHarvesting
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1766,7 +1800,8 @@
                 UserType: data === null || data === void 0 ? void 0 : data.UserType,
                 contactNumber: data.ContactNumber
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1778,7 +1813,8 @@
                 id: id,
                 prof_pic: image
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1790,7 +1826,8 @@
                 id: id,
                 images: image
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1807,7 +1844,8 @@
                 retailer_category: retailer_category,
                 retailers: retailer
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1825,7 +1863,8 @@
                 retailer_category: retailer_category,
                 retailer: retailer
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1840,7 +1879,8 @@
                 Body: price === null || price === void 0 ? void 0 : price.Body,
                 Images: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -1863,7 +1903,8 @@
                 ActivityType: price.ActivityType,
                 Time: price.Time
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -2053,7 +2094,8 @@
                 // clickUrl: url,
                 imageId: image
               },
-              errorPolicy: "all"
+              errorPolicy: "all",
+              fetchPolicy: "no-cache"
             });
           }
         }, {
@@ -2061,6 +2103,7 @@
           value: function updateDashboardAd(url, image) {
             return this.apollo.mutate({
               mutation: _updateDashboardAd,
+              fetchPolicy: "no-cache",
               variables: {
                 // clickUrl: url,
                 imageId: image

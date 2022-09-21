@@ -245,7 +245,10 @@ let ActivitiesComponent = class ActivitiesComponent {
             ActivityType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             Latitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             Longitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            NoOfAttendees: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].max(9999999), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(1), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]],
+            NoOfAttendees: [
+                "",
+                [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].max(9999999), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].min(1), _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            ],
             area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             crop: [""],
             FarmerName: [""],
@@ -270,6 +273,7 @@ let ActivitiesComponent = class ActivitiesComponent {
         this.getStates();
     }
     getActivities() {
+        console.log("jshdbfkjhsdfkjsdf");
         this.dataservice
             .getActivities(1, this.pageSize)
             .valueChanges.subscribe((result) => {

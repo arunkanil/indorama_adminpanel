@@ -410,6 +410,7 @@
           value: function getActivities() {
             var _this7 = this;
 
+            console.log("jshdbfkjhsdfkjsdf");
             this.dataservice.getActivities(1, this.pageSize).valueChanges.subscribe(function (result) {
               var _a, _b;
 

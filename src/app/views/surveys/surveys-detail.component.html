@@ -63,7 +63,9 @@
                   <p class="card-text">
                     Question type : {{ returnQuesType(item.__component) }}
                   </p>
-                  <p class="card-text">Field type : {{ returnFieldType(item.FieldType) }}</p>
+                  <p class="card-text">
+                    Field type : {{ returnFieldType(item.FieldType) }}
+                  </p>
                   <p class="card-text">Required : {{ item.Mandatory }}</p>
                   <p *ngIf="item.Values" class="card-text">
                     Options :
@@ -75,14 +77,14 @@
                   </p>
                 </div>
               </div>
-              <div class="chart-wrapper">
+              <div *ngIf="returnChartdata(item.FieldKey).length > 0" class="chart-wrapper">
                 <canvas
                   baseChart
                   class="chart"
                   [data]="returnChartdata(item.FieldKey)"
                   [labels]="returnChartLabels(item.FieldKey)"
                   [chartType]="pieChartType"
-                  (chartClick)="chartClicked($event)"
+                  (chartHover)="chartHovered($event)"
                 ></canvas>
               </div>
             </div>
