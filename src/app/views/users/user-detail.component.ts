@@ -168,7 +168,7 @@ export class UserDetailComponent implements OnInit {
   }
   getFarmers() {
     this.dataservice
-      .getUsers(undefined,undefined,"Farmer")
+      .getUsers(undefined, undefined, "Farmer")
       .valueChanges.subscribe((result: any) => {
         console.log("getFarmers", result.data.usersPermissionsUsers.data);
         this.Farmers = result.data.usersPermissionsUsers.data;
@@ -204,20 +204,26 @@ export class UserDetailComponent implements OnInit {
   }
   FormSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.agentForm.value);
-    this.dataservice
-      .UpdateRetailer(this.agentForm.value, this.id)
-      .subscribe((result: any) => {
+    this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe(
+      (result: any) => {
         resp = result.data;
         console.log("response", result);
         if (result.data.updateUsersPermissionsUser) {
           this.toastr.success("User updated successfully!");
+          this.btnLoading = false;
           this.myModal.hide();
           this.getTest();
         } else {
           this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
         }
-      });
+      },
+      (error) => {
+        this.btnLoading = false;
+      }
+    );
   }
   ResultSubmit() {
     console.log("edit", this.resultForm.value);
@@ -285,18 +291,18 @@ export class UserDetailComponent implements OnInit {
     let resp = {};
     console.log(this.areaForm.value);
     this.dataservice
-    .UpdateRetailer(this.areaForm.value, this.id)
-    .subscribe((result: any) => {
-      resp = result.data;
-      console.log("response", result);
-      if (result.data.updateUsersPermissionsUser) {
-        this.toastr.success("User updated successfully!");
-        this.areaModal.hide();
-        this.getTest();
-      } else {
-        this.toastr.error("Failed. Please check the fields!");
-      }
-    });
+      .UpdateRetailer(this.areaForm.value, this.id)
+      .subscribe((result: any) => {
+        resp = result.data;
+        console.log("response", result);
+        if (result.data.updateUsersPermissionsUser) {
+          this.toastr.success("User updated successfully!");
+          this.areaModal.hide();
+          this.getTest();
+        } else {
+          this.toastr.error("Failed. Please check the fields!");
+        }
+      });
   }
   ProductSubmit() {
     let resp = {};

@@ -109,7 +109,7 @@ export class UsersComponent {
   }
   loadNext() {
     this.count++;
-     this.disablePrevButton = false;
+    this.disablePrevButton = false;
     this.from = this.from + this.pageSize;
     this.to =
       this.to + this.pageSize > this.meta?.pagination?.total
@@ -173,20 +173,26 @@ export class UsersComponent {
     this.detailsModal.show();
   }
   formSubmit() {
+    this.btnLoading = true;
     console.log(this.commentForm.value);
     let resp = {};
-    this.dataservice
-      .createRetailer(this.commentForm.value)
-      .subscribe((result: any) => {
+    this.dataservice.createRetailer(this.commentForm.value).subscribe(
+      (result: any) => {
         resp = result;
         console.log("response", result);
         if (result) {
           this.toastr.success("User added successfully!");
+          this.btnLoading = false;
           this.commentModal.hide();
           this.getRetailers();
         } else {
           this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
         }
-      });
+      },
+      (error) => {
+        this.btnLoading = false;
+      }
+    );
   }
 }

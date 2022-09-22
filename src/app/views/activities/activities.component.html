@@ -175,8 +175,9 @@
                   id="NoOfAttendees"
                   name="NoOfAttendees"
                   formControlName="NoOfAttendees"
-                  placeholder="Maximum 9999999"
+                  placeholder="Enter no. of attendees"
                 />
+                <div *ngIf="activitiesForm.value.NoOfAttendees > 999999" class="danger">Maximum 9999999</div>
               </div>
               <div class="form-group">
                 <label for="Reason">Body <span class="danger">*</span></label>
@@ -201,6 +202,7 @@
                   formControlName="FarmerName"
                   placeholder="Enter name"
                 />
+                <div *ngIf="checkSpecialCharacters(activitiesForm.value.FarmerName)" class="danger">Special characters not permitted</div>
               </div>
               <div class="form-group">
                 <label for="crop">Crop</label>

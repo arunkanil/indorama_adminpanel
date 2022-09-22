@@ -128,7 +128,7 @@ export class ActivityDetailComponent implements OnInit {
           this.toastr.success("Activity updated successfully!");
           this.btnLoading = false;
           this.editModal.hide();
-          this.dataservice.getActivity(this.id).refetch();
+          this.getActivity();
         } else {
           this.toastr.error("Failed. Please check the fields!");
           this.btnLoading = false;

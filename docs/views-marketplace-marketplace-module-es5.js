@@ -406,8 +406,10 @@
         }, {
           key: "onSelectionChanged",
           value: function onSelectionChanged(event) {
+            var _a;
+
             this.selectedRows = this.gridApi.getSelectedRows();
-            this.router.navigate(["/marketplace/marketplace_details", this.selectedRows[0].id], {
+            this.router.navigate(["/marketplace/marketplace_details", (_a = this.selectedRows[0]) === null || _a === void 0 ? void 0 : _a.id], {
               state: {
                 data: this.selectedRows
               }
@@ -453,6 +455,7 @@
 
                     _this5.dataservice.getMarketplace(1, _this5.pageSize).refetch();
 
+                    window.location.reload();
                     _this5.file = null;
 
                     _this5.productForm.reset();
@@ -696,7 +699,7 @@
 
                 _this9.btnLoading = false;
 
-                _this9.dataservice.getSingleMarketplaceProduct(_this9.id).refetch();
+                _this9.getSingleMarketplaceProduct();
               } else {
                 _this9.toastr.error("Failed. Please check the fields!");
 

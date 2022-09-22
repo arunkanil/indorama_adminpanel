@@ -919,12 +919,18 @@ const CropPricesQuery = gql`
     $pageSize: Int
     $publicationState: PublicationState
     $publishedAt: DateTime
+    $Rejected: Boolean
   ) {
     cropPrices(
       publicationState: $publicationState
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { publishedAt: { eq: $publishedAt } }
+      filters: {
+        and: [
+          { publishedAt: { eq: $publishedAt } }
+          { Rejected: { eq: $Rejected } }
+        ]
+      }
     ) {
       meta {
         pagination {
@@ -3924,7 +3930,7 @@ export class DataService {
       },
     });
   }
-  getCropPrices(page?, pageSize?, PublicationState?, publishedAt?) {
+  getCropPrices(page?, pageSize?, PublicationState?, publishedAt?, Rejected?) {
     return this.apollo.watchQuery({
       query: CropPricesQuery,
       fetchPolicy: "no-cache",
@@ -3933,6 +3939,7 @@ export class DataService {
         pageSize: pageSize,
         publicationState: PublicationState,
         publishedAt: publishedAt,
+        Rejected: Rejected,
       },
     });
   }

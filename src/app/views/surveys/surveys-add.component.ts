@@ -80,6 +80,7 @@ export class NewSurveyComponent implements OnInit {
   }
   formSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.addForm.value);
     if (this.SurveyTitle && this.SurveyDescription) {
       this.dataservice
@@ -90,15 +91,18 @@ export class NewSurveyComponent implements OnInit {
             console.log("response", result);
             if (result.data.createSurveyForm) {
               this.toastr.success("Farm demo added successfully!");
+              this.btnLoading = false;
               this.router.navigate(["/surveys/all"]);
             }
           },
           (error) => {
             this.toastr.error("Failed. Please check the fields!");
+            this.btnLoading = false;
           }
         );
     } else {
       this.toastr.error("Please add both title & description");
+      this.btnLoading = false;
     }
   }
 }

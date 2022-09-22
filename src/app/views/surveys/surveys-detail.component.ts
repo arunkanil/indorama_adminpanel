@@ -42,8 +42,8 @@ export class SurveyDetailsComponent implements OnInit {
         width: 580,
         type: "pie",
       },
-      series: [10, 10, 22, 10, 10],
-      labels: ["Team A", "Team B", "Team C", "Team D", "Team E"],
+      series: [],
+      labels: [],
       responsive: [
         {
           breakpoint: 480,

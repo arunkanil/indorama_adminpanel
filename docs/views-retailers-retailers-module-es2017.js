@@ -118,7 +118,9 @@ let RetailersComponent = class RetailersComponent {
         });
     }
     getRetailers() {
-        this.dataservice.getRetailers(1, this.pageSize).valueChanges.subscribe((result) => {
+        this.dataservice
+            .getRetailers(1, this.pageSize)
+            .valueChanges.subscribe((result) => {
             var _a, _b;
             this.rowData = result.data.usersPermissionsUsers.data;
             this.meta = result.data.usersPermissionsUsers.meta;
@@ -195,20 +197,23 @@ let RetailersComponent = class RetailersComponent {
     }
     formSubmit() {
         console.log(this.commentForm.value);
+        this.btnLoading = true;
         let resp = {};
-        this.dataservice
-            .createRetailer(this.commentForm.value)
-            .subscribe((result) => {
+        this.dataservice.createRetailer(this.commentForm.value).subscribe((result) => {
             resp = result;
             console.log("response", result);
             if (result) {
                 this.toastr.success("Retailer added successfully!");
+                this.btnLoading = false;
                 this.commentModal.hide();
                 this.getRetailers();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
             }
+        }, (error) => {
+            this.btnLoading = false;
         });
     }
 };
@@ -495,25 +500,29 @@ let RetailerDetailComponent = class RetailerDetailComponent {
     }
     FormSubmit() {
         let resp = {};
+        this.btnLoading = true;
         console.log(this.agentForm.value);
-        this.dataservice
-            .UpdateRetailer(this.agentForm.value, this.id)
-            .subscribe((result) => {
+        this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe((result) => {
             resp = result.data;
             console.log("response", result);
             if (result.data.updateUsersPermissionsUser) {
                 this.toastr.success("Retailer updated successfully!");
+                this.btnLoading = false;
                 this.myModal.hide();
                 this.getTest();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
             }
+        }, (error) => {
+            this.btnLoading = false;
         });
     }
     ResultSubmit() {
         var _a, _b, _c, _d;
         console.log("edit", this.resultForm.value);
+        this.btnLoading = true;
         let resp = {};
         console.log(this.resultForm.value);
         this.dataservice
@@ -523,12 +532,16 @@ let RetailerDetailComponent = class RetailerDetailComponent {
             console.log("response", result);
             if (result.data.updateRetailerProduct) {
                 this.toastr.success("Product updated successfully!");
+                this.btnLoading = false;
                 this.resultModal.hide();
                 this.getTest();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
             }
+        }, (error) => {
+            this.btnLoading = false;
         });
     }
     onChange(event) {
@@ -573,6 +586,7 @@ let RetailerDetailComponent = class RetailerDetailComponent {
     }
     ProductSubmit() {
         let resp = {};
+        this.btnLoading = true;
         this.dataservice.upload(this.file).subscribe((response) => {
             var _a, _b, _c, _d, _e;
             if (response.status == 200) {
@@ -584,17 +598,22 @@ let RetailerDetailComponent = class RetailerDetailComponent {
                     console.log("response", result);
                     if (result.data.createRetailerProduct) {
                         this.toastr.success("Success!");
+                        this.btnLoading = false;
                         this.file = null;
                         this.getTest();
                         this.addProductModal.hide();
                     }
                     else {
                         this.toastr.error("Failed!");
+                        this.btnLoading = false;
                     }
+                }, (error) => {
+                    this.btnLoading = false;
                 });
             }
             else {
                 this.toastr.error("Image failed to upload!");
+                this.btnLoading = false;
             }
         });
     }

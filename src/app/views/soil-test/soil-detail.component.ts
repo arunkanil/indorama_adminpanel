@@ -4,7 +4,10 @@ import { ModalDirective } from "ngx-bootstrap/modal";
 import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
 import { FormBuilder, Validators } from "@angular/forms";
-import { dateConverter,dateConverterMin } from "../../constants/columnMetadata";
+import {
+  dateConverter,
+  dateConverterMin,
+} from "../../constants/columnMetadata";
 
 @Component({
   templateUrl: "soil-detail.component.html",
@@ -136,7 +139,7 @@ export class SoilTestDetailComponent implements OnInit {
   }
   getFarmers() {
     this.dataservice
-      .getUsers(undefined,undefined,"Farmer")
+      .getUsers(undefined, undefined, "Farmer")
       .valueChanges.subscribe((result: any) => {
         console.log("getFarmers", result.data.usersPermissionsUsers.data);
         this.Farmers = result.data.usersPermissionsUsers.data;
@@ -226,20 +229,26 @@ export class SoilTestDetailComponent implements OnInit {
   }
   FormSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.agentForm.value);
-    this.dataservice
-      .UpdateSoilTest(this.agentForm.value, this.id)
-      .subscribe((result: any) => {
+    this.dataservice.UpdateSoilTest(this.agentForm.value, this.id).subscribe(
+      (result: any) => {
         resp = result.data;
         console.log("response", result);
         if (result.data.updateSoilTest) {
           this.toastr.success("Test updated successfully!");
+          this.btnLoading = false;
           this.myModal.hide();
           this.getTest();
         } else {
           this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
         }
-      });
+      },
+      (error) => {
+        this.btnLoading = false;
+      }
+    );
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);
@@ -248,40 +257,51 @@ export class SoilTestDetailComponent implements OnInit {
     this.getAreas(event.target.value);
   }
   ResultSubmit() {
+    this.btnLoading = true;
     if (this.flag == "edit") {
       console.log("edit", this.resultForm.value);
       let resp = {};
       console.log(this.resultForm.value);
-      this.dataservice
-        .UpdateSoilTestResult(this.resultForm.value)
-        .subscribe((result: any) => {
+      this.dataservice.UpdateSoilTestResult(this.resultForm.value).subscribe(
+        (result: any) => {
           resp = result.data;
           console.log("response", result);
           if (result.data.updateSoilTestResult) {
             this.toastr.success("Result updated successfully!");
+            this.btnLoading = false;
             this.resultModal.hide();
             this.getTest();
           } else {
             this.toastr.error("Failed. Please check the fields!");
+            this.btnLoading = false;
           }
-        });
+        },
+        (error) => {
+          this.btnLoading = false;
+        }
+      );
     } else {
       console.log("new", this.resultForm.value);
       let resp = {};
       console.log(this.resultForm.value);
-      this.dataservice
-        .AddSoilTestResult(this.resultForm.value)
-        .subscribe((result: any) => {
+      this.dataservice.AddSoilTestResult(this.resultForm.value).subscribe(
+        (result: any) => {
           resp = result.data;
           console.log("response", result);
           if (result.data.createSoilTestResult) {
             this.toastr.success("Result added successfully!");
+            this.btnLoading = false;
             this.resultModal.hide();
             this.getTest();
           } else {
             this.toastr.error("Failed. Please check the fields!");
+            this.btnLoading = false;
           }
-        });
+        },
+        (error) => {
+          this.btnLoading = false;
+        }
+      );
     }
   }
 }

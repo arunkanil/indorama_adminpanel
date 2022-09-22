@@ -1349,12 +1349,18 @@ const CropPricesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $pageSize: Int
     $publicationState: PublicationState
     $publishedAt: DateTime
+    $Rejected: Boolean
   ) {
     cropPrices(
       publicationState: $publicationState
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { publishedAt: { eq: $publishedAt } }
+      filters: {
+        and: [
+          { publishedAt: { eq: $publishedAt } }
+          { Rejected: { eq: $Rejected } }
+        ]
+      }
     ) {
       meta {
         pagination {
@@ -4334,7 +4340,7 @@ let DataService = class DataService {
             },
         });
     }
-    getCropPrices(page, pageSize, PublicationState, publishedAt) {
+    getCropPrices(page, pageSize, PublicationState, publishedAt, Rejected) {
         return this.apollo.watchQuery({
             query: CropPricesQuery,
             fetchPolicy: "no-cache",
@@ -4343,6 +4349,7 @@ let DataService = class DataService {
                 pageSize: pageSize,
                 publicationState: PublicationState,
                 publishedAt: publishedAt,
+                Rejected: Rejected,
             },
         });
     }

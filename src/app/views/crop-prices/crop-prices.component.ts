@@ -34,6 +34,7 @@ export class CropPricesComponent {
   listCheck = false;
   publicationState = "PREVIEW";
   toApprove = undefined;
+  isRejected = undefined;
   columnDefs = [];
   States: any = [];
   Markets: any = [];
@@ -74,7 +75,13 @@ export class CropPricesComponent {
   }
   getCropPrices() {
     this.dataservice
-      .getCropPrices(1, this.pageSize, this.publicationState, this.toApprove)
+      .getCropPrices(
+        1,
+        this.pageSize,
+        this.publicationState,
+        this.toApprove,
+        this.isRejected
+      )
       .valueChanges.subscribe((result: any) => {
         this.rowData = result.data.cropPrices.data;
         this.meta = result.data.cropPrices.meta;
@@ -150,17 +157,43 @@ export class CropPricesComponent {
     this.getMarkets(event.target.value);
   }
   toggleCropPrices(data) {
-    if (data) {
-      this.selectedList = "Approval Pending";
-      this.publicationState = "PREVIEW";
-      this.toApprove = null;
-      this.getCropPrices();
-    } else {
-      this.selectedList = "All";
-      this.publicationState = "PREVIEW";
-      this.toApprove = undefined;
-      this.getCropPrices();
+    switch (data) {
+      case "Rejected":
+        this.selectedList = "Rejected";
+        this.publicationState = "PREVIEW";
+        this.toApprove = null;
+        this.isRejected = true;
+        this.getCropPrices();
+        break;
+      case "Approvalpending":
+        this.selectedList = "Pending";
+        this.publicationState = "PREVIEW";
+        this.toApprove = null;
+        this.isRejected = false;
+        this.getCropPrices();
+        break;
+      case "All":
+        this.selectedList = "All";
+        this.publicationState = "PREVIEW";
+        this.toApprove = undefined;
+        this.isRejected = undefined;
+        this.getCropPrices();
+        break;
     }
+    // if (data == 'Approvalpending') {
+    //   this.selectedList = "Approval Pending";
+    //   this.publicationState = "PREVIEW";
+    //   this.toApprove = null;
+    //   this.getCropPrices();
+    // }
+    // else if{
+
+    // } else {
+    //   this.selectedList = "All";
+    //   this.publicationState = "PREVIEW";
+    //   this.toApprove = undefined;
+    //   this.getCropPrices();
+    // }
   }
   onGridReady(params) {
     this.gridApi = params.api;

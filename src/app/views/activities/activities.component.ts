@@ -45,7 +45,7 @@ export class ActivitiesComponent {
     ],
     area: ["", Validators.required],
     crop: [""],
-    FarmerName: [""],
+    FarmerName: ["", Validators.pattern("[a-zA-Z ]*")],
     PlannedFarmDay: [""],
     ConditionOfCrop: [""],
     Date: ["", Validators.required],
@@ -66,6 +66,14 @@ export class ActivitiesComponent {
     this.getCrops();
     this.getAreas();
     this.getStates();
+  }
+  checkSpecialCharacters(data) {
+    let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    if (format.test(data)) {
+      return true;
+    } else {
+      return false;
+    }
   }
   getActivities() {
     console.log("jshdbfkjhsdfkjsdf");

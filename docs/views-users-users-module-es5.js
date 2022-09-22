@@ -474,6 +474,7 @@
             var _this10 = this;
 
             var resp = {};
+            this.btnLoading = true;
             console.log(this.agentForm.value);
             this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe(function (result) {
               resp = result.data;
@@ -482,12 +483,18 @@
               if (result.data.updateUsersPermissionsUser) {
                 _this10.toastr.success("User updated successfully!");
 
+                _this10.btnLoading = false;
+
                 _this10.myModal.hide();
 
                 _this10.getTest();
               } else {
                 _this10.toastr.error("Failed. Please check the fields!");
+
+                _this10.btnLoading = false;
               }
+            }, function (error) {
+              _this10.btnLoading = false;
             });
           }
         }, {
@@ -993,6 +1000,7 @@
           value: function formSubmit() {
             var _this23 = this;
 
+            this.btnLoading = true;
             console.log(this.commentForm.value);
             var resp = {};
             this.dataservice.createRetailer(this.commentForm.value).subscribe(function (result) {
@@ -1002,12 +1010,18 @@
               if (result) {
                 _this23.toastr.success("User added successfully!");
 
+                _this23.btnLoading = false;
+
                 _this23.commentModal.hide();
 
                 _this23.getRetailers();
               } else {
                 _this23.toastr.error("Failed. Please check the fields!");
+
+                _this23.btnLoading = false;
               }
+            }, function (error) {
+              _this23.btnLoading = false;
             });
           }
         }]);

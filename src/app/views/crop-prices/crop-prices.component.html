@@ -48,11 +48,14 @@
             </button>
             <ul *dropdownMenu class="dropdown-menu" role="menu">
               <li role="menuitem">
-                <a class="dropdown-item" (click)="toggleCropPrices(false)"
+                <a class="dropdown-item" (click)="toggleCropPrices('All')"
                   >All</a
                 >
-                <a class="dropdown-item" (click)="toggleCropPrices(true)"
+                <a class="dropdown-item" (click)="toggleCropPrices('Approvalpending')"
                   >Approval pending</a
+                >
+                <a class="dropdown-item" (click)="toggleCropPrices('Rejected')"
+                  >Rejected</a
                 >
               </li>
             </ul>

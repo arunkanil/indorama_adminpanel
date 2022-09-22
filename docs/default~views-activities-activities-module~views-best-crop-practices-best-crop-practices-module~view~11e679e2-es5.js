@@ -988,7 +988,7 @@
           buttons: ["reset"]
         }
       }, {
-        field: "attributes.Rejected",
+        field: "attributes",
         headerName: "Status",
         resizable: true,
         sortable: true,
@@ -998,9 +998,10 @@
           buttons: ["reset"]
         },
         cellRenderer: function cellRenderer(data) {
-          if (data.value == true) return "Rejected";
-          if (data.value == false) return "Approved";
-          if (data.value == null) return "Pending";
+          console.log(data.value, "cellrenderer");
+          if (data.value.Rejected == true && data.value.publishedAt == null) return "Rejected";
+          if (data.value.Rejected == false && data.value.publishedAt == null) return "Pending";
+          if (data.value.Rejected == false && data.value.publishedAt !== null) return "Approved";
         }
       }, {
         field: "attributes.createdAt",

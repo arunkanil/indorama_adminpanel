@@ -126,7 +126,7 @@ export class MarketplaceDetailComponent implements OnInit {
           this.toastr.success("Activity updated successfully!");
           this.editModal.hide();
           this.btnLoading = false;
-          this.dataservice.getSingleMarketplaceProduct(this.id).refetch();
+          this.getSingleMarketplaceProduct();
         } else {
           this.toastr.error("Failed. Please check the fields!");
           this.btnLoading = false;

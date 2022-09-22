@@ -125,7 +125,7 @@ export class MarketplaceComponent {
   onSelectionChanged(event: any) {
     this.selectedRows = this.gridApi.getSelectedRows();
     this.router.navigate(
-      ["/marketplace/marketplace_details", this.selectedRows[0].id],
+      ["/marketplace/marketplace_details", this.selectedRows[0]?.id],
       {
         state: { data: this.selectedRows },
       }
@@ -160,6 +160,7 @@ export class MarketplaceComponent {
             if (result.data.createMarketplaceProduct) {
               this.toastr.success("Success!");
               this.dataservice.getMarketplace(1, this.pageSize).refetch();
+              window.location.reload();
               this.file = null;
               this.productForm.reset();
               this.productModal.hide();

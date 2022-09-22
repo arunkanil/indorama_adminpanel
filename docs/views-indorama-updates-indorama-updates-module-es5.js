@@ -433,6 +433,7 @@
             var _this5 = this;
 
             var resp = {};
+            this.btnLoading = true;
             console.log(this.newsForm.value);
 
             if (!this.disableButton) {
@@ -454,11 +455,15 @@
 
                         _this5.getUpdates();
 
+                        _this5.btnLoading = false;
+
                         _this5.cropPriceModal.hide();
 
                         _this5.gridApi.deselectAll();
                       } else {
                         _this5.toastr.error("Failed. Please check the fields!");
+
+                        _this5.btnLoading = false;
                       }
                     });
                   }
@@ -472,6 +477,7 @@
                     _this5.toastr.success("Success!");
 
                     _this5.file = null;
+                    _this5.btnLoading = false;
 
                     _this5.cropPriceModal.hide();
 
@@ -480,6 +486,8 @@
                     _this5.getUpdates();
                   } else {
                     _this5.toastr.error("Failed. Please check the fields!");
+
+                    _this5.btnLoading = false;
                   }
                 });
               }
@@ -501,15 +509,21 @@
 
                       _this5.cropPriceModal.hide();
 
+                      _this5.btnLoading = false;
+
                       _this5.getUpdates();
 
                       _this5.gridApi.deselectAll();
                     } else {
                       _this5.toastr.error("Failed. Please check the fields!");
+
+                      _this5.btnLoading = false;
                     }
                   });
                 } else {
                   _this5.toastr.error("Image failed to upload!");
+
+                  _this5.btnLoading = false;
                 }
               });
             }

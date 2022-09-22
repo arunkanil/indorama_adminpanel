@@ -280,8 +280,9 @@ let MarketplaceComponent = class MarketplaceComponent {
         console.log("row", event.data);
     }
     onSelectionChanged(event) {
+        var _a;
         this.selectedRows = this.gridApi.getSelectedRows();
-        this.router.navigate(["/marketplace/marketplace_details", this.selectedRows[0].id], {
+        this.router.navigate(["/marketplace/marketplace_details", (_a = this.selectedRows[0]) === null || _a === void 0 ? void 0 : _a.id], {
             state: { data: this.selectedRows },
         });
     }
@@ -311,6 +312,7 @@ let MarketplaceComponent = class MarketplaceComponent {
                     if (result.data.createMarketplaceProduct) {
                         this.toastr.success("Success!");
                         this.dataservice.getMarketplace(1, this.pageSize).refetch();
+                        window.location.reload();
                         this.file = null;
                         this.productForm.reset();
                         this.productModal.hide();
@@ -487,7 +489,7 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
                 this.toastr.success("Activity updated successfully!");
                 this.editModal.hide();
                 this.btnLoading = false;
-                this.dataservice.getSingleMarketplaceProduct(this.id).refetch();
+                this.getSingleMarketplaceProduct();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");

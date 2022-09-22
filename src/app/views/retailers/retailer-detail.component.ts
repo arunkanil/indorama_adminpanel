@@ -187,23 +187,30 @@ export class RetailerDetailComponent implements OnInit {
   }
   FormSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.agentForm.value);
-    this.dataservice
-      .UpdateRetailer(this.agentForm.value, this.id)
-      .subscribe((result: any) => {
+    this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe(
+      (result: any) => {
         resp = result.data;
         console.log("response", result);
         if (result.data.updateUsersPermissionsUser) {
           this.toastr.success("Retailer updated successfully!");
+          this.btnLoading = false;
           this.myModal.hide();
           this.getTest();
         } else {
           this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
         }
-      });
+      },
+      (error) => {
+        this.btnLoading = false;
+      }
+    );
   }
   ResultSubmit() {
     console.log("edit", this.resultForm.value);
+    this.btnLoading = true;
     let resp = {};
     console.log(this.resultForm.value);
     this.dataservice
@@ -212,17 +219,24 @@ export class RetailerDetailComponent implements OnInit {
         this.details?.attributes?.retailer_categories?.data[0]?.id,
         this.id
       )
-      .subscribe((result: any) => {
-        resp = result.data;
-        console.log("response", result);
-        if (result.data.updateRetailerProduct) {
-          this.toastr.success("Product updated successfully!");
-          this.resultModal.hide();
-          this.getTest();
-        } else {
-          this.toastr.error("Failed. Please check the fields!");
+      .subscribe(
+        (result: any) => {
+          resp = result.data;
+          console.log("response", result);
+          if (result.data.updateRetailerProduct) {
+            this.toastr.success("Product updated successfully!");
+            this.btnLoading = false;
+            this.resultModal.hide();
+            this.getTest();
+          } else {
+            this.toastr.error("Failed. Please check the fields!");
+            this.btnLoading = false;
+          }
+        },
+        (error) => {
+          this.btnLoading = false;
         }
-      });
+      );
   }
   onChange(event: any) {
     this.file = [];
@@ -263,6 +277,7 @@ export class RetailerDetailComponent implements OnInit {
   }
   ProductSubmit() {
     let resp = {};
+    this.btnLoading = true;
     this.dataservice.upload(this.file).subscribe((response: any) => {
       if (response.status == 200) {
         console.log(response);
@@ -273,20 +288,28 @@ export class RetailerDetailComponent implements OnInit {
             this.id,
             response.body[0]?.id
           )
-          .subscribe((result: any) => {
-            resp = result.data;
-            console.log("response", result);
-            if (result.data.createRetailerProduct) {
-              this.toastr.success("Success!");
-              this.file = null;
-              this.getTest();
-              this.addProductModal.hide();
-            } else {
-              this.toastr.error("Failed!");
+          .subscribe(
+            (result: any) => {
+              resp = result.data;
+              console.log("response", result);
+              if (result.data.createRetailerProduct) {
+                this.toastr.success("Success!");
+                this.btnLoading = false;
+                this.file = null;
+                this.getTest();
+                this.addProductModal.hide();
+              } else {
+                this.toastr.error("Failed!");
+                this.btnLoading = false;
+              }
+            },
+            (error) => {
+              this.btnLoading = false;
             }
-          });
+          );
       } else {
         this.toastr.error("Image failed to upload!");
+        this.btnLoading = false;
       }
     });
   }

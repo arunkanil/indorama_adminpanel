@@ -701,6 +701,7 @@
             var _this12 = this;
 
             var resp = {};
+            this.btnLoading = true;
             console.log(this.agentForm.value);
             this.dataservice.UpdateSoilTest(this.agentForm.value, this.id).subscribe(function (result) {
               resp = result.data;
@@ -709,12 +710,18 @@
               if (result.data.updateSoilTest) {
                 _this12.toastr.success("Test updated successfully!");
 
+                _this12.btnLoading = false;
+
                 _this12.myModal.hide();
 
                 _this12.getTest();
               } else {
                 _this12.toastr.error("Failed. Please check the fields!");
+
+                _this12.btnLoading = false;
               }
+            }, function (error) {
+              _this12.btnLoading = false;
             });
           }
         }, {
@@ -732,6 +739,8 @@
           value: function ResultSubmit() {
             var _this13 = this;
 
+            this.btnLoading = true;
+
             if (this.flag == "edit") {
               console.log("edit", this.resultForm.value);
               var resp = {};
@@ -743,12 +752,18 @@
                 if (result.data.updateSoilTestResult) {
                   _this13.toastr.success("Result updated successfully!");
 
+                  _this13.btnLoading = false;
+
                   _this13.resultModal.hide();
 
                   _this13.getTest();
                 } else {
                   _this13.toastr.error("Failed. Please check the fields!");
+
+                  _this13.btnLoading = false;
                 }
+              }, function (error) {
+                _this13.btnLoading = false;
               });
             } else {
               console.log("new", this.resultForm.value);
@@ -761,12 +776,18 @@
                 if (result.data.createSoilTestResult) {
                   _this13.toastr.success("Result added successfully!");
 
+                  _this13.btnLoading = false;
+
                   _this13.resultModal.hide();
 
                   _this13.getTest();
                 } else {
                   _this13.toastr.error("Failed. Please check the fields!");
+
+                  _this13.btnLoading = false;
                 }
+              }, function (error) {
+                _this13.btnLoading = false;
               });
             }
           }

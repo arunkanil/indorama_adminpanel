@@ -62,16 +62,18 @@ export class FarmDemoComponent {
   }
   getLists() {
     this.loading = true;
-    this.dataservice.getFarmDemos(1,this.pageSize).valueChanges.subscribe((result: any) => {
-      console.log("getFarmDemos", result.data.farmDemos.data);
-      this.rowData = result.data.farmDemos.data;
-      this.meta = result.data.farmDemos.meta;
-      if (this.meta?.pagination?.pageCount <= 1) {
-        this.disablePrevButton = true;
-        this.disableNextButton = true;
-      }
-      this.loading = false;
-    });
+    this.dataservice
+      .getFarmDemos(1, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        console.log("getFarmDemos", result.data.farmDemos.data);
+        this.rowData = result.data.farmDemos.data;
+        this.meta = result.data.farmDemos.meta;
+        if (this.meta?.pagination?.pageCount <= 1) {
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+        this.loading = false;
+      });
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
       console.log("getCrops", result.data.crops.data);
       this.Crops = result.data.crops.data;
@@ -91,7 +93,7 @@ export class FarmDemoComponent {
   }
   loadNext() {
     this.count++;
-     this.disablePrevButton = false;
+    this.disablePrevButton = false;
     this.from = this.from + this.pageSize;
     this.to =
       this.to + this.pageSize > this.meta?.pagination?.total
@@ -124,7 +126,7 @@ export class FarmDemoComponent {
         this.rowData = result.data.farmDemos.data;
       });
   }
-  getLGAs(id?){
+  getLGAs(id?) {
     this.dataservice.getLGAs(id).valueChanges.subscribe((result: any) => {
       console.log("getLGAs", result.data.lgas.data);
       this.LGA = result.data.lgas.data;
@@ -147,19 +149,25 @@ export class FarmDemoComponent {
   }
   FormSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.addForm.value);
-    this.dataservice
-      .AddFarmdemo(this.addForm.value)
-      .subscribe((result: any) => {
+    this.dataservice.AddFarmdemo(this.addForm.value).subscribe(
+      (result: any) => {
         resp = result.data;
         console.log("response", result);
         if (result.data.createFarmDemo) {
           this.toastr.success("Farm demo added successfully!");
+          this.btnLoading = false;
           this.getLists();
           this.myModal.hide();
         } else {
           this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
         }
-      });
+      },
+      (error) => {
+        this.btnLoading = false;
+      }
+    );
   }
 }

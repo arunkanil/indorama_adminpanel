@@ -1,10 +1,19 @@
 <div class="animated fadeIn">
   <div class="card">
-    <div class="card-header" style="display: flex; justify-content: space-between">
+    <div
+      class="card-header"
+      style="display: flex; justify-content: space-between"
+    >
       <h2>Add New Survey</h2>
       <span>
         <div>
           <button type="button" class="btn btn-primary" (click)="formSubmit()">
+            <span
+              *ngIf="btnLoading"
+              class="spinner-border spinner-border-sm"
+              role="status"
+              aria-hidden="true"
+            ></span>
             Create Survey
           </button>
         </div>
@@ -15,7 +24,14 @@
         <div class="col">
           <div class="form-group">
             <label for="SurveyTitle">Survey Title</label>
-            <input type="text" class="form-control" id="SurveyTitle" name="SurveyTitle" (change)="onSurveyTitleChange($event)" placeholder="Enter survey title" />
+            <input
+              type="text"
+              class="form-control"
+              id="SurveyTitle"
+              name="SurveyTitle"
+              (change)="onSurveyTitleChange($event)"
+              placeholder="Enter survey title"
+            />
           </div>
         </div>
       </div>
@@ -23,8 +39,15 @@
         <div class="col">
           <div class="form-group">
             <label for="SurveyDescription">Survey Description</label>
-            <textarea type="text" class="form-control" rows="4" id="SurveyDescription" (change)="onSurveyDescriptionChange($event)" name="SurveyDescription"
-              placeholder="Enter survey description"></textarea>
+            <textarea
+              type="text"
+              class="form-control"
+              rows="4"
+              id="SurveyDescription"
+              (change)="onSurveyDescriptionChange($event)"
+              name="SurveyDescription"
+              placeholder="Enter survey description"
+            ></textarea>
           </div>
         </div>
       </div>
@@ -32,35 +55,62 @@
       <div class="row" *ngIf="questions.length > 0">
         <div class="col">
           <div class="card">
-            <div class="card-body" *ngFor="let item of questions;let indexOfelement=index;">
+            <div
+              class="card-body"
+              *ngFor="let item of questions; let indexOfelement = index"
+            >
               <div style="display: flex; justify-content: space-between">
-                <h5 class="card-title">{{item.FieldName}}</h5>
-                <button type="button" class="btn btn-outline-danger" data-toggle="modal"
-                  (click)="deleteQuestion(indexOfelement)">
+                <h5 class="card-title">{{ item.FieldName }}</h5>
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  data-toggle="modal"
+                  (click)="deleteQuestion(indexOfelement)"
+                >
                   Delete
                 </button>
               </div>
               <p class="card-text">
-                Question type : {{item.__typename == "ComponentSurveySurveyTextComponent"? "Text" : "Dropdown"}}
+                Question type :
+                {{
+                  item.__typename == "ComponentSurveySurveyTextComponent"
+                    ? "Text"
+                    : "Dropdown"
+                }}
               </p>
               <p class="card-text">
-                Required : {{item.Mandatory? "Yes" : "No"}}
+                Required : {{ item.Mandatory ? "Yes" : "No" }}
               </p>
               <p *ngIf="item.Values" class="card-text">
-                Options : <span *ngFor="let option of item.Values" class="badge badge-success mx-1">{{option}}</span>
+                Options :
+                <span
+                  *ngFor="let option of item.Values"
+                  class="badge badge-success mx-1"
+                  >{{ option }}</span
+                >
               </p>
             </div>
           </div>
         </div>
       </div>
       <div class="row p-3">
-        <form [formGroup]="addForm" (ngSubmit)="questionSubmit()" style="width: 100%;">
+        <form
+          [formGroup]="addForm"
+          (ngSubmit)="questionSubmit()"
+          style="width: 100%"
+        >
           <div class="row">
             <div class="col">
               <div class="form-group">
                 <label for="FieldName">Question</label>
-                <input type="text" class="form-control" id="FieldName" name="FieldName" formControlName="FieldName"
-                  placeholder="Enter your question">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="FieldName"
+                  name="FieldName"
+                  formControlName="FieldName"
+                  placeholder="Enter your question"
+                />
               </div>
             </div>
           </div>
@@ -68,23 +118,33 @@
             <div class="col">
               <div class="form-group">
                 <label for="title">Question type</label>
-                <select class="form-control" id="__typename" name="__typename" (change)="onQuestionTypeChange($event)"
-                  formControlName="__typename">
-                  <option value="" disabled selected hidden>
-                    Choose...
+                <select
+                  class="form-control"
+                  id="__typename"
+                  name="__typename"
+                  (change)="onQuestionTypeChange($event)"
+                  formControlName="__typename"
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option value="ComponentSurveySurveyTextComponent">
+                    Text
                   </option>
-                  <option value="ComponentSurveySurveyTextComponent">Text</option>
-                  <option value="ComponentSurveySurveySelectionComponent">Dropdown</option>
+                  <option value="ComponentSurveySurveySelectionComponent">
+                    Dropdown
+                  </option>
                 </select>
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="FieldType">Field type</label>
-                <select class="form-control" id="FieldType" name="FieldType" formControlName="FieldType">
-                  <option value="" disabled selected hidden>
-                    Choose...
-                  </option>
+                <select
+                  class="form-control"
+                  id="FieldType"
+                  name="FieldType"
+                  formControlName="FieldType"
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
                   <option *ngIf="isText" value="TextLong">Long answer</option>
                   <option *ngIf="isText" value="TextShort">Short answer</option>
                   <option *ngIf="!isText" value="Selection">Selection</option>
@@ -96,19 +156,36 @@
             <div class="col">
               <div class="form-group">
                 <label for="Values">Options</label>
-                <input type="text" class="form-control" id="Values" name="Values" formControlName="Values"
-                  placeholder="Enter options seperated by comma ( , )">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Values"
+                  name="Values"
+                  formControlName="Values"
+                  placeholder="Enter options seperated by comma ( , )"
+                />
               </div>
             </div>
           </div>
           <div class="form-group">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="Mandatory" name="Mandatory"
-                formControlName="Mandatory">
-              <label class="form-check-label" for="Mandatory">Required field</label>
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="Mandatory"
+                name="Mandatory"
+                formControlName="Mandatory"
+              />
+              <label class="form-check-label" for="Mandatory"
+                >Required field</label
+              >
             </div>
           </div>
-          <button type="submit" class="btn btn-outline-primary ml-2" [disabled]="!addForm.valid">
+          <button
+            type="submit"
+            class="btn btn-outline-primary ml-2"
+            [disabled]="!addForm.valid"
+          >
             Add question
           </button>
         </form>

@@ -176,6 +176,7 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
     }
     FormSubmit() {
         let resp = {};
+        this.btnLoading = true;
         console.log(this.editForm.value);
         this.dataservice
             .UpdateFarmDemo(this.editForm.value, this.details.id)
@@ -184,12 +185,16 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
             console.log("response", result);
             if (result.data.updateFarmDemo) {
                 this.toastr.success("Farm demo edited successfully!");
+                this.btnLoading = false;
                 this.myModal.hide();
                 this.getLists();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
             }
+        }, (error) => {
+            this.btnLoading = false;
         });
     }
     showImages(url) {
@@ -5453,7 +5458,9 @@ let FarmDemoComponent = class FarmDemoComponent {
     }
     getLists() {
         this.loading = true;
-        this.dataservice.getFarmDemos(1, this.pageSize).valueChanges.subscribe((result) => {
+        this.dataservice
+            .getFarmDemos(1, this.pageSize)
+            .valueChanges.subscribe((result) => {
             var _a, _b;
             console.log("getFarmDemos", result.data.farmDemos.data);
             this.rowData = result.data.farmDemos.data;
@@ -5538,20 +5545,23 @@ let FarmDemoComponent = class FarmDemoComponent {
     }
     FormSubmit() {
         let resp = {};
+        this.btnLoading = true;
         console.log(this.addForm.value);
-        this.dataservice
-            .AddFarmdemo(this.addForm.value)
-            .subscribe((result) => {
+        this.dataservice.AddFarmdemo(this.addForm.value).subscribe((result) => {
             resp = result.data;
             console.log("response", result);
             if (result.data.createFarmDemo) {
                 this.toastr.success("Farm demo added successfully!");
+                this.btnLoading = false;
                 this.getLists();
                 this.myModal.hide();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
             }
+        }, (error) => {
+            this.btnLoading = false;
         });
     }
 };

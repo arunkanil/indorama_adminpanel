@@ -4,7 +4,10 @@ import { ToastrService } from "ngx-toastr";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { DataService } from "../../data.service";
 import { FormBuilder, Validators } from "@angular/forms";
-import { dateConverter, dateConverterMin } from "../../constants/columnMetadata";
+import {
+  dateConverter,
+  dateConverterMin,
+} from "../../constants/columnMetadata";
 
 @Component({
   templateUrl: "farm-demo-detail.component.html",
@@ -173,20 +176,28 @@ export class FarmDemoDetailComponent implements OnInit {
 
   FormSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.editForm.value);
     this.dataservice
       .UpdateFarmDemo(this.editForm.value, this.details.id)
-      .subscribe((result: any) => {
-        resp = result.data;
-        console.log("response", result);
-        if (result.data.updateFarmDemo) {
-          this.toastr.success("Farm demo edited successfully!");
-          this.myModal.hide();
-          this.getLists();
-        } else {
-          this.toastr.error("Failed. Please check the fields!");
+      .subscribe(
+        (result: any) => {
+          resp = result.data;
+          console.log("response", result);
+          if (result.data.updateFarmDemo) {
+            this.toastr.success("Farm demo edited successfully!");
+            this.btnLoading = false;
+            this.myModal.hide();
+            this.getLists();
+          } else {
+            this.toastr.error("Failed. Please check the fields!");
+            this.btnLoading = false;
+          }
+        },
+        (error) => {
+          this.btnLoading = false;
         }
-      });
+      );
   }
   showImages(url) {
     console.log(url);
@@ -202,24 +213,27 @@ export class FarmDemoDetailComponent implements OnInit {
     });
   }
   deleteFarmDemo() {
-    this.dataservice.deleteFarmDemo(this.id).subscribe((result: any) => {
-      console.log("response", result);
-      if (result.data.deleteFarmDemo) {
-        this.toastr.success("Success!");
-        this.deleteModal.hide();
-        this.router.navigate(["/farmdemo/all"]);
-      } else {
-        this.toastr.error("Failed!");
+    this.dataservice.deleteFarmDemo(this.id).subscribe(
+      (result: any) => {
+        console.log("response", result);
+        if (result.data.deleteFarmDemo) {
+          this.toastr.success("Success!");
+          this.deleteModal.hide();
+          this.router.navigate(["/farmdemo/all"]);
+        } else {
+          this.toastr.error("Failed!");
+        }
+      },
+      (error) => {
+        this.toastr.error("Something went wrong!");
       }
-    },(error) => {
-      this.toastr.error("Something went wrong!");
-    });
+    );
   }
   onChange(event: any) {
     this.file = [];
-      for (var i = 0; i < event.target.files.length; i++) {
-        this.file.push(event.target.files[i]);
-      }
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.file.push(event.target.files[i]);
+    }
   }
   uploadPic() {
     let resp = {};

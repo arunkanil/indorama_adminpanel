@@ -302,6 +302,7 @@
             var _this8 = this;
 
             console.log(this.commentForm.value);
+            this.btnLoading = true;
             var resp = {};
             this.dataservice.createRetailer(this.commentForm.value).subscribe(function (result) {
               resp = result;
@@ -310,12 +311,18 @@
               if (result) {
                 _this8.toastr.success("Retailer added successfully!");
 
+                _this8.btnLoading = false;
+
                 _this8.commentModal.hide();
 
                 _this8.getRetailers();
               } else {
                 _this8.toastr.error("Failed. Please check the fields!");
+
+                _this8.btnLoading = false;
               }
+            }, function (error) {
+              _this8.btnLoading = false;
             });
           }
         }]);
@@ -700,6 +707,7 @@
             var _this18 = this;
 
             var resp = {};
+            this.btnLoading = true;
             console.log(this.agentForm.value);
             this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe(function (result) {
               resp = result.data;
@@ -708,12 +716,18 @@
               if (result.data.updateUsersPermissionsUser) {
                 _this18.toastr.success("Retailer updated successfully!");
 
+                _this18.btnLoading = false;
+
                 _this18.myModal.hide();
 
                 _this18.getTest();
               } else {
                 _this18.toastr.error("Failed. Please check the fields!");
+
+                _this18.btnLoading = false;
               }
+            }, function (error) {
+              _this18.btnLoading = false;
             });
           }
         }, {
@@ -724,6 +738,7 @@
             var _a, _b, _c, _d;
 
             console.log("edit", this.resultForm.value);
+            this.btnLoading = true;
             var resp = {};
             console.log(this.resultForm.value);
             this.dataservice.UpdateRetailerProducts(this.resultForm.value, (_d = (_c = (_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.retailer_categories) === null || _c === void 0 ? void 0 : _c.data[0]) === null || _d === void 0 ? void 0 : _d.id, this.id).subscribe(function (result) {
@@ -733,12 +748,18 @@
               if (result.data.updateRetailerProduct) {
                 _this19.toastr.success("Product updated successfully!");
 
+                _this19.btnLoading = false;
+
                 _this19.resultModal.hide();
 
                 _this19.getTest();
               } else {
                 _this19.toastr.error("Failed. Please check the fields!");
+
+                _this19.btnLoading = false;
               }
+            }, function (error) {
+              _this19.btnLoading = false;
             });
           }
         }, {
@@ -801,6 +822,7 @@
             var _this21 = this;
 
             var resp = {};
+            this.btnLoading = true;
             this.dataservice.upload(this.file).subscribe(function (response) {
               var _a, _b, _c, _d, _e;
 
@@ -814,6 +836,7 @@
                   if (result.data.createRetailerProduct) {
                     _this21.toastr.success("Success!");
 
+                    _this21.btnLoading = false;
                     _this21.file = null;
 
                     _this21.getTest();
@@ -821,10 +844,16 @@
                     _this21.addProductModal.hide();
                   } else {
                     _this21.toastr.error("Failed!");
+
+                    _this21.btnLoading = false;
                   }
+                }, function (error) {
+                  _this21.btnLoading = false;
                 });
               } else {
                 _this21.toastr.error("Image failed to upload!");
+
+                _this21.btnLoading = false;
               }
             });
           }

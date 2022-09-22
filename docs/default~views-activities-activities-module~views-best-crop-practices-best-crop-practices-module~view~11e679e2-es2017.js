@@ -940,7 +940,7 @@ const CropPricesColumn = [
         },
     },
     {
-        field: "attributes.Rejected",
+        field: "attributes",
         headerName: "Status",
         resizable: true,
         sortable: true,
@@ -950,12 +950,13 @@ const CropPricesColumn = [
             buttons: ["reset"],
         },
         cellRenderer: (data) => {
-            if (data.value == true)
+            console.log(data.value, "cellrenderer");
+            if (data.value.Rejected == true && data.value.publishedAt == null)
                 return "Rejected";
-            if (data.value == false)
-                return "Approved";
-            if (data.value == null)
+            if (data.value.Rejected == false && data.value.publishedAt == null)
                 return "Pending";
+            if (data.value.Rejected == false && data.value.publishedAt !== null)
+                return "Approved";
         },
     },
     {

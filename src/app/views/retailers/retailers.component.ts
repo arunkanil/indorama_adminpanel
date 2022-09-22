@@ -99,18 +99,20 @@ export class RetailersComponent {
     });
   }
   getRetailers() {
-    this.dataservice.getRetailers(1,this.pageSize).valueChanges.subscribe((result: any) => {
-      this.rowData = result.data.usersPermissionsUsers.data;
-      this.meta = result.data.usersPermissionsUsers.meta;
-      if (this.meta?.pagination?.pageCount <= 1) {
-        this.disablePrevButton = true;
-        this.disableNextButton = true;
-      }
-    });
+    this.dataservice
+      .getRetailers(1, this.pageSize)
+      .valueChanges.subscribe((result: any) => {
+        this.rowData = result.data.usersPermissionsUsers.data;
+        this.meta = result.data.usersPermissionsUsers.meta;
+        if (this.meta?.pagination?.pageCount <= 1) {
+          this.disablePrevButton = true;
+          this.disableNextButton = true;
+        }
+      });
   }
   loadNext() {
     this.count++;
-     this.disablePrevButton = false;
+    this.disablePrevButton = false;
     this.from = this.from + this.pageSize;
     this.to =
       this.to + this.pageSize > this.meta?.pagination?.total
@@ -175,19 +177,25 @@ export class RetailersComponent {
   }
   formSubmit() {
     console.log(this.commentForm.value);
+    this.btnLoading = true;
     let resp = {};
-    this.dataservice
-      .createRetailer(this.commentForm.value)
-      .subscribe((result: any) => {
+    this.dataservice.createRetailer(this.commentForm.value).subscribe(
+      (result: any) => {
         resp = result;
         console.log("response", result);
         if (result) {
           this.toastr.success("Retailer added successfully!");
+          this.btnLoading = false;
           this.commentModal.hide();
           this.getRetailers();
         } else {
           this.toastr.error("Failed. Please check the fields!");
+          this.btnLoading = false;
         }
-      });
+      },
+      (error) => {
+        this.btnLoading = false;
+      }
+    );
   }
 }

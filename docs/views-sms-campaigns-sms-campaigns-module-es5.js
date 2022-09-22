@@ -394,6 +394,7 @@
           value: function sendMessage() {
             var _this8 = this;
 
+            this.btnLoading = true;
             console.log(this.messageForm.value, "sendmessage");
             this.dataservice.createSMSCampaign(this.messageForm.value).subscribe(function (result) {
               console.log("response", result);
@@ -401,12 +402,18 @@
               if (result.data.createSmsCampaign) {
                 _this8.toastr.success("Success!");
 
+                _this8.btnLoading = false;
+
                 _this8.messageModal.hide();
 
                 _this8.getSmsCampaigns();
               } else {
                 _this8.toastr.error("Failed!");
+
+                _this8.btnLoading = false;
               }
+            }, function (error) {
+              _this8.btnLoading = false;
             });
           }
         }]);

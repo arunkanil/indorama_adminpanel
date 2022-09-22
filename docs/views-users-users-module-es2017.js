@@ -332,20 +332,23 @@ let UserDetailComponent = class UserDetailComponent {
     }
     FormSubmit() {
         let resp = {};
+        this.btnLoading = true;
         console.log(this.agentForm.value);
-        this.dataservice
-            .UpdateRetailer(this.agentForm.value, this.id)
-            .subscribe((result) => {
+        this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe((result) => {
             resp = result.data;
             console.log("response", result);
             if (result.data.updateUsersPermissionsUser) {
                 this.toastr.success("User updated successfully!");
+                this.btnLoading = false;
                 this.myModal.hide();
                 this.getTest();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
             }
+        }, (error) => {
+            this.btnLoading = false;
         });
     }
     ResultSubmit() {
@@ -711,21 +714,24 @@ let UsersComponent = class UsersComponent {
         this.detailsModal.show();
     }
     formSubmit() {
+        this.btnLoading = true;
         console.log(this.commentForm.value);
         let resp = {};
-        this.dataservice
-            .createRetailer(this.commentForm.value)
-            .subscribe((result) => {
+        this.dataservice.createRetailer(this.commentForm.value).subscribe((result) => {
             resp = result;
             console.log("response", result);
             if (result) {
                 this.toastr.success("User added successfully!");
+                this.btnLoading = false;
                 this.commentModal.hide();
                 this.getRetailers();
             }
             else {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
             }
+        }, (error) => {
+            this.btnLoading = false;
         });
     }
 };

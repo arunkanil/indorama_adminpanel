@@ -255,19 +255,22 @@ let SMSCampaignsComponent = class SMSCampaignsComponent {
         this.messageModal.show();
     }
     sendMessage() {
+        this.btnLoading = true;
         console.log(this.messageForm.value, "sendmessage");
-        this.dataservice
-            .createSMSCampaign(this.messageForm.value)
-            .subscribe((result) => {
+        this.dataservice.createSMSCampaign(this.messageForm.value).subscribe((result) => {
             console.log("response", result);
             if (result.data.createSmsCampaign) {
                 this.toastr.success("Success!");
+                this.btnLoading = false;
                 this.messageModal.hide();
                 this.getSmsCampaigns();
             }
             else {
                 this.toastr.error("Failed!");
+                this.btnLoading = false;
             }
+        }, (error) => {
+            this.btnLoading = false;
         });
     }
 };

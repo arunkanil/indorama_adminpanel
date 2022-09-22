@@ -71,7 +71,7 @@ export class IndoramaUpdatesComponent {
   }
   loadNext() {
     this.count++;
-     this.disablePrevButton = false;
+    this.disablePrevButton = false;
     this.from = this.from + this.pageSize;
     this.to =
       this.to + this.pageSize > this.meta?.pagination?.total
@@ -173,6 +173,7 @@ export class IndoramaUpdatesComponent {
   }
   cropPriceSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.newsForm.value);
     if (!this.disableButton) {
       if (this.file) {
@@ -192,10 +193,12 @@ export class IndoramaUpdatesComponent {
                   this.toastr.success("Success!");
                   this.file = null;
                   this.getUpdates();
+                  this.btnLoading = false;
                   this.cropPriceModal.hide();
                   this.gridApi.deselectAll();
                 } else {
                   this.toastr.error("Failed. Please check the fields!");
+                  this.btnLoading = false;
                 }
               });
           }
@@ -213,11 +216,14 @@ export class IndoramaUpdatesComponent {
             if (result.data.updateNewsAndUpdate) {
               this.toastr.success("Success!");
               this.file = null;
+              this.btnLoading = false;
               this.cropPriceModal.hide();
               this.gridApi.deselectAll();
               this.getUpdates();
+              
             } else {
               this.toastr.error("Failed. Please check the fields!");
+              this.btnLoading = false;
             }
           });
       }
@@ -234,14 +240,17 @@ export class IndoramaUpdatesComponent {
                 this.toastr.success("Success!");
                 this.file = null;
                 this.cropPriceModal.hide();
+                this.btnLoading = false;
                 this.getUpdates();
                 this.gridApi.deselectAll();
               } else {
                 this.toastr.error("Failed. Please check the fields!");
+                this.btnLoading = false;
               }
             });
         } else {
           this.toastr.error("Image failed to upload!");
+          this.btnLoading = false;
         }
       });
     }

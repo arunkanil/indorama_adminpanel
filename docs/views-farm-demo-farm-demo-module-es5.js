@@ -207,6 +207,7 @@
             var _this2 = this;
 
             var resp = {};
+            this.btnLoading = true;
             console.log(this.editForm.value);
             this.dataservice.UpdateFarmDemo(this.editForm.value, this.details.id).subscribe(function (result) {
               resp = result.data;
@@ -215,12 +216,18 @@
               if (result.data.updateFarmDemo) {
                 _this2.toastr.success("Farm demo edited successfully!");
 
+                _this2.btnLoading = false;
+
                 _this2.myModal.hide();
 
                 _this2.getLists();
               } else {
                 _this2.toastr.error("Failed. Please check the fields!");
+
+                _this2.btnLoading = false;
               }
+            }, function (error) {
+              _this2.btnLoading = false;
             });
           }
         }, {
@@ -8573,6 +8580,7 @@
             var _this25 = this;
 
             var resp = {};
+            this.btnLoading = true;
             console.log(this.addForm.value);
             this.dataservice.AddFarmdemo(this.addForm.value).subscribe(function (result) {
               resp = result.data;
@@ -8581,12 +8589,18 @@
               if (result.data.createFarmDemo) {
                 _this25.toastr.success("Farm demo added successfully!");
 
+                _this25.btnLoading = false;
+
                 _this25.getLists();
 
                 _this25.myModal.hide();
               } else {
                 _this25.toastr.error("Failed. Please check the fields!");
+
+                _this25.btnLoading = false;
               }
+            }, function (error) {
+              _this25.btnLoading = false;
             });
           }
         }]);
