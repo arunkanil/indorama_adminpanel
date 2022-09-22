@@ -435,13 +435,16 @@ export class mastersComponent {
                 this.rowData = result.data.states.data;
               });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
         });
     } else {
-      this.dataservice
-        .AddStates(this.stateForm.value)
-        .subscribe((result: any) => {
+      this.dataservice.AddStates(this.stateForm.value).subscribe(
+        (result: any) => {
           resp = result.data;
           console.log("response", result);
           if (result.data.createState) {
@@ -455,9 +458,18 @@ export class mastersComponent {
                 this.rowData = result.data.states.data;
               });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
-        });
+        },
+        (error) => {
+          console.log(error);
+          this.toastr.error("Failed.");
+        }
+      );
     }
   }
   lgaSubmit() {
@@ -479,7 +491,11 @@ export class mastersComponent {
               this.rowData = result.data.lgas.data;
             });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
         });
     } else {
@@ -495,7 +511,11 @@ export class mastersComponent {
             this.rowData = result.data.lgas.data;
           });
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          if (result.errors[0].extensions.error.name == "ValidationError") {
+            this.toastr.error("Can't be added as the value already exists");
+          } else {
+            this.toastr.error("Failed. Please check the fields!");
+          }
         }
       });
     }
@@ -520,7 +540,11 @@ export class mastersComponent {
                 this.rowData = result.data.areas.data;
               });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
         });
     } else {
@@ -536,7 +560,11 @@ export class mastersComponent {
             this.rowData = result.data.areas.data;
           });
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          if (result.errors[0].extensions.error.name == "ValidationError") {
+            this.toastr.error("Can't be added as the value already exists");
+          } else {
+            this.toastr.error("Failed. Please check the fields!");
+          }
         }
       });
     }
@@ -561,7 +589,11 @@ export class mastersComponent {
                 this.rowData = result.data.markets.data;
               });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
         });
     } else {
@@ -581,7 +613,11 @@ export class mastersComponent {
                 this.rowData = result.data.markets.data;
               });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
         });
     }
@@ -606,7 +642,11 @@ export class mastersComponent {
                 this.rowData = result.data.crops.data;
               });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
         });
     } else {
@@ -622,7 +662,11 @@ export class mastersComponent {
             this.rowData = result.data.crops.data;
           });
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          if (result.errors[0].extensions.error.name == "ValidationError") {
+            this.toastr.error("Can't be added as the value already exists");
+          } else {
+            this.toastr.error("Failed. Please check the fields!");
+          }
         }
       });
     }
@@ -647,7 +691,11 @@ export class mastersComponent {
                 this.rowData = result.data.villages.data;
               });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
         });
     } else {
@@ -667,7 +715,11 @@ export class mastersComponent {
                 this.rowData = result.data.villages.data;
               });
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            if (result.errors[0].extensions.error.name == "ValidationError") {
+              this.toastr.error("Can't be added as the value already exists");
+            } else {
+              this.toastr.error("Failed. Please check the fields!");
+            }
           }
         });
     }

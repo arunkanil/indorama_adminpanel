@@ -613,7 +613,11 @@
                     _this8.rowData = result.data.states.data;
                   });
                 } else {
-                  _this8.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this8.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this8.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             } else {
@@ -633,8 +637,16 @@
                     _this8.rowData = result.data.states.data;
                   });
                 } else {
-                  _this8.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this8.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this8.toastr.error("Failed. Please check the fields!");
+                  }
                 }
+              }, function (error) {
+                console.log(error);
+
+                _this8.toastr.error("Failed.");
               });
             }
           }
@@ -663,7 +675,11 @@
                     _this9.rowData = result.data.lgas.data;
                   });
                 } else {
-                  _this9.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this9.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this9.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             } else {
@@ -683,7 +699,11 @@
                     _this9.rowData = result.data.lgas.data;
                   });
                 } else {
-                  _this9.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this9.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this9.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             }
@@ -713,7 +733,11 @@
                     _this10.rowData = result.data.areas.data;
                   });
                 } else {
-                  _this10.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this10.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this10.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             } else {
@@ -733,7 +757,11 @@
                     _this10.rowData = result.data.areas.data;
                   });
                 } else {
-                  _this10.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this10.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this10.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             }
@@ -763,7 +791,11 @@
                     _this11.rowData = result.data.markets.data;
                   });
                 } else {
-                  _this11.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this11.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this11.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             } else {
@@ -783,7 +815,11 @@
                     _this11.rowData = result.data.markets.data;
                   });
                 } else {
-                  _this11.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this11.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this11.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             }
@@ -813,7 +849,11 @@
                     _this12.rowData = result.data.crops.data;
                   });
                 } else {
-                  _this12.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this12.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this12.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             } else {
@@ -833,7 +873,11 @@
                     _this12.rowData = result.data.crops.data;
                   });
                 } else {
-                  _this12.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this12.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this12.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             }
@@ -863,7 +907,11 @@
                     _this13.rowData = result.data.villages.data;
                   });
                 } else {
-                  _this13.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this13.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this13.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             } else {
@@ -883,7 +931,11 @@
                     _this13.rowData = result.data.villages.data;
                   });
                 } else {
-                  _this13.toastr.error("Failed. Please check the fields!");
+                  if (result.errors[0].extensions.error.name == "ValidationError") {
+                    _this13.toastr.error("Can't be added as the value already exists");
+                  } else {
+                    _this13.toastr.error("Failed. Please check the fields!");
+                  }
                 }
               });
             }

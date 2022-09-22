@@ -490,14 +490,17 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
         else {
-            this.dataservice
-                .AddStates(this.stateForm.value)
-                .subscribe((result) => {
+            this.dataservice.AddStates(this.stateForm.value).subscribe((result) => {
                 resp = result.data;
                 console.log("response", result);
                 if (result.data.createState) {
@@ -512,8 +515,16 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
+            }, (error) => {
+                console.log(error);
+                this.toastr.error("Failed.");
             });
         }
     }
@@ -536,7 +547,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -554,7 +570,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -580,7 +601,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -598,7 +624,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -624,7 +655,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -646,7 +682,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -672,7 +713,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -690,7 +736,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -716,7 +767,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
@@ -738,7 +794,12 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 else {
-                    this.toastr.error("Failed. Please check the fields!");
+                    if (result.errors[0].extensions.error.name == "ValidationError") {
+                        this.toastr.error("Can't be added as the value already exists");
+                    }
+                    else {
+                        this.toastr.error("Failed. Please check the fields!");
+                    }
                 }
             });
         }
