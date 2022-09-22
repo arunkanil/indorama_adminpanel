@@ -72,7 +72,7 @@
                 </option>
               </select>
             </div>
-            <div class="form-group">
+            <!-- <div class="form-group">
               <label for="lga">LGA</label>
               <select
                 class="form-control"
@@ -87,20 +87,20 @@
                   {{ item.attributes.Name }}
                 </option>
               </select>
-            </div>
+            </div> -->
             <div class="form-group">
-              <label for="area">Area</label>
+              <label for="agronomist_lgas">LGAs</label>
               <select
                 class="form-control"
-                id="area"
+                id="agronomist_lgas"
                 multiple
                 required
                 ngModel
-                name="area"
-                formControlName="area"
+                name="agronomist_lgas"
+                formControlName="agronomist_lgas"
               >
                 <option value="" disabled selected hidden>Choose...</option>
-                <option *ngFor="let item of Areas" value="{{ item.id }}">
+                <option *ngFor="let item of LGA" value="{{ item.id }}">
                   {{ item.attributes.Name }}
                 </option>
               </select>
@@ -226,12 +226,12 @@
                   <td>User type</td>
                   <td>{{ details?.attributes?.UserType }}</td>
                 </tr>
-                <tr>
+                <!-- <tr>
                   <td>Email</td>
                   <td>
                     {{ details?.attributes?.email }}
                   </td>
-                </tr>
+                </tr> -->
                 <tr>
                   <td>Village</td>
                   <td>
@@ -278,18 +278,18 @@
         </div>
         <div *ngIf="dispArea" class="col">
           <div style="display: flex; justify-content: space-between">
-            <h4>Areas assigned</h4>
+            <h4>LGAs assigned</h4>
             <button
               type="button"
               class="btn btn-primary"
               data-toggle="modal"
               (click)="areaModal.show()"
             >
-              Edit areas
+              Edit LGAs
             </button>
           </div>
           <ul>
-            <li *ngFor="let item of agronomists?.attributes?.areas?.data">
+            <li *ngFor="let item of agronomists">
               {{ item?.attributes?.Name }}
             </li>
           </ul>
@@ -322,7 +322,7 @@
                 <div class="row">
                   <div class="col">
                     <div class="form-group">
-                      <label for="Name">Name</label>
+                      <label for="Name">Name<span class="danger">*</span></label>
                       <input
                         type="text"
                         class="form-control"
@@ -333,7 +333,7 @@
                       />
                     </div>
                     <div class="form-group">
-                      <label for="market">Contact Number</label>
+                      <label for="market">Contact Number<span class="danger">*</span></label>
                       <input
                         type="text"
                         class="form-control"
@@ -343,7 +343,7 @@
                         placeholder="Enter contact number"
                       />
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                       <label for="email">email</label>
                       <input
                         type="text"
@@ -353,9 +353,9 @@
                         formControlName="email"
                         placeholder="Enter email"
                       />
-                    </div>
+                    </div> -->
                     <div class="form-group">
-                      <label for="UserType">User type</label>
+                      <label for="UserType">User type<span class="danger">*</span></label>
                       <select
                         class="form-control"
                         id="UserType"
@@ -397,7 +397,7 @@
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="state">State</label>
+                      <label for="state">State<span class="danger">*</span></label>
                       <select
                         class="form-control"
                         id="state"
@@ -419,7 +419,7 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="lga">LGA</label>
+                      <label for="lga">LGA<span class="danger">*</span></label>
                       <select
                         class="form-control"
                         id="lga"
@@ -438,7 +438,7 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="village">Village</label>
+                      <label for="village">Village<span class="danger">*</span></label>
                       <select
                         class="form-control"
                         id="village"
@@ -474,7 +474,6 @@
                       <input
                         class="form-control"
                         id="Longitude"
-                        required
                         ngModel
                         name="Longitude"
                         formControlName="Longitude"
@@ -482,7 +481,7 @@
                       />
                     </div>
                     <div class="form-group">
-                      <label for="blocked">Status</label>
+                      <label for="blocked">Status<span class="danger">*</span></label>
                       <select
                         class="form-control"
                         id="blocked"

@@ -46,15 +46,15 @@ export class UserDetailComponent implements OnInit {
     // username: ["", Validators.required],
     blocked: [""],
     Name: ["", Validators.required],
-    email: ["", Validators.required],
+    // email: ["", Validators.required],
     Farmer: ["", Validators.required],
     UserType: ["", Validators.required],
-    Bio: ["", Validators.required],
+    Bio: [""],
     state: ["", Validators.required],
     village: ["", Validators.required],
     lga: ["", Validators.required],
-    Latitude: ["", Validators.required],
-    Longitude: ["", Validators.required],
+    Latitude: [""],
+    Longitude: [""],
   });
   resultForm = this.fb.group({
     id: [""],
@@ -64,8 +64,7 @@ export class UserDetailComponent implements OnInit {
   });
   areaForm = this.fb.group({
     state: [""],
-    area: ["", Validators.required],
-    lga: [""],
+    agronomist_lgas: ["", Validators.required],
   });
   productForm = this.fb.group({
     Image: ["", Validators.required],
@@ -105,10 +104,10 @@ export class UserDetailComponent implements OnInit {
             Validators.required,
           ],
           Name: [this.details.attributes?.Name, Validators.required],
-          email: [this.details.attributes?.email, Validators.required],
-          Bio: [this.details.attributes?.Bio, Validators.required],
-          Latitude: [this.details.attributes?.Latitude, Validators.required],
-          Longitude: [this.details.attributes?.Longitude, Validators.required],
+          // email: [this.details.attributes?.email, Validators.required],
+          Bio: [this.details.attributes?.Bio],
+          Latitude: [this.details.attributes?.Latitude],
+          Longitude: [this.details.attributes?.Longitude],
           state: [
             this.details?.attributes?.lga?.data?.attributes?.state?.data?.id,
             Validators.required,
@@ -125,12 +124,13 @@ export class UserDetailComponent implements OnInit {
         this.dispArea =
           this.details?.attributes?.UserType == "Agronomist" ? true : false;
         if (this.dispArea == true) {
-          this.dataservice
-            .getAgronomist(this.id)
-            .valueChanges.subscribe((result: any) => {
-              console.log("getAgronomist", result?.data?.agronomists?.data);
-              this.agronomists = result?.data?.agronomists?.data[0];
-            });
+          this.agronomists = this.details?.attributes?.agronomist_lgas?.data;
+          // this.dataservice
+          //   .getAgronomist(this.id)
+          //   .valueChanges.subscribe((result: any) => {
+          //     console.log("getAgronomist", result?.data?.agronomists?.data);
+          //     this.agronomists = result?.data?.agronomists?.data[0];
+          //   });
         }
       });
   }
@@ -211,7 +211,7 @@ export class UserDetailComponent implements OnInit {
         resp = result.data;
         console.log("response", result);
         if (result.data.updateUsersPermissionsUser) {
-          this.toastr.success("Retailer updated successfully!");
+          this.toastr.success("User updated successfully!");
           this.myModal.hide();
           this.getTest();
         } else {
@@ -285,18 +285,18 @@ export class UserDetailComponent implements OnInit {
     let resp = {};
     console.log(this.areaForm.value);
     this.dataservice
-      .createAgronomist(this.areaForm.value, this.id)
-      .subscribe((result: any) => {
-        resp = result.data;
-        console.log("response", result);
-        if (result.data.createAgronomist) {
-          this.toastr.success("Success!");
-          window.location.reload();
-          this.areaModal.hide();
-        } else {
-          this.toastr.error("Failed!");
-        }
-      });
+    .UpdateRetailer(this.areaForm.value, this.id)
+    .subscribe((result: any) => {
+      resp = result.data;
+      console.log("response", result);
+      if (result.data.updateUsersPermissionsUser) {
+        this.toastr.success("User updated successfully!");
+        this.areaModal.hide();
+        this.getTest();
+      } else {
+        this.toastr.error("Failed. Please check the fields!");
+      }
+    });
   }
   ProductSubmit() {
     let resp = {};
@@ -334,7 +334,7 @@ export class UserDetailComponent implements OnInit {
         if (result.data.deleteUsersPermissionsUser) {
           this.toastr.success("Success!");
           this.deleteModal.hide();
-          this.router.navigate(["/users"]);
+          this.router.navigate(["/users/all"]);
         } else {
           this.toastr.error("Failed!");
         }

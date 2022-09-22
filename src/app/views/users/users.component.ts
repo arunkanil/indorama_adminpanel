@@ -39,7 +39,7 @@ export class UsersComponent {
   commentForm = this.fb.group({
     UserType: ["", Validators.required],
     username: ["", Validators.required],
-    email: ["", Validators.required],
+    email: ["nodata@email.com"],
     password: ["", Validators.required],
     Name: ["", Validators.required],
     Gender: ["", Validators.required],
@@ -181,7 +181,7 @@ export class UsersComponent {
         resp = result;
         console.log("response", result);
         if (result) {
-          this.toastr.success("Retailer added successfully!");
+          this.toastr.success("User added successfully!");
           this.commentModal.hide();
           this.getRetailers();
         } else {

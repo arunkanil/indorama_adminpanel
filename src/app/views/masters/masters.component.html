@@ -46,6 +46,7 @@
             [columnDefs]="columnDefs"
             [rowData]="rowData"
             [context]="context"
+            [pagination]="true"
             [rowSelection]="rowSelection"
             (selectionChanged)="onSelectionChanged($event)"
             [frameworkComponents]="frameworkComponents"
@@ -53,7 +54,7 @@
             animateRows="true"
           >
           </ag-grid-angular>
-          <span class="float-left mt-3">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>
+          <!-- <span class="float-left mt-3">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>
             <button
               type="button"
               [disabled]="disableNextButton"
@@ -73,7 +74,7 @@
               (click)="loadPrev()"
             >
               Prev
-            </button>
+            </button> -->
         </div>
       </div>
     </div>

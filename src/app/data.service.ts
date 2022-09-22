@@ -352,7 +352,7 @@ const UpdateFarmDemo = gql`
 `;
 const CropsQuery = gql`
   query {
-    crops(pagination: { limit: 100 }, sort: "createdAt:desc") {
+    crops(pagination: { limit: 10000 }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -403,7 +403,7 @@ const UpdateCrops = gql`
 `;
 const StatesQuery = gql`
   query {
-    states(pagination: { limit: 100 }, sort: "createdAt:desc") {
+    states(pagination: { limit: 10000 }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -503,7 +503,7 @@ const UpdateState = gql`
 const LGAquery = gql`
   query ($id: ID) {
     lgas(
-      pagination: { limit: 100 }
+      pagination: { limit: 10000 }
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
@@ -602,7 +602,7 @@ const UpdateLGA = gql`
 const Villagesquery = gql`
   query ($id: ID) {
     villages(
-      pagination: { limit: 100 }
+      pagination: { limit: 10000 }
       sort: "createdAt:desc"
       filters: { area: { lga: { id: { eq: $id } } } }
     ) {
@@ -704,7 +704,7 @@ const UpdateVillage = gql`
 const Areasquery = gql`
   query ($id: ID) {
     areas(
-      pagination: { limit: 100 }
+      pagination: { limit: 10000 }
       sort: "createdAt:desc"
       filters: { lga: { id: { eq: $id } } }
     ) {
@@ -841,7 +841,7 @@ const UpdateArea = gql`
 const MarketQuery = gql`
   query ($id: ID) {
     markets(
-      pagination: { limit: 100 }
+      pagination: { limit: 10000 }
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
@@ -1281,7 +1281,7 @@ const SingleSoilTestQuery = gql`
               attributes {
                 username
                 email
-                
+
                 Name
               }
             }
@@ -1706,6 +1706,30 @@ const GetSingleRetailerQuery = gql`
               }
             }
           }
+          agronomist_lgas {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      lgas {
+                        data {
+                          id
+                          attributes {
+                            Name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
           UserType
           Bio
           Latitude
@@ -1826,6 +1850,7 @@ const updateRetailerQuery = gql`
     $profpic: ID
     $blocked: Boolean
     $contactNumber: String
+    $agronomist_lgas: [ID]
   ) {
     updateUsersPermissionsUser(
       id: $id
@@ -1841,6 +1866,7 @@ const updateRetailerQuery = gql`
         Longitude: $longitude
         prof_pic: $profpic
         ContactNumber: $contactNumber
+        agronomist_lgas: $agronomist_lgas
       }
     ) {
       data {
@@ -1891,6 +1917,22 @@ const updateRetailerQuery = gql`
                   data {
                     attributes {
                       url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          agronomist_lgas {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
                     }
                   }
                 }
@@ -3056,7 +3098,7 @@ const getCropPricesDashboard = gql`
   query ($id: ID, $market: ID) {
     cropPrices(
       publicationState: LIVE
-      pagination: { limit: 100 }
+      pagination: { limit: 30 }
       sort: "publishedAt:desc"
       filters: { crop: { id: { eq: $id } }, market: { id: { eq: $market } } }
     ) {
@@ -4472,6 +4514,7 @@ export class DataService {
         village: data.village,
         lga: data.lga,
         bio: data.Bio,
+        agronomist_lgas: data.agronomist_lgas,
         blocked: data.blocked == "true" ? true : false,
         UserType: data?.UserType,
         contactNumber: data.ContactNumber,

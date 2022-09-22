@@ -39,7 +39,7 @@ export class RetailersComponent {
   commentForm = this.fb.group({
     UserType: ["Retailer"],
     username: ["", Validators.required],
-    email: ["", Validators.required],
+    email: ["nodata@email.com"],
     password: ["", Validators.required],
     Name: ["", Validators.required],
     Gender: ["", Validators.required],

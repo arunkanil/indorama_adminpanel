@@ -782,7 +782,7 @@ const UpdateFarmDemo = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 `;
 const CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query {
-    crops(pagination: { limit: 100 }, sort: "createdAt:desc") {
+    crops(pagination: { limit: 10000 }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -833,7 +833,7 @@ const UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 `;
 const StatesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query {
-    states(pagination: { limit: 100 }, sort: "createdAt:desc") {
+    states(pagination: { limit: 10000 }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -933,7 +933,7 @@ const UpdateState = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 const LGAquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query ($id: ID) {
     lgas(
-      pagination: { limit: 100 }
+      pagination: { limit: 10000 }
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
@@ -1032,7 +1032,7 @@ const UpdateLGA = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 const Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query ($id: ID) {
     villages(
-      pagination: { limit: 100 }
+      pagination: { limit: 10000 }
       sort: "createdAt:desc"
       filters: { area: { lga: { id: { eq: $id } } } }
     ) {
@@ -1134,7 +1134,7 @@ const UpdateVillage = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 const Areasquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query ($id: ID) {
     areas(
-      pagination: { limit: 100 }
+      pagination: { limit: 10000 }
       sort: "createdAt:desc"
       filters: { lga: { id: { eq: $id } } }
     ) {
@@ -1271,7 +1271,7 @@ const UpdateArea = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 const MarketQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query ($id: ID) {
     markets(
-      pagination: { limit: 100 }
+      pagination: { limit: 10000 }
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
@@ -1711,7 +1711,7 @@ const SingleSoilTestQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
               attributes {
                 username
                 email
-                
+
                 Name
               }
             }
@@ -2136,6 +2136,30 @@ const GetSingleRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"
               }
             }
           }
+          agronomist_lgas {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      lgas {
+                        data {
+                          id
+                          attributes {
+                            Name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
           UserType
           Bio
           Latitude
@@ -2256,6 +2280,7 @@ const updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $profpic: ID
     $blocked: Boolean
     $contactNumber: String
+    $agronomist_lgas: [ID]
   ) {
     updateUsersPermissionsUser(
       id: $id
@@ -2271,6 +2296,7 @@ const updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         Longitude: $longitude
         prof_pic: $profpic
         ContactNumber: $contactNumber
+        agronomist_lgas: $agronomist_lgas
       }
     ) {
       data {
@@ -2321,6 +2347,22 @@ const updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
                   data {
                     attributes {
                       url
+                    }
+                  }
+                }
+              }
+            }
+          }
+          agronomist_lgas {
+            data {
+              id
+              attributes {
+                Name
+                state {
+                  data {
+                    id
+                    attributes {
+                      Name
                     }
                   }
                 }
@@ -3486,7 +3528,7 @@ const getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"
   query ($id: ID, $market: ID) {
     cropPrices(
       publicationState: LIVE
-      pagination: { limit: 100 }
+      pagination: { limit: 30 }
       sort: "publishedAt:desc"
       filters: { crop: { id: { eq: $id } }, market: { id: { eq: $market } } }
     ) {
@@ -4879,6 +4921,7 @@ let DataService = class DataService {
                 village: data.village,
                 lga: data.lga,
                 bio: data.Bio,
+                agronomist_lgas: data.agronomist_lgas,
                 blocked: data.blocked == "true" ? true : false,
                 UserType: data === null || data === void 0 ? void 0 : data.UserType,
                 contactNumber: data.ContactNumber,
