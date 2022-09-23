@@ -178,14 +178,14 @@
                   <td>Profile pic</td>
                   <td>
                     <a
-                      href="https://indoramaapp.untanglestrategy.com{{
+                      href="{{ baseURL }}{{
                         details?.attributes?.prof_pic?.data?.attributes?.url
                       }}"
                       target="_blank"
                       ><img
                         class="card-img-top"
                         style="width: 150px; height: 150px"
-                        src="https://indoramaapp.untanglestrategy.com{{
+                        src="{{ baseURL }}{{
                           details?.attributes?.prof_pic?.data?.attributes?.url
                         }}"
                         alt="No image found"
@@ -322,7 +322,9 @@
                 <div class="row">
                   <div class="col">
                     <div class="form-group">
-                      <label for="Name">Name<span class="danger">*</span></label>
+                      <label for="Name"
+                        >Name<span class="danger">*</span></label
+                      >
                       <input
                         type="text"
                         class="form-control"
@@ -333,7 +335,9 @@
                       />
                     </div>
                     <div class="form-group">
-                      <label for="market">Contact Number<span class="danger">*</span></label>
+                      <label for="market"
+                        >Contact Number<span class="danger">*</span></label
+                      >
                       <input
                         type="text"
                         class="form-control"
@@ -355,7 +359,9 @@
                       />
                     </div> -->
                     <div class="form-group">
-                      <label for="UserType">User type<span class="danger">*</span></label>
+                      <label for="UserType"
+                        >User type<span class="danger">*</span></label
+                      >
                       <select
                         class="form-control"
                         id="UserType"
@@ -397,7 +403,9 @@
                   </div>
                   <div class="col">
                     <div class="form-group">
-                      <label for="state">State<span class="danger">*</span></label>
+                      <label for="state"
+                        >State<span class="danger">*</span></label
+                      >
                       <select
                         class="form-control"
                         id="state"
@@ -438,7 +446,9 @@
                       </select>
                     </div>
                     <div class="form-group">
-                      <label for="village">Village<span class="danger">*</span></label>
+                      <label for="village"
+                        >Village<span class="danger">*</span></label
+                      >
                       <select
                         class="form-control"
                         id="village"
@@ -481,7 +491,9 @@
                       />
                     </div>
                     <div class="form-group">
-                      <label for="blocked">Status<span class="danger">*</span></label>
+                      <label for="blocked"
+                        >Status<span class="danger">*</span></label
+                      >
                       <select
                         class="form-control"
                         id="blocked"

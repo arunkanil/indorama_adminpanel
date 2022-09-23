@@ -45,7 +45,7 @@ let AuthenticationService = class AuthenticationService {
         return this.currentUserSubject.value;
     }
     login(data) {
-        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl}api/auth/local/`, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((user) => {
+        return this.http.post(`${_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl}/api/auth/local/`, data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((user) => {
             // login successful if there's a jwt token in the response
             console.log(user);
             if (user.jwt) {
@@ -100,13 +100,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client/core */ "ALmS");
 /* harmony import */ var _apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client/link/context */ "MWEN");
 /* harmony import */ var apollo_angular_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! apollo-angular/http */ "F/12");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../environments/environment */ "AytR");
 
 
 
 
 
 
-const uri = "https://indoramaapp.untanglestrategy.com/graphql";
+
+const uri = `${_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl}/graphql`;
 function createApollo(httpLink) {
     const basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])((operation, context) => ({
         headers: {
@@ -209,7 +211,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const environment = {
     production: false,
-    apiUrl: "https://indoramaapp.untanglestrategy.com/"
+    apiUrl: "https://indoramaapp.untanglestrategy.com"
 };
 
 
@@ -4111,13 +4113,13 @@ let DataService = class DataService {
         const httpOptions1 = {
             observe: "response",
         };
-        return this.http.post(this.baseURL + `auth/login/`, data, httpOptions1);
+        return this.http.post(this.baseURL + `/auth/login/`, data, httpOptions1);
     }
     createRetailer(data) {
         const httpOptions1 = {
             observe: "response",
         };
-        return this.http.post(this.baseURL + `api/users`, data, httpOptions1);
+        return this.http.post(this.baseURL + `/api/users`, data, httpOptions1);
     }
     fetchMessage(api_token, message_id) {
         return this.http
@@ -4132,7 +4134,7 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`https://indoramaapp.untanglestrategy.com/api/survey-forms/${data}?populate=Fields`, httpOptions1)
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/survey-forms/${data}?populate=Fields`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     downloadResponses(data) {
@@ -4143,7 +4145,7 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=${data}`, httpOptions1)
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/survey-result/download?surveyForm=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     getSoilTestStats(data) {
@@ -4154,7 +4156,7 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`https://indoramaapp.untanglestrategy.com/api/dashboard-soil-npk?stateId=${data}`, httpOptions1)
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/dashboard-soil-npk?stateId=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     getFarmDemoYieldStats(data) {
@@ -4165,7 +4167,7 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`https://indoramaapp.untanglestrategy.com/api/dashboard-farm-demo?stateId=${data}`, httpOptions1)
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/dashboard-farm-demo?stateId=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     getDashboardStats(data) {
@@ -5052,7 +5054,7 @@ let DataService = class DataService {
         const httpOptions1 = {
             observe: "response",
         };
-        return this.http.post(this.baseURL + `api/upload`, formData, httpOptions1);
+        return this.http.post(this.baseURL + `/api/upload`, formData, httpOptions1);
     }
     deleteArea(id) {
         return this.apollo.mutate({

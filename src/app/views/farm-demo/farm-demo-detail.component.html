@@ -156,13 +156,13 @@
             </div>
             <div *ngFor="let item of details?.attributes?.Images.data">
               <a
-                href="https://indoramaapp.untanglestrategy.com{{
+                href="{{baseURL}}{{
                   item.attributes.url
                 }}"
                 target="_blank"
               >
                 <img
-                  src="https://indoramaapp.untanglestrategy.com{{
+                  src="{{baseURL}}{{
                     item.attributes.url
                   }}"
                   (click)="showImages(item.attributes.url)"

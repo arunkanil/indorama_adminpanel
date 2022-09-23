@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
 import { CropPricesColumn } from "../../constants/columnMetadata";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "best-crop-practices.component.html",
@@ -31,7 +32,7 @@ export class BestCropPracticesComponent {
   columnDefs = [];
   Crops: any = [];
   imageUrl;
-
+  baseURL = environment.apiUrl;
   practicesForm = this.fb.group({
     crop: ["", Validators.required],
     content: ["", Validators.required],

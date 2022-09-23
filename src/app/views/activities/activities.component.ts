@@ -21,7 +21,6 @@ export class ActivitiesComponent {
     this.rowSelection = "single";
   }
   @ViewChild("activitiesModal") public activitiesModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
@@ -155,7 +154,7 @@ export class ActivitiesComponent {
       state: { data: selectedRows },
     });
   }
-  openModal(data: any) {
+  openModal() {
     this.activitiesModal.show();
   }
   activitiesSubmit() {

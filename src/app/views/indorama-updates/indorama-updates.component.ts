@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
 import { IndoramaUpdatesColumn } from "../../constants/columnMetadata";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "indorama-updates.component.html",
@@ -23,7 +24,7 @@ export class IndoramaUpdatesComponent {
   @ViewChild("cropPriceModal") public cropPriceModal: ModalDirective;
   @ViewChild("detailsModal") public detailsModal: ModalDirective;
   @ViewChild("deleteModal") public deleteModal: ModalDirective;
-
+  baseURL = environment.apiUrl;
   loading = true;
   btnLoading = false;
   disableButton = true;
@@ -130,7 +131,7 @@ export class IndoramaUpdatesComponent {
       this.file.push(event.target.files[i]);
     }
   }
-  openModal(data: any) {
+  openModal(data?: any) {
     this.imageUrl = null;
     this.cropPriceModal.show();
     if (data) {
@@ -144,7 +145,7 @@ export class IndoramaUpdatesComponent {
       });
       this.imageUrl = this.selectedRows[0].attributes.Images?.data[0]
         ?.attributes?.url
-        ? "https://indoramaapp.untanglestrategy.com" +
+        ? `${this.baseURL}` +
           this.selectedRows[0].attributes.Images?.data[0]?.attributes?.url
         : null;
     } else {

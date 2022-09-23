@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
 import { FormBuilder, Validators } from "@angular/forms";
 import { dateConverter } from "../../constants/columnMetadata";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "retailer-detail.component.html",
@@ -23,6 +24,7 @@ export class RetailerDetailComponent implements OnInit {
   @ViewChild("addProductModal") public addProductModal: ModalDirective;
 
   id: any;
+  baseURL = environment.apiUrl;
   loading = true;
   details: any = [];
   btnLoading = false;
@@ -79,7 +81,7 @@ export class RetailerDetailComponent implements OnInit {
     this.getTest();
   }
   imgUrl(url) {
-    return "https://indoramaapp.untanglestrategy.com" + url;
+    return `${environment.apiUrl}` + url;
   }
   getTest() {
     this.dataservice

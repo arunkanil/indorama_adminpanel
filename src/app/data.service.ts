@@ -3686,13 +3686,13 @@ export class DataService {
     const httpOptions1: Object = {
       observe: "response",
     };
-    return this.http.post(this.baseURL + `auth/login/`, data, httpOptions1);
+    return this.http.post(this.baseURL + `/auth/login/`, data, httpOptions1);
   }
   createRetailer(data): Observable<any> {
     const httpOptions1: Object = {
       observe: "response",
     };
-    return this.http.post(this.baseURL + `api/users`, data, httpOptions1);
+    return this.http.post(this.baseURL + `/api/users`, data, httpOptions1);
   }
   fetchMessage(api_token, message_id): Observable<any> {
     return this.http
@@ -3710,7 +3710,7 @@ export class DataService {
     };
     return this.http
       .get(
-        `https://indoramaapp.untanglestrategy.com/api/survey-forms/${data}?populate=Fields`,
+        `${environment.apiUrl}/api/survey-forms/${data}?populate=Fields`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
@@ -3724,7 +3724,7 @@ export class DataService {
     };
     return this.http
       .get(
-        `https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=${data}`,
+        `${environment.apiUrl}/api/survey-result/download?surveyForm=${data}`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
@@ -3739,7 +3739,7 @@ export class DataService {
     };
     return this.http
       .get(
-        `https://indoramaapp.untanglestrategy.com/api/dashboard-soil-npk?stateId=${data}`,
+        `${environment.apiUrl}/api/dashboard-soil-npk?stateId=${data}`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
@@ -3753,7 +3753,7 @@ export class DataService {
     };
     return this.http
       .get(
-        `https://indoramaapp.untanglestrategy.com/api/dashboard-farm-demo?stateId=${data}`,
+        `${environment.apiUrl}/api/dashboard-farm-demo?stateId=${data}`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
@@ -4644,7 +4644,7 @@ export class DataService {
     const httpOptions1: Object = {
       observe: "response",
     };
-    return this.http.post(this.baseURL + `api/upload`, formData, httpOptions1);
+    return this.http.post(this.baseURL + `/api/upload`, formData, httpOptions1);
   }
   deleteArea(id) {
     return this.apollo.mutate({

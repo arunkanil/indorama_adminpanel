@@ -63,7 +63,7 @@
                       item?.attributes?.chatInitiatedBy?.data?.attributes
                         ?.prof_pic.data?.attributes?.url
                     "
-                    src="https://indoramaapp.untanglestrategy.com{{
+                    src="{{ baseURL }}{{
                       item?.attributes?.chatInitiatedBy?.data?.attributes
                         ?.prof_pic?.data?.attributes?.url
                     }}"
@@ -122,7 +122,7 @@
                           chatMembers[0]?.attributes?.prof_pic.data?.attributes
                             ?.url
                         "
-                        src="https://indoramaapp.untanglestrategy.com{{
+                        src="{{ baseURL }}{{
                           chatMembers[0]?.attributes?.prof_pic.data?.attributes
                             ?.url
                         }}"
@@ -156,7 +156,7 @@
                           chatMembers[1]?.attributes?.prof_pic.data?.attributes
                             ?.url
                         "
-                        src="https://indoramaapp.untanglestrategy.com{{
+                        src="{{ baseURL }}{{
                           chatMembers[1]?.attributes?.prof_pic.data?.attributes
                             ?.url
                         }}"
@@ -217,7 +217,7 @@
                           item?.attributes?.from_user?.data?.attributes
                             ?.prof_pic?.data?.attributes?.url
                         "
-                        src="https://indoramaapp.untanglestrategy.com{{
+                        src="{{ baseURL }}{{
                           item?.attributes?.from_user?.data?.attributes
                             ?.prof_pic?.data?.attributes?.url
                         }}"
@@ -250,17 +250,18 @@
                         }}
                       </div>
                       <a
-                        href="https://indoramaapp.untanglestrategy.com{{
+                        href="{{ baseURL }}{{
                           item?.attributes?.image_attachment?.data?.attributes
                             ?.url
-                        }}" target="_blank"
+                        }}"
+                        target="_blank"
                       >
                         <img
                           *ngIf="
                             item?.attributes?.image_attachment?.data?.attributes
                               ?.url
                           "
-                          src="https://indoramaapp.untanglestrategy.com{{
+                          src="{{ baseURL }}{{
                             item?.attributes?.image_attachment?.data?.attributes
                               ?.url
                           }}"

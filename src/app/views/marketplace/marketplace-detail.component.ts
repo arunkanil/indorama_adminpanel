@@ -8,6 +8,7 @@ import {
   dateConverter,
   dateConverterMin,
 } from "../../constants/columnMetadata";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "marketplace-detail.component.html",
@@ -25,6 +26,7 @@ export class MarketplaceDetailComponent implements OnInit {
   @ViewChild("deleteModal") public deleteModal: ModalDirective;
 
   id: any;
+  baseURL = environment.apiUrl;
   loading = true;
   details: any = [];
   btnLoading = false;

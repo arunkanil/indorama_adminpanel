@@ -7,6 +7,7 @@ import { DataService } from "../../data.service";
 
 import { CropPricesColumn } from "../../constants/columnMetadata";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "crop-prices.component.html",
@@ -251,10 +252,10 @@ export class CropPricesComponent {
         }
       );
   }
-  openApproveModal(data) {
+  openApproveModal() {
     this.approveModal.show();
   }
-  openModal(data: any) {
+  openModal(data?: any) {
     this.imageUrl = null;
     this.cropPriceModal.show();
     if (data) {
@@ -280,7 +281,7 @@ export class CropPricesComponent {
       });
       this.imageUrl = this.selectedRows[0].attributes.Image?.data?.attributes
         ?.url
-        ? "https://indoramaapp.untanglestrategy.com" +
+        ? `${environment.apiUrl}` +
           this.selectedRows[0].attributes.Image?.data?.attributes?.url
         : null;
     } else {

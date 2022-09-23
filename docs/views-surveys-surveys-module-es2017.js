@@ -1097,6 +1097,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "s7LF");
 /* harmony import */ var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../constants/columnMetadata */ "7nfi");
 /* harmony import */ var ng_apexcharts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ng-apexcharts */ "CV0D");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../environments/environment */ "AytR");
+
 
 
 
@@ -1272,7 +1274,7 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         this.btnLoading = true;
         this.dataservice.downloadResponses(this.id).subscribe((result) => {
             console.log("downloadResponses", result.body);
-            let url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
+            let url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl}` + result.body.path;
             this.btnLoading = false;
             window.open(url, "_blank");
         }, (error) => {

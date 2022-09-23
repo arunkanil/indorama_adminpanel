@@ -14,6 +14,7 @@ import {
   ApexXAxis,
   ApexTitleSubtitle,
 } from "ng-apexcharts";
+import { environment } from "../../../environments/environment";
 
 export type ChartOptions = {
   series: ApexNonAxisChartSeries;
@@ -202,7 +203,7 @@ export class SurveyDetailsComponent implements OnInit {
     this.dataservice.downloadResponses(this.id).subscribe(
       (result: any) => {
         console.log("downloadResponses", result.body);
-        let url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
+        let url = `${environment.apiUrl}` + result.body.path;
         this.btnLoading = false;
         window.open(url, "_blank");
       },

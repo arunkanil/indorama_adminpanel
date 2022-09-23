@@ -1,6 +1,7 @@
 import { Component,ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
+import { environment } from "../../../environments/environment";
 import { DataService } from "../../data.service";
 
 @Component({
@@ -25,6 +26,7 @@ export class ChatComponent {
   key = null;
   selectedList = "All Chats";
   listCheck = false;
+  baseURL = environment.apiUrl;
 
   ngOnInit(): void {
     console.log(this.router);

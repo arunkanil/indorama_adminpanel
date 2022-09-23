@@ -28,7 +28,7 @@ export class mastersComponent {
 
   constructor(
     public dataservice: DataService,
-    private route: ActivatedRoute,
+    public route: ActivatedRoute,
     public router: Router,
     private fb: FormBuilder,
     private toastr: ToastrService
@@ -249,7 +249,7 @@ export class mastersComponent {
     //   }
     // );
   }
-  openModal(data: any) {
+  openModal(data?: any) {
     switch (this.router.url) {
       case "/masters/Villages":
         this.villageModal.show();

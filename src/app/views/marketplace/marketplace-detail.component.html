@@ -130,13 +130,10 @@
                   <td>
                     <span *ngFor="let item of details?.attributes?.Images.data">
                       <a
-                        href="https://indoramaapp.untanglestrategy.com{{
-                          item?.attributes?.url
-                        }}" target="_blank"
+                        href="{{ baseURL }}{{ item?.attributes?.url }}"
+                        target="_blank"
                         ><img
-                          src="https://indoramaapp.untanglestrategy.com{{
-                            item?.attributes?.url
-                          }}"
+                          src="{{ baseURL }}{{ item?.attributes?.url }}"
                           alt=""
                           style="
                             height: 100px;
@@ -303,7 +300,7 @@
                   <button
                     type="button"
                     class="btn btn-secondary"
-                    (click)="productModal.hide()"
+                    (click)="editModal.hide()"
                   >
                     Close
                   </button>

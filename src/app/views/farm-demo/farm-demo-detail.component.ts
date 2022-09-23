@@ -8,6 +8,7 @@ import {
   dateConverter,
   dateConverterMin,
 } from "../../constants/columnMetadata";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "farm-demo-detail.component.html",
@@ -26,6 +27,7 @@ export class FarmDemoDetailComponent implements OnInit {
 
   id: any;
   loading = true;
+  baseURL = environment.apiUrl;
   details: any = [];
   dateConverter = dateConverter;
   dateConverterMin = dateConverterMin;
@@ -201,7 +203,7 @@ export class FarmDemoDetailComponent implements OnInit {
   }
   showImages(url) {
     console.log(url);
-    this.fullImage = "https://indoramaapp.untanglestrategy.com" + url;
+    this.fullImage = `${environment.apiUrl}` + url;
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);

@@ -22,19 +22,6 @@ export class SoilHomeComponent {
   }
 
   @ViewChild("myModal") public myModal: ModalDirective;
-  customerForm = this.fb.group({
-    NameOfBride: ["", Validators.required],
-    NameOfFather: ["", Validators.required],
-    NameOfMother: ["", Validators.required],
-    MarriageDate: ["", Validators.required],
-    Contact_Number_1: ["", Validators.required],
-    Contact_Number_2: ["", Validators.required],
-    MarriageMonth: ["", Validators.required],
-    tele_caller_contact: ["", Validators.required],
-    HouseName: ["", Validators.required],
-    Landmark: ["", Validators.required],
-    locality: ["", Validators.required],
-  });
   loading = true;
   btnLoading = false;
   disableNextButton = false;
@@ -46,7 +33,6 @@ export class SoilHomeComponent {
   count = 1;
   columnDefs = [];
   rowData: any = [];
-  localities: any = [];
   private gridApi;
   private gridColumnApi;
 
@@ -113,20 +99,5 @@ export class SoilHomeComponent {
     this.router.navigate(["/soiltest/test_details",selectedRows[0].id], {
       state: { data: selectedRows },
     });
-  }
-  FormSubmit() {
-    let resp = {};
-    console.log(this.customerForm.value);
-    // this.dataservice.Addcustomer(this.customerForm.value).subscribe((result: any) => {
-    //   resp = result.data;
-    //   console.log("response", result);
-    //   if (result.data.createCustomer) {
-    //     this.toastr.success("customer added successfully!");
-    //     this.getLists();
-    //     this.myModal.hide();
-    //   } else {
-    //     this.toastr.error("Failed. Please check the fields!");
-    //   }
-    // });
   }
 }

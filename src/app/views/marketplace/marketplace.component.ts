@@ -142,7 +142,7 @@ export class MarketplaceComponent {
     }
     console.log(this.file);
   }
-  openModal(data: any) {
+  openModal() {
     this.productModal.show();
   }
   productSubmit() {

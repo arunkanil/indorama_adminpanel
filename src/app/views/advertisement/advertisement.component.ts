@@ -4,6 +4,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "advertisement.component.html",
@@ -22,6 +23,7 @@ export class AdvertisementComponent {
   btnLoading = false;
   disableButton = true;
   orders: any = {};
+  baseURL = environment.apiUrl;
 
   advertisementForm = this.fb.group({
     clickUrl: [""],
@@ -53,7 +55,7 @@ export class AdvertisementComponent {
     });
   }
   // On file Select
-  onChange(event: any, check) {
+  onChange(event: any) {
     this.file = [];
     for (var i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);

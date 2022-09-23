@@ -1,0 +1,1 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[1],{"2ZVE":function(n,t,o){"use strict";o.d(t,"a",function(){return s});var r=o("8Y7J"),e=o("SVse");let s=(()=>{class n{static forRoot(){return{ngModule:n,providers:[]}}}return n.\u0275fac=function(t){return new(t||n)},n.\u0275mod=r.Kb({type:n}),n.\u0275inj=r.Jb({imports:[[e.c]]}),n})()}}]);

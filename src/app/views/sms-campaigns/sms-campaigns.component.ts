@@ -170,7 +170,7 @@ export class SMSCampaignsComponent {
     });
     console.log(this.selectedRows, this.selectedRows[0]);
   }
-  openModal(data: any) {
+  openModal() {
     this.messageModal.show();
   }
   sendMessage() {

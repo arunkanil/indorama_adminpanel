@@ -1718,6 +1718,12 @@
       var ng_apexcharts__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ng-apexcharts */
       "CV0D");
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! ../../../environments/environment */
+      "AytR");
 
       var unique = function unique(value, index, self) {
         return self.indexOf(value) === index;
@@ -1989,7 +1995,7 @@
             this.btnLoading = true;
             this.dataservice.downloadResponses(this.id).subscribe(function (result) {
               console.log("downloadResponses", result.body);
-              var url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
+              var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl) + result.body.path;
               _this12.btnLoading = false;
               window.open(url, "_blank");
             }, function (error) {

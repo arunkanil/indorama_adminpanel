@@ -86,7 +86,7 @@
           value: function login(data) {
             var _this = this;
 
-            return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl, "api/auth/local/"), data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (user) {
+            return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl, "/api/auth/local/"), data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (user) {
               // login successful if there's a jwt token in the response
               console.log(user);
 
@@ -191,8 +191,14 @@
       var apollo_angular_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! apollo-angular/http */
       "F/12");
+      /* harmony import */
 
-      var uri = "https://indoramaapp.untanglestrategy.com/graphql";
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../environments/environment */
+      "AytR");
+
+      var uri = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl, "/graphql");
 
       function createApollo(httpLink) {
         var basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])(function (operation, context) {
@@ -318,7 +324,7 @@
 
       var environment = {
         production: false,
-        apiUrl: "https://indoramaapp.untanglestrategy.com/"
+        apiUrl: "https://indoramaapp.untanglestrategy.com"
       };
       /***/
     },
@@ -844,7 +850,7 @@
             var httpOptions1 = {
               observe: "response"
             };
-            return this.http.post(this.baseURL + "auth/login/", data, httpOptions1);
+            return this.http.post(this.baseURL + "/auth/login/", data, httpOptions1);
           }
         }, {
           key: "createRetailer",
@@ -852,7 +858,7 @@
             var httpOptions1 = {
               observe: "response"
             };
-            return this.http.post(this.baseURL + "api/users", data, httpOptions1);
+            return this.http.post(this.baseURL + "/api/users", data, httpOptions1);
           }
         }, {
           key: "fetchMessage",
@@ -868,7 +874,7 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("https://indoramaapp.untanglestrategy.com/api/survey-forms/".concat(data, "?populate=Fields"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/survey-forms/").concat(data, "?populate=Fields"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "downloadResponses",
@@ -879,7 +885,7 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/survey-result/download?surveyForm=").concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getSoilTestStats",
@@ -890,7 +896,7 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("https://indoramaapp.untanglestrategy.com/api/dashboard-soil-npk?stateId=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/dashboard-soil-npk?stateId=").concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getFarmDemoYieldStats",
@@ -901,7 +907,7 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("https://indoramaapp.untanglestrategy.com/api/dashboard-farm-demo?stateId=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/dashboard-farm-demo?stateId=").concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getDashboardStats",
@@ -1926,7 +1932,7 @@
             var httpOptions1 = {
               observe: "response"
             };
-            return this.http.post(this.baseURL + "api/upload", formData, httpOptions1);
+            return this.http.post(this.baseURL + "/api/upload", formData, httpOptions1);
           }
         }, {
           key: "deleteArea",
