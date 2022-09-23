@@ -1414,6 +1414,15 @@ const CropPricesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
               }
             }
           }
+          user {
+            data {
+              id
+              attributes {
+                Name
+                UserType
+              }
+            }
+          }
           createdAt
           updatedAt
           publishedAt
@@ -1497,6 +1506,7 @@ const CropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $market: ID
     $image: ID
     $published: DateTime
+    $user: ID
   ) {
     createCropPrice(
       data: {
@@ -1508,6 +1518,7 @@ const CropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         market: $market
         Image: $image
         publishedAt: $published
+        user: $user
       }
     ) {
       data {
@@ -4519,6 +4530,7 @@ let DataService = class DataService {
                 state: price.state,
                 market: price.market,
                 image: image,
+                user: parseInt(localStorage.getItem("uid")),
                 published: new Date(),
             },
             errorPolicy: "all",

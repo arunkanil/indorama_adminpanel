@@ -69,7 +69,7 @@ export class SurveyDetailsComponent implements OnInit {
   btnLoading = false;
   rowData: any = [];
   questions: any = {};
-
+  currentQues;
   dateConverter = dateConverter;
 
   public pieChartType = "pie";
@@ -163,6 +163,7 @@ export class SurveyDetailsComponent implements OnInit {
     }
   }
   loadResponses(data) {
+    this.currentQues = data.replaceAll('_', ' ');
     // console.log(Object.keys(this.resultsProcessed[data]));
     if (this.resultsProcessed.hasOwnProperty(data)) {
       // return Object.keys(this.resultsProcessed[data]);

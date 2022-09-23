@@ -1004,6 +1004,16 @@
           if (data.value.Rejected == false && data.value.publishedAt !== null) return "Approved";
         }
       }, {
+        field: "attributes.user.data.attributes.Name",
+        headerName: "Created by",
+        resizable: true,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+          filterOptions: ["contains"],
+          buttons: ["reset"]
+        }
+      }, {
         field: "attributes.createdAt",
         headerName: "Created at",
         resizable: true,

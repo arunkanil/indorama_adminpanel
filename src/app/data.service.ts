@@ -984,6 +984,15 @@ const CropPricesQuery = gql`
               }
             }
           }
+          user {
+            data {
+              id
+              attributes {
+                Name
+                UserType
+              }
+            }
+          }
           createdAt
           updatedAt
           publishedAt
@@ -1067,6 +1076,7 @@ const CropPriceMutation = gql`
     $market: ID
     $image: ID
     $published: DateTime
+    $user: ID
   ) {
     createCropPrice(
       data: {
@@ -1078,6 +1088,7 @@ const CropPriceMutation = gql`
         market: $market
         Image: $image
         publishedAt: $published
+        user: $user
       }
     ) {
       data {
@@ -4111,6 +4122,7 @@ export class DataService {
         state: price.state,
         market: price.market,
         image: image,
+        user: parseInt(localStorage.getItem("uid")),
         published: new Date(),
       },
       errorPolicy: "all",

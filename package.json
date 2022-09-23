@@ -6,7 +6,7 @@
     "name": "Arun K Anil",
     "github": "https://https://github.com/arunkanil"
   },
-  "homepage": "https://arunkanil.github.io/indorama_adminpanel/",
+  "homepage": "http://13.89.242.79:8080/",
   "scripts": {
     "ng": "ng",
     "postinstall": "ngcc --properties es2015 browser module main --first-only",
