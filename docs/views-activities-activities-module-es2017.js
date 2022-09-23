@@ -286,11 +286,14 @@ let ActivitiesComponent = class ActivitiesComponent {
         this.dataservice
             .getActivities(1, this.pageSize)
             .valueChanges.subscribe((result) => {
-            var _a, _b;
+            var _a, _b, _c, _d, _e, _f;
             this.meta = result.data.activities.meta;
             if (((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
                 this.disablePrevButton = true;
                 this.disableNextButton = true;
+            }
+            if (((_d = (_c = this.meta) === null || _c === void 0 ? void 0 : _c.pagination) === null || _d === void 0 ? void 0 : _d.total) < this.pageSize) {
+                this.to = (_f = (_e = this.meta) === null || _e === void 0 ? void 0 : _e.pagination) === null || _f === void 0 ? void 0 : _f.total;
             }
             this.rowData = result.data.activities.data;
         });

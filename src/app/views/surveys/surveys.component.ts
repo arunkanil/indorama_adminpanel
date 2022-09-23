@@ -64,6 +64,9 @@ export class SurveysComponent {
           this.disablePrevButton = true;
           this.disableNextButton = true;
         }
+        if (this.meta?.pagination?.total < this.pageSize) {
+          this.to = this.meta?.pagination?.total;
+        }
       });
   }
   loadNext() {

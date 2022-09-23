@@ -898,7 +898,7 @@
             var _this20 = this;
 
             this.dataservice.getUsers(1, this.pageSize).valueChanges.subscribe(function (result) {
-              var _a, _b;
+              var _a, _b, _c, _d, _e, _f;
 
               _this20.rowData = result.data.usersPermissionsUsers.data;
               _this20.meta = result.data.usersPermissionsUsers.meta;
@@ -906,6 +906,10 @@
               if (((_b = (_a = _this20.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
                 _this20.disablePrevButton = true;
                 _this20.disableNextButton = true;
+              }
+
+              if (((_d = (_c = _this20.meta) === null || _c === void 0 ? void 0 : _c.pagination) === null || _d === void 0 ? void 0 : _d.total) < _this20.pageSize) {
+                _this20.to = (_f = (_e = _this20.meta) === null || _e === void 0 ? void 0 : _e.pagination) === null || _f === void 0 ? void 0 : _f.total;
               }
             });
           }

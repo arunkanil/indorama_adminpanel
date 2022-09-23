@@ -72,6 +72,9 @@ export class FarmDemoComponent {
           this.disablePrevButton = true;
           this.disableNextButton = true;
         }
+        if (this.meta?.pagination?.total < this.pageSize) {
+          this.to = this.meta?.pagination?.total;
+        }
         this.loading = false;
       });
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
