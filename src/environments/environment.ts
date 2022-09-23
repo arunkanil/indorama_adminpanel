@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://indorama-uat.untanglestrategy.com:883/"
+  apiUrl: "https://indoramaapp.untanglestrategy.com/"
 };

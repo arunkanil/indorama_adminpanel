@@ -144,7 +144,7 @@ export class IndoramaUpdatesComponent {
       });
       this.imageUrl = this.selectedRows[0].attributes.Images?.data[0]
         ?.attributes?.url
-        ? "https://indorama-uat.untanglestrategy.com:883" +
+        ? "https://indoramaapp.untanglestrategy.com" +
           this.selectedRows[0].attributes.Images?.data[0]?.attributes?.url
         : null;
     } else {

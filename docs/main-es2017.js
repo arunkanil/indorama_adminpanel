@@ -106,7 +106,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const uri = "https://indorama-uat.untanglestrategy.com:883/graphql";
+const uri = "https://indoramaapp.untanglestrategy.com/graphql";
 function createApollo(httpLink) {
     const basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])((operation, context) => ({
         headers: {
@@ -209,7 +209,7 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const environment = {
     production: false,
-    apiUrl: "https://indorama-uat.untanglestrategy.com:883/"
+    apiUrl: "https://indoramaapp.untanglestrategy.com/"
 };
 
 
@@ -4132,7 +4132,7 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`https://indorama-uat.untanglestrategy.com:883/api/survey-forms/${data}?populate=Fields`, httpOptions1)
+            .get(`https://indoramaapp.untanglestrategy.com/api/survey-forms/${data}?populate=Fields`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     downloadResponses(data) {
@@ -4143,7 +4143,7 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`https://indorama-uat.untanglestrategy.com:883/api/survey-result/download?surveyForm=${data}`, httpOptions1)
+            .get(`https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     getSoilTestStats(data) {
@@ -4154,7 +4154,7 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`https://indorama-uat.untanglestrategy.com:883/api/dashboard-soil-npk?stateId=${data}`, httpOptions1)
+            .get(`https://indoramaapp.untanglestrategy.com/api/dashboard-soil-npk?stateId=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     getFarmDemoYieldStats(data) {
@@ -4165,7 +4165,7 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`https://indorama-uat.untanglestrategy.com:883/api/dashboard-farm-demo?stateId=${data}`, httpOptions1)
+            .get(`https://indoramaapp.untanglestrategy.com/api/dashboard-farm-demo?stateId=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     getDashboardStats(data) {

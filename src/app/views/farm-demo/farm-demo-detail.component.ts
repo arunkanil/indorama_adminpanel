@@ -201,7 +201,7 @@ export class FarmDemoDetailComponent implements OnInit {
   }
   showImages(url) {
     console.log(url);
-    this.fullImage = "https://indorama-uat.untanglestrategy.com:883" + url;
+    this.fullImage = "https://indoramaapp.untanglestrategy.com" + url;
   }
   filterLGA(event) {
     this.getLGAs(event.target.value);

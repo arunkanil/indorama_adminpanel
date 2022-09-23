@@ -87,7 +87,7 @@ export class UserDetailComponent implements OnInit {
     this.getTest();
   }
   imgUrl(url) {
-    return "https://indorama-uat.untanglestrategy.com:883" + url;
+    return "https://indoramaapp.untanglestrategy.com" + url;
   }
   getTest() {
     this.dataservice

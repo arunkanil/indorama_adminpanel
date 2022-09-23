@@ -3710,7 +3710,7 @@ export class DataService {
     };
     return this.http
       .get(
-        `https://indorama-uat.untanglestrategy.com:883/api/survey-forms/${data}?populate=Fields`,
+        `https://indoramaapp.untanglestrategy.com/api/survey-forms/${data}?populate=Fields`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
@@ -3724,7 +3724,7 @@ export class DataService {
     };
     return this.http
       .get(
-        `https://indorama-uat.untanglestrategy.com:883/api/survey-result/download?surveyForm=${data}`,
+        `https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=${data}`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
@@ -3739,7 +3739,7 @@ export class DataService {
     };
     return this.http
       .get(
-        `https://indorama-uat.untanglestrategy.com:883/api/dashboard-soil-npk?stateId=${data}`,
+        `https://indoramaapp.untanglestrategy.com/api/dashboard-soil-npk?stateId=${data}`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
@@ -3753,7 +3753,7 @@ export class DataService {
     };
     return this.http
       .get(
-        `https://indorama-uat.untanglestrategy.com:883/api/dashboard-farm-demo?stateId=${data}`,
+        `https://indoramaapp.untanglestrategy.com/api/dashboard-farm-demo?stateId=${data}`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));

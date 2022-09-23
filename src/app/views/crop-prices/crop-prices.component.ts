@@ -280,7 +280,7 @@ export class CropPricesComponent {
       });
       this.imageUrl = this.selectedRows[0].attributes.Image?.data?.attributes
         ?.url
-        ? "https://indorama-uat.untanglestrategy.com:883" +
+        ? "https://indoramaapp.untanglestrategy.com" +
           this.selectedRows[0].attributes.Image?.data?.attributes?.url
         : null;
     } else {
