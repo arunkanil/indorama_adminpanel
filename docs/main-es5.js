@@ -192,7 +192,7 @@
       /*! apollo-angular/http */
       "F/12");
 
-      var uri = "https://indoramaapp.untanglestrategy.com/graphql";
+      var uri = "https://indorama-uat.untanglestrategy.com:883/graphql";
 
       function createApollo(httpLink) {
         var basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])(function (operation, context) {
@@ -318,7 +318,7 @@
 
       var environment = {
         production: false,
-        apiUrl: "https://indoramaapp.untanglestrategy.com/"
+        apiUrl: "https://indorama-uat.untanglestrategy.com:883/"
       };
       /***/
     },
@@ -868,7 +868,7 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("https://indoramaapp.untanglestrategy.com/api/survey-forms/".concat(data, "?populate=Fields"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("https://indorama-uat.untanglestrategy.com:883/api/survey-forms/".concat(data, "?populate=Fields"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "downloadResponses",
@@ -879,7 +879,7 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("https://indoramaapp.untanglestrategy.com/api/survey-result/download?surveyForm=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("https://indorama-uat.untanglestrategy.com:883/api/survey-result/download?surveyForm=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getSoilTestStats",
@@ -890,7 +890,7 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("https://indoramaapp.untanglestrategy.com/api/dashboard-soil-npk?stateId=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("https://indorama-uat.untanglestrategy.com:883/api/dashboard-soil-npk?stateId=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getFarmDemoYieldStats",
@@ -901,7 +901,7 @@
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("https://indoramaapp.untanglestrategy.com/api/dashboard-farm-demo?stateId=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("https://indorama-uat.untanglestrategy.com:883/api/dashboard-farm-demo?stateId=".concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getDashboardStats",

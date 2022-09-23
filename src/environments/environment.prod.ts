@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: "https://indoramaapp.untanglestrategy.com/"
+  apiUrl: "https://indorama-uat.untanglestrategy.com:883/"
 };

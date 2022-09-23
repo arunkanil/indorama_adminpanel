@@ -1989,7 +1989,7 @@
             this.btnLoading = true;
             this.dataservice.downloadResponses(this.id).subscribe(function (result) {
               console.log("downloadResponses", result.body);
-              var url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
+              var url = "https://indorama-uat.untanglestrategy.com:883" + result.body.path;
               _this12.btnLoading = false;
               window.open(url, "_blank");
             }, function (error) {

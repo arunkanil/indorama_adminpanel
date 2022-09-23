@@ -1272,7 +1272,7 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         this.btnLoading = true;
         this.dataservice.downloadResponses(this.id).subscribe((result) => {
             console.log("downloadResponses", result.body);
-            let url = "https://indoramaapp.untanglestrategy.com" + result.body.path;
+            let url = "https://indorama-uat.untanglestrategy.com:883" + result.body.path;
             this.btnLoading = false;
             window.open(url, "_blank");
         }, (error) => {
