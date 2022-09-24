@@ -65,12 +65,19 @@
       var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
       /*! ../../../environments/environment */
       "AytR");
+      /* harmony import */
+
+
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ngx-toastr */
+      "EApP");
 
       var AuthenticationService = /*#__PURE__*/function () {
-        function AuthenticationService(http) {
+        function AuthenticationService(http, toastr) {
           _classCallCheck(this, AuthenticationService);
 
           this.http = http;
+          this.toastr = toastr;
           this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem("currentUser")));
           this.currentUser = this.currentUserSubject.asObservable();
         }
@@ -90,18 +97,20 @@
               // login successful if there's a jwt token in the response
               console.log(user);
 
-              if (user.jwt) {
+              if (user.jwt && user.user.UserType == "Admin") {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem("token", user.jwt);
                 localStorage.setItem("username", user.user.username);
                 localStorage.setItem("uid", user.user.id);
                 localStorage.setItem("user_type", user.user.UserType);
                 localStorage.setItem("email", user.user.email);
-                localStorage.setItem('name', user.user.Name);
-                localStorage.setItem('phone_number', user.user.ContactNumber);
+                localStorage.setItem("name", user.user.Name);
+                localStorage.setItem("phone_number", user.user.ContactNumber);
                 localStorage.setItem("currentUser", JSON.stringify(user));
 
                 _this.currentUserSubject.next(user);
+              } else {
+                _this.toastr.error("You're not authorized");
               }
 
               return user;
@@ -123,12 +132,14 @@
       AuthenticationService.ctorParameters = function () {
         return [{
           type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
+        }, {
+          type: ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"]
         }];
       };
 
       AuthenticationService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: "root"
-      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])], AuthenticationService);
+      }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"]])], AuthenticationService);
       /***/
     },
 
@@ -578,11 +589,12 @@
           value: function onSubmit() {
             var _this3 = this;
 
+            this.loading = true;
             this.loginForm = this.usForm.value;
             console.log(this.loginForm);
             this.loading = true;
-            this.router.navigate(["/dashboard"]);
-            this.toastr.success("Login successful");
+            this.router.navigate(["/dashboard"]); // this.toastr.success("Login successful");
+
             this.authenticationService.login(this.loginForm).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
               _this3.loading = false;
 
@@ -592,9 +604,9 @@
             }, function (error) {
               _this3.error = error;
               _this3.loading = false;
-              console.log(error.error.message[0].messages[0].message);
+              console.log(error);
 
-              _this3.toastr.error("Error", error.error.message[0].messages[0].message);
+              _this3.toastr.error(error.error.error.message);
             });
           }
         }]);
@@ -2835,7 +2847,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<!-- <div class=\"app-body bg-image\">\r\n  <main class=\"main d-flex align-items-center\" style=\"background-color: rgba(0, 0, 0, 0.8);\">\r\n    <div class=\"login-box\">\r\n      <div class=\"card p-4\" style=\"width: fit-content;\">\r\n        <div class=\"card-body\">\r\n          <form>\r\n            <h1>Login</h1>\r\n            <p class=\"text-muted\">Welcome back! Please log in to your account</p>\r\n            <div class=\"input-group mb-3\">\r\n              <div class=\"input-group-prepend\">\r\n                <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n              </div>\r\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\" autocomplete=\"username\" required>\r\n            </div>\r\n            <div class=\"input-group mb-4\">\r\n              <div class=\"input-group-prepend\">\r\n                <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n              </div>\r\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\" autocomplete=\"current-password\"\r\n                required>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col-6\">\r\n                <button type=\"button\" class=\"btn btn-primary px-4\">Login</button>\r\n              </div>\r\n            </div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </main>\r\n</div> -->\r\n<!-- <div class=\"bg-image\"> -->\r\n<div class=\"d-md-flex h-md-100 align-items-center\">\r\n  <div class=\"col-md-6 p-0 bg-black h-md-100 login-screen\">\r\n    <div class=\"text-white d-md-flex align-items-center h-100 text-center justify-content-center\">\r\n      <div class=\"container-fluid bg-image\" style=\" height: 100vh \">\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"col-md-6 p-0 bg-white h-md-100\">\r\n    <div class=\"d-md-flex align-items-center h-md-100 justify-content-center\">\r\n      <div class=\"container-fluid fallback-image\" style=\" height: 100vh \">\r\n        <form class=\"login-box\" #usForm=\"ngForm\" (ngSubmit)=\"onSubmit()\" style=\"\r\n        background: #ffffff75;\r\n        padding: 20px;\r\n        border-radius: 10px;\r\n    \">\r\n          <img src='assets/img/brand/logo_new.png' width=\"300\" style=\"margin-bottom: 25px;\"/>\r\n          <h3 class=\"mt-3\">Admin Panel</h3>\r\n          <p class=\"text-muted\">Welcome back! Please log in to your account</p>\r\n          <div class=\"input-group mb-3\">\r\n            <div class=\"input-group-prepend\">\r\n              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n            </div>\r\n            <input type=\"text\" class=\"form-control\" placeholder=\"Username\" id=\"login\" maxlength=\"80\" size=\"30\" ngModel\r\n              value=\"\" name=\"identifier\" required>\r\n          </div>\r\n          <div class=\"input-group mb-4\">\r\n            <div class=\"input-group-prepend\">\r\n              <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n            </div>\r\n            <input type=\"password\" class=\"form-control\" placeholder=\"Password\" id=\"password\" size=\"30\" ngModel\r\n              name=\"password\" value=\"\" required>\r\n          </div>\r\n          <!-- <div class=\"row\"> -->\r\n          <!-- <div class=\"col-6\"> -->\r\n          <button type=\"submit\" class=\"btn btn-lg px-4\" style=\"background-color: #108D51; color: white;\">\r\n            <span *ngIf=\"loading\" class=\"spinner-border spinner-border-sm\" role=\"status\" aria-hidden=\"true\">\r\n            </span>Login\r\n          </button>\r\n          <!-- </div> -->\r\n          <!-- </div> -->\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- </div> -->";
+      __webpack_exports__["default"] = "<!-- <div class=\"app-body bg-image\">\r\n  <main class=\"main d-flex align-items-center\" style=\"background-color: rgba(0, 0, 0, 0.8);\">\r\n    <div class=\"login-box\">\r\n      <div class=\"card p-4\" style=\"width: fit-content;\">\r\n        <div class=\"card-body\">\r\n          <form>\r\n            <h1>Login</h1>\r\n            <p class=\"text-muted\">Welcome back! Please log in to your account</p>\r\n            <div class=\"input-group mb-3\">\r\n              <div class=\"input-group-prepend\">\r\n                <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n              </div>\r\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\" autocomplete=\"username\" required>\r\n            </div>\r\n            <div class=\"input-group mb-4\">\r\n              <div class=\"input-group-prepend\">\r\n                <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n              </div>\r\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\" autocomplete=\"current-password\"\r\n                required>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col-6\">\r\n                <button type=\"button\" class=\"btn btn-primary px-4\">Login</button>\r\n              </div>\r\n            </div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </main>\r\n</div> -->\r\n<!-- <div class=\"bg-image\"> -->\r\n<div class=\"d-md-flex h-md-100 align-items-center\">\r\n  <div class=\"col-md-6 p-0 bg-black h-md-100 login-screen\">\r\n    <div\r\n      class=\"text-white d-md-flex align-items-center h-100 text-center justify-content-center\"\r\n    >\r\n      <div class=\"container-fluid bg-image\" style=\"height: 100vh\"></div>\r\n    </div>\r\n  </div>\r\n  <div class=\"col-md-6 p-0 bg-white h-md-100\">\r\n    <div class=\"d-md-flex align-items-center h-md-100 justify-content-center\">\r\n      <div class=\"container-fluid fallback-image\" style=\"height: 100vh\">\r\n        <form\r\n          class=\"login-box\"\r\n          #usForm=\"ngForm\"\r\n          (ngSubmit)=\"onSubmit()\"\r\n          style=\"background: #ffffff75; padding: 20px; border-radius: 10px\"\r\n        >\r\n          <img\r\n            src=\"assets/img/brand/logo_new.png\"\r\n            width=\"300\"\r\n            style=\"margin-bottom: 25px\"\r\n          />\r\n          <h3 class=\"mt-3\">Admin Panel</h3>\r\n          <p class=\"text-muted\">Welcome back! Please log in to your account</p>\r\n          <div class=\"input-group mb-3\">\r\n            <div class=\"input-group-prepend\">\r\n              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n            </div>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              placeholder=\"Username\"\r\n              id=\"login\"\r\n              maxlength=\"80\"\r\n              size=\"30\"\r\n              ngModel\r\n              value=\"\"\r\n              name=\"identifier\"\r\n              required\r\n            />\r\n          </div>\r\n          <div class=\"input-group mb-4\">\r\n            <div class=\"input-group-prepend\">\r\n              <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n            </div>\r\n            <input\r\n              type=\"password\"\r\n              class=\"form-control\"\r\n              placeholder=\"Password\"\r\n              id=\"password\"\r\n              size=\"30\"\r\n              ngModel\r\n              name=\"password\"\r\n              value=\"\"\r\n              required\r\n            />\r\n          </div>\r\n          <!-- <div class=\"row\"> -->\r\n          <!-- <div class=\"col-6\"> -->\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"loading\"\r\n            style=\"background-color: #108d51; color: white\"\r\n          >\r\n            <span\r\n              *ngIf=\"loading\"\r\n              class=\"spinner-border spinner-border-sm mr-1\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            >\r\n            </span\r\n            >Login\r\n          </button>\r\n          <!-- </div> -->\r\n          <!-- </div> -->\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- </div> -->\r\n";
       /***/
     },
 

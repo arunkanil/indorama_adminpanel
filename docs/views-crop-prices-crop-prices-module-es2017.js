@@ -359,7 +359,7 @@ let CropPricesComponent = class CropPricesComponent {
             this.btnLoading = false;
         });
     }
-    openApproveModal(data) {
+    openApproveModal() {
         this.approveModal.show();
     }
     openModal(data) {

@@ -515,7 +515,7 @@
           }
         }, {
           key: "openApproveModal",
-          value: function openApproveModal(data) {
+          value: function openApproveModal() {
             this.approveModal.show();
           }
         }, {

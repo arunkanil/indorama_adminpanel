@@ -390,7 +390,7 @@
           }
         }, {
           key: "openModal",
-          value: function openModal(data) {
+          value: function openModal() {
             this.messageModal.show();
           }
         }, {

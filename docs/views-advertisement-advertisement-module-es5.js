@@ -117,7 +117,7 @@
 
         }, {
           key: "onChange",
-          value: function onChange(event, check) {
+          value: function onChange(event) {
             this.file = [];
 
             for (var i = 0; i < event.target.files.length; i++) {

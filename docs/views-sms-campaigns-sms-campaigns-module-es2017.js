@@ -254,7 +254,7 @@ let SMSCampaignsComponent = class SMSCampaignsComponent {
         });
         console.log(this.selectedRows, this.selectedRows[0]);
     }
-    openModal(data) {
+    openModal() {
         this.messageModal.show();
     }
     sendMessage() {

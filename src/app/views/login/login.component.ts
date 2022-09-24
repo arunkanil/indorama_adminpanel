@@ -35,11 +35,12 @@ export class LoginComponent {
     this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
   }
   onSubmit() {
+    this.loading = true;
     this.loginForm = this.usForm.value;
     console.log(this.loginForm);
     this.loading = true;
     this.router.navigate(["/dashboard"]);
-    this.toastr.success("Login successful");
+    // this.toastr.success("Login successful");
     this.authenticationService
       .login(this.loginForm)
       .pipe(first())
@@ -52,8 +53,8 @@ export class LoginComponent {
         (error) => {
           this.error = error;
           this.loading = false;
-          console.log(error.error.message[0].messages[0].message);
-          this.toastr.error("Error",error.error.message[0].messages[0].message);
+          console.log(error);
+          this.toastr.error(error.error.error.message);
         }
       );
   }

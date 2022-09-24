@@ -5,13 +5,14 @@ import { map } from "rxjs/operators";
 
 import { environment } from "../../../environments/environment";
 import { User } from "../../models/user";
+import { ToastrService } from "ngx-toastr";
 
 @Injectable({ providedIn: "root" })
 export class AuthenticationService {
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private toastr: ToastrService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem("currentUser"))
     );
@@ -24,27 +25,29 @@ export class AuthenticationService {
   }
 
   login(data) {
-    return this.http.post<any>(`${environment.apiUrl}/api/auth/local/`, data).pipe(
-      map((user) => {
-        // login successful if there's a jwt token in the response
-        console.log(user);
-        if (user.jwt) {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem("token", user.jwt);
-          localStorage.setItem("username", user.user.username);
-          localStorage.setItem("uid", user.user.id);
-          localStorage.setItem("user_type", user.user.UserType);
-          localStorage.setItem("email", user.user.email);
-          localStorage.setItem('name', user.user.Name);
-          localStorage.setItem('phone_number', user.user.ContactNumber);
-
-          localStorage.setItem("currentUser", JSON.stringify(user));
-          this.currentUserSubject.next(user);
-        }
-
-        return user;
-      })
-    );
+    return this.http
+      .post<any>(`${environment.apiUrl}/api/auth/local/`, data)
+      .pipe(
+        map((user) => {
+          // login successful if there's a jwt token in the response
+          console.log(user);
+          if (user.jwt && user.user.UserType == "Admin") {
+            // store user details and jwt token in local storage to keep user logged in between page refreshes
+            localStorage.setItem("token", user.jwt);
+            localStorage.setItem("username", user.user.username);
+            localStorage.setItem("uid", user.user.id);
+            localStorage.setItem("user_type", user.user.UserType);
+            localStorage.setItem("email", user.user.email);
+            localStorage.setItem("name", user.user.Name);
+            localStorage.setItem("phone_number", user.user.ContactNumber);
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            this.currentUserSubject.next(user);
+          } else {
+            this.toastr.error("You're not authorized");
+          }
+          return user;
+        })
+      );
   }
 
   logout() {
