@@ -95,21 +95,82 @@ AuthenticationService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])
 /*!***********************************!*\
   !*** ./src/app/graphql.module.ts ***!
   \***********************************/
-/*! exports provided: createApollo, createNamedApollo, GraphQLModule */
+/*! exports provided: createApollo, GraphQLModule */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createApollo", function() { return createApollo; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createNamedApollo", function() { return createNamedApollo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "GraphQLModule", function() { return GraphQLModule; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "8Y7J");
-/* harmony import */ var apollo_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! apollo-angular */ "nbgS");
-/* harmony import */ var _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @apollo/client/core */ "ALmS");
-/* harmony import */ var _apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @apollo/client/link/context */ "MWEN");
-/* harmony import */ var apollo_angular_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! apollo-angular/http */ "F/12");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../environments/environment */ "AytR");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "IheW");
+/* harmony import */ var apollo_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! apollo-angular */ "nbgS");
+/* harmony import */ var apollo_angular_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! apollo-angular/http */ "F/12");
+/* harmony import */ var _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @apollo/client/core */ "ALmS");
+/* harmony import */ var _apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @apollo/client/link/context */ "MWEN");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../environments/environment */ "AytR");
+// import { NgModule } from "@angular/core";
+// import { APOLLO_OPTIONS, APOLLO_NAMED_OPTIONS } from "apollo-angular";
+// import {
+//   ApolloClientOptions,
+//   ApolloLink,
+//   InMemoryCache,
+// } from "@apollo/client/core";
+// import { setContext } from "@apollo/client/link/context";
+// import { HttpLink } from "apollo-angular/http";
+// import { environment } from "../environments/environment";
+
+// const uri = `${environment.apiUrl}/graphql`;
+// export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+//   const basic = setContext((operation, context) => ({
+//     headers: {
+//       Accept: "charset=utf-8",
+//     },
+//   }));
+//   // Get the authentication token from local storage if it exists
+//   const token = localStorage.getItem("token");
+//   const auth = setContext((operation, context) => ({
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//     },
+//   }));
+//   return {
+//     link: ApolloLink.from([basic, auth, httpLink.create({ uri })]),
+//     cache: new InMemoryCache(),
+//   };
+// }
+// export function createNamedApollo(
+//   httpLink: HttpLink
+// ): Record<string, ApolloClientOptions<any>> {
+//   const basic = setContext((operation, context) => ({
+//     headers: {
+//       Accept: "charset=utf-8",
+//     },
+//   }));
+//   return {
+//     second: {
+//       name: "second",
+//       link: ApolloLink.from([ basic, httpLink.create({ uri }) ]),
+//       cache: new InMemoryCache(),
+//     },
+//   };
+// }
+// @NgModule({
+//   providers: [
+//     {
+//       provide: APOLLO_OPTIONS,
+//       useFactory: createApollo,
+//       deps: [HttpLink],
+//     },
+//     {
+//       provide: APOLLO_NAMED_OPTIONS,
+//       deps: [HttpLink],
+//       useFactory: createNamedApollo,
+//     },
+//   ],
+// })
+// export class GraphQLModule {}
 
 
 
@@ -117,55 +178,45 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const uri = `${_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl}/graphql`;
+const uri = `${_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].apiUrl}/graphql`;
 function createApollo(httpLink) {
-    const basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])((operation, context) => ({
+    const basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__["setContext"])((operation, context) => ({
         headers: {
-            Accept: "charset=utf-8",
-        },
+            Accept: 'charset=utf-8'
+        }
     }));
-    // Get the authentication token from local storage if it exists
-    const token = localStorage.getItem("token");
-    const auth = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])((operation, context) => ({
-        headers: {
-            Authorization: `Bearer ${token}`,
-        },
-    }));
+    const auth = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__["setContext"])((operation, context) => {
+        const token = localStorage.getItem('token');
+        if (token === null) {
+            return {};
+        }
+        else {
+            return {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            };
+        }
+    });
+    const link = _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__["ApolloLink"].from([basic, auth, httpLink.create({ uri })]);
+    const cache = new _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__["InMemoryCache"]();
     return {
-        link: _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__["ApolloLink"].from([basic, auth, httpLink.create({ uri })]),
-        cache: new _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__["InMemoryCache"](),
-    };
-}
-function createNamedApollo(httpLink) {
-    const basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])((operation, context) => ({
-        headers: {
-            Accept: "charset=utf-8",
-        },
-    }));
-    return {
-        second: {
-            name: "second",
-            link: _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__["ApolloLink"].from([basic, httpLink.create({ uri })]),
-            cache: new _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__["InMemoryCache"](),
-        },
+        link,
+        cache
     };
 }
 let GraphQLModule = class GraphQLModule {
 };
 GraphQLModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        providers: [
-            {
-                provide: apollo_angular__WEBPACK_IMPORTED_MODULE_2__["APOLLO_OPTIONS"],
-                useFactory: createApollo,
-                deps: [apollo_angular_http__WEBPACK_IMPORTED_MODULE_5__["HttpLink"]],
-            },
-            {
-                provide: apollo_angular__WEBPACK_IMPORTED_MODULE_2__["APOLLO_NAMED_OPTIONS"],
-                deps: [apollo_angular_http__WEBPACK_IMPORTED_MODULE_5__["HttpLink"]],
-                useFactory: createNamedApollo,
-            },
+        exports: [
+            _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"],
         ],
+        providers: [{
+                provide: apollo_angular__WEBPACK_IMPORTED_MODULE_3__["APOLLO_OPTIONS"],
+                useFactory: createApollo,
+                deps: [apollo_angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpLink"]]
+            }]
     })
 ], GraphQLModule);
 
@@ -807,6 +858,14 @@ const CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         id
         attributes {
           Name
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -815,12 +874,20 @@ const CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const CropsMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  mutation ($Name: String) {
-    createCrop(data: { Name: $Name }) {
+  mutation ($Name: String, $image: ID) {
+    createCrop(data: { Name: $Name, Image: $image }) {
       data {
         id
         attributes {
           Name
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -829,13 +896,24 @@ const CropsMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  mutation ($Name: String, $id: ID!, $isDelete: Boolean) {
-    updateCrop(id: $id, data: { Name: $Name, isDelete: $isDelete }) {
+  mutation ($Name: String, $id: ID!, $isDelete: Boolean, $image: ID) {
+    updateCrop(
+      id: $id
+      data: { Name: $Name, Image: $image, isDelete: $isDelete }
+    ) {
       data {
         id
         attributes {
           Name
           isDelete
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -4511,11 +4589,12 @@ let DataService = class DataService {
             fetchPolicy: "no-cache",
         });
     }
-    AddCrop(crop) {
+    AddCrop(crop, image) {
         return this.apollo.mutate({
             mutation: CropsMutation,
             variables: {
                 Name: crop.crop,
+                image: image,
             },
             errorPolicy: "all",
             fetchPolicy: "no-cache",
@@ -4808,13 +4887,14 @@ let DataService = class DataService {
             fetchPolicy: "no-cache",
         });
     }
-    UpdateCrop(crop, id) {
+    UpdateCrop(crop, id, Imageid) {
         return this.apollo.mutate({
             mutation: UpdateCrops,
             variables: {
                 Name: crop.crop,
                 isDelete: crop.isDelete,
                 id: id,
+                image: Imageid,
             },
             errorPolicy: "all",
             fetchPolicy: "no-cache",

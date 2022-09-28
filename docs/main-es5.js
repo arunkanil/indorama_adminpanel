@@ -157,12 +157,6 @@
       /* harmony export (binding) */
 
 
-      __webpack_require__.d(__webpack_exports__, "createNamedApollo", function () {
-        return createNamedApollo;
-      });
-      /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "GraphQLModule", function () {
         return GraphQLModule;
       });
@@ -181,77 +175,132 @@
       /* harmony import */
 
 
-      var apollo_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/common/http */
+      "IheW");
+      /* harmony import */
+
+
+      var apollo_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
       /*! apollo-angular */
       "nbgS");
       /* harmony import */
 
 
-      var _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! @apollo/client/core */
-      "ALmS");
-      /* harmony import */
-
-
-      var _apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! @apollo/client/link/context */
-      "MWEN");
-      /* harmony import */
-
-
-      var apollo_angular_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      var apollo_angular_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! apollo-angular/http */
       "F/12");
       /* harmony import */
 
 
-      var _environments_environment__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ../environments/environment */
-      "AytR");
+      var _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! @apollo/client/core */
+      "ALmS");
+      /* harmony import */
 
-      var uri = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl, "/graphql");
+
+      var _apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! @apollo/client/link/context */
+      "MWEN");
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ../environments/environment */
+      "AytR"); // import { NgModule } from "@angular/core";
+      // import { APOLLO_OPTIONS, APOLLO_NAMED_OPTIONS } from "apollo-angular";
+      // import {
+      //   ApolloClientOptions,
+      //   ApolloLink,
+      //   InMemoryCache,
+      // } from "@apollo/client/core";
+      // import { setContext } from "@apollo/client/link/context";
+      // import { HttpLink } from "apollo-angular/http";
+      // import { environment } from "../environments/environment";
+      // const uri = `${environment.apiUrl}/graphql`;
+      // export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
+      //   const basic = setContext((operation, context) => ({
+      //     headers: {
+      //       Accept: "charset=utf-8",
+      //     },
+      //   }));
+      //   // Get the authentication token from local storage if it exists
+      //   const token = localStorage.getItem("token");
+      //   const auth = setContext((operation, context) => ({
+      //     headers: {
+      //       Authorization: `Bearer ${token}`,
+      //     },
+      //   }));
+      //   return {
+      //     link: ApolloLink.from([basic, auth, httpLink.create({ uri })]),
+      //     cache: new InMemoryCache(),
+      //   };
+      // }
+      // export function createNamedApollo(
+      //   httpLink: HttpLink
+      // ): Record<string, ApolloClientOptions<any>> {
+      //   const basic = setContext((operation, context) => ({
+      //     headers: {
+      //       Accept: "charset=utf-8",
+      //     },
+      //   }));
+      //   return {
+      //     second: {
+      //       name: "second",
+      //       link: ApolloLink.from([ basic, httpLink.create({ uri }) ]),
+      //       cache: new InMemoryCache(),
+      //     },
+      //   };
+      // }
+      // @NgModule({
+      //   providers: [
+      //     {
+      //       provide: APOLLO_OPTIONS,
+      //       useFactory: createApollo,
+      //       deps: [HttpLink],
+      //     },
+      //     {
+      //       provide: APOLLO_NAMED_OPTIONS,
+      //       deps: [HttpLink],
+      //       useFactory: createNamedApollo,
+      //     },
+      //   ],
+      // })
+      // export class GraphQLModule {}
+
+
+      var uri = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].apiUrl, "/graphql");
 
       function createApollo(httpLink) {
-        var basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])(function (operation, context) {
+        var basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__["setContext"])(function (operation, context) {
           return {
             headers: {
-              Accept: "charset=utf-8"
-            }
-          };
-        }); // Get the authentication token from local storage if it exists
-
-        var token = localStorage.getItem("token");
-        var auth = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])(function (operation, context) {
-          return {
-            headers: {
-              Authorization: "Bearer ".concat(token)
+              Accept: 'charset=utf-8'
             }
           };
         });
-        return {
-          link: _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__["ApolloLink"].from([basic, auth, httpLink.create({
-            uri: uri
-          })]),
-          cache: new _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__["InMemoryCache"]()
-        };
-      }
+        var auth = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__["setContext"])(function (operation, context) {
+          var token = localStorage.getItem('token');
 
-      function createNamedApollo(httpLink) {
-        var basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])(function (operation, context) {
-          return {
-            headers: {
-              Accept: "charset=utf-8"
-            }
-          };
-        });
-        return {
-          second: {
-            name: "second",
-            link: _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__["ApolloLink"].from([basic, httpLink.create({
-              uri: uri
-            })]),
-            cache: new _apollo_client_core__WEBPACK_IMPORTED_MODULE_3__["InMemoryCache"]()
+          if (token === null) {
+            return {};
+          } else {
+            return {
+              headers: {
+                Authorization: "Bearer ".concat(token)
+              }
+            };
           }
+        });
+
+        var link = _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__["ApolloLink"].from([basic, auth, httpLink.create({
+          uri: uri
+        })]);
+
+        var cache = new _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__["InMemoryCache"]();
+        return {
+          link: link,
+          cache: cache
         };
       }
 
@@ -260,14 +309,11 @@
       };
 
       GraphQLModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        exports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"]],
         providers: [{
-          provide: apollo_angular__WEBPACK_IMPORTED_MODULE_2__["APOLLO_OPTIONS"],
+          provide: apollo_angular__WEBPACK_IMPORTED_MODULE_3__["APOLLO_OPTIONS"],
           useFactory: createApollo,
-          deps: [apollo_angular_http__WEBPACK_IMPORTED_MODULE_5__["HttpLink"]]
-        }, {
-          provide: apollo_angular__WEBPACK_IMPORTED_MODULE_2__["APOLLO_NAMED_OPTIONS"],
-          deps: [apollo_angular_http__WEBPACK_IMPORTED_MODULE_5__["HttpLink"]],
-          useFactory: createNamedApollo
+          deps: [apollo_angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpLink"]]
         }]
       })], GraphQLModule);
       /***/
@@ -707,9 +753,9 @@
 
       var _UpdateFarmDemo = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  mutation (\n    $id: ID!\n    $farmer: String\n    $latitude: Float\n    $longitude: Float\n    $lga: ID\n    $crop: ID\n    $area: String\n    $farmerPractise: ComponentFarmDemoFarmDemoPractiseInput\n    $indoramaPractise: ComponentFarmDemoFarmDemoPractiseInput\n    $dateOfHarvesting: Date\n    $season: String\n    $isPesticidesUsed: Boolean\n    $images: [ID]\n    $Status: ENUM_FARMDEMO_STATUS\n    $state: ID\n  ) {\n    updateFarmDemo(\n      id: $id\n      data: {\n        Farmer: $farmer\n        FarmLocationLatitude: $latitude\n        FarmLocationLongitude: $longitude\n        lgas: $lga\n        crop: $crop\n        Status: $Status\n        state: $state\n        AreaOfField: $area\n        FarmerPractise: $farmerPractise\n        IndoramaPractise: $indoramaPractise\n        isPesticidesUsed: $isPesticidesUsed\n        DateOfHarvesting: $dateOfHarvesting\n        Season: $season\n        Images: $images\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Farmer\n          FarmLocationLatitude\n          FarmLocationLongitude\n          Status\n          Season\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          AreaOfField\n          isPesticidesUsed\n          FarmerPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          IndoramaPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          Images {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          DateOfHarvesting\n          Season\n        }\n      }\n    }\n  }\n"])));
 
-      var CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  query {\n    crops(pagination: { limit: 10000 }, sort: \"createdAt:desc\") {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-      var CropsMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  mutation ($Name: String) {\n    createCrop(data: { Name: $Name }) {\n      data {\n        id\n        attributes {\n          Name\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-      var UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $id: ID!, $isDelete: Boolean) {\n    updateCrop(id: $id, data: { Name: $Name, isDelete: $isDelete }) {\n      data {\n        id\n        attributes {\n          Name\n          isDelete\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+      var CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  query {\n    crops(pagination: { limit: 10000 }, sort: \"createdAt:desc\") {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+      var CropsMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $image: ID) {\n    createCrop(data: { Name: $Name, Image: $image }) {\n      data {\n        id\n        attributes {\n          Name\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+      var UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $id: ID!, $isDelete: Boolean, $image: ID) {\n    updateCrop(\n      id: $id\n      data: { Name: $Name, Image: $image, isDelete: $isDelete }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          isDelete\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var StatesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  query {\n    states(pagination: { limit: 10000 }, sort: \"createdAt:desc\") {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var StatesMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  mutation ($Name: String) {\n    createState(data: { Name: $Name }) {\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
 
@@ -1318,11 +1364,12 @@
           }
         }, {
           key: "AddCrop",
-          value: function AddCrop(crop) {
+          value: function AddCrop(crop, image) {
             return this.apollo.mutate({
               mutation: CropsMutation,
               variables: {
-                Name: crop.crop
+                Name: crop.crop,
+                image: image
               },
               errorPolicy: "all",
               fetchPolicy: "no-cache"
@@ -1655,13 +1702,14 @@
           }
         }, {
           key: "UpdateCrop",
-          value: function UpdateCrop(crop, id) {
+          value: function UpdateCrop(crop, id, Imageid) {
             return this.apollo.mutate({
               mutation: UpdateCrops,
               variables: {
                 Name: crop.crop,
                 isDelete: crop.isDelete,
-                id: id
+                id: id,
+                image: Imageid
               },
               errorPolicy: "all",
               fetchPolicy: "no-cache"

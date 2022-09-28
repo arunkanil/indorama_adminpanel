@@ -14,6 +14,7 @@ import {
   CropMasterColumn,
 } from "../../constants/columnMetadata";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "masters.component.html",
@@ -60,6 +61,8 @@ export class mastersComponent {
   States: any = [];
   Markets: any = [];
   Crops: any = [];
+  imageUrl;
+  file: any = null;
 
   frameworkComponents = {
     statusRenderer: new ActionRenderer(),
@@ -83,6 +86,7 @@ export class mastersComponent {
   });
   cropForm = this.fb.group({
     crop: ["", Validators.required],
+    Image: ["", Validators.required],
   });
   villageForm = this.fb.group({
     village: ["", Validators.required],
@@ -365,14 +369,33 @@ export class mastersComponent {
         if (data) {
           this.cropForm = this.fb.group({
             crop: [this.selectedRows[0].attributes.Name, Validators.required],
+            Image: [
+              this.selectedRows[0].attributes.Image?.data?.id,
+              Validators.required,
+            ],
           });
+          this.imageUrl = this.selectedRows[0].attributes.Image?.data
+            ?.attributes?.url
+            ? `${environment.apiUrl}` +
+              this.selectedRows[0].attributes.Image?.data?.attributes?.url
+            : null;
         } else {
           this.cropForm = this.fb.group({
             crop: ["", Validators.required],
+            Image: ["", Validators.required],
           });
+          this.imageUrl = null;
         }
         break;
     }
+  }
+  // On file Select
+  onChange(event: any) {
+    this.file = [];
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.file.push(event.target.files[i]);
+    }
+    console.log(this.file);
   }
   // loadNext() {
   //   this.count++;
@@ -624,49 +647,111 @@ export class mastersComponent {
   }
   cropSubmit() {
     let resp = {};
+    this.btnLoading = true;
     console.log(this.cropForm.value);
     if (!this.disableButton) {
-      this.dataservice
-        .UpdateCrop(this.cropForm.value, this.selectedRows[0].id)
-        .subscribe((result: any) => {
-          resp = result.data;
-          console.log("response", result);
-          if (result.data.updateCrop) {
-            this.toastr.success("Success!");
-            this.gridApi.deselectAll();
-            this.cropModal.hide();
+      if (this.file) {
+        this.dataservice.upload(this.file).subscribe((response: any) => {
+          if (response.status == 200) {
+            console.log(response);
             this.dataservice
-              .getCrops()
-              .valueChanges.subscribe((result: any) => {
-                console.log("getCrops", result.data.crops.data);
-                this.rowData = result.data.crops.data;
-              });
-          } else {
-            if (result.errors[0].extensions.error.name == "ValidationError") {
-              this.toastr.error("Can't be added as the value already exists");
-            } else {
-              this.toastr.error("Failed. Please check the fields!");
-            }
+              .UpdateCrop(
+                this.cropForm.value,
+                this.selectedRows[0].id,
+                response.body[0]?.id
+              )
+              .subscribe(
+                (result: any) => {
+                  resp = result.data;
+                  console.log("response", result);
+                  if (result.data.updateCrop) {
+                    this.toastr.success("Success!");
+                    this.gridApi.deselectAll();
+                    this.cropModal.hide();
+                    this.btnLoading = false;
+                    this.dataservice
+                      .getCrops()
+                      .valueChanges.subscribe((result: any) => {
+                        console.log("getCrops", result.data.crops.data);
+                        this.rowData = result.data.crops.data;
+                      });
+                  } else {
+                    if (
+                      result.errors[0].extensions.error.name ==
+                      "ValidationError"
+                    ) {
+                      this.toastr.error(
+                        "Can't be added as the value already exists"
+                      );
+                      this.btnLoading = false;
+                    } else {
+                      this.toastr.error("Failed. Please check the fields!");
+                      this.btnLoading = false;
+                    }
+                  }
+                },
+                (error) => {
+                  this.btnLoading = false;
+                }
+              );
           }
         });
-    } else {
-      this.dataservice.AddCrop(this.cropForm.value).subscribe((result: any) => {
-        resp = result.data;
-        console.log("response", result);
-        if (result.data.createCrop) {
-          this.toastr.success("Success!");
-          this.gridApi.deselectAll();
-          this.cropModal.hide();
-          this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
-            console.log("getCrops", result.data.crops.data);
-            this.rowData = result.data.crops.data;
+      } else {
+        this.dataservice
+          .UpdateCrop(this.cropForm.value, this.selectedRows[0].id, null)
+          .subscribe((result: any) => {
+            resp = result.data;
+            console.log("response", result);
+            if (result.data.updateCrop) {
+              this.toastr.success("Success!");
+              this.gridApi.deselectAll();
+              this.cropModal.hide();
+              this.dataservice
+                .getCrops()
+                .valueChanges.subscribe((result: any) => {
+                  console.log("getCrops", result.data.crops.data);
+                  this.rowData = result.data.crops.data;
+                });
+            } else {
+              if (result.errors[0].extensions.error.name == "ValidationError") {
+                this.toastr.error("Can't be added as the value already exists");
+              } else {
+                this.toastr.error("Failed. Please check the fields!");
+              }
+            }
           });
-        } else {
-          if (result.errors[0].extensions.error.name == "ValidationError") {
-            this.toastr.error("Can't be added as the value already exists");
-          } else {
-            this.toastr.error("Failed. Please check the fields!");
-          }
+      }
+    } else {
+      this.dataservice.upload(this.file).subscribe((response: any) => {
+        if (response.status == 200) {
+          console.log(response);
+          this.dataservice
+            .AddCrop(this.cropForm.value, response.body[0]?.id)
+            .subscribe((result: any) => {
+              resp = result.data;
+              console.log("response", result);
+              if (result.data.createCrop) {
+                this.toastr.success("Success!");
+                this.gridApi.deselectAll();
+                this.cropModal.hide();
+                this.dataservice
+                  .getCrops()
+                  .valueChanges.subscribe((result: any) => {
+                    console.log("getCrops", result.data.crops.data);
+                    this.rowData = result.data.crops.data;
+                  });
+              } else {
+                if (
+                  result.errors[0].extensions.error.name == "ValidationError"
+                ) {
+                  this.toastr.error(
+                    "Can't be added as the value already exists"
+                  );
+                } else {
+                  this.toastr.error("Failed. Please check the fields!");
+                }
+              }
+            });
         }
       });
     }

@@ -436,6 +436,28 @@
               placeholder="Enter Crop Name"
             />
           </div>
+          <div class="form-group">
+            <label for="Image">Image</label>
+            <div>
+              <img
+                *ngIf="imageUrl"
+                src="{{ imageUrl }}"
+                width="100"
+                height="100"
+                style="object-fit: cover"
+              />
+            </div>
+            <input
+              type="file"
+              class="form-control"
+              id="Image"
+              accept=".jpg,.jpeg,.JPEG,.png"
+              name="Image"
+              (change)="onChange($event)"
+              formControlName="Image"
+              placeholder="Choose image"
+            />
+          </div>
           <button
             type="button"
             class="btn btn-secondary"

@@ -365,6 +365,14 @@ const CropsQuery = gql`
         id
         attributes {
           Name
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -373,12 +381,20 @@ const CropsQuery = gql`
   }
 `;
 const CropsMutation = gql`
-  mutation ($Name: String) {
-    createCrop(data: { Name: $Name }) {
+  mutation ($Name: String, $image: ID) {
+    createCrop(data: { Name: $Name, Image: $image }) {
       data {
         id
         attributes {
           Name
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -387,13 +403,24 @@ const CropsMutation = gql`
   }
 `;
 const UpdateCrops = gql`
-  mutation ($Name: String, $id: ID!, $isDelete: Boolean) {
-    updateCrop(id: $id, data: { Name: $Name, isDelete: $isDelete }) {
+  mutation ($Name: String, $id: ID!, $isDelete: Boolean, $image: ID) {
+    updateCrop(
+      id: $id
+      data: { Name: $Name, Image: $image, isDelete: $isDelete }
+    ) {
       data {
         id
         attributes {
           Name
           isDelete
+          Image {
+            data {
+              id
+              attributes {
+                url
+              }
+            }
+          }
           createdAt
           updatedAt
         }
@@ -4091,11 +4118,12 @@ export class DataService {
       fetchPolicy: "no-cache",
     });
   }
-  AddCrop(crop) {
+  AddCrop(crop, image) {
     return this.apollo.mutate({
       mutation: CropsMutation,
       variables: {
         Name: crop.crop,
+        image: image,
       },
       errorPolicy: "all",
       fetchPolicy: "no-cache",
@@ -4389,13 +4417,14 @@ export class DataService {
       fetchPolicy: "no-cache",
     });
   }
-  UpdateCrop(crop, id) {
+  UpdateCrop(crop, id, Imageid) {
     return this.apollo.mutate({
       mutation: UpdateCrops,
       variables: {
         Name: crop.crop,
         isDelete: crop.isDelete,
         id: id,
+        image: Imageid,
       },
       errorPolicy: "all",
       fetchPolicy: "no-cache",
