@@ -206,7 +206,7 @@ const RetailersColumn = [
     //   },
     // },
     {
-        field: "attributes.UserType",
+        field: "attributes.retailer_categories.data",
         headerName: "Category",
         resizable: true,
         sortable: true,
@@ -214,6 +214,13 @@ const RetailersColumn = [
         filterParams: {
             filterOptions: ["contains"],
             buttons: ["reset"],
+        },
+        cellRenderer: (data) => {
+            let x = "";
+            for (let i = 0; i < data.value.length; i++) {
+                x = x + data.value[i].attributes.CategoryName + ",";
+            }
+            return x;
         },
     },
     {

@@ -326,7 +326,7 @@
       //   },
       // },
       {
-        field: "attributes.UserType",
+        field: "attributes.retailer_categories.data",
         headerName: "Category",
         resizable: true,
         sortable: true,
@@ -334,6 +334,15 @@
         filterParams: {
           filterOptions: ["contains"],
           buttons: ["reset"]
+        },
+        cellRenderer: function cellRenderer(data) {
+          var x = "";
+
+          for (var i = 0; i < data.value.length; i++) {
+            x = x + data.value[i].attributes.CategoryName + ",";
+          }
+
+          return x;
         }
       }, {
         field: "attributes.village.data.attributes.Name",

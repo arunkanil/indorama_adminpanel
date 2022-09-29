@@ -1713,6 +1713,14 @@ const RetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
             }
           }
           UserType
+          retailer_categories {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
           Bio
           Latitude
           Longitude

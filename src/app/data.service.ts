@@ -1220,6 +1220,14 @@ const RetailerQuery = gql`
             }
           }
           UserType
+          retailer_categories {
+            data {
+              id
+              attributes {
+                CategoryName
+              }
+            }
+          }
           Bio
           Latitude
           Longitude
