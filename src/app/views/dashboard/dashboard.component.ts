@@ -16,6 +16,8 @@ export class DashboardComponent implements OnInit {
   Markets: any = [];
   cropPrices: any = [];
   DashboardStats: any;
+  toDate: any = new Date().toISOString().substr(0, 10);
+  fromDate: any = new Date();
   FarmDemoStats: any;
   selectedCrop: any = { attributes: { Name: "Crop" } };
   selectedMarket: any = { attributes: { Name: "Market" } };
@@ -160,8 +162,14 @@ export class DashboardComponent implements OnInit {
   public barChartData_farmdemo: any[] = [];
 
   ngOnInit(): void {
+    this.fromDate.setDate(this.fromDate.getDate() - 30);
+    this.fromDate = new Date(this.fromDate).toISOString().substr(0, 10);
     this.getData();
     console.log(this.barChartData);
+  }
+  onChange(event, key) {
+    this[key] = event.target.value;
+    console.log(this[key]);
   }
   getData() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
@@ -173,7 +181,7 @@ export class DashboardComponent implements OnInit {
     });
     this.getMarkets();
     this.dataservice
-      .getDashboardStats()
+      .getDashboardStats(undefined, this.fromDate, this.toDate)
       .valueChanges.subscribe((result: any) => {
         this.DashboardStats = result.data;
         console.log(this.DashboardStats);
@@ -213,7 +221,12 @@ export class DashboardComponent implements OnInit {
   getCropPrices(crop) {
     console.log(crop);
     this.dataservice
-      .getCropPricesDashboard(crop?.id, this.selectedMarket?.id)
+      .getCropPricesDashboard(
+        crop?.id,
+        this.selectedMarket?.id,
+        this.fromDate,
+        this.toDate
+      )
       .valueChanges.subscribe(
         (result: any) => {
           this.cropPrices = result.data.cropPrices.data;
@@ -238,31 +251,33 @@ export class DashboardComponent implements OnInit {
   getSoilTestStats(event) {
     this.selectedStateST = event;
     this.dataservice
-      .getDashboardStats(event.id)
+      .getDashboardStats(event.id, this.fromDate, this.toDate)
       .valueChanges.subscribe((result: any) => {
         this.DashboardStats = result.data;
       });
-    this.dataservice.getSoilTestStats(event.id).subscribe(
-      (result: any) => {
-        console.log(result.body, "result");
-        let keys = ["very_low", "low", "medium", "high", "very_high"];
-        let nutrients = ["nitrogen_N", "phosphorous_P", "pottassium_K"];
-        this.barChartData = [];
-        for (let j = 0; j < nutrients.length; j++) {
-          let count = [];
-          for (let i = 0; i < keys.length; i++) {
-            count.push(result.body[nutrients[j]][keys[i]].length);
+    this.dataservice
+      .getSoilTestStats(event.id, this.fromDate, this.toDate)
+      .subscribe(
+        (result: any) => {
+          console.log(result.body, "result");
+          let keys = ["very_low", "low", "medium", "high", "very_high"];
+          let nutrients = ["nitrogen_N", "phosphorous_P", "pottassium_K"];
+          this.barChartData = [];
+          for (let j = 0; j < nutrients.length; j++) {
+            let count = [];
+            for (let i = 0; i < keys.length; i++) {
+              count.push(result.body[nutrients[j]][keys[i]].length);
+            }
+            let labeldata = nutrients[j].split("_");
+            this.barChartData.push({ data: count, label: labeldata[0] });
+            console.log(count, nutrients[j], this.barChartData);
           }
-          let labeldata = nutrients[j].split("_");
-          this.barChartData.push({ data: count, label: labeldata[0] });
-          console.log(count, nutrients[j], this.barChartData);
+          this.chart?.update();
+        },
+        (error) => {
+          console.log("downloadResponses", error);
         }
-        this.chart?.update();
-      },
-      (error) => {
-        console.log("downloadResponses", error);
-      }
-    );
+      );
   }
   getFarmDemoStatsDashboard(data) {
     this.selectedStateFD = data;
@@ -272,32 +287,34 @@ export class DashboardComponent implements OnInit {
         this.FarmDemoStats = result.data;
       });
     this.barChartData_farmdemo = [];
-    this.dataservice.getFarmDemoYieldStats(data.id).subscribe(
-      (result: any) => {
-        this.barChartData_farmdemo = [
-          {
-            data: [
-              parseInt(
-                result.body.farmDemoYieldTrend.indorama_practice_yield_avg
-              ),
-            ],
-            label: "Indorama practice yield",
-          },
-          {
-            data: [
-              parseInt(
-                result.body.farmDemoYieldTrend.farmer_practice_yield_avg
-              ),
-            ],
-            label: "Farmer practice yield",
-          },
-        ];
-        console.log(this.barChartData_farmdemo);
-        this.chart?.update();
-      },
-      (error) => {
-        console.log("downloadResponses", error);
-      }
-    );
+    this.dataservice
+      .getFarmDemoYieldStats(data.id, this.fromDate, this.toDate)
+      .subscribe(
+        (result: any) => {
+          this.barChartData_farmdemo = [
+            {
+              data: [
+                parseInt(
+                  result.body.farmDemoYieldTrend.indorama_practice_yield_avg
+                ),
+              ],
+              label: "Indorama practice yield",
+            },
+            {
+              data: [
+                parseInt(
+                  result.body.farmDemoYieldTrend.farmer_practice_yield_avg
+                ),
+              ],
+              label: "Farmer practice yield",
+            },
+          ];
+          console.log(this.barChartData_farmdemo);
+          this.chart?.update();
+        },
+        (error) => {
+          console.log("downloadResponses", error);
+        }
+      );
   }
 }

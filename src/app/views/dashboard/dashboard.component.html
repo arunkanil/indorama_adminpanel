@@ -23,6 +23,28 @@
               </li>
             </ul>
           </div>
+          <div class="float-right d-flex mx-3">
+            <span class="mx-2 d-flex align-items-center">To</span>
+            <input
+              type="date"
+              class="form-control"
+              id="toDate"
+              name="toDate"
+              (change)="onChange($event, 'toDate')"
+              value="{{ toDate }}"
+            />
+          </div>
+          <div class="float-right d-flex">
+            <span class="mx-2 d-flex align-items-center">From</span>
+            <input
+              type="date"
+              class="form-control"
+              id="fromDate"
+              name="fromDate"
+              (change)="onChange($event, 'fromDate')"
+              value="{{ fromDate }}"
+            />
+          </div>
         </div>
       </div>
       <div class="row">
@@ -117,6 +139,11 @@
           <!-- <div class="small text-muted">November 2017</div> -->
         </div>
         <div class="col-sm-7 d-none d-md-block">
+          <div class="btn-group float-right">
+            <button type="button" class="btn btn-link" (click)="clearFilter()">
+              Clear
+            </button>
+          </div>
           <div class="btn-group float-right" dropdown>
             <button
               dropdownToggle
@@ -165,8 +192,27 @@
               </li>
             </ul>
           </div>
-          <div class="btn-group float-right">
-            <button type="button" class="btn btn-link" (click)="clearFilter()">Clear</button>
+          <div class="float-right d-flex mx-3">
+            <span class="mx-2 d-flex align-items-center">To</span>
+            <input
+              type="date"
+              class="form-control"
+              id="toDate"
+              name="toDate"
+              (change)="onChange($event, 'toDate')"
+              value="{{ toDate }}"
+            />
+          </div>
+          <div class="float-right d-flex">
+            <span class="mx-2 d-flex align-items-center">From</span>
+            <input
+              type="date"
+              class="form-control"
+              id="fromDate"
+              name="fromDate"
+              (change)="onChange($event, 'fromDate')"
+              value="{{ fromDate }}"
+            />
           </div>
         </div>
       </div>
@@ -238,6 +284,29 @@
                     >
                   </li>
                 </ul>
+              </div>
+
+              <div class="float-right d-flex mx-3">
+                <span class="mx-2 d-flex align-items-center">To</span>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="toDate"
+                  name="toDate"
+                  (change)="onChange($event, 'toDate')"
+                  value="{{ toDate }}"
+                />
+              </div>
+              <div class="float-right d-flex">
+                <span class="mx-2 d-flex align-items-center">From</span>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="fromDate"
+                  name="fromDate"
+                  (change)="onChange($event, 'fromDate')"
+                  value="{{ fromDate }}"
+                />
               </div>
             </div>
           </div>

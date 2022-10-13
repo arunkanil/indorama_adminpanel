@@ -3107,8 +3107,15 @@ const UpdateActivity = gql`
   }
 `;
 const getDashboardStats = gql`
-  query dashboardAPI($state: ID) {
-    soilTests(filters: { lga: { state: { id: { eq: $state } } } }) {
+  query dashboardAPI($state: ID, $fromDate: DateTime, $toDate: DateTime) {
+    soilTests(
+      filters: {
+        and: [
+          { lga: { state: { id: { eq: $state } } } }
+          { createdAt: { between: [$fromDate, $toDate] } }
+        ]
+      }
+    ) {
       meta {
         pagination {
           total
@@ -3116,7 +3123,12 @@ const getDashboardStats = gql`
       }
     }
     soilTestSamples(
-      filters: { soil_test: { lga: { state: { id: { eq: $state } } } } }
+      filters: {
+        and: [
+          { soil_test: { lga: { state: { id: { eq: $state } } } } }
+          { createdAt: { between: [$fromDate, $toDate] } }
+        ]
+      }
     ) {
       meta {
         pagination {
@@ -3126,9 +3138,14 @@ const getDashboardStats = gql`
     }
     soilTestResults(
       filters: {
-        soil_test_sample: {
-          soil_test: { lga: { state: { id: { eq: $state } } } }
-        }
+        and: [
+          {
+            soil_test_sample: {
+              soil_test: { lga: { state: { id: { eq: $state } } } }
+            }
+          }
+          { createdAt: { between: [$fromDate, $toDate] } }
+        ]
       }
     ) {
       meta {
@@ -3147,12 +3164,16 @@ const getDashboardStats = gql`
   }
 `;
 const getCropPricesDashboard = gql`
-  query ($id: ID, $market: ID) {
+  query ($id: ID, $market: ID, $fromDate: DateTime, $toDate: DateTime) {
     cropPrices(
       publicationState: LIVE
-      pagination: { limit: 30 }
+      pagination: { limit: 10000 }
       sort: "publishedAt:desc"
-      filters: { crop: { id: { eq: $id } }, market: { id: { eq: $market } } }
+      filters: {
+        crop: { id: { eq: $id } }
+        market: { id: { eq: $market } }
+        publishedAt: { between: [$fromDate, $toDate] }
+      }
     ) {
       data {
         id
@@ -3765,7 +3786,7 @@ export class DataService {
       .pipe(catchError(this.handleError));
   }
 
-  getSoilTestStats(data): Observable<any> {
+  getSoilTestStats(data, fromDate?, toDate?): Observable<any> {
     const httpOptions1: Object = {
       observe: "response",
       headers: {
@@ -3774,12 +3795,12 @@ export class DataService {
     };
     return this.http
       .get(
-        `${environment.apiUrl}/api/dashboard-soil-npk?stateId=${data}`,
+        `${environment.apiUrl}/api/dashboard-soil-npk?stateId=${data}&fromDate=${fromDate}T00:00:00.000Z&toDate=${toDate}T23:59:59.000Z`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
   }
-  getFarmDemoYieldStats(data): Observable<any> {
+  getFarmDemoYieldStats(data, fromDate?, toDate?): Observable<any> {
     const httpOptions1: Object = {
       observe: "response",
       headers: {
@@ -3788,27 +3809,31 @@ export class DataService {
     };
     return this.http
       .get(
-        `${environment.apiUrl}/api/dashboard-farm-demo?stateId=${data}`,
+        `${environment.apiUrl}/api/dashboard-farm-demo?stateId=${data}&fromDate=${fromDate}T00:00:00.000Z&toDate=${toDate}T23:59:59.000Z`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
   }
-  getDashboardStats(data?) {
+  getDashboardStats(data?, fromDate?, toDate?) {
     return this.apollo.watchQuery({
       query: getDashboardStats,
       fetchPolicy: "no-cache",
       variables: {
         state: data,
+        fromDate: `${fromDate}T00:00:00.000Z`,
+        toDate: `${toDate}T23:59:59.000Z`,
       },
     });
   }
-  getCropPricesDashboard(id, market?) {
+  getCropPricesDashboard(id, market?, fromDate?, toDate?) {
     return this.apollo.watchQuery({
       query: getCropPricesDashboard,
       fetchPolicy: "no-cache",
       variables: {
         id: id,
         market: market,
+        fromDate: `${fromDate}T00:00:00.000Z`,
+        toDate: `${toDate}T23:59:59.000Z`,
       },
     });
   }

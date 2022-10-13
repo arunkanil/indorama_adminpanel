@@ -3600,8 +3600,15 @@ const UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query dashboardAPI($state: ID) {
-    soilTests(filters: { lga: { state: { id: { eq: $state } } } }) {
+  query dashboardAPI($state: ID, $fromDate: DateTime, $toDate: DateTime) {
+    soilTests(
+      filters: {
+        and: [
+          { lga: { state: { id: { eq: $state } } } }
+          { createdAt: { between: [$fromDate, $toDate] } }
+        ]
+      }
+    ) {
       meta {
         pagination {
           total
@@ -3609,7 +3616,12 @@ const getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
       }
     }
     soilTestSamples(
-      filters: { soil_test: { lga: { state: { id: { eq: $state } } } } }
+      filters: {
+        and: [
+          { soil_test: { lga: { state: { id: { eq: $state } } } } }
+          { createdAt: { between: [$fromDate, $toDate] } }
+        ]
+      }
     ) {
       meta {
         pagination {
@@ -3619,9 +3631,14 @@ const getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     }
     soilTestResults(
       filters: {
-        soil_test_sample: {
-          soil_test: { lga: { state: { id: { eq: $state } } } }
-        }
+        and: [
+          {
+            soil_test_sample: {
+              soil_test: { lga: { state: { id: { eq: $state } } } }
+            }
+          }
+          { createdAt: { between: [$fromDate, $toDate] } }
+        ]
       }
     ) {
       meta {
@@ -3640,12 +3657,16 @@ const getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($id: ID, $market: ID) {
+  query ($id: ID, $market: ID, $fromDate: DateTime, $toDate: DateTime) {
     cropPrices(
       publicationState: LIVE
-      pagination: { limit: 30 }
+      pagination: { limit: 10000 }
       sort: "publishedAt:desc"
-      filters: { crop: { id: { eq: $id } }, market: { id: { eq: $market } } }
+      filters: {
+        crop: { id: { eq: $id } }
+        market: { id: { eq: $market } }
+        publishedAt: { between: [$fromDate, $toDate] }
+      }
     ) {
       data {
         id
@@ -4244,7 +4265,7 @@ let DataService = class DataService {
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/survey-result/download?surveyForm=${data}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
-    getSoilTestStats(data) {
+    getSoilTestStats(data, fromDate, toDate) {
         const httpOptions1 = {
             observe: "response",
             headers: {
@@ -4252,10 +4273,10 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/dashboard-soil-npk?stateId=${data}`, httpOptions1)
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/dashboard-soil-npk?stateId=${data}&fromDate=${fromDate}T00:00:00.000Z&toDate=${toDate}T23:59:59.000Z`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
-    getFarmDemoYieldStats(data) {
+    getFarmDemoYieldStats(data, fromDate, toDate) {
         const httpOptions1 = {
             observe: "response",
             headers: {
@@ -4263,25 +4284,29 @@ let DataService = class DataService {
             },
         };
         return this.http
-            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/dashboard-farm-demo?stateId=${data}`, httpOptions1)
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/dashboard-farm-demo?stateId=${data}&fromDate=${fromDate}T00:00:00.000Z&toDate=${toDate}T23:59:59.000Z`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
-    getDashboardStats(data) {
+    getDashboardStats(data, fromDate, toDate) {
         return this.apollo.watchQuery({
             query: getDashboardStats,
             fetchPolicy: "no-cache",
             variables: {
                 state: data,
+                fromDate: `${fromDate}T00:00:00.000Z`,
+                toDate: `${toDate}T23:59:59.000Z`,
             },
         });
     }
-    getCropPricesDashboard(id, market) {
+    getCropPricesDashboard(id, market, fromDate, toDate) {
         return this.apollo.watchQuery({
             query: getCropPricesDashboard,
             fetchPolicy: "no-cache",
             variables: {
                 id: id,
                 market: market,
+                fromDate: `${fromDate}T00:00:00.000Z`,
+                toDate: `${toDate}T23:59:59.000Z`,
             },
         });
     }

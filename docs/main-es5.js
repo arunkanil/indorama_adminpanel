@@ -841,9 +841,9 @@
       var CreateActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["\n  mutation (\n    $FarmerName: String\n    $Date: Date\n    $Latitude: Float\n    $Longitude: Float\n    $NoOfAttendees: Int\n    $crop: ID\n    $ConditionOfCrop: String\n    $PlannedFarmDay: Date\n    $Reason: String\n    $area: ID\n    $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE\n    $Time: String\n  ) {\n    createActivity(\n      data: {\n        FarmerName: $FarmerName\n        Date: $Date\n        Latitude: $Latitude\n        Longitude: $Longitude\n        NoOfAttendees: $NoOfAttendees\n        crop: $crop\n        ConditionOfCrop: $ConditionOfCrop\n        PlannedFarmDay: $PlannedFarmDay\n        Reason: $Reason\n        area: $area\n        ActivityType: $ActivityType\n        Time: $Time\n      }\n    ) {\n      data {\n        id\n        attributes {\n          FarmerName\n          Date\n          Latitude\n          Longitude\n          NoOfAttendees\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ConditionOfCrop\n          PlannedFarmDay\n          Reason\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ActivityType\n          Time\n        }\n      }\n    }\n  }\n"])));
       var UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["\n  mutation (\n    $FarmerName: String\n    $Date: Date\n    $Latitude: Float\n    $Longitude: Float\n    $NoOfAttendees: Int\n    $crop: ID\n    $ConditionOfCrop: String\n    $PlannedFarmDay: Date\n    $Reason: String\n    $area: ID\n    $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE\n    $Time: String\n    $id: ID!\n  ) {\n    updateActivity(\n      id: $id\n      data: {\n        FarmerName: $FarmerName\n        Date: $Date\n        Latitude: $Latitude\n        Longitude: $Longitude\n        NoOfAttendees: $NoOfAttendees\n        crop: $crop\n        ConditionOfCrop: $ConditionOfCrop\n        PlannedFarmDay: $PlannedFarmDay\n        Reason: $Reason\n        area: $area\n        ActivityType: $ActivityType\n        Time: $Time\n      }\n    ) {\n      data {\n        id\n        attributes {\n          FarmerName\n          Date\n          Latitude\n          Longitude\n          NoOfAttendees\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ConditionOfCrop\n          PlannedFarmDay\n          Reason\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ActivityType\n          Time\n        }\n      }\n    }\n  }\n"])));
 
-      var _getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["\n  query dashboardAPI($state: ID) {\n    soilTests(filters: { lga: { state: { id: { eq: $state } } } }) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestSamples(\n      filters: { soil_test: { lga: { state: { id: { eq: $state } } } } }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestResults(\n      filters: {\n        soil_test_sample: {\n          soil_test: { lga: { state: { id: { eq: $state } } } }\n        }\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    farmDemos {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
+      var _getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["\n  query dashboardAPI($state: ID, $fromDate: DateTime, $toDate: DateTime) {\n    soilTests(\n      filters: {\n        and: [\n          { lga: { state: { id: { eq: $state } } } }\n          { createdAt: { between: [$fromDate, $toDate] } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestSamples(\n      filters: {\n        and: [\n          { soil_test: { lga: { state: { id: { eq: $state } } } } }\n          { createdAt: { between: [$fromDate, $toDate] } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestResults(\n      filters: {\n        and: [\n          {\n            soil_test_sample: {\n              soil_test: { lga: { state: { id: { eq: $state } } } }\n            }\n          }\n          { createdAt: { between: [$fromDate, $toDate] } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    farmDemos {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
 
-      var _getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["\n  query ($id: ID, $market: ID) {\n    cropPrices(\n      publicationState: LIVE\n      pagination: { limit: 30 }\n      sort: \"publishedAt:desc\"\n      filters: { crop: { id: { eq: $id } }, market: { id: { eq: $market } } }\n    ) {\n      data {\n        id\n        attributes {\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Price\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Unit\n          market {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          publishedAt\n        }\n      }\n    }\n  }\n"])));
+      var _getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["\n  query ($id: ID, $market: ID, $fromDate: DateTime, $toDate: DateTime) {\n    cropPrices(\n      publicationState: LIVE\n      pagination: { limit: 10000 }\n      sort: \"publishedAt:desc\"\n      filters: {\n        crop: { id: { eq: $id } }\n        market: { id: { eq: $market } }\n        publishedAt: { between: [$fromDate, $toDate] }\n      }\n    ) {\n      data {\n        id\n        attributes {\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Price\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Unit\n          market {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          publishedAt\n        }\n      }\n    }\n  }\n"])));
 
       var _getFarmDemoStatsDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["\n  query dashboardAPI($state: ID, $status: String) {\n    all: farmDemos(filters: { state: { id: { eq: $state } } }) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    status: farmDemos(\n      filters: {\n        and: [{ state: { id: { eq: $state } } }, { Status: { eq: $status } }]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
 
@@ -947,46 +947,50 @@
           }
         }, {
           key: "getSoilTestStats",
-          value: function getSoilTestStats(data) {
+          value: function getSoilTestStats(data, fromDate, toDate) {
             var httpOptions1 = {
               observe: "response",
               headers: {
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/dashboard-soil-npk?stateId=").concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/dashboard-soil-npk?stateId=").concat(data, "&fromDate=").concat(fromDate, "T00:00:00.000Z&toDate=").concat(toDate, "T23:59:59.000Z"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getFarmDemoYieldStats",
-          value: function getFarmDemoYieldStats(data) {
+          value: function getFarmDemoYieldStats(data, fromDate, toDate) {
             var httpOptions1 = {
               observe: "response",
               headers: {
                 Authorization: "Bearer ".concat(localStorage.getItem("token"))
               }
             };
-            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/dashboard-farm-demo?stateId=").concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/dashboard-farm-demo?stateId=").concat(data, "&fromDate=").concat(fromDate, "T00:00:00.000Z&toDate=").concat(toDate, "T23:59:59.000Z"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
           key: "getDashboardStats",
-          value: function getDashboardStats(data) {
+          value: function getDashboardStats(data, fromDate, toDate) {
             return this.apollo.watchQuery({
               query: _getDashboardStats,
               fetchPolicy: "no-cache",
               variables: {
-                state: data
+                state: data,
+                fromDate: "".concat(fromDate, "T00:00:00.000Z"),
+                toDate: "".concat(toDate, "T23:59:59.000Z")
               }
             });
           }
         }, {
           key: "getCropPricesDashboard",
-          value: function getCropPricesDashboard(id, market) {
+          value: function getCropPricesDashboard(id, market, fromDate, toDate) {
             return this.apollo.watchQuery({
               query: _getCropPricesDashboard,
               fetchPolicy: "no-cache",
               variables: {
                 id: id,
-                market: market
+                market: market,
+                fromDate: "".concat(fromDate, "T00:00:00.000Z"),
+                toDate: "".concat(toDate, "T23:59:59.000Z")
               }
             });
           }
