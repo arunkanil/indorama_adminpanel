@@ -845,7 +845,7 @@
 
       var _getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["\n  query ($id: ID, $market: ID, $fromDate: DateTime, $toDate: DateTime) {\n    cropPrices(\n      publicationState: LIVE\n      pagination: { limit: 10000 }\n      sort: \"publishedAt:desc\"\n      filters: {\n        crop: { id: { eq: $id } }\n        market: { id: { eq: $market } }\n        publishedAt: { between: [$fromDate, $toDate] }\n      }\n    ) {\n      data {\n        id\n        attributes {\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Price\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Unit\n          market {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          publishedAt\n        }\n      }\n    }\n  }\n"])));
 
-      var _getFarmDemoStatsDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["\n  query dashboardAPI($state: ID, $status: String) {\n    all: farmDemos(filters: { state: { id: { eq: $state } } }) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    status: farmDemos(\n      filters: {\n        and: [{ state: { id: { eq: $state } } }, { Status: { eq: $status } }]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
+      var _getFarmDemoStatsDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["\n  query dashboardAPI(\n    $state: ID\n    $status: String\n    $fromDate: DateTime\n    $toDate: DateTime\n  ) {\n    all: farmDemos(\n      filters: {\n        state: { id: { eq: $state } }\n        createdAt: { between: [$fromDate, $toDate] }\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    status: farmDemos(\n      filters: {\n        and: [\n          { state: { id: { eq: $state } } }\n          { Status: { eq: $status } }\n          { createdAt: { between: [$fromDate, $toDate] } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
 
       var _getallChats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["\n  query ($limit: Int, $start: Int, $key: String, $isAskIndorama: Boolean) {\n    chats(\n      filters: {\n        members: {\n          or: [{ username: { containsi: $key } }, { Name: { containsi: $key } }]\n        }\n        isAskIndorama: { eq: $isAskIndorama }\n      }\n      sort: \"updatedAt:desc\"\n      pagination: { limit: $limit, start: $start }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          isAskIndorama\n          members {\n            data {\n              id\n              attributes {\n                username\n                Name\n                UserType\n                Name\n                prof_pic {\n                  data {\n                    id\n                    attributes {\n                      name\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          chatInitiatedBy {\n            data {\n              id\n              attributes {\n                username\n                Name\n                UserType\n                Name\n                prof_pic {\n                  data {\n                    id\n                    attributes {\n                      name\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
 
@@ -996,13 +996,15 @@
           }
         }, {
           key: "getFarmDemoStatsDashboard",
-          value: function getFarmDemoStatsDashboard(state, status) {
+          value: function getFarmDemoStatsDashboard(state, status, fromDate, toDate) {
             return this.apollo.watchQuery({
               query: _getFarmDemoStatsDashboard,
               fetchPolicy: "no-cache",
               variables: {
                 state: state,
-                status: status
+                status: status,
+                fromDate: "".concat(fromDate, "T00:00:00.000Z"),
+                toDate: "".concat(toDate, "T23:59:59.000Z")
               }
             });
           }

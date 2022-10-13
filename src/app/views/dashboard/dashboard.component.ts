@@ -18,6 +18,10 @@ export class DashboardComponent implements OnInit {
   DashboardStats: any;
   toDate: any = new Date().toISOString().substr(0, 10);
   fromDate: any = new Date();
+  toDate_CropPrices: any = new Date().toISOString().substr(0, 10);
+  fromDate_CropPrices: any = new Date();
+  toDate_FarmDemo: any = new Date().toISOString().substr(0, 10);
+  fromDate_FarmDemo: any = new Date();
   FarmDemoStats: any;
   selectedCrop: any = { attributes: { Name: "Crop" } };
   selectedMarket: any = { attributes: { Name: "Market" } };
@@ -164,12 +168,29 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.fromDate.setDate(this.fromDate.getDate() - 30);
     this.fromDate = new Date(this.fromDate).toISOString().substr(0, 10);
+    this.fromDate_CropPrices.setDate(this.fromDate_CropPrices.getDate() - 30);
+    this.fromDate_CropPrices = new Date(this.fromDate_CropPrices)
+      .toISOString()
+      .substr(0, 10);
+    this.fromDate_FarmDemo.setDate(this.fromDate_FarmDemo.getDate() - 30);
+    this.fromDate_FarmDemo = new Date(this.fromDate_FarmDemo)
+      .toISOString()
+      .substr(0, 10);
     this.getData();
     console.log(this.barChartData);
   }
   onChange(event, key) {
     this[key] = event.target.value;
-    console.log(this[key]);
+    this.getData();
+    if (this.selectedStateFD) {
+      this.getFarmDemoStatsDashboard(this.selectedStateFD);
+    }
+  }
+  onChange_CropPrices(event, key) {
+    this[key] = event.target.value;
+    if (this.selectedCrop?.id) {
+      this.getCropPrices(this.selectedCrop);
+    }
   }
   getData() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
@@ -224,8 +245,8 @@ export class DashboardComponent implements OnInit {
       .getCropPricesDashboard(
         crop?.id,
         this.selectedMarket?.id,
-        this.fromDate,
-        this.toDate
+        this.fromDate_CropPrices,
+        this.toDate_CropPrices
       )
       .valueChanges.subscribe(
         (result: any) => {
@@ -282,13 +303,22 @@ export class DashboardComponent implements OnInit {
   getFarmDemoStatsDashboard(data) {
     this.selectedStateFD = data;
     this.dataservice
-      .getFarmDemoStatsDashboard(data.id, "ONGOING")
+      .getFarmDemoStatsDashboard(
+        data.id,
+        "ONGOING",
+        this.fromDate_FarmDemo,
+        this.toDate_FarmDemo
+      )
       .valueChanges.subscribe((result: any) => {
         this.FarmDemoStats = result.data;
       });
     this.barChartData_farmdemo = [];
     this.dataservice
-      .getFarmDemoYieldStats(data.id, this.fromDate, this.toDate)
+      .getFarmDemoYieldStats(
+        data.id,
+        this.fromDate_FarmDemo,
+        this.toDate_FarmDemo
+      )
       .subscribe(
         (result: any) => {
           this.barChartData_farmdemo = [

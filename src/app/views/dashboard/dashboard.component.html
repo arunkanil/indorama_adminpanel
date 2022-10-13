@@ -2,11 +2,11 @@
   <div class="card">
     <div class="card-body">
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-12 col-md-3">
           <h4 class="card-title mb-0">Soil Analysis</h4>
           <!-- <div class="small text-muted">November 2017</div> -->
         </div>
-        <div class="col-sm-7 d-none d-md-block">
+        <div class="col-sm-12 col-md-9">
           <div class="btn-group float-right" dropdown>
             <button
               dropdownToggle
@@ -134,11 +134,11 @@
   <div class="card">
     <div class="card-body">
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-12 col-md-3">
           <h4 class="card-title mb-0">Crop Prices</h4>
           <!-- <div class="small text-muted">November 2017</div> -->
         </div>
-        <div class="col-sm-7 d-none d-md-block">
+        <div class="col-sm-12 col-md-12">
           <div class="btn-group float-right">
             <button type="button" class="btn btn-link" (click)="clearFilter()">
               Clear
@@ -197,10 +197,10 @@
             <input
               type="date"
               class="form-control"
-              id="toDate"
-              name="toDate"
-              (change)="onChange($event, 'toDate')"
-              value="{{ toDate }}"
+              id="toDate_CropPrices"
+              name="toDate_CropPrices"
+              (change)="onChange_CropPrices($event, 'toDate_CropPrices')"
+              value="{{ toDate_CropPrices }}"
             />
           </div>
           <div class="float-right d-flex">
@@ -208,10 +208,10 @@
             <input
               type="date"
               class="form-control"
-              id="fromDate"
-              name="fromDate"
-              (change)="onChange($event, 'fromDate')"
-              value="{{ fromDate }}"
+              id="fromDate_CropPrices"
+              name="fromDate_CropPrices"
+              (change)="onChange_CropPrices($event, 'fromDate_CropPrices')"
+              value="{{ fromDate_CropPrices }}"
             />
           </div>
         </div>
@@ -235,11 +235,11 @@
       <div class="card">
         <div class="card-body">
           <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-12 col-md-3">
               <h4 class="card-title mb-0">Farm Demo</h4>
               <!-- <div class="small text-muted">November 2017</div> -->
             </div>
-            <div class="col-sm-7 d-none d-md-block"></div>
+            <div class="col-sm-12 col-md-12"></div>
           </div>
           <div class="row">
             <div class="col-sm-6">
@@ -265,7 +265,7 @@
               </div>
               <hr class="mt-0" />
             </div>
-            <div class="col-sm-6 d-none d-md-block">
+            <div class="col-sm-6 ">
               <div class="btn-group float-right" dropdown>
                 <button
                   dropdownToggle
@@ -291,10 +291,10 @@
                 <input
                   type="date"
                   class="form-control"
-                  id="toDate"
-                  name="toDate"
-                  (change)="onChange($event, 'toDate')"
-                  value="{{ toDate }}"
+                  id="toDate_FarmDemo"
+                  name="toDate_FarmDemo"
+                  (change)="onChange($event, 'toDate_FarmDemo')"
+                  value="{{ toDate_FarmDemo }}"
                 />
               </div>
               <div class="float-right d-flex">
@@ -302,10 +302,10 @@
                 <input
                   type="date"
                   class="form-control"
-                  id="fromDate"
-                  name="fromDate"
-                  (change)="onChange($event, 'fromDate')"
-                  value="{{ fromDate }}"
+                  id="fromDate_FarmDemo"
+                  name="fromDate_FarmDemo"
+                  (change)="onChange($event, 'fromDate_FarmDemo')"
+                  value="{{ fromDate_FarmDemo }}"
                 />
               </div>
             </div>

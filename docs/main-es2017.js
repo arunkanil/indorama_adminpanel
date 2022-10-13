@@ -3706,8 +3706,18 @@ const getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"
   }
 `;
 const getFarmDemoStatsDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query dashboardAPI($state: ID, $status: String) {
-    all: farmDemos(filters: { state: { id: { eq: $state } } }) {
+  query dashboardAPI(
+    $state: ID
+    $status: String
+    $fromDate: DateTime
+    $toDate: DateTime
+  ) {
+    all: farmDemos(
+      filters: {
+        state: { id: { eq: $state } }
+        createdAt: { between: [$fromDate, $toDate] }
+      }
+    ) {
       meta {
         pagination {
           total
@@ -3716,7 +3726,11 @@ const getFarmDemoStatsDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["g
     }
     status: farmDemos(
       filters: {
-        and: [{ state: { id: { eq: $state } } }, { Status: { eq: $status } }]
+        and: [
+          { state: { id: { eq: $state } } }
+          { Status: { eq: $status } }
+          { createdAt: { between: [$fromDate, $toDate] } }
+        ]
       }
     ) {
       meta {
@@ -4310,13 +4324,15 @@ let DataService = class DataService {
             },
         });
     }
-    getFarmDemoStatsDashboard(state, status) {
+    getFarmDemoStatsDashboard(state, status, fromDate, toDate) {
         return this.apollo.watchQuery({
             query: getFarmDemoStatsDashboard,
             fetchPolicy: "no-cache",
             variables: {
                 state: state,
                 status: status,
+                fromDate: `${fromDate}T00:00:00.000Z`,
+                toDate: `${toDate}T23:59:59.000Z`,
             },
         });
     }
