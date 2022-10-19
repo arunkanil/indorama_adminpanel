@@ -47,16 +47,8 @@
         </div>
       </div>
       <h5 class="mb-3">Survey Questions & Responses</h5>
-      <h6 *ngIf="currentQues">Question : {{currentQues}}</h6>
+      <h6 *ngIf="currentQues">Question : {{ currentQues }}</h6>
       <div class="row">
-        <div class="col">
-          <apx-chart
-            [series]="chartOptions.series"
-            [chart]="chartOptions.chart"
-            [labels]="chartOptions.labels"
-            [responsive]="chartOptions.responsive"
-          ></apx-chart>
-        </div>
         <div class="col">
           <div
             class="col-12"
@@ -87,15 +79,16 @@
                         >{{ option }}</span
                       >
                     </p>
-                    <button
-                      type="button"
-                      class="btn btn-primary"
-                      data-toggle="modal"
-                      (click)="loadResponses(item.FieldKey)"
-                    >
-                      Load pie chart
-                    </button>
                   </div>
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    style="height: fit-content"
+                    data-toggle="modal"
+                    (click)="loadResponses(item.FieldKey)"
+                  >
+                    Load pie chart
+                  </button>
                 </div>
                 <div
                   *ngIf="returnChartdata(item.FieldKey).length > 0"
@@ -114,6 +107,14 @@
               </div>
             </div>
           </div>
+        </div>
+        <div class="col">
+          <apx-chart
+            [series]="chartOptions.series"
+            [chart]="chartOptions.chart"
+            [labels]="chartOptions.labels"
+            [responsive]="chartOptions.responsive"
+          ></apx-chart>
         </div>
       </div>
     </div>
