@@ -118,6 +118,7 @@ export class BestCropPracticesComponent {
                 console.log("response", result);
                 if (result.data.createBestCropPractise) {
                   this.toastr.success("Success!");
+                  this.practicesForm.reset();
                   this.dataservice.getBestCropPractises().refetch();
                   this.practicesModal.hide();
                   this.btnLoading = false;

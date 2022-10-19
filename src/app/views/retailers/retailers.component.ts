@@ -8,6 +8,7 @@ import { DataService } from "../../data.service";
 import { RetailersColumn } from "../../constants/columnMetadata";
 import { filter } from "rxjs/operators";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { UsernameValidator } from "../../utils/username.validator";
 
 @Component({
   templateUrl: "retailers.component.html",
@@ -38,7 +39,7 @@ export class RetailersComponent {
   columnDefs = [];
   commentForm = this.fb.group({
     UserType: ["Retailer"],
-    username: ["", Validators.required],
+    username: ["", [Validators.required, Validators.minLength(3), UsernameValidator.cannotContainSpace]],
     email: ["nodata@email.com"],
     password: ["", Validators.required],
     Name: ["", Validators.required],
@@ -80,6 +81,9 @@ export class RetailersComponent {
       this.States = result.data.states.data;
     });
   }
+  get f(){  
+    return this.commentForm.controls;  
+  } 
   getLGAs(id?) {
     this.dataservice.getLGAs(id).valueChanges.subscribe((result: any) => {
       console.log("getLGAs", result.data.lgas.data);

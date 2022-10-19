@@ -71,6 +71,13 @@ export class FarmDemoDetailComponent implements OnInit {
     this.getLists();
     this.getLGAs();
   }
+  dispPesticides(data) {
+    if (data) {
+      return "Yes";
+    } else {
+      return "No";
+    }
+  }
   getLists() {
     this.loading = true;
     // this.dataservice.getGroups().valueChanges.subscribe((result: any) => {

@@ -2667,7 +2667,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-retailers-retailers-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("common"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null,
             /*! ./views/retailers/retailers.module */
             "d3Ph")).then(function (m) {
               return m.RetailersModule;
@@ -2678,7 +2678,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-users-users-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("common"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null,
             /*! ./views/users/users.module */
             "QSsw")).then(function (m) {
               return m.UsersModule;

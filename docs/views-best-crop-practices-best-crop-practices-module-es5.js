@@ -286,6 +286,8 @@
                       if (result.data.createBestCropPractise) {
                         _this4.toastr.success("Success!");
 
+                        _this4.practicesForm.reset();
+
                         _this4.dataservice.getBestCropPractises().refetch();
 
                         _this4.practicesModal.hide();

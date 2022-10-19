@@ -30,7 +30,9 @@
             animateRows="true"
           >
           </ag-grid-angular>
-          <span class="float-left mt-3">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>
+          <span class="float-left mt-3"
+            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span
+          >
           <button
             type="button"
             [disabled]="disableNextButton"
@@ -92,6 +94,12 @@
                   formControlName="Name"
                   placeholder="Enter  Name"
                 />
+                <div
+                  *ngIf="f.Name.touched && f.Name.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="f.Name.errors.required">Name is required.</div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="username">Username</label>
@@ -103,6 +111,20 @@
                   formControlName="username"
                   placeholder="Enter username"
                 />
+                <div
+                  *ngIf="f.username.touched && f.username.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="f.username.errors.required">
+                    Username is required.
+                  </div>
+                  <div *ngIf="f.username.errors.minlength">
+                    Username should have minimum 3 characters.
+                  </div>
+                  <div *ngIf="f.username.errors.cannotContainSpace">
+                    Username cannot contain space.
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
@@ -114,6 +136,14 @@
                   formControlName="password"
                   placeholder="Enter password"
                 />
+                <div
+                  *ngIf="f.password.touched && f.password.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="f.password.errors.required">
+                    Password is required.
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="UserType">User type</label>
@@ -131,6 +161,14 @@
                   <option value="Agronomist">Agronomist</option>
                   <option value="Admin">Admin</option>
                 </select>
+                <div
+                  *ngIf="f.UserType.touched && f.UserType.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="f.UserType.errors.required">
+                    User type is required.
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="ContactNumber">Contact number</label>
@@ -142,6 +180,14 @@
                   formControlName="ContactNumber"
                   placeholder="Enter contact number"
                 />
+                <div
+                  *ngIf="f.ContactNumber.touched && f.ContactNumber.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="f.ContactNumber.errors.required">
+                    Contact number is required.
+                  </div>
+                </div>
               </div>
               <!-- <div class="form-group">
                 <label for="name">E-mail</label>
@@ -172,6 +218,12 @@
                     {{ item.attributes.Name }}
                   </option>
                 </select>
+                <div
+                  *ngIf="f.state.touched && f.state.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="f.state.errors.required">State is required.</div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="lga">LGA</label>
@@ -189,6 +241,9 @@
                     {{ item.attributes.Name }}
                   </option>
                 </select>
+                <div *ngIf="f.lga.touched && f.lga.invalid" class="text-danger">
+                  <div *ngIf="f.lga.errors.required">LGA is required.</div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="village">Village</label>
@@ -205,6 +260,14 @@
                     {{ item.attributes.Name }}
                   </option>
                 </select>
+                <div
+                  *ngIf="f.village.touched && f.village.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="f.village.errors.required">
+                    Village is required.
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="Gender">Gender</label>
@@ -220,6 +283,14 @@
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
                 </select>
+                <div
+                  *ngIf="f.Gender.touched && f.Gender.invalid"
+                  class="text-danger"
+                >
+                  <div *ngIf="f.Gender.errors.required">
+                    Gender is required.
+                  </div>
+                </div>
               </div>
               <div class="form-group">
                 <label for="Age">Age</label>
@@ -231,6 +302,9 @@
                   formControlName="Age"
                   placeholder="Enter age"
                 />
+                <div *ngIf="f.Age.touched && f.Age.invalid" class="text-danger">
+                  <div *ngIf="f.Age.errors.required">Age is required.</div>
+                </div>
               </div>
             </div>
           </div>

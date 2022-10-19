@@ -3,11 +3,10 @@ import { Router } from "@angular/router";
 import { FormBuilder, Validators } from "@angular/forms";
 import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
-// import { ActionRenderer } from "../../utils/StatusRenderer";
-
 import { UsersColumn } from "../../constants/columnMetadata";
 import { filter } from "rxjs/operators";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { UsernameValidator } from "../../utils/username.validator";
 
 @Component({
   templateUrl: "users.component.html",
@@ -38,7 +37,7 @@ export class UsersComponent {
   columnDefs = [];
   commentForm = this.fb.group({
     UserType: ["", Validators.required],
-    username: ["", Validators.required],
+    username: ["", [Validators.required, Validators.minLength(3), UsernameValidator.cannotContainSpace]],
     email: ["nodata@email.com"],
     password: ["", Validators.required],
     Name: ["", Validators.required],
@@ -71,6 +70,9 @@ export class UsersComponent {
     this.getStates();
     this.getVillages();
   }
+  get f(){  
+    return this.commentForm.controls;  
+  } 
   getStates() {
     this.dataservice.getStates().valueChanges.subscribe((result: any) => {
       console.log("getStates", result.data.states.data);
