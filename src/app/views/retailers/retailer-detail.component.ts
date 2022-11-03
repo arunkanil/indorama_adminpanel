@@ -48,6 +48,7 @@ export class RetailerDetailComponent implements OnInit {
     // username: ["", Validators.required],
     Name: ["", Validators.required],
     // email: ["", Validators.required],
+    password: [""],
     Farmer: ["", Validators.required],
     retailer_categories: ["", Validators.required],
     Bio: ["", Validators.required],
@@ -109,6 +110,7 @@ export class RetailerDetailComponent implements OnInit {
             this.details?.attributes?.lga?.data?.attributes?.state?.data?.id,
             Validators.required,
           ],
+          password: [""],
           lga: [this.details?.attributes?.lga?.data?.id, Validators.required],
           village: [
             this.details?.attributes?.village?.data?.id,

@@ -316,6 +316,24 @@
                           }}
                         </td>
                       </tr>
+                      <tr>
+                        <td>Recommended Urea Qty</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.RecommendedUreaQty
+                          }}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Recommended NPK Qty</td>
+                        <td>
+                          {{
+                            item?.attributes?.soil_test_results?.data[0]
+                              ?.attributes?.RecommendedNPKQty
+                          }}
+                        </td>
+                      </tr>
                     </tbody>
                   </table>
                 </div>
@@ -760,6 +778,28 @@
                         id="BoronObserved"
                         name="BoronObserved"
                         formControlName="BoronObserved"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="RecommendedUreaQty">Recommended Urea Qty</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="RecommendedUreaQty"
+                        name="RecommendedUreaQty"
+                        formControlName="RecommendedUreaQty"
+                        placeholder="Enter value"
+                      />
+                    </div>
+                    <div class="form-group">
+                      <label for="RecommendedNPKQty">Recommended NPK Qty</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="RecommendedNPKQty"
+                        name="RecommendedNPKQty"
+                        formControlName="RecommendedNPKQty"
                         placeholder="Enter value"
                       />
                     </div>

@@ -63,6 +63,8 @@ export class SoilTestDetailComponent implements OnInit {
     CopperObserved: ["", Validators.required],
     BoronObserved: ["", Validators.required],
     ManganeseObserved: ["", Validators.required],
+    RecommendedUreaQty: ["", Validators.required],
+    RecommendedNPKQty: ["", Validators.required],
   });
 
   ngOnInit(): void {
@@ -223,6 +225,16 @@ export class SoilTestDetailComponent implements OnInit {
       ManganeseObserved: [
         data?.attributes?.soil_test_results?.data[0]?.attributes
           ?.ManganeseObserved,
+        Validators.required,
+      ],
+      RecommendedUreaQty: [
+        data?.attributes?.soil_test_results?.data[0]?.attributes
+          ?.RecommendedUreaQty,
+        Validators.required,
+      ],
+      RecommendedNPKQty: [
+        data?.attributes?.soil_test_results?.data[0]?.attributes
+          ?.RecommendedNPKQty,
         Validators.required,
       ],
     });

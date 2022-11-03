@@ -52,6 +52,7 @@ export class UserDetailComponent implements OnInit {
     Farmer: ["", Validators.required],
     UserType: ["", Validators.required],
     Bio: [""],
+    password: [""],
     state: ["", Validators.required],
     village: ["", Validators.required],
     lga: ["", Validators.required],
@@ -119,6 +120,7 @@ export class UserDetailComponent implements OnInit {
             this.details?.attributes?.village?.data?.id,
             Validators.required,
           ],
+          password: [""],
           blocked: [this.details?.attributes?.blocked],
           UserType: [this.details?.attributes?.UserType, Validators.required],
         });

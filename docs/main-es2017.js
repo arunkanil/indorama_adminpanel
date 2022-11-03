@@ -1903,6 +1903,8 @@ const SingleSoilTestQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
                       CopperObserved
                       BoronObserved
                       ManganeseObserved
+                      RecommendedNPKQty
+                      RecommendedUreaQty
                       updatedAt
                     }
                   }
@@ -2089,6 +2091,8 @@ const AddSoilTestResult = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $copper: String
     $boron: String
     $manganese: String
+    $RecommendedNPKQty: String
+    $RecommendedUreaQty: String
   ) {
     createSoilTestResult(
       data: {
@@ -2106,6 +2110,8 @@ const AddSoilTestResult = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         CopperObserved: $copper
         BoronObserved: $boron
         ManganeseObserved: $manganese
+        RecommendedNPKQty: $RecommendedNPKQty,
+        RecommendedUreaQty: $RecommendedUreaQty,
       }
     ) {
       data {
@@ -2153,6 +2159,8 @@ const UpdateSoilTestResult = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] 
     $copper: String
     $boron: String
     $manganese: String
+    $RecommendedNPKQty: String
+    $RecommendedUreaQty: String
   ) {
     updateSoilTestResult(
       id: $id
@@ -2171,6 +2179,8 @@ const UpdateSoilTestResult = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] 
         CopperObserved: $copper
         BoronObserved: $boron
         ManganeseObserved: $manganese
+        RecommendedNPKQty: $RecommendedNPKQty,
+        RecommendedUreaQty: $RecommendedUreaQty,
       }
     ) {
       data {
@@ -2403,6 +2413,7 @@ const updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $latitude: Float
     $longitude: Float
     $profpic: ID
+    $password: String
     $blocked: Boolean
     $confirmed: Boolean
     $contactNumber: String
@@ -2418,6 +2429,7 @@ const updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         retailer_categories: $categories
         Bio: $bio
         blocked: $blocked
+        password: $password
         confirmed: $confirmed
         Latitude: $latitude
         Longitude: $longitude
@@ -4923,6 +4935,8 @@ let DataService = class DataService {
                 manganese: result.ManganeseObserved,
                 pottassium: result.PotassiumObserved,
                 sulphur: result.SulphurObserved,
+                RecommendedNPKQty: result.RecommendedNPKQty,
+                RecommendedUreaQty: result.RecommendedUreaQty,
             },
             errorPolicy: "all",
             fetchPolicy: "no-cache",
@@ -4946,6 +4960,8 @@ let DataService = class DataService {
                 manganese: result.ManganeseObserved,
                 pottassium: result.PotassiumObserved,
                 sulphur: result.SulphurObserved,
+                RecommendedNPKQty: result.RecommendedNPKQty,
+                RecommendedUreaQty: result.RecommendedUreaQty,
             },
             errorPolicy: "all",
             fetchPolicy: "no-cache",
@@ -5094,6 +5110,7 @@ let DataService = class DataService {
                 latitude: data.Latitude ? parseFloat(data.Latitude) : undefined,
                 longitude: data.Longitude ? parseFloat(data.Longitude) : undefined,
                 village: data.village,
+                password: data.password ? data.password : undefined,
                 lga: data.lga,
                 bio: data.Bio,
                 agronomist_lgas: data.agronomist_lgas,
