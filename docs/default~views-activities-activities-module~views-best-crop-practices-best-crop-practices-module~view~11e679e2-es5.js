@@ -376,6 +376,24 @@
           filterOptions: ["contains"],
           buttons: ["reset"]
         }
+      }, {
+        field: "attributes.confirmed",
+        headerName: "Approval Status",
+        resizable: true,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+          filterOptions: ["contains"],
+          buttons: ["reset"]
+        },
+        valueGetter: function valueGetter(data) {
+          if (data.data.attributes.blocked === true) return "Rejected";else if (data.data.attributes.confirmed === true) {
+            return "Approved";
+          } else if (data.data.attributes.confirmed === false) {
+            return "Pending";
+          }
+          console.log(data.data.attributes);
+        }
       }];
       var UsersColumn = [{
         field: "id",

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Projects\Angular Apps\indorama_adminpanel\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! E:\Projects\indorama_adminpanel\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -1652,11 +1652,15 @@ const CropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const RetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($page: Int, $pageSize: Int) {
+  query ($page: Int, $pageSize: Int, $confirmed: Boolean, $blocked: Boolean) {
     usersPermissionsUsers(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { UserType: { eq: "Retailer" } }
+      filters: {
+        UserType: { eq: "Retailer" }
+        confirmed: { eq: $confirmed }
+        blocked: { eq: $blocked }
+      }
     ) {
       meta {
         pagination {
@@ -1724,6 +1728,8 @@ const RetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
           Bio
           Latitude
           Longitude
+          blocked
+          confirmed
           UserType
           prof_pic {
             data {
@@ -1999,6 +2005,8 @@ const UsersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
           username
           Name
           email
+          blocked
+          confirmed
           village {
             data {
               id
@@ -2201,6 +2209,8 @@ const GetSingleRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"
         attributes {
           username
           Name
+          blocked
+          confirmed
           email
           village {
             data {
@@ -2394,6 +2404,7 @@ const updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $longitude: Float
     $profpic: ID
     $blocked: Boolean
+    $confirmed: Boolean
     $contactNumber: String
     $agronomist_lgas: [ID]
   ) {
@@ -2407,6 +2418,7 @@ const updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         retailer_categories: $categories
         Bio: $bio
         blocked: $blocked
+        confirmed: $confirmed
         Latitude: $latitude
         Longitude: $longitude
         prof_pic: $profpic
@@ -2497,6 +2509,7 @@ const updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
             }
           }
           ContactNumber
+          confirmed
           blocked
         }
       }
@@ -4503,13 +4516,15 @@ let DataService = class DataService {
             },
         });
     }
-    getRetailers(page, pageSize) {
+    getRetailers(page, pageSize, confirmed, blocked) {
         return this.apollo.watchQuery({
             query: RetailerQuery,
             fetchPolicy: "no-cache",
             variables: {
                 page: page,
                 pageSize: pageSize,
+                confirmed: confirmed,
+                blocked: blocked,
             },
         });
     }
@@ -5076,13 +5091,14 @@ let DataService = class DataService {
                 id: id,
                 categories: data.retailer_categories,
                 name: data.Name,
-                latitude: parseFloat(data.Latitude),
-                longitude: parseFloat(data.Longitude),
+                latitude: data.Latitude ? parseFloat(data.Latitude) : undefined,
+                longitude: data.Longitude ? parseFloat(data.Longitude) : undefined,
                 village: data.village,
                 lga: data.lga,
                 bio: data.Bio,
                 agronomist_lgas: data.agronomist_lgas,
-                blocked: data.blocked == "true" ? true : false,
+                blocked: data.blocked,
+                confirmed: data.confirmed,
                 UserType: data === null || data === void 0 ? void 0 : data.UserType,
                 contactNumber: data.ContactNumber,
             },

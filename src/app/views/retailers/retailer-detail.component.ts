@@ -22,10 +22,13 @@ export class RetailerDetailComponent implements OnInit {
   @ViewChild("resultModal") public resultModal: ModalDirective;
   @ViewChild("deleteModal") public deleteModal: ModalDirective;
   @ViewChild("addProductModal") public addProductModal: ModalDirective;
+  @ViewChild("approveModal") public approveModal: ModalDirective;
 
   id: any;
   baseURL = environment.apiUrl;
   loading = true;
+  btnText = "Approve / Reject";
+  disableButton = true;
   details: any = [];
   btnLoading = false;
   dateConverter = dateConverter;
@@ -116,6 +119,17 @@ export class RetailerDetailComponent implements OnInit {
             Validators.required,
           ],
         });
+        if (this.details?.attributes?.blocked === true) {
+          this.disableButton = true;
+          this.btnText = "Rejected";
+        } else if (this.details?.attributes?.confirmed === true) {
+          {
+            this.disableButton = true;
+            this.btnText = "Approved";
+          }
+        } else if (this.details?.attributes?.confirmed === false) {
+          return (this.disableButton = false);
+        }
         this.loading = false;
       });
   }
@@ -170,6 +184,67 @@ export class RetailerDetailComponent implements OnInit {
   }
   getLists() {
     this.loading = true;
+  }
+  approveOrReject(check) {
+    let payload = {};
+    if (check) {
+      payload = {
+        confirmed: true,
+        blocked: false,
+      };
+    } else {
+      payload = {
+        confirmed: false,
+        blocked: true,
+      };
+    }
+    this.dataservice.UpdateRetailer(payload, this.id).subscribe(
+      (result: any) => {
+        console.log("response", result);
+        if (result.data.updateUsersPermissionsUser) {
+          this.toastr.success("Updated successfully!");
+          this.btnLoading = false;
+          this.approveModal.hide();
+          this.getTest();
+        } else {
+          this.toastr.error("Something went wrong!");
+          this.btnLoading = false;
+        }
+      },
+      (error) => {
+        this.btnLoading = false;
+      }
+    );
+    // let published = null;
+    // if (!check) published = new Date();
+    // this.dataservice
+    //   .UpdateCropPrice(
+    //     undefined,
+    //     this.selectedRows[0].id,
+    //     undefined,
+    //     check,
+    //     published
+    //   )
+    //   .subscribe(
+    //     (result: any) => {
+    //       console.log("response", result);
+    //       if (result.data.updateCropPrice) {
+    //         this.toastr.success("Success!");
+    //         this.getCropPrices();
+    //         this.file = null;
+    //         this.approveModal.hide();
+    //         this.gridApi.deselectAll();
+    //         this.btnLoading = false;
+    //       }
+    //     },
+    //     (error) => {
+    //       this.toastr.error("Failed. Please check the fields!");
+    //       this.btnLoading = false;
+    //     }
+    //   );
+  }
+  openApproveModal() {
+    this.approveModal.show();
   }
   openModal(data: any, flag) {
     this.resultModal.show();

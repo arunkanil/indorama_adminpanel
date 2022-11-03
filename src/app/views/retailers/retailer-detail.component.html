@@ -32,6 +32,39 @@
       </div>
     </div>
   </div>
+  <div
+    bsModal
+    #approveModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered modal-sm">
+      <div class="modal-content">
+        <div class="modal-body text-center">
+          Do you want to approve this retailer?
+        </div>
+        <div class="modal-footer justify-content-around">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            (click)="approveOrReject(false)"
+          >
+            No! Reject.
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="approveOrReject(true)"
+          >
+            Yes! Approve.
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="card">
     <div
       class="card-header"
@@ -55,6 +88,15 @@
             (click)="myModal.show()"
           >
             Edit
+          </button>
+          <button
+            type="button"
+            class="btn btn-warning"
+            data-toggle="modal"
+            [disabled]="disableButton"
+            (click)="openApproveModal()"
+          >
+            {{ btnText }}
           </button>
           <!-- <button
           type="button"
@@ -169,6 +211,15 @@
                 <tr>
                   <td>Bio</td>
                   <td style="width: 60%">{{ details?.attributes?.Bio }}</td>
+                </tr>
+                <tr>
+                  <td>Location</td>
+                  <td><a
+                    href="https://www.google.com/maps/search/?api=1&query={{
+                      details.attributes?.Latitude}}%2C{{ details.attributes?.Longitude }}"
+                    target="_blank"
+                    >Click here to view location</a
+                  ></td>
                 </tr>
                 <tr>
                   <td>Created at</td>

@@ -17,6 +17,35 @@
     <div class="card-body">
       <div class="row">
         <div class="col-12">
+          <div class="btn-group float-right mb-3" dropdown>
+            <button
+              dropdownToggle
+              type="button"
+              class="btn btn-primary dropdown-toggle"
+            >
+              {{ selectedList }}<span class="caret"></span>
+            </button>
+            <ul *dropdownMenu class="dropdown-menu" role="menu">
+              <li role="menuitem">
+                <a class="dropdown-item" (click)="toggleCropPrices('All')"
+                  >All</a
+                >
+                <a class="dropdown-item" (click)="toggleCropPrices('Approved')"
+                  >Approved</a
+                >
+                <a class="dropdown-item" (click)="toggleCropPrices('Approvalpending')"
+                  >Approval pending</a
+                >
+                <a class="dropdown-item" (click)="toggleCropPrices('Rejected')"
+                  >Rejected</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
           <ag-grid-angular
             #agGrid
             style="width: 100%; height: 65vh"

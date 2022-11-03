@@ -1152,8 +1152,8 @@ $({ target: 'Reflect', stat: true, sham: !FREEZING }, {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Projects\Angular Apps\indorama_adminpanel\src\polyfills.ts */"hN/g");
-module.exports = __webpack_require__(/*! E:\Projects\Angular Apps\indorama_adminpanel\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */"rZy+");
+__webpack_require__(/*! E:\Projects\indorama_adminpanel\src\polyfills.ts */"hN/g");
+module.exports = __webpack_require__(/*! E:\Projects\indorama_adminpanel\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */"rZy+");
 
 
 /***/ }),

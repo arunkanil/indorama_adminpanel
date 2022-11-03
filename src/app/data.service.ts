@@ -1159,11 +1159,15 @@ const CropPriceMutation = gql`
   }
 `;
 const RetailerQuery = gql`
-  query ($page: Int, $pageSize: Int) {
+  query ($page: Int, $pageSize: Int, $confirmed: Boolean, $blocked: Boolean) {
     usersPermissionsUsers(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { UserType: { eq: "Retailer" } }
+      filters: {
+        UserType: { eq: "Retailer" }
+        confirmed: { eq: $confirmed }
+        blocked: { eq: $blocked }
+      }
     ) {
       meta {
         pagination {
@@ -1231,6 +1235,8 @@ const RetailerQuery = gql`
           Bio
           Latitude
           Longitude
+          blocked
+          confirmed
           UserType
           prof_pic {
             data {
@@ -1506,6 +1512,8 @@ const UsersQuery = gql`
           username
           Name
           email
+          blocked
+          confirmed
           village {
             data {
               id
@@ -1708,6 +1716,8 @@ const GetSingleRetailerQuery = gql`
         attributes {
           username
           Name
+          blocked
+          confirmed
           email
           village {
             data {
@@ -1901,6 +1911,7 @@ const updateRetailerQuery = gql`
     $longitude: Float
     $profpic: ID
     $blocked: Boolean
+    $confirmed: Boolean
     $contactNumber: String
     $agronomist_lgas: [ID]
   ) {
@@ -1914,6 +1925,7 @@ const updateRetailerQuery = gql`
         retailer_categories: $categories
         Bio: $bio
         blocked: $blocked
+        confirmed: $confirmed
         Latitude: $latitude
         Longitude: $longitude
         prof_pic: $profpic
@@ -2004,6 +2016,7 @@ const updateRetailerQuery = gql`
             }
           }
           ContactNumber
+          confirmed
           blocked
         }
       }
@@ -4030,13 +4043,15 @@ export class DataService {
       },
     });
   }
-  getRetailers(page?, pageSize?) {
+  getRetailers(page?, pageSize?, confirmed?, blocked?) {
     return this.apollo.watchQuery({
       query: RetailerQuery,
       fetchPolicy: "no-cache",
       variables: {
         page: page,
         pageSize: pageSize,
+        confirmed: confirmed,
+        blocked: blocked,
       },
     });
   }
@@ -4606,13 +4621,14 @@ export class DataService {
         id: id,
         categories: data.retailer_categories,
         name: data.Name,
-        latitude: parseFloat(data.Latitude),
-        longitude: parseFloat(data.Longitude),
+        latitude: data.Latitude ? parseFloat(data.Latitude) : undefined,
+        longitude: data.Longitude ? parseFloat(data.Longitude) : undefined,
         village: data.village,
         lga: data.lga,
         bio: data.Bio,
         agronomist_lgas: data.agronomist_lgas,
-        blocked: data.blocked == "true" ? true : false,
+        blocked: data.blocked,
+        confirmed: data.confirmed,
         UserType: data?.UserType,
         contactNumber: data.ContactNumber,
       },

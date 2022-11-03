@@ -29,8 +29,11 @@ export class RetailersComponent {
 
   loading = true;
   btnLoading = false;
+  confirmed = undefined;
+  blocked = undefined;
   disableNextButton = false;
   disablePrevButton = true;
+  selectedList = "All";
   meta;
   pageSize = 20;
   from = 1;
@@ -39,7 +42,14 @@ export class RetailersComponent {
   columnDefs = [];
   commentForm = this.fb.group({
     UserType: ["Retailer"],
-    username: ["", [Validators.required, Validators.minLength(3), UsernameValidator.cannotContainSpace]],
+    username: [
+      "",
+      [
+        Validators.required,
+        Validators.minLength(3),
+        UsernameValidator.cannotContainSpace,
+      ],
+    ],
     email: ["nodata@email.com"],
     password: ["", Validators.required],
     Name: ["", Validators.required],
@@ -81,9 +91,9 @@ export class RetailersComponent {
       this.States = result.data.states.data;
     });
   }
-  get f(){  
-    return this.commentForm.controls;  
-  } 
+  get f() {
+    return this.commentForm.controls;
+  }
   getLGAs(id?) {
     this.dataservice.getLGAs(id).valueChanges.subscribe((result: any) => {
       console.log("getLGAs", result.data.lgas.data);
@@ -104,7 +114,7 @@ export class RetailersComponent {
   }
   getRetailers() {
     this.dataservice
-      .getRetailers(1, this.pageSize)
+      .getRetailers(1, this.pageSize, this.confirmed, this.blocked)
       .valueChanges.subscribe((result: any) => {
         this.rowData = result.data.usersPermissionsUsers.data;
         this.meta = result.data.usersPermissionsUsers.meta;
@@ -171,6 +181,48 @@ export class RetailersComponent {
     //     state: { data: event.data },
     //   }
     // );
+  }
+  toggleCropPrices(data) {
+    switch (data) {
+      case "Rejected":
+        this.selectedList = "Rejected";
+        this.blocked = true;
+        this.confirmed = undefined;
+        this.getRetailers();
+        break;
+      case "Approvalpending":
+        this.selectedList = "Pending";
+        this.blocked = false;
+        this.confirmed = false;
+        this.getRetailers();
+        break;
+      case "Approved":
+        this.selectedList = "Approved";
+        this.blocked = false;
+        this.confirmed = true;
+        this.getRetailers();
+        break;
+      case "All":
+        this.selectedList = "All";
+        this.blocked = undefined;
+        this.confirmed = undefined;
+        this.getRetailers();
+        break;
+    }
+    // if (data == 'Approvalpending') {
+    //   this.selectedList = "Approval Pending";
+    //   this.publicationState = "PREVIEW";
+    //   this.toApprove = null;
+    //   this.getCropPrices();
+    // }
+    // else if{
+
+    // } else {
+    //   this.selectedList = "All";
+    //   this.publicationState = "PREVIEW";
+    //   this.toApprove = undefined;
+    //   this.getCropPrices();
+    // }
   }
   onSelectionChanged(event: any) {
     var selectedRows = this.gridApi.getSelectedRows();

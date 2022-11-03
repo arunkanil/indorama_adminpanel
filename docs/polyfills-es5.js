@@ -1183,7 +1183,7 @@
     /***/
     1: function _(module, exports, __webpack_require__) {
       __webpack_require__(
-      /*! E:\Projects\Angular Apps\indorama_adminpanel\node_modules\@angular-devkit\build-angular\src\webpack\es5-polyfills.js */
+      /*! E:\Projects\indorama_adminpanel\node_modules\@angular-devkit\build-angular\src\webpack\es5-polyfills.js */
       "voQr");
 
       __webpack_require__(
@@ -1191,15 +1191,15 @@
       "R0gw");
 
       __webpack_require__(
-      /*! E:\Projects\Angular Apps\indorama_adminpanel\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */
+      /*! E:\Projects\indorama_adminpanel\node_modules\@angular-devkit\build-angular\src\webpack\jit-polyfills.js */
       "rZy+");
 
       __webpack_require__(
-      /*! E:\Projects\Angular Apps\indorama_adminpanel\node_modules\@angular-devkit\build-angular\src\webpack\es5-jit-polyfills.js */
+      /*! E:\Projects\indorama_adminpanel\node_modules\@angular-devkit\build-angular\src\webpack\es5-jit-polyfills.js */
       "aYjs");
 
       module.exports = __webpack_require__(
-      /*! E:\Projects\Angular Apps\indorama_adminpanel\src\polyfills.ts */
+      /*! E:\Projects\indorama_adminpanel\src\polyfills.ts */
       "hN/g");
       /***/
     },
