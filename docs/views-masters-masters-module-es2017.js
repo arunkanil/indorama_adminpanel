@@ -503,6 +503,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.stateModal.hide();
+                    this.stateForm.reset();
                     this.dataservice
                         .getStates()
                         .valueChanges.subscribe((result) => {
@@ -528,6 +529,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.stateModal.hide();
+                    this.stateForm.reset();
                     this.dataservice
                         .getStates()
                         .valueChanges.subscribe((result) => {
@@ -562,6 +564,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.lgaModal.hide();
+                    this.lgaForm.reset();
                     this.dataservice.getLGAs().valueChanges.subscribe((result) => {
                         console.log("getLGAs", result.data.lgas.data);
                         this.rowData = result.data.lgas.data;
@@ -585,6 +588,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.lgaModal.hide();
+                    this.lgaForm.reset();
                     this.dataservice.getLGAs().valueChanges.subscribe((result) => {
                         console.log("getLGAs", result.data.lgas.data);
                         this.rowData = result.data.lgas.data;
@@ -614,6 +618,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.areaModal.hide();
+                    this.areaForm.reset();
                     this.dataservice
                         .getAreas()
                         .valueChanges.subscribe((result) => {
@@ -639,6 +644,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.areaModal.hide();
+                    this.areaForm.reset();
                     this.dataservice.getAreas().valueChanges.subscribe((result) => {
                         console.log("getAreas", result.data.areas.data);
                         this.rowData = result.data.areas.data;
@@ -668,6 +674,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.marketModal.hide();
+                    this.marketForm.reset();
                     this.dataservice
                         .getMarkets()
                         .valueChanges.subscribe((result) => {
@@ -695,6 +702,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.marketModal.hide();
+                    this.marketForm.reset();
                     this.dataservice
                         .getMarkets()
                         .valueChanges.subscribe((result) => {
@@ -732,6 +740,7 @@ let mastersComponent = class mastersComponent {
                                 this.toastr.success("Success!");
                                 this.gridApi.deselectAll();
                                 this.cropModal.hide();
+                                this.cropForm.reset();
                                 this.btnLoading = false;
                                 this.dataservice
                                     .getCrops()
@@ -767,6 +776,7 @@ let mastersComponent = class mastersComponent {
                         this.toastr.success("Success!");
                         this.gridApi.deselectAll();
                         this.cropModal.hide();
+                        this.cropForm.reset();
                         this.dataservice
                             .getCrops()
                             .valueChanges.subscribe((result) => {
@@ -799,6 +809,7 @@ let mastersComponent = class mastersComponent {
                             this.toastr.success("Success!");
                             this.gridApi.deselectAll();
                             this.cropModal.hide();
+                            this.cropForm.reset();
                             this.dataservice
                                 .getCrops()
                                 .valueChanges.subscribe((result) => {
@@ -832,6 +843,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.villageModal.hide();
+                    this.villageForm.reset();
                     this.dataservice
                         .getVillages()
                         .valueChanges.subscribe((result) => {
@@ -859,6 +871,7 @@ let mastersComponent = class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.villageModal.hide();
+                    this.villageForm.reset();
                     this.dataservice
                         .getVillages()
                         .valueChanges.subscribe((result) => {

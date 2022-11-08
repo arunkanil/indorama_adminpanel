@@ -578,6 +578,8 @@
 
                         _this8.cropPriceModal.hide();
 
+                        _this8.cropPriceForm.reset();
+
                         _this8.gridApi.deselectAll();
 
                         _this8.btnLoading = false;
@@ -602,6 +604,8 @@
                     _this8.file = null;
 
                     _this8.cropPriceModal.hide();
+
+                    _this8.cropPriceForm.reset();
 
                     _this8.gridApi.deselectAll();
 
@@ -632,6 +636,8 @@
                       _this8.file = null;
 
                       _this8.cropPriceModal.hide();
+
+                      _this8.cropPriceForm.reset();
 
                       _this8.gridApi.deselectAll();
                     }

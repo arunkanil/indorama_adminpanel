@@ -22,6 +22,7 @@ export class RetailersComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...RetailersColumn];
+    this.setForm();
     this.rowSelection = "single";
   }
   @ViewChild("commentModal") public commentModal: ModalDirective;
@@ -40,26 +41,7 @@ export class RetailersComponent {
   to = 20;
   count = 1;
   columnDefs = [];
-  commentForm = this.fb.group({
-    UserType: ["Retailer"],
-    username: [
-      "",
-      [
-        Validators.required,
-        Validators.minLength(3),
-        UsernameValidator.cannotContainSpace,
-      ],
-    ],
-    email: ["nodata@email.com"],
-    password: ["", Validators.required],
-    Name: ["", Validators.required],
-    Gender: ["", Validators.required],
-    Age: ["", Validators.required],
-    ContactNumber: ["", Validators.required],
-    lga: ["", Validators.required],
-    village: ["", Validators.required],
-    state: [""],
-  });
+  commentForm;
   // frameworkComponents = {
   //   statusRenderer: ActionRenderer,
   // };
@@ -89,6 +71,28 @@ export class RetailersComponent {
     this.dataservice.getStates().valueChanges.subscribe((result: any) => {
       console.log("getStates", result.data.states.data);
       this.States = result.data.states.data;
+    });
+  }
+  setForm() {
+    this.commentForm = this.fb.group({
+      UserType: ["Retailer"],
+      username: [
+        "",
+        [
+          Validators.required,
+          Validators.minLength(4),
+          UsernameValidator.cannotContainSpace,
+        ],
+      ],
+      email: ["nodata@email.com"],
+      password: ["", Validators.required],
+      Name: ["", Validators.required],
+      Gender: ["", Validators.required],
+      Age: ["", Validators.required],
+      ContactNumber: ["", Validators.required],
+      lga: ["", Validators.required],
+      village: ["", Validators.required],
+      state: [""],
     });
   }
   get f() {
@@ -246,6 +250,7 @@ export class RetailersComponent {
           this.toastr.success("Retailer added successfully!");
           this.btnLoading = false;
           this.commentModal.hide();
+          this.setForm();
           this.getRetailers();
         } else {
           this.toastr.error("Failed. Please check the fields!");

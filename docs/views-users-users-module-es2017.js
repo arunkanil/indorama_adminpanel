@@ -584,19 +584,6 @@ let UsersComponent = class UsersComponent {
         this.to = 20;
         this.count = 1;
         this.columnDefs = [];
-        this.commentForm = this.fb.group({
-            UserType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            username: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(3), _utils_username_validator__WEBPACK_IMPORTED_MODULE_9__["UsernameValidator"].cannotContainSpace]],
-            email: ["nodata@email.com"],
-            password: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Gender: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Age: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            ContactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: [""],
-        });
         this.rowData = [];
         this.Villages = [];
         this.LGA = [];
@@ -606,6 +593,7 @@ let UsersComponent = class UsersComponent {
         this.years = [];
         this.filter = {};
         this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["UsersColumn"]];
+        this.setForm();
         this.rowSelection = "single";
     }
     ngOnInit() {
@@ -616,6 +604,28 @@ let UsersComponent = class UsersComponent {
         this.getLGAs();
         this.getStates();
         this.getVillages();
+    }
+    setForm() {
+        this.commentForm = this.fb.group({
+            UserType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            username: [
+                "",
+                [
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required,
+                    _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(3),
+                    _utils_username_validator__WEBPACK_IMPORTED_MODULE_9__["UsernameValidator"].cannotContainSpace,
+                ],
+            ],
+            email: ["nodata@email.com"],
+            password: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Gender: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Age: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            ContactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: [""],
+        });
     }
     get f() {
         return this.commentForm.controls;
@@ -736,6 +746,7 @@ let UsersComponent = class UsersComponent {
                 this.toastr.success("User added successfully!");
                 this.btnLoading = false;
                 this.commentModal.hide();
+                this.setForm();
                 this.getRetailers();
             }
             else {

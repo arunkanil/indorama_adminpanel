@@ -193,6 +193,8 @@
                       item?.attributes?.SampleAddedBy?.data?.attributes?.Name
                     }}
                   </p>
+                  <p>Result updated on : {{dateConvertor(item?.attributes?.soil_test_results?.data[0]
+                    ?.attributes?.updatedAt)}}</p>
                   <table class="table">
                     <tbody>
                       <tr>

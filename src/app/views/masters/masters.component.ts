@@ -451,6 +451,7 @@ export class mastersComponent {
             this.toastr.success("Success!");
             this.gridApi.deselectAll();
             this.stateModal.hide();
+            this.stateForm.reset();
             this.dataservice
               .getStates()
               .valueChanges.subscribe((result: any) => {
@@ -474,6 +475,7 @@ export class mastersComponent {
             this.toastr.success("Success!");
             this.gridApi.deselectAll();
             this.stateModal.hide();
+            this.stateForm.reset();
             this.dataservice
               .getStates()
               .valueChanges.subscribe((result: any) => {
@@ -509,6 +511,7 @@ export class mastersComponent {
             this.gridApi.deselectAll();
 
             this.lgaModal.hide();
+            this.lgaForm.reset();
             this.dataservice.getLGAs().valueChanges.subscribe((result: any) => {
               console.log("getLGAs", result.data.lgas.data);
               this.rowData = result.data.lgas.data;
@@ -529,6 +532,7 @@ export class mastersComponent {
           this.toastr.success("Success!");
           this.gridApi.deselectAll();
           this.lgaModal.hide();
+          this.lgaForm.reset();
           this.dataservice.getLGAs().valueChanges.subscribe((result: any) => {
             console.log("getLGAs", result.data.lgas.data);
             this.rowData = result.data.lgas.data;
@@ -556,6 +560,7 @@ export class mastersComponent {
             this.toastr.success("Success!");
             this.gridApi.deselectAll();
             this.areaModal.hide();
+            this.areaForm.reset();
             this.dataservice
               .getAreas()
               .valueChanges.subscribe((result: any) => {
@@ -578,6 +583,7 @@ export class mastersComponent {
           this.toastr.success("Success!");
           this.gridApi.deselectAll();
           this.areaModal.hide();
+          this.areaForm.reset();
           this.dataservice.getAreas().valueChanges.subscribe((result: any) => {
             console.log("getAreas", result.data.areas.data);
             this.rowData = result.data.areas.data;
@@ -605,6 +611,7 @@ export class mastersComponent {
             this.toastr.success("Success!");
             this.gridApi.deselectAll();
             this.marketModal.hide();
+            this.marketForm.reset();
             this.dataservice
               .getMarkets()
               .valueChanges.subscribe((result: any) => {
@@ -629,6 +636,7 @@ export class mastersComponent {
             this.toastr.success("Success!");
             this.gridApi.deselectAll();
             this.marketModal.hide();
+            this.marketForm.reset();
             this.dataservice
               .getMarkets()
               .valueChanges.subscribe((result: any) => {
@@ -668,6 +676,7 @@ export class mastersComponent {
                     this.toastr.success("Success!");
                     this.gridApi.deselectAll();
                     this.cropModal.hide();
+                    this.cropForm.reset();
                     this.btnLoading = false;
                     this.dataservice
                       .getCrops()
@@ -706,6 +715,7 @@ export class mastersComponent {
               this.toastr.success("Success!");
               this.gridApi.deselectAll();
               this.cropModal.hide();
+              this.cropForm.reset();
               this.dataservice
                 .getCrops()
                 .valueChanges.subscribe((result: any) => {
@@ -734,6 +744,7 @@ export class mastersComponent {
                 this.toastr.success("Success!");
                 this.gridApi.deselectAll();
                 this.cropModal.hide();
+                this.cropForm.reset();
                 this.dataservice
                   .getCrops()
                   .valueChanges.subscribe((result: any) => {
@@ -769,6 +780,7 @@ export class mastersComponent {
             this.toastr.success("Success!");
             this.gridApi.deselectAll();
             this.villageModal.hide();
+            this.villageForm.reset();
             this.dataservice
               .getVillages()
               .valueChanges.subscribe((result: any) => {
@@ -793,6 +805,7 @@ export class mastersComponent {
             this.toastr.success("Success!");
             this.gridApi.deselectAll();
             this.villageModal.hide();
+            this.villageForm.reset();
             this.dataservice
               .getVillages()
               .valueChanges.subscribe((result: any) => {

@@ -325,6 +325,7 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                                 this.getUpdates();
                                 this.btnLoading = false;
                                 this.cropPriceModal.hide();
+                                this.newsForm.reset();
                                 this.gridApi.deselectAll();
                             }
                             else {
@@ -346,6 +347,7 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                         this.file = null;
                         this.btnLoading = false;
                         this.cropPriceModal.hide();
+                        this.newsForm.reset();
                         this.gridApi.deselectAll();
                         this.getUpdates();
                     }
@@ -370,6 +372,7 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                             this.toastr.success("Success!");
                             this.file = null;
                             this.cropPriceModal.hide();
+                            this.newsForm.reset();
                             this.btnLoading = false;
                             this.getUpdates();
                             this.gridApi.deselectAll();

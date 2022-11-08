@@ -830,19 +830,6 @@
           this.to = 20;
           this.count = 1;
           this.columnDefs = [];
-          this.commentForm = this.fb.group({
-            UserType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            username: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(3), _utils_username_validator__WEBPACK_IMPORTED_MODULE_9__["UsernameValidator"].cannotContainSpace]],
-            email: ["nodata@email.com"],
-            password: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Gender: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Age: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            ContactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: [""]
-          });
           this.rowData = [];
           this.Villages = [];
           this.LGA = [];
@@ -852,6 +839,7 @@
           this.years = [];
           this.filter = {};
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["UsersColumn"]);
+          this.setForm();
           this.rowSelection = "single";
         }
 
@@ -865,6 +853,23 @@
             this.getLGAs();
             this.getStates();
             this.getVillages();
+          }
+        }, {
+          key: "setForm",
+          value: function setForm() {
+            this.commentForm = this.fb.group({
+              UserType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              username: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(3), _utils_username_validator__WEBPACK_IMPORTED_MODULE_9__["UsernameValidator"].cannotContainSpace]],
+              email: ["nodata@email.com"],
+              password: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              Name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              Gender: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              Age: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              ContactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              state: [""]
+            });
           }
         }, {
           key: "f",
@@ -1036,6 +1041,8 @@
                 _this23.btnLoading = false;
 
                 _this23.commentModal.hide();
+
+                _this23.setForm();
 
                 _this23.getRetailers();
               } else {

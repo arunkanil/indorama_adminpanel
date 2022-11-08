@@ -320,6 +320,7 @@ export class CropPricesComponent {
                     this.getCropPrices();
                     this.file = null;
                     this.cropPriceModal.hide();
+                    this.cropPriceForm.reset();
                     this.gridApi.deselectAll();
                     this.btnLoading = false;
                   }
@@ -347,6 +348,7 @@ export class CropPricesComponent {
                 this.getCropPrices();
                 this.file = null;
                 this.cropPriceModal.hide();
+                this.cropPriceForm.reset();
                 this.gridApi.deselectAll();
                 this.btnLoading = false;
               }
@@ -372,6 +374,7 @@ export class CropPricesComponent {
                   this.getCropPrices();
                   this.file = null;
                   this.cropPriceModal.hide();
+                  this.cropPriceForm.reset();
                   this.gridApi.deselectAll();
                 }
                 this.btnLoading = false;

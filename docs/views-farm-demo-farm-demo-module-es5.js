@@ -8614,6 +8614,8 @@
                 _this25.getLists();
 
                 _this25.myModal.hide();
+
+                _this25.addForm.reset();
               } else {
                 _this25.toastr.error("Failed. Please check the fields!");
 

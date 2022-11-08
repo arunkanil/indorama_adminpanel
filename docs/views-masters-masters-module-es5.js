@@ -634,6 +634,8 @@
 
                   _this8.stateModal.hide();
 
+                  _this8.stateForm.reset();
+
                   _this8.dataservice.getStates().valueChanges.subscribe(function (result) {
                     console.log("getStates", result.data.states.data);
                     _this8.rowData = result.data.states.data;
@@ -657,6 +659,8 @@
                   _this8.gridApi.deselectAll();
 
                   _this8.stateModal.hide();
+
+                  _this8.stateForm.reset();
 
                   _this8.dataservice.getStates().valueChanges.subscribe(function (result) {
                     console.log("getStates", result.data.states.data);
@@ -696,6 +700,8 @@
 
                   _this9.lgaModal.hide();
 
+                  _this9.lgaForm.reset();
+
                   _this9.dataservice.getLGAs().valueChanges.subscribe(function (result) {
                     console.log("getLGAs", result.data.lgas.data);
                     _this9.rowData = result.data.lgas.data;
@@ -719,6 +725,8 @@
                   _this9.gridApi.deselectAll();
 
                   _this9.lgaModal.hide();
+
+                  _this9.lgaForm.reset();
 
                   _this9.dataservice.getLGAs().valueChanges.subscribe(function (result) {
                     console.log("getLGAs", result.data.lgas.data);
@@ -754,6 +762,8 @@
 
                   _this10.areaModal.hide();
 
+                  _this10.areaForm.reset();
+
                   _this10.dataservice.getAreas().valueChanges.subscribe(function (result) {
                     console.log("getAreas", result.data.areas.data);
                     _this10.rowData = result.data.areas.data;
@@ -777,6 +787,8 @@
                   _this10.gridApi.deselectAll();
 
                   _this10.areaModal.hide();
+
+                  _this10.areaForm.reset();
 
                   _this10.dataservice.getAreas().valueChanges.subscribe(function (result) {
                     console.log("getAreas", result.data.areas.data);
@@ -812,6 +824,8 @@
 
                   _this11.marketModal.hide();
 
+                  _this11.marketForm.reset();
+
                   _this11.dataservice.getMarkets().valueChanges.subscribe(function (result) {
                     console.log("getMarkets", result.data.markets.data);
                     _this11.rowData = result.data.markets.data;
@@ -835,6 +849,8 @@
                   _this11.gridApi.deselectAll();
 
                   _this11.marketModal.hide();
+
+                  _this11.marketForm.reset();
 
                   _this11.dataservice.getMarkets().valueChanges.subscribe(function (result) {
                     console.log("getMarkets", result.data.markets.data);
@@ -878,6 +894,8 @@
 
                         _this12.cropModal.hide();
 
+                        _this12.cropForm.reset();
+
                         _this12.btnLoading = false;
 
                         _this12.dataservice.getCrops().valueChanges.subscribe(function (result) {
@@ -912,6 +930,8 @@
 
                     _this12.cropModal.hide();
 
+                    _this12.cropForm.reset();
+
                     _this12.dataservice.getCrops().valueChanges.subscribe(function (result) {
                       console.log("getCrops", result.data.crops.data);
                       _this12.rowData = result.data.crops.data;
@@ -942,6 +962,8 @@
                       _this12.gridApi.deselectAll();
 
                       _this12.cropModal.hide();
+
+                      _this12.cropForm.reset();
 
                       _this12.dataservice.getCrops().valueChanges.subscribe(function (result) {
                         console.log("getCrops", result.data.crops.data);
@@ -979,6 +1001,8 @@
 
                   _this13.villageModal.hide();
 
+                  _this13.villageForm.reset();
+
                   _this13.dataservice.getVillages().valueChanges.subscribe(function (result) {
                     console.log("getVillages", result.data.villages.data);
                     _this13.rowData = result.data.villages.data;
@@ -1002,6 +1026,8 @@
                   _this13.gridApi.deselectAll();
 
                   _this13.villageModal.hide();
+
+                  _this13.villageForm.reset();
 
                   _this13.dataservice.getVillages().valueChanges.subscribe(function (result) {
                     console.log("getVillages", result.data.villages.data);

@@ -81,7 +81,7 @@ export class ChatComponent {
     return new Date(data).toLocaleDateString();
   }
   convertTime(data) {
-    return new Date(data).toLocaleTimeString();
+    return new Date(data).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric' });
   }
   onChange(event) {
     this.key = event.target.value;
@@ -91,13 +91,13 @@ export class ChatComponent {
     this.messageLoading = true;
     this.chatMembers = data.attributes?.members?.data;
     console.log(this.chatMembers);
-
     this.dataservice
       .getChatMessages(data.id)
       .valueChanges.subscribe((result: any) => {
         console.log("getChatMessages", result?.data?.chat?.data);
         this.messageData = result?.data?.chat.data;
         this.messageLoading = false;
+        this
       });
   }
 }

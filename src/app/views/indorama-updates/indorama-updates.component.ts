@@ -199,6 +199,7 @@ export class IndoramaUpdatesComponent {
                   this.getUpdates();
                   this.btnLoading = false;
                   this.cropPriceModal.hide();
+                  this.newsForm.reset();
                   this.gridApi.deselectAll();
                 } else {
                   this.toastr.error("Failed. Please check the fields!");
@@ -222,9 +223,9 @@ export class IndoramaUpdatesComponent {
               this.file = null;
               this.btnLoading = false;
               this.cropPriceModal.hide();
+              this.newsForm.reset();
               this.gridApi.deselectAll();
               this.getUpdates();
-              
             } else {
               this.toastr.error("Failed. Please check the fields!");
               this.btnLoading = false;
@@ -244,6 +245,7 @@ export class IndoramaUpdatesComponent {
                 this.toastr.success("Success!");
                 this.file = null;
                 this.cropPriceModal.hide();
+                this.newsForm.reset();
                 this.btnLoading = false;
                 this.getUpdates();
                 this.gridApi.deselectAll();

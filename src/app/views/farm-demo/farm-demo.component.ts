@@ -163,6 +163,7 @@ export class FarmDemoComponent {
           this.btnLoading = false;
           this.getLists();
           this.myModal.hide();
+          this.addForm.reset();
         } else {
           this.toastr.error("Failed. Please check the fields!");
           this.btnLoading = false;

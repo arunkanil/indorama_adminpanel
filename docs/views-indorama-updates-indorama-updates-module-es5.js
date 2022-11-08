@@ -470,6 +470,8 @@
 
                         _this5.cropPriceModal.hide();
 
+                        _this5.newsForm.reset();
+
                         _this5.gridApi.deselectAll();
                       } else {
                         _this5.toastr.error("Failed. Please check the fields!");
@@ -491,6 +493,8 @@
                     _this5.btnLoading = false;
 
                     _this5.cropPriceModal.hide();
+
+                    _this5.newsForm.reset();
 
                     _this5.gridApi.deselectAll();
 
@@ -519,6 +523,8 @@
                       _this5.file = null;
 
                       _this5.cropPriceModal.hide();
+
+                      _this5.newsForm.reset();
 
                       _this5.btnLoading = false;
 
