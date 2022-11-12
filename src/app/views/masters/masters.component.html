@@ -231,7 +231,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title">Add/Edit Area</h4>
+        <h4 class="modal-title">Add/Edit City</h4>
         <button
           type="button"
           class="close"
@@ -244,14 +244,14 @@
       <div class="modal-body">
         <form [formGroup]="areaForm" (ngSubmit)="areaSubmit()">
           <div class="form-group">
-            <label for="area">Area Name</label>
+            <label for="area">City Name</label>
             <input
               type="text"
               class="form-control"
               id="area"
               name="area"
               formControlName="area"
-              placeholder="Enter Area Name"
+              placeholder="Enter City Name"
             />
           </div>
           <div class="form-group">
@@ -552,7 +552,7 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="area">Area</label>
+            <label for="area">City</label>
             <select
               class="form-control"
               id="area"

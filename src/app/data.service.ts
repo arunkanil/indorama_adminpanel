@@ -4644,7 +4644,7 @@ export class DataService {
         lga: data.lga,
         bio: data.Bio,
         agronomist_lgas: data.agronomist_lgas,
-        blocked: data.blocked,
+        blocked: data.blocked == "true" ? true : false,
         confirmed: data.confirmed,
         UserType: data?.UserType,
         contactNumber: data.ContactNumber,

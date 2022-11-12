@@ -646,7 +646,7 @@ export const SoilAnalysisColumns = [
   },
   {
     field: "attributes.area.data.attributes.Name",
-    headerName: "Area",
+    headerName: "City",
     resizable: true,
     sortable: true,
     filter: "agTextColumnFilter",
@@ -788,7 +788,7 @@ export const AreaMasterColumn = [
   },
   {
     field: "attributes.Name",
-    headerName: "Area",
+    headerName: "City",
     resizable: true,
     sortable: true,
     filter: "agTextColumnFilter",
@@ -861,7 +861,7 @@ export const VillageMasterColumn = [
   },
   {
     field: "attributes.area.data.attributes.Name",
-    headerName: "Area",
+    headerName: "City",
     resizable: true,
     sortable: true,
     filter: "agTextColumnFilter",

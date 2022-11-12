@@ -709,7 +709,7 @@
         }
       }, {
         field: "attributes.area.data.attributes.Name",
-        headerName: "Area",
+        headerName: "City",
         resizable: true,
         sortable: true,
         filter: "agTextColumnFilter",
@@ -824,7 +824,7 @@
         sortable: true
       }, {
         field: "attributes.Name",
-        headerName: "Area",
+        headerName: "City",
         resizable: true,
         sortable: true,
         filter: "agTextColumnFilter",
@@ -882,7 +882,7 @@
         }
       }, {
         field: "attributes.area.data.attributes.Name",
-        headerName: "Area",
+        headerName: "City",
         resizable: true,
         sortable: true,
         filter: "agTextColumnFilter",

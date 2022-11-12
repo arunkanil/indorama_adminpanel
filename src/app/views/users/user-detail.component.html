@@ -175,6 +175,16 @@
                   <td>{{ details?.attributes?.username }}</td>
                 </tr>
                 <tr>
+                  <td>Status</td>
+                  <td>
+                    <span
+                      *ngIf="details?.attributes?.blocked"
+                      class="text-danger"
+                      >Blocked</span
+                    ><span *ngIf="!details?.attributes?.blocked" class="text-success">Active</span>
+                  </td>
+                </tr>
+                <tr>
                   <td>Profile pic</td>
                   <td>
                     <a

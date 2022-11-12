@@ -5114,7 +5114,7 @@ let DataService = class DataService {
                 lga: data.lga,
                 bio: data.Bio,
                 agronomist_lgas: data.agronomist_lgas,
-                blocked: data.blocked,
+                blocked: data.blocked == "true" ? true : false,
                 confirmed: data.confirmed,
                 UserType: data === null || data === void 0 ? void 0 : data.UserType,
                 contactNumber: data.ContactNumber,
@@ -5798,7 +5798,7 @@ const navItems = [
                 url: "/masters/LGA",
             },
             {
-                name: "Area",
+                name: "City",
                 url: "/masters/Areas",
             },
             {

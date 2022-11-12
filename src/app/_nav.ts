@@ -100,7 +100,7 @@ export const navItems: INavData[] = [
         url: "/masters/LGA",
       },
       {
-        name: "Area",
+        name: "City",
         url: "/masters/Areas",
       },
       {
