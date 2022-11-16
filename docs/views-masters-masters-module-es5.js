@@ -276,7 +276,7 @@
                 });
                 break;
 
-              case "/masters/Areas":
+              case "/masters/Cities":
                 this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["AreaMasterColumn"]);
                 this.dataservice.getAreas().valueChanges.subscribe(function (result) {
                   console.log("getAreas", result.data.areas.data);
@@ -467,7 +467,7 @@
 
                 break;
 
-              case "/masters/Areas":
+              case "/masters/Cities":
                 this.areaModal.show();
 
                 if (data) {
@@ -1089,7 +1089,7 @@
                 });
                 break;
 
-              case "/masters/Areas":
+              case "/masters/Cities":
                 this.dataservice.deleteArea(this.selectedRows[0].id).subscribe(function (result) {
                   console.log("response", result);
 
@@ -1315,12 +1315,12 @@
             title: 'LGA'
           }
         }, {
-          path: 'Areas',
+          path: 'Cities',
           // canActivate: [AuthGuard],
           component: _masters_component__WEBPACK_IMPORTED_MODULE_3__["mastersComponent"],
           data: {
-            roles: 'Areas',
-            title: 'Areas'
+            roles: 'Cities',
+            title: 'Cities'
           }
         }, {
           path: 'Villages',

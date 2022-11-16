@@ -170,7 +170,7 @@ let mastersComponent = class mastersComponent {
                     // }
                 });
                 break;
-            case "/masters/Areas":
+            case "/masters/Cities":
                 this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["AreaMasterColumn"]];
                 this.dataservice.getAreas().valueChanges.subscribe((result) => {
                     console.log("getAreas", result.data.areas.data);
@@ -340,7 +340,7 @@ let mastersComponent = class mastersComponent {
                     });
                 }
                 break;
-            case "/masters/Areas":
+            case "/masters/Cities":
                 this.areaModal.show();
                 if (data) {
                     this.areaForm = this.fb.group({
@@ -931,7 +931,7 @@ let mastersComponent = class mastersComponent {
                     }
                 });
                 break;
-            case "/masters/Areas":
+            case "/masters/Cities":
                 this.dataservice
                     .deleteArea(this.selectedRows[0].id)
                     .subscribe((result) => {
@@ -1123,12 +1123,12 @@ const routes = [
                 }
             },
             {
-                path: 'Areas',
+                path: 'Cities',
                 // canActivate: [AuthGuard],
                 component: _masters_component__WEBPACK_IMPORTED_MODULE_3__["mastersComponent"],
                 data: {
-                    roles: 'Areas',
-                    title: 'Areas'
+                    roles: 'Cities',
+                    title: 'Cities'
                 }
             },
             {

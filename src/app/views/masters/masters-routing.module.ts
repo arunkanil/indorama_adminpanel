@@ -32,12 +32,12 @@ const routes: Routes = [
         }
       },
       {
-        path: 'Areas',
+        path: 'Cities',
         // canActivate: [AuthGuard],
         component: mastersComponent,
         data: {
-          roles: 'Areas',
-          title: 'Areas'
+          roles: 'Cities',
+          title: 'Cities'
         }
       },
       {

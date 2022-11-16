@@ -101,7 +101,7 @@ export const navItems: INavData[] = [
       },
       {
         name: "City",
-        url: "/masters/Areas",
+        url: "/masters/Cities",
       },
       {
         name: "Villages",

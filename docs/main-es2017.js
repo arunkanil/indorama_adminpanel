@@ -5799,7 +5799,7 @@ const navItems = [
             },
             {
                 name: "City",
-                url: "/masters/Areas",
+                url: "/masters/Cities",
             },
             {
                 name: "Villages",

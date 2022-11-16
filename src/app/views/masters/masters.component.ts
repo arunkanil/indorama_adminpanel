@@ -116,7 +116,7 @@ export class mastersComponent {
           // }
         });
         break;
-      case "/masters/Areas":
+      case "/masters/Cities":
         this.columnDefs = [...AreaMasterColumn];
         this.dataservice.getAreas().valueChanges.subscribe((result: any) => {
           console.log("getAreas", result.data.areas.data);
@@ -288,7 +288,7 @@ export class mastersComponent {
           });
         }
         break;
-      case "/masters/Areas":
+      case "/masters/Cities":
         this.areaModal.show();
         if (data) {
           this.areaForm = this.fb.group({
@@ -862,7 +862,7 @@ export class mastersComponent {
             }
           });
         break;
-      case "/masters/Areas":
+      case "/masters/Cities":
         this.dataservice
           .deleteArea(this.selectedRows[0].id)
           .subscribe((result: any) => {

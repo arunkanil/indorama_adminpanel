@@ -2818,7 +2818,7 @@
           url: "/masters/LGA"
         }, {
           name: "City",
-          url: "/masters/Areas"
+          url: "/masters/Cities"
         }, {
           name: "Villages",
           url: "/masters/Villages"
