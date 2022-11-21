@@ -29,11 +29,12 @@
 .bg-image {
   position: relative;
   overflow: hidden;
-  background-image: url(../assets/img/brand/banner-2.jpg);
+  background-image: url(../assets/img/brand/banner-5.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
-  filter: opacity(25%);
+  filter: sepia(20%);
+  filter: opacity(65%);
 }
 .login-box {
   position: absolute;
@@ -46,7 +47,7 @@
 }
 .fallback-image {
   @media screen and (max-width: 768px) {
-    background-image: url(../assets/img/brand/banner-2.jpg);
+    background-image: url(../assets/img/brand/banner-5.jpg);
     background-repeat: no-repeat;
     background-size: cover;
   }

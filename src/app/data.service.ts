@@ -352,7 +352,7 @@ const UpdateFarmDemo = gql`
 `;
 const CropsQuery = gql`
   query {
-    crops(pagination: { limit: 10000 }, sort: "createdAt:desc") {
+    crops(pagination: { limit: 10000 }, sort: "createdAt:desc", filters:{isDelete:{eq:false}}) {
       meta {
         pagination {
           total
@@ -430,7 +430,7 @@ const UpdateCrops = gql`
 `;
 const StatesQuery = gql`
   query {
-    states(pagination: { limit: 10000 }, sort: "createdAt:desc") {
+    states(pagination: { limit: 10000 }, sort: "createdAt:desc", filters:{isDelete:{eq:false}}) {
       meta {
         pagination {
           total
@@ -532,7 +532,7 @@ const LGAquery = gql`
     lgas(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { state: { id: { eq: $id } } }
+      filters: { state: { id: { eq: $id } }, isDelete:{eq:false} }
     ) {
       meta {
         pagination {
@@ -631,7 +631,7 @@ const Villagesquery = gql`
     villages(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { area: { lga: { id: { eq: $id } } } }
+      filters: { area: { lga: { id: { eq: $id } } }, isDelete:{eq:false} }
     ) {
       meta {
         pagination {
@@ -733,7 +733,7 @@ const Areasquery = gql`
     areas(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { lga: { id: { eq: $id } } }
+      filters: { lga: { id: { eq: $id } }, isDelete:{eq:false} }
     ) {
       meta {
         pagination {
@@ -870,7 +870,7 @@ const MarketQuery = gql`
     markets(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { state: { id: { eq: $id } } }
+      filters: { state: { id: { eq: $id } }, isDelete:{eq:false} }
     ) {
       meta {
         pagination {
@@ -2162,7 +2162,7 @@ const updateRetailerProducts = gql`
 `;
 const DeleteStatesMutation = gql`
   mutation ($id: ID!) {
-    deleteState(id: $id) {
+    updateState(id: $id, data:{isDelete:true}) {
       data {
         attributes {
           Name
@@ -2173,7 +2173,7 @@ const DeleteStatesMutation = gql`
 `;
 const DeleteLGAMutation = gql`
   mutation ($id: ID!) {
-    deleteLga(id: $id) {
+    updateLga(id: $id, data:{isDelete:true}) {
       data {
         attributes {
           Name
@@ -2184,7 +2184,7 @@ const DeleteLGAMutation = gql`
 `;
 const DeleteAreaMutation = gql`
   mutation ($id: ID!) {
-    deleteArea(id: $id) {
+    updateArea(id: $id, data:{isDelete:true}) {
       data {
         attributes {
           Name
@@ -2195,7 +2195,7 @@ const DeleteAreaMutation = gql`
 `;
 const DeleteVillageMutation = gql`
   mutation ($id: ID!) {
-    deleteVillage(id: $id) {
+    updateVillage(id: $id, data:{isDelete:true}) {
       data {
         attributes {
           Name
@@ -2206,7 +2206,7 @@ const DeleteVillageMutation = gql`
 `;
 const DeleteCropMutation = gql`
   mutation ($id: ID!) {
-    deleteCrop(id: $id) {
+    updateCrop(id: $id, data:{isDelete:true}) {
       data {
         attributes {
           Name
@@ -2217,7 +2217,7 @@ const DeleteCropMutation = gql`
 `;
 const DeleteMarketMutation = gql`
   mutation ($id: ID!) {
-    deleteMarket(id: $id) {
+    updateMarket(id: $id, data:{isDelete:true}) {
       data {
         attributes {
           Name

@@ -848,7 +848,7 @@ export class mastersComponent {
           .deleteVillage(this.selectedRows[0].id)
           .subscribe((result: any) => {
             console.log("response", result);
-            if (result.data.deleteVillage) {
+            if (result.data.updateVillage) {
               this.toastr.success("Success!");
               this.gridApi.deselectAll();
               this.deleteModal.hide();
@@ -867,7 +867,7 @@ export class mastersComponent {
           .deleteArea(this.selectedRows[0].id)
           .subscribe((result: any) => {
             console.log("response", result);
-            if (result.data.deleteArea) {
+            if (result.data.updateArea) {
               this.toastr.success("Success!");
               this.gridApi.deselectAll();
               this.deleteModal.hide();
@@ -886,7 +886,7 @@ export class mastersComponent {
           .deleteLGA(this.selectedRows[0].id)
           .subscribe((result: any) => {
             console.log("response", result);
-            if (result.data.deleteLga) {
+            if (result.data.updateLga) {
               this.toastr.success("Success!");
               this.gridApi.deselectAll();
               this.deleteModal.hide();
@@ -905,7 +905,7 @@ export class mastersComponent {
           .deleteState(this.selectedRows[0].id)
           .subscribe((result: any) => {
             console.log("response", result);
-            if (result.data.deleteState) {
+            if (result.data.updateState) {
               this.toastr.success("Success!");
               this.gridApi.deselectAll();
               this.deleteModal.hide();
@@ -924,7 +924,7 @@ export class mastersComponent {
           .deleteMarket(this.selectedRows[0].id)
           .subscribe((result: any) => {
             console.log("response", result);
-            if (result.data.deleteMarket) {
+            if (result.data.updateMarket) {
               this.toastr.success("Success!");
               this.gridApi.deselectAll();
               this.deleteModal.hide();
@@ -943,7 +943,7 @@ export class mastersComponent {
           .deleteCrop(this.selectedRows[0].id)
           .subscribe((result: any) => {
             console.log("response", result);
-            if (result.data.deleteCrop) {
+            if (result.data.updateCrop) {
               this.toastr.success("Success!");
               this.gridApi.deselectAll();
               this.deleteModal.hide();
