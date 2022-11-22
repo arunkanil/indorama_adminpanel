@@ -1,108 +1,155 @@
 (function () {
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"], {
-    /***/"7nfi":
-    /*!*********************************************!*\
-      !*** ./src/app/constants/columnMetadata.ts ***!
-      \*********************************************/
-    /*! exports provided: filterParams, AgentsColumn, RetailersColumn, UsersColumn, FarmDemoColumn, SoilHomeColumn, SoilAnalysisColumns, dateConverter, dateConverterMin, StateMasterColumn, LGAMasterColumn, AreaMasterColumn, VillageMasterColumn, MarketMasterColumn, CropMasterColumn, CropPricesColumn, SmsColumn, DeliveryReportColumn, MarketplaceColumn, IndoramaUpdatesColumn, SurveysColumn, ActivitiesColumn */
     /***/
-    function nfi(module, __webpack_exports__, __webpack_require__) {
+    "7nfi": function nfi(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "filterParams", function () {
         return filterParams;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "AgentsColumn", function () {
         return AgentsColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "RetailersColumn", function () {
         return RetailersColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "UsersColumn", function () {
         return UsersColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "FarmDemoColumn", function () {
         return FarmDemoColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "SoilHomeColumn", function () {
         return SoilHomeColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "SoilAnalysisColumns", function () {
         return SoilAnalysisColumns;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "dateConverter", function () {
         return dateConverter;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "dateConverterMin", function () {
         return dateConverterMin;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "StateMasterColumn", function () {
         return StateMasterColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "LGAMasterColumn", function () {
         return LGAMasterColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "AreaMasterColumn", function () {
         return AreaMasterColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "VillageMasterColumn", function () {
         return VillageMasterColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "MarketMasterColumn", function () {
         return MarketMasterColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "CropMasterColumn", function () {
         return CropMasterColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "CropPricesColumn", function () {
         return CropPricesColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "SmsColumn", function () {
         return SmsColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "DeliveryReportColumn", function () {
         return DeliveryReportColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "MarketplaceColumn", function () {
         return MarketplaceColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "IndoramaUpdatesColumn", function () {
         return IndoramaUpdatesColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "SurveysColumn", function () {
         return SurveysColumn;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "ActivitiesColumn", function () {
         return ActivitiesColumn;
       });
       /* harmony import */
-      var _utils_StatusRenderer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ../utils/StatusRenderer */"MYrn");
+
+
+      var _utils_StatusRenderer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! ../utils/StatusRenderer */
+      "MYrn");
+
       var filterParams = {
         suppressAndOrCondition: true,
         comparator: function comparator(filterLocalDateAtMidnight, cellValue) {
@@ -111,12 +158,15 @@
           var dateParts = dateAsString.split("/");
           var cellDate = new Date(Number(dateParts[2]), Number(dateParts[1]) - 1, Number(dateParts[0]));
           console.log(cellValue, "ddd", cellDate, "ddd", filterLocalDateAtMidnight);
+
           if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
             return 0;
           }
+
           if (cellDate < filterLocalDateAtMidnight) {
             return -1;
           }
+
           if (cellDate > filterLocalDateAtMidnight) {
             return 1;
           }
@@ -124,41 +174,57 @@
         browserDatePicker: true,
         buttons: ["reset"]
       };
+
       function monthRenderer(params) {
         switch (params.data.MarriageMonth) {
           case 0:
             return "January";
+
           case 1:
             return "February";
+
           case 2:
             return "March";
+
           case 3:
             return "April";
+
           case 4:
             return "May";
+
           case 5:
             return "June";
+
           case 6:
             return "July";
+
           case 7:
             return "August";
+
           case 8:
             return "September";
+
           case 9:
             return "October";
+
           case 10:
             return "November";
+
           case 11:
             return "December";
         }
       }
+
       function dateRenderer(params) {
         var _a, _b, _c, _d;
+
         var value = ((_b = (_a = params.data.Address) === null || _a === void 0 ? void 0 : _a.post_office) === null || _b === void 0 ? void 0 : _b.Name) + " " + ((_d = (_c = params.data.Address) === null || _c === void 0 ? void 0 : _c.post_office) === null || _d === void 0 ? void 0 : _d.Pincode);
+
         if (value != "undefined undefined") {
           return value;
         } else return "No data";
       }
+
       var AgentsColumn = [{
         field: "id",
         headerName: "ID",
@@ -248,8 +314,7 @@
           filterOptions: ["contains"],
           buttons: ["reset"]
         }
-      },
-      // {
+      }, // {
       //   field: "attributes.email",
       //   headerName: "Email",
       //   minWidth: 150,
@@ -272,9 +337,11 @@
         },
         cellRenderer: function cellRenderer(data) {
           var x = "";
+
           for (var i = 0; i < data.value.length; i++) {
             x = x + data.value[i].attributes.CategoryName + ",";
           }
+
           return x;
         }
       }, {
@@ -357,8 +424,7 @@
           filterOptions: ["contains"],
           buttons: ["reset"]
         }
-      },
-      // {
+      }, // {
       //   field: "attributes.email",
       //   headerName: "Email",
       //   minWidth: 150,
@@ -449,16 +515,6 @@
           buttons: ["reset"]
         }
       }, {
-        field: "attributes.state.data.attributes.Name",
-        headerName: "State",
-        resizable: true,
-        sortable: true,
-        filter: "agTextColumnFilter",
-        filterParams: {
-          filterOptions: ["contains"],
-          buttons: ["reset"]
-        }
-      }, {
         field: "attributes.lgas.data.attributes.Name",
         headerName: "LGA",
         resizable: true,
@@ -481,10 +537,11 @@
         }
       }, {
         field: "attributes.AreaOfField",
-        headerName: "Area of Field",
+        headerName: "Area of Field (hectares)",
+        suppressSizeToFit: true,
         sortable: true,
         resizable: true,
-        filter: "agDateColumnFilter",
+        filter: "agNumberColumnFilter",
         filterParams: filterParams
       }, {
         field: "attributes.Season",
@@ -504,6 +561,16 @@
         },
         cellRenderer: function cellRenderer(data) {
           return data.value ? new Date(data.value).toDateString() : "";
+        }
+      }, {
+        field: "attributes.state.data.attributes.Name",
+        headerName: "State",
+        resizable: true,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+          filterOptions: ["contains"],
+          buttons: ["reset"]
         }
       }];
       var SoilHomeColumn = [{
@@ -686,6 +753,7 @@
           return data.value ? new Date(data.value).toString() : "";
         }
       }];
+
       function dateConverter(date) {
         if (date) {
           return new Date(date);
@@ -693,6 +761,7 @@
           return "No data";
         }
       }
+
       function dateConverterMin(date) {
         if (date) {
           return new Date(date).toDateString();
@@ -700,6 +769,7 @@
           return "No data";
         }
       }
+
       var StateMasterColumn = [{
         field: "id",
         headerName: "ID",
@@ -927,12 +997,13 @@
         }
       }, {
         field: "attributes.Price",
-        headerName: "Price",
+        headerName: "Price (NGN)",
         resizable: true,
         sortable: true,
-        filter: "agTextColumnFilter",
+        maxWidth: 135,
+        suppressSizeToFit: true,
+        filter: "agNumberColumnFilter",
         filterParams: {
-          filterOptions: ["contains"],
           buttons: ["reset"]
         }
       }, {
@@ -1099,16 +1170,6 @@
           buttons: ["reset"]
         }
       }, {
-        field: "attributes.Price",
-        headerName: "Price",
-        resizable: true,
-        sortable: true,
-        filter: "agTextColumnFilter",
-        filterParams: {
-          filterOptions: ["contains"],
-          buttons: ["reset"]
-        }
-      }, {
         field: "attributes.Unit",
         headerName: "Unit",
         resizable: true,
@@ -1117,6 +1178,20 @@
         filterParams: {
           filterOptions: ["contains"],
           buttons: ["reset"]
+        }
+      }, {
+        field: "attributes.Price",
+        headerName: "Price (NGN)",
+        resizable: true,
+        suppressSizeToFit: true,
+        sortable: true,
+        filter: "agNumberColumnFilter",
+        filterParams: {
+          filterOptions: ["contains", "greaterThan", "greaterThanOrEqual", "inRange", "lessThan", "lessThanOrEqual"],
+          buttons: ["reset"]
+        },
+        valueFormatter: function valueFormatter(params) {
+          return params.data.number;
         }
       }, {
         field: "attributes.seller.data.attributes.Name",
@@ -1271,32 +1346,38 @@
           return data.value ? new Date(data.value).toString() : "";
         }
       }];
-
       /***/
     },
 
-    /***/"MYrn":
-    /*!*****************************************!*\
-      !*** ./src/app/utils/StatusRenderer.ts ***!
-      \*****************************************/
-    /*! exports provided: ActionRenderer */
     /***/
-    function MYrn(module, __webpack_exports__, __webpack_require__) {
+    "MYrn": function MYrn(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "ActionRenderer", function () {
         return ActionRenderer;
       });
       /* harmony import */
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "8Y7J");
+
       var ActionRenderer = /*#__PURE__*/function () {
         function ActionRenderer() {
           _classCallCheck(this, ActionRenderer);
         }
+
         _createClass(ActionRenderer, [{
           key: "agInit",
           value: function agInit(params) {
@@ -1306,6 +1387,7 @@
           key: "invokeParentMethod",
           value: function invokeParentMethod() {
             var _a;
+
             this.params.context.componentParent.onRowClicked("Row: ".concat(this.params.node.rowIndex, ", Col: ").concat((_a = this.params.colDef) === null || _a === void 0 ? void 0 : _a.headerName));
           }
         }, {
@@ -1314,13 +1396,14 @@
             return false;
           }
         }]);
+
         return ActionRenderer;
       }();
+
       ActionRenderer = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         template: "<span\n    ><button\n      style=\"height: 20px\"\n      (click)=\"invokeParentMethod()\"\n      class=\"btn btn-info\"\n    >\n      Edit\n    </button></span\n  >",
         styles: ["\n      .btn {\n        line-height: 0.5;\n      }\n    "]
       })], ActionRenderer);
-
       /***/
     }
   }]);

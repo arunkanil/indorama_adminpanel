@@ -413,17 +413,6 @@ const FarmDemoColumn = [
         },
     },
     {
-        field: "attributes.state.data.attributes.Name",
-        headerName: "State",
-        resizable: true,
-        sortable: true,
-        filter: "agTextColumnFilter",
-        filterParams: {
-            filterOptions: ["contains"],
-            buttons: ["reset"],
-        },
-    },
-    {
         field: "attributes.lgas.data.attributes.Name",
         headerName: "LGA",
         resizable: true,
@@ -448,10 +437,11 @@ const FarmDemoColumn = [
     },
     {
         field: "attributes.AreaOfField",
-        headerName: "Area of Field",
+        headerName: "Area of Field (hectares)",
+        suppressSizeToFit: true,
         sortable: true,
         resizable: true,
-        filter: "agDateColumnFilter",
+        filter: "agNumberColumnFilter",
         filterParams: filterParams,
     },
     {
@@ -473,6 +463,17 @@ const FarmDemoColumn = [
         },
         cellRenderer: (data) => {
             return data.value ? new Date(data.value).toDateString() : "";
+        },
+    },
+    {
+        field: "attributes.state.data.attributes.Name",
+        headerName: "State",
+        resizable: true,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+            filterOptions: ["contains"],
+            buttons: ["reset"],
         },
     },
 ];
@@ -948,12 +949,13 @@ const CropPricesColumn = [
     },
     {
         field: "attributes.Price",
-        headerName: "Price",
+        headerName: "Price (NGN)",
         resizable: true,
         sortable: true,
-        filter: "agTextColumnFilter",
+        maxWidth: 135,
+        suppressSizeToFit: true,
+        filter: "agNumberColumnFilter",
         filterParams: {
-            filterOptions: ["contains"],
             buttons: ["reset"],
         },
     },
@@ -1142,17 +1144,6 @@ const MarketplaceColumn = [
         },
     },
     {
-        field: "attributes.Price",
-        headerName: "Price",
-        resizable: true,
-        sortable: true,
-        filter: "agTextColumnFilter",
-        filterParams: {
-            filterOptions: ["contains"],
-            buttons: ["reset"],
-        },
-    },
-    {
         field: "attributes.Unit",
         headerName: "Unit",
         resizable: true,
@@ -1162,6 +1153,19 @@ const MarketplaceColumn = [
             filterOptions: ["contains"],
             buttons: ["reset"],
         },
+    },
+    {
+        field: "attributes.Price",
+        headerName: "Price (NGN)",
+        resizable: true,
+        suppressSizeToFit: true,
+        sortable: true,
+        filter: "agNumberColumnFilter",
+        filterParams: {
+            filterOptions: ["contains", "greaterThan", "greaterThanOrEqual", "inRange", "lessThan", "lessThanOrEqual"],
+            buttons: ["reset"],
+        },
+        valueFormatter: params => params.data.number,
     },
     {
         field: "attributes.seller.data.attributes.Name",
