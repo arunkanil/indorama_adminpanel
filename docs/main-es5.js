@@ -1,87 +1,58 @@
 (function () {
   var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15, _templateObject16, _templateObject17, _templateObject18, _templateObject19, _templateObject20, _templateObject21, _templateObject22, _templateObject23, _templateObject24, _templateObject25, _templateObject26, _templateObject27, _templateObject28, _templateObject29, _templateObject30, _templateObject31, _templateObject32, _templateObject33, _templateObject34, _templateObject35, _templateObject36, _templateObject37, _templateObject38, _templateObject39, _templateObject40, _templateObject41, _templateObject42, _templateObject43, _templateObject44, _templateObject45, _templateObject46, _templateObject47, _templateObject48, _templateObject49, _templateObject50, _templateObject51, _templateObject52, _templateObject53, _templateObject54, _templateObject55, _templateObject56, _templateObject57, _templateObject58, _templateObject59, _templateObject60, _templateObject61, _templateObject62, _templateObject63, _templateObject64, _templateObject65, _templateObject66, _templateObject67, _templateObject68, _templateObject69, _templateObject70, _templateObject71, _templateObject72, _templateObject73, _templateObject74, _templateObject75, _templateObject76, _templateObject77, _templateObject78, _templateObject79, _templateObject80, _templateObject81, _templateObject82, _templateObject83, _templateObject84;
-
   function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
-
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["main"], {
+    /***/0:
+    /*!***************************!*\
+      !*** multi ./src/main.ts ***!
+      \***************************/
+    /*! no static exports found */
     /***/
-    0: function _(module, exports, __webpack_require__) {
-      module.exports = __webpack_require__(
-      /*! E:\Projects\Angular Apps\indorama_adminpanel\src\main.ts */
-      "zUnb");
+    function _(module, exports, __webpack_require__) {
+      module.exports = __webpack_require__( /*! /Users/ashikvashraf/Documents/AngularProjects/indorama_adminpanel/src/main.ts */"zUnb");
+
       /***/
     },
 
+    /***/"1BUF":
+    /*!*******************************************************!*\
+      !*** ./src/app/views/login/authentication.service.ts ***!
+      \*******************************************************/
+    /*! exports provided: AuthenticationService */
     /***/
-    "1BUF": function BUF(module, __webpack_exports__, __webpack_require__) {
+    function BUF(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "AuthenticationService", function () {
         return AuthenticationService;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      "IheW");
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/common/http */"IheW");
       /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
+      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! rxjs */"qCKp");
       /* harmony import */
-
-
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! rxjs/operators */
-      "kU1M");
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! rxjs/operators */"kU1M");
       /* harmony import */
-
-
-      var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ../../../environments/environment */
-      "AytR");
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../../../environments/environment */"AytR");
       /* harmony import */
-
-
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ngx-toastr */
-      "EApP");
-
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ngx-toastr */"EApP");
       var AuthenticationService = /*#__PURE__*/function () {
         function AuthenticationService(http, toastr) {
           _classCallCheck(this, AuthenticationService);
-
           this.http = http;
           this.toastr = toastr;
           this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem("currentUser")));
           this.currentUser = this.currentUserSubject.asObservable();
         }
-
         _createClass(AuthenticationService, [{
           key: "currentUserValue",
           get: function get() {
@@ -92,11 +63,9 @@
           key: "login",
           value: function login(data) {
             var _this = this;
-
             return this.http.post("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].apiUrl, "/api/auth/local/"), data).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])(function (user) {
               // login successful if there's a jwt token in the response
               console.log(user);
-
               if (user.jwt && user.user.UserType == "Admin") {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem("token", user.jwt);
@@ -107,12 +76,10 @@
                 localStorage.setItem("name", user.user.Name);
                 localStorage.setItem("phone_number", user.user.ContactNumber);
                 localStorage.setItem("currentUser", JSON.stringify(user));
-
                 _this.currentUserSubject.next(user);
               } else {
                 _this.toastr.error("You're not authorized");
               }
-
               return user;
             }));
           }
@@ -125,10 +92,8 @@
             this.currentUserSubject.next(null);
           }
         }]);
-
         return AuthenticationService;
       }();
-
       AuthenticationService.ctorParameters = function () {
         return [{
           type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
@@ -136,78 +101,48 @@
           type: ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"]
         }];
       };
-
       AuthenticationService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: "root"
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"]])], AuthenticationService);
+
       /***/
     },
 
+    /***/"4KHl":
+    /*!***********************************!*\
+      !*** ./src/app/graphql.module.ts ***!
+      \***********************************/
+    /*! exports provided: createApollo, GraphQLModule */
     /***/
-    "4KHl": function KHl(module, __webpack_exports__, __webpack_require__) {
+    function KHl(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "createApollo", function () {
         return createApollo;
       });
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "GraphQLModule", function () {
         return GraphQLModule;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      "IheW");
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/common/http */"IheW");
       /* harmony import */
-
-
-      var apollo_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! apollo-angular */
-      "nbgS");
+      var apollo_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! apollo-angular */"nbgS");
       /* harmony import */
-
-
-      var apollo_angular_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! apollo-angular/http */
-      "F/12");
+      var apollo_angular_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! apollo-angular/http */"F/12");
       /* harmony import */
-
-
-      var _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! @apollo/client/core */
-      "ALmS");
+      var _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! @apollo/client/core */"ALmS");
       /* harmony import */
-
-
-      var _apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! @apollo/client/link/context */
-      "MWEN");
+      var _apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! @apollo/client/link/context */"MWEN");
       /* harmony import */
-
-
-      var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../environments/environment */
-      "AytR"); // import { NgModule } from "@angular/core";
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ../environments/environment */"AytR");
+      // import { NgModule } from "@angular/core";
       // import { APOLLO_OPTIONS, APOLLO_NAMED_OPTIONS } from "apollo-angular";
       // import {
       //   ApolloClientOptions,
@@ -217,6 +152,7 @@
       // import { setContext } from "@apollo/client/link/context";
       // import { HttpLink } from "apollo-angular/http";
       // import { environment } from "../environments/environment";
+
       // const uri = `${environment.apiUrl}/graphql`;
       // export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
       //   const basic = setContext((operation, context) => ({
@@ -268,9 +204,7 @@
       // })
       // export class GraphQLModule {}
 
-
       var uri = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_7__["environment"].apiUrl, "/graphql");
-
       function createApollo(httpLink) {
         var basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__["setContext"])(function (operation, context) {
           return {
@@ -281,7 +215,6 @@
         });
         var auth = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_6__["setContext"])(function (operation, context) {
           var token = localStorage.getItem('token');
-
           if (token === null) {
             return {};
           } else {
@@ -292,22 +225,18 @@
             };
           }
         });
-
         var link = _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__["ApolloLink"].from([basic, auth, httpLink.create({
           uri: uri
         })]);
-
         var cache = new _apollo_client_core__WEBPACK_IMPORTED_MODULE_5__["InMemoryCache"]();
         return {
           link: link,
           cache: cache
         };
       }
-
-      var GraphQLModule = function GraphQLModule() {
+      var GraphQLModule = /*#__PURE__*/_createClass(function GraphQLModule() {
         _classCallCheck(this, GraphQLModule);
-      };
-
+      });
       GraphQLModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         exports: [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClientModule"]],
         providers: [{
@@ -316,172 +245,139 @@
           deps: [apollo_angular_http__WEBPACK_IMPORTED_MODULE_4__["HttpLink"]]
         }]
       })], GraphQLModule);
+
       /***/
     },
 
+    /***/"8gg5":
+    /*!**********************************************!*\
+      !*** ./src/app/views/error/404.component.ts ***!
+      \**********************************************/
+    /*! exports provided: P404Component */
     /***/
-    "8gg5": function gg5(module, __webpack_exports__, __webpack_require__) {
+    function gg5(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "P404Component", function () {
         return P404Component;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _raw_loader_404_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! raw-loader!./404.component.html */
-      "nAJl");
+      var _raw_loader_404_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! raw-loader!./404.component.html */"nAJl");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
-
-      var P404Component = function P404Component() {
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */"8Y7J");
+      var P404Component = /*#__PURE__*/_createClass(function P404Component() {
         _classCallCheck(this, P404Component);
-      };
-
+      });
       P404Component.ctorParameters = function () {
         return [];
       };
-
       P404Component = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         template: _raw_loader_404_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], P404Component);
+
       /***/
     },
 
+    /***/"AytR":
+    /*!*****************************************!*\
+      !*** ./src/environments/environment.ts ***!
+      \*****************************************/
+    /*! exports provided: environment */
     /***/
-    "AytR": function AytR(module, __webpack_exports__, __webpack_require__) {
+    function AytR(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "environment", function () {
         return environment;
-      }); // The file contents for the current environment will overwrite these during build.
+      });
+      // The file contents for the current environment will overwrite these during build.
       // The build system defaults to the dev environment which uses `environment.ts`, but if you do
       // `ng build --env=prod` then `environment.prod.ts` will be used instead.
       // The list of which env maps to which file can be found in `.angular-cli.json`.
-
-
       var environment = {
         production: false,
         apiUrl: "https://indoramaapp.untanglestrategy.com"
       };
+
       /***/
     },
 
+    /***/"DodC":
+    /*!****************************************************!*\
+      !*** ./src/app/containers/default-layout/index.ts ***!
+      \****************************************************/
+    /*! exports provided: DefaultLayoutComponent */
     /***/
-    "DodC": function DodC(module, __webpack_exports__, __webpack_require__) {
+    function DodC(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony import */
-
-
-      var _default_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ./default-layout.component */
-      "JPqG");
+      var _default_layout_component__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./default-layout.component */"JPqG");
       /* harmony reexport (safe) */
-
-
       __webpack_require__.d(__webpack_exports__, "DefaultLayoutComponent", function () {
         return _default_layout_component__WEBPACK_IMPORTED_MODULE_0__["DefaultLayoutComponent"];
       });
-      /***/
 
+      /***/
     },
 
+    /***/"G/4p":
+    /*!*************************************!*\
+      !*** ./src/app/containers/index.ts ***!
+      \*************************************/
+    /*! exports provided: DefaultLayoutComponent */
     /***/
-    "G/4p": function G4p(module, __webpack_exports__, __webpack_require__) {
+    function G4p(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony import */
-
-
-      var _default_layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! ./default-layout */
-      "DodC");
+      var _default_layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! ./default-layout */"DodC");
       /* harmony reexport (safe) */
-
-
       __webpack_require__.d(__webpack_exports__, "DefaultLayoutComponent", function () {
         return _default_layout__WEBPACK_IMPORTED_MODULE_0__["DefaultLayoutComponent"];
       });
-      /***/
 
+      /***/
     },
 
+    /***/"JPqG":
+    /*!***********************************************************************!*\
+      !*** ./src/app/containers/default-layout/default-layout.component.ts ***!
+      \***********************************************************************/
+    /*! exports provided: DefaultLayoutComponent */
     /***/
-    "JPqG": function JPqG(module, __webpack_exports__, __webpack_require__) {
+    function JPqG(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "DefaultLayoutComponent", function () {
         return DefaultLayoutComponent;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _raw_loader_default_layout_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! raw-loader!./default-layout.component.html */
-      "lm8q");
+      var _raw_loader_default_layout_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! raw-loader!./default-layout.component.html */"lm8q");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! @angular/router */
-      "iInd");
+      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/router */"iInd");
       /* harmony import */
-
-
-      var _views_login_authentication_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ../../views/login/authentication.service */
-      "1BUF");
+      var _views_login_authentication_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ../../views/login/authentication.service */"1BUF");
       /* harmony import */
-
-
-      var _nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ../../_nav */
-      "c2Qq");
-
+      var _nav__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ../../_nav */"c2Qq");
       var DefaultLayoutComponent = /*#__PURE__*/function () {
         function DefaultLayoutComponent(router, authenticationService) {
           var _this2 = this;
-
           _classCallCheck(this, DefaultLayoutComponent);
-
           this.router = router;
           this.authenticationService = authenticationService;
           this.sidebarMinimized = false;
@@ -491,14 +387,13 @@
           });
           this.authenticationService.currentUser.subscribe(function (x) {
             return _this2.currentUser = x;
-          }); // console.log("constructor",this.currentUser.user.UserType)
+          });
+          // console.log("constructor",this.currentUser.user.UserType)
         }
-
         _createClass(DefaultLayoutComponent, [{
           key: "toggleMinimize",
           value: function toggleMinimize(e) {
             var _a;
-
             this.sidebarMinimized = e;
             console.log((_a = this.currentUser.user) === null || _a === void 0 ? void 0 : _a.UserType);
           }
@@ -509,10 +404,8 @@
             this.router.navigate(["/login"]);
           }
         }]);
-
         return DefaultLayoutComponent;
       }();
-
       DefaultLayoutComponent.ctorParameters = function () {
         return [{
           type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]
@@ -520,96 +413,65 @@
           type: _views_login_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]
         }];
       };
-
       DefaultLayoutComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         selector: "app-dashboard",
         template: _raw_loader_default_layout_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _views_login_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]])], DefaultLayoutComponent);
+
       /***/
     },
 
+    /***/"Lrxh":
+    /*!**************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/error/500.component.html ***!
+      \**************************************************************************************/
+    /*! exports provided: default */
     /***/
-    "Lrxh": function Lrxh(module, __webpack_exports__, __webpack_require__) {
+    function Lrxh(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
+      __webpack_exports__["default"] = "<div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"clearfix\">\n          <h1 class=\"float-left display-3 mr-4\">500</h1>\n          <h4 class=\"pt-3\">Houston, we have a problem!</h4>\n          <p class=\"text-muted\">The page you are looking for is temporarily unavailable.</p>\n        </div>\n        <div class=\"input-prepend input-group\">\n          <div class=\"input-group-prepend\">\n            <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\n          </div>\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\n          <span class=\"input-group-append\">\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n";
 
-
-      __webpack_exports__["default"] = "<div class=\"app flex-row align-items-center\">\r\n  <div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"clearfix\">\r\n          <h1 class=\"float-left display-3 mr-4\">500</h1>\r\n          <h4 class=\"pt-3\">Houston, we have a problem!</h4>\r\n          <p class=\"text-muted\">The page you are looking for is temporarily unavailable.</p>\r\n        </div>\r\n        <div class=\"input-prepend input-group\">\r\n          <div class=\"input-group-prepend\">\r\n            <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\r\n          </div>\r\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\r\n          <span class=\"input-group-append\">\r\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\r\n          </span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
+    /***/"QB/w":
+    /*!************************************************!*\
+      !*** ./src/app/views/login/login.component.ts ***!
+      \************************************************/
+    /*! exports provided: LoginComponent */
     /***/
-    "QB/w": function QBW(module, __webpack_exports__, __webpack_require__) {
+    function QBW(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "LoginComponent", function () {
         return LoginComponent;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _raw_loader_login_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! raw-loader!./login.component.html */
-      "nSew");
+      var _raw_loader_login_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! raw-loader!./login.component.html */"nSew");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! @angular/forms */
-      "s7LF");
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/forms */"s7LF");
       /* harmony import */
-
-
-      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! @angular/router */
-      "iInd");
+      var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! @angular/router */"iInd");
       /* harmony import */
-
-
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ngx-toastr */
-      "EApP");
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ngx-toastr */"EApP");
       /* harmony import */
-
-
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! rxjs/operators */
-      "kU1M");
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! rxjs/operators */"kU1M");
       /* harmony import */
-
-
-      var _data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ../../data.service */
-      "R7Hv");
+      var _data_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ../../data.service */"R7Hv");
       /* harmony import */
-
-
-      var _authentication_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-      /*! ./authentication.service */
-      "1BUF");
-
+      var _authentication_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ./authentication.service */"1BUF");
       var LoginComponent = /*#__PURE__*/function () {
         function LoginComponent(dataservice, route, router, authenticationService, toastr) {
           _classCallCheck(this, LoginComponent);
-
           this.dataservice = dataservice;
           this.route = route;
           this.router = router;
@@ -619,12 +481,10 @@
           this.result = {};
           this.error = "";
           this.loading = false;
-
           if (this.authenticationService.currentUserValue) {
             this.router.navigate(["/"]);
           }
         }
-
         _createClass(LoginComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
@@ -634,32 +494,26 @@
           key: "onSubmit",
           value: function onSubmit() {
             var _this3 = this;
-
             this.loading = true;
             this.loginForm = this.usForm.value;
             console.log(this.loginForm);
             this.loading = true;
-            this.router.navigate(["/dashboard"]); // this.toastr.success("Login successful");
-
+            this.router.navigate(["/dashboard"]);
+            // this.toastr.success("Login successful");
             this.authenticationService.login(this.loginForm).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
               _this3.loading = false;
-
               _this3.router.navigate([_this3.returnUrl]);
-
               _this3.toastr.success("Login successful");
             }, function (error) {
               _this3.error = error;
               _this3.loading = false;
               console.log(error);
-
               _this3.toastr.error(error.error.error.message);
             });
           }
         }]);
-
         return LoginComponent;
       }();
-
       LoginComponent.ctorParameters = function () {
         return [{
           type: _data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"]
@@ -673,7 +527,6 @@
           type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]
         }];
       };
-
       LoginComponent.propDecorators = {
         usForm: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
@@ -684,122 +537,76 @@
         selector: "app-dashboard",
         template: _raw_loader_login_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _authentication_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticationService"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])], LoginComponent);
+
       /***/
     },
 
+    /***/"R7Hv":
+    /*!*********************************!*\
+      !*** ./src/app/data.service.ts ***!
+      \*********************************/
+    /*! exports provided: DataService */
     /***/
-    "R7Hv": function R7Hv(module, __webpack_exports__, __webpack_require__) {
+    function R7Hv(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "DataService", function () {
         return DataService;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common/http */
-      "IheW");
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/common/http */"IheW");
       /* harmony import */
-
-
-      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! rxjs */
-      "qCKp");
+      var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! rxjs */"qCKp");
       /* harmony import */
-
-
-      var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ../environments/environment */
-      "AytR");
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ../environments/environment */"AytR");
       /* harmony import */
-
-
-      var apollo_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! apollo-angular */
-      "nbgS");
+      var apollo_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! apollo-angular */"nbgS");
       /* harmony import */
-
-
-      var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! rxjs/operators */
-      "kU1M");
+      var rxjs_operators__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! rxjs/operators */"kU1M");
       /* harmony import */
-
-
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ngx-toastr */
-      "EApP");
-
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ngx-toastr */"EApP");
       var FarmDemosQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject || (_templateObject = _taggedTemplateLiteral(["\n  query ($page: Int, $pageSize: Int) {\n    farmDemos(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Farmer\n          FarmLocationLatitude\n          FarmLocationLongitude\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          AreaOfField\n          isPesticidesUsed\n          FarmerPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          IndoramaPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          Images {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          DateOfHarvesting\n          Season\n          Status\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var FarmDemoQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    farmDemo(id: $id) {\n      data {\n        id\n        attributes {\n          Farmer\n          FarmLocationLatitude\n          FarmLocationLongitude\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          AreaOfField\n          isPesticidesUsed\n          DateOfHarvesting\n          Season\n          FarmerPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          IndoramaPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          Status\n          Images {\n            data {\n              id\n              attributes {\n                name\n                previewUrl\n                url\n              }\n            }\n          }\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var AddFarmDemoMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  mutation (\n    $farmer: String\n    $latitude: Float\n    $longitude: Float\n    $lga: ID\n    $state: ID\n    $crop: ID\n    $area: String\n    $farmerPractise: ComponentFarmDemoFarmDemoPractiseInput\n    $indoramaPractise: ComponentFarmDemoFarmDemoPractiseInput\n    $dateOfHarvesting: Date\n    $season: String\n    $Status: ENUM_FARMDEMO_STATUS\n    $isPesticidesUsed: Boolean\n    $images: [ID]\n  ) {\n    createFarmDemo(\n      data: {\n        Farmer: $farmer\n        FarmLocationLatitude: $latitude\n        FarmLocationLongitude: $longitude\n        lgas: $lga\n        state: $state\n        crop: $crop\n        Status: $Status\n        AreaOfField: $area\n        FarmerPractise: $farmerPractise\n        IndoramaPractise: $indoramaPractise\n        isPesticidesUsed: $isPesticidesUsed\n        DateOfHarvesting: $dateOfHarvesting\n        Season: $season\n        Images: $images\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Farmer\n          FarmLocationLatitude\n          FarmLocationLongitude\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Status\n          AreaOfField\n          isPesticidesUsed\n          FarmerPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          IndoramaPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          Images {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          DateOfHarvesting\n          Season\n        }\n      }\n    }\n  }\n"])));
-
       var _UpdateFarmDemo = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  mutation (\n    $id: ID!\n    $farmer: String\n    $latitude: Float\n    $longitude: Float\n    $lga: ID\n    $crop: ID\n    $area: String\n    $farmerPractise: ComponentFarmDemoFarmDemoPractiseInput\n    $indoramaPractise: ComponentFarmDemoFarmDemoPractiseInput\n    $dateOfHarvesting: Date\n    $season: String\n    $isPesticidesUsed: Boolean\n    $images: [ID]\n    $Status: ENUM_FARMDEMO_STATUS\n    $state: ID\n  ) {\n    updateFarmDemo(\n      id: $id\n      data: {\n        Farmer: $farmer\n        FarmLocationLatitude: $latitude\n        FarmLocationLongitude: $longitude\n        lgas: $lga\n        crop: $crop\n        Status: $Status\n        state: $state\n        AreaOfField: $area\n        FarmerPractise: $farmerPractise\n        IndoramaPractise: $indoramaPractise\n        isPesticidesUsed: $isPesticidesUsed\n        DateOfHarvesting: $dateOfHarvesting\n        Season: $season\n        Images: $images\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Farmer\n          FarmLocationLatitude\n          FarmLocationLongitude\n          Status\n          Season\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          AreaOfField\n          isPesticidesUsed\n          FarmerPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          IndoramaPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          Images {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          DateOfHarvesting\n          Season\n        }\n      }\n    }\n  }\n"])));
-
       var CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  query {\n    crops(pagination: { limit: 10000 }, sort: \"createdAt:desc\", filters:{isDelete:{eq:false}}) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var CropsMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $image: ID) {\n    createCrop(data: { Name: $Name, Image: $image }) {\n      data {\n        id\n        attributes {\n          Name\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $id: ID!, $isDelete: Boolean, $image: ID) {\n    updateCrop(\n      id: $id\n      data: { Name: $Name, Image: $image, isDelete: $isDelete }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          isDelete\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var StatesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  query {\n    states(pagination: { limit: 10000 }, sort: \"createdAt:desc\", filters:{isDelete:{eq:false}}) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var StatesMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  mutation ($Name: String) {\n    createState(data: { Name: $Name }) {\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _UpdateState = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $id: ID!, $isDelete: Boolean) {\n    updateState(id: $id, data: { Name: $Name, isDelete: $isDelete }) {\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          isDelete\n        }\n      }\n    }\n  }\n"])));
-
       var LGAquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    lgas(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: { state: { id: { eq: $id } }, isDelete:{eq:false} }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var LGAmutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID) {\n    createLga(data: { Name: $Name, state: $state }) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var _UpdateLGA = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID, $id: ID!, $isDelete: Boolean) {\n    updateLga(\n      id: $id\n      data: { Name: $Name, isDelete: $isDelete, state: $state }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    villages(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: { area: { lga: { id: { eq: $id } } }, isDelete:{eq:false} }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n                PostalCode\n                lga {\n                  data {\n                    id\n                    attributes {\n                      Name\n                      state {\n                        data {\n                          id\n                          attributes {\n                            Name\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n          localizations {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n        __typename\n      }\n    }\n  }\n"])));
       var VillageMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $area: ID) {\n    createVillage(data: { Name: $Name, area: $area }) {\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var UpdateVillage = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $area: ID, $id: ID!, $isDelete: Boolean) {\n    updateVillage(\n      id: $id\n      data: { Name: $Name, area: $area, isDelete: $isDelete }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          isDelete\n        }\n      }\n    }\n  }\n"])));
       var Areasquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    areas(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: { lga: { id: { eq: $id } }, isDelete:{eq:false} }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          PostalCode\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          villages {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var AreaMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $PostalCode: Long, $lga: ID) {\n    createArea(data: { Name: $Name, PostalCode: $PostalCode, lga: $lga }) {\n      data {\n        id\n        attributes {\n          Name\n          PostalCode\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          villages {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var _UpdateArea = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  mutation (\n    $Name: String\n    $lga: ID\n    $PostalCode: Long\n    $id: ID!\n    $isDelete: Boolean\n  ) {\n    updateArea(\n      id: $id\n      data: {\n        Name: $Name\n        PostalCode: $PostalCode\n        lga: $lga\n        isDelete: $isDelete\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          PostalCode\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          villages {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var MarketQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    markets(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: { state: { id: { eq: $id } }, isDelete:{eq:false} }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var MarketMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID) {\n    createMarket(data: { Name: $Name, state: $state }) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var _UpdateMarket = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID, $id: ID!, $isDelete: Boolean) {\n    updateMarket(\n      id: $id\n      data: { Name: $Name, isDelete: $isDelete, state: $state }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var CropPricesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject23 || (_templateObject23 = _taggedTemplateLiteral(["\n  query (\n    $page: Int\n    $pageSize: Int\n    $publicationState: PublicationState\n    $publishedAt: DateTime\n    $Rejected: Boolean\n  ) {\n    cropPrices(\n      publicationState: $publicationState\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: {\n        and: [\n          { publishedAt: { eq: $publishedAt } }\n          { Rejected: { eq: $Rejected } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Price\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Unit\n          Rejected\n          market {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Image {\n            data {\n              id\n              attributes {\n                name\n                alternativeText\n                caption\n                width\n                height\n                url\n                previewUrl\n              }\n            }\n          }\n          user {\n            data {\n              id\n              attributes {\n                Name\n                UserType\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          publishedAt\n        }\n      }\n    }\n  }\n"])));
       var UpdateCropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject24 || (_templateObject24 = _taggedTemplateLiteral(["\n  mutation updateCropPrice(\n    $id: ID!\n    $crop: ID\n    $price: Float\n    $state: ID\n    $unit: String\n    $market: ID\n    $image: ID\n    $Rejected: Boolean\n    $published: DateTime\n  ) {\n    updateCropPrice(\n      id: $id\n      data: {\n        crop: $crop\n        Price: $price\n        state: $state\n        Unit: $unit\n        market: $market\n        Image: $image\n        Rejected: $Rejected\n        publishedAt: $published\n      }\n    ) {\n      data {\n        id\n        attributes {\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Price\n          Unit\n          state {\n            data {\n              attributes {\n                Name\n              }\n            }\n          }\n          market {\n            data {\n              attributes {\n                Name\n              }\n            }\n          }\n          Rejected\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var CropPriceMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject25 || (_templateObject25 = _taggedTemplateLiteral(["\n  mutation addCropPrice(\n    $crop: ID\n    $price: Float\n    $state: ID\n    $unit: String\n    $market: ID\n    $image: ID\n    $published: DateTime\n    $user: ID\n  ) {\n    createCropPrice(\n      data: {\n        crop: $crop\n        Price: $price\n        state: $state\n        Unit: $unit\n        Rejected: false\n        market: $market\n        Image: $image\n        publishedAt: $published\n        user: $user\n      }\n    ) {\n      data {\n        id\n        attributes {\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Price\n          Unit\n          state {\n            data {\n              attributes {\n                Name\n              }\n            }\n          }\n          market {\n            data {\n              attributes {\n                Name\n              }\n            }\n          }\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var RetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject26 || (_templateObject26 = _taggedTemplateLiteral(["\n  query ($page: Int, $pageSize: Int, $confirmed: Boolean, $blocked: Boolean) {\n    usersPermissionsUsers(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: {\n        UserType: { eq: \"Retailer\" }\n        confirmed: { eq: $confirmed }\n        blocked: { eq: $blocked }\n      }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          username\n          Name\n          email\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          retailer_products {\n            data {\n              attributes {\n                ItemName\n                Price\n                Unit\n                Images {\n                  data {\n                    attributes {\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          UserType\n          retailer_categories {\n            data {\n              id\n              attributes {\n                CategoryName\n              }\n            }\n          }\n          Bio\n          Latitude\n          Longitude\n          blocked\n          confirmed\n          UserType\n          prof_pic {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          ContactNumber\n        }\n      }\n    }\n  }\n"])));
       var SoilTestQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject27 || (_templateObject27 = _taggedTemplateLiteral(["\n  query ($page: Int, $pageSize: Int) {\n    soilTests(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          SoilTestID\n          Status\n          ReasonForSoilTest\n          ContactNumber\n          nutrient\n          Farmer {\n            data {\n              attributes {\n                username\n                email\n\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          area {\n            data {\n              attributes {\n                Name\n                PostalCode\n              }\n            }\n          }\n          soil_test_samples {\n            data {\n              attributes {\n                SampleID\n              }\n            }\n          }\n          PreferredCollectionDate\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var SingleSoilTestQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject28 || (_templateObject28 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    soilTest(id: $id) {\n      data {\n        id\n        attributes {\n          SoilTestID\n          Status\n          ReasonForSoilTest\n          ContactNumber\n          nutrient\n          Farmer {\n            data {\n              id\n              attributes {\n                username\n                email\n\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          area {\n            data {\n              id\n              attributes {\n                Name\n                PostalCode\n              }\n            }\n          }\n          soil_test_samples {\n            data {\n              id\n              attributes {\n                SampleID\n                QuantityOfSamples\n                createdAt\n                updatedAt\n                SampleAddedBy {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n                soil_test_results {\n                  data {\n                    id\n                    attributes {\n                      soil_test_sample {\n                        data {\n                          id\n                          attributes {\n                            SampleID\n                          }\n                        }\n                      }\n                      phObserved\n                      OrganicCarbonObserved\n                      TotalNitrogenObserved\n                      PhosphorousObserved\n                      PotassiumObserved\n                      CalciumObserved\n                      MagnesiumObserved\n                      ZincObserved\n                      SulphurObserved\n                      IronObserved\n                      CopperObserved\n                      BoronObserved\n                      ManganeseObserved\n                      RecommendedNPKQty\n                      RecommendedUreaQty\n                      updatedAt\n                    }\n                  }\n                }\n              }\n            }\n          }\n          PreferredCollectionDate\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _UpdateSoilTest = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject29 || (_templateObject29 = _taggedTemplateLiteral(["\n  mutation updateSoilTest(\n    $soilTestId: ID!\n    $contactNumber: String\n    $preferredCollectionDate: DateTime\n    $reason: String\n    $farmerID: ID\n    $areaID: ID\n    $lgaID: ID\n    $soilTestDisplayID: String\n    $status: ENUM_SOILTEST_STATUS\n    $nutrient: String\n  ) {\n    updateSoilTest(\n      id: $soilTestId\n      data: {\n        ContactNumber: $contactNumber\n        PreferredCollectionDate: $preferredCollectionDate\n        ReasonForSoilTest: $reason\n        Farmer: $farmerID\n        area: $areaID\n        lga: $lgaID\n        SoilTestID: $soilTestDisplayID\n        Status: $status\n        nutrient: $nutrient\n      }\n    ) {\n      data {\n        id\n        attributes {\n          ContactNumber\n          PreferredCollectionDate\n          ReasonForSoilTest\n          Farmer {\n            data {\n              id\n              attributes {\n                username\n                Name\n              }\n            }\n          }\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          SoilTestID\n          Status\n          nutrient\n        }\n      }\n    }\n  }\n"])));
-
       var UsersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject30 || (_templateObject30 = _taggedTemplateLiteral(["\n  query ($UserType: String, $page: Int, $pageSize: Int) {\n    usersPermissionsUsers(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: { UserType: { eq: $UserType } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          username\n          Name\n          email\n          blocked\n          confirmed\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          retailer_categories {\n            data {\n              id\n              attributes {\n                CategoryName\n              }\n            }\n          }\n          retailer_products {\n            data {\n              attributes {\n                ItemName\n                Price\n                Unit\n                Images {\n                  data {\n                    attributes {\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          UserType\n          Bio\n          Latitude\n          Longitude\n          UserType\n          prof_pic {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          ContactNumber\n        }\n      }\n    }\n  }\n"])));
-
       var _AddSoilTestResult = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject31 || (_templateObject31 = _taggedTemplateLiteral(["\n  mutation soilTestAddResult(\n    $soilTestSampleID: ID\n    $ph: String\n    $Carbon: String\n    $Nitrogen: String\n    $phosphorous: String\n    $pottassium: String\n    $calcium: String\n    $magnesium: String\n    $zinc: String\n    $sulphur: String\n    $iron: String\n    $copper: String\n    $boron: String\n    $manganese: String\n    $RecommendedNPKQty: String\n    $RecommendedUreaQty: String\n  ) {\n    createSoilTestResult(\n      data: {\n        soil_test_sample: $soilTestSampleID\n        phObserved: $ph\n        OrganicCarbonObserved: $Carbon\n        TotalNitrogenObserved: $Nitrogen\n        PhosphorousObserved: $phosphorous\n        PotassiumObserved: $pottassium\n        CalciumObserved: $calcium\n        MagnesiumObserved: $magnesium\n        ZincObserved: $zinc\n        SulphurObserved: $sulphur\n        IronObserved: $iron\n        CopperObserved: $copper\n        BoronObserved: $boron\n        ManganeseObserved: $manganese\n        RecommendedNPKQty: $RecommendedNPKQty,\n        RecommendedUreaQty: $RecommendedUreaQty,\n      }\n    ) {\n      data {\n        attributes {\n          soil_test_sample {\n            data {\n              id\n              attributes {\n                SampleID\n              }\n            }\n          }\n          phObserved\n          OrganicCarbonObserved\n          TotalNitrogenObserved\n          PhosphorousObserved\n          PotassiumObserved\n          CalciumObserved\n          MagnesiumObserved\n          ZincObserved\n          SulphurObserved\n          CopperObserved\n          IronObserved\n          BoronObserved\n          ManganeseObserved\n        }\n      }\n    }\n  }\n"])));
-
       var _UpdateSoilTestResult = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject32 || (_templateObject32 = _taggedTemplateLiteral(["\n  mutation soilTestAddResult(\n    $id: ID!\n    $soilTestSampleID: ID\n    $ph: String\n    $Carbon: String\n    $Nitrogen: String\n    $phosphorous: String\n    $pottassium: String\n    $calcium: String\n    $magnesium: String\n    $zinc: String\n    $sulphur: String\n    $iron: String\n    $copper: String\n    $boron: String\n    $manganese: String\n    $RecommendedNPKQty: String\n    $RecommendedUreaQty: String\n  ) {\n    updateSoilTestResult(\n      id: $id\n      data: {\n        soil_test_sample: $soilTestSampleID\n        phObserved: $ph\n        OrganicCarbonObserved: $Carbon\n        TotalNitrogenObserved: $Nitrogen\n        PhosphorousObserved: $phosphorous\n        PotassiumObserved: $pottassium\n        CalciumObserved: $calcium\n        MagnesiumObserved: $magnesium\n        ZincObserved: $zinc\n        SulphurObserved: $sulphur\n        IronObserved: $iron\n        CopperObserved: $copper\n        BoronObserved: $boron\n        ManganeseObserved: $manganese\n        RecommendedNPKQty: $RecommendedNPKQty,\n        RecommendedUreaQty: $RecommendedUreaQty,\n      }\n    ) {\n      data {\n        attributes {\n          soil_test_sample {\n            data {\n              id\n              attributes {\n                SampleID\n              }\n            }\n          }\n          phObserved\n          OrganicCarbonObserved\n          TotalNitrogenObserved\n          PhosphorousObserved\n          PotassiumObserved\n          CalciumObserved\n          MagnesiumObserved\n          ZincObserved\n          SulphurObserved\n          CopperObserved\n          IronObserved\n          BoronObserved\n          ManganeseObserved\n        }\n      }\n    }\n  }\n"])));
-
       var GetSingleRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject33 || (_templateObject33 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    usersPermissionsUsers(filters: { id: { eq: $id } }) {\n      data {\n        id\n        attributes {\n          username\n          Name\n          blocked\n          confirmed\n          email\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          retailer_categories {\n            data {\n              id\n              attributes {\n                CategoryName\n              }\n            }\n          }\n          retailer_products {\n            data {\n              id\n              attributes {\n                ItemName\n                Price\n                Unit\n                Images {\n                  data {\n                    attributes {\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          agronomist_lgas {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                      lgas {\n                        data {\n                          id\n                          attributes {\n                            Name\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n          UserType\n          Bio\n          Latitude\n          Longitude\n          UserType\n          prof_pic {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          blocked\n          ContactNumber\n        }\n      }\n    }\n  }\n"])));
       var updateRetailerProfPic = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject34 || (_templateObject34 = _taggedTemplateLiteral(["\n  mutation editRetailer($id: ID!, $prof_pic: ID) {\n    updateUsersPermissionsUser(id: $id, data: { prof_pic: $prof_pic }) {\n      data {\n        id\n        attributes {\n          username\n          Name\n          email\n          prof_pic {\n            data {\n              id\n              attributes {\n                name\n                url\n              }\n            }\n          }\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          retailer_categories {\n            data {\n              id\n              attributes {\n                CategoryName\n              }\n            }\n          }\n          retailer_products {\n            data {\n              attributes {\n                ItemName\n                Price\n                Unit\n                Images {\n                  data {\n                    attributes {\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          UserType\n          Bio\n          Latitude\n          Longitude\n          UserType\n          prof_pic {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          ContactNumber\n        }\n      }\n    }\n  }\n"])));
       var updateRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject35 || (_templateObject35 = _taggedTemplateLiteral(["\n  mutation editRetailer(\n    $id: ID!\n    $name: String\n    $village: ID\n    $lga: ID\n    $UserType: ENUM_USERSPERMISSIONSUSER_USERTYPE\n    $categories: [ID]\n    $bio: String\n    $latitude: Float\n    $longitude: Float\n    $profpic: ID\n    $password: String\n    $blocked: Boolean\n    $confirmed: Boolean\n    $contactNumber: String\n    $agronomist_lgas: [ID]\n  ) {\n    updateUsersPermissionsUser(\n      id: $id\n      data: {\n        Name: $name\n        village: $village\n        lga: $lga\n        UserType: $UserType\n        retailer_categories: $categories\n        Bio: $bio\n        blocked: $blocked\n        password: $password\n        confirmed: $confirmed\n        Latitude: $latitude\n        Longitude: $longitude\n        prof_pic: $profpic\n        ContactNumber: $contactNumber\n        agronomist_lgas: $agronomist_lgas\n      }\n    ) {\n      data {\n        id\n        attributes {\n          username\n          Name\n          email\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          retailer_categories {\n            data {\n              id\n              attributes {\n                CategoryName\n              }\n            }\n          }\n          retailer_products {\n            data {\n              attributes {\n                ItemName\n                Price\n                Unit\n                Images {\n                  data {\n                    attributes {\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          agronomist_lgas {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          UserType\n          Bio\n          Latitude\n          Longitude\n          UserType\n          prof_pic {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          ContactNumber\n          confirmed\n          blocked\n        }\n      }\n    }\n  }\n"])));
-
       var _getRetailerCategories = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject36 || (_templateObject36 = _taggedTemplateLiteral(["\n  query {\n    retailerCategories {\n      data {\n        id\n        attributes {\n          CategoryName\n          createdAt\n          CategoryImage {\n            data {\n              id\n              attributes {\n                name\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var createdRetailerProducts = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject37 || (_templateObject37 = _taggedTemplateLiteral(["\n  mutation (\n    $ItemName: String\n    $Price: Int\n    $Unit: String\n    $Images: [ID]\n    $retailer_category: ID\n    $retailers: [ID]\n  ) {\n    createRetailerProduct(\n      data: {\n        ItemName: $ItemName\n        Price: $Price\n        Unit: $Unit\n        Images: $Images\n        retailer_category: $retailer_category\n        retailers: $retailers\n      }\n    ) {\n      data {\n        id\n        attributes {\n          ItemName\n          Unit\n          Price\n          Images {\n            data {\n              id\n            }\n          }\n          retailer_category {\n            data {\n              id\n            }\n          }\n          retailers {\n            data {\n              id\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var updateRetailerProducts = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject38 || (_templateObject38 = _taggedTemplateLiteral(["\n  mutation editRetailerProduct(\n    $productId: ID!\n    $itemName: String\n    $price: Int\n    $unit: String\n    $images: [ID]\n    $isApproved: Boolean\n    $retailer: [ID]\n    $retailer_category: ID\n  ) {\n    updateRetailerProduct(\n      id: $productId\n      data: {\n        ItemName: $itemName\n        Price: $price\n        Unit: $unit\n        Images: $images\n        isApproved: $isApproved\n        retailers: $retailer\n        retailer_category: $retailer_category\n      }\n    ) {\n      data {\n        attributes {\n          ItemName\n          Price\n          Unit\n          retailers {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          retailer_category {\n            data {\n              id\n              attributes {\n                CategoryName\n              }\n            }\n          }\n          Images {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          isApproved\n        }\n      }\n    }\n  }\n"])));
       var DeleteStatesMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject39 || (_templateObject39 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    updateState(id: $id, data:{isDelete:true}) {\n      data {\n        attributes {\n          Name\n        }\n      }\n    }\n  }\n"])));
@@ -814,19 +621,12 @@
       var DeleteUser = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject48 || (_templateObject48 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    deleteUsersPermissionsUser(id: $id) {\n      data {\n        id\n        attributes {\n          username\n        }\n      }\n    }\n  }\n"])));
       var DeleteBestPractice = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject49 || (_templateObject49 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    deleteBestCropPractise(id: $id) {\n      data {\n        attributes {\n          content\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var DeleteActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject50 || (_templateObject50 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    deleteActivity(id: $id) {\n      data {\n        attributes {\n          FarmerName\n          Date\n          Latitude\n          Longitude\n          NoOfAttendees\n        }\n      }\n    }\n  }\n"])));
-
       var _DeleteMarketplaceProduct = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject51 || (_templateObject51 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    deleteMarketplaceProduct(id: $id) {\n      data {\n        attributes {\n          ItemName\n          Price\n          AvailableQty\n        }\n      }\n    }\n  }\n"])));
-
       var CreateAgronomist = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject52 || (_templateObject52 = _taggedTemplateLiteral(["\n  mutation ($areas: [ID], $user: ID) {\n    createAgronomist(data: { areas: $areas, users_permissions_user: $user }) {\n      data {\n        id\n        attributes {\n          users_permissions_user {\n            data {\n              id\n              attributes {\n                username\n                Name\n                UserType\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var _getAgronomist = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject53 || (_templateObject53 = _taggedTemplateLiteral(["\n  query ($user: ID) {\n    agronomists(filters: { users_permissions_user: { id: { eq: $user } } }) {\n      data {\n        id\n        attributes {\n          users_permissions_user {\n            data {\n              id\n              attributes {\n                username\n                Name\n                UserType\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var queryUsersLarge = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject54 || (_templateObject54 = _taggedTemplateLiteral(["\n  query ($UserType: String, $village: ID, $lga: ID, $area: ID, $state: ID) {\n    usersPermissionsUsers(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: {\n        UserType: { eq: $UserType }\n        village: {\n          or: [{ id: { eq: $village } }, { area: { id: { eq: $area } } }]\n        }\n        lga: { or: [{ id: { eq: $lga } }, { state: { id: { eq: $state } } }] }\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          ContactNumber\n        }\n      }\n    }\n  }\n"])));
-
       var _getIndoramaUpdates = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject55 || (_templateObject55 = _taggedTemplateLiteral(["\n  query (\n    $isDelete: Boolean\n    $isActive: Boolean\n    $id: ID\n    $page: Int\n    $pageSize: Int\n  ) {\n    newsAndUpdates(\n      sort: \"createdAt:desc\"\n      pagination: { page: $page, pageSize: $pageSize }\n      filters: {\n        isActive: { eq: $isActive }\n        isDelete: { eq: $isDelete }\n        id: { eq: $id }\n      }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Title\n          Body\n          Images {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          isActive\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _UpdateIndoramaUpdates = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject56 || (_templateObject56 = _taggedTemplateLiteral(["\n  mutation (\n    $id: ID!\n    $Title: String\n    $Body: String\n    $isDelete: Boolean\n    $isActive: Boolean\n    $Images: [ID]\n  ) {\n    updateNewsAndUpdate(\n      id: $id\n      data: {\n        Title: $Title\n        Body: $Body\n        isActive: $isActive\n        isDelete: $isDelete\n        Images: $Images\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Title\n          Body\n          isActive\n          isDelete\n          Images {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var CreateIndoramaUpdates = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject57 || (_templateObject57 = _taggedTemplateLiteral(["\n  mutation ($Title: String, $Body: String, $Images: [ID]) {\n    createNewsAndUpdate(\n      data: {\n        Title: $Title\n        Body: $Body\n        isActive: true\n        isDelete: false\n        Images: $Images\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Title\n          Body\n          isActive\n          isDelete\n          Images {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var GetMarketplace = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject58 || (_templateObject58 = _taggedTemplateLiteral(["\n  query ($pageNumber: Int, $pageSize: Int, $categoryFilter: [ID]) {\n    marketplaceProducts(\n      filters: { marketplace_category: { id: { in: $categoryFilter } } }\n      pagination: { page: $pageNumber, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          ItemName\n          Images {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          seller {\n            data {\n              attributes {\n                Name\n                username\n                ContactNumber\n              }\n            }\n          }\n          description\n          contactNumber\n          Price\n          AvailableQty\n          Unit\n          marketplace_category {\n            data {\n              id\n              attributes {\n                CategoryName\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var GetMarketplaceSingleProduct = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject59 || (_templateObject59 = _taggedTemplateLiteral(["\n  query ($id: ID!) {\n    marketplaceProduct(id: $id) {\n      data {\n        id\n        attributes {\n          ItemName\n          Images {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          seller {\n            data {\n              attributes {\n                Name\n                username\n                ContactNumber\n              }\n            }\n          }\n          description\n          contactNumber\n          Price\n          AvailableQty\n          Unit\n          marketplace_category {\n            data {\n              id\n              attributes {\n                CategoryName\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
@@ -840,62 +640,43 @@
       var GetSingleActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject67 || (_templateObject67 = _taggedTemplateLiteral(["\n  query getActivities($id: ID) {\n    activity(id: $id) {\n      data {\n        id\n        attributes {\n          FarmerName\n          Date\n          Latitude\n          Longitude\n          NoOfAttendees\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ConditionOfCrop\n          PlannedFarmDay\n          Reason\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ActivityType\n          Time\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var CreateActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject68 || (_templateObject68 = _taggedTemplateLiteral(["\n  mutation (\n    $FarmerName: String\n    $Date: Date\n    $Latitude: Float\n    $Longitude: Float\n    $NoOfAttendees: Int\n    $crop: ID\n    $ConditionOfCrop: String\n    $PlannedFarmDay: Date\n    $Reason: String\n    $area: ID\n    $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE\n    $Time: String\n  ) {\n    createActivity(\n      data: {\n        FarmerName: $FarmerName\n        Date: $Date\n        Latitude: $Latitude\n        Longitude: $Longitude\n        NoOfAttendees: $NoOfAttendees\n        crop: $crop\n        ConditionOfCrop: $ConditionOfCrop\n        PlannedFarmDay: $PlannedFarmDay\n        Reason: $Reason\n        area: $area\n        ActivityType: $ActivityType\n        Time: $Time\n      }\n    ) {\n      data {\n        id\n        attributes {\n          FarmerName\n          Date\n          Latitude\n          Longitude\n          NoOfAttendees\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ConditionOfCrop\n          PlannedFarmDay\n          Reason\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ActivityType\n          Time\n        }\n      }\n    }\n  }\n"])));
       var UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject69 || (_templateObject69 = _taggedTemplateLiteral(["\n  mutation (\n    $FarmerName: String\n    $Date: Date\n    $Latitude: Float\n    $Longitude: Float\n    $NoOfAttendees: Int\n    $crop: ID\n    $ConditionOfCrop: String\n    $PlannedFarmDay: Date\n    $Reason: String\n    $area: ID\n    $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE\n    $Time: String\n    $id: ID!\n  ) {\n    updateActivity(\n      id: $id\n      data: {\n        FarmerName: $FarmerName\n        Date: $Date\n        Latitude: $Latitude\n        Longitude: $Longitude\n        NoOfAttendees: $NoOfAttendees\n        crop: $crop\n        ConditionOfCrop: $ConditionOfCrop\n        PlannedFarmDay: $PlannedFarmDay\n        Reason: $Reason\n        area: $area\n        ActivityType: $ActivityType\n        Time: $Time\n      }\n    ) {\n      data {\n        id\n        attributes {\n          FarmerName\n          Date\n          Latitude\n          Longitude\n          NoOfAttendees\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ConditionOfCrop\n          PlannedFarmDay\n          Reason\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          ActivityType\n          Time\n        }\n      }\n    }\n  }\n"])));
-
       var _getDashboardStats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject70 || (_templateObject70 = _taggedTemplateLiteral(["\n  query dashboardAPI($state: ID, $fromDate: DateTime, $toDate: DateTime) {\n    soilTests(\n      filters: {\n        and: [\n          { lga: { state: { id: { eq: $state } } } }\n          { createdAt: { between: [$fromDate, $toDate] } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestSamples(\n      filters: {\n        and: [\n          { soil_test: { lga: { state: { id: { eq: $state } } } } }\n          { createdAt: { between: [$fromDate, $toDate] } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    soilTestResults(\n      filters: {\n        and: [\n          {\n            soil_test_sample: {\n              soil_test: { lga: { state: { id: { eq: $state } } } }\n            }\n          }\n          { createdAt: { between: [$fromDate, $toDate] } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    farmDemos {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
-
       var _getCropPricesDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject71 || (_templateObject71 = _taggedTemplateLiteral(["\n  query ($id: ID, $market: ID, $fromDate: DateTime, $toDate: DateTime) {\n    cropPrices(\n      publicationState: LIVE\n      pagination: { limit: 10000 }\n      sort: \"publishedAt:desc\"\n      filters: {\n        crop: { id: { eq: $id } }\n        market: { id: { eq: $market } }\n        publishedAt: { between: [$fromDate, $toDate] }\n      }\n    ) {\n      data {\n        id\n        attributes {\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Price\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          Unit\n          market {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          publishedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _getFarmDemoStatsDashboard = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject72 || (_templateObject72 = _taggedTemplateLiteral(["\n  query dashboardAPI(\n    $state: ID\n    $status: String\n    $fromDate: DateTime\n    $toDate: DateTime\n  ) {\n    all: farmDemos(\n      filters: {\n        state: { id: { eq: $state } }\n        createdAt: { between: [$fromDate, $toDate] }\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n    status: farmDemos(\n      filters: {\n        and: [\n          { state: { id: { eq: $state } } }\n          { Status: { eq: $status } }\n          { createdAt: { between: [$fromDate, $toDate] } }\n        ]\n      }\n    ) {\n      meta {\n        pagination {\n          total\n        }\n      }\n    }\n  }\n"])));
-
       var _getallChats = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject73 || (_templateObject73 = _taggedTemplateLiteral(["\n  query ($limit: Int, $start: Int, $key: String, $isAskIndorama: Boolean) {\n    chats(\n      filters: {\n        members: {\n          or: [{ username: { containsi: $key } }, { Name: { containsi: $key } }]\n        }\n        isAskIndorama: { eq: $isAskIndorama }\n      }\n      sort: \"updatedAt:desc\"\n      pagination: { limit: $limit, start: $start }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          isAskIndorama\n          members {\n            data {\n              id\n              attributes {\n                username\n                Name\n                UserType\n                Name\n                prof_pic {\n                  data {\n                    id\n                    attributes {\n                      name\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          chatInitiatedBy {\n            data {\n              id\n              attributes {\n                username\n                Name\n                UserType\n                Name\n                prof_pic {\n                  data {\n                    id\n                    attributes {\n                      name\n                      url\n                    }\n                  }\n                }\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _getChatMessages = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject74 || (_templateObject74 = _taggedTemplateLiteral(["\n  query ($id: ID!) {\n    chat(id: $id) {\n      data {\n        id\n        attributes {\n          messages {\n            data {\n              id\n              attributes {\n                message\n                createdAt\n                updatedAt\n                image_attachment {\n                  data {\n                    id\n                    attributes {\n                      name\n                      width\n                      height\n                      url\n                    }\n                  }\n                }\n                from_user {\n                  data {\n                    id\n                    attributes {\n                      username\n                      Name\n                      UserType\n                      prof_pic {\n                        data {\n                          id\n                          attributes {\n                            url\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n                to_user {\n                  data {\n                    id\n                    attributes {\n                      username\n                      Name\n                      UserType\n                      prof_pic {\n                        data {\n                          id\n                          attributes {\n                            url\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n                chat {\n                  data {\n                    id\n                  }\n                }\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-
       var _getSurveys = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject75 || (_templateObject75 = _taggedTemplateLiteral(["\n  query ($page: Int, $pageSize: Int) {\n    surveyForms(\n      sort: \"updatedAt:desc\"\n      pagination: { page: $page, pageSize: $pageSize }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          SurveyTitle\n          SurveyDescription\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var CreateSurveys = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject76 || (_templateObject76 = _taggedTemplateLiteral(["\n  mutation (\n    $SurveyTitle: String\n    $SurveyDescription: String\n    $Fields: [SurveyFormFieldsDynamicZoneInput!]\n  ) {\n    createSurveyForm(\n      data: {\n        SurveyTitle: $SurveyTitle\n        SurveyDescription: $SurveyDescription\n        Fields: $Fields\n      }\n    ) {\n      data {\n        id\n        attributes {\n          SurveyTitle\n          SurveyDescription\n          Fields {\n            __typename\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _getSurveyResults = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject77 || (_templateObject77 = _taggedTemplateLiteral(["\n  query ($limit: Int, $start: Int, $id: ID) {\n    surveyResults(\n      sort: \"updatedAt:desc\"\n      pagination: { limit: $limit, start: $start }\n      filters: { survey_form: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          SurveyResponse\n          createdAt\n        }\n      }\n    }\n  }\n"])));
-
       var _deleteSurvey = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject78 || (_templateObject78 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    deleteSurveyForm(id: $id) {\n      data {\n        attributes {\n          SurveyTitle\n          SurveyDescription\n        }\n      }\n    }\n  }\n"])));
-
       var _getDashboardAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject79 || (_templateObject79 = _taggedTemplateLiteral(["\n  query {\n    advertisement {\n      data {\n        id\n        attributes {\n          AdImage {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _getRetailerAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject80 || (_templateObject80 = _taggedTemplateLiteral(["\n  query {\n    retailerAdvertisement {\n      data {\n        id\n        attributes {\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _updateDashboardAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject81 || (_templateObject81 = _taggedTemplateLiteral(["\n  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {\n    updateAdvertisement(\n      data: { AdImage: $imageId, url: $clickUrl, isActive: true }\n    ) {\n      data {\n        id\n        attributes {\n          AdImage {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _updateRetailerAd = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject82 || (_templateObject82 = _taggedTemplateLiteral(["\n  mutation updateAdvertisement($imageId: ID, $clickUrl: String) {\n    updateRetailerAdvertisement(\n      data: { Image: $imageId, url: $clickUrl, isActive: true }\n    ) {\n      data {\n        id\n        attributes {\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          url\n          isActive\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _getSmsCampaigns = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject83 || (_templateObject83 = _taggedTemplateLiteral(["\n  query ($page: Int, $pageSize: Int, $id: ID) {\n    smsCampaigns(\n      sort: \"updatedAt:desc\"\n      pagination: { page: $page, pageSize: $pageSize }\n      filters: { id: { eq: $id } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          message\n          isAllFarmers\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          recipients {\n            data {\n              id\n              attributes {\n                Name\n                ContactNumber\n              }\n            }\n          }\n          apiKey\n          SMSGatewayResponse\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var _createSMSCampaign = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject84 || (_templateObject84 = _taggedTemplateLiteral(["\n  mutation createSMSCampaign(\n    $message: String\n    $state: ID\n    $lga: ID\n    $area: ID\n    $village: ID\n    $isAllFarmers: Boolean\n  ) {\n    createSmsCampaign(\n      data: {\n        message: $message\n        state: $state\n        lga: $lga\n        area: $area\n        village: $village\n        isAllFarmers: $isAllFarmers\n      }\n    ) {\n      data {\n        id\n        attributes {\n          message\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lga {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          village {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          recipients {\n            data {\n              id\n              attributes {\n                Name\n                ContactNumber\n              }\n            }\n          }\n          apiKey\n          SMSGatewayResponse\n          isAllFarmers\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-
       var DataService = /*#__PURE__*/function () {
         function DataService(http, apollo, toastr) {
           _classCallCheck(this, DataService);
-
           this.http = http;
           this.apollo = apollo;
           this.toastr = toastr;
           this.baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl;
           this.params = new URLSearchParams();
         }
-
         _createClass(DataService, [{
           key: "handleError",
           value: function handleError(error) {
             var errorMessage = "Unknown error!";
-            console.log(error); // if (error.error instanceof ErrorEvent) {
+            console.log(error);
+            // if (error.error instanceof ErrorEvent) {
             //   // Client-side errors
             //   errorMessage = `Error: ${error.error.message}`;
             // } else {
             //   // Server-side errors
             //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
             // }
-
             if (error.error.message) this.toastr.error(error.error.message);
-
             if (error.status !== 200) {
               this.toastr.error(error.error.error.Message);
               this.toastr.error(error.error.message);
@@ -1993,15 +1774,12 @@
           key: "upload",
           value: function upload(file) {
             var _a;
-
             var formData = new FormData();
-
             for (var i = 0; i < file.length; i++) {
               // formData.append("file[]",  file[i]);
               formData.append("files", file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
-            } // formData.append("files", file, file?.name);
-
-
+            }
+            // formData.append("files", file, file?.name);
             console.log(formData);
             var httpOptions1 = {
               observe: "response"
@@ -2194,10 +1972,8 @@
             });
           }
         }]);
-
         return DataService;
       }();
-
       DataService.ctorParameters = function () {
         return [{
           type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]
@@ -2207,65 +1983,45 @@
           type: ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrService"]
         }];
       };
-
       DataService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: "root"
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], apollo_angular__WEBPACK_IMPORTED_MODULE_5__["Apollo"], ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrService"]])], DataService);
+
       /***/
     },
 
+    /***/"Sy1n":
+    /*!**********************************!*\
+      !*** ./src/app/app.component.ts ***!
+      \**********************************/
+    /*! exports provided: AppComponent */
     /***/
-    "Sy1n": function Sy1n(module, __webpack_exports__, __webpack_require__) {
+    function Sy1n(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "AppComponent", function () {
         return AppComponent;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/router */
-      "iInd");
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/router */"iInd");
       /* harmony import */
-
-
-      var _coreui_icons_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! @coreui/icons-angular */
-      "rVqu");
+      var _coreui_icons_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @coreui/icons-angular */"rVqu");
       /* harmony import */
-
-
-      var _coreui_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! @coreui/icons */
-      "t17N");
-
+      var _coreui_icons__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! @coreui/icons */"t17N");
       var AppComponent = /*#__PURE__*/function () {
         function AppComponent(router, iconSet) {
           _classCallCheck(this, AppComponent);
-
           this.router = router;
-          this.iconSet = iconSet; // iconSet singleton
-
+          this.iconSet = iconSet;
+          // iconSet singleton
           iconSet.icons = Object.assign({}, _coreui_icons__WEBPACK_IMPORTED_MODULE_4__["freeSet"]);
         }
-
         _createClass(AppComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
@@ -2273,15 +2029,12 @@
               if (!(evt instanceof _angular_router__WEBPACK_IMPORTED_MODULE_2__["NavigationEnd"])) {
                 return;
               }
-
               window.scrollTo(0, 0);
             });
           }
         }]);
-
         return AppComponent;
       }();
-
       AppComponent.ctorParameters = function () {
         return [{
           type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
@@ -2289,147 +2042,82 @@
           type: _coreui_icons_angular__WEBPACK_IMPORTED_MODULE_3__["IconSetService"]
         }];
       };
-
       AppComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         // tslint:disable-next-line
         selector: 'body',
         template: '<router-outlet></router-outlet>',
         providers: [_coreui_icons_angular__WEBPACK_IMPORTED_MODULE_3__["IconSetService"]]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _coreui_icons_angular__WEBPACK_IMPORTED_MODULE_3__["IconSetService"]])], AppComponent);
+
       /***/
     },
 
+    /***/"ZAI4":
+    /*!*******************************!*\
+      !*** ./src/app/app.module.ts ***!
+      \*******************************/
+    /*! exports provided: AppModule */
     /***/
-    "ZAI4": function ZAI4(module, __webpack_exports__, __webpack_require__) {
+    function ZAI4(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "AppModule", function () {
         return AppModule;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/common */
-      "SVse");
+      var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/common */"SVse");
       /* harmony import */
-
-
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! @angular/forms */
-      "s7LF");
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/forms */"s7LF");
       /* harmony import */
-
-
-      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! @angular/platform-browser/animations */
-      "omvX");
+      var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! @angular/platform-browser/animations */"omvX");
       /* harmony import */
-
-
-      var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! @angular/common/http */
-      "IheW");
+      var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! @angular/common/http */"IheW");
       /* harmony import */
-
-
-      var ag_grid_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ag-grid-angular */
-      "YFAK");
+      var ag_grid_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ag-grid-angular */"YFAK");
       /* harmony import */
-
-
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ngx-toastr */
-      "EApP");
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ngx-toastr */"EApP");
       /* harmony import */
-
-
-      var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
-      /*! @ng-select/ng-select */
-      "wTG2");
+      var _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! @ng-select/ng-select */"wTG2");
       /* harmony import */
-
-
-      var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
-      /*! ./app.component */
-      "Sy1n");
+      var _app_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ./app.component */"Sy1n");
       /* harmony import */
-
-
-      var _containers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
-      /*! ./containers */
-      "G/4p");
+      var _containers__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ./containers */"G/4p");
       /* harmony import */
-
-
-      var _views_error_404_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
-      /*! ./views/error/404.component */
-      "8gg5");
+      var _views_error_404_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__( /*! ./views/error/404.component */"8gg5");
       /* harmony import */
-
-
-      var _views_error_500_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(
-      /*! ./views/error/500.component */
-      "dxhq");
+      var _views_error_500_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__( /*! ./views/error/500.component */"dxhq");
       /* harmony import */
-
-
-      var _views_login_login_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(
-      /*! ./views/login/login.component */
-      "QB/w");
+      var _views_login_login_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__( /*! ./views/login/login.component */"QB/w");
       /* harmony import */
-
-
-      var _coreui_angular__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(
-      /*! @coreui/angular */
-      "Iluq");
+      var _coreui_angular__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__( /*! @coreui/angular */"Iluq");
       /* harmony import */
-
-
-      var _app_routing__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(
-      /*! ./app.routing */
-      "beVS");
+      var _app_routing__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__( /*! ./app.routing */"beVS");
       /* harmony import */
-
-
-      var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(
-      /*! ngx-bootstrap/dropdown */
-      "FE24");
+      var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__( /*! ngx-bootstrap/dropdown */"FE24");
       /* harmony import */
+      var _graphql_module__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__( /*! ./graphql.module */"4KHl");
 
+      // Import containers
 
-      var _graphql_module__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(
-      /*! ./graphql.module */
-      "4KHl"); // Import containers
       // const APP_CONTAINERS = [
       //   DefaultLayoutComponent
       // ];
+
       // Import routing module
+
       // Import 3rd party components
+
       // import { TabsModule } from 'ngx-bootstrap/tabs';
 
-
-      var AppModule = function AppModule() {
+      var AppModule = /*#__PURE__*/_createClass(function AppModule() {
         _classCallCheck(this, AppModule);
-      };
-
+      });
       AppModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [ag_grid_angular__WEBPACK_IMPORTED_MODULE_6__["AgGridModule"].withComponents([]), _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClientModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"], _app_routing__WEBPACK_IMPORTED_MODULE_15__["AppRoutingModule"], _coreui_angular__WEBPACK_IMPORTED_MODULE_14__["AppAsideModule"], _coreui_angular__WEBPACK_IMPORTED_MODULE_14__["AppBreadcrumbModule"].forRoot(), ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrModule"].forRoot(), _coreui_angular__WEBPACK_IMPORTED_MODULE_14__["AppFooterModule"], _coreui_angular__WEBPACK_IMPORTED_MODULE_14__["AppHeaderModule"], _ng_select_ng_select__WEBPACK_IMPORTED_MODULE_8__["NgSelectModule"], _coreui_angular__WEBPACK_IMPORTED_MODULE_14__["AppSidebarModule"], ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_16__["BsDropdownModule"].forRoot(), _graphql_module__WEBPACK_IMPORTED_MODULE_17__["GraphQLModule"]],
         declarations: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"], _views_error_404_component__WEBPACK_IMPORTED_MODULE_11__["P404Component"], _views_error_500_component__WEBPACK_IMPORTED_MODULE_12__["P500Component"], _views_login_login_component__WEBPACK_IMPORTED_MODULE_13__["LoginComponent"], _containers__WEBPACK_IMPORTED_MODULE_10__["DefaultLayoutComponent"]],
@@ -2439,75 +2127,46 @@
         }],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
       })], AppModule);
+
       /***/
     },
 
+    /***/"beVS":
+    /*!********************************!*\
+      !*** ./src/app/app.routing.ts ***!
+      \********************************/
+    /*! exports provided: routes, AppRoutingModule */
     /***/
-    "beVS": function beVS(module, __webpack_exports__, __webpack_require__) {
+    function beVS(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "routes", function () {
         return routes;
       });
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "AppRoutingModule", function () {
         return AppRoutingModule;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/router */
-      "iInd");
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/router */"iInd");
       /* harmony import */
-
-
-      var _containers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ./containers */
-      "G/4p");
+      var _containers__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./containers */"G/4p");
       /* harmony import */
-
-
-      var _views_error_404_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ./views/error/404.component */
-      "8gg5");
+      var _views_error_404_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./views/error/404.component */"8gg5");
       /* harmony import */
-
-
-      var _views_error_500_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ./views/error/500.component */
-      "dxhq");
+      var _views_error_500_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ./views/error/500.component */"dxhq");
       /* harmony import */
-
-
-      var _views_login_login_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
-      /*! ./views/login/login.component */
-      "QB/w");
+      var _views_login_login_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ./views/login/login.component */"QB/w");
       /* harmony import */
+      var _views_login_auth_guard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ./views/login/auth.guard */"nl+3");
 
-
-      var _views_login_auth_guard__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
-      /*! ./views/login/auth.guard */
-      "nl+3"); // Import Containers
-
+      // Import Containers
 
       var routes = [{
         path: '',
@@ -2541,165 +2200,105 @@
         children: [{
           path: 'sms-campaigns',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-sms-campaigns-sms-campaigns-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-sms-campaigns-sms-campaigns-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/sms-campaigns/sms-campaigns.module */
-            "0OHv")).then(function (m) {
+            return Promise.all( /*! import() | views-sms-campaigns-sms-campaigns-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-sms-campaigns-sms-campaigns-module")]).then(__webpack_require__.bind(null, /*! ./views/sms-campaigns/sms-campaigns.module */"0OHv")).then(function (m) {
               return m.SMSCampaignsModule;
             });
           }
         }, {
           path: 'farmdemo',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-farm-demo-farm-demo-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-farm-demo-farm-demo-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/farm-demo/farm-demo.module */
-            "6rTd")).then(function (m) {
+            return Promise.all( /*! import() | views-farm-demo-farm-demo-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-farm-demo-farm-demo-module")]).then(__webpack_require__.bind(null, /*! ./views/farm-demo/farm-demo.module */"6rTd")).then(function (m) {
               return m.FarmDemoModule;
             });
           }
         }, {
           path: 'chat',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-chat-chat-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-chat-chat-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/chat/chat.module */
-            "jykL")).then(function (m) {
+            return Promise.all( /*! import() | views-chat-chat-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-chat-chat-module")]).then(__webpack_require__.bind(null, /*! ./views/chat/chat.module */"jykL")).then(function (m) {
               return m.ChatModule;
             });
           }
         }, {
           path: 'activities',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-activities-activities-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-activities-activities-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/activities/activities.module */
-            "ve2J")).then(function (m) {
+            return Promise.all( /*! import() | views-activities-activities-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-activities-activities-module")]).then(__webpack_require__.bind(null, /*! ./views/activities/activities.module */"ve2J")).then(function (m) {
               return m.ActivitiesModule;
             });
           }
         }, {
           path: 'surveys',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-surveys-surveys-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("default~views-dashboard-dashboard-module~views-surveys-surveys-module"), __webpack_require__.e("views-surveys-surveys-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/surveys/surveys.module */
-            "8dM2")).then(function (m) {
+            return Promise.all( /*! import() | views-surveys-surveys-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("default~views-dashboard-dashboard-module~views-surveys-surveys-module"), __webpack_require__.e("views-surveys-surveys-module")]).then(__webpack_require__.bind(null, /*! ./views/surveys/surveys.module */"8dM2")).then(function (m) {
               return m.SurveysModule;
             });
           }
         }, {
           path: 'marketplace',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-marketplace-marketplace-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-marketplace-marketplace-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/marketplace/marketplace.module */
-            "4Ywq")).then(function (m) {
+            return Promise.all( /*! import() | views-marketplace-marketplace-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-marketplace-marketplace-module")]).then(__webpack_require__.bind(null, /*! ./views/marketplace/marketplace.module */"4Ywq")).then(function (m) {
               return m.MarketplaceModule;
             });
           }
         }, {
           path: 'best-crop-practices',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-best-crop-practices-best-crop-practices-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-best-crop-practices-best-crop-practices-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/best-crop-practices/best-crop-practices.module */
-            "mjQe")).then(function (m) {
+            return Promise.all( /*! import() | views-best-crop-practices-best-crop-practices-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-best-crop-practices-best-crop-practices-module")]).then(__webpack_require__.bind(null, /*! ./views/best-crop-practices/best-crop-practices.module */"mjQe")).then(function (m) {
               return m.BestCropPracticesModule;
             });
           }
         }, {
           path: 'indorama_updates',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-indorama-updates-indorama-updates-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-indorama-updates-indorama-updates-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/indorama-updates/indorama-updates.module */
-            "eFNz")).then(function (m) {
+            return Promise.all( /*! import() | views-indorama-updates-indorama-updates-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-indorama-updates-indorama-updates-module")]).then(__webpack_require__.bind(null, /*! ./views/indorama-updates/indorama-updates.module */"eFNz")).then(function (m) {
               return m.IndoramaUpdatesModule;
             });
           }
         }, {
           path: 'soiltest',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-soil-test-soil-test-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-soil-test-soil-test-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/soil-test/soil-test.module */
-            "/dPm")).then(function (m) {
+            return Promise.all( /*! import() | views-soil-test-soil-test-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-farm-demo-farm-demo-module~views-soil-test-soil-test-module"), __webpack_require__.e("views-soil-test-soil-test-module")]).then(__webpack_require__.bind(null, /*! ./views/soil-test/soil-test.module */"/dPm")).then(function (m) {
               return m.SoilTestModule;
             });
           }
         }, {
           path: 'cropprices',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-crop-prices-crop-prices-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-crop-prices-crop-prices-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/crop-prices/crop-prices.module */
-            "N8R/")).then(function (m) {
+            return Promise.all( /*! import() | views-crop-prices-crop-prices-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-crop-prices-crop-prices-module")]).then(__webpack_require__.bind(null, /*! ./views/crop-prices/crop-prices.module */"N8R/")).then(function (m) {
               return m.CropPricesModule;
             });
           }
         }, {
           path: 'dashboard',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-dashboard-dashboard-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-dashboard-dashboard-module~views-surveys-surveys-module"), __webpack_require__.e("views-dashboard-dashboard-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/dashboard/dashboard.module */
-            "6dU7")).then(function (m) {
+            return Promise.all( /*! import() | views-dashboard-dashboard-module */[__webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-dashboard-dashboard-module~views-surveys-surveys-module"), __webpack_require__.e("views-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./views/dashboard/dashboard.module */"6dU7")).then(function (m) {
               return m.DashboardModule;
             });
           }
         }, {
           path: 'advertisement',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-advertisement-advertisement-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-advertisement-advertisement-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/advertisement/advertisement.module */
-            "Th2f")).then(function (m) {
+            return Promise.all( /*! import() | views-advertisement-advertisement-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-advertisement-advertisement-module")]).then(__webpack_require__.bind(null, /*! ./views/advertisement/advertisement.module */"Th2f")).then(function (m) {
               return m.AdvertisementModule;
             });
           }
         }, {
           path: 'retailers',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-retailers-retailers-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("common"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/retailers/retailers.module */
-            "d3Ph")).then(function (m) {
+            return Promise.all( /*! import() | views-retailers-retailers-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("common"), __webpack_require__.e("views-retailers-retailers-module")]).then(__webpack_require__.bind(null, /*! ./views/retailers/retailers.module */"d3Ph")).then(function (m) {
               return m.RetailersModule;
             });
           }
         }, {
           path: 'users',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-users-users-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("common"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/users/users.module */
-            "QSsw")).then(function (m) {
+            return Promise.all( /*! import() | views-users-users-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("common"), __webpack_require__.e("views-users-users-module")]).then(__webpack_require__.bind(null, /*! ./views/users/users.module */"QSsw")).then(function (m) {
               return m.UsersModule;
             });
           }
         }, {
           path: 'masters',
           loadChildren: function loadChildren() {
-            return Promise.all(
-            /*! import() | views-masters-masters-module */
-            [__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-masters-masters-module")]).then(__webpack_require__.bind(null,
-            /*! ./views/masters/masters.module */
-            "NPE9")).then(function (m) {
+            return Promise.all( /*! import() | views-masters-masters-module */[__webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~5020e6bb"), __webpack_require__.e("default~views-activities-activities-module~views-best-crop-practices-best-crop-practices-module~view~11e679e2"), __webpack_require__.e("default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"), __webpack_require__.e("views-masters-masters-module")]).then(__webpack_require__.bind(null, /*! ./views/masters/masters.module */"NPE9")).then(function (m) {
               return m.MastersModule;
             });
           }
@@ -2708,33 +2307,35 @@
         path: '**',
         component: _views_error_404_component__WEBPACK_IMPORTED_MODULE_4__["P404Component"]
       }];
-
-      var AppRoutingModule = function AppRoutingModule() {
+      var AppRoutingModule = /*#__PURE__*/_createClass(function AppRoutingModule() {
         _classCallCheck(this, AppRoutingModule);
-      };
-
+      });
       AppRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forRoot(routes, {
           relativeLinkResolution: 'legacy'
         })],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
       })], AppRoutingModule);
+
       /***/
     },
 
+    /***/"c2Qq":
+    /*!*************************!*\
+      !*** ./src/app/_nav.ts ***!
+      \*************************/
+    /*! exports provided: navItems */
     /***/
-    "c2Qq": function c2Qq(module, __webpack_exports__, __webpack_require__) {
+    function c2Qq(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "navItems", function () {
         return navItems;
       });
-
-      var navItems = [// {
+      var navItems = [
+      // {
       //   name: "Dashboard",
       //   url: "/dashboard",
       //   icon: "icon-speedometer",
@@ -2830,154 +2431,137 @@
           url: "/masters/Crops"
         }]
       }];
+
       /***/
     },
 
+    /***/"dxhq":
+    /*!**********************************************!*\
+      !*** ./src/app/views/error/500.component.ts ***!
+      \**********************************************/
+    /*! exports provided: P500Component */
     /***/
-    "dxhq": function dxhq(module, __webpack_exports__, __webpack_require__) {
+    function dxhq(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "P500Component", function () {
         return P500Component;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _raw_loader_500_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! raw-loader!./500.component.html */
-      "Lrxh");
+      var _raw_loader_500_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! raw-loader!./500.component.html */"Lrxh");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
-
-      var P500Component = function P500Component() {
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */"8Y7J");
+      var P500Component = /*#__PURE__*/_createClass(function P500Component() {
         _classCallCheck(this, P500Component);
-      };
-
+      });
       P500Component.ctorParameters = function () {
         return [];
       };
-
       P500Component = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         template: _raw_loader_500_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])], P500Component);
+
       /***/
     },
 
+    /***/"lm8q":
+    /*!***************************************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/containers/default-layout/default-layout.component.html ***!
+      \***************************************************************************************************************/
+    /*! exports provided: default */
     /***/
-    "lm8q": function lm8q(module, __webpack_exports__, __webpack_require__) {
+    function lm8q(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
+      __webpack_exports__["default"] = "<app-header [navbarBrandRouterLink]=\"['/dashboard']\" [fixed]=\"true\"\n  [navbarBrandFull]=\"{src: 'assets/img/brand/logo_new.png',width:200,alt: 'CartIntoCar Logo'}\"\n  [navbarBrandMinimized]=\"{src: 'assets/img/brand/logo_new.png', width: 200, alt: 'CartIntoCar Logo'}\"\n  [sidebarToggler]=\"'lg'\">\n  <ul class=\"nav navbar-nav ml-auto\">\n    {{userName}}\n    <li class=\"nav-item dropdown\" dropdown placement=\"bottom right\">\n      <a class=\"nav-link\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"\n        dropdownToggle (click)=\"false\">\n        <img src=\"assets/img/avatars/6.png\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\" />\n      </a>\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\n        <div class=\"dropdown-header text-center\"><strong>Settings</strong></div>\n        <a class=\"dropdown-item\"><i class=\"fa fa-user\"></i>{{userName}}</a>\n        <div class=\"divider\"></div>\n        <a class=\"dropdown-item\" (click)=\"logout()\"><i class=\"fa fa-lock\"></i> Logout</a>\n      </div>\n    </li>\n  </ul>\n</app-header>\n<div class=\"app-body\">\n  <app-sidebar #appSidebar [fixed]=\"true\" [display]=\"'lg'\" [minimized]=\"sidebarMinimized\"\n    (minimizedChange)=\"toggleMinimize($event)\">\n    <app-sidebar-nav [navItems]=\"navItems\"></app-sidebar-nav>\n    <!-- <app-sidebar-minimizer></app-sidebar-minimizer> -->\n  </app-sidebar>\n  <!-- Main content -->\n  <main class=\"main\">\n    <cui-breadcrumb>\n    </cui-breadcrumb>\n    <div class=\"container-fluid\">\n      <router-outlet></router-outlet>\n    </div>\n  </main>\n</div>\n<app-footer>\n  <span><a>Indorama Agronomy App</a> &copy; 2022 Untangle_</span>\n  <!-- <span class=\"ml-auto\">Powered by <a href=\"https://www.upsquad.in\">upsquad</a></span> -->\n</app-footer>";
 
-
-      __webpack_exports__["default"] = "<app-header [navbarBrandRouterLink]=\"['/dashboard']\" [fixed]=\"true\"\r\n  [navbarBrandFull]=\"{src: 'assets/img/brand/logo_new.png',width:200,alt: 'CartIntoCar Logo'}\"\r\n  [navbarBrandMinimized]=\"{src: 'assets/img/brand/logo_new.png', width: 200, alt: 'CartIntoCar Logo'}\"\r\n  [sidebarToggler]=\"'lg'\">\r\n  <ul class=\"nav navbar-nav ml-auto\">\r\n    {{userName}}\r\n    <li class=\"nav-item dropdown\" dropdown placement=\"bottom right\">\r\n      <a class=\"nav-link\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"\r\n        dropdownToggle (click)=\"false\">\r\n        <img src=\"assets/img/avatars/6.png\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\" />\r\n      </a>\r\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\r\n        <div class=\"dropdown-header text-center\"><strong>Settings</strong></div>\r\n        <a class=\"dropdown-item\"><i class=\"fa fa-user\"></i>{{userName}}</a>\r\n        <div class=\"divider\"></div>\r\n        <a class=\"dropdown-item\" (click)=\"logout()\"><i class=\"fa fa-lock\"></i> Logout</a>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n</app-header>\r\n<div class=\"app-body\">\r\n  <app-sidebar #appSidebar [fixed]=\"true\" [display]=\"'lg'\" [minimized]=\"sidebarMinimized\"\r\n    (minimizedChange)=\"toggleMinimize($event)\">\r\n    <app-sidebar-nav [navItems]=\"navItems\"></app-sidebar-nav>\r\n    <!-- <app-sidebar-minimizer></app-sidebar-minimizer> -->\r\n  </app-sidebar>\r\n  <!-- Main content -->\r\n  <main class=\"main\">\r\n    <cui-breadcrumb>\r\n    </cui-breadcrumb>\r\n    <div class=\"container-fluid\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </main>\r\n</div>\r\n<app-footer>\r\n  <span><a>Indorama Agronomy App</a> &copy; 2022 Untangle_</span>\r\n  <!-- <span class=\"ml-auto\">Powered by <a href=\"https://www.upsquad.in\">upsquad</a></span> -->\r\n</app-footer>";
       /***/
     },
 
+    /***/"nAJl":
+    /*!**************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/error/404.component.html ***!
+      \**************************************************************************************/
+    /*! exports provided: default */
     /***/
-    "nAJl": function nAJl(module, __webpack_exports__, __webpack_require__) {
+    function nAJl(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
+      __webpack_exports__["default"] = "<div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"clearfix\">\n          <h1 class=\"float-left display-3 mr-4\">404</h1>\n          <h4 class=\"pt-3\">Oops! You're lost.</h4>\n          <p class=\"text-muted\">The page you are looking for was not found.</p>\n        </div>\n        <div class=\"input-prepend input-group\">\n          <div class=\"input-group-prepend\">\n            <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\n          </div>\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\n          <span class=\"input-group-append\">\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n";
 
-
-      __webpack_exports__["default"] = "<div class=\"app flex-row align-items-center\">\r\n  <div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"clearfix\">\r\n          <h1 class=\"float-left display-3 mr-4\">404</h1>\r\n          <h4 class=\"pt-3\">Oops! You're lost.</h4>\r\n          <p class=\"text-muted\">The page you are looking for was not found.</p>\r\n        </div>\r\n        <div class=\"input-prepend input-group\">\r\n          <div class=\"input-group-prepend\">\r\n            <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\r\n          </div>\r\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\r\n          <span class=\"input-group-append\">\r\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\r\n          </span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
+    /***/"nSew":
+    /*!****************************************************************************************!*\
+      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/login/login.component.html ***!
+      \****************************************************************************************/
+    /*! exports provided: default */
     /***/
-    "nSew": function nSew(module, __webpack_exports__, __webpack_require__) {
+    function nSew(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
+      __webpack_exports__["default"] = "<!-- <div class=\"app-body bg-image\">\n  <main class=\"main d-flex align-items-center\" style=\"background-color: rgba(0, 0, 0, 0.8);\">\n    <div class=\"login-box\">\n      <div class=\"card p-4\" style=\"width: fit-content;\">\n        <div class=\"card-body\">\n          <form>\n            <h1>Login</h1>\n            <p class=\"text-muted\">Welcome back! Please log in to your account</p>\n            <div class=\"input-group mb-3\">\n              <div class=\"input-group-prepend\">\n                <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\n              </div>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\" autocomplete=\"username\" required>\n            </div>\n            <div class=\"input-group mb-4\">\n              <div class=\"input-group-prepend\">\n                <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\n              </div>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\" autocomplete=\"current-password\"\n                required>\n            </div>\n            <div class=\"row\">\n              <div class=\"col-6\">\n                <button type=\"button\" class=\"btn btn-primary px-4\">Login</button>\n              </div>\n            </div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </main>\n</div> -->\n<!-- <div class=\"bg-image\"> -->\n<div class=\"d-md-flex h-md-100 align-items-center\">\n  <div class=\"col-md-6 p-0 bg-black h-md-100 login-screen\">\n    <div\n      class=\"text-white d-md-flex align-items-center h-100 text-center justify-content-center\"\n    >\n      <div class=\"container-fluid bg-image\" style=\"height: 100vh\"></div>\n    </div>\n  </div>\n  <div class=\"col-md-6 p-0 bg-white h-md-100\">\n    <div class=\"d-md-flex align-items-center h-md-100 justify-content-center\">\n      <div class=\"container-fluid fallback-image\" style=\"height: 100vh\">\n        <form\n          class=\"login-box\"\n          #usForm=\"ngForm\"\n          (ngSubmit)=\"onSubmit()\"\n          style=\"background: #ffffff75; padding: 20px; border-radius: 10px\"\n        >\n          <img\n            src=\"assets/img/brand/logo_new.png\"\n            width=\"300\"\n            style=\"margin-bottom: 25px\"\n          />\n          <h3 class=\"mt-3\">Admin Panel</h3>\n          <p class=\"text-muted\">Welcome back! Please log in to your account</p>\n          <div class=\"input-group mb-3\">\n            <div class=\"input-group-prepend\">\n              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\n            </div>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              placeholder=\"Username\"\n              id=\"login\"\n              maxlength=\"80\"\n              size=\"30\"\n              ngModel\n              value=\"\"\n              name=\"identifier\"\n              required\n            />\n          </div>\n          <div class=\"input-group mb-4\">\n            <div class=\"input-group-prepend\">\n              <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\n            </div>\n            <input\n              type=\"password\"\n              class=\"form-control\"\n              placeholder=\"Password\"\n              id=\"password\"\n              size=\"30\"\n              ngModel\n              name=\"password\"\n              value=\"\"\n              required\n            />\n          </div>\n          <!-- <div class=\"row\"> -->\n          <!-- <div class=\"col-6\"> -->\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"loading\"\n            style=\"background-color: #108d51; color: white\"\n          >\n            <span\n              *ngIf=\"loading\"\n              class=\"spinner-border spinner-border-sm mr-1\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            >\n            </span\n            >Login\n          </button>\n          <!-- </div> -->\n          <!-- </div> -->\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- </div> -->\n";
 
-
-      __webpack_exports__["default"] = "<!-- <div class=\"app-body bg-image\">\r\n  <main class=\"main d-flex align-items-center\" style=\"background-color: rgba(0, 0, 0, 0.8);\">\r\n    <div class=\"login-box\">\r\n      <div class=\"card p-4\" style=\"width: fit-content;\">\r\n        <div class=\"card-body\">\r\n          <form>\r\n            <h1>Login</h1>\r\n            <p class=\"text-muted\">Welcome back! Please log in to your account</p>\r\n            <div class=\"input-group mb-3\">\r\n              <div class=\"input-group-prepend\">\r\n                <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n              </div>\r\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\" autocomplete=\"username\" required>\r\n            </div>\r\n            <div class=\"input-group mb-4\">\r\n              <div class=\"input-group-prepend\">\r\n                <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n              </div>\r\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\" autocomplete=\"current-password\"\r\n                required>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col-6\">\r\n                <button type=\"button\" class=\"btn btn-primary px-4\">Login</button>\r\n              </div>\r\n            </div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </main>\r\n</div> -->\r\n<!-- <div class=\"bg-image\"> -->\r\n<div class=\"d-md-flex h-md-100 align-items-center\">\r\n  <div class=\"col-md-6 p-0 bg-black h-md-100 login-screen\">\r\n    <div\r\n      class=\"text-white d-md-flex align-items-center h-100 text-center justify-content-center\"\r\n    >\r\n      <div class=\"container-fluid bg-image\" style=\"height: 100vh\"></div>\r\n    </div>\r\n  </div>\r\n  <div class=\"col-md-6 p-0 bg-white h-md-100\">\r\n    <div class=\"d-md-flex align-items-center h-md-100 justify-content-center\">\r\n      <div class=\"container-fluid fallback-image\" style=\"height: 100vh\">\r\n        <form\r\n          class=\"login-box\"\r\n          #usForm=\"ngForm\"\r\n          (ngSubmit)=\"onSubmit()\"\r\n          style=\"background: #ffffff75; padding: 20px; border-radius: 10px\"\r\n        >\r\n          <img\r\n            src=\"assets/img/brand/logo_new.png\"\r\n            width=\"300\"\r\n            style=\"margin-bottom: 25px\"\r\n          />\r\n          <h3 class=\"mt-3\">Admin Panel</h3>\r\n          <p class=\"text-muted\">Welcome back! Please log in to your account</p>\r\n          <div class=\"input-group mb-3\">\r\n            <div class=\"input-group-prepend\">\r\n              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n            </div>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              placeholder=\"Username\"\r\n              id=\"login\"\r\n              maxlength=\"80\"\r\n              size=\"30\"\r\n              ngModel\r\n              value=\"\"\r\n              name=\"identifier\"\r\n              required\r\n            />\r\n          </div>\r\n          <div class=\"input-group mb-4\">\r\n            <div class=\"input-group-prepend\">\r\n              <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n            </div>\r\n            <input\r\n              type=\"password\"\r\n              class=\"form-control\"\r\n              placeholder=\"Password\"\r\n              id=\"password\"\r\n              size=\"30\"\r\n              ngModel\r\n              name=\"password\"\r\n              value=\"\"\r\n              required\r\n            />\r\n          </div>\r\n          <!-- <div class=\"row\"> -->\r\n          <!-- <div class=\"col-6\"> -->\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"loading\"\r\n            style=\"background-color: #108d51; color: white\"\r\n          >\r\n            <span\r\n              *ngIf=\"loading\"\r\n              class=\"spinner-border spinner-border-sm mr-1\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            >\r\n            </span\r\n            >Login\r\n          </button>\r\n          <!-- </div> -->\r\n          <!-- </div> -->\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- </div> -->\r\n";
       /***/
     },
 
+    /***/"nl+3":
+    /*!*******************************************!*\
+      !*** ./src/app/views/login/auth.guard.ts ***!
+      \*******************************************/
+    /*! exports provided: AuthGuard */
     /***/
-    "nl+3": function nl3(module, __webpack_exports__, __webpack_require__) {
+    function nl3(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
-
-
       __webpack_require__.d(__webpack_exports__, "AuthGuard", function () {
         return AuthGuard;
       });
       /* harmony import */
-
-
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! tslib */
-      "mrSG");
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! @angular/router */
-      "iInd");
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/router */"iInd");
       /* harmony import */
-
-
-      var _authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ./authentication.service */
-      "1BUF");
-
+      var _authentication_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./authentication.service */"1BUF");
       var AuthGuard = /*#__PURE__*/function () {
         function AuthGuard(router, authenticationService) {
           _classCallCheck(this, AuthGuard);
-
           this.router = router;
           this.authenticationService = authenticationService;
         }
-
         _createClass(AuthGuard, [{
           key: "canActivate",
           value: function canActivate(route, state) {
             var currentUser = this.authenticationService.currentUserValue;
-
             if (currentUser) {
-              console.log(currentUser, 'authguard', route.data.roles); // check if route is restricted by role
-
+              console.log(currentUser, 'authguard', route.data.roles);
+              // check if route is restricted by role
               if (route.data.roles && route.data.roles.indexOf(currentUser.user.UserType) === -1) {
                 // role not authorised so redirect to home page
                 this.router.navigate(['/500']);
                 console.log('authguard failed');
                 return false;
-              } // authorised so return true
-
-
+              }
+              // authorised so return true
               return true;
             }
-
-            console.log(currentUser, 'authguard il kerilla', route.data.roles); // not logged in so redirect to login page with the return url
-
+            console.log(currentUser, 'authguard il kerilla', route.data.roles);
+            // not logged in so redirect to login page with the return url
             this.router.navigate(['/login'], {
               queryParams: {
                 returnUrl: state.url
@@ -2986,10 +2570,8 @@
             return false;
           }
         }]);
-
         return AuthGuard;
       }();
-
       AuthGuard.ctorParameters = function () {
         return [{
           type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"]
@@ -2997,58 +2579,51 @@
           type: _authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"]
         }];
       };
-
       AuthGuard = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"], _authentication_service__WEBPACK_IMPORTED_MODULE_3__["AuthenticationService"]])], AuthGuard);
+
       /***/
     },
 
+    /***/"zUnb":
+    /*!*********************!*\
+      !*** ./src/main.ts ***!
+      \*********************/
+    /*! no exports provided */
     /***/
-    "zUnb": function zUnb(module, __webpack_exports__, __webpack_require__) {
+    function zUnb(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony import */
-
-
-      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
-      /*! @angular/core */
-      "8Y7J");
+      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! @angular/core */"8Y7J");
       /* harmony import */
-
-
-      var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
-      /*! @angular/platform-browser-dynamic */
-      "wAiw");
+      var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/platform-browser-dynamic */"wAiw");
       /* harmony import */
-
-
-      var _app_app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
-      /*! ./app/app.module */
-      "ZAI4");
+      var _app_app_module__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! ./app/app.module */"ZAI4");
       /* harmony import */
-
-
-      var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
-      /*! ./environments/environment */
-      "AytR");
-
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./environments/environment */"AytR");
       if (_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].production) {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["enableProdMode"])();
       }
-
       Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_2__["AppModule"], {
         useJit: true,
         preserveWhitespaces: true
       })["catch"](function (err) {
         return console.log(err);
       });
+
       /***/
     },
 
+    /***/"zn8P":
+    /*!******************************************************!*\
+      !*** ./$$_lazy_route_resource lazy namespace object ***!
+      \******************************************************/
+    /*! no static exports found */
     /***/
-    "zn8P": function zn8P(module, exports) {
+    function zn8P(module, exports) {
       function webpackEmptyAsyncContext(req) {
         // Here Promise.resolve().then() is used instead of new Promise() to prevent
         // uncaught exception popping up in devtools
@@ -3058,14 +2633,13 @@
           throw e;
         });
       }
-
       webpackEmptyAsyncContext.keys = function () {
         return [];
       };
-
       webpackEmptyAsyncContext.resolve = webpackEmptyAsyncContext;
       module.exports = webpackEmptyAsyncContext;
       webpackEmptyAsyncContext.id = "zn8P";
+
       /***/
     }
   }, [[0, "runtime", "vendor"]]]);
