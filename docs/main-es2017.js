@@ -53,7 +53,7 @@ let AuthenticationService = class AuthenticationService {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((user) => {
             // login successful if there's a jwt token in the response
             console.log(user);
-            if (user.jwt && user.user.UserType == "Admin") {
+            if (user.jwt && (user.user.UserType == "Admin" || user.user.UserType == "Marketing")) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem("token", user.jwt);
                 localStorage.setItem("username", user.user.username);
@@ -339,11 +339,10 @@ let DefaultLayoutComponent = class DefaultLayoutComponent {
         this.authenticationService = authenticationService;
         this.sidebarMinimized = false;
         this.userName = localStorage.getItem("username");
-        this.navItems = _nav__WEBPACK_IMPORTED_MODULE_5__["navItems"].filter((item) => item.role === localStorage.getItem("user_type") || item.role === "");
+        this.navItems = _nav__WEBPACK_IMPORTED_MODULE_5__["navItems"].filter((item) => item.role === localStorage.getItem('user_type') || item.role === '');
         this.authenticationService.currentUser.subscribe((x) => (this.currentUser = x));
         // console.log("constructor",this.currentUser.user.UserType)
     }
-    ;
     toggleMinimize(e) {
         var _a;
         this.sidebarMinimized = e;
@@ -351,7 +350,7 @@ let DefaultLayoutComponent = class DefaultLayoutComponent {
     }
     logout() {
         this.authenticationService.logout();
-        this.router.navigate(["/login"]);
+        this.router.navigate(['/login']);
     }
 };
 DefaultLayoutComponent.ctorParameters = () => [
@@ -5709,43 +5708,43 @@ const navItems = [
         name: "Activities",
         url: "/activities/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Marketplace",
         url: "/marketplace/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Indorama Updates",
         url: "/indorama_updates/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "SMS Campaigns",
         url: "/sms-campaigns/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Farm Demo",
         url: "/farmdemo/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Soil Analysis",
         url: "/soiltest/customers",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Crop Prices",
         url: "/cropprices/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Retailers",
@@ -5757,37 +5756,37 @@ const navItems = [
         name: "Users",
         url: "/users/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Best crop practices",
         url: "/best-crop-practices/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Surveys",
         url: "/surveys/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Chat",
         url: "/chat/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Advertisement",
         url: "/advertisement/all",
         icon: "icon-cursor",
-        role: "",
+        role: "Admin",
     },
     {
         name: "Masters",
         url: "/soiltest/enquiries",
         icon: 'icon-cursor',
-        role: "",
+        role: "Admin",
         children: [
             {
                 name: "States",
