@@ -29,12 +29,11 @@
 .bg-image {
   position: relative;
   overflow: hidden;
-  background-image: url(../assets/img/brand/banner-5.jpg);
+  background-image: url(../assets/img/brand/banner-2.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 50%;
-  filter: sepia(20%);
-  filter: opacity(65%);
+  filter: opacity(25%);
 }
 .login-box {
   position: absolute;
@@ -47,7 +46,7 @@
 }
 .fallback-image {
   @media screen and (max-width: 768px) {
-    background-image: url(../assets/img/brand/banner-5.jpg);
+    background-image: url(../assets/img/brand/banner-2.jpg);
     background-repeat: no-repeat;
     background-size: cover;
   }
@@ -252,4 +251,18 @@ input:checked + .slider .off {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+
+.round-badge {
+  width: 50px;
+  height: 50px;
+  background-color: #ff4f4f;
+  border-radius: 50%;
+  padding: 10px 14px;
+  margin-left: 10px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  color: #fff;
 }

@@ -1,124 +1,184 @@
 (function () {
   function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~views-activities-activities-module~views-advertisement-advertisement-module~views-best-crop-~b517c4b1"], {
-    /***/"2ZVE":
-    /*!************************************************************************!*\
-      !*** ./node_modules/ngx-bootstrap/tabs/fesm2015/ngx-bootstrap-tabs.js ***!
-      \************************************************************************/
-    /*! exports provided: NgTranscludeDirective, TabDirective, TabHeadingDirective, TabsModule, TabsetComponent, TabsetConfig */
     /***/
-    function ZVE(module, __webpack_exports__, __webpack_require__) {
+    "2ZVE": function ZVE(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "NgTranscludeDirective", function () {
         return NgTranscludeDirective;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "TabDirective", function () {
         return TabDirective;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "TabHeadingDirective", function () {
         return TabHeadingDirective;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "TabsModule", function () {
         return TabsModule;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "TabsetComponent", function () {
         return TabsetComponent;
       });
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "TabsetConfig", function () {
         return TabsetConfig;
       });
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! @angular/core */"8Y7J");
-      /* harmony import */
-      var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/common */"SVse");
 
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! @angular/core */
+      "8Y7J");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common */
+      "SVse");
       /**
        * @fileoverview added by tsickle
        * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
        */
 
+
       function TabsetComponent_li_1_span_4_Template(rf, ctx) {
         if (rf & 1) {
           var _r6 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "span", 7);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TabsetComponent_li_1_span_4_Template_span_click_0_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r6);
+
             var tabz_r1 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]().$implicit;
+
             var ctx_r4 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
             $event.preventDefault();
             return ctx_r4.removeTab(tabz_r1);
           });
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](1, " \u274C");
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
       }
+
       var _c0 = function _c0(a1) {
         return ["nav-item", a1];
       };
+
       function TabsetComponent_li_1_Template(rf, ctx) {
         if (rf & 1) {
           var _r8 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵgetCurrentView"]();
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "li", 3);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("keydown", function TabsetComponent_li_1_Template_li_keydown_0_listener($event) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵrestoreView"](_r8);
+
             var i_r2 = ctx.index;
+
             var ctx_r7 = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵnextContext"]();
+
             return ctx_r7.keyNavActions($event, i_r2);
           });
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](1, "a", 4);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TabsetComponent_li_1_Template_a_click_1_listener() {
             var tabz_r1 = ctx.$implicit;
             return tabz_r1.active = true;
           });
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "span", 5);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtext"](3);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](4, TabsetComponent_li_1_span_4_Template, 2, 0, "span", 6);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
         }
+
         if (rf & 2) {
           var tabz_r1 = ctx.$implicit;
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("active", tabz_r1.active)("disabled", tabz_r1.disabled);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵpureFunction1"](15, _c0, tabz_r1.customClass || ""));
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("active", tabz_r1.active)("disabled", tabz_r1.disabled);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("aria-controls", tabz_r1.id ? tabz_r1.id : "")("aria-selected", !!tabz_r1.active)("id", tabz_r1.id ? tabz_r1.id + "-link" : "");
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngTransclude", tabz_r1.headingRef);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtextInterpolate"](tabz_r1.heading);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
           _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngIf", tabz_r1.removable);
         }
       }
+
       var _c1 = ["*"];
+
       var NgTranscludeDirective = /*#__PURE__*/function () {
         /**
          * @param {?} viewRef
          */
         function NgTranscludeDirective(viewRef) {
           _classCallCheck(this, NgTranscludeDirective);
+
           this.viewRef = viewRef;
         }
         /**
          * @param {?} templateRef
          * @return {?}
          */
+
+
         _createClass(NgTranscludeDirective, [{
           key: "ngTransclude",
-          get: /* tslint:disable-next-line:no-any */
+          get:
+          /* tslint:disable-next-line:no-any */
+
           /**
            * @return {?}
            */
@@ -127,16 +187,20 @@
           },
           set: function set(templateRef) {
             this._ngTransclude = templateRef;
+
             if (templateRef) {
               this.viewRef.createEmbeddedView(templateRef);
             }
           }
         }]);
+
         return NgTranscludeDirective;
       }();
+
       NgTranscludeDirective.ɵfac = function NgTranscludeDirective_Factory(t) {
         return new (t || NgTranscludeDirective)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"]));
       };
+
       NgTranscludeDirective.ɵdir = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineDirective"]({
         type: NgTranscludeDirective,
         selectors: [["", "ngTransclude", ""]],
@@ -145,16 +209,19 @@
         }
       });
       /** @nocollapse */
+
       NgTranscludeDirective.ctorParameters = function () {
         return [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewContainerRef"]
         }];
       };
+
       NgTranscludeDirective.propDecorators = {
         ngTransclude: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
         }]
       };
+
       (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](NgTranscludeDirective, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"],
@@ -171,14 +238,17 @@
           }]
         });
       })();
-      if (false) {}
 
+      if (false) {}
       /**
        * @fileoverview added by tsickle
        * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
        */
-      var TabsetConfig = /*#__PURE__*/_createClass(function TabsetConfig() {
+
+
+      var TabsetConfig = function TabsetConfig() {
         _classCallCheck(this, TabsetConfig);
+
         /**
          * provides default navigation context class: 'tabs' or 'pills'
          */
@@ -186,16 +256,21 @@
         /**
          * provides possibility to set keyNavigations enable or disable, by default is enable
          */
+
         this.isKeysAllowed = true;
         /**
          * aria label for tab list
          */
+
         this.ariaLabel = 'Tabs';
-      });
+      };
+
       TabsetConfig.ɵfac = function TabsetConfig_Factory(t) {
         return new (t || TabsetConfig)();
       };
       /** @nocollapse */
+
+
       TabsetConfig.ɵprov = Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjectable"])({
         factory: function TabsetConfig_Factory() {
           return new TabsetConfig();
@@ -203,6 +278,7 @@
         token: TabsetConfig,
         providedIn: "root"
       });
+
       (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TabsetConfig, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"],
@@ -213,14 +289,16 @@
           return [];
         }, null);
       })();
-      if (false) {}
 
+      if (false) {}
       /**
        * @fileoverview added by tsickle
        * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
        */
       // todo: add active event to tab
       // todo: fix? mixing static and dynamic tabs position tabs in order of creation
+
+
       var TabsetComponent = /*#__PURE__*/function () {
         /**
          * @param {?} config
@@ -229,6 +307,7 @@
          */
         function TabsetComponent(config, renderer, elementRef) {
           _classCallCheck(this, TabsetComponent);
+
           this.renderer = renderer;
           this.elementRef = elementRef;
           this.clazz = true;
@@ -240,6 +319,8 @@
          * if true tabs will be placed vertically
          * @return {?}
          */
+
+
         _createClass(TabsetComponent, [{
           key: "vertical",
           get: function get() {
@@ -248,7 +329,8 @@
           /**
            * @param {?} value
            * @return {?}
-           */,
+           */
+          ,
           set: function set(value) {
             this._vertical = value;
             this.setClassMap();
@@ -257,6 +339,7 @@
            * if true tabs fill the container and have a consistent width
            * @return {?}
            */
+
         }, {
           key: "justified",
           get: function get() {
@@ -265,7 +348,8 @@
           /**
            * @param {?} value
            * @return {?}
-           */,
+           */
+          ,
           set: function set(value) {
             this._justified = value;
             this.setClassMap();
@@ -274,6 +358,7 @@
            * navigation context class: 'tabs' or 'pills'
            * @return {?}
            */
+
         }, {
           key: "type",
           get: function get() {
@@ -282,7 +367,8 @@
           /**
            * @param {?} value
            * @return {?}
-           */,
+           */
+          ,
           set: function set(value) {
             this._type = value;
             this.setClassMap();
@@ -290,6 +376,7 @@
           /**
            * @return {?}
            */
+
         }, {
           key: "isKeysAllowed",
           get: function get() {
@@ -298,13 +385,15 @@
           /**
            * @param {?} value
            * @return {?}
-           */,
+           */
+          ,
           set: function set(value) {
             this._isKeysAllowed = value;
           }
           /**
            * @return {?}
            */
+
         }, {
           key: "ngOnDestroy",
           value: function ngOnDestroy() {
@@ -314,6 +403,7 @@
            * @param {?} tab
            * @return {?}
            */
+
         }, {
           key: "addTab",
           value: function addTab(tab) {
@@ -325,6 +415,7 @@
            * @param {?=} options
            * @return {?}
            */
+
         }, {
           key: "removeTab",
           value: function removeTab(tab) {
@@ -332,31 +423,39 @@
               reselect: true,
               emit: true
             };
+
             /** @type {?} */
             var index = this.tabs.indexOf(tab);
+
             if (index === -1 || this.isDestroyed) {
               return;
-            }
-            // Select a new tab if the tab to be removed is selected and not destroyed
+            } // Select a new tab if the tab to be removed is selected and not destroyed
+
+
             if (options.reselect && tab.active && this.hasAvailableTabs(index)) {
               /** @type {?} */
               var newActiveIndex = this.getClosestTabIndex(index);
               this.tabs[newActiveIndex].active = true;
             }
+
             if (options.emit) {
               tab.removed.emit(tab);
             }
+
             this.tabs.splice(index, 1);
+
             if (tab.elementRef.nativeElement.parentNode) {
               this.renderer.removeChild(tab.elementRef.nativeElement.parentNode, tab.elementRef.nativeElement);
             }
           }
           /* tslint:disable-next-line: cyclomatic-complexity */
+
           /**
            * @param {?} event
            * @param {?} index
            * @return {?}
            */
+
         }, {
           key: "keyNavActions",
           value: function keyNavActions(event, index) {
@@ -364,37 +463,48 @@
               return;
             }
             /** @type {?} */
-            var list = Array.from(this.elementRef.nativeElement.querySelectorAll('.nav-link'));
-            // const activeElList = list.filter((el: HTMLElement) => !el.classList.contains('disabled'));
+
+
+            var list = Array.from(this.elementRef.nativeElement.querySelectorAll('.nav-link')); // const activeElList = list.filter((el: HTMLElement) => !el.classList.contains('disabled'));
             // tslint:disable-next-line:deprecation
+
             if (event.keyCode === 13 || event.key === 'Enter' || event.keyCode === 32 || event.key === 'Space') {
               event.preventDefault();
               /** @type {?} */
+
               var currentTab = list[index % list.length];
               currentTab.click();
               return;
-            }
-            // tslint:disable-next-line:deprecation
+            } // tslint:disable-next-line:deprecation
+
+
             if (event.keyCode === 39 || event.key === 'RightArrow') {
               /** @type {?} */
               var nextTab;
               /** @type {?} */
+
               var shift = 1;
+
               do {
                 nextTab = list[(index + shift) % list.length];
                 shift++;
               } while (nextTab.classList.contains('disabled'));
+
               nextTab.focus();
               return;
-            }
-            // tslint:disable-next-line:deprecation
+            } // tslint:disable-next-line:deprecation
+
+
             if (event.keyCode === 37 || event.key === 'LeftArrow') {
               /** @type {?} */
               var previousTab;
               /** @type {?} */
+
               var _shift = 1;
               /** @type {?} */
+
               var i = index;
+
               do {
                 if (i - _shift < 0) {
                   i = list.length - 1;
@@ -403,34 +513,46 @@
                 } else {
                   previousTab = list[i - _shift];
                 }
+
                 _shift++;
               } while (previousTab.classList.contains('disabled'));
+
               previousTab.focus();
               return;
-            }
-            // tslint:disable-next-line:deprecation
+            } // tslint:disable-next-line:deprecation
+
+
             if (event.keyCode === 36 || event.key === 'Home') {
               event.preventDefault();
               /** @type {?} */
+
               var firstTab;
               /** @type {?} */
+
               var _shift2 = 0;
+
               do {
                 firstTab = list[_shift2 % list.length];
                 _shift2++;
               } while (firstTab.classList.contains('disabled'));
+
               firstTab.focus();
               return;
-            }
-            // tslint:disable-next-line:deprecation
+            } // tslint:disable-next-line:deprecation
+
+
             if (event.keyCode === 35 || event.key === 'End') {
               event.preventDefault();
               /** @type {?} */
+
               var lastTab;
               /** @type {?} */
+
               var _shift3 = 1;
               /** @type {?} */
+
               var _i = index;
+
               do {
                 if (_i - _shift3 < 0) {
                   _i = list.length - 1;
@@ -439,19 +561,24 @@
                 } else {
                   lastTab = list[_i - _shift3];
                 }
+
                 _shift3++;
               } while (lastTab.classList.contains('disabled'));
+
               lastTab.focus();
               return;
-            }
-            // tslint:disable-next-line:deprecation
+            } // tslint:disable-next-line:deprecation
+
+
             if (event.keyCode === 46 || event.key === 'Delete') {
               if (this.tabs[index].removable) {
                 this.removeTab(this.tabs[index]);
+
                 if (list[index + 1]) {
                   list[(index + 1) % list.length].focus();
                   return;
                 }
+
                 if (list[list.length - 1]) {
                   list[0].focus();
                 }
@@ -463,26 +590,33 @@
            * @param {?} index
            * @return {?}
            */
+
         }, {
           key: "getClosestTabIndex",
           value: function getClosestTabIndex(index) {
             /** @type {?} */
             var tabsLength = this.tabs.length;
+
             if (!tabsLength) {
               return -1;
             }
+
             for (var step = 1; step <= tabsLength; step += 1) {
               /** @type {?} */
               var prevIndex = index - step;
               /** @type {?} */
+
               var nextIndex = index + step;
+
               if (this.tabs[prevIndex] && !this.tabs[prevIndex].disabled) {
                 return prevIndex;
               }
+
               if (this.tabs[nextIndex] && !this.tabs[nextIndex].disabled) {
                 return nextIndex;
               }
             }
+
             return -1;
           }
           /**
@@ -490,25 +624,30 @@
            * @param {?} index
            * @return {?}
            */
+
         }, {
           key: "hasAvailableTabs",
           value: function hasAvailableTabs(index) {
             /** @type {?} */
             var tabsLength = this.tabs.length;
+
             if (!tabsLength) {
               return false;
             }
+
             for (var i = 0; i < tabsLength; i += 1) {
               if (!this.tabs[i].disabled && i !== index) {
                 return true;
               }
             }
+
             return false;
           }
           /**
            * @protected
            * @return {?}
            */
+
         }, {
           key: "setClassMap",
           value: function setClassMap() {
@@ -519,11 +658,14 @@
             }, "nav-".concat(this.type), true);
           }
         }]);
+
         return TabsetComponent;
       }();
+
       TabsetComponent.ɵfac = function TabsetComponent_Factory(t) {
         return new (t || TabsetComponent)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](TabsetConfig), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["Renderer2"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"]));
       };
+
       TabsetComponent.ɵcmp = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineComponent"]({
         type: TabsetComponent,
         selectors: [["tabset"]],
@@ -545,20 +687,31 @@
         template: function TabsetComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojectionDef"]();
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](0, "ul", 0);
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵlistener"]("click", function TabsetComponent_Template_ul_click_0_listener($event) {
               return $event.preventDefault();
             });
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵtemplate"](1, TabsetComponent_li_1_Template, 5, 17, "li", 1);
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementStart"](2, "div", 2);
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵprojection"](3);
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵelementEnd"]();
           }
+
           if (rf & 2) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngClass", ctx.classMap);
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("aria-label", ctx.ariaLabel);
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵadvance"](1);
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵproperty"]("ngForOf", ctx.tabs);
           }
         },
@@ -566,6 +719,7 @@
         styles: ["[_nghost-%COMP%]   .nav-tabs[_ngcontent-%COMP%]   .nav-item.disabled[_ngcontent-%COMP%]   a.disabled[_ngcontent-%COMP%]{cursor:default}"]
       });
       /** @nocollapse */
+
       TabsetComponent.ctorParameters = function () {
         return [{
           type: TabsetConfig
@@ -575,6 +729,7 @@
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"]
         }];
       };
+
       TabsetComponent.propDecorators = {
         vertical: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
@@ -590,6 +745,7 @@
           args: ['class.tab-container']
         }]
       };
+
       (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TabsetComponent, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"],
@@ -622,12 +778,14 @@
           }]
         });
       })();
-      if (false) {}
 
+      if (false) {}
       /**
        * @fileoverview added by tsickle
        * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
        */
+
+
       var TabDirective = /*#__PURE__*/function () {
         /**
          * @param {?} tabset
@@ -636,19 +794,23 @@
          */
         function TabDirective(tabset, elementRef, renderer) {
           _classCallCheck(this, TabDirective);
+
           this.elementRef = elementRef;
           this.renderer = renderer;
           /**
            * fired when tab became active, $event:Tab equals to selected instance of Tab component
            */
+
           this.selectTab = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
           /**
            * fired when tab became inactive, $event:Tab equals to deselected instance of Tab component
            */
+
           this.deselect = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
           /**
            * fired before tab will be removed, $event:Tab equals to instance of removed tab
            */
+
           this.removed = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
           this.addClass = true;
           this.role = 'tabpanel';
@@ -659,6 +821,8 @@
          * if set, will be added to the tab's class attribute. Multiple classes are supported.
          * @return {?}
          */
+
+
         _createClass(TabDirective, [{
           key: "customClass",
           get: function get() {
@@ -667,9 +831,11 @@
           /**
            * @param {?} customClass
            * @return {?}
-           */,
+           */
+          ,
           set: function set(customClass) {
             var _this = this;
+
             if (this.customClass) {
               this.customClass.split(' ').forEach(
               /**
@@ -680,7 +846,9 @@
                 _this.renderer.removeClass(_this.elementRef.nativeElement, cssClass);
               });
             }
+
             this._customClass = customClass ? customClass.trim() : null;
+
             if (this.customClass) {
               this.customClass.split(' ').forEach(
               /**
@@ -696,6 +864,7 @@
            * tab active state toggle
            * @return {?}
            */
+
         }, {
           key: "active",
           get: function get() {
@@ -704,19 +873,24 @@
           /**
            * @param {?} active
            * @return {?}
-           */,
+           */
+          ,
           set: function set(active) {
             var _this2 = this;
+
             if (this._active === active) {
               return;
             }
+
             if (this.disabled && active || !active) {
               if (this._active && !active) {
                 this.deselect.emit(this);
                 this._active = active;
               }
+
               return;
             }
+
             this._active = active;
             this.selectTab.emit(this);
             this.tabset.tabs.forEach(
@@ -733,6 +907,7 @@
           /**
            * @return {?}
            */
+
         }, {
           key: "ariaLabelledby",
           get: function get() {
@@ -741,6 +916,7 @@
           /**
            * @return {?}
            */
+
         }, {
           key: "ngOnInit",
           value: function ngOnInit() {
@@ -749,6 +925,7 @@
           /**
            * @return {?}
            */
+
         }, {
           key: "ngOnDestroy",
           value: function ngOnDestroy() {
@@ -758,11 +935,14 @@
             });
           }
         }]);
+
         return TabDirective;
       }();
+
       TabDirective.ɵfac = function TabDirective_Factory(t) {
         return new (t || TabDirective)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](TabsetComponent), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["ElementRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["Renderer2"]));
       };
+
       TabDirective.ɵdir = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineDirective"]({
         type: TabDirective,
         selectors: [["tab"], ["", "tab", ""]],
@@ -770,6 +950,7 @@
         hostBindings: function TabDirective_HostBindings(rf, ctx) {
           if (rf & 2) {
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵattribute"]("role", ctx.role)("aria-labelledby", ctx.ariaLabelledby)("id", ctx.id);
+
             _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵclassProp"]("tab-pane", ctx.addClass)("active", ctx.active);
           }
         },
@@ -789,6 +970,7 @@
         exportAs: ["tab"]
       });
       /** @nocollapse */
+
       TabDirective.ctorParameters = function () {
         return [{
           type: TabsetComponent
@@ -798,6 +980,7 @@
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Renderer2"]
         }];
       };
+
       TabDirective.propDecorators = {
         heading: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"]
@@ -845,6 +1028,7 @@
           args: ['attr.aria-labelledby']
         }]
       };
+
       (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TabDirective, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"],
@@ -908,32 +1092,41 @@
           }]
         });
       })();
-      if (false) {}
 
+      if (false) {}
       /**
        * @fileoverview added by tsickle
        * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
        */
+
       /**
        * Should be used to mark <ng-template> element as a template for tab heading
        */
-      var TabHeadingDirective = /*#__PURE__*/_createClass( /* tslint:disable-next-line:no-any */
+
+
+      var TabHeadingDirective =
+      /* tslint:disable-next-line:no-any */
+
       /**
        * @param {?} templateRef
        * @param {?} tab
        */
       function TabHeadingDirective(templateRef, tab) {
         _classCallCheck(this, TabHeadingDirective);
+
         tab.headingRef = templateRef;
-      });
+      };
+
       TabHeadingDirective.ɵfac = function TabHeadingDirective_Factory(t) {
         return new (t || TabHeadingDirective)(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](_angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"]), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdirectiveInject"](TabDirective));
       };
+
       TabHeadingDirective.ɵdir = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineDirective"]({
         type: TabHeadingDirective,
         selectors: [["", "tabHeading", ""]]
       });
       /** @nocollapse */
+
       TabHeadingDirective.ctorParameters = function () {
         return [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["TemplateRef"]
@@ -941,6 +1134,7 @@
           type: TabDirective
         }];
       };
+
       (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TabHeadingDirective, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Directive"],
@@ -955,16 +1149,19 @@
           }];
         }, null);
       })();
-      if (false) {}
 
+      if (false) {}
       /**
        * @fileoverview added by tsickle
        * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
        */
+
+
       var TabsModule = /*#__PURE__*/function () {
         function TabsModule() {
           _classCallCheck(this, TabsModule);
         }
+
         _createClass(TabsModule, null, [{
           key: "forRoot",
           value:
@@ -978,17 +1175,21 @@
             };
           }
         }]);
+
         return TabsModule;
       }();
+
       TabsModule.ɵfac = function TabsModule_Factory(t) {
         return new (t || TabsModule)();
       };
+
       TabsModule.ɵmod = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineNgModule"]({
         type: TabsModule
       });
       TabsModule.ɵinj = _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵdefineInjector"]({
         imports: [[_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"]]]
       });
+
       (function () {
         (typeof ngJitMode === "undefined" || ngJitMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵɵsetNgModuleScope"](TabsModule, {
           declarations: function declarations() {
@@ -1002,6 +1203,7 @@
           }
         });
       })();
+
       (function () {
         (typeof ngDevMode === "undefined" || ngDevMode) && _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵsetClassMetadata"](TabsModule, [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"],
@@ -1012,7 +1214,6 @@
           }]
         }], null, null);
       })();
-
       /**
        * @fileoverview added by tsickle
        * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
@@ -1022,10 +1223,10 @@
        * @fileoverview added by tsickle
        * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
        */
-
       //# sourceMappingURL=ngx-bootstrap-tabs.js.map
 
       /***/
+
     }
   }]);
 })();

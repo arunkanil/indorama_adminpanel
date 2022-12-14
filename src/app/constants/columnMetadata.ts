@@ -390,6 +390,17 @@ export const FarmDemoColumn = [
     },
   },
   {
+    field: "attributes.state.data.attributes.Name",
+    headerName: "State",
+    resizable: true,
+    sortable: true,
+    filter: "agTextColumnFilter",
+    filterParams: {
+      filterOptions: ["contains"],
+      buttons: ["reset"],
+    },
+  },
+  {
     field: "attributes.lgas.data.attributes.Name",
     headerName: "LGA",
     resizable: true,
@@ -414,11 +425,10 @@ export const FarmDemoColumn = [
   },
   {
     field: "attributes.AreaOfField",
-    headerName: "Area of Field (hectares)",
-    suppressSizeToFit: true,
+    headerName: "Area of Field",
     sortable: true,
     resizable: true,
-    filter: "agNumberColumnFilter",
+    filter: "agDateColumnFilter",
     filterParams: filterParams,
     // cellRenderer: fullNameGetter,
   },
@@ -442,17 +452,6 @@ export const FarmDemoColumn = [
     },
     cellRenderer: (data) => {
       return data.value ? new Date(data.value).toDateString() : "";
-    },
-  },
-  {
-    field: "attributes.state.data.attributes.Name",
-    headerName: "State",
-    resizable: true,
-    sortable: true,
-    filter: "agTextColumnFilter",
-    filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
     },
   },
   // {
@@ -1017,13 +1016,12 @@ export const CropPricesColumn = [
   },
   {
     field: "attributes.Price",
-    headerName: "Price (NGN)",
+    headerName: "Price",
     resizable: true,
     sortable: true,
-    maxWidth: 135,
-    suppressSizeToFit: true,
-    filter: "agNumberColumnFilter",
+    filter: "agTextColumnFilter",
     filterParams: {
+      filterOptions: ["contains"],
       buttons: ["reset"],
     },
   },
@@ -1223,6 +1221,17 @@ export const MarketplaceColumn = [
     },
   },
   {
+    field: "attributes.Price",
+    headerName: "Price",
+    resizable: true,
+    sortable: true,
+    filter: "agTextColumnFilter",
+    filterParams: {
+      filterOptions: ["contains"],
+      buttons: ["reset"],
+    },
+  },
+  {
     field: "attributes.Unit",
     headerName: "Unit",
     resizable: true,
@@ -1233,20 +1242,6 @@ export const MarketplaceColumn = [
       buttons: ["reset"],
     },
   },
-  {
-    field: "attributes.Price",
-    headerName: "Price (NGN)",
-    resizable: true,
-    suppressSizeToFit: true,
-    sortable: true,
-    filter: "agNumberColumnFilter",
-    filterParams: {
-      filterOptions: ["contains", "greaterThan", "greaterThanOrEqual", "inRange", "lessThan", "lessThanOrEqual"],
-      buttons: ["reset"],
-    },
-    valueFormatter: params => params.data.number,
-  },
-  
   {
     field: "attributes.seller.data.attributes.Name",
     headerName: "Listed by",

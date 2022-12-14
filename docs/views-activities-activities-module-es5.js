@@ -1,65 +1,105 @@
 (function () {
   function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
   function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
   function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
   function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
   function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
   function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
   function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+  function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
   (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["views-activities-activities-module"], {
-    /***/"Hcx8":
-    /*!**************************************************************************************************!*\
-      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/activities/activities.component.html ***!
-      \**************************************************************************************************/
-    /*! exports provided: default */
     /***/
-    function Hcx8(module, __webpack_exports__, __webpack_require__) {
+    "Hcx8": function Hcx8(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>Activities</h2>\n      <div>\n        <!-- <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" [disabled]=\"disableButton\"\n          (click)=\"deleteModal.show()\">\n          Delete\n        </button>\n        <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\n          (click)=\"openModal('Edit')\">\n          Edit\n        </button> -->\n        <button\n          type=\"button\"\n          [disabled]=\"!disableButton\"\n          class=\"btn btn-primary\"\n          data-toggle=\"modal\"\n          (click)=\"openModal()\"\n        >\n          Add New Activity\n        </button>\n      </div>\n    </div>\n    <!-- <p class=\"text-muted mx-3\">\n      To approve a crop price simply select and edit the record without\n      modifying the data\n    </p> -->\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            (gridReady)=\"onGridReady($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\"\n            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #activitiesModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add Activity</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"activitiesModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"activitiesForm\" (ngSubmit)=\"activitiesSubmit()\">\n          <div class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"ActivityType\"\n                  >Activity Type <span class=\"danger\">*</span></label\n                >\n                <select\n                  class=\"form-control\"\n                  id=\"ActivityType\"\n                  required\n                  ngModel\n                  name=\"ActivityType\"\n                  formControlName=\"ActivityType\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option value=\"FarmDemo\">Farm Demo</option>\n                  <option value=\"GroupFarmerTraining\">\n                    Group Farmer Training\n                  </option>\n                  <option value=\"MegaFarmerTraining\">\n                    Mega Farmer Training\n                  </option>\n                  <option value=\"FarmDay\">Farm Day</option>\n                  <option value=\"RetailersTraining\">Retailers Training</option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"area\">City <span class=\"danger\">*</span></label>\n                <select\n                  class=\"form-control\"\n                  id=\"area\"\n                  required\n                  ngModel\n                  name=\"area\"\n                  formControlName=\"area\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"Latitude\"\n                  >Latitude <span class=\"danger\">*</span></label\n                >\n                <input\n                  type=\"number\"\n                  class=\"form-control\"\n                  id=\"Latitude\"\n                  name=\"Latitude\"\n                  formControlName=\"Latitude\"\n                  placeholder=\"Enter Latitude\"\n                />\n              </div>\n              <div class=\"form-group\">\n                <label for=\"Longitude\"\n                  >Longitude <span class=\"danger\">*</span></label\n                >\n                <input\n                  type=\"number\"\n                  class=\"form-control\"\n                  id=\"Longitude\"\n                  name=\"Longitude\"\n                  formControlName=\"Longitude\"\n                  placeholder=\"Enter Longitude\"\n                />\n              </div>\n              <div class=\"form-group\">\n                <label for=\"NoOfAttendees\"\n                  >Number of attendees <span class=\"danger\">*</span></label\n                >\n                <input\n                  type=\"number\"\n                  class=\"form-control\"\n                  id=\"NoOfAttendees\"\n                  name=\"NoOfAttendees\"\n                  formControlName=\"NoOfAttendees\"\n                  placeholder=\"Enter no. of attendees\"\n                />\n                <div *ngIf=\"activitiesForm.value.NoOfAttendees > 999999\" class=\"danger\">Maximum 9999999</div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"Reason\">Body <span class=\"danger\">*</span></label>\n                <textarea\n                  class=\"form-control\"\n                  id=\"Reason\"\n                  rows=\"5\"\n                  name=\"Reason\"\n                  formControlName=\"Reason\"\n                  placeholder=\"Enter body\"\n                ></textarea>\n              </div>\n            </div>\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"FarmerName\">Farmer name</label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"FarmerName\"\n                  name=\"FarmerName\"\n                  formControlName=\"FarmerName\"\n                  placeholder=\"Enter name\"\n                />\n                <div *ngIf=\"checkSpecialCharacters(activitiesForm.value.FarmerName)\" class=\"danger\">Special characters not permitted</div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"crop\">Crop</label>\n                <select\n                  class=\"form-control\"\n                  id=\"crop\"\n                  ngModel\n                  name=\"crop\"\n                  formControlName=\"crop\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"ConditionOfCrop\">Condition of crop</label>\n                <select\n                  class=\"form-control\"\n                  id=\"ConditionOfCrop\"\n                  name=\"ConditionOfCrop\"\n                  formControlName=\"ConditionOfCrop\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option value=\"Good\">Good</option>\n                  <option value=\"VeryGood\">Very Good</option>\n                  <option value=\"Excellent\">Excellent</option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"PlannedFarmDay\">Planned farm day</label>\n                <input\n                  type=\"date\"\n                  class=\"form-control\"\n                  id=\"PlannedFarmDay\"\n                  name=\"PlannedFarmDay\"\n                  formControlName=\"PlannedFarmDay\"\n                  placeholder=\"Enter Date\"\n                />\n              </div>\n              <div class=\"form-group\">\n                <label for=\"Date\">Date <span class=\"danger\">*</span></label>\n                <input\n                  type=\"date\"\n                  class=\"form-control\"\n                  id=\"Date\"\n                  name=\"Date\"\n                  formControlName=\"Date\"\n                  placeholder=\"Enter Date\"\n                />\n              </div>\n              <div class=\"form-group\">\n                <label for=\"Time\">Time <span class=\"danger\">*</span></label>\n                <input\n                  type=\"time\"\n                  class=\"form-control\"\n                  id=\"Time\"\n                  name=\"Time\"\n                  formControlName=\"Time\"\n                  placeholder=\"Enter Time\"\n                />\n              </div>\n            </div>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"activitiesModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !activitiesForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n";
 
+
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Activities</h2>\r\n      <div>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-outline-secondary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"downloadActivitiesModal.show()\"\r\n        >\r\n          Download sheets\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-outline-secondary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"uploadActivitiesModal.show()\"\r\n        >\r\n          Upload sheet\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"!disableButton\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Add New Activity\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <span class=\"float-left mt-3\"\r\n            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #activitiesModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add Activity</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"activitiesModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"activitiesForm\" (ngSubmit)=\"activitiesSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"ActivityType\"\r\n                  >Activity Type <span class=\"danger\">*</span></label\r\n                >\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"ActivityType\"\r\n                  required\r\n                  ngModel\r\n                  name=\"ActivityType\"\r\n                  formControlName=\"ActivityType\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option value=\"FarmDemo\">Farm Demo</option>\r\n                  <option value=\"GroupFarmerTraining\">\r\n                    Group Farmer Training\r\n                  </option>\r\n                  <option value=\"MegaFarmerTraining\">\r\n                    Mega Farmer Training\r\n                  </option>\r\n                  <option value=\"FarmDay\">Farm Day</option>\r\n                  <option value=\"RetailersTraining\">Retailers Training</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"area\">City <span class=\"danger\">*</span></label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"area\"\r\n                  required\r\n                  ngModel\r\n                  name=\"area\"\r\n                  formControlName=\"area\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"Latitude\"\r\n                  >Latitude <span class=\"danger\">*</span></label\r\n                >\r\n                <input\r\n                  type=\"number\"\r\n                  class=\"form-control\"\r\n                  id=\"Latitude\"\r\n                  name=\"Latitude\"\r\n                  formControlName=\"Latitude\"\r\n                  placeholder=\"Enter Latitude\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"Longitude\"\r\n                  >Longitude <span class=\"danger\">*</span></label\r\n                >\r\n                <input\r\n                  type=\"number\"\r\n                  class=\"form-control\"\r\n                  id=\"Longitude\"\r\n                  name=\"Longitude\"\r\n                  formControlName=\"Longitude\"\r\n                  placeholder=\"Enter Longitude\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"NoOfAttendees\"\r\n                  >Number of attendees <span class=\"danger\">*</span></label\r\n                >\r\n                <input\r\n                  type=\"number\"\r\n                  class=\"form-control\"\r\n                  id=\"NoOfAttendees\"\r\n                  name=\"NoOfAttendees\"\r\n                  formControlName=\"NoOfAttendees\"\r\n                  placeholder=\"Enter no. of attendees\"\r\n                />\r\n                <div\r\n                  *ngIf=\"activitiesForm.value.NoOfAttendees > 999999\"\r\n                  class=\"danger\"\r\n                >\r\n                  Maximum 9999999\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"Reason\">Body <span class=\"danger\">*</span></label>\r\n                <textarea\r\n                  class=\"form-control\"\r\n                  id=\"Reason\"\r\n                  rows=\"5\"\r\n                  name=\"Reason\"\r\n                  formControlName=\"Reason\"\r\n                  placeholder=\"Enter body\"\r\n                ></textarea>\r\n              </div>\r\n            </div>\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"FarmerName\">Farmer name</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"FarmerName\"\r\n                  name=\"FarmerName\"\r\n                  formControlName=\"FarmerName\"\r\n                  placeholder=\"Enter name\"\r\n                />\r\n                <div\r\n                  *ngIf=\"\r\n                    checkSpecialCharacters(activitiesForm.value.FarmerName)\r\n                  \"\r\n                  class=\"danger\"\r\n                >\r\n                  Special characters not permitted\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"crop\">Crop</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"crop\"\r\n                  ngModel\r\n                  name=\"crop\"\r\n                  formControlName=\"crop\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"ConditionOfCrop\">Condition of crop</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"ConditionOfCrop\"\r\n                  name=\"ConditionOfCrop\"\r\n                  formControlName=\"ConditionOfCrop\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option value=\"Good\">Good</option>\r\n                  <option value=\"VeryGood\">Very Good</option>\r\n                  <option value=\"Excellent\">Excellent</option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"PlannedFarmDay\">Planned farm day</label>\r\n                <input\r\n                  type=\"date\"\r\n                  class=\"form-control\"\r\n                  id=\"PlannedFarmDay\"\r\n                  name=\"PlannedFarmDay\"\r\n                  formControlName=\"PlannedFarmDay\"\r\n                  placeholder=\"Enter Date\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"Date\">Date <span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"date\"\r\n                  class=\"form-control\"\r\n                  id=\"Date\"\r\n                  name=\"Date\"\r\n                  formControlName=\"Date\"\r\n                  placeholder=\"Enter Date\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"Time\">Time <span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"time\"\r\n                  class=\"form-control\"\r\n                  id=\"Time\"\r\n                  name=\"Time\"\r\n                  formControlName=\"Time\"\r\n                  placeholder=\"Enter Time\"\r\n                />\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"activitiesModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !activitiesForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n<div\r\n  bsModal\r\n  #downloadActivitiesModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Download Activity</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"downloadActivitiesModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"downloadExcelForm\" (ngSubmit)=\"downloadActivities()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"fromDate\">From<span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"date\"\r\n                  class=\"form-control\"\r\n                  id=\"fromDate\"\r\n                  required\r\n                  ngModel\r\n                  name=\"fromDate\"\r\n                  formControlName=\"fromDate\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"toDate\">From<span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"date\"\r\n                  class=\"form-control\"\r\n                  id=\"toDate\"\r\n                  required\r\n                  ngModel\r\n                  name=\"toDate\"\r\n                  formControlName=\"toDate\"\r\n                />\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"downloadActivitiesModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !downloadExcelForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Download\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #uploadActivitiesModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Upload Activities</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"uploadActivitiesModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"uploadExcelForm\" (ngSubmit)=\"uploadActivities()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"Image\">Excel file</label>\r\n                <input\r\n                  type=\"file\"\r\n                  class=\"form-control\"\r\n                  id=\"File\"\r\n                  accept=\".xlsx\"\r\n                  name=\"File\"\r\n                  (change)=\"onChange($event)\"\r\n                  formControlName=\"File\"\r\n                  placeholder=\"Choose file\"\r\n                />\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"uploadActivitiesModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !uploadExcelForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Download\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
       /***/
     },
 
-    /***/"bCMp":
-    /*!***************************************************************!*\
-      !*** ./src/app/views/activities/activity-detail.component.ts ***!
-      \***************************************************************/
-    /*! exports provided: ActivityDetailComponent */
     /***/
-    function bCMp(module, __webpack_exports__, __webpack_require__) {
+    "bCMp": function bCMp(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "ActivityDetailComponent", function () {
         return ActivityDetailComponent;
       });
       /* harmony import */
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
       /* harmony import */
-      var _raw_loader_activity_detail_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! raw-loader!./activity-detail.component.html */"hbGJ");
+
+
+      var _raw_loader_activity_detail_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./activity-detail.component.html */
+      "hbGJ");
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */"8Y7J");
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      "8Y7J");
       /* harmony import */
-      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/router */"iInd");
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/router */
+      "iInd");
       /* harmony import */
-      var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ngx-bootstrap/modal */"LqlI");
+
+
+      var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ngx-bootstrap/modal */
+      "LqlI");
       /* harmony import */
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ngx-toastr */"EApP");
+
+
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ngx-toastr */
+      "EApP");
       /* harmony import */
-      var _data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ../../data.service */"R7Hv");
+
+
+      var _data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../../data.service */
+      "R7Hv");
       /* harmony import */
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! @angular/forms */"s7LF");
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! @angular/forms */
+      "s7LF");
       /* harmony import */
-      var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ../../constants/columnMetadata */"7nfi");
+
+
+      var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! ../../constants/columnMetadata */
+      "7nfi");
+
       var ActivityDetailComponent = /*#__PURE__*/function () {
         function ActivityDetailComponent(dataservice, activatedRouter, router, fb, toastr) {
           _classCallCheck(this, ActivityDetailComponent);
+
           this.dataservice = dataservice;
           this.activatedRouter = activatedRouter;
           this.router = router;
@@ -87,10 +127,12 @@
             Reason: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
           });
         }
+
         _createClass(ActivityDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
             var _this = this;
+
             this.activatedRouter.params.subscribe(function (params) {
               _this.id = params["id"];
             });
@@ -102,8 +144,10 @@
           key: "getActivity",
           value: function getActivity() {
             var _this2 = this;
+
             this.dataservice.getActivity(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13;
+
               console.log("getActivity", (_b = (_a = result === null || result === void 0 ? void 0 : result.data) === null || _a === void 0 ? void 0 : _a.activity) === null || _b === void 0 ? void 0 : _b.data);
               _this2.details = (_d = (_c = result === null || result === void 0 ? void 0 : result.data) === null || _c === void 0 ? void 0 : _c.activity) === null || _d === void 0 ? void 0 : _d.data;
               _this2.activitiesForm = _this2.fb.group({
@@ -128,6 +172,7 @@
           key: "getCrops",
           value: function getCrops() {
             var _this3 = this;
+
             this.dataservice.getCrops().valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
               _this3.Crops = result.data.crops.data;
@@ -137,6 +182,7 @@
           key: "getAreas",
           value: function getAreas(id) {
             var _this4 = this;
+
             this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
               _this4.Areas = result.data.areas.data;
@@ -163,19 +209,25 @@
           key: "FormSubmit",
           value: function FormSubmit() {
             var _this5 = this;
+
             var resp = {};
             console.log(this.activitiesForm.value);
             this.btnLoading = true;
             this.dataservice.updateActivity(this.activitiesForm.value, this.id).subscribe(function (result) {
               resp = result.data;
               console.log("response", result);
+
               if (result.data.updateActivity) {
                 _this5.toastr.success("Activity updated successfully!");
+
                 _this5.btnLoading = false;
+
                 _this5.editModal.hide();
+
                 _this5.getActivity();
               } else {
                 _this5.toastr.error("Failed. Please check the fields!");
+
                 _this5.btnLoading = false;
               }
             });
@@ -184,11 +236,15 @@
           key: "deleteActivity",
           value: function deleteActivity() {
             var _this6 = this;
+
             this.dataservice.deleteActivity(this.id).subscribe(function (result) {
               console.log("response", result);
+
               if (result.data.deleteActivity) {
                 _this6.toastr.success("Success!");
+
                 _this6.deleteModal.hide();
+
                 _this6.router.navigate(["/activities/all"]);
               } else {
                 _this6.toastr.error("Failed!");
@@ -196,8 +252,10 @@
             });
           }
         }]);
+
         return ActivityDetailComponent;
       }();
+
       ActivityDetailComponent.ctorParameters = function () {
         return [{
           type: _data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"]
@@ -211,6 +269,7 @@
           type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]
         }];
       };
+
       ActivityDetailComponent.propDecorators = {
         editModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
@@ -228,45 +287,85 @@
       ActivityDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         template: _raw_loader_activity_detail_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])], ActivityDetailComponent);
-
       /***/
     },
 
-    /***/"e3Zl":
-    /*!**********************************************************!*\
-      !*** ./src/app/views/activities/activities.component.ts ***!
-      \**********************************************************/
-    /*! exports provided: ActivitiesComponent */
     /***/
-    function e3Zl(module, __webpack_exports__, __webpack_require__) {
+    "e3Zl": function e3Zl(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "ActivitiesComponent", function () {
         return ActivitiesComponent;
       });
       /* harmony import */
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
       /* harmony import */
-      var _raw_loader_activities_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! raw-loader!./activities.component.html */"Hcx8");
+
+
+      var _raw_loader_activities_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! raw-loader!./activities.component.html */
+      "Hcx8");
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/core */"8Y7J");
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/core */
+      "8Y7J");
       /* harmony import */
-      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/router */"iInd");
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/router */
+      "iInd");
       /* harmony import */
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! @angular/forms */"s7LF");
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! @angular/forms */
+      "s7LF");
       /* harmony import */
-      var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ngx-toastr */"EApP");
+
+
+      var ngx_toastr__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ngx-toastr */
+      "EApP");
       /* harmony import */
-      var _data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ../../data.service */"R7Hv");
+
+
+      var _data_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ../../data.service */
+      "R7Hv");
       /* harmony import */
-      var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ../../constants/columnMetadata */"7nfi");
+
+
+      var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ../../constants/columnMetadata */
+      "7nfi");
       /* harmony import */
-      var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ngx-bootstrap/modal */"LqlI");
+
+
+      var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! ngx-bootstrap/modal */
+      "LqlI");
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ../../../environments/environment */
+      "AytR");
+
       var ActivitiesComponent = /*#__PURE__*/function () {
         function ActivitiesComponent(dataservice, router, fb, toastr) {
           _classCallCheck(this, ActivitiesComponent);
+
           this.dataservice = dataservice;
           this.router = router;
           this.fb = fb;
@@ -281,6 +380,7 @@
           this.States = [];
           this.Areas = [];
           this.Crops = [];
+          this.file = null;
           this.activitiesForm = this.fb.group({
             ActivityType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             Latitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
@@ -295,6 +395,13 @@
             Time: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             Reason: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
+          this.downloadExcelForm = this.fb.group({
+            fromDate: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            toDate: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+          });
+          this.uploadExcelForm = this.fb.group({
+            File: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+          });
           this.rowData = [];
           this.pageSize = 20;
           this.from = 1;
@@ -302,6 +409,7 @@
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["ActivitiesColumn"]);
           this.rowSelection = "single";
         }
+
         _createClass(ActivitiesComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
@@ -315,6 +423,7 @@
           key: "checkSpecialCharacters",
           value: function checkSpecialCharacters(data) {
             var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+
             if (format.test(data)) {
               return true;
             } else {
@@ -325,17 +434,22 @@
           key: "getActivities",
           value: function getActivities() {
             var _this7 = this;
+
             console.log("jshdbfkjhsdfkjsdf");
             this.dataservice.getActivities(1, this.pageSize).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f;
+
               _this7.meta = result.data.activities.meta;
+
               if (((_b = (_a = _this7.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
                 _this7.disablePrevButton = true;
                 _this7.disableNextButton = true;
               }
+
               if (((_d = (_c = _this7.meta) === null || _c === void 0 ? void 0 : _c.pagination) === null || _d === void 0 ? void 0 : _d.total) < _this7.pageSize) {
                 _this7.to = (_f = (_e = _this7.meta) === null || _e === void 0 ? void 0 : _e.pagination) === null || _f === void 0 ? void 0 : _f.total;
               }
+
               _this7.rowData = result.data.activities.data;
             });
           }
@@ -343,14 +457,18 @@
           key: "loadNext",
           value: function loadNext() {
             var _this8 = this;
+
             var _a, _b, _c, _d;
+
             this.count++;
             this.disablePrevButton = false;
             this.from = this.from + this.pageSize;
             this.to = this.to + this.pageSize > ((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.total) ? (_d = (_c = this.meta) === null || _c === void 0 ? void 0 : _c.pagination) === null || _d === void 0 ? void 0 : _d.total : this.to + this.pageSize;
+
             if (this.count === this.meta.pagination.pageCount) {
               this.disableNextButton = true;
             }
+
             this.dataservice.getActivities(this.count, this.pageSize).valueChanges.subscribe(function (result) {
               _this8.meta = result.data.activities.meta;
               _this8.rowData = result.data.activities.data;
@@ -360,13 +478,17 @@
           key: "loadPrev",
           value: function loadPrev() {
             var _this9 = this;
+
             this.count--;
+
             if (this.count < this.meta.pagination.pageCount) {
               this.disableNextButton = false;
             }
+
             if (this.count === 1) {
               this.disablePrevButton = true;
             }
+
             this.from = this.from - this.pageSize;
             this.to = this.to - this.rowData.length;
             this.dataservice.getActivities(this.count, this.pageSize).valueChanges.subscribe(function (result) {
@@ -378,6 +500,7 @@
           key: "getCrops",
           value: function getCrops() {
             var _this10 = this;
+
             this.dataservice.getCrops().valueChanges.subscribe(function (result) {
               _this10.Crops = result.data.crops.data;
             });
@@ -386,6 +509,7 @@
           key: "getStates",
           value: function getStates() {
             var _this11 = this;
+
             this.dataservice.getStates().valueChanges.subscribe(function (result) {
               _this11.States = result.data.states.data;
             });
@@ -394,6 +518,7 @@
           key: "getAreas",
           value: function getAreas(lgaid) {
             var _this12 = this;
+
             this.dataservice.getAreas(lgaid).valueChanges.subscribe(function (result) {
               _this12.Areas = result.data.areas.data;
             });
@@ -409,6 +534,17 @@
           key: "onRowClicked",
           value: function onRowClicked(event) {
             console.log("row", event.data);
+          }
+        }, {
+          key: "onChange",
+          value: function onChange(event) {
+            this.file = [];
+
+            for (var i = 0; i < event.target.files.length; i++) {
+              this.file.push(event.target.files[i]);
+            }
+
+            console.log(this.file);
           }
         }, {
           key: "onSelectionChanged",
@@ -429,26 +565,84 @@
           key: "activitiesSubmit",
           value: function activitiesSubmit() {
             var _this13 = this;
+
             var resp = {};
             this.btnLoading = true;
             this.dataservice.createActivity(this.activitiesForm.value).subscribe(function (result) {
               resp = result.data;
+
               if (result.data.createActivity) {
                 _this13.toastr.success("Success!");
+
                 _this13.getActivities();
+
                 _this13.activitiesForm.reset();
+
                 _this13.btnLoading = false;
+
                 _this13.activitiesModal.hide();
+
                 _this13.gridApi.deselectAll();
               } else {
                 _this13.toastr.error("Failed. Please check the fields!");
+
                 _this13.btnLoading = false;
               }
             });
           }
+        }, {
+          key: "downloadActivities",
+          value: function downloadActivities() {
+            var _this14 = this;
+
+            console.log(this.downloadExcelForm.value);
+            var resp = {};
+            this.btnLoading = true;
+            this.dataservice.downloadActivities(this.downloadExcelForm.value).subscribe(function (result) {
+              var _a;
+
+              resp = result.body;
+              console.log(result);
+
+              if (result.status === 200 && result.body.status == "Success") {
+                _this14.toastr.success(result.body.message);
+
+                _this14.btnLoading = false;
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+              } else {
+                _this14.btnLoading = false;
+
+                _this14.toastr.error(result.body.message);
+              }
+            });
+          }
+        }, {
+          key: "uploadActivities",
+          value: function uploadActivities() {
+            var _this15 = this;
+
+            var resp = {};
+            this.dataservice.uploadActivities(this.file).subscribe(function (response) {
+              if (response.status == 200) {
+                console.log(response);
+
+                _this15.toastr.success("Success!");
+
+                _this15.file = null;
+
+                _this15.getActivities();
+
+                _this15.uploadActivitiesModal.hide();
+              } else {
+                _this15.toastr.error("Failed!");
+              }
+            });
+          }
         }]);
+
         return ActivitiesComponent;
       }();
+
       ActivitiesComponent.ctorParameters = function () {
         return [{
           type: _data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"]
@@ -460,59 +654,81 @@
           type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]
         }];
       };
+
       ActivitiesComponent.propDecorators = {
         activitiesModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
           args: ["activitiesModal"]
+        }],
+        downloadActivitiesModal: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
+          args: ["downloadActivitiesModal"]
+        }],
+        uploadActivitiesModal: [{
+          type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
+          args: ["uploadActivitiesModal"]
         }]
       };
       ActivitiesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         template: _raw_loader_activities_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_6__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])], ActivitiesComponent);
-
       /***/
     },
 
-    /***/"hbGJ":
-    /*!*******************************************************************************************************!*\
-      !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/activities/activity-detail.component.html ***!
-      \*******************************************************************************************************/
-    /*! exports provided: default */
     /***/
-    function hbGJ(module, __webpack_exports__, __webpack_require__) {
+    "hbGJ": function hbGJ(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony default export */
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div bsModal #deleteModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"editModalLabel\"\n    aria-hidden=\"true\">\n    <div class=\"modal-dialog modal-dialog-centered modal-sm\">\n      <div class=\"modal-content\">\n        <div class=\"modal-body text-center\">\n          Do you want to delete this activity?\n        </div>\n        <div class=\"modal-footer justify-content-around\">\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"deleteModal.hide()\">\n            No! Cancel.\n          </button>\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteActivity()\">\n            Yes! Delete.\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"card\">\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\n      <h2>Activity Details</h2>\n      <span>\n        <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"editModal.show()\">\n          Edit\n        </button>\n        <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" (click)=\"deleteModal.show()\">\n          Delete\n        </button>\n      </span>\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col\">\n          <div class=\"row\">\n            <table class=\"table table-striped\">\n              <tbody>\n                <tr>\n                  <td>ID</td>\n                  <td>{{ details?.id }}</td>\n                </tr>\n                <tr>\n                  <td>Activity type</td>\n                  <td>\n                    {{ returnActivityType(details?.attributes?.ActivityType) }}\n                  </td>\n                </tr>\n                <tr>\n                  <td>Date</td>\n                  <td>\n                    {{ dateConverterMin(details?.attributes?.Date) }}\n                  </td>\n                </tr>\n                <tr>\n                  <td>Time</td>\n                  <td>{{ details?.attributes?.Time }}</td>\n                </tr>\n                <tr>\n                  <td>City</td>\n                  <td>{{ details?.attributes?.area?.data?.attributes?.Name }}</td>\n                </tr>\n                <tr>\n                  <td>No. of Attendees</td>\n                  <td>\n                    {{\n                    details?.attributes?.NoOfAttendees}}\n                  </td>\n                </tr>\n                <tr>\n                  <td>Location</td>\n                  <td>\n                    <a href=\"{{ maplink }}\" target=\"_blank\">Click here to view location</a>\n                  </td>\n                </tr>\n                <tr>\n                  <td>Farmer Name</td>\n                  <td>{{ details?.attributes?.FarmerName }}</td>\n                </tr>\n                <tr>\n                  <td>Crop</td>\n                  <td>\n                    {{ details?.attributes?.crop?.data?.attributes?.Name }}\n                  </td>\n                </tr>\n                <tr>\n                  <td>Condition of crop</td>\n                  <td>{{ details?.attributes?.ConditionOfCrop }}</td>\n                </tr>\n                <tr>\n                  <td>Planned farm day</td>\n                  <td>\n                    {{\n                    dateConverterMin(details?.attributes?.PlannedFarmDay)\n                    }}\n                  </td>\n                </tr>\n                <tr>\n                  <td>Body</td>\n                  <td>\n                    {{details?.attributes?.Reason}}\n                  </td>\n                </tr>\n                <tr>\n                  <td>Created at</td>\n                  <td>{{ dateConvertor(details?.attributes?.createdAt) }}</td>\n                </tr>\n                <tr>\n                  <td>Last updated</td>\n                  <td>{{ dateConvertor(details?.attributes?.updatedAt) }}</td>\n                </tr>\n              </tbody>\n            </table>\n          </div>\n        </div>\n        <div bsModal #editModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\n          aria-labelledby=\"editModalLabel\" aria-hidden=\"true\">\n          <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n            <div class=\"modal-content\">\n              <div class=\"modal-header\">\n                <h4 class=\"modal-title\">Edit details</h4>\n                <button type=\"button\" class=\"close\" (click)=\"editModal.hide()\" aria-label=\"Close\">\n                  <span aria-hidden=\"true\">&times;</span>\n                </button>\n              </div>\n              <div class=\"modal-body\">\n                <form [formGroup]=\"activitiesForm\" (ngSubmit)=\"FormSubmit()\">\n                  <div class=\"row\">\n                    <div class=\"col\">\n                      <div class=\"form-group\">\n                        <label for=\"ActivityType\">Activity Type <span class=\"danger\">*</span></label>\n                        <select\n                          class=\"form-control\"\n                          id=\"ActivityType\"\n                          required\n                          ngModel\n                          name=\"ActivityType\"\n                          formControlName=\"ActivityType\"\n                        >\n                          <option value=\"\" disabled selected hidden>Choose...</option>\n                          <option value=\"FarmDemo\">Farm Demo</option>\n                          <option value=\"GroupFarmerTraining\">\n                            Group Farmer Training\n                          </option>\n                          <option value=\"MegaFarmerTraining\">\n                            Mega Farmer Training\n                          </option>\n                          <option value=\"FarmDay\">Farm Day</option>\n                          <option value=\"RetailersTraining\">Retailers Training</option>\n                        </select>\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"area\">City <span class=\"danger\">*</span></label>\n                        <select\n                          class=\"form-control\"\n                          id=\"area\"\n                          required\n                          ngModel\n                          name=\"area\"\n                          formControlName=\"area\"\n                        >\n                          <option value=\"\" disabled selected hidden>Choose...</option>\n                          <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\n                            {{ item.attributes.Name }}\n                          </option>\n                        </select>\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"Latitude\">Latitude <span class=\"danger\">*</span></label>\n                        <input\n                          type=\"text\"\n                          class=\"form-control\"\n                          id=\"Latitude\"\n                          name=\"Latitude\"\n                          formControlName=\"Latitude\"\n                          placeholder=\"Enter Latitude\"\n                        />\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"Longitude\">Longitude <span class=\"danger\">*</span></label>\n                        <input\n                          type=\"text\"\n                          class=\"form-control\"\n                          id=\"Longitude\"\n                          name=\"Longitude\"\n                          formControlName=\"Longitude\"\n                          placeholder=\"Enter Longitude\"\n                        />\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"NoOfAttendees\">Number of attendees <span class=\"danger\">*</span></label>\n                        <input\n                          type=\"text\"\n                          class=\"form-control\"\n                          id=\"NoOfAttendees\"\n                          name=\"NoOfAttendees\"\n                          formControlName=\"NoOfAttendees\"\n                          placeholder=\"Enter No. of attendees\"\n                        />\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"Reason\">Body <span class=\"danger\">*</span></label>\n                        <textarea\n                          class=\"form-control\"\n                          id=\"Reason\"\n                          rows=\"5\"\n                          name=\"Reason\"\n                          formControlName=\"Reason\"\n                          placeholder=\"Enter body\"\n                        ></textarea>\n                      </div>\n                    </div>\n                    <div class=\"col\">\n                      <div class=\"form-group\">\n                        <label for=\"FarmerName\">Farmer name</label>\n                        <input\n                          type=\"text\"\n                          class=\"form-control\"\n                          id=\"FarmerName\"\n                          name=\"FarmerName\"\n                          formControlName=\"FarmerName\"\n                          placeholder=\"Enter name\"\n                        />\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"crop\">Crop</label>\n                        <select\n                          class=\"form-control\"\n                          id=\"crop\"\n                          ngModel\n                          name=\"crop\"\n                          formControlName=\"crop\"\n                        >\n                          <option value=\"\" disabled selected hidden>Choose...</option>\n                          <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\n                            {{ item.attributes.Name }}\n                          </option>\n                        </select>\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"ConditionOfCrop\">Condition of crop</label>\n                        <input\n                          type=\"text\"\n                          class=\"form-control\"\n                          id=\"ConditionOfCrop\"\n                          name=\"ConditionOfCrop\"\n                          formControlName=\"ConditionOfCrop\"\n                          placeholder=\"Enter condition\"\n                        />\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"PlannedFarmDay\">Planned farm day</label>\n                        <input\n                          type=\"date\"\n                          class=\"form-control\"\n                          id=\"PlannedFarmDay\"\n                          name=\"PlannedFarmDay\"\n                          formControlName=\"PlannedFarmDay\"\n                          placeholder=\"Enter Date\"\n                        />\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"Date\">Date <span class=\"danger\">*</span></label>\n                        <input\n                          type=\"date\"\n                          class=\"form-control\"\n                          id=\"Date\"\n                          name=\"Date\"\n                          formControlName=\"Date\"\n                          placeholder=\"Enter Date\"\n                        />\n                      </div>\n                      <div class=\"form-group\">\n                        <label for=\"Time\">Time <span class=\"danger\">*</span></label>\n                        <input\n                          type=\"time\"\n                          class=\"form-control\"\n                          id=\"Time\"\n                          name=\"Time\"\n                          formControlName=\"Time\"\n                          placeholder=\"Enter Time\"\n                        />\n                      </div>\n                    </div>\n                  </div>\n                  <button\n                    type=\"button\"\n                    class=\"btn btn-secondary\"\n                    (click)=\"editModal.hide()\"\n                  >\n                    Close\n                  </button>\n                  <button\n                    type=\"submit\"\n                    class=\"btn btn-primary ml-2\"\n                    [disabled]=\"btnLoading || !activitiesForm.valid\"\n                  >\n                    <span\n                      *ngIf=\"btnLoading\"\n                      class=\"spinner-border spinner-border-sm\"\n                      role=\"status\"\n                      aria-hidden=\"true\"\n                    ></span>\n                    Save changes\n                  </button>\n                </form>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>";
 
+
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div bsModal #deleteModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"editModalLabel\"\r\n    aria-hidden=\"true\">\r\n    <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n      <div class=\"modal-content\">\r\n        <div class=\"modal-body text-center\">\r\n          Do you want to delete this activity?\r\n        </div>\r\n        <div class=\"modal-footer justify-content-around\">\r\n          <button type=\"button\" class=\"btn btn-secondary\" (click)=\"deleteModal.hide()\">\r\n            No! Cancel.\r\n          </button>\r\n          <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteActivity()\">\r\n            Yes! Delete.\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"card\">\r\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n      <h2>Activity Details</h2>\r\n      <span>\r\n        <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"editModal.show()\">\r\n          Edit\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-danger\" data-toggle=\"modal\" (click)=\"deleteModal.show()\">\r\n          Delete\r\n        </button>\r\n      </span>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col\">\r\n          <div class=\"row\">\r\n            <table class=\"table table-striped\">\r\n              <tbody>\r\n                <tr>\r\n                  <td>ID</td>\r\n                  <td>{{ details?.id }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Activity type</td>\r\n                  <td>\r\n                    {{ returnActivityType(details?.attributes?.ActivityType) }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Date</td>\r\n                  <td>\r\n                    {{ dateConverterMin(details?.attributes?.Date) }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Time</td>\r\n                  <td>{{ details?.attributes?.Time }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>City</td>\r\n                  <td>{{ details?.attributes?.area?.data?.attributes?.Name }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>No. of Attendees</td>\r\n                  <td>\r\n                    {{\r\n                    details?.attributes?.NoOfAttendees}}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Location</td>\r\n                  <td>\r\n                    <a href=\"{{ maplink }}\" target=\"_blank\">Click here to view location</a>\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Farmer Name</td>\r\n                  <td>{{ details?.attributes?.FarmerName }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Crop</td>\r\n                  <td>\r\n                    {{ details?.attributes?.crop?.data?.attributes?.Name }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Condition of crop</td>\r\n                  <td>{{ details?.attributes?.ConditionOfCrop }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Planned farm day</td>\r\n                  <td>\r\n                    {{\r\n                    dateConverterMin(details?.attributes?.PlannedFarmDay)\r\n                    }}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Body</td>\r\n                  <td>\r\n                    {{details?.attributes?.Reason}}\r\n                  </td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Created at</td>\r\n                  <td>{{ dateConvertor(details?.attributes?.createdAt) }}</td>\r\n                </tr>\r\n                <tr>\r\n                  <td>Last updated</td>\r\n                  <td>{{ dateConvertor(details?.attributes?.updatedAt) }}</td>\r\n                </tr>\r\n              </tbody>\r\n            </table>\r\n          </div>\r\n        </div>\r\n        <div bsModal #editModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\n          aria-labelledby=\"editModalLabel\" aria-hidden=\"true\">\r\n          <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n            <div class=\"modal-content\">\r\n              <div class=\"modal-header\">\r\n                <h4 class=\"modal-title\">Edit details</h4>\r\n                <button type=\"button\" class=\"close\" (click)=\"editModal.hide()\" aria-label=\"Close\">\r\n                  <span aria-hidden=\"true\">&times;</span>\r\n                </button>\r\n              </div>\r\n              <div class=\"modal-body\">\r\n                <form [formGroup]=\"activitiesForm\" (ngSubmit)=\"FormSubmit()\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col\">\r\n                      <div class=\"form-group\">\r\n                        <label for=\"ActivityType\">Activity Type <span class=\"danger\">*</span></label>\r\n                        <select\r\n                          class=\"form-control\"\r\n                          id=\"ActivityType\"\r\n                          required\r\n                          ngModel\r\n                          name=\"ActivityType\"\r\n                          formControlName=\"ActivityType\"\r\n                        >\r\n                          <option value=\"\" disabled selected hidden>Choose...</option>\r\n                          <option value=\"FarmDemo\">Farm Demo</option>\r\n                          <option value=\"GroupFarmerTraining\">\r\n                            Group Farmer Training\r\n                          </option>\r\n                          <option value=\"MegaFarmerTraining\">\r\n                            Mega Farmer Training\r\n                          </option>\r\n                          <option value=\"FarmDay\">Farm Day</option>\r\n                          <option value=\"RetailersTraining\">Retailers Training</option>\r\n                        </select>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"area\">City <span class=\"danger\">*</span></label>\r\n                        <select\r\n                          class=\"form-control\"\r\n                          id=\"area\"\r\n                          required\r\n                          ngModel\r\n                          name=\"area\"\r\n                          formControlName=\"area\"\r\n                        >\r\n                          <option value=\"\" disabled selected hidden>Choose...</option>\r\n                          <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\r\n                            {{ item.attributes.Name }}\r\n                          </option>\r\n                        </select>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"Latitude\">Latitude <span class=\"danger\">*</span></label>\r\n                        <input\r\n                          type=\"text\"\r\n                          class=\"form-control\"\r\n                          id=\"Latitude\"\r\n                          name=\"Latitude\"\r\n                          formControlName=\"Latitude\"\r\n                          placeholder=\"Enter Latitude\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"Longitude\">Longitude <span class=\"danger\">*</span></label>\r\n                        <input\r\n                          type=\"text\"\r\n                          class=\"form-control\"\r\n                          id=\"Longitude\"\r\n                          name=\"Longitude\"\r\n                          formControlName=\"Longitude\"\r\n                          placeholder=\"Enter Longitude\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"NoOfAttendees\">Number of attendees <span class=\"danger\">*</span></label>\r\n                        <input\r\n                          type=\"text\"\r\n                          class=\"form-control\"\r\n                          id=\"NoOfAttendees\"\r\n                          name=\"NoOfAttendees\"\r\n                          formControlName=\"NoOfAttendees\"\r\n                          placeholder=\"Enter No. of attendees\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"Reason\">Body <span class=\"danger\">*</span></label>\r\n                        <textarea\r\n                          class=\"form-control\"\r\n                          id=\"Reason\"\r\n                          rows=\"5\"\r\n                          name=\"Reason\"\r\n                          formControlName=\"Reason\"\r\n                          placeholder=\"Enter body\"\r\n                        ></textarea>\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"col\">\r\n                      <div class=\"form-group\">\r\n                        <label for=\"FarmerName\">Farmer name</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          class=\"form-control\"\r\n                          id=\"FarmerName\"\r\n                          name=\"FarmerName\"\r\n                          formControlName=\"FarmerName\"\r\n                          placeholder=\"Enter name\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"crop\">Crop</label>\r\n                        <select\r\n                          class=\"form-control\"\r\n                          id=\"crop\"\r\n                          ngModel\r\n                          name=\"crop\"\r\n                          formControlName=\"crop\"\r\n                        >\r\n                          <option value=\"\" disabled selected hidden>Choose...</option>\r\n                          <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\r\n                            {{ item.attributes.Name }}\r\n                          </option>\r\n                        </select>\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"ConditionOfCrop\">Condition of crop</label>\r\n                        <input\r\n                          type=\"text\"\r\n                          class=\"form-control\"\r\n                          id=\"ConditionOfCrop\"\r\n                          name=\"ConditionOfCrop\"\r\n                          formControlName=\"ConditionOfCrop\"\r\n                          placeholder=\"Enter condition\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"PlannedFarmDay\">Planned farm day</label>\r\n                        <input\r\n                          type=\"date\"\r\n                          class=\"form-control\"\r\n                          id=\"PlannedFarmDay\"\r\n                          name=\"PlannedFarmDay\"\r\n                          formControlName=\"PlannedFarmDay\"\r\n                          placeholder=\"Enter Date\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"Date\">Date <span class=\"danger\">*</span></label>\r\n                        <input\r\n                          type=\"date\"\r\n                          class=\"form-control\"\r\n                          id=\"Date\"\r\n                          name=\"Date\"\r\n                          formControlName=\"Date\"\r\n                          placeholder=\"Enter Date\"\r\n                        />\r\n                      </div>\r\n                      <div class=\"form-group\">\r\n                        <label for=\"Time\">Time <span class=\"danger\">*</span></label>\r\n                        <input\r\n                          type=\"time\"\r\n                          class=\"form-control\"\r\n                          id=\"Time\"\r\n                          name=\"Time\"\r\n                          formControlName=\"Time\"\r\n                          placeholder=\"Enter Time\"\r\n                        />\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                  <button\r\n                    type=\"button\"\r\n                    class=\"btn btn-secondary\"\r\n                    (click)=\"editModal.hide()\"\r\n                  >\r\n                    Close\r\n                  </button>\r\n                  <button\r\n                    type=\"submit\"\r\n                    class=\"btn btn-primary ml-2\"\r\n                    [disabled]=\"btnLoading || !activitiesForm.valid\"\r\n                  >\r\n                    <span\r\n                      *ngIf=\"btnLoading\"\r\n                      class=\"spinner-border spinner-border-sm\"\r\n                      role=\"status\"\r\n                      aria-hidden=\"true\"\r\n                    ></span>\r\n                    Save changes\r\n                  </button>\r\n                </form>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>";
       /***/
     },
 
-    /***/"odFu":
-    /*!***************************************************************!*\
-      !*** ./src/app/views/activities/activities-routing.module.ts ***!
-      \***************************************************************/
-    /*! exports provided: ActivitiesRoutingModule */
     /***/
-    function odFu(module, __webpack_exports__, __webpack_require__) {
+    "odFu": function odFu(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "ActivitiesRoutingModule", function () {
         return ActivitiesRoutingModule;
       });
       /* harmony import */
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
+
+
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
       /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/core */"8Y7J");
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/core */
+      "8Y7J");
       /* harmony import */
-      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/router */"iInd");
+
+
+      var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/router */
+      "iInd");
       /* harmony import */
-      var _activities_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! ./activities.component */"e3Zl");
+
+
+      var _activities_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! ./activities.component */
+      "e3Zl");
       /* harmony import */
-      var _activity_detail_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./activity-detail.component */"bCMp");
+
+
+      var _activity_detail_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ./activity-detail.component */
+      "bCMp");
+
       var routes = [{
         path: '',
         children: [{
@@ -536,68 +752,107 @@
           }
         }]
       }];
-      var ActivitiesRoutingModule = /*#__PURE__*/_createClass(function ActivitiesRoutingModule() {
+
+      var ActivitiesRoutingModule = function ActivitiesRoutingModule() {
         _classCallCheck(this, ActivitiesRoutingModule);
-      });
+      };
+
       ActivitiesRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
       })], ActivitiesRoutingModule);
-
       /***/
     },
 
-    /***/"ve2J":
-    /*!*******************************************************!*\
-      !*** ./src/app/views/activities/activities.module.ts ***!
-      \*******************************************************/
-    /*! exports provided: ActivitiesModule */
     /***/
-    function ve2J(module, __webpack_exports__, __webpack_require__) {
+    "ve2J": function ve2J(module, __webpack_exports__, __webpack_require__) {
       "use strict";
 
       __webpack_require__.r(__webpack_exports__);
       /* harmony export (binding) */
+
+
       __webpack_require__.d(__webpack_exports__, "ActivitiesModule", function () {
         return ActivitiesModule;
       });
       /* harmony import */
-      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__( /*! tslib */"mrSG");
-      /* harmony import */
-      var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__( /*! @angular/common */"SVse");
-      /* harmony import */
-      var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__( /*! @angular/forms */"s7LF");
-      /* harmony import */
-      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__( /*! @angular/core */"8Y7J");
-      /* harmony import */
-      var _activities_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__( /*! ./activities.component */"e3Zl");
-      /* harmony import */
-      var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__( /*! ngx-bootstrap/dropdown */"FE24");
-      /* harmony import */
-      var ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__( /*! ngx-bootstrap/tabs */"2ZVE");
-      /* harmony import */
-      var _activities_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__( /*! ./activities-routing.module */"odFu");
-      /* harmony import */
-      var ag_grid_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__( /*! ag-grid-angular */"YFAK");
-      /* harmony import */
-      var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__( /*! ngx-bootstrap/modal */"LqlI");
-      /* harmony import */
-      var _activity_detail_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__( /*! ./activity-detail.component */"bCMp");
 
-      // Dropdowns Component
 
+      var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+      /*! tslib */
+      "mrSG");
+      /* harmony import */
+
+
+      var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+      /*! @angular/common */
+      "SVse");
+      /* harmony import */
+
+
+      var _angular_forms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+      /*! @angular/forms */
+      "s7LF");
+      /* harmony import */
+
+
+      var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+      /*! @angular/core */
+      "8Y7J");
+      /* harmony import */
+
+
+      var _activities_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+      /*! ./activities.component */
+      "e3Zl");
+      /* harmony import */
+
+
+      var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+      /*! ngx-bootstrap/dropdown */
+      "FE24");
+      /* harmony import */
+
+
+      var ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      /*! ngx-bootstrap/tabs */
+      "2ZVE");
+      /* harmony import */
+
+
+      var _activities_routing_module__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+      /*! ./activities-routing.module */
+      "odFu");
+      /* harmony import */
+
+
+      var ag_grid_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+      /*! ag-grid-angular */
+      "YFAK");
+      /* harmony import */
+
+
+      var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ngx-bootstrap/modal */
+      "LqlI");
+      /* harmony import */
+
+
+      var _activity_detail_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! ./activity-detail.component */
+      "bCMp"); // Dropdowns Component
       // Buttons Routing
-
       // Angular
 
-      var ActivitiesModule = /*#__PURE__*/_createClass(function ActivitiesModule() {
+
+      var ActivitiesModule = function ActivitiesModule() {
         _classCallCheck(this, ActivitiesModule);
-      });
+      };
+
       ActivitiesModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
         imports: [_angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"], ngx_bootstrap_tabs__WEBPACK_IMPORTED_MODULE_6__["TabsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"], ag_grid_angular__WEBPACK_IMPORTED_MODULE_8__["AgGridModule"].withComponents([]), _activities_routing_module__WEBPACK_IMPORTED_MODULE_7__["ActivitiesRoutingModule"], ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_5__["BsDropdownModule"].forRoot(), ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_9__["ModalModule"].forRoot(), _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"]],
         declarations: [_activities_component__WEBPACK_IMPORTED_MODULE_4__["ActivitiesComponent"], _activity_detail_component__WEBPACK_IMPORTED_MODULE_10__["ActivityDetailComponent"]]
       })], ActivitiesModule);
-
       /***/
     }
   }]);

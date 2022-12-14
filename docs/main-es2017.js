@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/ashikvashraf/Documents/AngularProjects/indorama_adminpanel/src/main.ts */"zUnb");
+module.exports = __webpack_require__(/*! E:\Projects\indorama_adminpanel\src\main.ts */"zUnb");
 
 
 /***/ }),
@@ -53,7 +53,7 @@ let AuthenticationService = class AuthenticationService {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((user) => {
             // login successful if there's a jwt token in the response
             console.log(user);
-            if (user.jwt && (user.user.UserType == "Admin" || user.user.UserType == "Marketing")) {
+            if (user.jwt && user.user.UserType == "Admin") {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
                 localStorage.setItem("token", user.jwt);
                 localStorage.setItem("username", user.user.username);
@@ -339,10 +339,11 @@ let DefaultLayoutComponent = class DefaultLayoutComponent {
         this.authenticationService = authenticationService;
         this.sidebarMinimized = false;
         this.userName = localStorage.getItem("username");
-        this.navItems = _nav__WEBPACK_IMPORTED_MODULE_5__["navItems"].filter((item) => item.role === localStorage.getItem('user_type') || item.role === '');
+        this.navItems = _nav__WEBPACK_IMPORTED_MODULE_5__["navItems"].filter((item) => item.role == localStorage.getItem("user_type") || item.role == "");
         this.authenticationService.currentUser.subscribe((x) => (this.currentUser = x));
         // console.log("constructor",this.currentUser.user.UserType)
     }
+    ;
     toggleMinimize(e) {
         var _a;
         this.sidebarMinimized = e;
@@ -350,7 +351,7 @@ let DefaultLayoutComponent = class DefaultLayoutComponent {
     }
     logout() {
         this.authenticationService.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate(["/login"]);
     }
 };
 DefaultLayoutComponent.ctorParameters = () => [
@@ -379,7 +380,7 @@ DefaultLayoutComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"clearfix\">\n          <h1 class=\"float-left display-3 mr-4\">500</h1>\n          <h4 class=\"pt-3\">Houston, we have a problem!</h4>\n          <p class=\"text-muted\">The page you are looking for is temporarily unavailable.</p>\n        </div>\n        <div class=\"input-prepend input-group\">\n          <div class=\"input-group-prepend\">\n            <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\n          </div>\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\n          <span class=\"input-group-append\">\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"app flex-row align-items-center\">\r\n  <div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"clearfix\">\r\n          <h1 class=\"float-left display-3 mr-4\">500</h1>\r\n          <h4 class=\"pt-3\">Houston, we have a problem!</h4>\r\n          <p class=\"text-muted\">The page you are looking for is temporarily unavailable.</p>\r\n        </div>\r\n        <div class=\"input-prepend input-group\">\r\n          <div class=\"input-group-prepend\">\r\n            <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\r\n          </div>\r\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\r\n          <span class=\"input-group-append\">\r\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\r\n          </span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -844,7 +845,7 @@ const UpdateFarmDemo = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 `;
 const CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query {
-    crops(pagination: { limit: 10000 }, sort: "createdAt:desc", filters:{isDelete:{eq:false}}) {
+    crops(pagination: { limit: 10000 }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -922,7 +923,7 @@ const UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 `;
 const StatesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   query {
-    states(pagination: { limit: 10000 }, sort: "createdAt:desc", filters:{isDelete:{eq:false}}) {
+    states(pagination: { limit: 10000 }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -1024,7 +1025,7 @@ const LGAquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     lgas(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { state: { id: { eq: $id } }, isDelete:{eq:false} }
+      filters: { state: { id: { eq: $id } } }
     ) {
       meta {
         pagination {
@@ -1123,7 +1124,7 @@ const Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     villages(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { area: { lga: { id: { eq: $id } } }, isDelete:{eq:false} }
+      filters: { area: { lga: { id: { eq: $id } } } }
     ) {
       meta {
         pagination {
@@ -1225,7 +1226,7 @@ const Areasquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     areas(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { lga: { id: { eq: $id } }, isDelete:{eq:false} }
+      filters: { lga: { id: { eq: $id } } }
     ) {
       meta {
         pagination {
@@ -1362,7 +1363,7 @@ const MarketQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     markets(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { state: { id: { eq: $id } }, isDelete:{eq:false} }
+      filters: { state: { id: { eq: $id } } }
     ) {
       meta {
         pagination {
@@ -2109,8 +2110,8 @@ const AddSoilTestResult = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         CopperObserved: $copper
         BoronObserved: $boron
         ManganeseObserved: $manganese
-        RecommendedNPKQty: $RecommendedNPKQty,
-        RecommendedUreaQty: $RecommendedUreaQty,
+        RecommendedNPKQty: $RecommendedNPKQty
+        RecommendedUreaQty: $RecommendedUreaQty
       }
     ) {
       data {
@@ -2178,8 +2179,8 @@ const UpdateSoilTestResult = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] 
         CopperObserved: $copper
         BoronObserved: $boron
         ManganeseObserved: $manganese
-        RecommendedNPKQty: $RecommendedNPKQty,
-        RecommendedUreaQty: $RecommendedUreaQty,
+        RecommendedNPKQty: $RecommendedNPKQty
+        RecommendedUreaQty: $RecommendedUreaQty
       }
     ) {
       data {
@@ -2654,7 +2655,7 @@ const updateRetailerProducts = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"
 `;
 const DeleteStatesMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   mutation ($id: ID!) {
-    updateState(id: $id, data:{isDelete:true}) {
+    deleteState(id: $id) {
       data {
         attributes {
           Name
@@ -2665,7 +2666,7 @@ const DeleteStatesMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] 
 `;
 const DeleteLGAMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   mutation ($id: ID!) {
-    updateLga(id: $id, data:{isDelete:true}) {
+    deleteLga(id: $id) {
       data {
         attributes {
           Name
@@ -2676,7 +2677,7 @@ const DeleteLGAMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 `;
 const DeleteAreaMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   mutation ($id: ID!) {
-    updateArea(id: $id, data:{isDelete:true}) {
+    deleteArea(id: $id) {
       data {
         attributes {
           Name
@@ -2687,7 +2688,7 @@ const DeleteAreaMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 `;
 const DeleteVillageMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   mutation ($id: ID!) {
-    updateVillage(id: $id, data:{isDelete:true}) {
+    deleteVillage(id: $id) {
       data {
         attributes {
           Name
@@ -2698,7 +2699,7 @@ const DeleteVillageMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"]
 `;
 const DeleteCropMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   mutation ($id: ID!) {
-    updateCrop(id: $id, data:{isDelete:true}) {
+    deleteCrop(id: $id) {
       data {
         attributes {
           Name
@@ -2709,7 +2710,7 @@ const DeleteCropMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
 `;
 const DeleteMarketMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   mutation ($id: ID!) {
-    updateMarket(id: $id, data:{isDelete:true}) {
+    deleteMarket(id: $id) {
       data {
         attributes {
           Name
@@ -4238,6 +4239,101 @@ const createSMSCampaign = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     }
   }
 `;
+const getPendingRetailerApprovals = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  query getPendingRetailerApprovals {
+    usersPermissionsUsers(
+      filters: {
+        and: [
+          { confirmed: { eq: false } }
+          { blocked: { eq: false } }
+          { UserType: { eq: "Retailer" } }
+        ]
+      }
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+      data {
+        id
+        attributes {
+          username
+          Name
+          Bio
+          email
+          confirmed
+          blocked
+          UserType
+          ContactNumber
+          isContactNumberVerified
+        }
+      }
+    }
+  }
+`;
+const readApprovalCropPrices = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
+  query readApprovalCropPrices {
+    cropPrices(
+      filters: { publishedAt: { eq: null }, Rejected: { eq: false } }
+      publicationState: PREVIEW
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+      data {
+        id
+        attributes {
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Price
+          Unit
+          market {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Rejected
+          user {
+            data {
+              id
+              attributes {
+                Name
+                username
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 let DataService = class DataService {
     constructor(http, apollo, toastr) {
         this.http = http;
@@ -4290,6 +4386,14 @@ let DataService = class DataService {
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/survey-forms/${data}?populate=Fields`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadActivities(data) {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/activity/download?fromDate=${data.fromDate}&toDate=${data.toDate}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
     downloadResponses(data) {
@@ -4358,6 +4462,18 @@ let DataService = class DataService {
                 fromDate: `${fromDate}T00:00:00.000Z`,
                 toDate: `${toDate}T23:59:59.000Z`,
             },
+        });
+    }
+    getPendingRetailerApprovals() {
+        return this.apollo.watchQuery({
+            query: getPendingRetailerApprovals,
+            fetchPolicy: "no-cache",
+        });
+    }
+    getApprovalCropPrices() {
+        return this.apollo.watchQuery({
+            query: readApprovalCropPrices,
+            fetchPolicy: "no-cache",
         });
     }
     getallChats(limit, start, key, isAskIndorama) {
@@ -5227,6 +5343,20 @@ let DataService = class DataService {
         };
         return this.http.post(this.baseURL + `/api/upload`, formData, httpOptions1);
     }
+    uploadActivities(file) {
+        var _a;
+        const formData = new FormData();
+        for (var i = 0; i < file.length; i++) {
+            // formData.append("file[]",  file[i]);
+            formData.append("files", file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
+        }
+        // formData.append("files", file, file?.name);
+        console.log(formData);
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http.post(this.baseURL + `/api/activity/upload`, formData, httpOptions1);
+    }
     deleteArea(id) {
         return this.apollo.mutate({
             mutation: DeleteAreaMutation,
@@ -5708,43 +5838,43 @@ const navItems = [
         name: "Activities",
         url: "/activities/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Marketplace",
         url: "/marketplace/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Indorama Updates",
         url: "/indorama_updates/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "SMS Campaigns",
         url: "/sms-campaigns/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Farm Demo",
         url: "/farmdemo/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Soil Analysis",
         url: "/soiltest/customers",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Crop Prices",
         url: "/cropprices/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Retailers",
@@ -5756,37 +5886,37 @@ const navItems = [
         name: "Users",
         url: "/users/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Best crop practices",
         url: "/best-crop-practices/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Surveys",
         url: "/surveys/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Chat",
         url: "/chat/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Advertisement",
         url: "/advertisement/all",
         icon: "icon-cursor",
-        role: "Admin",
+        role: "",
     },
     {
         name: "Masters",
         url: "/soiltest/enquiries",
         icon: 'icon-cursor',
-        role: "Admin",
+        role: "",
         children: [
             {
                 name: "States",
@@ -5859,7 +5989,7 @@ P500Component = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-header [navbarBrandRouterLink]=\"['/dashboard']\" [fixed]=\"true\"\n  [navbarBrandFull]=\"{src: 'assets/img/brand/logo_new.png',width:200,alt: 'CartIntoCar Logo'}\"\n  [navbarBrandMinimized]=\"{src: 'assets/img/brand/logo_new.png', width: 200, alt: 'CartIntoCar Logo'}\"\n  [sidebarToggler]=\"'lg'\">\n  <ul class=\"nav navbar-nav ml-auto\">\n    {{userName}}\n    <li class=\"nav-item dropdown\" dropdown placement=\"bottom right\">\n      <a class=\"nav-link\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"\n        dropdownToggle (click)=\"false\">\n        <img src=\"assets/img/avatars/6.png\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\" />\n      </a>\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\n        <div class=\"dropdown-header text-center\"><strong>Settings</strong></div>\n        <a class=\"dropdown-item\"><i class=\"fa fa-user\"></i>{{userName}}</a>\n        <div class=\"divider\"></div>\n        <a class=\"dropdown-item\" (click)=\"logout()\"><i class=\"fa fa-lock\"></i> Logout</a>\n      </div>\n    </li>\n  </ul>\n</app-header>\n<div class=\"app-body\">\n  <app-sidebar #appSidebar [fixed]=\"true\" [display]=\"'lg'\" [minimized]=\"sidebarMinimized\"\n    (minimizedChange)=\"toggleMinimize($event)\">\n    <app-sidebar-nav [navItems]=\"navItems\"></app-sidebar-nav>\n    <!-- <app-sidebar-minimizer></app-sidebar-minimizer> -->\n  </app-sidebar>\n  <!-- Main content -->\n  <main class=\"main\">\n    <cui-breadcrumb>\n    </cui-breadcrumb>\n    <div class=\"container-fluid\">\n      <router-outlet></router-outlet>\n    </div>\n  </main>\n</div>\n<app-footer>\n  <span><a>Indorama Agronomy App</a> &copy; 2022 Untangle_</span>\n  <!-- <span class=\"ml-auto\">Powered by <a href=\"https://www.upsquad.in\">upsquad</a></span> -->\n</app-footer>");
+/* harmony default export */ __webpack_exports__["default"] = ("<app-header [navbarBrandRouterLink]=\"['/dashboard']\" [fixed]=\"true\"\r\n  [navbarBrandFull]=\"{src: 'assets/img/brand/logo_new.png',width:200,alt: 'CartIntoCar Logo'}\"\r\n  [navbarBrandMinimized]=\"{src: 'assets/img/brand/logo_new.png', width: 200, alt: 'CartIntoCar Logo'}\"\r\n  [sidebarToggler]=\"'lg'\">\r\n  <ul class=\"nav navbar-nav ml-auto\">\r\n    {{userName}}\r\n    <li class=\"nav-item dropdown\" dropdown placement=\"bottom right\">\r\n      <a class=\"nav-link\" data-toggle=\"dropdown\" href=\"#\" role=\"button\" aria-haspopup=\"true\" aria-expanded=\"false\"\r\n        dropdownToggle (click)=\"false\">\r\n        <img src=\"assets/img/avatars/6.png\" class=\"img-avatar\" alt=\"admin@bootstrapmaster.com\" />\r\n      </a>\r\n      <div class=\"dropdown-menu dropdown-menu-right\" *dropdownMenu aria-labelledby=\"simple-dropdown\">\r\n        <div class=\"dropdown-header text-center\"><strong>Settings</strong></div>\r\n        <a class=\"dropdown-item\"><i class=\"fa fa-user\"></i>{{userName}}</a>\r\n        <div class=\"divider\"></div>\r\n        <a class=\"dropdown-item\" (click)=\"logout()\"><i class=\"fa fa-lock\"></i> Logout</a>\r\n      </div>\r\n    </li>\r\n  </ul>\r\n</app-header>\r\n<div class=\"app-body\">\r\n  <app-sidebar #appSidebar [fixed]=\"true\" [display]=\"'lg'\" [minimized]=\"sidebarMinimized\"\r\n    (minimizedChange)=\"toggleMinimize($event)\">\r\n    <app-sidebar-nav [navItems]=\"navItems\"></app-sidebar-nav>\r\n    <!-- <app-sidebar-minimizer></app-sidebar-minimizer> -->\r\n  </app-sidebar>\r\n  <!-- Main content -->\r\n  <main class=\"main\">\r\n    <cui-breadcrumb>\r\n    </cui-breadcrumb>\r\n    <div class=\"container-fluid\">\r\n      <router-outlet></router-outlet>\r\n    </div>\r\n  </main>\r\n</div>\r\n<app-footer>\r\n  <span><a>Indorama Agronomy App</a> &copy; 2022 Untangle_</span>\r\n  <!-- <span class=\"ml-auto\">Powered by <a href=\"https://www.upsquad.in\">upsquad</a></span> -->\r\n</app-footer>");
 
 /***/ }),
 
@@ -5872,7 +6002,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"app flex-row align-items-center\">\n  <div class=\"container\">\n    <div class=\"row justify-content-center\">\n      <div class=\"col-md-6\">\n        <div class=\"clearfix\">\n          <h1 class=\"float-left display-3 mr-4\">404</h1>\n          <h4 class=\"pt-3\">Oops! You're lost.</h4>\n          <p class=\"text-muted\">The page you are looking for was not found.</p>\n        </div>\n        <div class=\"input-prepend input-group\">\n          <div class=\"input-group-prepend\">\n            <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\n          </div>\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\n          <span class=\"input-group-append\">\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\n          </span>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"app flex-row align-items-center\">\r\n  <div class=\"container\">\r\n    <div class=\"row justify-content-center\">\r\n      <div class=\"col-md-6\">\r\n        <div class=\"clearfix\">\r\n          <h1 class=\"float-left display-3 mr-4\">404</h1>\r\n          <h4 class=\"pt-3\">Oops! You're lost.</h4>\r\n          <p class=\"text-muted\">The page you are looking for was not found.</p>\r\n        </div>\r\n        <div class=\"input-prepend input-group\">\r\n          <div class=\"input-group-prepend\">\r\n            <span class=\"input-group-text\"><i class=\"fa fa-search\"></i></span>\r\n          </div>\r\n          <input id=\"prependedInput\" class=\"form-control\" size=\"16\" type=\"text\" placeholder=\"What are you looking for?\">\r\n          <span class=\"input-group-append\">\r\n            <button class=\"btn btn-info\" type=\"button\">Search</button>\r\n          </span>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n");
 
 /***/ }),
 
@@ -5885,7 +6015,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<!-- <div class=\"app-body bg-image\">\n  <main class=\"main d-flex align-items-center\" style=\"background-color: rgba(0, 0, 0, 0.8);\">\n    <div class=\"login-box\">\n      <div class=\"card p-4\" style=\"width: fit-content;\">\n        <div class=\"card-body\">\n          <form>\n            <h1>Login</h1>\n            <p class=\"text-muted\">Welcome back! Please log in to your account</p>\n            <div class=\"input-group mb-3\">\n              <div class=\"input-group-prepend\">\n                <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\n              </div>\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\" autocomplete=\"username\" required>\n            </div>\n            <div class=\"input-group mb-4\">\n              <div class=\"input-group-prepend\">\n                <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\n              </div>\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\" autocomplete=\"current-password\"\n                required>\n            </div>\n            <div class=\"row\">\n              <div class=\"col-6\">\n                <button type=\"button\" class=\"btn btn-primary px-4\">Login</button>\n              </div>\n            </div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </main>\n</div> -->\n<!-- <div class=\"bg-image\"> -->\n<div class=\"d-md-flex h-md-100 align-items-center\">\n  <div class=\"col-md-6 p-0 bg-black h-md-100 login-screen\">\n    <div\n      class=\"text-white d-md-flex align-items-center h-100 text-center justify-content-center\"\n    >\n      <div class=\"container-fluid bg-image\" style=\"height: 100vh\"></div>\n    </div>\n  </div>\n  <div class=\"col-md-6 p-0 bg-white h-md-100\">\n    <div class=\"d-md-flex align-items-center h-md-100 justify-content-center\">\n      <div class=\"container-fluid fallback-image\" style=\"height: 100vh\">\n        <form\n          class=\"login-box\"\n          #usForm=\"ngForm\"\n          (ngSubmit)=\"onSubmit()\"\n          style=\"background: #ffffff75; padding: 20px; border-radius: 10px\"\n        >\n          <img\n            src=\"assets/img/brand/logo_new.png\"\n            width=\"300\"\n            style=\"margin-bottom: 25px\"\n          />\n          <h3 class=\"mt-3\">Admin Panel</h3>\n          <p class=\"text-muted\">Welcome back! Please log in to your account</p>\n          <div class=\"input-group mb-3\">\n            <div class=\"input-group-prepend\">\n              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\n            </div>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              placeholder=\"Username\"\n              id=\"login\"\n              maxlength=\"80\"\n              size=\"30\"\n              ngModel\n              value=\"\"\n              name=\"identifier\"\n              required\n            />\n          </div>\n          <div class=\"input-group mb-4\">\n            <div class=\"input-group-prepend\">\n              <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\n            </div>\n            <input\n              type=\"password\"\n              class=\"form-control\"\n              placeholder=\"Password\"\n              id=\"password\"\n              size=\"30\"\n              ngModel\n              name=\"password\"\n              value=\"\"\n              required\n            />\n          </div>\n          <!-- <div class=\"row\"> -->\n          <!-- <div class=\"col-6\"> -->\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"loading\"\n            style=\"background-color: #108d51; color: white\"\n          >\n            <span\n              *ngIf=\"loading\"\n              class=\"spinner-border spinner-border-sm mr-1\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            >\n            </span\n            >Login\n          </button>\n          <!-- </div> -->\n          <!-- </div> -->\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n<!-- </div> -->\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<!-- <div class=\"app-body bg-image\">\r\n  <main class=\"main d-flex align-items-center\" style=\"background-color: rgba(0, 0, 0, 0.8);\">\r\n    <div class=\"login-box\">\r\n      <div class=\"card p-4\" style=\"width: fit-content;\">\r\n        <div class=\"card-body\">\r\n          <form>\r\n            <h1>Login</h1>\r\n            <p class=\"text-muted\">Welcome back! Please log in to your account</p>\r\n            <div class=\"input-group mb-3\">\r\n              <div class=\"input-group-prepend\">\r\n                <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n              </div>\r\n              <input type=\"text\" class=\"form-control\" placeholder=\"Username\" autocomplete=\"username\" required>\r\n            </div>\r\n            <div class=\"input-group mb-4\">\r\n              <div class=\"input-group-prepend\">\r\n                <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n              </div>\r\n              <input type=\"password\" class=\"form-control\" placeholder=\"Password\" autocomplete=\"current-password\"\r\n                required>\r\n            </div>\r\n            <div class=\"row\">\r\n              <div class=\"col-6\">\r\n                <button type=\"button\" class=\"btn btn-primary px-4\">Login</button>\r\n              </div>\r\n            </div>\r\n          </form>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </main>\r\n</div> -->\r\n<!-- <div class=\"bg-image\"> -->\r\n<div class=\"d-md-flex h-md-100 align-items-center\">\r\n  <div class=\"col-md-6 p-0 bg-black h-md-100 login-screen\">\r\n    <div\r\n      class=\"text-white d-md-flex align-items-center h-100 text-center justify-content-center\"\r\n    >\r\n      <div class=\"container-fluid bg-image\" style=\"height: 100vh\"></div>\r\n    </div>\r\n  </div>\r\n  <div class=\"col-md-6 p-0 bg-white h-md-100\">\r\n    <div class=\"d-md-flex align-items-center h-md-100 justify-content-center\">\r\n      <div class=\"container-fluid fallback-image\" style=\"height: 100vh\">\r\n        <form\r\n          class=\"login-box\"\r\n          #usForm=\"ngForm\"\r\n          (ngSubmit)=\"onSubmit()\"\r\n          style=\"background: #ffffff75; padding: 20px; border-radius: 10px\"\r\n        >\r\n          <img\r\n            src=\"assets/img/brand/logo_new.png\"\r\n            width=\"300\"\r\n            style=\"margin-bottom: 25px\"\r\n          />\r\n          <h3 class=\"mt-3\">Admin Panel</h3>\r\n          <p class=\"text-muted\">Welcome back! Please log in to your account</p>\r\n          <div class=\"input-group mb-3\">\r\n            <div class=\"input-group-prepend\">\r\n              <span class=\"input-group-text\"><i class=\"icon-user\"></i></span>\r\n            </div>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              placeholder=\"Username\"\r\n              id=\"login\"\r\n              maxlength=\"80\"\r\n              size=\"30\"\r\n              ngModel\r\n              value=\"\"\r\n              name=\"identifier\"\r\n              required\r\n            />\r\n          </div>\r\n          <div class=\"input-group mb-4\">\r\n            <div class=\"input-group-prepend\">\r\n              <span class=\"input-group-text\"><i class=\"icon-lock\"></i></span>\r\n            </div>\r\n            <input\r\n              type=\"password\"\r\n              class=\"form-control\"\r\n              placeholder=\"Password\"\r\n              id=\"password\"\r\n              size=\"30\"\r\n              ngModel\r\n              name=\"password\"\r\n              value=\"\"\r\n              required\r\n            />\r\n          </div>\r\n          <!-- <div class=\"row\"> -->\r\n          <!-- <div class=\"col-6\"> -->\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"loading\"\r\n            style=\"background-color: #108d51; color: white\"\r\n          >\r\n            <span\r\n              *ngIf=\"loading\"\r\n              class=\"spinner-border spinner-border-sm mr-1\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            >\r\n            </span\r\n            >Login\r\n          </button>\r\n          <!-- </div> -->\r\n          <!-- </div> -->\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<!-- </div> -->\r\n");
 
 /***/ }),
 

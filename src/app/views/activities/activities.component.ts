@@ -5,6 +5,7 @@ import { ToastrService } from "ngx-toastr";
 import { DataService } from "../../data.service";
 import { ActivitiesColumn } from "../../constants/columnMetadata";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "activities.component.html",
@@ -21,6 +22,10 @@ export class ActivitiesComponent {
     this.rowSelection = "single";
   }
   @ViewChild("activitiesModal") public activitiesModal: ModalDirective;
+  @ViewChild("downloadActivitiesModal")
+  public downloadActivitiesModal: ModalDirective;
+  @ViewChild("uploadActivitiesModal")
+  public uploadActivitiesModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
@@ -33,6 +38,7 @@ export class ActivitiesComponent {
   States: any = [];
   Areas: any = [];
   Crops: any = [];
+  file: any = null;
 
   activitiesForm = this.fb.group({
     ActivityType: ["", Validators.required],
@@ -50,6 +56,13 @@ export class ActivitiesComponent {
     Date: ["", Validators.required],
     Time: ["", Validators.required],
     Reason: ["", Validators.required],
+  });
+  downloadExcelForm = this.fb.group({
+    fromDate: ["", Validators.required],
+    toDate: ["", Validators.required],
+  });
+  uploadExcelForm = this.fb.group({
+    File: ["", Validators.required],
   });
   rowData: any = [];
   meta;
@@ -148,6 +161,13 @@ export class ActivitiesComponent {
   onRowClicked(event: any) {
     console.log("row", event.data);
   }
+  onChange(event: any) {
+    this.file = [];
+    for (var i = 0; i < event.target.files.length; i++) {
+      this.file.push(event.target.files[i]);
+    }
+    console.log(this.file);
+  }
   onSelectionChanged(event: any) {
     let selectedRows = this.gridApi.getSelectedRows();
     this.router.navigate(["/activities/activity_details", selectedRows[0].id], {
@@ -176,5 +196,38 @@ export class ActivitiesComponent {
           this.btnLoading = false;
         }
       });
+  }
+  downloadActivities() {
+    console.log(this.downloadExcelForm.value);
+    let resp = {};
+    this.btnLoading = true;
+    this.dataservice
+      .downloadActivities(this.downloadExcelForm.value)
+      .subscribe((result: any) => {
+        resp = result.body;
+        console.log(result);
+        if (result.status === 200 && result.body.status == "Success") {
+          this.toastr.success(result.body.message);
+          this.btnLoading = false;
+          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+        } else {
+          this.btnLoading = false;
+          this.toastr.error(result.body.message);
+        }
+      });
+  }
+  uploadActivities() {
+    let resp = {};
+    this.dataservice.uploadActivities(this.file).subscribe((response: any) => {
+      if (response.status == 200) {
+        console.log(response);
+        this.toastr.success("Success!");
+        this.file = null;
+        this.getActivities();
+        this.uploadActivitiesModal.hide();
+      } else {
+        this.toastr.error("Failed!");
+      }
+    });
   }
 }

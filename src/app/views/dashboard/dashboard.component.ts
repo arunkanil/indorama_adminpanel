@@ -12,6 +12,10 @@ export class DashboardComponent implements OnInit {
   constructor(public dataservice: DataService) {}
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   States: any = [];
+  pendingApprovals: any = [];
+  pendingCropPrices: any = [];
+  CropPriceFlag: any = "false";
+  ApprovalsFlag: any = "false";
   Crops: any = [];
   Markets: any = [];
   cropPrices: any = [];
@@ -195,17 +199,25 @@ export class DashboardComponent implements OnInit {
   getData() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
       this.Crops = result.data.crops.data;
-      console.log(this.Crops);
     });
     this.dataservice.getStates().valueChanges.subscribe((result: any) => {
       this.States = result.data.states.data;
     });
+    this.dataservice
+      .getPendingRetailerApprovals()
+      .valueChanges.subscribe((result: any) => {
+        this.pendingApprovals = result.data.usersPermissionsUsers;
+      });
+    this.dataservice
+      .getApprovalCropPrices()
+      .valueChanges.subscribe((result: any) => {
+        this.pendingCropPrices = result.data.cropPrices;
+      });
     this.getMarkets();
     this.dataservice
       .getDashboardStats(undefined, this.fromDate, this.toDate)
       .valueChanges.subscribe((result: any) => {
         this.DashboardStats = result.data;
-        console.log(this.DashboardStats);
       });
   }
   getMarkets(id?) {

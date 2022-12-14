@@ -1,6 +1,6 @@
 import { INavData } from "@coreui/angular";
 
-export const navItems = [
+export const navItems: INavData[] = [
   // {
   //   name: "Dashboard",
   //   url: "/dashboard",
@@ -11,43 +11,43 @@ export const navItems = [
     name: "Activities",
     url: "/activities/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Marketplace",
     url: "/marketplace/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Indorama Updates",
     url: "/indorama_updates/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "SMS Campaigns",
     url: "/sms-campaigns/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Farm Demo",
     url: "/farmdemo/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Soil Analysis",
     url: "/soiltest/customers",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Crop Prices",
     url: "/cropprices/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Retailers",
@@ -59,37 +59,37 @@ export const navItems = [
     name: "Users",
     url: "/users/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Best crop practices",
     url: "/best-crop-practices/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Surveys",
     url: "/surveys/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Chat",
     url: "/chat/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Advertisement",
     url: "/advertisement/all",
     icon: "icon-cursor",
-    role: "Admin",
+    role: "",
   },
   {
     name: "Masters",
     url: "/soiltest/enquiries",
     icon: 'icon-cursor',
-    role: "Admin",
+    role: "",
     children: [
       {
         name: "States",

@@ -352,7 +352,7 @@ const UpdateFarmDemo = gql`
 `;
 const CropsQuery = gql`
   query {
-    crops(pagination: { limit: 10000 }, sort: "createdAt:desc", filters:{isDelete:{eq:false}}) {
+    crops(pagination: { limit: 10000 }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -430,7 +430,7 @@ const UpdateCrops = gql`
 `;
 const StatesQuery = gql`
   query {
-    states(pagination: { limit: 10000 }, sort: "createdAt:desc", filters:{isDelete:{eq:false}}) {
+    states(pagination: { limit: 10000 }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -532,7 +532,7 @@ const LGAquery = gql`
     lgas(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { state: { id: { eq: $id } }, isDelete:{eq:false} }
+      filters: { state: { id: { eq: $id } } }
     ) {
       meta {
         pagination {
@@ -631,7 +631,7 @@ const Villagesquery = gql`
     villages(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { area: { lga: { id: { eq: $id } } }, isDelete:{eq:false} }
+      filters: { area: { lga: { id: { eq: $id } } } }
     ) {
       meta {
         pagination {
@@ -733,7 +733,7 @@ const Areasquery = gql`
     areas(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { lga: { id: { eq: $id } }, isDelete:{eq:false} }
+      filters: { lga: { id: { eq: $id } } }
     ) {
       meta {
         pagination {
@@ -870,7 +870,7 @@ const MarketQuery = gql`
     markets(
       pagination: { limit: 10000 }
       sort: "createdAt:desc"
-      filters: { state: { id: { eq: $id } }, isDelete:{eq:false} }
+      filters: { state: { id: { eq: $id } } }
     ) {
       meta {
         pagination {
@@ -1617,8 +1617,8 @@ const AddSoilTestResult = gql`
         CopperObserved: $copper
         BoronObserved: $boron
         ManganeseObserved: $manganese
-        RecommendedNPKQty: $RecommendedNPKQty,
-        RecommendedUreaQty: $RecommendedUreaQty,
+        RecommendedNPKQty: $RecommendedNPKQty
+        RecommendedUreaQty: $RecommendedUreaQty
       }
     ) {
       data {
@@ -1686,8 +1686,8 @@ const UpdateSoilTestResult = gql`
         CopperObserved: $copper
         BoronObserved: $boron
         ManganeseObserved: $manganese
-        RecommendedNPKQty: $RecommendedNPKQty,
-        RecommendedUreaQty: $RecommendedUreaQty,
+        RecommendedNPKQty: $RecommendedNPKQty
+        RecommendedUreaQty: $RecommendedUreaQty
       }
     ) {
       data {
@@ -2162,7 +2162,7 @@ const updateRetailerProducts = gql`
 `;
 const DeleteStatesMutation = gql`
   mutation ($id: ID!) {
-    updateState(id: $id, data:{isDelete:true}) {
+    deleteState(id: $id) {
       data {
         attributes {
           Name
@@ -2173,7 +2173,7 @@ const DeleteStatesMutation = gql`
 `;
 const DeleteLGAMutation = gql`
   mutation ($id: ID!) {
-    updateLga(id: $id, data:{isDelete:true}) {
+    deleteLga(id: $id) {
       data {
         attributes {
           Name
@@ -2184,7 +2184,7 @@ const DeleteLGAMutation = gql`
 `;
 const DeleteAreaMutation = gql`
   mutation ($id: ID!) {
-    updateArea(id: $id, data:{isDelete:true}) {
+    deleteArea(id: $id) {
       data {
         attributes {
           Name
@@ -2195,7 +2195,7 @@ const DeleteAreaMutation = gql`
 `;
 const DeleteVillageMutation = gql`
   mutation ($id: ID!) {
-    updateVillage(id: $id, data:{isDelete:true}) {
+    deleteVillage(id: $id) {
       data {
         attributes {
           Name
@@ -2206,7 +2206,7 @@ const DeleteVillageMutation = gql`
 `;
 const DeleteCropMutation = gql`
   mutation ($id: ID!) {
-    updateCrop(id: $id, data:{isDelete:true}) {
+    deleteCrop(id: $id) {
       data {
         attributes {
           Name
@@ -2217,7 +2217,7 @@ const DeleteCropMutation = gql`
 `;
 const DeleteMarketMutation = gql`
   mutation ($id: ID!) {
-    updateMarket(id: $id, data:{isDelete:true}) {
+    deleteMarket(id: $id) {
       data {
         attributes {
           Name
@@ -3746,6 +3746,101 @@ const createSMSCampaign = gql`
     }
   }
 `;
+const getPendingRetailerApprovals = gql`
+  query getPendingRetailerApprovals {
+    usersPermissionsUsers(
+      filters: {
+        and: [
+          { confirmed: { eq: false } }
+          { blocked: { eq: false } }
+          { UserType: { eq: "Retailer" } }
+        ]
+      }
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+      data {
+        id
+        attributes {
+          username
+          Name
+          Bio
+          email
+          confirmed
+          blocked
+          UserType
+          ContactNumber
+          isContactNumberVerified
+        }
+      }
+    }
+  }
+`;
+const readApprovalCropPrices = gql`
+  query readApprovalCropPrices {
+    cropPrices(
+      filters: { publishedAt: { eq: null }, Rejected: { eq: false } }
+      publicationState: PREVIEW
+      sort: "createdAt:desc"
+    ) {
+      meta {
+        pagination {
+          total
+          page
+          pageSize
+          pageCount
+        }
+      }
+      data {
+        id
+        attributes {
+          crop {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Price
+          Unit
+          market {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          Image {
+            data {
+              attributes {
+                url
+              }
+            }
+          }
+          Rejected
+          user {
+            data {
+              id
+              attributes {
+                Name
+                username
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
 @Injectable({
   providedIn: "root",
 })
@@ -3806,6 +3901,20 @@ export class DataService {
     return this.http
       .get(
         `${environment.apiUrl}/api/survey-forms/${data}?populate=Fields`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+  downloadActivities(data): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/activity/download?fromDate=${data.fromDate}&toDate=${data.toDate}`,
         httpOptions1
       )
       .pipe(catchError(this.handleError));
@@ -3886,6 +3995,18 @@ export class DataService {
         fromDate: `${fromDate}T00:00:00.000Z`,
         toDate: `${toDate}T23:59:59.000Z`,
       },
+    });
+  }
+  getPendingRetailerApprovals() {
+    return this.apollo.watchQuery({
+      query: getPendingRetailerApprovals,
+      fetchPolicy: "no-cache",
+    });
+  }
+  getApprovalCropPrices() {
+    return this.apollo.watchQuery({
+      query: readApprovalCropPrices,
+      fetchPolicy: "no-cache",
     });
   }
   getallChats(limit?, start?, key?, isAskIndorama?) {
@@ -4756,6 +4877,23 @@ export class DataService {
       observe: "response",
     };
     return this.http.post(this.baseURL + `/api/upload`, formData, httpOptions1);
+  }
+  uploadActivities(file: any): Observable<any> {
+    const formData = new FormData();
+    for (var i = 0; i < file.length; i++) {
+      // formData.append("file[]",  file[i]);
+      formData.append("files", file[i], file[i]?.name);
+    }
+    // formData.append("files", file, file?.name);
+    console.log(formData);
+    const httpOptions1: Object = {
+      observe: "response",
+    };
+    return this.http.post(
+      this.baseURL + `/api/activity/upload`,
+      formData,
+      httpOptions1
+    );
   }
   deleteArea(id) {
     return this.apollo.mutate({

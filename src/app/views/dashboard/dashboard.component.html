@@ -1,4 +1,93 @@
 <div class="animated fadeIn">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <h4 class="card-title mb-0">
+                Pending Retailer Approvals<span
+                  class="round-badge"
+                  *ngIf="pendingApprovals?.data?.length > 0"
+                  >{{ pendingApprovals?.meta?.pagination?.total }}</span
+                >
+              </h4>
+              <!-- <div class="small text-muted">November 2017</div> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mt-3">
+              <ul class="list-group" *ngIf="pendingApprovals?.data?.length > 0">
+                <li
+                  class="list-group-item"
+                  *ngFor="let item of pendingApprovals?.data"
+                >
+                  {{ item?.attributes?.Name }}
+                </li>
+              </ul>
+              <span
+                *ngIf="!(pendingApprovals?.data?.length > 0)"
+                style="display: flex; justify-content: center"
+                >No items to display</span
+              >
+            </div>
+          </div>
+          <a
+            *ngIf="pendingApprovals?.data?.length > 0"
+            href="/#/retailers/all"
+            style="display: flex; justify-content: flex-end"
+            class="btn btn-link"
+            >View all</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="col">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-12 col-md-12">
+              <h4 class="card-title mb-0">
+                Pending Crop Prices Approvals<span
+                  class="round-badge"
+                  *ngIf="pendingCropPrices?.data?.length > 0"
+                  >{{ pendingCropPrices?.meta?.pagination?.total }}</span
+                >
+              </h4>
+              <!-- <div class="small text-muted">November 2017</div> -->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col mt-3">
+              <ul
+                class="list-group"
+                *ngIf="pendingCropPrices?.data?.length > 0"
+              >
+                <li
+                  class="list-group-item"
+                  *ngFor="let item of pendingCropPrices?.data"
+                >
+                  {{ item?.attributes?.crop?.data?.attributes?.Name }}
+                </li>
+              </ul>
+              <span
+                *ngIf="!(pendingCropPrices?.data?.length > 0)"
+                style="display: flex; justify-content: center"
+                >No items to display</span
+              >
+            </div>
+          </div>
+          <a
+            *ngIf="pendingCropPrices?.data?.length > 0"
+            href="/#/cropprices/all"
+            style="display: flex; justify-content: flex-end"
+            class="btn btn-link"
+            >View all</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="card">
     <div class="card-body">
       <div class="row">
@@ -265,7 +354,7 @@
               </div>
               <hr class="mt-0" />
             </div>
-            <div class="col-sm-6 ">
+            <div class="col-sm-6">
               <div class="btn-group float-right" dropdown>
                 <button
                   dropdownToggle
@@ -329,5 +418,6 @@
         </div>
       </div>
     </div>
+    <!-- </div> -->
   </div>
 </div>
