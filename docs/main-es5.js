@@ -13,7 +13,7 @@
     /***/
     0: function _(module, exports, __webpack_require__) {
       module.exports = __webpack_require__(
-      /*! E:\Projects\indorama_adminpanel\src\main.ts */
+      /*! /Users/ashikvashraf/Documents/AngularProjects/indorama_adminpanel/src/main.ts */
       "zUnb");
       /***/
     },

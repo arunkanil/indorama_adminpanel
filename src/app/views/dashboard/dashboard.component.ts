@@ -4,12 +4,13 @@ import { CustomTooltips } from "@coreui/coreui-plugin-chartjs-custom-tooltips";
 import { DataService } from "../../data.service";
 import { dateConverterMin } from "../../constants/columnMetadata";
 import { BaseChartDirective } from "ng2-charts";
+import { Router } from "@angular/router";
 
 @Component({
   templateUrl: "dashboard.component.html",
 })
 export class DashboardComponent implements OnInit {
-  constructor(public dataservice: DataService) {}
+  constructor(public dataservice: DataService, private router: Router) {}
   @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
   States: any = [];
   pendingApprovals: any = [];
@@ -358,5 +359,9 @@ export class DashboardComponent implements OnInit {
           console.log("downloadResponses", error);
         }
       );
+  }
+
+  navigateViewAll(path) {
+    this.router.navigate([path]);
   }
 }

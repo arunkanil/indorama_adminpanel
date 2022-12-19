@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! E:\Projects\indorama_adminpanel\src\main.ts */"zUnb");
+module.exports = __webpack_require__(/*! /Users/ashikvashraf/Documents/AngularProjects/indorama_adminpanel/src/main.ts */"zUnb");
 
 
 /***/ }),

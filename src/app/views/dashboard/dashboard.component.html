@@ -34,7 +34,7 @@
           </div>
           <a
             *ngIf="pendingApprovals?.data?.length > 0"
-            href="/#/retailers/all"
+            (click)="navigateViewAll('/retailers/all')"
             style="display: flex; justify-content: flex-end"
             class="btn btn-link"
             >View all</a
@@ -79,7 +79,7 @@
           </div>
           <a
             *ngIf="pendingCropPrices?.data?.length > 0"
-            href="/#/cropprices/all"
+            (click)="navigateViewAll('/cropprices/all')"
             style="display: flex; justify-content: flex-end"
             class="btn btn-link"
             >View all</a
