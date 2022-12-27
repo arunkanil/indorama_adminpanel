@@ -4882,7 +4882,7 @@ export class DataService {
     const formData = new FormData();
     for (var i = 0; i < file.length; i++) {
       // formData.append("file[]",  file[i]);
-      formData.append("files", file[i], file[i]?.name);
+      formData.append("file", file[i], file[i]?.name);
     }
     // formData.append("files", file, file?.name);
     console.log(formData);

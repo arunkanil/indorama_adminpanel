@@ -2045,7 +2045,7 @@
 
             for (var i = 0; i < file.length; i++) {
               // formData.append("file[]",  file[i]);
-              formData.append("files", file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
+              formData.append("file", file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
             } // formData.append("files", file, file?.name);
 
 
