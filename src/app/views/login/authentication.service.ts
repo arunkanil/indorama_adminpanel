@@ -31,7 +31,7 @@ export class AuthenticationService {
         map((user) => {
           // login successful if there's a jwt token in the response
           console.log(user);
-          if (user.jwt && user.user.UserType == "Admin") {
+          if (user.jwt && (user.user.UserType == "Admin" || user.user.UserType == "Marketing")) {
             // store user details and jwt token in local storage to keep user logged in between page refreshes
             localStorage.setItem("token", user.jwt);
             localStorage.setItem("username", user.user.username);

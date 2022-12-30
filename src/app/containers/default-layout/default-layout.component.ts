@@ -21,7 +21,7 @@ export class DefaultLayoutComponent {
     );
     // console.log("constructor",this.currentUser.user.UserType)
   }
-  public navItems = navItems.filter((item) => item.role == localStorage.getItem("user_type") || item.role == "");;
+  public navItems = navItems.filter((item) => item.role === localStorage.getItem('user_type') || item.role === '');
 
   toggleMinimize(e) {
     this.sidebarMinimized = e;
@@ -29,6 +29,6 @@ export class DefaultLayoutComponent {
   }
   logout() {
     this.authenticationService.logout();
-    this.router.navigate(["/login"]);
+    this.router.navigate(['/login']);
   }
 }
