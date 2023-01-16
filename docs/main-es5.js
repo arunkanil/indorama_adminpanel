@@ -381,7 +381,8 @@
 
       var environment = {
         production: false,
-        apiUrl: "https://indoramaapp.untanglestrategy.com"
+        apiUrl: "https://indoramaapp.untanglestrategy.com" // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
+
       };
       /***/
     },

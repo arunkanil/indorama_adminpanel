@@ -117,9 +117,10 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
     }
     getBestCropPractises() {
         this.dataservice
-            .getBestCropPractises()
+            .getBestCropPractises(1, 1000)
             .valueChanges.subscribe((result) => {
             this.rowData = result.data.bestCropPractises.data;
+            console.log(this.rowData);
         });
     }
     getCrops() {

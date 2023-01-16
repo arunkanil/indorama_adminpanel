@@ -197,8 +197,9 @@
           value: function getBestCropPractises() {
             var _this = this;
 
-            this.dataservice.getBestCropPractises().valueChanges.subscribe(function (result) {
+            this.dataservice.getBestCropPractises(1, 1000).valueChanges.subscribe(function (result) {
               _this.rowData = result.data.bestCropPractises.data;
+              console.log(_this.rowData);
             });
           }
         }, {

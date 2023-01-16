@@ -272,6 +272,7 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     apiUrl: "https://indoramaapp.untanglestrategy.com"
+    // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
 };
 
 
