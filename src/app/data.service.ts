@@ -4195,14 +4195,20 @@ export class DataService {
     });
   }
   getUsers(page?, pageSize?, UserType?) {
+
+    let variables = {
+        page: page,
+        pageSize: pageSize,
+      };
+
+      if(UserType!=null) {
+        variables["UserType"] = UserType;
+      }
+
     return this.apollo.watchQuery({
       query: UsersQuery,
       fetchPolicy: "no-cache",
-      variables: {
-        UserType: UserType,
-        page: page,
-        pageSize: pageSize,
-      },
+      variables: variables,
     });
   }
   getUsersLarge(UserType?, data?) {
