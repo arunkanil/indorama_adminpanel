@@ -42,20 +42,20 @@ export class ActivitiesComponent {
 
   activitiesForm = this.fb.group({
     ActivityType: ["", Validators.required],
-    Latitude: ["", Validators.required],
-    Longitude: ["", Validators.required],
+    Latitude: [""],
+    Longitude: [""],
     NoOfAttendees: [
       "",
-      [Validators.max(9999999), Validators.min(1), Validators.required],
+      [Validators.max(9999999), Validators.min(1)],
     ],
     area: ["", Validators.required],
-    crop: [""],
+    crop: ["", Validators.required],
     FarmerName: ["", Validators.pattern("[a-zA-Z ]*")],
     PlannedFarmDay: [""],
     ConditionOfCrop: [""],
     Date: ["", Validators.required],
-    Time: ["", Validators.required],
-    Reason: ["", Validators.required],
+    Time: [""],
+    Reason: [""],
   });
   downloadExcelForm = this.fb.group({
     fromDate: ["", Validators.required],
