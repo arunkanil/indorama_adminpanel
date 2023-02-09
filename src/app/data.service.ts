@@ -2961,7 +2961,8 @@ const GetActivities = gql`
   }
 `;
 const GetSingleActivity = gql`
-  query getActivities($id: ID) {
+# Write your query or mutation here
+query getActivities($id: ID) {
     activity(id: $id) {
       data {
         id
@@ -2987,6 +2988,22 @@ const GetSingleActivity = gql`
               id
               attributes {
                 Name
+                lga {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      state {
+                        data {
+                          id
+                          attributes {
+                            Name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

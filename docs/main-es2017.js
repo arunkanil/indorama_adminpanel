@@ -272,6 +272,7 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     apiUrl: "https://indoramaapp.untanglestrategy.com"
+    // apiUrl: "http://localhost:1337"
     // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
 };
 
@@ -3454,7 +3455,8 @@ const GetActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const GetSingleActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query getActivities($id: ID) {
+# Write your query or mutation here
+query getActivities($id: ID) {
     activity(id: $id) {
       data {
         id
@@ -3480,6 +3482,22 @@ const GetSingleActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
               id
               attributes {
                 Name
+                lga {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      state {
+                        data {
+                          id
+                          attributes {
+                            Name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }

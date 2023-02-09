@@ -66,12 +66,7 @@
                     details?.attributes?.NoOfAttendees}}
                   </td>
                 </tr>
-                <tr>
-                  <td>Location</td>
-                  <td>
-                    <a href="{{ maplink }}" target="_blank">Click here to view location</a>
-                  </td>
-                </tr>
+
                 <tr>
                   <td>Farmer Name</td>
                   <td>{{ details?.attributes?.FarmerName }}</td>
@@ -148,6 +143,47 @@
                           <option value="RetailersTraining">Retailers Training</option>
                         </select>
                       </div>
+
+                      <div class="form-group">
+                        <label for="state">State <span class="danger">*</span></label>
+                        <select
+                          class="form-control"
+                          id="state"
+                          required
+                          ngModel
+                          name="state"
+                          formControlName="state"
+                          (change)="filterLGA($event)"
+                        >
+                          <option value="" disabled selected hidden>
+                            Choose...
+                          </option>
+                          <option *ngFor="let item of States" value="{{ item.id }}">
+                            {{ item.attributes.Name }}
+                          </option>
+                        </select>
+                      </div>
+                      <div class="form-group">
+                        <label for="lga">LGA <span class="danger">*</span></label>
+                        <select
+                          class="form-control"
+                          id="lga"
+                          required
+                          ngModel
+                          name="lga"
+                          formControlName="lga"
+                          (change)="filterArea($event)"
+                        >
+                          <option value="" disabled selected hidden>
+                            Choose...
+                          </option>
+                          <option *ngFor="let item of LGA" value="{{ item.id }}">
+                            {{ item.attributes.Name }}
+                          </option>
+                        </select>
+                      </div>
+
+
                       <div class="form-group">
                         <label for="area">City <span class="danger">*</span></label>
                         <select
@@ -164,30 +200,9 @@
                           </option>
                         </select>
                       </div>
+
                       <div class="form-group">
-                        <label for="Latitude">Latitude <span class="danger">*</span></label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="Latitude"
-                          name="Latitude"
-                          formControlName="Latitude"
-                          placeholder="Enter Latitude"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="Longitude">Longitude <span class="danger">*</span></label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="Longitude"
-                          name="Longitude"
-                          formControlName="Longitude"
-                          placeholder="Enter Longitude"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <label for="NoOfAttendees">Number of attendees <span class="danger">*</span></label>
+                        <label for="NoOfAttendees">Number of attendees</label>
                         <input
                           type="text"
                           class="form-control"
@@ -198,7 +213,7 @@
                         />
                       </div>
                       <div class="form-group">
-                        <label for="Reason">Body <span class="danger">*</span></label>
+                        <label for="Reason">Body </label>
                         <textarea
                           class="form-control"
                           id="Reason"
@@ -270,7 +285,7 @@
                         />
                       </div>
                       <div class="form-group">
-                        <label for="Time">Time <span class="danger">*</span></label>
+                        <label for="Time">Time</label>
                         <input
                           type="time"
                           class="form-control"

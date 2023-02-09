@@ -36,6 +36,7 @@ export class ActivitiesComponent {
 
   columnDefs = [];
   States: any = [];
+  LGA: any = [];
   Areas: any = [];
   Crops: any = [];
   file: any = null;
@@ -44,6 +45,8 @@ export class ActivitiesComponent {
     ActivityType: ["", Validators.required],
     Latitude: [""],
     Longitude: [""],
+    state: ["", Validators.required],
+    lga: ["", Validators.required],
     NoOfAttendees: [
       "",
       [Validators.max(9999999), Validators.min(1)],
@@ -87,6 +90,23 @@ export class ActivitiesComponent {
       return false;
     }
   }
+
+  getLGAs(id?) {
+    this.dataservice.getLGAs(id).valueChanges.subscribe((result: any) => {
+      console.log("getLGAs", result.data.lgas.data);
+      this.LGA = result.data.lgas.data;
+    });
+  }
+
+  filterArea(event) {
+    this.getAreas(event.target.value);
+  }
+
+  filterLGA(event) {
+    this.getLGAs(event.target.value);
+  }
+
+
   getActivities() {
     console.log("jshdbfkjhsdfkjsdf");
     this.dataservice
@@ -101,6 +121,11 @@ export class ActivitiesComponent {
           this.to = this.meta?.pagination?.total;
         }
         this.rowData = result.data.activities.data;
+      });
+
+      this.dataservice.getStates().valueChanges.subscribe((result: any) => {
+        console.log("getStates", result.data.states.data);
+        this.States = result.data.states.data;
       });
   }
   loadNext() {
@@ -178,6 +203,7 @@ export class ActivitiesComponent {
     this.activitiesModal.show();
   }
   activitiesSubmit() {
+    console.log("Values before submit", this.activitiesForm.value);
     let resp = {};
     this.btnLoading = true;
     this.dataservice

@@ -31,23 +31,27 @@ export class ActivityDetailComponent implements OnInit {
   dateConverterMin = dateConverterMin;
   dateConverter = dateConverter;
   Areas: any = [];
+  States: any = [];
+  LGA: any = [];
   Crops: any = [];
   flag;
   maplink;
 
   activitiesForm = this.fb.group({
     ActivityType: ["", Validators.required],
-    Latitude: ["", Validators.required],
-    Longitude: ["", Validators.required],
-    NoOfAttendees: ["", Validators.required],
+    Latitude: [""],
+    Longitude: [""],
+    NoOfAttendees: [""],
+    state:["", Validators.required],
+    lga:["", Validators.required],
     area: ["", Validators.required],
     crop: [""],
     FarmerName: [""],
     PlannedFarmDay: [""],
     ConditionOfCrop: [""],
     Date: ["", Validators.required],
-    Time: ["", Validators.required],
-    Reason: ["", Validators.required],
+    Time: [""],
+    Reason: [""],
   });
 
   ngOnInit(): void {
@@ -55,6 +59,8 @@ export class ActivityDetailComponent implements OnInit {
       this.id = params["id"];
     });
     this.getActivity();
+    this.getStates();
+    this.getLGAs();
     this.getAreas();
     this.getCrops();
   }
@@ -69,20 +75,21 @@ export class ActivityDetailComponent implements OnInit {
             this.details?.attributes?.ActivityType,
             Validators.required,
           ],
-          Latitude: [this.details?.attributes?.Latitude, Validators.required],
-          Longitude: [this.details?.attributes?.Longitude, Validators.required],
+          Latitude: [this.details?.attributes?.Latitude],
+          Longitude: [this.details?.attributes?.Longitude],
           NoOfAttendees: [
             this.details?.attributes?.NoOfAttendees,
-            Validators.required,
           ],
+          state:[this.details?.attributes?.area?.data?.attributes?.lga?.data?.attributes?.state?.data?.id, Validators.required],
+          lga:[this.details?.attributes?.area?.data?.attributes?.lga?.data?.id, Validators.required],
           area: [this.details?.attributes?.area?.data?.id, Validators.required],
           crop: [this.details?.attributes?.crop?.data?.id],
           FarmerName: [this.details?.attributes?.FarmerName],
           PlannedFarmDay: [this.details?.attributes?.PlannedFarmDay],
           ConditionOfCrop: [this.details?.attributes?.ConditionOfCrop],
           Date: [this.details?.attributes?.Date, Validators.required],
-          Time: [this.details?.attributes?.Time, Validators.required],
-          Reason: [this.details?.attributes?.Reason, Validators.required],
+          Time: [this.details?.attributes?.Time,],
+          Reason: [this.details?.attributes?.Reason],
         });
         this.maplink =
           "https://maps.google.com/?q=" +
@@ -104,6 +111,25 @@ export class ActivityDetailComponent implements OnInit {
       this.Areas = result.data.areas.data;
     });
   }
+  getStates() {
+    this.dataservice.getStates().valueChanges.subscribe((result: any) => {
+      this.States = result.data.states.data;
+    });
+  }
+  getLGAs(id?) {
+    this.dataservice.getLGAs(id).valueChanges.subscribe((result: any) => {
+      console.log("getLGAs", result.data.lgas.data);
+      this.LGA = result.data.lgas.data;
+    });
+  }
+  filterArea(event) {
+    this.getAreas(event.target.value);
+  }
+
+  filterLGA(event) {
+    this.getLGAs(event.target.value);
+  }
+
   returnActivityType(data) {
     if(data) return data.replace(/([A-Z])/g, " $1").trim();
   }
