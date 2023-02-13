@@ -5,6 +5,7 @@ import { ModalDirective } from "ngx-bootstrap/modal";
 import { DataService } from "../../data.service";
 import { FormBuilder, Validators } from "@angular/forms";
 import { FarmDemoColumn } from "../../constants/columnMetadata";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "farm-demo.component.html",
@@ -93,6 +94,25 @@ export class FarmDemoComponent {
       console.log("getVillages", result.data.villages.data);
       this.Villages = result.data.villages.data;
     });
+  }
+
+  downloadExcel() {
+    let resp = {};
+    this.btnLoading = true;
+    this.dataservice
+      .downloadFarmDemos()
+      .subscribe((result: any) => {
+        resp = result.body;
+        console.log(result);
+        if (result.status === 200 && result.body.status == "Success") {
+          this.toastr.success(result.body.message);
+          this.btnLoading = false;
+          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+        } else {
+          this.btnLoading = false;
+          this.toastr.error(result.body.message);
+        }
+      });
   }
   loadNext() {
     this.count++;

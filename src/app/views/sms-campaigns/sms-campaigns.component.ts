@@ -6,6 +6,7 @@ import { DataService } from "../../data.service";
 // import { ActionRenderer } from "../../utils/StatusRenderer";
 import { SmsColumn } from "../../constants/columnMetadata";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "sms-campaigns.component.html",
@@ -139,6 +140,25 @@ export class SMSCampaignsComponent {
       .valueChanges.subscribe((result: any) => {
         console.log("getVillages", result.data.villages.data);
         this.Villages = result.data.villages.data;
+      });
+  }
+
+  downloadExcel() {
+    let resp = {};
+    this.btnLoading = true;
+    this.dataservice
+      .downloadSMSCampaigns()
+      .subscribe((result: any) => {
+        resp = result.body;
+        console.log(result);
+        if (result.status === 200 && result.body.status == "Success") {
+          this.toastr.success(result.body.message);
+          this.btnLoading = false;
+          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+        } else {
+          this.btnLoading = false;
+          this.toastr.error(result.body.message);
+        }
       });
   }
   filterLGA(event) {

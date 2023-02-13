@@ -184,6 +184,52 @@ export class mastersComponent {
     this.getStates();
     this.getVillages();
   }
+
+
+  downloadExcel() {
+
+    let masterUrl = "";
+    switch (this.router.url) {
+      case "/masters/Villages":
+        masterUrl = "villages";
+        break;
+      case "/masters/States":
+        masterUrl = "states";
+        break;
+      case "/masters/Cities":
+        masterUrl = "cities";
+        break;
+      case "/masters/LGA":
+        masterUrl = "lgas";
+        break;
+      case "/masters/Markets":
+        masterUrl = "markets";
+        break;
+
+      case "/masters/Crops":
+        masterUrl = "crops";
+        break;
+    }
+
+
+    let resp = {};
+    this.btnLoading = true;
+    this.dataservice
+      .downloadMaster(masterUrl)
+      .subscribe((result: any) => {
+        resp = result.body;
+        console.log(result);
+        if (result.status === 200 && result.body.status == "Success") {
+          this.toastr.success(result.body.message);
+          this.btnLoading = false;
+          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+        } else {
+          this.btnLoading = false;
+          this.toastr.error(result.body.message);
+        }
+      });
+  }
+
   getCrops() {
     this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
       console.log("getCrops", result.data.crops.data);
@@ -377,7 +423,7 @@ export class mastersComponent {
           this.imageUrl = this.selectedRows[0].attributes.Image?.data
             ?.attributes?.url
             ? `${environment.apiUrl}` +
-              this.selectedRows[0].attributes.Image?.data?.attributes?.url
+            this.selectedRows[0].attributes.Image?.data?.attributes?.url
             : null;
         } else {
           this.cropForm = this.fb.group({

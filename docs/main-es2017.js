@@ -4414,6 +4414,126 @@ let DataService = class DataService {
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/activity/download?fromDate=${data.fromDate}&toDate=${data.toDate}`, httpOptions1)
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
     }
+    downloadCropPrices() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/crop-prices`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadFarmDemos() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/download-farm-demos`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadIndoramaUpdates() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/indorama-updates`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadMarketplace() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/marketplace`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadMaster(masterType) {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/${masterType}`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadStates() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/states`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadLgas() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/lgas`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadCities() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/cities`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadVillages() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/villages`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadMarkets() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/markets`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadCrops() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/crops`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadUsers() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/activity/download-users`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadRetailers() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/activity/retailers-download`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadSMSCampaigns() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/sms-campaigns`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
+    downloadSoilTests() {
+        const httpOptions1 = {
+            observe: "response",
+        };
+        return this.http
+            .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/soiltest`, httpOptions1)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+    }
     downloadResponses(data) {
         const httpOptions1 = {
             observe: "response",

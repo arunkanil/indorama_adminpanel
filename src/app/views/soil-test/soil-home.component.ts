@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DataService } from "../../data.service";
 import { FormBuilder, Validators } from "@angular/forms";
 import { SoilAnalysisColumns } from "../../constants/columnMetadata";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "soil-home.component.html",
@@ -53,6 +54,24 @@ export class SoilHomeComponent {
         this.to = this.meta?.pagination?.total;
       }
     });
+  }
+  downloadExcel() {
+    let resp = {};
+    this.btnLoading = true;
+    this.dataservice
+      .downloadSoilTests()
+      .subscribe((result: any) => {
+        resp = result.body;
+        console.log(result);
+        if (result.status === 200 && result.body.status == "Success") {
+          this.toastr.success(result.body.message);
+          this.btnLoading = false;
+          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+        } else {
+          this.btnLoading = false;
+          this.toastr.error(result.body.message);
+        }
+      });
   }
   loadNext() {
     this.count++;

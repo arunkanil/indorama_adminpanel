@@ -252,6 +252,27 @@ export class CropPricesComponent {
         }
       );
   }
+
+  downloadExcel() {
+    let resp = {};
+    this.btnLoading = true;
+    this.dataservice
+      .downloadCropPrices()
+      .subscribe((result: any) => {
+        resp = result.body;
+        console.log(result);
+        if (result.status === 200 && result.body.status == "Success") {
+          this.toastr.success(result.body.message);
+          this.btnLoading = false;
+          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+        } else {
+          this.btnLoading = false;
+          this.toastr.error(result.body.message);
+        }
+      });
+  }
+
+
   openApproveModal() {
     this.approveModal.show();
   }

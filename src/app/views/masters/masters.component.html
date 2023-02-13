@@ -7,6 +7,14 @@
       <h2>{{ this.route.snapshot.data.title }} Master</h2>
       <div>
         <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-toggle="modal"
+            (click)="downloadExcel()"
+          >
+            Download excel
+          </button>
+        <button
           type="button"
           class="btn btn-danger"
           data-toggle="modal"

@@ -3936,6 +3936,236 @@ export class DataService {
       )
       .pipe(catchError(this.handleError));
   }
+
+  downloadCropPrices(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/crop-prices`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadFarmDemos(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/download-farm-demos`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadIndoramaUpdates(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/indorama-updates`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+
+  downloadMarketplace(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/marketplace`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadMaster(masterType): Observable<any> {
+
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/${masterType}`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadStates(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/states`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadLgas(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/lgas`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadCities(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/cities`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadVillages(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/villages`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadMarkets(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/markets`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadCrops(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/crops`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadUsers(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/activity/download-users`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+  downloadRetailers(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/activity/retailers-download`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+
+  downloadSMSCampaigns(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/sms-campaigns`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
+
+  downloadSoilTests(): Observable<any> {
+    const httpOptions1: Object = {
+      observe: "response",
+      // headers: {
+      //   Authorization: `Bearer ${localStorage.getItem("token")}`,
+      // },
+    };
+    return this.http
+      .get(
+        `${environment.apiUrl}/api/excel-download/soiltest`,
+        httpOptions1
+      )
+      .pipe(catchError(this.handleError));
+  }
+
   downloadResponses(data): Observable<any> {
     const httpOptions1: Object = {
       observe: "response",

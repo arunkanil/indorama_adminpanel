@@ -175,7 +175,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Crop Prices Home</h2>\r\n      <div>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-warning\"\r\n          data-toggle=\"modal\"\r\n          [disabled]=\"disableButton\"\r\n          (click)=\"openApproveModal()\"\r\n        >\r\n          Approve / Reject\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"disableButton\"\r\n          class=\"btn btn-info\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\"\r\n        >\r\n          Edit\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"!disableButton\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Add New Price\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <div class=\"btn-group float-right mb-3\" dropdown>\r\n            <button\r\n              dropdownToggle\r\n              type=\"button\"\r\n              class=\"btn btn-primary dropdown-toggle\"\r\n            >\r\n              {{ selectedList }}<span class=\"caret\"></span>\r\n            </button>\r\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\r\n              <li role=\"menuitem\">\r\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('All')\"\r\n                  >All</a\r\n                >\r\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Approvalpending')\"\r\n                  >Approval pending</a\r\n                >\r\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Rejected')\"\r\n                  >Rejected</a\r\n                >\r\n              </li>\r\n            </ul>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <span class=\"float-left mt-3\"\r\n            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #cropPriceModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit Crop Price</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"cropPriceModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"cropPriceForm\" (ngSubmit)=\"cropPriceSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"state\">State</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"state\"\r\n              (change)=\"filterMarkets($event)\"\r\n              required\r\n              ngModel\r\n              name=\"state\"\r\n              formControlName=\"state\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"market\">Market</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"market\"\r\n              required\r\n              ngModel\r\n              name=\"market\"\r\n              formControlName=\"market\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of Markets\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"crop\">Crop</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"crop\"\r\n              required\r\n              ngModel\r\n              name=\"crop\"\r\n              formControlName=\"crop\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">Price</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"Price\"\r\n              name=\"Price\"\r\n              formControlName=\"Price\"\r\n              placeholder=\"Enter price\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">Unit</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"Unit\"\r\n              name=\"Unit\"\r\n              formControlName=\"Unit\"\r\n              placeholder=\"Enter unit\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Image\">Image</label>\r\n            <div>\r\n              <img\r\n                *ngIf=\"imageUrl\"\r\n                src=\"{{ imageUrl }}\"\r\n                width=\"100\"\r\n                height=\"100\"\r\n                style=\"object-fit: cover\"\r\n              />\r\n            </div>\r\n            <input\r\n              type=\"file\"\r\n              class=\"form-control\"\r\n              id=\"Image\"\r\n              accept=\".jpg,.jpeg,.JPEG,.png\"\r\n              name=\"Image\"\r\n              (change)=\"onChange($event)\"\r\n              formControlName=\"Image\"\r\n              placeholder=\"Choose image\"\r\n            />\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"cropPriceModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !cropPriceForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n<div\r\n  bsModal\r\n  #approveModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        Do you want to approve this record?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-secondary\"\r\n          (click)=\"approveOrReject(true)\"\r\n        >\r\n          No! Reject.\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          (click)=\"approveOrReject(false)\"\r\n        >\r\n          Yes! Approve.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>Crop Prices Home</h2>\n      <div>\n        <button\n          type=\"button\"\n          class=\"btn btn-outline-primary\"\n          data-toggle=\"modal\"\n          (click)=\"downloadExcel()\"\n        >\n          Download excel\n        </button>\n        <button\n          type=\"button\"\n          class=\"btn btn-warning\"\n          data-toggle=\"modal\"\n          [disabled]=\"disableButton\"\n          (click)=\"openApproveModal()\"\n        >\n          Approve / Reject\n        </button>\n        <button\n          type=\"button\"\n          [disabled]=\"disableButton\"\n          class=\"btn btn-info\"\n          data-toggle=\"modal\"\n          (click)=\"openModal('Edit')\"\n        >\n          Edit\n        </button>\n        <button\n          type=\"button\"\n          [disabled]=\"!disableButton\"\n          class=\"btn btn-primary\"\n          data-toggle=\"modal\"\n          (click)=\"openModal()\"\n        >\n          Add New Price\n        </button>\n      </div>\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"btn-group float-right mb-3\" dropdown>\n            <button\n              dropdownToggle\n              type=\"button\"\n              class=\"btn btn-primary dropdown-toggle\"\n            >\n              {{ selectedList }}<span class=\"caret\"></span>\n            </button>\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\n              <li role=\"menuitem\">\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('All')\"\n                  >All</a\n                >\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Approvalpending')\"\n                  >Approval pending</a\n                >\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Rejected')\"\n                  >Rejected</a\n                >\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            (gridReady)=\"onGridReady($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\"\n            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #cropPriceModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add/Edit Crop Price</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"cropPriceModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"cropPriceForm\" (ngSubmit)=\"cropPriceSubmit()\">\n          <div class=\"form-group\">\n            <label for=\"state\">State</label>\n            <select\n              class=\"form-control\"\n              id=\"state\"\n              (change)=\"filterMarkets($event)\"\n              required\n              ngModel\n              name=\"state\"\n              formControlName=\"state\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"market\">Market</label>\n            <select\n              class=\"form-control\"\n              id=\"market\"\n              required\n              ngModel\n              name=\"market\"\n              formControlName=\"market\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of Markets\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"crop\">Crop</label>\n            <select\n              class=\"form-control\"\n              id=\"crop\"\n              required\n              ngModel\n              name=\"crop\"\n              formControlName=\"crop\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of Crops\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"name\">Price</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"Price\"\n              name=\"Price\"\n              formControlName=\"Price\"\n              placeholder=\"Enter price\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"name\">Unit</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"Unit\"\n              name=\"Unit\"\n              formControlName=\"Unit\"\n              placeholder=\"Enter unit\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"Image\">Image</label>\n            <div>\n              <img\n                *ngIf=\"imageUrl\"\n                src=\"{{ imageUrl }}\"\n                width=\"100\"\n                height=\"100\"\n                style=\"object-fit: cover\"\n              />\n            </div>\n            <input\n              type=\"file\"\n              class=\"form-control\"\n              id=\"Image\"\n              accept=\".jpg,.jpeg,.JPEG,.png\"\n              name=\"Image\"\n              (change)=\"onChange($event)\"\n              formControlName=\"Image\"\n              placeholder=\"Choose image\"\n            />\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"cropPriceModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !cropPriceForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n<div\n  bsModal\n  #approveModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\n    <div class=\"modal-content\">\n      <div class=\"modal-body text-center\">\n        Do you want to approve this record?\n      </div>\n      <div class=\"modal-footer justify-content-around\">\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary\"\n          (click)=\"approveOrReject(true)\"\n        >\n          No! Reject.\n        </button>\n        <button\n          type=\"button\"\n          class=\"btn btn-primary\"\n          (click)=\"approveOrReject(false)\"\n        >\n          Yes! Approve.\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n";
       /***/
     },
 
@@ -514,6 +514,31 @@
             });
           }
         }, {
+          key: "downloadExcel",
+          value: function downloadExcel() {
+            var _this8 = this;
+
+            var resp = {};
+            this.btnLoading = true;
+            this.dataservice.downloadCropPrices().subscribe(function (result) {
+              var _a;
+
+              resp = result.body;
+              console.log(result);
+
+              if (result.status === 200 && result.body.status == "Success") {
+                _this8.toastr.success(result.body.message);
+
+                _this8.btnLoading = false;
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+              } else {
+                _this8.btnLoading = false;
+
+                _this8.toastr.error(result.body.message);
+              }
+            });
+          }
+        }, {
           key: "openApproveModal",
           value: function openApproveModal() {
             this.approveModal.show();
@@ -551,7 +576,7 @@
         }, {
           key: "cropPriceSubmit",
           value: function cropPriceSubmit() {
-            var _this8 = this;
+            var _this9 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -565,29 +590,29 @@
                   if (response.status == 200) {
                     console.log(response);
 
-                    _this8.dataservice.UpdateCropPrice(_this8.cropPriceForm.value, _this8.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                    _this9.dataservice.UpdateCropPrice(_this9.cropPriceForm.value, _this9.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                       resp = result.data;
                       console.log("response", result);
 
                       if (result.data.updateCropPrice) {
-                        _this8.toastr.success("Success!");
+                        _this9.toastr.success("Success!");
 
-                        _this8.getCropPrices();
+                        _this9.getCropPrices();
 
-                        _this8.file = null;
+                        _this9.file = null;
 
-                        _this8.cropPriceModal.hide();
+                        _this9.cropPriceModal.hide();
 
-                        _this8.cropPriceForm.reset();
+                        _this9.cropPriceForm.reset();
 
-                        _this8.gridApi.deselectAll();
+                        _this9.gridApi.deselectAll();
 
-                        _this8.btnLoading = false;
+                        _this9.btnLoading = false;
                       }
                     }, function (error) {
-                      _this8.toastr.error("Failed. Please check the fields!");
+                      _this9.toastr.error("Failed. Please check the fields!");
 
-                      _this8.btnLoading = false;
+                      _this9.btnLoading = false;
                     });
                   }
                 });
@@ -597,24 +622,24 @@
                   console.log("response", result);
 
                   if (result.data.updateCropPrice) {
-                    _this8.toastr.success("Success!");
+                    _this9.toastr.success("Success!");
 
-                    _this8.getCropPrices();
+                    _this9.getCropPrices();
 
-                    _this8.file = null;
+                    _this9.file = null;
 
-                    _this8.cropPriceModal.hide();
+                    _this9.cropPriceModal.hide();
 
-                    _this8.cropPriceForm.reset();
+                    _this9.cropPriceForm.reset();
 
-                    _this8.gridApi.deselectAll();
+                    _this9.gridApi.deselectAll();
 
-                    _this8.btnLoading = false;
+                    _this9.btnLoading = false;
                   }
                 }, function (error) {
-                  _this8.toastr.error("Failed. Please check the fields!");
+                  _this9.toastr.error("Failed. Please check the fields!");
 
-                  _this8.btnLoading = false;
+                  _this9.btnLoading = false;
                 });
               }
             } else {
@@ -624,32 +649,32 @@
                 if (response.status == 200) {
                   console.log(response);
 
-                  _this8.dataservice.AddCropPrice(_this8.cropPriceForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                  _this9.dataservice.AddCropPrice(_this9.cropPriceForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                     resp = result.data;
                     console.log("response", result);
 
                     if (result.data.createCropPrice) {
-                      _this8.toastr.success("Success!");
+                      _this9.toastr.success("Success!");
 
-                      _this8.getCropPrices();
+                      _this9.getCropPrices();
 
-                      _this8.file = null;
+                      _this9.file = null;
 
-                      _this8.cropPriceModal.hide();
+                      _this9.cropPriceModal.hide();
 
-                      _this8.cropPriceForm.reset();
+                      _this9.cropPriceForm.reset();
 
-                      _this8.gridApi.deselectAll();
+                      _this9.gridApi.deselectAll();
                     }
 
-                    _this8.btnLoading = false;
+                    _this9.btnLoading = false;
                   }, function (error) {
-                    _this8.toastr.error("Failed. Please check the fields!");
+                    _this9.toastr.error("Failed. Please check the fields!");
 
-                    _this8.btnLoading = false;
+                    _this9.btnLoading = false;
                   });
                 } else {
-                  _this8.toastr.error("Image failed to upload!");
+                  _this9.toastr.error("Image failed to upload!");
                 }
               });
             }

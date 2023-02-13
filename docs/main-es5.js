@@ -949,6 +949,126 @@
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/activity/download?fromDate=").concat(data.fromDate, "&toDate=").concat(data.toDate), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
         }, {
+          key: "downloadCropPrices",
+          value: function downloadCropPrices() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/crop-prices"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadFarmDemos",
+          value: function downloadFarmDemos() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/download-farm-demos"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadIndoramaUpdates",
+          value: function downloadIndoramaUpdates() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/indorama-updates"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadMarketplace",
+          value: function downloadMarketplace() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/marketplace"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadMaster",
+          value: function downloadMaster(masterType) {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/").concat(masterType), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadStates",
+          value: function downloadStates() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/states"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadLgas",
+          value: function downloadLgas() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/lgas"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadCities",
+          value: function downloadCities() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/cities"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadVillages",
+          value: function downloadVillages() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/villages"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadMarkets",
+          value: function downloadMarkets() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/markets"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadCrops",
+          value: function downloadCrops() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/crops"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadUsers",
+          value: function downloadUsers() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/activity/download-users"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadRetailers",
+          value: function downloadRetailers() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/activity/retailers-download"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadSMSCampaigns",
+          value: function downloadSMSCampaigns() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/sms-campaigns"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
+          key: "downloadSoilTests",
+          value: function downloadSoilTests() {
+            var httpOptions1 = {
+              observe: "response"
+            };
+            return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/soiltest"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
+          }
+        }, {
           key: "downloadResponses",
           value: function downloadResponses(data) {
             var httpOptions1 = {

@@ -7,6 +7,7 @@ import { UsersColumn } from "../../constants/columnMetadata";
 import { filter } from "rxjs/operators";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { UsernameValidator } from "../../utils/username.validator";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "users.component.html",
@@ -120,6 +121,24 @@ export class UsersComponent {
         }
         if (this.meta?.pagination?.total < this.pageSize) {
           this.to = this.meta?.pagination?.total;
+        }
+      });
+  }
+  downloadExcel() {
+    let resp = {};
+    this.btnLoading = true;
+    this.dataservice
+      .downloadUsers()
+      .subscribe((result: any) => {
+        resp = result.body;
+        console.log(result);
+        if (result.status === 200 && result.body.status == "Success") {
+          this.toastr.success(result.body.message);
+          this.btnLoading = false;
+          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+        } else {
+          this.btnLoading = false;
+          this.toastr.error(result.body.message);
         }
       });
   }

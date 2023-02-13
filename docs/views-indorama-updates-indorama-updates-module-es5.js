@@ -172,7 +172,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Indorama Updates</h2>\r\n      <div>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-danger\"\r\n          data-toggle=\"modal\"\r\n          [disabled]=\"disableButton\"\r\n          (click)=\"deleteModal.show()\"\r\n        >\r\n          Delete\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"disableButton\"\r\n          class=\"btn btn-info\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\"\r\n        >\r\n          Edit\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"!disableButton\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Add New Update\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #cropPriceModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit News</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"cropPriceModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"newsForm\" (ngSubmit)=\"cropPriceSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"Title\">Title</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"Title\"\r\n              name=\"Title\"\r\n              formControlName=\"Title\"\r\n              placeholder=\"Enter title\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Body\">Body</label>\r\n            <textarea\r\n              class=\"form-control\"\r\n              id=\"Body\"\r\n              rows=\"5\"\r\n              name=\"Body\"\r\n              formControlName=\"Body\"\r\n              placeholder=\"Enter Body\"\r\n            ></textarea>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Image\">Image</label>\r\n            <div>\r\n              <img\r\n                *ngIf=\"imageUrl\"\r\n                src=\"{{ imageUrl }}\"\r\n                width=\"100\"\r\n                height=\"100\"\r\n                style=\"object-fit: cover\"\r\n              />\r\n            </div>\r\n            <input\r\n              type=\"file\"\r\n              class=\"form-control\"\r\n              id=\"Image\"\r\n              accept=\".jpg,.jpeg,.JPEG,.png\"\r\n              name=\"Image\"\r\n              (change)=\"onChange($event)\"\r\n              formControlName=\"Image\"\r\n              placeholder=\"Choose image\"\r\n            />\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"cropPriceModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !newsForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n<div\r\n  bsModal\r\n  #deleteModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        Do you want to delete this record?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-secondary\"\r\n          (click)=\"deleteModal.hide()\"\r\n        >\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteRecord()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>Indorama Updates</h2>\n      <div>\n        <button\n            type=\"button\"\n            class=\"btn btn-outline-primary\"\n            data-toggle=\"modal\"\n            (click)=\"downloadExcel()\"\n          >\n            Download excel\n          </button>\n        <button\n          type=\"button\"\n          class=\"btn btn-danger\"\n          data-toggle=\"modal\"\n          [disabled]=\"disableButton\"\n          (click)=\"deleteModal.show()\"\n        >\n          Delete\n        </button>\n        <button\n          type=\"button\"\n          [disabled]=\"disableButton\"\n          class=\"btn btn-info\"\n          data-toggle=\"modal\"\n          (click)=\"openModal('Edit')\"\n        >\n          Edit\n        </button>\n        <button\n          type=\"button\"\n          [disabled]=\"!disableButton\"\n          class=\"btn btn-primary\"\n          data-toggle=\"modal\"\n          (click)=\"openModal()\"\n        >\n          Add New Update\n        </button>\n      </div>\n    </div>\n    <!-- <p class=\"text-muted mx-3\">\n      To approve a crop price simply select and edit the record without\n      modifying the data\n    </p> -->\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            (gridReady)=\"onGridReady($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #cropPriceModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add/Edit News</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"cropPriceModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"newsForm\" (ngSubmit)=\"cropPriceSubmit()\">\n          <div class=\"form-group\">\n            <label for=\"Title\">Title</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"Title\"\n              name=\"Title\"\n              formControlName=\"Title\"\n              placeholder=\"Enter title\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"Body\">Body</label>\n            <textarea\n              class=\"form-control\"\n              id=\"Body\"\n              rows=\"5\"\n              name=\"Body\"\n              formControlName=\"Body\"\n              placeholder=\"Enter Body\"\n            ></textarea>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"Image\">Image</label>\n            <div>\n              <img\n                *ngIf=\"imageUrl\"\n                src=\"{{ imageUrl }}\"\n                width=\"100\"\n                height=\"100\"\n                style=\"object-fit: cover\"\n              />\n            </div>\n            <input\n              type=\"file\"\n              class=\"form-control\"\n              id=\"Image\"\n              accept=\".jpg,.jpeg,.JPEG,.png\"\n              name=\"Image\"\n              (change)=\"onChange($event)\"\n              formControlName=\"Image\"\n              placeholder=\"Choose image\"\n            />\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"cropPriceModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !newsForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n<div\n  bsModal\n  #deleteModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\n    <div class=\"modal-content\">\n      <div class=\"modal-body text-center\">\n        Do you want to delete this record?\n      </div>\n      <div class=\"modal-footer justify-content-around\">\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary\"\n          (click)=\"deleteModal.hide()\"\n        >\n          No! Cancel.\n        </button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteRecord()\">\n          Yes! Delete.\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n";
       /***/
     },
 
@@ -312,9 +312,34 @@
             });
           }
         }, {
+          key: "downloadExcel",
+          value: function downloadExcel() {
+            var _this2 = this;
+
+            var resp = {};
+            this.btnLoading = true;
+            this.dataservice.downloadIndoramaUpdates().subscribe(function (result) {
+              var _a;
+
+              resp = result.body;
+              console.log(result);
+
+              if (result.status === 200 && result.body.status == "Success") {
+                _this2.toastr.success(result.body.message);
+
+                _this2.btnLoading = false;
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+              } else {
+                _this2.btnLoading = false;
+
+                _this2.toastr.error(result.body.message);
+              }
+            });
+          }
+        }, {
           key: "loadNext",
           value: function loadNext() {
-            var _this2 = this;
+            var _this3 = this;
 
             var _a, _b, _c, _d;
 
@@ -328,14 +353,14 @@
             }
 
             this.dataservice.getIndoramaUpdates(undefined, this.count, this.pageSize).valueChanges.subscribe(function (result) {
-              _this2.meta = result.data.newsAndUpdates.meta;
-              _this2.rowData = result.data.newsAndUpdates.data;
+              _this3.meta = result.data.newsAndUpdates.meta;
+              _this3.rowData = result.data.newsAndUpdates.data;
             });
           }
         }, {
           key: "loadPrev",
           value: function loadPrev() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.count--;
 
@@ -350,8 +375,8 @@
             this.from = this.from - this.pageSize;
             this.to = this.to - this.rowData.length;
             this.dataservice.getIndoramaUpdates(undefined, this.count, this.pageSize).valueChanges.subscribe(function (result) {
-              _this3.meta = result.data.newsAndUpdates.meta;
-              _this3.rowData = result.data.newsAndUpdates.data;
+              _this4.meta = result.data.newsAndUpdates.meta;
+              _this4.rowData = result.data.newsAndUpdates.data;
             });
           }
         }, {
@@ -414,7 +439,7 @@
         }, {
           key: "deleteRecord",
           value: function deleteRecord() {
-            var _this4 = this;
+            var _this5 = this;
 
             var resp = {};
             this.dataservice.UpdateIndoramaUpdates({
@@ -424,24 +449,24 @@
               console.log("response", result);
 
               if (result.data.updateNewsAndUpdate) {
-                _this4.toastr.success("Success!");
+                _this5.toastr.success("Success!");
 
-                _this4.getUpdates();
+                _this5.getUpdates();
 
-                _this4.file = null;
+                _this5.file = null;
 
-                _this4.deleteModal.hide();
+                _this5.deleteModal.hide();
 
-                _this4.gridApi.deselectAll();
+                _this5.gridApi.deselectAll();
               } else {
-                _this4.toastr.error("Failed. Please check the fields!");
+                _this5.toastr.error("Failed. Please check the fields!");
               }
             });
           }
         }, {
           key: "cropPriceSubmit",
           value: function cropPriceSubmit() {
-            var _this5 = this;
+            var _this6 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -455,28 +480,28 @@
                   if (response.status == 200) {
                     console.log(response);
 
-                    _this5.dataservice.UpdateIndoramaUpdates(_this5.newsForm.value, _this5.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                    _this6.dataservice.UpdateIndoramaUpdates(_this6.newsForm.value, _this6.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                       resp = result.data;
                       console.log("response", result);
 
                       if (result.data.updateNewsAndUpdate) {
-                        _this5.toastr.success("Success!");
+                        _this6.toastr.success("Success!");
 
-                        _this5.file = null;
+                        _this6.file = null;
 
-                        _this5.getUpdates();
+                        _this6.getUpdates();
 
-                        _this5.btnLoading = false;
+                        _this6.btnLoading = false;
 
-                        _this5.cropPriceModal.hide();
+                        _this6.cropPriceModal.hide();
 
-                        _this5.newsForm.reset();
+                        _this6.newsForm.reset();
 
-                        _this5.gridApi.deselectAll();
+                        _this6.gridApi.deselectAll();
                       } else {
-                        _this5.toastr.error("Failed. Please check the fields!");
+                        _this6.toastr.error("Failed. Please check the fields!");
 
-                        _this5.btnLoading = false;
+                        _this6.btnLoading = false;
                       }
                     });
                   }
@@ -487,22 +512,22 @@
                   console.log("response", result);
 
                   if (result.data.updateNewsAndUpdate) {
-                    _this5.toastr.success("Success!");
+                    _this6.toastr.success("Success!");
 
-                    _this5.file = null;
-                    _this5.btnLoading = false;
+                    _this6.file = null;
+                    _this6.btnLoading = false;
 
-                    _this5.cropPriceModal.hide();
+                    _this6.cropPriceModal.hide();
 
-                    _this5.newsForm.reset();
+                    _this6.newsForm.reset();
 
-                    _this5.gridApi.deselectAll();
+                    _this6.gridApi.deselectAll();
 
-                    _this5.getUpdates();
+                    _this6.getUpdates();
                   } else {
-                    _this5.toastr.error("Failed. Please check the fields!");
+                    _this6.toastr.error("Failed. Please check the fields!");
 
-                    _this5.btnLoading = false;
+                    _this6.btnLoading = false;
                   }
                 });
               }
@@ -513,34 +538,34 @@
                 if (response.status == 200) {
                   console.log(response);
 
-                  _this5.dataservice.AddIndoramaUpdates(_this5.newsForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                  _this6.dataservice.AddIndoramaUpdates(_this6.newsForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                     resp = result.data;
                     console.log("response", result);
 
                     if (result.data.createNewsAndUpdate) {
-                      _this5.toastr.success("Success!");
+                      _this6.toastr.success("Success!");
 
-                      _this5.file = null;
+                      _this6.file = null;
 
-                      _this5.cropPriceModal.hide();
+                      _this6.cropPriceModal.hide();
 
-                      _this5.newsForm.reset();
+                      _this6.newsForm.reset();
 
-                      _this5.btnLoading = false;
+                      _this6.btnLoading = false;
 
-                      _this5.getUpdates();
+                      _this6.getUpdates();
 
-                      _this5.gridApi.deselectAll();
+                      _this6.gridApi.deselectAll();
                     } else {
-                      _this5.toastr.error("Failed. Please check the fields!");
+                      _this6.toastr.error("Failed. Please check the fields!");
 
-                      _this5.btnLoading = false;
+                      _this6.btnLoading = false;
                     }
                   });
                 } else {
-                  _this5.toastr.error("Image failed to upload!");
+                  _this6.toastr.error("Image failed to upload!");
 
-                  _this5.btnLoading = false;
+                  _this6.btnLoading = false;
                 }
               });
             }

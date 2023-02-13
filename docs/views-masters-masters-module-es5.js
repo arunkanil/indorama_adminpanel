@@ -345,63 +345,116 @@
             this.getVillages();
           }
         }, {
+          key: "downloadExcel",
+          value: function downloadExcel() {
+            var _this2 = this;
+
+            var masterUrl = "";
+
+            switch (this.router.url) {
+              case "/masters/Villages":
+                masterUrl = "villages";
+                break;
+
+              case "/masters/States":
+                masterUrl = "states";
+                break;
+
+              case "/masters/Cities":
+                masterUrl = "cities";
+                break;
+
+              case "/masters/LGA":
+                masterUrl = "lgas";
+                break;
+
+              case "/masters/Markets":
+                masterUrl = "markets";
+                break;
+
+              case "/masters/Crops":
+                masterUrl = "crops";
+                break;
+            }
+
+            var resp = {};
+            this.btnLoading = true;
+            this.dataservice.downloadMaster(masterUrl).subscribe(function (result) {
+              var _a;
+
+              resp = result.body;
+              console.log(result);
+
+              if (result.status === 200 && result.body.status == "Success") {
+                _this2.toastr.success(result.body.message);
+
+                _this2.btnLoading = false;
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+              } else {
+                _this2.btnLoading = false;
+
+                _this2.toastr.error(result.body.message);
+              }
+            });
+          }
+        }, {
           key: "getCrops",
           value: function getCrops() {
-            var _this2 = this;
+            var _this3 = this;
 
             this.dataservice.getCrops().valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
-              _this2.Crops = result.data.crops.data;
+              _this3.Crops = result.data.crops.data;
             });
           }
         }, {
           key: "getStates",
           value: function getStates() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.dataservice.getStates().valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
-              _this3.States = result.data.states.data;
+              _this4.States = result.data.states.data;
             });
           }
         }, {
           key: "getLGAs",
           value: function getLGAs(stateid) {
-            var _this4 = this;
+            var _this5 = this;
 
             this.dataservice.getLGAs(stateid).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
-              _this4.LGA = result.data.lgas.data;
+              _this5.LGA = result.data.lgas.data;
             });
           }
         }, {
           key: "getAreas",
           value: function getAreas(lgaid) {
-            var _this5 = this;
+            var _this6 = this;
 
             this.dataservice.getAreas(lgaid).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
-              _this5.Areas = result.data.areas.data;
+              _this6.Areas = result.data.areas.data;
             });
           }
         }, {
           key: "getVillages",
           value: function getVillages(areaid) {
-            var _this6 = this;
+            var _this7 = this;
 
             this.dataservice.getVillages(areaid).valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
-              _this6.Villages = result.data.villages.data;
+              _this7.Villages = result.data.villages.data;
             });
           }
         }, {
           key: "getMarkets",
           value: function getMarkets() {
-            var _this7 = this;
+            var _this8 = this;
 
             this.dataservice.getMarkets().valueChanges.subscribe(function (result) {
               console.log("getMarkets", result.data.markets.data);
-              _this7.Markets = result.data.markets.data;
+              _this8.Markets = result.data.markets.data;
             });
           }
         }, {
@@ -617,7 +670,7 @@
         }, {
           key: "stateSubmit",
           value: function stateSubmit() {
-            var _this8 = this;
+            var _this9 = this;
 
             var resp = {};
             console.log(this.stateForm.value);
@@ -628,23 +681,23 @@
                 console.log("response", result);
 
                 if (result.data.updateState) {
-                  _this8.toastr.success("Success!");
+                  _this9.toastr.success("Success!");
 
-                  _this8.gridApi.deselectAll();
+                  _this9.gridApi.deselectAll();
 
-                  _this8.stateModal.hide();
+                  _this9.stateModal.hide();
 
-                  _this8.stateForm.reset();
+                  _this9.stateForm.reset();
 
-                  _this8.dataservice.getStates().valueChanges.subscribe(function (result) {
+                  _this9.dataservice.getStates().valueChanges.subscribe(function (result) {
                     console.log("getStates", result.data.states.data);
-                    _this8.rowData = result.data.states.data;
+                    _this9.rowData = result.data.states.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this8.toastr.error("Can't be added as the value already exists");
+                    _this9.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this8.toastr.error("Failed. Please check the fields!");
+                    _this9.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -654,36 +707,36 @@
                 console.log("response", result);
 
                 if (result.data.createState) {
-                  _this8.toastr.success("Success!");
+                  _this9.toastr.success("Success!");
 
-                  _this8.gridApi.deselectAll();
+                  _this9.gridApi.deselectAll();
 
-                  _this8.stateModal.hide();
+                  _this9.stateModal.hide();
 
-                  _this8.stateForm.reset();
+                  _this9.stateForm.reset();
 
-                  _this8.dataservice.getStates().valueChanges.subscribe(function (result) {
+                  _this9.dataservice.getStates().valueChanges.subscribe(function (result) {
                     console.log("getStates", result.data.states.data);
-                    _this8.rowData = result.data.states.data;
+                    _this9.rowData = result.data.states.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this8.toastr.error("Can't be added as the value already exists");
+                    _this9.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this8.toastr.error("Failed. Please check the fields!");
+                    _this9.toastr.error("Failed. Please check the fields!");
                   }
                 }
               }, function (error) {
                 console.log(error);
 
-                _this8.toastr.error("Failed.");
+                _this9.toastr.error("Failed.");
               });
             }
           }
         }, {
           key: "lgaSubmit",
           value: function lgaSubmit() {
-            var _this9 = this;
+            var _this10 = this;
 
             var resp = {};
             console.log(this.lgaForm.value);
@@ -694,23 +747,23 @@
                 console.log("response", result);
 
                 if (result.data.updateLga) {
-                  _this9.toastr.success("Success!");
+                  _this10.toastr.success("Success!");
 
-                  _this9.gridApi.deselectAll();
+                  _this10.gridApi.deselectAll();
 
-                  _this9.lgaModal.hide();
+                  _this10.lgaModal.hide();
 
-                  _this9.lgaForm.reset();
+                  _this10.lgaForm.reset();
 
-                  _this9.dataservice.getLGAs().valueChanges.subscribe(function (result) {
+                  _this10.dataservice.getLGAs().valueChanges.subscribe(function (result) {
                     console.log("getLGAs", result.data.lgas.data);
-                    _this9.rowData = result.data.lgas.data;
+                    _this10.rowData = result.data.lgas.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this9.toastr.error("Can't be added as the value already exists");
+                    _this10.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this9.toastr.error("Failed. Please check the fields!");
+                    _this10.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -720,23 +773,23 @@
                 console.log("response", result);
 
                 if (result.data.createLga) {
-                  _this9.toastr.success("Success!");
+                  _this10.toastr.success("Success!");
 
-                  _this9.gridApi.deselectAll();
+                  _this10.gridApi.deselectAll();
 
-                  _this9.lgaModal.hide();
+                  _this10.lgaModal.hide();
 
-                  _this9.lgaForm.reset();
+                  _this10.lgaForm.reset();
 
-                  _this9.dataservice.getLGAs().valueChanges.subscribe(function (result) {
+                  _this10.dataservice.getLGAs().valueChanges.subscribe(function (result) {
                     console.log("getLGAs", result.data.lgas.data);
-                    _this9.rowData = result.data.lgas.data;
+                    _this10.rowData = result.data.lgas.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this9.toastr.error("Can't be added as the value already exists");
+                    _this10.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this9.toastr.error("Failed. Please check the fields!");
+                    _this10.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -745,7 +798,7 @@
         }, {
           key: "areaSubmit",
           value: function areaSubmit() {
-            var _this10 = this;
+            var _this11 = this;
 
             var resp = {};
             console.log(this.areaForm.value);
@@ -756,23 +809,23 @@
                 console.log("response", result);
 
                 if (result.data.updateArea) {
-                  _this10.toastr.success("Success!");
+                  _this11.toastr.success("Success!");
 
-                  _this10.gridApi.deselectAll();
+                  _this11.gridApi.deselectAll();
 
-                  _this10.areaModal.hide();
+                  _this11.areaModal.hide();
 
-                  _this10.areaForm.reset();
+                  _this11.areaForm.reset();
 
-                  _this10.dataservice.getAreas().valueChanges.subscribe(function (result) {
+                  _this11.dataservice.getAreas().valueChanges.subscribe(function (result) {
                     console.log("getAreas", result.data.areas.data);
-                    _this10.rowData = result.data.areas.data;
+                    _this11.rowData = result.data.areas.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this10.toastr.error("Can't be added as the value already exists");
+                    _this11.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this10.toastr.error("Failed. Please check the fields!");
+                    _this11.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -782,23 +835,23 @@
                 console.log("response", result);
 
                 if (result.data.createArea) {
-                  _this10.toastr.success("Success!");
+                  _this11.toastr.success("Success!");
 
-                  _this10.gridApi.deselectAll();
+                  _this11.gridApi.deselectAll();
 
-                  _this10.areaModal.hide();
+                  _this11.areaModal.hide();
 
-                  _this10.areaForm.reset();
+                  _this11.areaForm.reset();
 
-                  _this10.dataservice.getAreas().valueChanges.subscribe(function (result) {
+                  _this11.dataservice.getAreas().valueChanges.subscribe(function (result) {
                     console.log("getAreas", result.data.areas.data);
-                    _this10.rowData = result.data.areas.data;
+                    _this11.rowData = result.data.areas.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this10.toastr.error("Can't be added as the value already exists");
+                    _this11.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this10.toastr.error("Failed. Please check the fields!");
+                    _this11.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -807,7 +860,7 @@
         }, {
           key: "marketSubmit",
           value: function marketSubmit() {
-            var _this11 = this;
+            var _this12 = this;
 
             var resp = {};
             console.log(this.marketForm.value);
@@ -818,23 +871,23 @@
                 console.log("response", result);
 
                 if (result.data.updateMarket) {
-                  _this11.toastr.success("Success!");
+                  _this12.toastr.success("Success!");
 
-                  _this11.gridApi.deselectAll();
+                  _this12.gridApi.deselectAll();
 
-                  _this11.marketModal.hide();
+                  _this12.marketModal.hide();
 
-                  _this11.marketForm.reset();
+                  _this12.marketForm.reset();
 
-                  _this11.dataservice.getMarkets().valueChanges.subscribe(function (result) {
+                  _this12.dataservice.getMarkets().valueChanges.subscribe(function (result) {
                     console.log("getMarkets", result.data.markets.data);
-                    _this11.rowData = result.data.markets.data;
+                    _this12.rowData = result.data.markets.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this11.toastr.error("Can't be added as the value already exists");
+                    _this12.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this11.toastr.error("Failed. Please check the fields!");
+                    _this12.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -844,23 +897,23 @@
                 console.log("response", result);
 
                 if (result.data.createMarket) {
-                  _this11.toastr.success("Success!");
+                  _this12.toastr.success("Success!");
 
-                  _this11.gridApi.deselectAll();
+                  _this12.gridApi.deselectAll();
 
-                  _this11.marketModal.hide();
+                  _this12.marketModal.hide();
 
-                  _this11.marketForm.reset();
+                  _this12.marketForm.reset();
 
-                  _this11.dataservice.getMarkets().valueChanges.subscribe(function (result) {
+                  _this12.dataservice.getMarkets().valueChanges.subscribe(function (result) {
                     console.log("getMarkets", result.data.markets.data);
-                    _this11.rowData = result.data.markets.data;
+                    _this12.rowData = result.data.markets.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this11.toastr.error("Can't be added as the value already exists");
+                    _this12.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this11.toastr.error("Failed. Please check the fields!");
+                    _this12.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -869,7 +922,7 @@
         }, {
           key: "cropSubmit",
           value: function cropSubmit() {
-            var _this12 = this;
+            var _this13 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -883,38 +936,38 @@
                   if (response.status == 200) {
                     console.log(response);
 
-                    _this12.dataservice.UpdateCrop(_this12.cropForm.value, _this12.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                    _this13.dataservice.UpdateCrop(_this13.cropForm.value, _this13.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                       resp = result.data;
                       console.log("response", result);
 
                       if (result.data.updateCrop) {
-                        _this12.toastr.success("Success!");
+                        _this13.toastr.success("Success!");
 
-                        _this12.gridApi.deselectAll();
+                        _this13.gridApi.deselectAll();
 
-                        _this12.cropModal.hide();
+                        _this13.cropModal.hide();
 
-                        _this12.cropForm.reset();
+                        _this13.cropForm.reset();
 
-                        _this12.btnLoading = false;
+                        _this13.btnLoading = false;
 
-                        _this12.dataservice.getCrops().valueChanges.subscribe(function (result) {
+                        _this13.dataservice.getCrops().valueChanges.subscribe(function (result) {
                           console.log("getCrops", result.data.crops.data);
-                          _this12.rowData = result.data.crops.data;
+                          _this13.rowData = result.data.crops.data;
                         });
                       } else {
                         if (result.errors[0].extensions.error.name == "ValidationError") {
-                          _this12.toastr.error("Can't be added as the value already exists");
+                          _this13.toastr.error("Can't be added as the value already exists");
 
-                          _this12.btnLoading = false;
+                          _this13.btnLoading = false;
                         } else {
-                          _this12.toastr.error("Failed. Please check the fields!");
+                          _this13.toastr.error("Failed. Please check the fields!");
 
-                          _this12.btnLoading = false;
+                          _this13.btnLoading = false;
                         }
                       }
                     }, function (error) {
-                      _this12.btnLoading = false;
+                      _this13.btnLoading = false;
                     });
                   }
                 });
@@ -924,23 +977,23 @@
                   console.log("response", result);
 
                   if (result.data.updateCrop) {
-                    _this12.toastr.success("Success!");
+                    _this13.toastr.success("Success!");
 
-                    _this12.gridApi.deselectAll();
+                    _this13.gridApi.deselectAll();
 
-                    _this12.cropModal.hide();
+                    _this13.cropModal.hide();
 
-                    _this12.cropForm.reset();
+                    _this13.cropForm.reset();
 
-                    _this12.dataservice.getCrops().valueChanges.subscribe(function (result) {
+                    _this13.dataservice.getCrops().valueChanges.subscribe(function (result) {
                       console.log("getCrops", result.data.crops.data);
-                      _this12.rowData = result.data.crops.data;
+                      _this13.rowData = result.data.crops.data;
                     });
                   } else {
                     if (result.errors[0].extensions.error.name == "ValidationError") {
-                      _this12.toastr.error("Can't be added as the value already exists");
+                      _this13.toastr.error("Can't be added as the value already exists");
                     } else {
-                      _this12.toastr.error("Failed. Please check the fields!");
+                      _this13.toastr.error("Failed. Please check the fields!");
                     }
                   }
                 });
@@ -952,28 +1005,28 @@
                 if (response.status == 200) {
                   console.log(response);
 
-                  _this12.dataservice.AddCrop(_this12.cropForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                  _this13.dataservice.AddCrop(_this13.cropForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                     resp = result.data;
                     console.log("response", result);
 
                     if (result.data.createCrop) {
-                      _this12.toastr.success("Success!");
+                      _this13.toastr.success("Success!");
 
-                      _this12.gridApi.deselectAll();
+                      _this13.gridApi.deselectAll();
 
-                      _this12.cropModal.hide();
+                      _this13.cropModal.hide();
 
-                      _this12.cropForm.reset();
+                      _this13.cropForm.reset();
 
-                      _this12.dataservice.getCrops().valueChanges.subscribe(function (result) {
+                      _this13.dataservice.getCrops().valueChanges.subscribe(function (result) {
                         console.log("getCrops", result.data.crops.data);
-                        _this12.rowData = result.data.crops.data;
+                        _this13.rowData = result.data.crops.data;
                       });
                     } else {
                       if (result.errors[0].extensions.error.name == "ValidationError") {
-                        _this12.toastr.error("Can't be added as the value already exists");
+                        _this13.toastr.error("Can't be added as the value already exists");
                       } else {
-                        _this12.toastr.error("Failed. Please check the fields!");
+                        _this13.toastr.error("Failed. Please check the fields!");
                       }
                     }
                   });
@@ -984,7 +1037,7 @@
         }, {
           key: "vilageSubmit",
           value: function vilageSubmit() {
-            var _this13 = this;
+            var _this14 = this;
 
             var resp = {};
             console.log(this.villageForm.value);
@@ -995,23 +1048,23 @@
                 console.log("response", result);
 
                 if (result.data.updateVillage) {
-                  _this13.toastr.success("Success!");
+                  _this14.toastr.success("Success!");
 
-                  _this13.gridApi.deselectAll();
+                  _this14.gridApi.deselectAll();
 
-                  _this13.villageModal.hide();
+                  _this14.villageModal.hide();
 
-                  _this13.villageForm.reset();
+                  _this14.villageForm.reset();
 
-                  _this13.dataservice.getVillages().valueChanges.subscribe(function (result) {
+                  _this14.dataservice.getVillages().valueChanges.subscribe(function (result) {
                     console.log("getVillages", result.data.villages.data);
-                    _this13.rowData = result.data.villages.data;
+                    _this14.rowData = result.data.villages.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this13.toastr.error("Can't be added as the value already exists");
+                    _this14.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this13.toastr.error("Failed. Please check the fields!");
+                    _this14.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -1021,23 +1074,23 @@
                 console.log("response", result);
 
                 if (result.data.createVillage) {
-                  _this13.toastr.success("Success!");
+                  _this14.toastr.success("Success!");
 
-                  _this13.gridApi.deselectAll();
+                  _this14.gridApi.deselectAll();
 
-                  _this13.villageModal.hide();
+                  _this14.villageModal.hide();
 
-                  _this13.villageForm.reset();
+                  _this14.villageForm.reset();
 
-                  _this13.dataservice.getVillages().valueChanges.subscribe(function (result) {
+                  _this14.dataservice.getVillages().valueChanges.subscribe(function (result) {
                     console.log("getVillages", result.data.villages.data);
-                    _this13.rowData = result.data.villages.data;
+                    _this14.rowData = result.data.villages.data;
                   });
                 } else {
                   if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this13.toastr.error("Can't be added as the value already exists");
+                    _this14.toastr.error("Can't be added as the value already exists");
                   } else {
-                    _this13.toastr.error("Failed. Please check the fields!");
+                    _this14.toastr.error("Failed. Please check the fields!");
                   }
                 }
               });
@@ -1046,7 +1099,7 @@
         }, {
           key: "deleteRecord",
           value: function deleteRecord() {
-            var _this14 = this;
+            var _this15 = this;
 
             // this.lgaForm = this.fb.group({
             //   isDelete: [true, Validators.required],
@@ -1074,17 +1127,17 @@
                   console.log("response", result);
 
                   if (result.data.deleteVillage) {
-                    _this14.toastr.success("Success!");
+                    _this15.toastr.success("Success!");
 
-                    _this14.gridApi.deselectAll();
+                    _this15.gridApi.deselectAll();
 
-                    _this14.deleteModal.hide();
+                    _this15.deleteModal.hide();
 
-                    _this14.dataservice.getVillages().valueChanges.subscribe(function (result) {
-                      _this14.rowData = result.data.villages.data;
+                    _this15.dataservice.getVillages().valueChanges.subscribe(function (result) {
+                      _this15.rowData = result.data.villages.data;
                     });
                   } else {
-                    _this14.toastr.error("Failed!");
+                    _this15.toastr.error("Failed!");
                   }
                 });
                 break;
@@ -1094,17 +1147,17 @@
                   console.log("response", result);
 
                   if (result.data.deleteArea) {
-                    _this14.toastr.success("Success!");
+                    _this15.toastr.success("Success!");
 
-                    _this14.gridApi.deselectAll();
+                    _this15.gridApi.deselectAll();
 
-                    _this14.deleteModal.hide();
+                    _this15.deleteModal.hide();
 
-                    _this14.dataservice.getAreas().valueChanges.subscribe(function (result) {
-                      _this14.rowData = result.data.areas.data;
+                    _this15.dataservice.getAreas().valueChanges.subscribe(function (result) {
+                      _this15.rowData = result.data.areas.data;
                     });
                   } else {
-                    _this14.toastr.error("Failed!");
+                    _this15.toastr.error("Failed!");
                   }
                 });
                 break;
@@ -1114,17 +1167,17 @@
                   console.log("response", result);
 
                   if (result.data.deleteLga) {
-                    _this14.toastr.success("Success!");
+                    _this15.toastr.success("Success!");
 
-                    _this14.gridApi.deselectAll();
+                    _this15.gridApi.deselectAll();
 
-                    _this14.deleteModal.hide();
+                    _this15.deleteModal.hide();
 
-                    _this14.dataservice.getLGAs().valueChanges.subscribe(function (result) {
-                      _this14.rowData = result.data.lgas.data;
+                    _this15.dataservice.getLGAs().valueChanges.subscribe(function (result) {
+                      _this15.rowData = result.data.lgas.data;
                     });
                   } else {
-                    _this14.toastr.error("Failed!");
+                    _this15.toastr.error("Failed!");
                   }
                 });
                 break;
@@ -1134,17 +1187,17 @@
                   console.log("response", result);
 
                   if (result.data.deleteState) {
-                    _this14.toastr.success("Success!");
+                    _this15.toastr.success("Success!");
 
-                    _this14.gridApi.deselectAll();
+                    _this15.gridApi.deselectAll();
 
-                    _this14.deleteModal.hide();
+                    _this15.deleteModal.hide();
 
-                    _this14.dataservice.getStates().valueChanges.subscribe(function (result) {
-                      _this14.rowData = result.data.states.data;
+                    _this15.dataservice.getStates().valueChanges.subscribe(function (result) {
+                      _this15.rowData = result.data.states.data;
                     });
                   } else {
-                    _this14.toastr.error("Failed!");
+                    _this15.toastr.error("Failed!");
                   }
                 });
                 break;
@@ -1154,17 +1207,17 @@
                   console.log("response", result);
 
                   if (result.data.deleteMarket) {
-                    _this14.toastr.success("Success!");
+                    _this15.toastr.success("Success!");
 
-                    _this14.gridApi.deselectAll();
+                    _this15.gridApi.deselectAll();
 
-                    _this14.deleteModal.hide();
+                    _this15.deleteModal.hide();
 
-                    _this14.dataservice.getMarkets().valueChanges.subscribe(function (result) {
-                      _this14.rowData = result.data.markets.data;
+                    _this15.dataservice.getMarkets().valueChanges.subscribe(function (result) {
+                      _this15.rowData = result.data.markets.data;
                     });
                   } else {
-                    _this14.toastr.error("Failed!");
+                    _this15.toastr.error("Failed!");
                   }
                 });
                 break;
@@ -1174,17 +1227,17 @@
                   console.log("response", result);
 
                   if (result.data.deleteCrop) {
-                    _this14.toastr.success("Success!");
+                    _this15.toastr.success("Success!");
 
-                    _this14.gridApi.deselectAll();
+                    _this15.gridApi.deselectAll();
 
-                    _this14.deleteModal.hide();
+                    _this15.deleteModal.hide();
 
-                    _this14.dataservice.getCrops().valueChanges.subscribe(function (result) {
-                      _this14.rowData = result.data.crops.data;
+                    _this15.dataservice.getCrops().valueChanges.subscribe(function (result) {
+                      _this15.rowData = result.data.crops.data;
                     });
                   } else {
-                    _this14.toastr.error("Failed!");
+                    _this15.toastr.error("Failed!");
                   }
                 });
                 break;
@@ -1253,7 +1306,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>{{ this.route.snapshot.data.title }} Master</h2>\r\n      <div>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-danger\"\r\n          data-toggle=\"modal\"\r\n          [disabled]=\"disableButton\"\r\n          (click)=\"deleteModal.show()\"\r\n        >\r\n          Delete\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"disableButton\"\r\n          class=\"btn btn-info\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\"\r\n        >\r\n          Edit\r\n        </button>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          [disabled]=\"!disableButton\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Add New {{ this.route.snapshot.data.title }}\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [context]=\"context\"\r\n            [pagination]=\"true\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            [frameworkComponents]=\"frameworkComponents\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <!-- <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\r\n            <button\r\n              type=\"button\"\r\n              [disabled]=\"disableNextButton\"\r\n              class=\"btn btn-primary float-right m-2\"\r\n              (click)=\"loadNext()\"\r\n            >\r\n              Next\r\n            </button>\r\n            <span class=\"float-right mt-3\"\r\n              >Page {{ meta?.pagination?.page }} of\r\n              {{ meta?.pagination?.pageCount }}</span\r\n            >\r\n            <button\r\n              type=\"button\"\r\n              [disabled]=\"disablePrevButton\"\r\n              class=\"btn btn-primary float-right m-2\"\r\n              (click)=\"loadPrev()\"\r\n            >\r\n              Prev\r\n            </button> -->\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div\r\n  bsModal\r\n  #stateModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit State</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"stateModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"stateForm\" (ngSubmit)=\"stateSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">State</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"state\"\r\n              name=\"state\"\r\n              formControlName=\"state\"\r\n              placeholder=\"Enter State Name\"\r\n            />\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"stateModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !stateForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div\r\n  bsModal\r\n  #lgaModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit LGA</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"lgaModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"lgaForm\" (ngSubmit)=\"lgaSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"lga\">LGA</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"lga\"\r\n              name=\"lga\"\r\n              formControlName=\"lga\"\r\n              placeholder=\"Enter LGA Name\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"state\">State</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"state\"\r\n              required\r\n              ngModel\r\n              name=\"state\"\r\n              formControlName=\"state\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"lgaModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !lgaForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div\r\n  bsModal\r\n  #areaModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit City</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"areaModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"areaForm\" (ngSubmit)=\"areaSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"area\">City Name</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"area\"\r\n              name=\"area\"\r\n              formControlName=\"area\"\r\n              placeholder=\"Enter City Name\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"area\">Postal code</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"PostalCode\"\r\n              name=\"PostalCode\"\r\n              formControlName=\"PostalCode\"\r\n              placeholder=\"Enter Postal Code\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"state\">State</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"state\"\r\n              required\r\n              ngModel\r\n              name=\"state\"\r\n              formControlName=\"state\"\r\n              (change)=\"filterLGA($event)\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"lga\">LGA</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"lga\"\r\n              required\r\n              ngModel\r\n              name=\"lga\"\r\n              formControlName=\"lga\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"areaModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !areaForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div\r\n  bsModal\r\n  #marketModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit Market</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"marketModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"marketForm\" (ngSubmit)=\"marketSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"market\">Market</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"market\"\r\n              name=\"market\"\r\n              formControlName=\"market\"\r\n              placeholder=\"Enter Market Name\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"state\">State</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"state\"\r\n              required\r\n              ngModel\r\n              name=\"state\"\r\n              formControlName=\"state\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"marketModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !marketForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div\r\n  bsModal\r\n  #cropModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit Crop</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"cropModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"cropForm\" (ngSubmit)=\"cropSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">Crop</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"crop\"\r\n              name=\"crop\"\r\n              formControlName=\"crop\"\r\n              placeholder=\"Enter Crop Name\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"Image\">Image</label>\r\n            <div>\r\n              <img\r\n                *ngIf=\"imageUrl\"\r\n                src=\"{{ imageUrl }}\"\r\n                width=\"100\"\r\n                height=\"100\"\r\n                style=\"object-fit: cover\"\r\n              />\r\n            </div>\r\n            <input\r\n              type=\"file\"\r\n              class=\"form-control\"\r\n              id=\"Image\"\r\n              accept=\".jpg,.jpeg,.JPEG,.png\"\r\n              name=\"Image\"\r\n              (change)=\"onChange($event)\"\r\n              formControlName=\"Image\"\r\n              placeholder=\"Choose image\"\r\n            />\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"cropModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !cropForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n\r\n<div\r\n  bsModal\r\n  #villageModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add/Edit Village</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"villageModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"villageForm\" (ngSubmit)=\"vilageSubmit()\">\r\n          <div class=\"form-group\">\r\n            <label for=\"market\">Village Name</label>\r\n            <input\r\n              type=\"text\"\r\n              class=\"form-control\"\r\n              id=\"village\"\r\n              name=\"village\"\r\n              formControlName=\"village\"\r\n              placeholder=\"Enter Village Name\"\r\n            />\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"state\">State</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"state\"\r\n              ngModel\r\n              name=\"state\"\r\n              (change)=\"filterLGA($event)\"\r\n              formControlName=\"state\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"lga\">LGA</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"lga\"\r\n              ngModel\r\n              (change)=\"filterArea($event)\"\r\n              name=\"lga\"\r\n              formControlName=\"lga\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <div class=\"form-group\">\r\n            <label for=\"area\">City</label>\r\n            <select\r\n              class=\"form-control\"\r\n              id=\"area\"\r\n              ngModel\r\n              name=\"area\"\r\n              formControlName=\"area\"\r\n            >\r\n              <option value=\"\" disabled selected hidden>Choose...</option>\r\n              <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\r\n                {{ item.attributes.Name }}\r\n              </option>\r\n            </select>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"villageModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !villageForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #deleteModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-body text-center\">\r\n        Do you want to delete this record?\r\n      </div>\r\n      <div class=\"modal-footer justify-content-around\">\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-secondary\"\r\n          (click)=\"deleteModal.hide()\"\r\n        >\r\n          No! Cancel.\r\n        </button>\r\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteRecord()\">\r\n          Yes! Delete.\r\n        </button>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>{{ this.route.snapshot.data.title }} Master</h2>\n      <div>\n        <button\n            type=\"button\"\n            class=\"btn btn-outline-primary\"\n            data-toggle=\"modal\"\n            (click)=\"downloadExcel()\"\n          >\n            Download excel\n          </button>\n        <button\n          type=\"button\"\n          class=\"btn btn-danger\"\n          data-toggle=\"modal\"\n          [disabled]=\"disableButton\"\n          (click)=\"deleteModal.show()\"\n        >\n          Delete\n        </button>\n        <button\n          type=\"button\"\n          [disabled]=\"disableButton\"\n          class=\"btn btn-info\"\n          data-toggle=\"modal\"\n          (click)=\"openModal('Edit')\"\n        >\n          Edit\n        </button>\n        <button\n          type=\"button\"\n          class=\"btn btn-primary\"\n          [disabled]=\"!disableButton\"\n          data-toggle=\"modal\"\n          (click)=\"openModal()\"\n        >\n          Add New {{ this.route.snapshot.data.title }}\n        </button>\n      </div>\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [context]=\"context\"\n            [pagination]=\"true\"\n            [rowSelection]=\"rowSelection\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            [frameworkComponents]=\"frameworkComponents\"\n            (gridReady)=\"onGridReady($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <!-- <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\n            <button\n              type=\"button\"\n              [disabled]=\"disableNextButton\"\n              class=\"btn btn-primary float-right m-2\"\n              (click)=\"loadNext()\"\n            >\n              Next\n            </button>\n            <span class=\"float-right mt-3\"\n              >Page {{ meta?.pagination?.page }} of\n              {{ meta?.pagination?.pageCount }}</span\n            >\n            <button\n              type=\"button\"\n              [disabled]=\"disablePrevButton\"\n              class=\"btn btn-primary float-right m-2\"\n              (click)=\"loadPrev()\"\n            >\n              Prev\n            </button> -->\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div\n  bsModal\n  #stateModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add/Edit State</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"stateModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"stateForm\" (ngSubmit)=\"stateSubmit()\">\n          <div class=\"form-group\">\n            <label for=\"name\">State</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"state\"\n              name=\"state\"\n              formControlName=\"state\"\n              placeholder=\"Enter State Name\"\n            />\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"stateModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !stateForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div\n  bsModal\n  #lgaModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add/Edit LGA</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"lgaModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"lgaForm\" (ngSubmit)=\"lgaSubmit()\">\n          <div class=\"form-group\">\n            <label for=\"lga\">LGA</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"lga\"\n              name=\"lga\"\n              formControlName=\"lga\"\n              placeholder=\"Enter LGA Name\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"state\">State</label>\n            <select\n              class=\"form-control\"\n              id=\"state\"\n              required\n              ngModel\n              name=\"state\"\n              formControlName=\"state\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"lgaModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !lgaForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div\n  bsModal\n  #areaModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add/Edit City</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"areaModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"areaForm\" (ngSubmit)=\"areaSubmit()\">\n          <div class=\"form-group\">\n            <label for=\"area\">City Name</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"area\"\n              name=\"area\"\n              formControlName=\"area\"\n              placeholder=\"Enter City Name\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"area\">Postal code</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"PostalCode\"\n              name=\"PostalCode\"\n              formControlName=\"PostalCode\"\n              placeholder=\"Enter Postal Code\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"state\">State</label>\n            <select\n              class=\"form-control\"\n              id=\"state\"\n              required\n              ngModel\n              name=\"state\"\n              formControlName=\"state\"\n              (change)=\"filterLGA($event)\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"lga\">LGA</label>\n            <select\n              class=\"form-control\"\n              id=\"lga\"\n              required\n              ngModel\n              name=\"lga\"\n              formControlName=\"lga\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"areaModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !areaForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div\n  bsModal\n  #marketModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add/Edit Market</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"marketModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"marketForm\" (ngSubmit)=\"marketSubmit()\">\n          <div class=\"form-group\">\n            <label for=\"market\">Market</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"market\"\n              name=\"market\"\n              formControlName=\"market\"\n              placeholder=\"Enter Market Name\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"state\">State</label>\n            <select\n              class=\"form-control\"\n              id=\"state\"\n              required\n              ngModel\n              name=\"state\"\n              formControlName=\"state\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"marketModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !marketForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div\n  bsModal\n  #cropModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add/Edit Crop</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"cropModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"cropForm\" (ngSubmit)=\"cropSubmit()\">\n          <div class=\"form-group\">\n            <label for=\"name\">Crop</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"crop\"\n              name=\"crop\"\n              formControlName=\"crop\"\n              placeholder=\"Enter Crop Name\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"Image\">Image</label>\n            <div>\n              <img\n                *ngIf=\"imageUrl\"\n                src=\"{{ imageUrl }}\"\n                width=\"100\"\n                height=\"100\"\n                style=\"object-fit: cover\"\n              />\n            </div>\n            <input\n              type=\"file\"\n              class=\"form-control\"\n              id=\"Image\"\n              accept=\".jpg,.jpeg,.JPEG,.png\"\n              name=\"Image\"\n              (change)=\"onChange($event)\"\n              formControlName=\"Image\"\n              placeholder=\"Choose image\"\n            />\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"cropModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !cropForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n\n<div\n  bsModal\n  #villageModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add/Edit Village</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"villageModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"villageForm\" (ngSubmit)=\"vilageSubmit()\">\n          <div class=\"form-group\">\n            <label for=\"market\">Village Name</label>\n            <input\n              type=\"text\"\n              class=\"form-control\"\n              id=\"village\"\n              name=\"village\"\n              formControlName=\"village\"\n              placeholder=\"Enter Village Name\"\n            />\n          </div>\n          <div class=\"form-group\">\n            <label for=\"state\">State</label>\n            <select\n              class=\"form-control\"\n              id=\"state\"\n              ngModel\n              name=\"state\"\n              (change)=\"filterLGA($event)\"\n              formControlName=\"state\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"lga\">LGA</label>\n            <select\n              class=\"form-control\"\n              id=\"lga\"\n              ngModel\n              (change)=\"filterArea($event)\"\n              name=\"lga\"\n              formControlName=\"lga\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <div class=\"form-group\">\n            <label for=\"area\">City</label>\n            <select\n              class=\"form-control\"\n              id=\"area\"\n              ngModel\n              name=\"area\"\n              formControlName=\"area\"\n            >\n              <option value=\"\" disabled selected hidden>Choose...</option>\n              <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\n                {{ item.attributes.Name }}\n              </option>\n            </select>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"villageModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !villageForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #deleteModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered modal-sm\">\n    <div class=\"modal-content\">\n      <div class=\"modal-body text-center\">\n        Do you want to delete this record?\n      </div>\n      <div class=\"modal-footer justify-content-around\">\n        <button\n          type=\"button\"\n          class=\"btn btn-secondary\"\n          (click)=\"deleteModal.hide()\"\n        >\n          No! Cancel.\n        </button>\n        <button type=\"button\" class=\"btn btn-primary\" (click)=\"deleteRecord()\">\n          Yes! Delete.\n        </button>\n      </div>\n    </div>\n  </div>\n</div>\n";
       /***/
     },
 

@@ -4,7 +4,18 @@
       class="card-header"
       style="display: flex; justify-content: space-between"
     >
+
       <h2>Users</h2>
+
+      <div>
+        <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-toggle="modal"
+            (click)="downloadExcel()"
+          >
+            Download excel
+          </button>
       <button
         type="button"
         class="btn btn-primary"
@@ -13,6 +24,7 @@
       >
         Add New User
       </button>
+      </div>
     </div>
     <div class="card-body">
       <div class="row">

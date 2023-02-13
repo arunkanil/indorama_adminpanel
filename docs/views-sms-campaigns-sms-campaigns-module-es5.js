@@ -118,7 +118,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>SMS Campaigns</h2>\r\n      <div>\r\n        <!-- <button\r\n          type=\"button\"\r\n          class=\"btn btn-danger\"\r\n          data-toggle=\"modal\"\r\n          [disabled]=\"disableButton\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Delete\r\n        </button> -->\r\n        <!-- <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\r\n          (click)=\"openModal('Edit')\">\r\n          Edit\r\n        </button> -->\r\n        <button\r\n          type=\"button\"\r\n          [disabled]=\"!disableButton\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Create new campaign\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #messageModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">New Campaign</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"messageModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"messageForm\" (ngSubmit)=\"sendMessage()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label class=\"switch\">\r\n                  <input\r\n                    type=\"checkbox\"\r\n                    id=\"isAllFarmers\"\r\n                    maxlength=\"160\"\r\n                    name=\"isAllFarmers\"\r\n                    formControlName=\"isAllFarmers\"\r\n                  />\r\n                  <div class=\"slider round\">\r\n                    <span class=\"on\">Filter</span>\r\n                    <span class=\"off\">All</span>\r\n                  </div>\r\n                </label>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div *ngIf=\"messageForm.value?.isAllFarmers\" class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"state\">State</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"state\"\r\n                  ngModel\r\n                  (change)=\"filterLGA($event)\"\r\n                  name=\"state\"\r\n                  formControlName=\"state\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"area\">City</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"area\"\r\n                  ngModel\r\n                  (change)=\"filterVillage($event)\"\r\n                  name=\"area\"\r\n                  formControlName=\"area\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"lga\">LGA</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"lga\"\r\n                  ngModel\r\n                  (change)=\"filterArea($event)\"\r\n                  name=\"lga\"\r\n                  formControlName=\"lga\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"village\">Village</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"village\"\r\n                  ngModel\r\n                  name=\"village\"\r\n                  formControlName=\"village\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of Villages\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <!-- <div class=\"form-group\">Farmers selected : {{ NoOfContacts }}</div>\r\n          <div class=\"form-group\">\r\n            <button\r\n              type=\"button\"\r\n              class=\"btn btn-secondary\"\r\n              (click)=\"clearSearch()\"\r\n            >\r\n              Clear\r\n            </button>\r\n            <button\r\n              type=\"button\"\r\n              class=\"btn btn-primary ml-2\"\r\n              (click)=\"getUsers()\"\r\n            >\r\n              <span\r\n                *ngIf=\"btnLoading\"\r\n                class=\"spinner-border spinner-border-sm\"\r\n                role=\"status\"\r\n                aria-hidden=\"true\"\r\n              ></span>\r\n              Search\r\n            </button>\r\n          </div> -->\r\n          <div class=\"form-group\">\r\n            <label for=\"name\">Message body</label>\r\n            <textarea\r\n              rows=\"5\"\r\n              class=\"form-control\"\r\n              id=\"message\"\r\n              maxlength=\"160\"\r\n              name=\"message\"\r\n              formControlName=\"message\"\r\n              placeholder=\"Max 160 characters\"\r\n            ></textarea>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"messageModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !messageForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Create\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>SMS Campaigns</h2>\n      <div>\n        <button\n            type=\"button\"\n            class=\"btn btn-outline-primary\"\n            data-toggle=\"modal\"\n            (click)=\"downloadExcel()\"\n          >\n            Download excel\n          </button>\n        <!-- <button\n          type=\"button\"\n          class=\"btn btn-danger\"\n          data-toggle=\"modal\"\n          [disabled]=\"disableButton\"\n          (click)=\"openModal()\"\n        >\n          Delete\n        </button> -->\n        <!-- <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\n          (click)=\"openModal('Edit')\">\n          Edit\n        </button> -->\n        <button\n          type=\"button\"\n          [disabled]=\"!disableButton\"\n          class=\"btn btn-primary\"\n          data-toggle=\"modal\"\n          (click)=\"openModal()\"\n        >\n          Create new campaign\n        </button>\n      </div>\n    </div>\n    <!-- <p class=\"text-muted mx-3\">\n      To approve a crop price simply select and edit the record without\n      modifying the data\n    </p> -->\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            (gridReady)=\"onGridReady($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #messageModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">New Campaign</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"messageModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"messageForm\" (ngSubmit)=\"sendMessage()\">\n          <div class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label class=\"switch\">\n                  <input\n                    type=\"checkbox\"\n                    id=\"isAllFarmers\"\n                    maxlength=\"160\"\n                    name=\"isAllFarmers\"\n                    formControlName=\"isAllFarmers\"\n                  />\n                  <div class=\"slider round\">\n                    <span class=\"on\">Filter</span>\n                    <span class=\"off\">All</span>\n                  </div>\n                </label>\n              </div>\n            </div>\n          </div>\n          <div *ngIf=\"messageForm.value?.isAllFarmers\" class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"state\">State</label>\n                <select\n                  class=\"form-control\"\n                  id=\"state\"\n                  ngModel\n                  (change)=\"filterLGA($event)\"\n                  name=\"state\"\n                  formControlName=\"state\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"area\">City</label>\n                <select\n                  class=\"form-control\"\n                  id=\"area\"\n                  ngModel\n                  (change)=\"filterVillage($event)\"\n                  name=\"area\"\n                  formControlName=\"area\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n            </div>\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"lga\">LGA</label>\n                <select\n                  class=\"form-control\"\n                  id=\"lga\"\n                  ngModel\n                  (change)=\"filterArea($event)\"\n                  name=\"lga\"\n                  formControlName=\"lga\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"village\">Village</label>\n                <select\n                  class=\"form-control\"\n                  id=\"village\"\n                  ngModel\n                  name=\"village\"\n                  formControlName=\"village\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Villages\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n            </div>\n          </div>\n          <!-- <div class=\"form-group\">Farmers selected : {{ NoOfContacts }}</div>\n          <div class=\"form-group\">\n            <button\n              type=\"button\"\n              class=\"btn btn-secondary\"\n              (click)=\"clearSearch()\"\n            >\n              Clear\n            </button>\n            <button\n              type=\"button\"\n              class=\"btn btn-primary ml-2\"\n              (click)=\"getUsers()\"\n            >\n              <span\n                *ngIf=\"btnLoading\"\n                class=\"spinner-border spinner-border-sm\"\n                role=\"status\"\n                aria-hidden=\"true\"\n              ></span>\n              Search\n            </button>\n          </div> -->\n          <div class=\"form-group\">\n            <label for=\"name\">Message body</label>\n            <textarea\n              rows=\"5\"\n              class=\"form-control\"\n              id=\"message\"\n              maxlength=\"160\"\n              name=\"message\"\n              formControlName=\"message\"\n              placeholder=\"Max 160 characters\"\n            ></textarea>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"messageModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !messageForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Create\n          </button>\n        </form>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n";
       /***/
     },
 
@@ -186,7 +186,13 @@
 
       var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-bootstrap/modal */
-      "LqlI"); // import { ActionRenderer } from "../../utils/StatusRenderer";
+      "LqlI");
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ../../../environments/environment */
+      "AytR"); // import { ActionRenderer } from "../../utils/StatusRenderer";
 
 
       var SMSCampaignsComponent = /*#__PURE__*/function () {
@@ -344,6 +350,31 @@
             });
           }
         }, {
+          key: "downloadExcel",
+          value: function downloadExcel() {
+            var _this8 = this;
+
+            var resp = {};
+            this.btnLoading = true;
+            this.dataservice.downloadSMSCampaigns().subscribe(function (result) {
+              var _a;
+
+              resp = result.body;
+              console.log(result);
+
+              if (result.status === 200 && result.body.status == "Success") {
+                _this8.toastr.success(result.body.message);
+
+                _this8.btnLoading = false;
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+              } else {
+                _this8.btnLoading = false;
+
+                _this8.toastr.error(result.body.message);
+              }
+            });
+          }
+        }, {
           key: "filterLGA",
           value: function filterLGA(event) {
             this.getLGAs(event.target.value);
@@ -396,7 +427,7 @@
         }, {
           key: "sendMessage",
           value: function sendMessage() {
-            var _this8 = this;
+            var _this9 = this;
 
             this.btnLoading = true;
             console.log(this.messageForm.value, "sendmessage");
@@ -404,20 +435,20 @@
               console.log("response", result);
 
               if (result.data.createSmsCampaign) {
-                _this8.toastr.success("Success!");
+                _this9.toastr.success("Success!");
 
-                _this8.btnLoading = false;
+                _this9.btnLoading = false;
 
-                _this8.messageModal.hide();
+                _this9.messageModal.hide();
 
-                _this8.getSmsCampaigns();
+                _this9.getSmsCampaigns();
               } else {
-                _this8.toastr.error("Failed!");
+                _this9.toastr.error("Failed!");
 
-                _this8.btnLoading = false;
+                _this9.btnLoading = false;
               }
             }, function (error) {
-              _this8.btnLoading = false;
+              _this9.btnLoading = false;
             });
           }
         }]);
@@ -551,11 +582,11 @@
         _createClass(SMSCampaignsDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this9 = this;
+            var _this10 = this;
 
             this.loading = true;
             this.activatedRouter.params.subscribe(function (params) {
-              _this9.id = params["id"];
+              _this10.id = params["id"];
             });
             console.log(this.router);
             this.getSmsCampaigns();
@@ -570,30 +601,30 @@
         }, {
           key: "getSmsCampaigns",
           value: function getSmsCampaigns() {
-            var _this10 = this;
+            var _this11 = this;
 
             this.dataservice.getSmsCampaigns(1, 10, this.id).valueChanges.subscribe(function (result) {
-              _this10.details = result.data.smsCampaigns.data[0];
-              console.log(_this10.details);
+              _this11.details = result.data.smsCampaigns.data[0];
+              console.log(_this11.details);
             });
           }
         }, {
           key: "getDeliveryReports",
           value: function getDeliveryReports() {
-            var _this11 = this;
+            var _this12 = this;
 
             var _a, _b, _c, _d, _e, _f;
 
             this.btnLoading = true;
             this.dataservice.fetchMessage((_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.apiKey, (_f = (_e = (_d = (_c = this.details) === null || _c === void 0 ? void 0 : _c.attributes) === null || _d === void 0 ? void 0 : _d.SMSGatewayResponse) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.message_id).subscribe(function (result) {
               console.log("getDeliveryReports", result);
-              _this11.rowData = result.data;
-              _this11.btnLoading = false;
+              _this12.rowData = result.data;
+              _this12.btnLoading = false;
             }, function (error) {
               console.error("error caught in component", error);
-              _this11.btnLoading = false;
+              _this12.btnLoading = false;
 
-              _this11.toastr.error("Unable to fetch data");
+              _this12.toastr.error("Unable to fetch data");
             });
           }
         }]);

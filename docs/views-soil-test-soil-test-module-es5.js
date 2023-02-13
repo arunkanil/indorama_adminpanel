@@ -169,6 +169,12 @@
       var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ../../constants/columnMetadata */
       "7nfi");
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ../../../environments/environment */
+      "AytR");
 
       var SoilHomeComponent = /*#__PURE__*/function () {
         function SoilHomeComponent(dataservice, router, fb, toastr) {
@@ -221,9 +227,34 @@
             });
           }
         }, {
+          key: "downloadExcel",
+          value: function downloadExcel() {
+            var _this2 = this;
+
+            var resp = {};
+            this.btnLoading = true;
+            this.dataservice.downloadSoilTests().subscribe(function (result) {
+              var _a;
+
+              resp = result.body;
+              console.log(result);
+
+              if (result.status === 200 && result.body.status == "Success") {
+                _this2.toastr.success(result.body.message);
+
+                _this2.btnLoading = false;
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+              } else {
+                _this2.btnLoading = false;
+
+                _this2.toastr.error(result.body.message);
+              }
+            });
+          }
+        }, {
           key: "loadNext",
           value: function loadNext() {
-            var _this2 = this;
+            var _this3 = this;
 
             var _a, _b, _c, _d;
 
@@ -237,14 +268,14 @@
             }
 
             this.dataservice.getsoilTests(this.count, this.pageSize).valueChanges.subscribe(function (result) {
-              _this2.meta = result.data.soilTests.meta;
-              _this2.rowData = result.data.soilTests.data;
+              _this3.meta = result.data.soilTests.meta;
+              _this3.rowData = result.data.soilTests.data;
             });
           }
         }, {
           key: "loadPrev",
           value: function loadPrev() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.count--;
 
@@ -259,8 +290,8 @@
             this.from = this.from - this.pageSize;
             this.to = this.to - this.rowData.length;
             this.dataservice.getsoilTests(this.count, this.pageSize).valueChanges.subscribe(function (result) {
-              _this3.meta = result.data.soilTests.meta;
-              _this3.rowData = result.data.soilTests.data;
+              _this4.meta = result.data.soilTests.meta;
+              _this4.rowData = result.data.soilTests.data;
             });
           }
         }, {
@@ -409,7 +440,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Soil Analysis Home</h2>\r\n      <!-- <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"myModal.show()\">\r\n        New\r\n      </button> -->\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 500px\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>Soil Analysis Home</h2>\n\n        <button\n            type=\"button\"\n            class=\"btn btn-outline-primary\"\n            data-toggle=\"modal\"\n            (click)=\"downloadExcel()\"\n          >\n            Download excel\n          </button>\n      <!-- <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"myModal.show()\">\n        New\n      </button> -->\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 500px\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (gridReady)=\"onGridReady($event)\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n";
       /***/
     },
 
@@ -534,7 +565,7 @@
         _createClass(SoilTestDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this4 = this;
+            var _this5 = this;
 
             this.getLists();
             this.getAreas();
@@ -544,95 +575,95 @@
             this.getVillages();
             this.getFarmers();
             this.activatedRouter.params.subscribe(function (params) {
-              _this4.id = params["id"];
+              _this5.id = params["id"];
             });
             this.getTest();
           }
         }, {
           key: "getTest",
           value: function getTest() {
-            var _this5 = this;
+            var _this6 = this;
 
             this.dataservice.getsingleSoilTests(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q;
 
               console.log("getsingleSoilTests", result.data.soilTest.data);
-              _this5.details = result.data.soilTest.data;
-              _this5.agentForm = _this5.fb.group({
-                ContactNumber: [(_a = _this5.details.attributes) === null || _a === void 0 ? void 0 : _a.ContactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+              _this6.details = result.data.soilTest.data;
+              _this6.agentForm = _this6.fb.group({
+                ContactNumber: [(_a = _this6.details.attributes) === null || _a === void 0 ? void 0 : _a.ContactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 // PreferredCollectionDate: [
                 //   this.details?.attributes?.PreferredCollectionDate,
                 //   Validators.required,
                 // ],
-                ReasonForSoilTest: [(_c = (_b = _this5.details) === null || _b === void 0 ? void 0 : _b.attributes) === null || _c === void 0 ? void 0 : _c.ReasonForSoilTest, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                Status: [(_e = (_d = _this5.details) === null || _d === void 0 ? void 0 : _d.attributes) === null || _e === void 0 ? void 0 : _e.Status, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                nutrient: [(_g = (_f = _this5.details) === null || _f === void 0 ? void 0 : _f.attributes) === null || _g === void 0 ? void 0 : _g.nutrient, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                Farmer: [(_j = (_h = _this5.details) === null || _h === void 0 ? void 0 : _h.attributes) === null || _j === void 0 ? void 0 : _j.Farmer.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                area: [(_l = (_k = _this5.details) === null || _k === void 0 ? void 0 : _k.attributes) === null || _l === void 0 ? void 0 : _l.area.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                state: [(_o = (_m = _this5.details) === null || _m === void 0 ? void 0 : _m.attributes) === null || _o === void 0 ? void 0 : _o.lga.data.attributes.state.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                lga: [(_q = (_p = _this5.details) === null || _p === void 0 ? void 0 : _p.attributes) === null || _q === void 0 ? void 0 : _q.lga.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+                ReasonForSoilTest: [(_c = (_b = _this6.details) === null || _b === void 0 ? void 0 : _b.attributes) === null || _c === void 0 ? void 0 : _c.ReasonForSoilTest, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                Status: [(_e = (_d = _this6.details) === null || _d === void 0 ? void 0 : _d.attributes) === null || _e === void 0 ? void 0 : _e.Status, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                nutrient: [(_g = (_f = _this6.details) === null || _f === void 0 ? void 0 : _f.attributes) === null || _g === void 0 ? void 0 : _g.nutrient, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                Farmer: [(_j = (_h = _this6.details) === null || _h === void 0 ? void 0 : _h.attributes) === null || _j === void 0 ? void 0 : _j.Farmer.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                area: [(_l = (_k = _this6.details) === null || _k === void 0 ? void 0 : _k.attributes) === null || _l === void 0 ? void 0 : _l.area.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                state: [(_o = (_m = _this6.details) === null || _m === void 0 ? void 0 : _m.attributes) === null || _o === void 0 ? void 0 : _o.lga.data.attributes.state.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                lga: [(_q = (_p = _this6.details) === null || _p === void 0 ? void 0 : _p.attributes) === null || _q === void 0 ? void 0 : _q.lga.data.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
               });
-              _this5.loading = false;
+              _this6.loading = false;
             });
           }
         }, {
           key: "getCrops",
           value: function getCrops() {
-            var _this6 = this;
+            var _this7 = this;
 
             this.dataservice.getCrops().valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
-              _this6.Crops = result.data.crops.data;
+              _this7.Crops = result.data.crops.data;
             });
           }
         }, {
           key: "getStates",
           value: function getStates() {
-            var _this7 = this;
+            var _this8 = this;
 
             this.dataservice.getStates().valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
-              _this7.States = result.data.states.data;
+              _this8.States = result.data.states.data;
             });
           }
         }, {
           key: "getLGAs",
           value: function getLGAs(id) {
-            var _this8 = this;
+            var _this9 = this;
 
             this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
-              _this8.LGA = result.data.lgas.data;
+              _this9.LGA = result.data.lgas.data;
             });
           }
         }, {
           key: "getAreas",
           value: function getAreas(id) {
-            var _this9 = this;
+            var _this10 = this;
 
             this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
-              _this9.Areas = result.data.areas.data;
+              _this10.Areas = result.data.areas.data;
             });
           }
         }, {
           key: "getFarmers",
           value: function getFarmers() {
-            var _this10 = this;
+            var _this11 = this;
 
             this.dataservice.getUsers(undefined, undefined, "Farmer").valueChanges.subscribe(function (result) {
               console.log("getFarmers", result.data.usersPermissionsUsers.data);
-              _this10.Farmers = result.data.usersPermissionsUsers.data;
+              _this11.Farmers = result.data.usersPermissionsUsers.data;
             });
           }
         }, {
           key: "getVillages",
           value: function getVillages() {
-            var _this11 = this;
+            var _this12 = this;
 
             this.dataservice.getVillages().valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
-              _this11.Villages = result.data.villages.data;
+              _this12.Villages = result.data.villages.data;
             });
           }
         }, {
@@ -676,7 +707,7 @@
         }, {
           key: "FormSubmit",
           value: function FormSubmit() {
-            var _this12 = this;
+            var _this13 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -686,20 +717,20 @@
               console.log("response", result);
 
               if (result.data.updateSoilTest) {
-                _this12.toastr.success("Test updated successfully!");
+                _this13.toastr.success("Test updated successfully!");
 
-                _this12.btnLoading = false;
+                _this13.btnLoading = false;
 
-                _this12.myModal.hide();
+                _this13.myModal.hide();
 
-                _this12.getTest();
+                _this13.getTest();
               } else {
-                _this12.toastr.error("Failed. Please check the fields!");
+                _this13.toastr.error("Failed. Please check the fields!");
 
-                _this12.btnLoading = false;
+                _this13.btnLoading = false;
               }
             }, function (error) {
-              _this12.btnLoading = false;
+              _this13.btnLoading = false;
             });
           }
         }, {
@@ -715,7 +746,7 @@
         }, {
           key: "ResultSubmit",
           value: function ResultSubmit() {
-            var _this13 = this;
+            var _this14 = this;
 
             this.btnLoading = true;
 
@@ -728,20 +759,20 @@
                 console.log("response", result);
 
                 if (result.data.updateSoilTestResult) {
-                  _this13.toastr.success("Result updated successfully!");
+                  _this14.toastr.success("Result updated successfully!");
 
-                  _this13.btnLoading = false;
+                  _this14.btnLoading = false;
 
-                  _this13.resultModal.hide();
+                  _this14.resultModal.hide();
 
-                  _this13.getTest();
+                  _this14.getTest();
                 } else {
-                  _this13.toastr.error("Failed. Please check the fields!");
+                  _this14.toastr.error("Failed. Please check the fields!");
 
-                  _this13.btnLoading = false;
+                  _this14.btnLoading = false;
                 }
               }, function (error) {
-                _this13.btnLoading = false;
+                _this14.btnLoading = false;
               });
             } else {
               console.log("new", this.resultForm.value);
@@ -752,20 +783,20 @@
                 console.log("response", result);
 
                 if (result.data.createSoilTestResult) {
-                  _this13.toastr.success("Result added successfully!");
+                  _this14.toastr.success("Result added successfully!");
 
-                  _this13.btnLoading = false;
+                  _this14.btnLoading = false;
 
-                  _this13.resultModal.hide();
+                  _this14.resultModal.hide();
 
-                  _this13.getTest();
+                  _this14.getTest();
                 } else {
-                  _this13.toastr.error("Failed. Please check the fields!");
+                  _this14.toastr.error("Failed. Please check the fields!");
 
-                  _this13.btnLoading = false;
+                  _this14.btnLoading = false;
                 }
               }, function (error) {
-                _this13.btnLoading = false;
+                _this14.btnLoading = false;
               });
             }
           }

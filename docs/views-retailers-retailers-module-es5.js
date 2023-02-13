@@ -26,7 +26,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Retailers</h2>\r\n      <button\r\n        type=\"button\"\r\n        class=\"btn btn-primary\"\r\n        data-toggle=\"modal\"\r\n        (click)=\"commentModal.show()\"\r\n      >\r\n        Add New Retailer\r\n      </button>\r\n    </div>\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <div class=\"btn-group float-right mb-3\" dropdown>\r\n            <button\r\n              dropdownToggle\r\n              type=\"button\"\r\n              class=\"btn btn-primary dropdown-toggle\"\r\n            >\r\n              {{ selectedList }}<span class=\"caret\"></span>\r\n            </button>\r\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\r\n              <li role=\"menuitem\">\r\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('All')\"\r\n                  >All</a\r\n                >\r\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Approved')\"\r\n                  >Approved</a\r\n                >\r\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Approvalpending')\"\r\n                  >Approval pending</a\r\n                >\r\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Rejected')\"\r\n                  >Rejected</a\r\n                >\r\n              </li>\r\n            </ul>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <span class=\"float-left mt-3\"\r\n            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #commentModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add Retailer</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"commentModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"commentForm\" (ngSubmit)=\"formSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"Name\">Name</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"Name\"\r\n                  name=\"Name\"\r\n                  formControlName=\"Name\"\r\n                  placeholder=\"Enter  Name\"\r\n                />\r\n                <div\r\n                  *ngIf=\"f.Name.touched && f.Name.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.Name.errors.required\">\r\n                    Name is required.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"username\">Username</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"username\"\r\n                  name=\"username\"\r\n                  formControlName=\"username\"\r\n                  placeholder=\"Enter username\"\r\n                />\r\n                <div\r\n                  *ngIf=\"f.username.touched && f.username.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.username.errors.required\">\r\n                    Username is required.\r\n                  </div>\r\n                  <div *ngIf=\"f.username.errors.minlength\">\r\n                    Username should have minimum 3 characters.\r\n                  </div>\r\n                  <div *ngIf=\"f.username.errors.cannotContainSpace\">\r\n                    Username cannot contain space.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"password\">Password</label>\r\n                <input\r\n                  type=\"password\"\r\n                  class=\"form-control\"\r\n                  id=\"password\"\r\n                  name=\"password\"\r\n                  formControlName=\"password\"\r\n                  placeholder=\"Enter password\"\r\n                />\r\n                <div\r\n                  *ngIf=\"f.password.touched && f.password.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.password.errors.required\">\r\n                    Password is required.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"ContactNumber\">Contact number</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"ContactNumber\"\r\n                  name=\"ContactNumber\"\r\n                  formControlName=\"ContactNumber\"\r\n                  placeholder=\"Enter contact number\"\r\n                />\r\n                <div\r\n                  *ngIf=\"f.ContactNumber.touched && f.ContactNumber.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.ContactNumber.errors.required\">\r\n                    Contact number is required.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <!-- <div class=\"form-group\">\r\n                <label for=\"name\">E-mail</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"email\"\r\n                  name=\"email\"\r\n                  formControlName=\"email\"\r\n                  placeholder=\"Enter email\"\r\n                />\r\n              </div> -->\r\n            </div>\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"state\">State</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"state\"\r\n                  required\r\n                  ngModel\r\n                  (change)=\"filterLGA($event)\"\r\n                  name=\"state\"\r\n                  formControlName=\"state\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n                <div\r\n                  *ngIf=\"f.state.touched && f.state.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.state.errors.required\">\r\n                    State is required.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"lga\">LGA</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"lga\"\r\n                  required\r\n                  ngModel\r\n                  (change)=\"filterVillage($event)\"\r\n                  name=\"lga\"\r\n                  formControlName=\"lga\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n                <div\r\n                  *ngIf=\"f.lga.touched && f.lga.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.lga.errors.required\">\r\n                    LGA is required.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"village\">Village</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"village\"\r\n                  required\r\n                  ngModel\r\n                  name=\"village\"\r\n                  formControlName=\"village\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of Villages\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.Name }}\r\n                  </option>\r\n                </select>\r\n                <div\r\n                  *ngIf=\"f.village.touched && f.village.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.village.errors.required\">\r\n                    Village is required.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"Gender\">Gender</label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"Gender\"\r\n                  required\r\n                  ngModel\r\n                  name=\"Gender\"\r\n                  formControlName=\"Gender\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option value=\"Male\">Male</option>\r\n                  <option value=\"Female\">Female</option>\r\n                </select>\r\n                <div\r\n                  *ngIf=\"f.Gender.touched && f.Gender.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.Gender.errors.required\">\r\n                    Gender is required.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"Age\">Age</label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"Age\"\r\n                  name=\"Age\"\r\n                  formControlName=\"Age\"\r\n                  placeholder=\"Enter age\"\r\n                />\r\n                <div\r\n                  *ngIf=\"f.Age.touched && f.Age.invalid\"\r\n                  class=\"text-danger\"\r\n                >\r\n                  <div *ngIf=\"f.Age.errors.required\">\r\n                    Age is required.\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"commentModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !commentForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n    <!-- /.modal-content -->\r\n  </div>\r\n  <!-- /.modal-dialog -->\r\n</div>\r\n<div\r\n  bsModal\r\n  #detailsModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">History</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"detailsModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\"></div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>Retailers</h2>\n      <div>\n        <button\n            type=\"button\"\n            class=\"btn btn-outline-primary\"\n            data-toggle=\"modal\"\n            (click)=\"downloadExcel()\"\n          >\n            Download excel\n          </button>\n        <button\n        type=\"button\"\n        class=\"btn btn-primary\"\n        data-toggle=\"modal\"\n        (click)=\"commentModal.show()\"\n      >\n        Add New Retailer\n      </button>\n      </div>\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <div class=\"btn-group float-right mb-3\" dropdown>\n            <button\n              dropdownToggle\n              type=\"button\"\n              class=\"btn btn-primary dropdown-toggle\"\n            >\n              {{ selectedList }}<span class=\"caret\"></span>\n            </button>\n            <ul *dropdownMenu class=\"dropdown-menu\" role=\"menu\">\n              <li role=\"menuitem\">\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('All')\"\n                  >All</a\n                >\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Approved')\"\n                  >Approved</a\n                >\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Approvalpending')\"\n                  >Approval pending</a\n                >\n                <a class=\"dropdown-item\" (click)=\"toggleCropPrices('Rejected')\"\n                  >Rejected</a\n                >\n              </li>\n            </ul>\n          </div>\n        </div>\n      </div>\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (gridReady)=\"onGridReady($event)\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\"\n            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #commentModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add Retailer</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"commentModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"commentForm\" (ngSubmit)=\"formSubmit()\">\n          <div class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"Name\">Name</label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"Name\"\n                  name=\"Name\"\n                  formControlName=\"Name\"\n                  placeholder=\"Enter  Name\"\n                />\n                <div\n                  *ngIf=\"f.Name.touched && f.Name.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.Name.errors.required\">\n                    Name is required.\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"username\">Username</label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"username\"\n                  name=\"username\"\n                  formControlName=\"username\"\n                  placeholder=\"Enter username\"\n                />\n                <div\n                  *ngIf=\"f.username.touched && f.username.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.username.errors.required\">\n                    Username is required.\n                  </div>\n                  <div *ngIf=\"f.username.errors.minlength\">\n                    Username should have minimum 3 characters.\n                  </div>\n                  <div *ngIf=\"f.username.errors.cannotContainSpace\">\n                    Username cannot contain space.\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"password\">Password</label>\n                <input\n                  type=\"password\"\n                  class=\"form-control\"\n                  id=\"password\"\n                  name=\"password\"\n                  formControlName=\"password\"\n                  placeholder=\"Enter password\"\n                />\n                <div\n                  *ngIf=\"f.password.touched && f.password.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.password.errors.required\">\n                    Password is required.\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"ContactNumber\">Contact number</label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"ContactNumber\"\n                  name=\"ContactNumber\"\n                  formControlName=\"ContactNumber\"\n                  placeholder=\"Enter contact number\"\n                />\n                <div\n                  *ngIf=\"f.ContactNumber.touched && f.ContactNumber.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.ContactNumber.errors.required\">\n                    Contact number is required.\n                  </div>\n                </div>\n              </div>\n              <!-- <div class=\"form-group\">\n                <label for=\"name\">E-mail</label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"email\"\n                  name=\"email\"\n                  formControlName=\"email\"\n                  placeholder=\"Enter email\"\n                />\n              </div> -->\n            </div>\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"state\">State</label>\n                <select\n                  class=\"form-control\"\n                  id=\"state\"\n                  required\n                  ngModel\n                  (change)=\"filterLGA($event)\"\n                  name=\"state\"\n                  formControlName=\"state\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n                <div\n                  *ngIf=\"f.state.touched && f.state.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.state.errors.required\">\n                    State is required.\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"lga\">LGA</label>\n                <select\n                  class=\"form-control\"\n                  id=\"lga\"\n                  required\n                  ngModel\n                  (change)=\"filterVillage($event)\"\n                  name=\"lga\"\n                  formControlName=\"lga\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n                <div\n                  *ngIf=\"f.lga.touched && f.lga.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.lga.errors.required\">\n                    LGA is required.\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"village\">Village</label>\n                <select\n                  class=\"form-control\"\n                  id=\"village\"\n                  required\n                  ngModel\n                  name=\"village\"\n                  formControlName=\"village\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Villages\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n                <div\n                  *ngIf=\"f.village.touched && f.village.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.village.errors.required\">\n                    Village is required.\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"Gender\">Gender</label>\n                <select\n                  class=\"form-control\"\n                  id=\"Gender\"\n                  required\n                  ngModel\n                  name=\"Gender\"\n                  formControlName=\"Gender\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option value=\"Male\">Male</option>\n                  <option value=\"Female\">Female</option>\n                </select>\n                <div\n                  *ngIf=\"f.Gender.touched && f.Gender.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.Gender.errors.required\">\n                    Gender is required.\n                  </div>\n                </div>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"Age\">Age</label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"Age\"\n                  name=\"Age\"\n                  formControlName=\"Age\"\n                  placeholder=\"Enter age\"\n                />\n                <div\n                  *ngIf=\"f.Age.touched && f.Age.invalid\"\n                  class=\"text-danger\"\n                >\n                  <div *ngIf=\"f.Age.errors.required\">\n                    Age is required.\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"commentModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !commentForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n<div\n  bsModal\n  #detailsModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">History</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"detailsModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\"></div>\n    </div>\n  </div>\n</div>\n";
       /***/
     },
 
@@ -100,7 +100,13 @@
 
       var _utils_username_validator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
       /*! ../../utils/username.validator */
-      "1qmy"); // import { ActionRenderer } from "../../utils/StatusRenderer";
+      "1qmy");
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+      /*! ../../../environments/environment */
+      "AytR"); // import { ActionRenderer } from "../../utils/StatusRenderer";
 
 
       var RetailersComponent = /*#__PURE__*/function () {
@@ -161,6 +167,31 @@
             });
           }
         }, {
+          key: "downloadExcel",
+          value: function downloadExcel() {
+            var _this2 = this;
+
+            var resp = {};
+            this.btnLoading = true;
+            this.dataservice.downloadRetailers().subscribe(function (result) {
+              var _a;
+
+              resp = result.body;
+              console.log(result);
+
+              if (result.status === 200 && result.body.status == "Success") {
+                _this2.toastr.success(result.body.message);
+
+                _this2.btnLoading = false;
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+              } else {
+                _this2.btnLoading = false;
+
+                _this2.toastr.error(result.body.message);
+              }
+            });
+          }
+        }, {
           key: "setForm",
           value: function setForm() {
             this.commentForm = this.fb.group({
@@ -185,58 +216,58 @@
         }, {
           key: "getLGAs",
           value: function getLGAs(id) {
-            var _this2 = this;
+            var _this3 = this;
 
             this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
-              _this2.LGA = result.data.lgas.data;
+              _this3.LGA = result.data.lgas.data;
             });
           }
         }, {
           key: "getAreas",
           value: function getAreas(id) {
-            var _this3 = this;
+            var _this4 = this;
 
             this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
-              _this3.Areas = result.data.areas.data;
+              _this4.Areas = result.data.areas.data;
             });
           }
         }, {
           key: "getVillages",
           value: function getVillages(id) {
-            var _this4 = this;
+            var _this5 = this;
 
             this.dataservice.getVillages(id).valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
-              _this4.Villages = result.data.villages.data;
+              _this5.Villages = result.data.villages.data;
             });
           }
         }, {
           key: "getRetailers",
           value: function getRetailers() {
-            var _this5 = this;
+            var _this6 = this;
 
             this.dataservice.getRetailers(1, this.pageSize, this.confirmed, this.blocked).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f;
 
-              _this5.rowData = result.data.usersPermissionsUsers.data;
-              _this5.meta = result.data.usersPermissionsUsers.meta;
+              _this6.rowData = result.data.usersPermissionsUsers.data;
+              _this6.meta = result.data.usersPermissionsUsers.meta;
 
-              if (((_b = (_a = _this5.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
-                _this5.disablePrevButton = true;
-                _this5.disableNextButton = true;
+              if (((_b = (_a = _this6.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
+                _this6.disablePrevButton = true;
+                _this6.disableNextButton = true;
               }
 
-              if (((_d = (_c = _this5.meta) === null || _c === void 0 ? void 0 : _c.pagination) === null || _d === void 0 ? void 0 : _d.total) < _this5.pageSize) {
-                _this5.to = (_f = (_e = _this5.meta) === null || _e === void 0 ? void 0 : _e.pagination) === null || _f === void 0 ? void 0 : _f.total;
+              if (((_d = (_c = _this6.meta) === null || _c === void 0 ? void 0 : _c.pagination) === null || _d === void 0 ? void 0 : _d.total) < _this6.pageSize) {
+                _this6.to = (_f = (_e = _this6.meta) === null || _e === void 0 ? void 0 : _e.pagination) === null || _f === void 0 ? void 0 : _f.total;
               }
             });
           }
         }, {
           key: "loadNext",
           value: function loadNext() {
-            var _this6 = this;
+            var _this7 = this;
 
             var _a, _b, _c, _d;
 
@@ -250,14 +281,14 @@
             }
 
             this.dataservice.getRetailers(this.count, this.pageSize).valueChanges.subscribe(function (result) {
-              _this6.meta = result.data.usersPermissionsUsers.meta;
-              _this6.rowData = result.data.usersPermissionsUsers.data;
+              _this7.meta = result.data.usersPermissionsUsers.meta;
+              _this7.rowData = result.data.usersPermissionsUsers.data;
             });
           }
         }, {
           key: "loadPrev",
           value: function loadPrev() {
-            var _this7 = this;
+            var _this8 = this;
 
             this.count--;
 
@@ -272,8 +303,8 @@
             this.from = this.from - this.pageSize;
             this.to = this.to - this.rowData.length;
             this.dataservice.getRetailers(this.count, this.pageSize).valueChanges.subscribe(function (result) {
-              _this7.meta = result.data.usersPermissionsUsers.meta;
-              _this7.rowData = result.data.usersPermissionsUsers.data;
+              _this8.meta = result.data.usersPermissionsUsers.meta;
+              _this8.rowData = result.data.usersPermissionsUsers.data;
             });
           }
         }, {
@@ -368,7 +399,7 @@
         }, {
           key: "formSubmit",
           value: function formSubmit() {
-            var _this8 = this;
+            var _this9 = this;
 
             console.log(this.commentForm.value);
             this.btnLoading = true;
@@ -378,22 +409,22 @@
               console.log("response", result);
 
               if (result) {
-                _this8.toastr.success("Retailer added successfully!");
+                _this9.toastr.success("Retailer added successfully!");
 
-                _this8.btnLoading = false;
+                _this9.btnLoading = false;
 
-                _this8.commentModal.hide();
+                _this9.commentModal.hide();
 
-                _this8.setForm();
+                _this9.setForm();
 
-                _this8.getRetailers();
+                _this9.getRetailers();
               } else {
-                _this8.toastr.error("Failed. Please check the fields!");
+                _this9.toastr.error("Failed. Please check the fields!");
 
-                _this8.btnLoading = false;
+                _this9.btnLoading = false;
               }
             }, function (error) {
-              _this8.btnLoading = false;
+              _this9.btnLoading = false;
             });
           }
         }]);
@@ -635,7 +666,7 @@
         _createClass(RetailerDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this9 = this;
+            var _this10 = this;
 
             this.getLists();
             this.getAreas();
@@ -646,7 +677,7 @@
             this.getFarmers();
             this.getRetailers();
             this.activatedRouter.params.subscribe(function (params) {
-              _this9.id = params["id"];
+              _this10.id = params["id"];
             });
             this.getTest();
           }
@@ -658,110 +689,110 @@
         }, {
           key: "getTest",
           value: function getTest() {
-            var _this10 = this;
+            var _this11 = this;
 
             this.dataservice.getsingleRetailer(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5;
 
               console.log("getsingleRetailer", result.data.usersPermissionsUsers.data[0]);
-              _this10.details = result.data.usersPermissionsUsers.data[0];
-              _this10.agentForm = _this10.fb.group({
-                ContactNumber: [(_a = _this10.details.attributes) === null || _a === void 0 ? void 0 : _a.ContactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                Name: [(_b = _this10.details.attributes) === null || _b === void 0 ? void 0 : _b.Name, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+              _this11.details = result.data.usersPermissionsUsers.data[0];
+              _this11.agentForm = _this11.fb.group({
+                ContactNumber: [(_a = _this11.details.attributes) === null || _a === void 0 ? void 0 : _a.ContactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                Name: [(_b = _this11.details.attributes) === null || _b === void 0 ? void 0 : _b.Name, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 // email: [this.details.attributes?.email, Validators.required],
-                Bio: [(_c = _this10.details.attributes) === null || _c === void 0 ? void 0 : _c.Bio, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                Latitude: [(_d = _this10.details.attributes) === null || _d === void 0 ? void 0 : _d.Latitude, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                Longitude: [(_e = _this10.details.attributes) === null || _e === void 0 ? void 0 : _e.Longitude, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                state: [(_m = (_l = (_k = (_j = (_h = (_g = (_f = _this10.details) === null || _f === void 0 ? void 0 : _f.attributes) === null || _g === void 0 ? void 0 : _g.lga) === null || _h === void 0 ? void 0 : _h.data) === null || _j === void 0 ? void 0 : _j.attributes) === null || _k === void 0 ? void 0 : _k.state) === null || _l === void 0 ? void 0 : _l.data) === null || _m === void 0 ? void 0 : _m.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                Bio: [(_c = _this11.details.attributes) === null || _c === void 0 ? void 0 : _c.Bio, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                Latitude: [(_d = _this11.details.attributes) === null || _d === void 0 ? void 0 : _d.Latitude, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                Longitude: [(_e = _this11.details.attributes) === null || _e === void 0 ? void 0 : _e.Longitude, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                state: [(_m = (_l = (_k = (_j = (_h = (_g = (_f = _this11.details) === null || _f === void 0 ? void 0 : _f.attributes) === null || _g === void 0 ? void 0 : _g.lga) === null || _h === void 0 ? void 0 : _h.data) === null || _j === void 0 ? void 0 : _j.attributes) === null || _k === void 0 ? void 0 : _k.state) === null || _l === void 0 ? void 0 : _l.data) === null || _m === void 0 ? void 0 : _m.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 password: [""],
-                lga: [(_r = (_q = (_p = (_o = _this10.details) === null || _o === void 0 ? void 0 : _o.attributes) === null || _p === void 0 ? void 0 : _p.lga) === null || _q === void 0 ? void 0 : _q.data) === null || _r === void 0 ? void 0 : _r.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                village: [(_v = (_u = (_t = (_s = _this10.details) === null || _s === void 0 ? void 0 : _s.attributes) === null || _t === void 0 ? void 0 : _t.village) === null || _u === void 0 ? void 0 : _u.data) === null || _v === void 0 ? void 0 : _v.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                retailer_categories: [(_z = (_y = (_x = (_w = _this10.details) === null || _w === void 0 ? void 0 : _w.attributes) === null || _x === void 0 ? void 0 : _x.retailer_categories) === null || _y === void 0 ? void 0 : _y.data[0]) === null || _z === void 0 ? void 0 : _z.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+                lga: [(_r = (_q = (_p = (_o = _this11.details) === null || _o === void 0 ? void 0 : _o.attributes) === null || _p === void 0 ? void 0 : _p.lga) === null || _q === void 0 ? void 0 : _q.data) === null || _r === void 0 ? void 0 : _r.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                village: [(_v = (_u = (_t = (_s = _this11.details) === null || _s === void 0 ? void 0 : _s.attributes) === null || _t === void 0 ? void 0 : _t.village) === null || _u === void 0 ? void 0 : _u.data) === null || _v === void 0 ? void 0 : _v.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                retailer_categories: [(_z = (_y = (_x = (_w = _this11.details) === null || _w === void 0 ? void 0 : _w.attributes) === null || _x === void 0 ? void 0 : _x.retailer_categories) === null || _y === void 0 ? void 0 : _y.data[0]) === null || _z === void 0 ? void 0 : _z.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
               });
 
-              if (((_1 = (_0 = _this10.details) === null || _0 === void 0 ? void 0 : _0.attributes) === null || _1 === void 0 ? void 0 : _1.blocked) === true) {
-                _this10.disableButton = true;
-                _this10.btnText = "Rejected";
-              } else if (((_3 = (_2 = _this10.details) === null || _2 === void 0 ? void 0 : _2.attributes) === null || _3 === void 0 ? void 0 : _3.confirmed) === true) {
+              if (((_1 = (_0 = _this11.details) === null || _0 === void 0 ? void 0 : _0.attributes) === null || _1 === void 0 ? void 0 : _1.blocked) === true) {
+                _this11.disableButton = true;
+                _this11.btnText = "Rejected";
+              } else if (((_3 = (_2 = _this11.details) === null || _2 === void 0 ? void 0 : _2.attributes) === null || _3 === void 0 ? void 0 : _3.confirmed) === true) {
                 {
-                  _this10.disableButton = true;
-                  _this10.btnText = "Approved";
+                  _this11.disableButton = true;
+                  _this11.btnText = "Approved";
                 }
-              } else if (((_5 = (_4 = _this10.details) === null || _4 === void 0 ? void 0 : _4.attributes) === null || _5 === void 0 ? void 0 : _5.confirmed) === false) {
-                return _this10.disableButton = false;
+              } else if (((_5 = (_4 = _this11.details) === null || _4 === void 0 ? void 0 : _4.attributes) === null || _5 === void 0 ? void 0 : _5.confirmed) === false) {
+                return _this11.disableButton = false;
               }
 
-              _this10.loading = false;
+              _this11.loading = false;
             });
           }
         }, {
           key: "getCrops",
           value: function getCrops() {
-            var _this11 = this;
+            var _this12 = this;
 
             this.dataservice.getCrops().valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
-              _this11.Crops = result.data.crops.data;
+              _this12.Crops = result.data.crops.data;
             });
           }
         }, {
           key: "getStates",
           value: function getStates() {
-            var _this12 = this;
+            var _this13 = this;
 
             this.dataservice.getStates().valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
-              _this12.States = result.data.states.data;
+              _this13.States = result.data.states.data;
             });
           }
         }, {
           key: "getLGAs",
           value: function getLGAs(id) {
-            var _this13 = this;
+            var _this14 = this;
 
             this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
-              _this13.LGA = result.data.lgas.data;
+              _this14.LGA = result.data.lgas.data;
             });
           }
         }, {
           key: "getAreas",
           value: function getAreas(id) {
-            var _this14 = this;
+            var _this15 = this;
 
             this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
-              _this14.Areas = result.data.areas.data;
+              _this15.Areas = result.data.areas.data;
             });
           }
         }, {
           key: "getRetailers",
           value: function getRetailers() {
-            var _this15 = this;
+            var _this16 = this;
 
             this.dataservice.getRetailerCategories().valueChanges.subscribe(function (result) {
               console.log("getRetailers", result.data.retailerCategories.data);
-              _this15.Retailers = result.data.retailerCategories.data;
+              _this16.Retailers = result.data.retailerCategories.data;
             });
           }
         }, {
           key: "getFarmers",
           value: function getFarmers() {
-            var _this16 = this;
+            var _this17 = this;
 
             this.dataservice.getUsers(undefined, undefined, "Farmer").valueChanges.subscribe(function (result) {
               console.log("getFarmers", result.data.usersPermissionsUsers.data);
-              _this16.Farmers = result.data.usersPermissionsUsers.data;
+              _this17.Farmers = result.data.usersPermissionsUsers.data;
             });
           }
         }, {
           key: "getVillages",
           value: function getVillages(id) {
-            var _this17 = this;
+            var _this18 = this;
 
             this.dataservice.getVillages(id).valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
-              _this17.Villages = result.data.villages.data;
+              _this18.Villages = result.data.villages.data;
             });
           }
         }, {
@@ -777,7 +808,7 @@
         }, {
           key: "approveOrReject",
           value: function approveOrReject(check) {
-            var _this18 = this;
+            var _this19 = this;
 
             var payload = {};
 
@@ -797,20 +828,20 @@
               console.log("response", result);
 
               if (result.data.updateUsersPermissionsUser) {
-                _this18.toastr.success("Updated successfully!");
+                _this19.toastr.success("Updated successfully!");
 
-                _this18.btnLoading = false;
+                _this19.btnLoading = false;
 
-                _this18.approveModal.hide();
+                _this19.approveModal.hide();
 
-                _this18.getTest();
+                _this19.getTest();
               } else {
-                _this18.toastr.error("Something went wrong!");
+                _this19.toastr.error("Something went wrong!");
 
-                _this18.btnLoading = false;
+                _this19.btnLoading = false;
               }
             }, function (error) {
-              _this18.btnLoading = false;
+              _this19.btnLoading = false;
             }); // let published = null;
             // if (!check) published = new Date();
             // this.dataservice
@@ -869,7 +900,7 @@
         }, {
           key: "FormSubmit",
           value: function FormSubmit() {
-            var _this19 = this;
+            var _this20 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -879,26 +910,26 @@
               console.log("response", result);
 
               if (result.data.updateUsersPermissionsUser) {
-                _this19.toastr.success("Retailer updated successfully!");
+                _this20.toastr.success("Retailer updated successfully!");
 
-                _this19.btnLoading = false;
+                _this20.btnLoading = false;
 
-                _this19.myModal.hide();
+                _this20.myModal.hide();
 
-                _this19.getTest();
+                _this20.getTest();
               } else {
-                _this19.toastr.error("Failed. Please check the fields!");
+                _this20.toastr.error("Failed. Please check the fields!");
 
-                _this19.btnLoading = false;
+                _this20.btnLoading = false;
               }
             }, function (error) {
-              _this19.btnLoading = false;
+              _this20.btnLoading = false;
             });
           }
         }, {
           key: "ResultSubmit",
           value: function ResultSubmit() {
-            var _this20 = this;
+            var _this21 = this;
 
             var _a, _b, _c, _d;
 
@@ -911,20 +942,20 @@
               console.log("response", result);
 
               if (result.data.updateRetailerProduct) {
-                _this20.toastr.success("Product updated successfully!");
+                _this21.toastr.success("Product updated successfully!");
 
-                _this20.btnLoading = false;
+                _this21.btnLoading = false;
 
-                _this20.resultModal.hide();
+                _this21.resultModal.hide();
 
-                _this20.getTest();
+                _this21.getTest();
               } else {
-                _this20.toastr.error("Failed. Please check the fields!");
+                _this21.toastr.error("Failed. Please check the fields!");
 
-                _this20.btnLoading = false;
+                _this21.btnLoading = false;
               }
             }, function (error) {
-              _this20.btnLoading = false;
+              _this21.btnLoading = false;
             });
           }
         }, {
@@ -951,7 +982,7 @@
         }, {
           key: "uploadProfPic",
           value: function uploadProfPic() {
-            var _this21 = this;
+            var _this22 = this;
 
             var resp = {};
             this.dataservice.upload(this.file).subscribe(function (response) {
@@ -960,31 +991,31 @@
               if (response.status == 200) {
                 console.log(response);
 
-                _this21.dataservice.UpdateRetailerPic(_this21.id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
+                _this22.dataservice.UpdateRetailerPic(_this22.id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                   resp = result.data;
                   console.log("response", result);
 
                   if (result.data.updateUsersPermissionsUser) {
-                    _this21.toastr.success("Success!");
+                    _this22.toastr.success("Success!");
 
-                    _this21.file = null;
+                    _this22.file = null;
 
-                    _this21.getTest();
+                    _this22.getTest();
 
-                    _this21.addProductModal.hide();
+                    _this22.addProductModal.hide();
                   } else {
-                    _this21.toastr.error("Failed!");
+                    _this22.toastr.error("Failed!");
                   }
                 });
               } else {
-                _this21.toastr.error("Image failed to upload!");
+                _this22.toastr.error("Image failed to upload!");
               }
             });
           }
         }, {
           key: "ProductSubmit",
           value: function ProductSubmit() {
-            var _this22 = this;
+            var _this23 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -994,50 +1025,50 @@
               if (response.status == 200) {
                 console.log(response);
 
-                _this22.dataservice.addRetailerProducts(_this22.productForm.value, (_d = (_c = (_b = (_a = _this22.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.retailer_categories) === null || _c === void 0 ? void 0 : _c.data[0]) === null || _d === void 0 ? void 0 : _d.id, _this22.id, (_e = response.body[0]) === null || _e === void 0 ? void 0 : _e.id).subscribe(function (result) {
+                _this23.dataservice.addRetailerProducts(_this23.productForm.value, (_d = (_c = (_b = (_a = _this23.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.retailer_categories) === null || _c === void 0 ? void 0 : _c.data[0]) === null || _d === void 0 ? void 0 : _d.id, _this23.id, (_e = response.body[0]) === null || _e === void 0 ? void 0 : _e.id).subscribe(function (result) {
                   resp = result.data;
                   console.log("response", result);
 
                   if (result.data.createRetailerProduct) {
-                    _this22.toastr.success("Success!");
+                    _this23.toastr.success("Success!");
 
-                    _this22.btnLoading = false;
-                    _this22.file = null;
+                    _this23.btnLoading = false;
+                    _this23.file = null;
 
-                    _this22.getTest();
+                    _this23.getTest();
 
-                    _this22.addProductModal.hide();
+                    _this23.addProductModal.hide();
                   } else {
-                    _this22.toastr.error("Failed!");
+                    _this23.toastr.error("Failed!");
 
-                    _this22.btnLoading = false;
+                    _this23.btnLoading = false;
                   }
                 }, function (error) {
-                  _this22.btnLoading = false;
+                  _this23.btnLoading = false;
                 });
               } else {
-                _this22.toastr.error("Image failed to upload!");
+                _this23.toastr.error("Image failed to upload!");
 
-                _this22.btnLoading = false;
+                _this23.btnLoading = false;
               }
             });
           }
         }, {
           key: "deleteProduct",
           value: function deleteProduct() {
-            var _this23 = this;
+            var _this24 = this;
 
             this.dataservice.deleteProduct(this.deleteObj.id).subscribe(function (result) {
               console.log("response", result);
 
               if (result.data.deleteRetailerProduct) {
-                _this23.toastr.success("Success!");
+                _this24.toastr.success("Success!");
 
-                _this23.deleteModal.hide();
+                _this24.deleteModal.hide();
 
-                _this23.getTest();
+                _this24.getTest();
               } else {
-                _this23.toastr.error("Failed!");
+                _this24.toastr.error("Failed!");
               }
             });
           }

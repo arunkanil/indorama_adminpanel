@@ -9,6 +9,7 @@ import { RetailersColumn } from "../../constants/columnMetadata";
 import { filter } from "rxjs/operators";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { UsernameValidator } from "../../utils/username.validator";
+import { environment } from "../../../environments/environment";
 
 @Component({
   templateUrl: "retailers.component.html",
@@ -72,6 +73,25 @@ export class RetailersComponent {
       console.log("getStates", result.data.states.data);
       this.States = result.data.states.data;
     });
+  }
+
+  downloadExcel() {
+    let resp = {};
+    this.btnLoading = true;
+    this.dataservice
+      .downloadRetailers()
+      .subscribe((result: any) => {
+        resp = result.body;
+        console.log(result);
+        if (result.status === 200 && result.body.status == "Success") {
+          this.toastr.success(result.body.message);
+          this.btnLoading = false;
+          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+        } else {
+          this.btnLoading = false;
+          this.toastr.error(result.body.message);
+        }
+      });
   }
   setForm() {
     this.commentForm = this.fb.group({

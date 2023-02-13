@@ -130,7 +130,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\r\n  <div class=\"card\">\r\n    <div\r\n      class=\"card-header\"\r\n      style=\"display: flex; justify-content: space-between\"\r\n    >\r\n      <h2>Marketplace</h2>\r\n      <div>\r\n        <button\r\n          type=\"button\"\r\n          class=\"btn btn-primary\"\r\n          data-toggle=\"modal\"\r\n          (click)=\"openModal()\"\r\n        >\r\n          Add New listing\r\n        </button>\r\n      </div>\r\n    </div>\r\n    <!-- <p class=\"text-muted mx-3\">\r\n      To approve a crop price simply select and edit the record without\r\n      modifying the data\r\n    </p> -->\r\n    <div class=\"card-body\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <ag-grid-angular\r\n            #agGrid\r\n            style=\"width: 100%; height: 65vh\"\r\n            id=\"myGrid\"\r\n            class=\"ag-theme-alpine\"\r\n            [columnDefs]=\"columnDefs\"\r\n            [rowData]=\"rowData\"\r\n            [rowSelection]=\"rowSelection\"\r\n            (selectionChanged)=\"onSelectionChanged($event)\"\r\n            (gridReady)=\"onGridReady($event)\"\r\n            animateRows=\"true\"\r\n          >\r\n          </ag-grid-angular>\r\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disableNextButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadNext()\"\r\n          >\r\n            Next\r\n          </button>\r\n          <span class=\"float-right mt-3\"\r\n            >Page {{ meta?.pagination?.page }} of\r\n            {{ meta?.pagination?.pageCount }}</span\r\n          >\r\n          <button\r\n            type=\"button\"\r\n            [disabled]=\"disablePrevButton\"\r\n            class=\"btn btn-primary float-right m-2\"\r\n            (click)=\"loadPrev()\"\r\n          >\r\n            Prev\r\n          </button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n<div\r\n  bsModal\r\n  #productModal=\"bs-modal\"\r\n  class=\"modal fade\"\r\n  tabindex=\"-1\"\r\n  role=\"dialog\"\r\n  aria-labelledby=\"myModalLabel\"\r\n  aria-hidden=\"true\"\r\n>\r\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n    <div class=\"modal-content\">\r\n      <div class=\"modal-header\">\r\n        <h4 class=\"modal-title\">Add Listing</h4>\r\n        <button\r\n          type=\"button\"\r\n          class=\"close\"\r\n          (click)=\"productModal.hide()\"\r\n          aria-label=\"Close\"\r\n        >\r\n          <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n      </div>\r\n      <div class=\"modal-body\">\r\n        <form [formGroup]=\"productForm\" (ngSubmit)=\"productSubmit()\">\r\n          <div class=\"row\">\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"category\">Category <span class=\"danger\">*</span></label>\r\n                <select\r\n                  class=\"form-control\"\r\n                  id=\"category\"\r\n                  required\r\n                  ngModel\r\n                  name=\"category\"\r\n                  formControlName=\"category\"\r\n                >\r\n                  <option value=\"\" disabled selected hidden>Choose...</option>\r\n                  <option *ngFor=\"let item of Categories\" value=\"{{ item.id }}\">\r\n                    {{ item.attributes.CategoryName }}\r\n                  </option>\r\n                </select>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"itemName\">Title <span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"itemName\"\r\n                  name=\"itemName\"\r\n                  formControlName=\"itemName\"\r\n                  placeholder=\"Enter title\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"price\">Price <span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"number\"\r\n                  class=\"form-control\"\r\n                  id=\"price\"\r\n                  name=\"price\"\r\n                  formControlName=\"price\"\r\n                  placeholder=\"Enter price\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"unit\">Unit <span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"unit\"\r\n                  name=\"unit\"\r\n                  formControlName=\"unit\"\r\n                  placeholder=\"Enter unit\"\r\n                />\r\n              </div>\r\n            </div>\r\n            <div class=\"col\">\r\n              <div class=\"form-group\">\r\n                <label for=\"availableQty\">Quantity <span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"text\"\r\n                  class=\"form-control\"\r\n                  id=\"availableQty\"\r\n                  name=\"availableQty\"\r\n                  formControlName=\"availableQty\"\r\n                  placeholder=\"Enter available quantity\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"contactNumber\">Contact Number <span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"number\"\r\n                  class=\"form-control\"\r\n                  id=\"contactNumber\"\r\n                  name=\"contactNumber\"\r\n                  formControlName=\"contactNumber\"\r\n                  placeholder=\"Enter Contact number\"\r\n                />\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"description\">Description <span class=\"danger\">*</span></label>\r\n                <textarea\r\n                  class=\"form-control\"\r\n                  id=\"description\"\r\n                  rows=\"5\"\r\n                  name=\"description\"\r\n                  formControlName=\"description\"\r\n                  placeholder=\"Enter description\"\r\n                ></textarea>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <label for=\"images\">Image <span class=\"danger\">*</span></label>\r\n                <input\r\n                  type=\"file\"\r\n                  id=\"images\"\r\n                  multiple\r\n                  accept=\".jpg,.jpeg,.JPEG,.png\"\r\n                  name=\"images\"\r\n                  (change)=\"onChange($event)\"\r\n                  formControlName=\"images\"\r\n                  placeholder=\"Choose images\"\r\n                />\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <button\r\n            type=\"button\"\r\n            class=\"btn btn-secondary\"\r\n            (click)=\"productModal.hide()\"\r\n          >\r\n            Close\r\n          </button>\r\n          <button\r\n            type=\"submit\"\r\n            class=\"btn btn-primary ml-2\"\r\n            [disabled]=\"btnLoading || !productForm.valid\"\r\n          >\r\n            <span\r\n              *ngIf=\"btnLoading\"\r\n              class=\"spinner-border spinner-border-sm\"\r\n              role=\"status\"\r\n              aria-hidden=\"true\"\r\n            ></span>\r\n            Save changes\r\n          </button>\r\n        </form>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</div>\r\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>Marketplace</h2>\n      <div>\n        <button\n            type=\"button\"\n            class=\"btn btn-outline-primary\"\n            data-toggle=\"modal\"\n            (click)=\"downloadExcel()\"\n          >\n            Download excel\n          </button>\n        <button\n          type=\"button\"\n          class=\"btn btn-primary\"\n          data-toggle=\"modal\"\n          (click)=\"openModal()\"\n        >\n          Add New listing\n        </button>\n      </div>\n    </div>\n    <!-- <p class=\"text-muted mx-3\">\n      To approve a crop price simply select and edit the record without\n      modifying the data\n    </p> -->\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            (gridReady)=\"onGridReady($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #productModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">Add Listing</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"productModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"productForm\" (ngSubmit)=\"productSubmit()\">\n          <div class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"category\">Category <span class=\"danger\">*</span></label>\n                <select\n                  class=\"form-control\"\n                  id=\"category\"\n                  required\n                  ngModel\n                  name=\"category\"\n                  formControlName=\"category\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Categories\" value=\"{{ item.id }}\">\n                    {{ item.attributes.CategoryName }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"itemName\">Title <span class=\"danger\">*</span></label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"itemName\"\n                  name=\"itemName\"\n                  formControlName=\"itemName\"\n                  placeholder=\"Enter title\"\n                />\n              </div>\n              <div class=\"form-group\">\n                <label for=\"price\">Price <span class=\"danger\">*</span></label>\n                <input\n                  type=\"number\"\n                  class=\"form-control\"\n                  id=\"price\"\n                  name=\"price\"\n                  formControlName=\"price\"\n                  placeholder=\"Enter price\"\n                />\n              </div>\n              <div class=\"form-group\">\n                <label for=\"unit\">Unit <span class=\"danger\">*</span></label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"unit\"\n                  name=\"unit\"\n                  formControlName=\"unit\"\n                  placeholder=\"Enter unit\"\n                />\n              </div>\n            </div>\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"availableQty\">Quantity <span class=\"danger\">*</span></label>\n                <input\n                  type=\"text\"\n                  class=\"form-control\"\n                  id=\"availableQty\"\n                  name=\"availableQty\"\n                  formControlName=\"availableQty\"\n                  placeholder=\"Enter available quantity\"\n                />\n              </div>\n              <div class=\"form-group\">\n                <label for=\"contactNumber\">Contact Number <span class=\"danger\">*</span></label>\n                <input\n                  type=\"number\"\n                  class=\"form-control\"\n                  id=\"contactNumber\"\n                  name=\"contactNumber\"\n                  formControlName=\"contactNumber\"\n                  placeholder=\"Enter Contact number\"\n                />\n              </div>\n              <div class=\"form-group\">\n                <label for=\"description\">Description <span class=\"danger\">*</span></label>\n                <textarea\n                  class=\"form-control\"\n                  id=\"description\"\n                  rows=\"5\"\n                  name=\"description\"\n                  formControlName=\"description\"\n                  placeholder=\"Enter description\"\n                ></textarea>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"images\">Image <span class=\"danger\">*</span></label>\n                <input\n                  type=\"file\"\n                  id=\"images\"\n                  multiple\n                  accept=\".jpg,.jpeg,.JPEG,.png\"\n                  name=\"images\"\n                  (change)=\"onChange($event)\"\n                  formControlName=\"images\"\n                  placeholder=\"Choose images\"\n                />\n              </div>\n            </div>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"productModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !productForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Save changes\n          </button>\n        </form>\n      </div>\n    </div>\n  </div>\n</div>\n";
       /***/
     },
 
@@ -276,6 +276,12 @@
       var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
       /*! ngx-bootstrap/modal */
       "LqlI");
+      /* harmony import */
+
+
+      var _environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+      /*! ../../../environments/environment */
+      "AytR");
 
       var MarketplaceComponent = /*#__PURE__*/function () {
         function MarketplaceComponent(dataservice, router, fb, toastr) {
@@ -343,9 +349,34 @@
             });
           }
         }, {
+          key: "downloadExcel",
+          value: function downloadExcel() {
+            var _this2 = this;
+
+            var resp = {};
+            this.btnLoading = true;
+            this.dataservice.downloadMarketplace().subscribe(function (result) {
+              var _a;
+
+              resp = result.body;
+              console.log(result);
+
+              if (result.status === 200 && result.body.status == "Success") {
+                _this2.toastr.success(result.body.message);
+
+                _this2.btnLoading = false;
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+              } else {
+                _this2.btnLoading = false;
+
+                _this2.toastr.error(result.body.message);
+              }
+            });
+          }
+        }, {
           key: "loadNext",
           value: function loadNext() {
-            var _this2 = this;
+            var _this3 = this;
 
             var _a, _b, _c, _d;
 
@@ -359,14 +390,14 @@
             }
 
             this.dataservice.getMarketplace(this.count, this.pageSize).valueChanges.subscribe(function (result) {
-              _this2.meta = result.data.marketplaceProducts.meta;
-              _this2.rowData = result.data.marketplaceProducts.data;
+              _this3.meta = result.data.marketplaceProducts.meta;
+              _this3.rowData = result.data.marketplaceProducts.data;
             });
           }
         }, {
           key: "loadPrev",
           value: function loadPrev() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.count--;
 
@@ -381,18 +412,18 @@
             this.from = this.from - this.pageSize;
             this.to = this.to - this.rowData.length;
             this.dataservice.getMarketplace(this.count, this.pageSize).valueChanges.subscribe(function (result) {
-              _this3.meta = result.data.marketplaceProducts.meta;
-              _this3.rowData = result.data.marketplaceProducts.data;
+              _this4.meta = result.data.marketplaceProducts.meta;
+              _this4.rowData = result.data.marketplaceProducts.data;
             });
           }
         }, {
           key: "getCategories",
           value: function getCategories() {
-            var _this4 = this;
+            var _this5 = this;
 
             this.dataservice.getMarketplaceCategories().valueChanges.subscribe(function (result) {
               console.log("getCategories", result.data.marketplaceCategories.data);
-              _this4.Categories = result.data.marketplaceCategories.data;
+              _this5.Categories = result.data.marketplaceCategories.data;
             });
           }
         }, {
@@ -439,7 +470,7 @@
         }, {
           key: "productSubmit",
           value: function productSubmit() {
-            var _this5 = this;
+            var _this6 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -448,37 +479,37 @@
               if (response.status == 200) {
                 console.log(response);
 
-                _this5.dataservice.createMarketplaceProduct(_this5.productForm.value, response.body.map(function (a) {
+                _this6.dataservice.createMarketplaceProduct(_this6.productForm.value, response.body.map(function (a) {
                   return a.id;
                 })).subscribe(function (result) {
                   resp = result.data;
                   console.log("response", result);
 
                   if (result.data.createMarketplaceProduct) {
-                    _this5.toastr.success("Success!");
+                    _this6.toastr.success("Success!");
 
-                    _this5.dataservice.getMarketplace(1, _this5.pageSize).refetch();
+                    _this6.dataservice.getMarketplace(1, _this6.pageSize).refetch();
 
                     window.location.reload();
-                    _this5.file = null;
+                    _this6.file = null;
 
-                    _this5.productForm.reset();
+                    _this6.productForm.reset();
 
-                    _this5.productModal.hide();
+                    _this6.productModal.hide();
 
-                    _this5.gridApi.deselectAll();
+                    _this6.gridApi.deselectAll();
 
-                    _this5.btnLoading = false;
+                    _this6.btnLoading = false;
                   } else {
-                    _this5.toastr.error("Failed. Please check the fields!");
+                    _this6.toastr.error("Failed. Please check the fields!");
 
-                    _this5.btnLoading = false;
+                    _this6.btnLoading = false;
                   }
                 });
               } else {
-                _this5.toastr.error("Image failed to upload!");
+                _this6.toastr.error("Image failed to upload!");
 
-                _this5.btnLoading = false;
+                _this6.btnLoading = false;
               }
             });
           }
@@ -624,10 +655,10 @@
         _createClass(MarketplaceDetailComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            var _this6 = this;
+            var _this7 = this;
 
             this.activatedRouter.params.subscribe(function (params) {
-              _this6.id = params["id"];
+              _this7.id = params["id"];
             });
             this.getSingleMarketplaceProduct();
             this.getCategories();
@@ -635,36 +666,36 @@
         }, {
           key: "getSingleMarketplaceProduct",
           value: function getSingleMarketplaceProduct() {
-            var _this7 = this;
+            var _this8 = this;
 
             this.dataservice.getSingleMarketplaceProduct(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 
               console.log("getSingleMarketplaceProduct", result.data.marketplaceProduct.data);
-              _this7.details = result.data.marketplaceProduct.data;
-              _this7.productForm = _this7.fb.group({
-                itemName: [(_a = _this7.details.attributes) === null || _a === void 0 ? void 0 : _a.ItemName, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+              _this8.details = result.data.marketplaceProduct.data;
+              _this8.productForm = _this8.fb.group({
+                itemName: [(_a = _this8.details.attributes) === null || _a === void 0 ? void 0 : _a.ItemName, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 // images: [this.details.attributes?.Images?.data, Validators.required],
                 // userId: [this.details?.attributes?.seller?.data?.attributes?.Name],
-                contactNumber: [(_b = _this7.details.attributes) === null || _b === void 0 ? void 0 : _b.contactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                price: [(_c = _this7.details.attributes) === null || _c === void 0 ? void 0 : _c.Price, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                availableQty: [(_d = _this7.details.attributes) === null || _d === void 0 ? void 0 : _d.AvailableQty, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                unit: [(_e = _this7.details.attributes) === null || _e === void 0 ? void 0 : _e.Unit, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                category: [(_h = (_g = (_f = _this7.details.attributes) === null || _f === void 0 ? void 0 : _f.marketplace_category) === null || _g === void 0 ? void 0 : _g.data) === null || _h === void 0 ? void 0 : _h.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                description: [(_j = _this7.details.attributes) === null || _j === void 0 ? void 0 : _j.description, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+                contactNumber: [(_b = _this8.details.attributes) === null || _b === void 0 ? void 0 : _b.contactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                price: [(_c = _this8.details.attributes) === null || _c === void 0 ? void 0 : _c.Price, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                availableQty: [(_d = _this8.details.attributes) === null || _d === void 0 ? void 0 : _d.AvailableQty, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                unit: [(_e = _this8.details.attributes) === null || _e === void 0 ? void 0 : _e.Unit, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                category: [(_h = (_g = (_f = _this8.details.attributes) === null || _f === void 0 ? void 0 : _f.marketplace_category) === null || _g === void 0 ? void 0 : _g.data) === null || _h === void 0 ? void 0 : _h.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+                description: [(_j = _this8.details.attributes) === null || _j === void 0 ? void 0 : _j.description, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
               });
-              console.log(_this7.productForm);
-              _this7.loading = false;
+              console.log(_this8.productForm);
+              _this8.loading = false;
             });
           }
         }, {
           key: "getCategories",
           value: function getCategories() {
-            var _this8 = this;
+            var _this9 = this;
 
             this.dataservice.getMarketplaceCategories().valueChanges.subscribe(function (result) {
               console.log("getCategories", result.data.marketplaceCategories.data);
-              _this8.Categories = result.data.marketplaceCategories.data;
+              _this9.Categories = result.data.marketplaceCategories.data;
             });
           }
         }, {
@@ -694,7 +725,7 @@
         }, {
           key: "productSubmit",
           value: function productSubmit() {
-            var _this9 = this;
+            var _this10 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -704,24 +735,24 @@
               console.log("response", result);
 
               if (result.data.updateMarketplaceProduct) {
-                _this9.toastr.success("Activity updated successfully!");
+                _this10.toastr.success("Activity updated successfully!");
 
-                _this9.editModal.hide();
+                _this10.editModal.hide();
 
-                _this9.btnLoading = false;
+                _this10.btnLoading = false;
 
-                _this9.getSingleMarketplaceProduct();
+                _this10.getSingleMarketplaceProduct();
               } else {
-                _this9.toastr.error("Failed. Please check the fields!");
+                _this10.toastr.error("Failed. Please check the fields!");
 
-                _this9.btnLoading = false;
+                _this10.btnLoading = false;
               }
             });
           }
         }, {
           key: "uploadImages",
           value: function uploadImages() {
-            var _this10 = this;
+            var _this11 = this;
 
             var resp = {};
             this.btnLoading = true;
@@ -729,47 +760,47 @@
               if (response.status == 200) {
                 console.log(response);
 
-                _this10.dataservice.updateMarketplaceProductImg(_this10.id, response.body.map(function (a) {
+                _this11.dataservice.updateMarketplaceProductImg(_this11.id, response.body.map(function (a) {
                   return a.id;
                 })).subscribe(function (result) {
                   resp = result.data;
                   console.log("response", result);
 
                   if (result.data.updateMarketplaceProduct) {
-                    _this10.toastr.success("Activity updated successfully!");
+                    _this11.toastr.success("Activity updated successfully!");
 
-                    _this10.btnLoading = false;
+                    _this11.btnLoading = false;
 
-                    _this10.dataservice.getSingleMarketplaceProduct(_this10.id).refetch();
+                    _this11.dataservice.getSingleMarketplaceProduct(_this11.id).refetch();
                   } else {
-                    _this10.toastr.error("Failed. Please check the fields!");
+                    _this11.toastr.error("Failed. Please check the fields!");
 
-                    _this10.btnLoading = false;
+                    _this11.btnLoading = false;
                   }
                 });
               } else {
-                _this10.toastr.error("Image failed to upload!");
+                _this11.toastr.error("Image failed to upload!");
 
-                _this10.btnLoading = false;
+                _this11.btnLoading = false;
               }
             });
           }
         }, {
           key: "DeleteMarketplaceProduct",
           value: function DeleteMarketplaceProduct() {
-            var _this11 = this;
+            var _this12 = this;
 
             this.dataservice.DeleteMarketplaceProduct(this.id).subscribe(function (result) {
               console.log("response", result);
 
               if (result.data.deleteMarketplaceProduct) {
-                _this11.toastr.success("Success!");
+                _this12.toastr.success("Success!");
 
-                _this11.deleteModal.hide();
+                _this12.deleteModal.hide();
 
-                _this11.router.navigate(["/marketplace/all"]);
+                _this12.router.navigate(["/marketplace/all"]);
               } else {
-                _this11.toastr.error("Failed!");
+                _this12.toastr.error("Failed!");
               }
             });
           }

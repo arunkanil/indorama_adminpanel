@@ -5,7 +5,16 @@
       style="display: flex; justify-content: space-between"
     >
       <h2>Retailers</h2>
-      <button
+      <div>
+        <button
+            type="button"
+            class="btn btn-outline-primary"
+            data-toggle="modal"
+            (click)="downloadExcel()"
+          >
+            Download excel
+          </button>
+        <button
         type="button"
         class="btn btn-primary"
         data-toggle="modal"
@@ -13,6 +22,7 @@
       >
         Add New Retailer
       </button>
+      </div>
     </div>
     <div class="card-body">
       <div class="row">
