@@ -45,7 +45,7 @@ export class ActivityDetailComponent implements OnInit {
     state:["", Validators.required],
     lga:["", Validators.required],
     area: ["", Validators.required],
-    crop: [""],
+    crop: ["", Validators.required],
     FarmerName: [""],
     PlannedFarmDay: [""],
     ConditionOfCrop: [""],
