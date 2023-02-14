@@ -1337,6 +1337,16 @@
           buttons: ["reset"]
         }
       }, {
+        field: "attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name",
+        headerName: "State",
+        resizable: true,
+        sortable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+          filterOptions: ["contains"],
+          buttons: ["reset"]
+        }
+      }, {
         field: "attributes.NoOfAttendees",
         headerName: "No. of attendees",
         resizable: true,
