@@ -3443,6 +3443,22 @@ const GetActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
               id
               attributes {
                 Name
+                lga {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      state {
+                        data {
+                          id
+                          attributes {
+                            Name
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
