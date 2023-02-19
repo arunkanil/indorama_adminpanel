@@ -669,6 +669,10 @@
         }, {
           key: "dateConvertor",
           value: function dateConvertor(date) {
+            if (date == null) {
+              return "Nil";
+            }
+
             return new Date(date);
           }
         }, {

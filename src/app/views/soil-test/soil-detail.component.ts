@@ -154,6 +154,9 @@ export class SoilTestDetailComponent implements OnInit {
     });
   }
   dateConvertor(date) {
+    if (date==null) {
+      return "Nil";
+    }
     return new Date(date);
   }
   getLists() {

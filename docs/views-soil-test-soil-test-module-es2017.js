@@ -471,6 +471,9 @@ let SoilTestDetailComponent = class SoilTestDetailComponent {
         });
     }
     dateConvertor(date) {
+        if (date == null) {
+            return "Nil";
+        }
         return new Date(date);
     }
     getLists() {
