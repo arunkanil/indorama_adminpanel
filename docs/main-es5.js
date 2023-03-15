@@ -381,7 +381,8 @@
 
       var environment = {
         production: false,
-        apiUrl: "https://indoramaapp.untanglestrategy.com" // apiUrl: "http://localhost:1337"
+        apiUrl: "https://indoramaapp.untanglestrategy.com" // apiUrl: "https://indorama-uat.untanglestrategy.com:883",
+        // apiUrl: "http://localhost:1337"
         // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
 
       };
@@ -755,28 +756,28 @@
 
       var _UpdateFarmDemo = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  mutation (\n    $id: ID!\n    $farmer: String\n    $latitude: Float\n    $longitude: Float\n    $lga: ID\n    $crop: ID\n    $area: String\n    $farmerPractise: ComponentFarmDemoFarmDemoPractiseInput\n    $indoramaPractise: ComponentFarmDemoFarmDemoPractiseInput\n    $dateOfHarvesting: Date\n    $season: String\n    $isPesticidesUsed: Boolean\n    $images: [ID]\n    $Status: ENUM_FARMDEMO_STATUS\n    $state: ID\n  ) {\n    updateFarmDemo(\n      id: $id\n      data: {\n        Farmer: $farmer\n        FarmLocationLatitude: $latitude\n        FarmLocationLongitude: $longitude\n        lgas: $lga\n        crop: $crop\n        Status: $Status\n        state: $state\n        AreaOfField: $area\n        FarmerPractise: $farmerPractise\n        IndoramaPractise: $indoramaPractise\n        isPesticidesUsed: $isPesticidesUsed\n        DateOfHarvesting: $dateOfHarvesting\n        Season: $season\n        Images: $images\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Farmer\n          FarmLocationLatitude\n          FarmLocationLongitude\n          Status\n          Season\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          crop {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          AreaOfField\n          isPesticidesUsed\n          FarmerPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          IndoramaPractise {\n            id\n            Yield\n            DateOfSowing\n            DateOfDemonstration\n            FirstUreaApplication\n            SecondUreaApplication\n          }\n          Images {\n            data {\n              attributes {\n                url\n              }\n            }\n          }\n          DateOfHarvesting\n          Season\n        }\n      }\n    }\n  }\n"])));
 
-      var CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  query {\n    crops(pagination: { limit: 10000 }, sort: \"createdAt:desc\") {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+      var CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  query($page: Int, $pageSize: Int) {\n    crops(pagination: { page: $page, pageSize: $pageSize }, sort: \"createdAt:desc\") {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var CropsMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $image: ID) {\n    createCrop(data: { Name: $Name, Image: $image }) {\n      data {\n        id\n        attributes {\n          Name\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $id: ID!, $isDelete: Boolean, $image: ID) {\n    updateCrop(\n      id: $id\n      data: { Name: $Name, Image: $image, isDelete: $isDelete }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          isDelete\n          Image {\n            data {\n              id\n              attributes {\n                url\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
-      var StatesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  query {\n    states(pagination: { limit: 10000 }, sort: \"createdAt:desc\") {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
+      var StatesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  query($page: Int, $pageSize: Int) {\n    states(pagination: { page: $page, pageSize: $pageSize }, sort: \"createdAt:desc\") {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
       var StatesMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  mutation ($Name: String) {\n    createState(data: { Name: $Name }) {\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n        }\n      }\n    }\n  }\n"])));
 
       var _UpdateState = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $id: ID!, $isDelete: Boolean) {\n    updateState(id: $id, data: { Name: $Name, isDelete: $isDelete }) {\n      data {\n        id\n        attributes {\n          Name\n          lgas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          markets {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          createdAt\n          updatedAt\n          isDelete\n        }\n      }\n    }\n  }\n"])));
 
-      var LGAquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    lgas(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: { state: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
+      var LGAquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  query ($id: ID, $page: Int, $pageSize: Int) {\n    lgas(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: { state: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var LGAmutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID) {\n    createLga(data: { Name: $Name, state: $state }) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
 
       var _UpdateLGA = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID, $id: ID!, $isDelete: Boolean) {\n    updateLga(\n      id: $id\n      data: { Name: $Name, isDelete: $isDelete, state: $state }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
 
-      var Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    villages(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: { area: { lga: { id: { eq: $id } } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n                PostalCode\n                lga {\n                  data {\n                    id\n                    attributes {\n                      Name\n                      state {\n                        data {\n                          id\n                          attributes {\n                            Name\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n          localizations {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n        __typename\n      }\n    }\n  }\n"])));
+      var Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  query ($id: ID, $page: Int, $pageSize: Int) {\n    villages(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: { area: { lga: { id: { eq: $id } } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n                PostalCode\n                lga {\n                  data {\n                    id\n                    attributes {\n                      Name\n                      state {\n                        data {\n                          id\n                          attributes {\n                            Name\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n          localizations {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n        __typename\n      }\n    }\n  }\n"])));
       var VillageMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $area: ID) {\n    createVillage(data: { Name: $Name, area: $area }) {\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var UpdateVillage = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $area: ID, $id: ID!, $isDelete: Boolean) {\n    updateVillage(\n      id: $id\n      data: { Name: $Name, area: $area, isDelete: $isDelete }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          isDelete\n        }\n      }\n    }\n  }\n"])));
-      var Areasquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    areas(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: { lga: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          PostalCode\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          villages {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
+      var Areasquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  query ($id: ID, $page: Int, $pageSize: Int) {\n    areas(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: { lga: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          PostalCode\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          villages {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var AreaMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject18 || (_templateObject18 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $PostalCode: Long, $lga: ID) {\n    createArea(data: { Name: $Name, PostalCode: $PostalCode, lga: $lga }) {\n      data {\n        id\n        attributes {\n          Name\n          PostalCode\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          villages {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
 
       var _UpdateArea = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject19 || (_templateObject19 = _taggedTemplateLiteral(["\n  mutation (\n    $Name: String\n    $lga: ID\n    $PostalCode: Long\n    $id: ID!\n    $isDelete: Boolean\n  ) {\n    updateArea(\n      id: $id\n      data: {\n        Name: $Name\n        PostalCode: $PostalCode\n        lga: $lga\n        isDelete: $isDelete\n      }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          PostalCode\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          villages {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
 
-      var MarketQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  query ($id: ID) {\n    markets(\n      pagination: { limit: 10000 }\n      sort: \"createdAt:desc\"\n      filters: { state: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
+      var MarketQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject20 || (_templateObject20 = _taggedTemplateLiteral(["\n  query ($id: ID, $page: Int, $pageSize: Int) {\n    markets(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: { state: { id: { eq: $id } } }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var MarketMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject21 || (_templateObject21 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID) {\n    createMarket(data: { Name: $Name, state: $state }) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
 
       var _UpdateMarket = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject22 || (_templateObject22 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID, $id: ID!, $isDelete: Boolean) {\n    updateMarket(\n      id: $id\n      data: { Name: $Name, isDelete: $isDelete, state: $state }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
@@ -1286,61 +1287,77 @@
           }
         }, {
           key: "getCrops",
-          value: function getCrops() {
+          value: function getCrops(page, pageSize) {
             return this.apollo.watchQuery({
               query: CropsQuery,
-              fetchPolicy: "no-cache"
+              fetchPolicy: "no-cache",
+              variables: {
+                page: page,
+                pageSize: pageSize
+              }
             });
           }
         }, {
           key: "getStates",
-          value: function getStates() {
+          value: function getStates(page, pageSize) {
             return this.apollo.watchQuery({
               query: StatesQuery,
-              fetchPolicy: "no-cache"
+              fetchPolicy: "no-cache",
+              variables: {
+                page: page,
+                pageSize: pageSize
+              }
             });
           }
         }, {
           key: "getLGAs",
-          value: function getLGAs(id) {
+          value: function getLGAs(page, pageSize, id) {
             return this.apollo.watchQuery({
               query: LGAquery,
               fetchPolicy: "no-cache",
               variables: {
-                id: id
+                id: id,
+                page: page,
+                pageSize: pageSize
               }
             });
           }
         }, {
           key: "getVillages",
-          value: function getVillages(id) {
+          value: function getVillages(page, pageSize, id) {
             return this.apollo.watchQuery({
               query: Villagesquery,
               fetchPolicy: "no-cache",
               variables: {
-                id: id
+                id: id,
+                page: page,
+                pageSize: pageSize
               }
             });
           }
         }, {
           key: "getAreas",
-          value: function getAreas(id) {
+          value: function getAreas(page, pageSize, id) {
             return this.apollo.watchQuery({
               query: Areasquery,
               fetchPolicy: "no-cache",
               variables: {
-                id: id
+                id: id,
+                page: page,
+                pageSize: pageSize
               }
             });
           }
         }, {
           key: "getMarkets",
-          value: function getMarkets(id) {
+          value: function getMarkets(page, pageSize, id) {
             return this.apollo.watchQuery({
               query: MarketQuery,
               fetchPolicy: "no-cache",
               variables: {
-                id: id
+                id: id,
+                page: page,
+                pageSize: pageSize
               }
             });
           }

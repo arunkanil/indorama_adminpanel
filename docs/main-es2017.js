@@ -272,6 +272,7 @@ __webpack_require__.r(__webpack_exports__);
 const environment = {
     production: false,
     apiUrl: "https://indoramaapp.untanglestrategy.com"
+    // apiUrl: "https://indorama-uat.untanglestrategy.com:883",
     // apiUrl: "http://localhost:1337"
     // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
 };
@@ -845,8 +846,8 @@ const UpdateFarmDemo = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const CropsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query {
-    crops(pagination: { limit: 10000 }, sort: "createdAt:desc") {
+  query($page: Int, $pageSize: Int) {
+    crops(pagination: { page: $page, pageSize: $pageSize }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -923,8 +924,8 @@ const UpdateCrops = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const StatesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query {
-    states(pagination: { limit: 10000 }, sort: "createdAt:desc") {
+  query($page: Int, $pageSize: Int) {
+    states(pagination: { page: $page, pageSize: $pageSize }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -1022,9 +1023,9 @@ const UpdateState = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const LGAquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($id: ID) {
+  query ($id: ID, $page: Int, $pageSize: Int) {
     lgas(
-      pagination: { limit: 10000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
@@ -1121,9 +1122,9 @@ const UpdateLGA = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($id: ID) {
+  query ($id: ID, $page: Int, $pageSize: Int) {
     villages(
-      pagination: { limit: 10000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { area: { lga: { id: { eq: $id } } } }
     ) {
@@ -1223,9 +1224,9 @@ const UpdateVillage = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const Areasquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($id: ID) {
+  query ($id: ID, $page: Int, $pageSize: Int) {
     areas(
-      pagination: { limit: 10000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { lga: { id: { eq: $id } } }
     ) {
@@ -1360,9 +1361,9 @@ const UpdateArea = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const MarketQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($id: ID) {
+  query ($id: ID, $page: Int, $pageSize: Int) {
     markets(
-      pagination: { limit: 10000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
@@ -4736,51 +4737,67 @@ let DataService = class DataService {
             fetchPolicy: "no-cache",
         });
     }
-    getCrops() {
+    getCrops(page, pageSize) {
         return this.apollo.watchQuery({
             query: CropsQuery,
             fetchPolicy: "no-cache",
+            variables: {
+                page: page,
+                pageSize: pageSize,
+            },
         });
     }
-    getStates() {
+    getStates(page, pageSize) {
         return this.apollo.watchQuery({
             query: StatesQuery,
             fetchPolicy: "no-cache",
+            variables: {
+                page: page,
+                pageSize: pageSize,
+            },
         });
     }
-    getLGAs(id) {
+    getLGAs(page, pageSize, id) {
         return this.apollo.watchQuery({
             query: LGAquery,
             fetchPolicy: "no-cache",
             variables: {
                 id: id,
+                page: page,
+                pageSize: pageSize,
             },
         });
     }
-    getVillages(id) {
+    getVillages(page, pageSize, id) {
         return this.apollo.watchQuery({
             query: Villagesquery,
             fetchPolicy: "no-cache",
             variables: {
                 id: id,
+                page: page,
+                pageSize: pageSize,
             },
         });
     }
-    getAreas(id) {
+    getAreas(page, pageSize, id) {
         return this.apollo.watchQuery({
             query: Areasquery,
             fetchPolicy: "no-cache",
             variables: {
                 id: id,
+                page: page,
+                pageSize: pageSize,
             },
         });
     }
-    getMarkets(id) {
+    getMarkets(page, pageSize, id) {
         return this.apollo.watchQuery({
             query: MarketQuery,
             fetchPolicy: "no-cache",
             variables: {
                 id: id,
+                page: page,
+                pageSize: pageSize,
             },
         });
     }

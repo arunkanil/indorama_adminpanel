@@ -351,8 +351,8 @@ const UpdateFarmDemo = gql`
   }
 `;
 const CropsQuery = gql`
-  query {
-    crops(pagination: { limit: 10000 }, sort: "createdAt:desc") {
+  query($page: Int, $pageSize: Int) {
+    crops(pagination: { page: $page, pageSize: $pageSize }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -429,8 +429,8 @@ const UpdateCrops = gql`
   }
 `;
 const StatesQuery = gql`
-  query {
-    states(pagination: { limit: 10000 }, sort: "createdAt:desc") {
+  query($page: Int, $pageSize: Int) {
+    states(pagination: { page: $page, pageSize: $pageSize }, sort: "createdAt:desc") {
       meta {
         pagination {
           total
@@ -528,9 +528,9 @@ const UpdateState = gql`
   }
 `;
 const LGAquery = gql`
-  query ($id: ID) {
+  query ($id: ID, $page: Int, $pageSize: Int) {
     lgas(
-      pagination: { limit: 10000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
@@ -626,10 +626,11 @@ const UpdateLGA = gql`
     }
   }
 `;
+
 const Villagesquery = gql`
-  query ($id: ID) {
+  query ($id: ID, $page: Int, $pageSize: Int) {
     villages(
-      pagination: { limit: 10000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { area: { lga: { id: { eq: $id } } } }
     ) {
@@ -729,9 +730,9 @@ const UpdateVillage = gql`
   }
 `;
 const Areasquery = gql`
-  query ($id: ID) {
+  query ($id: ID, $page: Int, $pageSize: Int) {
     areas(
-      pagination: { limit: 10000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { lga: { id: { eq: $id } } }
     ) {
@@ -866,9 +867,9 @@ const UpdateArea = gql`
   }
 `;
 const MarketQuery = gql`
-  query ($id: ID) {
+  query ($id: ID, $page: Int, $pageSize: Int) {
     markets(
-      pagination: { limit: 10000 }
+      pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
       filters: { state: { id: { eq: $id } } }
     ) {
@@ -4378,51 +4379,67 @@ export class DataService {
       fetchPolicy: "no-cache",
     });
   }
-  getCrops() {
+  getCrops(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: CropsQuery,
       fetchPolicy: "no-cache",
+      variables : {
+        page: page,
+        pageSize: pageSize,
+      },
     });
   }
-  getStates() {
+  getStates(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: StatesQuery,
       fetchPolicy: "no-cache",
+      variables : {
+        page: page,
+        pageSize: pageSize,
+      },
     });
   }
-  getLGAs(id?) {
+  getLGAs(page?, pageSize?, id?) {
     return this.apollo.watchQuery({
       query: LGAquery,
       fetchPolicy: "no-cache",
       variables: {
         id: id,
+        page: page,
+        pageSize: pageSize,
       },
     });
   }
-  getVillages(id?) {
+  getVillages(page?, pageSize?, id?) {
     return this.apollo.watchQuery({
       query: Villagesquery,
       fetchPolicy: "no-cache",
       variables: {
         id: id,
+        page: page,
+        pageSize: pageSize,
       },
     });
   }
-  getAreas(id?) {
+  getAreas(page?, pageSize?, id?) {
     return this.apollo.watchQuery({
       query: Areasquery,
       fetchPolicy: "no-cache",
       variables: {
         id: id,
+        page: page,
+        pageSize: pageSize,
       },
     });
   }
-  getMarkets(id?) {
+  getMarkets(page?, pageSize?, id?) {
     return this.apollo.watchQuery({
       query: MarketQuery,
       fetchPolicy: "no-cache",
       variables: {
         id: id,
+        page: page,
+        pageSize: pageSize,
       },
     });
   }

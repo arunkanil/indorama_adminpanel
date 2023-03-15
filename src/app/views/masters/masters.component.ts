@@ -48,6 +48,8 @@ export class mastersComponent {
   loading = true;
   disableButton = true;
   btnLoading = false;
+  disableNextButton = false;
+  disablePrevButton = true;
   // disableNextButton = false;
   // disablePrevButton = true;
   // meta;
@@ -63,6 +65,11 @@ export class mastersComponent {
   Crops: any = [];
   imageUrl;
   file: any = null;
+  meta;
+
+  pageSize = 20;
+  from = 1;
+  to = 20;
 
   frameworkComponents = {
     statusRenderer: new ActionRenderer(),
@@ -106,89 +113,142 @@ export class mastersComponent {
     switch (this.router.url) {
       case "/masters/Villages":
         this.columnDefs = [...VillageMasterColumn];
-        this.dataservice.getVillages().valueChanges.subscribe((result: any) => {
+        this.dataservice.getVillages(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
           console.log("getVillages", result.data.villages.data);
           this.rowData = result.data.villages.data;
-          // this.meta = result.data.villages.meta;
-          // if (this.meta?.pagination?.pageCount <= 1) {
-          //   this.disablePrevButton = true;
-          //   this.disableNextButton = true;
-          // }
+          this.meta = result.data.villages.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/Cities":
         this.columnDefs = [...AreaMasterColumn];
-        this.dataservice.getAreas().valueChanges.subscribe((result: any) => {
+        this.dataservice.getAreas(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
           console.log("getAreas", result.data.areas.data);
           this.rowData = result.data.areas.data;
-          // this.meta = result.data.areas.meta;
-          // if (this.meta?.pagination?.pageCount <= 1) {
-          //   this.disablePrevButton = true;
-          //   this.disableNextButton = true;
-          // }
+          this.meta = result.data.areas.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/LGA":
         this.columnDefs = [...LGAMasterColumn];
-        this.dataservice.getLGAs().valueChanges.subscribe((result: any) => {
+        this.dataservice.getLGAs(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
           console.log("getLGAs", result.data.lgas.data);
           this.rowData = result.data.lgas.data;
-          // this.meta = result.data.lgas.meta;
-          // if (this.meta?.pagination?.pageCount <= 1) {
-          //   this.disablePrevButton = true;
-          //   this.disableNextButton = true;
-          // }
+          this.meta = result.data.lgas.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/States":
         this.columnDefs = [...StateMasterColumn];
-        this.dataservice.getStates().valueChanges.subscribe((result: any) => {
+        this.dataservice.getStates(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
           console.log("getStates", result.data.states.data);
           this.rowData = result.data.states.data;
-          // this.meta = result.data.states.meta;
-          // if (this.meta?.pagination?.pageCount <= 1) {
-          //   this.disablePrevButton = true;
-          //   this.disableNextButton = true;
-          // }
+          this.meta = result.data.states.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/Markets":
         this.columnDefs = [...MarketMasterColumn];
-        this.dataservice.getMarkets().valueChanges.subscribe((result: any) => {
+        this.dataservice.getMarkets(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
           console.log("getMarkets", result.data.markets.data);
           this.rowData = result.data.markets.data;
-          // this.meta = result.data.markets.meta;
-          // if (this.meta?.pagination?.pageCount <= 1) {
-          //   this.disablePrevButton = true;
-          //   this.disableNextButton = true;
-          // }
+          this.meta = result.data.markets.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
       case "/masters/Crops":
         this.columnDefs = [...CropMasterColumn];
-        this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
+        this.dataservice.getCrops(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
           console.log("getCrops", result.data.crops.data);
           this.rowData = result.data.crops.data;
-          // this.meta = result.data.crops.meta;
-          // if (this.meta?.pagination?.pageCount <= 1) {
-          //   this.disablePrevButton = true;
-          //   this.disableNextButton = true;
-          // }
+          this.meta = result.data.crops.meta;
+          if (this.meta?.pagination?.pageCount <= 1) {
+            this.disablePrevButton = true;
+            this.disableNextButton = true;
+          }
         });
         break;
     }
-    this.getAreas();
-    this.getCrops();
-    this.getLGAs();
-    this.getMarkets();
-    this.getStates();
-    this.getVillages();
+    this.getAreas(this.count, this.pageSize);
+    this.getCrops(this.count, this.pageSize);
+    this.getLGAs(this.count, this.pageSize);
+    this.getMarkets(this.count, this.pageSize);
+    this.getStates(this.count, this.pageSize);
+    this.getVillages(this.count, this.pageSize);
+  }
+
+  loadData(count, pageSize) {
+    let masterUrl = "";
+    switch (this.router.url) {
+      case "/masters/Villages":
+        this.getVillages(count, pageSize);
+        break;
+      case "/masters/States":
+        this.getStates(count, pageSize);
+        break;
+      case "/masters/Cities":
+        this.getAreas(count, pageSize);
+        break;
+      case "/masters/LGA":
+        this.getLGAs(count, pageSize);
+        break;
+      case "/masters/Markets":
+        this.getMarkets(count, pageSize);
+        break;
+
+      case "/masters/Crops":
+        this.getCrops(count, pageSize);
+        break;
+    }
+  }
+
+  loadNext() {
+    this.count++;
+    this.disablePrevButton = false;
+    this.from = this.from + this.pageSize;
+    this.to =
+      this.to + this.pageSize > this.meta?.pagination?.total
+        ? this.meta?.pagination?.total
+        : this.to + this.pageSize;
+    if (this.count === this.meta.pagination.pageCount) {
+      this.disableNextButton = true;
+    }
+    this.loadData(this.count, this.pageSize);
+  }
+  loadPrev() {
+    this.count--;
+    if (this.count < this.meta.pagination.pageCount) {
+      this.disableNextButton = false;
+    }
+    if (this.count === 1) {
+      this.disablePrevButton = true;
+    }
+    this.from = this.from - this.pageSize;
+    this.to = this.to - this.rowData.length;
+    this.loadData(this.count, this.pageSize);
   }
 
 
   downloadExcel() {
 
     let masterUrl = "";
+
+
     switch (this.router.url) {
       case "/masters/Villages":
         masterUrl = "villages";
@@ -230,42 +290,66 @@ export class mastersComponent {
       });
   }
 
-  getCrops() {
-    this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
+  getCrops(count, pageSize) {
+    this.dataservice.getCrops(count, pageSize).valueChanges.subscribe((result: any) => {
+      console.log("getCrops2Function", result.data.crops.data);
       this.Crops = result.data.crops.data;
+      if(this.router.url === "/masters/Crops") {
+        this.rowData = result.data.crops.data;
+        this.meta = result.data.crops.meta;
+      }
     });
   }
-  getStates() {
-    this.dataservice.getStates().valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
+  getStates(count, pageSize) {
+    this.dataservice.getStates(count, pageSize).valueChanges.subscribe((result: any) => {
+      console.log("getStates2Function", result.data.states.data);
       this.States = result.data.states.data;
+      if(this.router.url === "/masters/States") {
+        this.rowData = result.data.states.data;
+        this.meta = result.data.states.meta;
+      }
     });
   }
-  getLGAs(stateid?) {
-    this.dataservice.getLGAs(stateid).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+  getLGAs(count, pageSize, stateid?) {
+    this.dataservice.getLGAs(count, pageSize, stateid).valueChanges.subscribe((result: any) => {
+      console.log("getLGAs2Function", result.data.lgas.data);
       this.LGA = result.data.lgas.data;
+      if(this.router.url === "/masters/LGA") {
+        this.rowData = result.data.lgas.data;
+        this.meta = result.data.lgas.meta;
+      }
     });
   }
-  getAreas(lgaid?) {
-    this.dataservice.getAreas(lgaid).valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
+  getAreas(count, pageSize, lgaid?) {
+    this.dataservice.getAreas(count, pageSize, lgaid).valueChanges.subscribe((result: any) => {
+      console.log("getAreas2Function", result.data.areas.data);
       this.Areas = result.data.areas.data;
+      if(this.router.url === "/masters/Cities") {
+        this.rowData = result.data.areas.data;
+        this.meta = result.data.areas.meta;
+      }
     });
   }
-  getVillages(areaid?) {
+  getVillages(count, pageSize, areaid?) {
     this.dataservice
-      .getVillages(areaid)
+      .getVillages(count, pageSize, areaid)
       .valueChanges.subscribe((result: any) => {
-        console.log("getVillages", result.data.villages.data);
+        console.log("getVillages2Function", result.data.villages.data);
         this.Villages = result.data.villages.data;
+        if(this.router.url === "/masters/Villages") {
+          this.rowData = result.data.villages.data;
+          this.meta = result.data.villages.meta;
+        }
       });
   }
-  getMarkets() {
-    this.dataservice.getMarkets().valueChanges.subscribe((result: any) => {
-      console.log("getMarkets", result.data.markets.data);
+  getMarkets(count, pageSize) {
+    this.dataservice.getMarkets(count, pageSize).valueChanges.subscribe((result: any) => {
+      console.log("getMarkets2Function", result.data.markets.data);
       this.Markets = result.data.markets.data;
+      if(this.router.url === "/masters/Markets") {
+        this.rowData = result.data.markets.data;
+        this.meta = result.data.markets.meta;
+      }
     });
   }
   onGridReady(params) {
@@ -479,10 +563,10 @@ export class mastersComponent {
   //   //   });
   // }
   filterLGA(event) {
-    this.getLGAs(event.target.value);
+    this.getLGAs(this.count, this.pageSize,event.target.value);
   }
   filterArea(event) {
-    this.getAreas(event.target.value);
+    this.getAreas(this.count, this.pageSize,event.target.value);
   }
   stateSubmit() {
     let resp = {};
@@ -499,7 +583,7 @@ export class mastersComponent {
             this.stateModal.hide();
             this.stateForm.reset();
             this.dataservice
-              .getStates()
+              .getStates(this.count, this.pageSize,)
               .valueChanges.subscribe((result: any) => {
                 console.log("getStates", result.data.states.data);
                 this.rowData = result.data.states.data;
@@ -523,7 +607,7 @@ export class mastersComponent {
             this.stateModal.hide();
             this.stateForm.reset();
             this.dataservice
-              .getStates()
+              .getStates(this.count, this.pageSize,)
               .valueChanges.subscribe((result: any) => {
                 console.log("getStates", result.data.states.data);
                 this.rowData = result.data.states.data;
@@ -558,7 +642,7 @@ export class mastersComponent {
 
             this.lgaModal.hide();
             this.lgaForm.reset();
-            this.dataservice.getLGAs().valueChanges.subscribe((result: any) => {
+            this.dataservice.getLGAs(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
               console.log("getLGAs", result.data.lgas.data);
               this.rowData = result.data.lgas.data;
             });
@@ -579,7 +663,7 @@ export class mastersComponent {
           this.gridApi.deselectAll();
           this.lgaModal.hide();
           this.lgaForm.reset();
-          this.dataservice.getLGAs().valueChanges.subscribe((result: any) => {
+          this.dataservice.getLGAs(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
             console.log("getLGAs", result.data.lgas.data);
             this.rowData = result.data.lgas.data;
           });
@@ -608,7 +692,7 @@ export class mastersComponent {
             this.areaModal.hide();
             this.areaForm.reset();
             this.dataservice
-              .getAreas()
+              .getAreas(this.count, this.pageSize)
               .valueChanges.subscribe((result: any) => {
                 console.log("getAreas", result.data.areas.data);
                 this.rowData = result.data.areas.data;
@@ -630,7 +714,7 @@ export class mastersComponent {
           this.gridApi.deselectAll();
           this.areaModal.hide();
           this.areaForm.reset();
-          this.dataservice.getAreas().valueChanges.subscribe((result: any) => {
+          this.dataservice.getAreas(this.count, this.pageSize).valueChanges.subscribe((result: any) => {
             console.log("getAreas", result.data.areas.data);
             this.rowData = result.data.areas.data;
           });
@@ -659,7 +743,7 @@ export class mastersComponent {
             this.marketModal.hide();
             this.marketForm.reset();
             this.dataservice
-              .getMarkets()
+              .getMarkets(this.count, this.pageSize)
               .valueChanges.subscribe((result: any) => {
                 console.log("getMarkets", result.data.markets.data);
                 this.rowData = result.data.markets.data;
@@ -684,7 +768,7 @@ export class mastersComponent {
             this.marketModal.hide();
             this.marketForm.reset();
             this.dataservice
-              .getMarkets()
+              .getMarkets(this.count, this.pageSize)
               .valueChanges.subscribe((result: any) => {
                 console.log("getMarkets", result.data.markets.data);
                 this.rowData = result.data.markets.data;
@@ -725,7 +809,7 @@ export class mastersComponent {
                     this.cropForm.reset();
                     this.btnLoading = false;
                     this.dataservice
-                      .getCrops()
+                      .getCrops(this.count, this.pageSize)
                       .valueChanges.subscribe((result: any) => {
                         console.log("getCrops", result.data.crops.data);
                         this.rowData = result.data.crops.data;
@@ -763,7 +847,7 @@ export class mastersComponent {
               this.cropModal.hide();
               this.cropForm.reset();
               this.dataservice
-                .getCrops()
+                .getCrops(this.count, this.pageSize)
                 .valueChanges.subscribe((result: any) => {
                   console.log("getCrops", result.data.crops.data);
                   this.rowData = result.data.crops.data;
@@ -792,7 +876,7 @@ export class mastersComponent {
                 this.cropModal.hide();
                 this.cropForm.reset();
                 this.dataservice
-                  .getCrops()
+                  .getCrops(this.count, this.pageSize)
                   .valueChanges.subscribe((result: any) => {
                     console.log("getCrops", result.data.crops.data);
                     this.rowData = result.data.crops.data;
@@ -828,7 +912,7 @@ export class mastersComponent {
             this.villageModal.hide();
             this.villageForm.reset();
             this.dataservice
-              .getVillages()
+              .getVillages(this.count, this.pageSize)
               .valueChanges.subscribe((result: any) => {
                 console.log("getVillages", result.data.villages.data);
                 this.rowData = result.data.villages.data;
@@ -853,7 +937,7 @@ export class mastersComponent {
             this.villageModal.hide();
             this.villageForm.reset();
             this.dataservice
-              .getVillages()
+              .getVillages(this.count, this.pageSize)
               .valueChanges.subscribe((result: any) => {
                 console.log("getVillages", result.data.villages.data);
                 this.rowData = result.data.villages.data;
@@ -899,7 +983,7 @@ export class mastersComponent {
               this.gridApi.deselectAll();
               this.deleteModal.hide();
               this.dataservice
-                .getVillages()
+                .getVillages(this.count, this.pageSize)
                 .valueChanges.subscribe((result: any) => {
                   this.rowData = result.data.villages.data;
                 });
@@ -918,7 +1002,7 @@ export class mastersComponent {
               this.gridApi.deselectAll();
               this.deleteModal.hide();
               this.dataservice
-                .getAreas()
+                .getAreas(this.count, this.pageSize)
                 .valueChanges.subscribe((result: any) => {
                   this.rowData = result.data.areas.data;
                 });
@@ -937,7 +1021,7 @@ export class mastersComponent {
               this.gridApi.deselectAll();
               this.deleteModal.hide();
               this.dataservice
-                .getLGAs()
+                .getLGAs(this.count, this.pageSize)
                 .valueChanges.subscribe((result: any) => {
                   this.rowData = result.data.lgas.data;
                 });
@@ -956,7 +1040,7 @@ export class mastersComponent {
               this.gridApi.deselectAll();
               this.deleteModal.hide();
               this.dataservice
-                .getStates()
+                .getStates(this.count, this.pageSize)
                 .valueChanges.subscribe((result: any) => {
                   this.rowData = result.data.states.data;
                 });
@@ -975,7 +1059,7 @@ export class mastersComponent {
               this.gridApi.deselectAll();
               this.deleteModal.hide();
               this.dataservice
-                .getMarkets()
+                .getMarkets(this.count, this.pageSize)
                 .valueChanges.subscribe((result: any) => {
                   this.rowData = result.data.markets.data;
                 });
@@ -994,7 +1078,7 @@ export class mastersComponent {
               this.gridApi.deselectAll();
               this.deleteModal.hide();
               this.dataservice
-                .getCrops()
+                .getCrops(this.count, this.pageSize)
                 .valueChanges.subscribe((result: any) => {
                   this.rowData = result.data.crops.data;
                 });
