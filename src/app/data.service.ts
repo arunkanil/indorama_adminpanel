@@ -351,8 +351,8 @@ const UpdateFarmDemo = gql`
   }
 `;
 const CropsQuery = gql`
-  query($page: Int, $pageSize: Int) {
-    crops(pagination: { page: $page, pageSize: $pageSize }, sort: "createdAt:desc") {
+  query($page: Int, $pageSize: Int, $searchTerm:String) {
+    crops(pagination: { page: $page, pageSize: $pageSize }, sort: "createdAt:desc", filters:{Name:{containsi:$searchTerm}}) {
       meta {
         pagination {
           total
@@ -429,8 +429,8 @@ const UpdateCrops = gql`
   }
 `;
 const StatesQuery = gql`
-  query($page: Int, $pageSize: Int) {
-    states(pagination: { page: $page, pageSize: $pageSize }, sort: "createdAt:desc") {
+  query($page: Int, $pageSize: Int, $searchTerm:String) {
+    states(pagination: { page: $page, pageSize: $pageSize }, sort: "createdAt:desc", filters:{Name:{containsi:$searchTerm}}) {
       meta {
         pagination {
           total
@@ -528,11 +528,11 @@ const UpdateState = gql`
   }
 `;
 const LGAquery = gql`
-  query ($id: ID, $page: Int, $pageSize: Int) {
+  query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
     lgas(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { state: { id: { eq: $id } } }
+      filters: { state: { id: { eq: $id } }, Name:{containsi:$searchTerm} }
     ) {
       meta {
         pagination {
@@ -628,11 +628,11 @@ const UpdateLGA = gql`
 `;
 
 const Villagesquery = gql`
-  query ($id: ID, $page: Int, $pageSize: Int) {
+  query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
     villages(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { area: { lga: { id: { eq: $id } } } }
+      filters: { area: { lga: { id: { eq: $id } } }, Name:{containsi:$searchTerm} }
     ) {
       meta {
         pagination {
@@ -730,11 +730,11 @@ const UpdateVillage = gql`
   }
 `;
 const Areasquery = gql`
-  query ($id: ID, $page: Int, $pageSize: Int) {
+  query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
     areas(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { lga: { id: { eq: $id } } }
+      filters: { lga: { id: { eq: $id } }, Name:{containsi:$searchTerm}}
     ) {
       meta {
         pagination {
@@ -867,11 +867,11 @@ const UpdateArea = gql`
   }
 `;
 const MarketQuery = gql`
-  query ($id: ID, $page: Int, $pageSize: Int) {
+  query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
     markets(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { state: { id: { eq: $id } } }
+      filters: { state: { id: { eq: $id } } ,Name:{containsi:$searchTerm}}
     ) {
       meta {
         pagination {
@@ -3886,7 +3886,7 @@ export class DataService {
     private http: HttpClient,
     private apollo: Apollo,
     private toastr: ToastrService
-  ) {}
+  ) { }
 
   handleError(error: HttpErrorResponse) {
     let errorMessage = "Unknown error!";
@@ -4379,27 +4379,29 @@ export class DataService {
       fetchPolicy: "no-cache",
     });
   }
-  getCrops(page?, pageSize?) {
+  getCrops(page?, pageSize?, searchTerm?) {
     return this.apollo.watchQuery({
       query: CropsQuery,
       fetchPolicy: "no-cache",
-      variables : {
+      variables: {
         page: page,
         pageSize: pageSize,
+        searchTerm: searchTerm,
       },
     });
   }
-  getStates(page?, pageSize?) {
+  getStates(page?, pageSize?, searchTerm?) {
     return this.apollo.watchQuery({
       query: StatesQuery,
       fetchPolicy: "no-cache",
-      variables : {
+      variables: {
         page: page,
         pageSize: pageSize,
+        searchTerm: searchTerm
       },
     });
   }
-  getLGAs(page?, pageSize?, id?) {
+  getLGAs(page?, pageSize?, searchTerm?, id?) {
     return this.apollo.watchQuery({
       query: LGAquery,
       fetchPolicy: "no-cache",
@@ -4407,10 +4409,11 @@ export class DataService {
         id: id,
         page: page,
         pageSize: pageSize,
+        searchTerm: searchTerm,
       },
     });
   }
-  getVillages(page?, pageSize?, id?) {
+  getVillages(page?, pageSize?, searchTerm?, id?) {
     return this.apollo.watchQuery({
       query: Villagesquery,
       fetchPolicy: "no-cache",
@@ -4418,10 +4421,11 @@ export class DataService {
         id: id,
         page: page,
         pageSize: pageSize,
+        searchTerm: searchTerm,
       },
     });
   }
-  getAreas(page?, pageSize?, id?) {
+  getAreas(page?, pageSize?, searchTerm?, id?) {
     return this.apollo.watchQuery({
       query: Areasquery,
       fetchPolicy: "no-cache",
@@ -4429,10 +4433,11 @@ export class DataService {
         id: id,
         page: page,
         pageSize: pageSize,
+        searchTerm: searchTerm,
       },
     });
   }
-  getMarkets(page?, pageSize?, id?) {
+  getMarkets(page?, pageSize?,  searchTerm?, id?) {
     return this.apollo.watchQuery({
       query: MarketQuery,
       fetchPolicy: "no-cache",
@@ -4440,6 +4445,7 @@ export class DataService {
         id: id,
         page: page,
         pageSize: pageSize,
+        searchTerm: searchTerm,
       },
     });
   }
@@ -4477,13 +4483,13 @@ export class DataService {
   getUsers(page?, pageSize?, UserType?) {
 
     let variables = {
-        page: page,
-        pageSize: pageSize,
-      };
+      page: page,
+      pageSize: pageSize,
+    };
 
-      if(UserType!=null) {
-        variables["UserType"] = UserType;
-      }
+    if (UserType != null) {
+      variables["UserType"] = UserType;
+    }
 
     return this.apollo.watchQuery({
       query: UsersQuery,

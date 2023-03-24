@@ -44,12 +44,14 @@ export class mastersComponent {
   @ViewChild("areaModal") public areaModal: ModalDirective;
   @ViewChild("cropModal") public cropModal: ModalDirective;
   @ViewChild("deleteModal") public deleteModal: ModalDirective;
+  @ViewChild('searchInput', { static: true }) searchInput: Element;
 
   loading = true;
   disableButton = true;
   btnLoading = false;
   disableNextButton = false;
   disablePrevButton = true;
+  searchTerm = "";
   // disableNextButton = false;
   // disablePrevButton = true;
   // meta;
@@ -192,27 +194,43 @@ export class mastersComponent {
     this.getVillages(this.count, this.pageSize);
   }
 
-  loadData(count, pageSize) {
+  search() {
+    this.loadData(this.count, this.pageSize, this.searchTerm);
+  }
+
+  onInputChange(value: string) {
+    // if (value.length > 2) {
+    //   this.search();
+    // }
+    // if (value.length == 0) {
+    //   this.search();
+    // }
+
+    this.search();
+
+  }
+
+  loadData(count, pageSize, searchTerm) {
     let masterUrl = "";
     switch (this.router.url) {
       case "/masters/Villages":
-        this.getVillages(count, pageSize);
+        this.getVillages(count, pageSize, searchTerm);
         break;
       case "/masters/States":
-        this.getStates(count, pageSize);
+        this.getStates(count, pageSize, searchTerm);
         break;
       case "/masters/Cities":
-        this.getAreas(count, pageSize);
+        this.getAreas(count, pageSize, searchTerm);
         break;
       case "/masters/LGA":
-        this.getLGAs(count, pageSize);
+        this.getLGAs(count, pageSize, searchTerm);
         break;
       case "/masters/Markets":
-        this.getMarkets(count, pageSize);
+        this.getMarkets(count, pageSize, searchTerm);
         break;
 
       case "/masters/Crops":
-        this.getCrops(count, pageSize);
+        this.getCrops(count, pageSize, searchTerm);
         break;
     }
   }
@@ -228,7 +246,7 @@ export class mastersComponent {
     if (this.count === this.meta.pagination.pageCount) {
       this.disableNextButton = true;
     }
-    this.loadData(this.count, this.pageSize);
+    this.loadData(this.count, this.pageSize, this.searchTerm);
   }
   loadPrev() {
     this.count--;
@@ -240,7 +258,7 @@ export class mastersComponent {
     }
     this.from = this.from - this.pageSize;
     this.to = this.to - this.rowData.length;
-    this.loadData(this.count, this.pageSize);
+    this.loadData(this.count, this.pageSize, this.searchTerm);
   }
 
 
@@ -290,63 +308,63 @@ export class mastersComponent {
       });
   }
 
-  getCrops(count, pageSize) {
-    this.dataservice.getCrops(count, pageSize).valueChanges.subscribe((result: any) => {
+  getCrops(count, pageSize, searchTerm?) {
+    this.dataservice.getCrops(count, pageSize, searchTerm).valueChanges.subscribe((result: any) => {
       console.log("getCrops2Function", result.data.crops.data);
       this.Crops = result.data.crops.data;
-      if(this.router.url === "/masters/Crops") {
+      if (this.router.url === "/masters/Crops") {
         this.rowData = result.data.crops.data;
         this.meta = result.data.crops.meta;
       }
     });
   }
-  getStates(count, pageSize) {
-    this.dataservice.getStates(count, pageSize).valueChanges.subscribe((result: any) => {
+  getStates(count, pageSize, searchTerm?) {
+    this.dataservice.getStates(count, pageSize, searchTerm).valueChanges.subscribe((result: any) => {
       console.log("getStates2Function", result.data.states.data);
       this.States = result.data.states.data;
-      if(this.router.url === "/masters/States") {
+      if (this.router.url === "/masters/States") {
         this.rowData = result.data.states.data;
         this.meta = result.data.states.meta;
       }
     });
   }
-  getLGAs(count, pageSize, stateid?) {
-    this.dataservice.getLGAs(count, pageSize, stateid).valueChanges.subscribe((result: any) => {
+  getLGAs(count, pageSize, searchTerm?, stateid?) {
+    this.dataservice.getLGAs(count, pageSize, searchTerm, stateid).valueChanges.subscribe((result: any) => {
       console.log("getLGAs2Function", result.data.lgas.data);
       this.LGA = result.data.lgas.data;
-      if(this.router.url === "/masters/LGA") {
+      if (this.router.url === "/masters/LGA") {
         this.rowData = result.data.lgas.data;
         this.meta = result.data.lgas.meta;
       }
     });
   }
-  getAreas(count, pageSize, lgaid?) {
-    this.dataservice.getAreas(count, pageSize, lgaid).valueChanges.subscribe((result: any) => {
+  getAreas(count, pageSize, searchTerm?, lgaid?) {
+    this.dataservice.getAreas(count, pageSize, searchTerm, lgaid).valueChanges.subscribe((result: any) => {
       console.log("getAreas2Function", result.data.areas.data);
       this.Areas = result.data.areas.data;
-      if(this.router.url === "/masters/Cities") {
+      if (this.router.url === "/masters/Cities") {
         this.rowData = result.data.areas.data;
         this.meta = result.data.areas.meta;
       }
     });
   }
-  getVillages(count, pageSize, areaid?) {
+  getVillages(count, pageSize, searchTerm?, areaid?,) {
     this.dataservice
-      .getVillages(count, pageSize, areaid)
+      .getVillages(count, pageSize, searchTerm, areaid)
       .valueChanges.subscribe((result: any) => {
         console.log("getVillages2Function", result.data.villages.data);
         this.Villages = result.data.villages.data;
-        if(this.router.url === "/masters/Villages") {
+        if (this.router.url === "/masters/Villages") {
           this.rowData = result.data.villages.data;
           this.meta = result.data.villages.meta;
         }
       });
   }
-  getMarkets(count, pageSize) {
-    this.dataservice.getMarkets(count, pageSize).valueChanges.subscribe((result: any) => {
+  getMarkets(count, pageSize, searchTerm?) {
+    this.dataservice.getMarkets(count, pageSize, searchTerm).valueChanges.subscribe((result: any) => {
       console.log("getMarkets2Function", result.data.markets.data);
       this.Markets = result.data.markets.data;
-      if(this.router.url === "/masters/Markets") {
+      if (this.router.url === "/masters/Markets") {
         this.rowData = result.data.markets.data;
         this.meta = result.data.markets.meta;
       }
@@ -563,10 +581,10 @@ export class mastersComponent {
   //   //   });
   // }
   filterLGA(event) {
-    this.getLGAs(this.count, this.pageSize,event.target.value);
+    this.getLGAs(this.count, this.pageSize, event.target.value);
   }
   filterArea(event) {
-    this.getAreas(this.count, this.pageSize,event.target.value);
+    this.getAreas(this.count, this.pageSize, event.target.value);
   }
   stateSubmit() {
     let resp = {};

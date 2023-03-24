@@ -6,14 +6,26 @@
     >
       <h2>{{ this.route.snapshot.data.title }} Master</h2>
       <div>
+        <input
+          #searchInput
+          class="search-input"
+          type="text"
+          [(ngModel)]="searchTerm"
+          name="searchField"
+          placeholder="Search..."
+          (input)="onInputChange($event.target.value)"
+        />
+        <button type="button" class="btn btn-secondary" (click)="search()">
+          Search
+        </button>
         <button
-            type="button"
-            class="btn btn-outline-primary"
-            data-toggle="modal"
-            (click)="downloadExcel()"
-          >
-            Download excel
-          </button>
+          type="button"
+          class="btn btn-outline-primary"
+          data-toggle="modal"
+          (click)="downloadExcel()"
+        >
+          Download excel
+        </button>
         <button
           type="button"
           class="btn btn-danger"
@@ -63,28 +75,29 @@
           >
           </ag-grid-angular>
 
-
-          <span class="float-left mt-3">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>
-            <button
-              type="button"
-              [disabled]="disableNextButton"
-              class="btn btn-primary float-right m-2"
-              (click)="loadNext()"
-            >
-              Next
-            </button>
-            <span class="float-right mt-3"
-              >Page {{ meta?.pagination?.page }} of
-              {{ meta?.pagination?.pageCount }}</span
-            >
-            <button
-              type="button"
-              [disabled]="disablePrevButton"
-              class="btn btn-primary float-right m-2"
-              (click)="loadPrev()"
-            >
-              Prev
-            </button>
+          <span class="float-left mt-3"
+            >{{ from }} to {{ to }} of {{ meta?.pagination?.total }}</span
+          >
+          <button
+            type="button"
+            [disabled]="disableNextButton"
+            class="btn btn-primary float-right m-2"
+            (click)="loadNext()"
+          >
+            Next
+          </button>
+          <span class="float-right mt-3"
+            >Page {{ meta?.pagination?.page }} of
+            {{ meta?.pagination?.pageCount }}</span
+          >
+          <button
+            type="button"
+            [disabled]="disablePrevButton"
+            class="btn btn-primary float-right m-2"
+            (click)="loadPrev()"
+          >
+            Prev
+          </button>
         </div>
       </div>
     </div>
