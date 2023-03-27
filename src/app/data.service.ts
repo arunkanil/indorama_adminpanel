@@ -632,7 +632,7 @@ const Villagesquery = gql`
     villages(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { area: { lga: { id: { eq: $id } } }, Name:{containsi:$searchTerm} }
+      filters: { area: { lga: { id: { eq: $id } } }, Name:{ containsi:$searchTerm} }
     ) {
       meta {
         pagination {

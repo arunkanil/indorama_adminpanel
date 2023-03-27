@@ -1126,7 +1126,7 @@ const Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     villages(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { area: { lga: { id: { eq: $id } } }, Name:{containsi:$searchTerm} }
+      filters: { area: { lga: { id: { eq: $id } } }, Name:{ containsi:$searchTerm} }
     ) {
       meta {
         pagination {
