@@ -92,7 +92,7 @@ export class ActivitiesComponent {
   }
 
   getLGAs(id?) {
-    this.dataservice.getLGAs(id).valueChanges.subscribe((result: any) => {
+    this.dataservice.getLGAs(1,10000,"",id).valueChanges.subscribe((result: any) => {
       console.log("getLGAs", result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
@@ -169,12 +169,12 @@ export class ActivitiesComponent {
     });
   }
   getStates() {
-    this.dataservice.getStates().valueChanges.subscribe((result: any) => {
+    this.dataservice.getStates(1,10000).valueChanges.subscribe((result: any) => {
       this.States = result.data.states.data;
     });
   }
   getAreas(lgaid?) {
-    this.dataservice.getAreas(lgaid).valueChanges.subscribe((result: any) => {
+    this.dataservice.getAreas(1,10000, "", lgaid).valueChanges.subscribe((result: any) => {
       this.Areas = result.data.areas.data;
     });
   }
