@@ -119,24 +119,24 @@ let ActivityDetailComponent = class ActivityDetailComponent {
         });
     }
     getCrops() {
-        this.dataservice.getCrops().valueChanges.subscribe((result) => {
+        this.dataservice.getCrops(1, 1000).valueChanges.subscribe((result) => {
             console.log("getCrops", result.data.crops.data);
             this.Crops = result.data.crops.data;
         });
     }
     getAreas(id) {
-        this.dataservice.getAreas(id).valueChanges.subscribe((result) => {
+        this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getAreas", result.data.areas.data);
             this.Areas = result.data.areas.data;
         });
     }
     getStates() {
-        this.dataservice.getStates().valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000).valueChanges.subscribe((result) => {
             this.States = result.data.states.data;
         });
     }
     getLGAs(id) {
-        this.dataservice.getLGAs(id).valueChanges.subscribe((result) => {
+        this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getLGAs", result.data.lgas.data);
             this.LGA = result.data.lgas.data;
         });
@@ -319,7 +319,7 @@ let ActivitiesComponent = class ActivitiesComponent {
         }
     }
     getLGAs(id) {
-        this.dataservice.getLGAs(id).valueChanges.subscribe((result) => {
+        this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getLGAs", result.data.lgas.data);
             this.LGA = result.data.lgas.data;
         });
@@ -392,12 +392,12 @@ let ActivitiesComponent = class ActivitiesComponent {
         });
     }
     getStates() {
-        this.dataservice.getStates().valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000).valueChanges.subscribe((result) => {
             this.States = result.data.states.data;
         });
     }
     getAreas(lgaid) {
-        this.dataservice.getAreas(lgaid).valueChanges.subscribe((result) => {
+        this.dataservice.getAreas(1, 10000, "", lgaid).valueChanges.subscribe((result) => {
             this.Areas = result.data.areas.data;
         });
     }

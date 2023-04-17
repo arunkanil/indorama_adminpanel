@@ -181,7 +181,7 @@
           value: function getCrops() {
             var _this3 = this;
 
-            this.dataservice.getCrops().valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 1000).valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
               _this3.Crops = result.data.crops.data;
             });
@@ -191,7 +191,7 @@
           value: function getAreas(id) {
             var _this4 = this;
 
-            this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
               _this4.Areas = result.data.areas.data;
             });
@@ -201,7 +201,7 @@
           value: function getStates() {
             var _this5 = this;
 
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000).valueChanges.subscribe(function (result) {
               _this5.States = result.data.states.data;
             });
           }
@@ -210,7 +210,7 @@
           value: function getLGAs(id) {
             var _this6 = this;
 
-            this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
               _this6.LGA = result.data.lgas.data;
             });
@@ -475,7 +475,7 @@
           value: function getLGAs(id) {
             var _this9 = this;
 
-            this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
               _this9.LGA = result.data.lgas.data;
             });
@@ -574,7 +574,7 @@
           value: function getStates() {
             var _this14 = this;
 
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000).valueChanges.subscribe(function (result) {
               _this14.States = result.data.states.data;
             });
           }
@@ -583,7 +583,7 @@
           value: function getAreas(lgaid) {
             var _this15 = this;
 
-            this.dataservice.getAreas(lgaid).valueChanges.subscribe(function (result) {
+            this.dataservice.getAreas(1, 10000, "", lgaid).valueChanges.subscribe(function (result) {
               _this15.Areas = result.data.areas.data;
             });
           }

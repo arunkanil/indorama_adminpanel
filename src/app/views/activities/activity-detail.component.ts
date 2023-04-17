@@ -100,24 +100,24 @@ export class ActivityDetailComponent implements OnInit {
       });
   }
   getCrops() {
-    this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
+    this.dataservice.getCrops(1,1000).valueChanges.subscribe((result: any) => {
       console.log("getCrops", result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
   }
   getAreas(id?) {
-    this.dataservice.getAreas(id).valueChanges.subscribe((result: any) => {
+    this.dataservice.getAreas(1,10000,"",id).valueChanges.subscribe((result: any) => {
       console.log("getAreas", result.data.areas.data);
       this.Areas = result.data.areas.data;
     });
   }
   getStates() {
-    this.dataservice.getStates().valueChanges.subscribe((result: any) => {
+    this.dataservice.getStates(1,10000).valueChanges.subscribe((result: any) => {
       this.States = result.data.states.data;
     });
   }
   getLGAs(id?) {
-    this.dataservice.getLGAs(id).valueChanges.subscribe((result: any) => {
+    this.dataservice.getLGAs(1,10000,"",id).valueChanges.subscribe((result: any) => {
       console.log("getLGAs", result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
