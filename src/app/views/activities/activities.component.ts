@@ -123,7 +123,7 @@ export class ActivitiesComponent {
         this.rowData = result.data.activities.data;
       });
 
-      this.dataservice.getStates().valueChanges.subscribe((result: any) => {
+      this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
         console.log("getStates", result.data.states.data);
         this.States = result.data.states.data;
       });
@@ -169,7 +169,7 @@ export class ActivitiesComponent {
     });
   }
   getStates() {
-    this.dataservice.getStates(1,10000).valueChanges.subscribe((result: any) => {
+    this.dataservice.getStates(1,10000, "").valueChanges.subscribe((result: any) => {
       this.States = result.data.states.data;
     });
   }
