@@ -117,26 +117,26 @@ export class SMSCampaignsComponent {
       });
   }
   getStates() {
-    this.dataservice.getStates().valueChanges.subscribe((result: any) => {
+    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
       console.log("getStates", result.data.states.data);
       this.States = result.data.states.data;
     });
   }
   getLGAs(stateid?) {
-    this.dataservice.getLGAs(stateid).valueChanges.subscribe((result: any) => {
+    this.dataservice.getLGAs(1, 10000, "",stateid).valueChanges.subscribe((result: any) => {
       console.log("getLGAs", result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
   getAreas(lgaid?) {
-    this.dataservice.getAreas(lgaid).valueChanges.subscribe((result: any) => {
+    this.dataservice.getAreas(1, 10000, "",lgaid).valueChanges.subscribe((result: any) => {
       console.log("getAreas", result.data.areas.data);
       this.Areas = result.data.areas.data;
     });
   }
   getVillages(areaid?) {
     this.dataservice
-      .getVillages(areaid)
+      .getVillages(1, 10000, "",areaid)
       .valueChanges.subscribe((result: any) => {
         console.log("getVillages", result.data.villages.data);
         this.Villages = result.data.villages.data;

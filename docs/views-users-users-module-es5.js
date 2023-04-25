@@ -380,7 +380,7 @@
           value: function getCrops() {
             var _this3 = this;
 
-            this.dataservice.getCrops().valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
               _this3.Crops = result.data.crops.data;
             });
@@ -390,7 +390,7 @@
           value: function getStates() {
             var _this4 = this;
 
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
               _this4.States = result.data.states.data;
             });
@@ -400,7 +400,7 @@
           value: function getLGAs(id) {
             var _this5 = this;
 
-            this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
               _this5.LGA = result.data.lgas.data;
             });
@@ -410,7 +410,7 @@
           value: function getAreas(id) {
             var _this6 = this;
 
-            this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
               _this6.Areas = result.data.areas.data;
             });
@@ -440,7 +440,7 @@
           value: function getVillages(id) {
             var _this9 = this;
 
-            this.dataservice.getVillages(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getVillages(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
               _this9.Villages = result.data.villages.data;
             });
@@ -887,7 +887,7 @@
           value: function getStates() {
             var _this16 = this;
 
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
               _this16.States = result.data.states.data;
             });
@@ -897,7 +897,7 @@
           value: function getLGAs(id) {
             var _this17 = this;
 
-            this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
               _this17.LGA = result.data.lgas.data;
             });
@@ -907,7 +907,7 @@
           value: function getAreas(id) {
             var _this18 = this;
 
-            this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
               _this18.Areas = result.data.areas.data;
             });
@@ -917,7 +917,7 @@
           value: function getVillages(id) {
             var _this19 = this;
 
-            this.dataservice.getVillages(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getVillages(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
               _this19.Villages = result.data.villages.data;
             });

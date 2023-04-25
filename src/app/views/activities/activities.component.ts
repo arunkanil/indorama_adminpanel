@@ -164,7 +164,7 @@ export class ActivitiesComponent {
       });
   }
   getCrops() {
-    this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
+    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
       this.Crops = result.data.crops.data;
     });
   }

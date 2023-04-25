@@ -512,7 +512,7 @@
 
               _this10.rowData = result.data.activities.data;
             });
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
               _this10.States = result.data.states.data;
             });
@@ -565,7 +565,7 @@
           value: function getCrops() {
             var _this13 = this;
 
-            this.dataservice.getCrops().valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
               _this13.Crops = result.data.crops.data;
             });
           }
@@ -574,7 +574,7 @@
           value: function getStates() {
             var _this14 = this;
 
-            this.dataservice.getStates(1, 10000).valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
               _this14.States = result.data.states.data;
             });
           }

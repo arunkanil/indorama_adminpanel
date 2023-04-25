@@ -3636,10 +3636,10 @@
           value: function getData() {
             var _this2 = this;
 
-            this.dataservice.getCrops().valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
               _this2.Crops = result.data.crops.data;
             });
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
               _this2.States = result.data.states.data;
             });
             this.dataservice.getPendingRetailerApprovals().valueChanges.subscribe(function (result) {
@@ -3658,7 +3658,7 @@
           value: function getMarkets(id) {
             var _this3 = this;
 
-            this.dataservice.getMarkets(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getMarkets(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getMarkets", result.data.markets.data);
               _this3.Markets = result.data.markets.data;
             });

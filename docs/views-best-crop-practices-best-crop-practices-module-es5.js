@@ -207,7 +207,7 @@
           value: function getCrops() {
             var _this2 = this;
 
-            this.dataservice.getCrops().valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
               _this2.Crops = result.data.crops.data;
             });
           } // On file Select

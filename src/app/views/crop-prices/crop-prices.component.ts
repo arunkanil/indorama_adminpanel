@@ -96,7 +96,7 @@ export class CropPricesComponent {
       });
   }
   getCrops() {
-    this.dataservice.getCrops().valueChanges.subscribe((result: any) => {
+    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
       this.Crops = result.data.crops.data;
     });
   }
@@ -146,13 +146,13 @@ export class CropPricesComponent {
       });
   }
   getStates() {
-    this.dataservice.getStates().valueChanges.subscribe((result: any) => {
+    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
       console.log("getStates", result.data.states.data);
       this.States = result.data.states.data;
     });
   }
   getMarkets(id?) {
-    this.dataservice.getMarkets(id).valueChanges.subscribe((result: any) => {
+    this.dataservice.getMarkets(1, 10000, "",id).valueChanges.subscribe((result: any) => {
       console.log("getMarkets", result.data.markets.data);
       this.Markets = result.data.markets.data;
     });

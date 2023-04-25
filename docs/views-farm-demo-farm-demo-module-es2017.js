@@ -168,19 +168,19 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
             console.log(this.maplink);
             this.loading = false;
         });
-        this.dataservice.getCrops().valueChanges.subscribe((result) => {
+        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getCrops", result.data.crops.data);
             this.Crops = result.data.crops.data;
         });
-        this.dataservice.getStates().valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getStates", result.data.states.data);
             this.States = result.data.states.data;
         });
-        this.dataservice.getAreas().valueChanges.subscribe((result) => {
+        this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getAreas", result.data.areas.data);
             this.Areas = result.data.areas.data;
         });
-        this.dataservice.getVillages().valueChanges.subscribe((result) => {
+        this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getVillages", result.data.villages.data);
             this.Villages = result.data.villages.data;
         });
@@ -216,7 +216,7 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
         this.getLGAs(event.target.value);
     }
     getLGAs(id) {
-        this.dataservice.getLGAs(id).valueChanges.subscribe((result) => {
+        this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getLGAs", result.data.lgas.data);
             this.LGA = result.data.lgas.data;
         });
@@ -5487,19 +5487,19 @@ let FarmDemoComponent = class FarmDemoComponent {
             }
             this.loading = false;
         });
-        this.dataservice.getCrops().valueChanges.subscribe((result) => {
+        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getCrops", result.data.crops.data);
             this.Crops = result.data.crops.data;
         });
-        this.dataservice.getStates().valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getStates", result.data.states.data);
             this.States = result.data.states.data;
         });
-        this.dataservice.getAreas().valueChanges.subscribe((result) => {
+        this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getAreas", result.data.areas.data);
             this.Areas = result.data.areas.data;
         });
-        this.dataservice.getVillages().valueChanges.subscribe((result) => {
+        this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getVillages", result.data.villages.data);
             this.Villages = result.data.villages.data;
         });
@@ -5560,7 +5560,7 @@ let FarmDemoComponent = class FarmDemoComponent {
         });
     }
     getLGAs(id) {
-        this.dataservice.getLGAs(id).valueChanges.subscribe((result) => {
+        this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getLGAs", result.data.lgas.data);
             this.LGA = result.data.lgas.data;
         });

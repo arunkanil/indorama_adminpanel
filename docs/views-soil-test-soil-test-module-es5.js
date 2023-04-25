@@ -611,7 +611,7 @@
           value: function getCrops() {
             var _this7 = this;
 
-            this.dataservice.getCrops().valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
               _this7.Crops = result.data.crops.data;
             });
@@ -621,7 +621,7 @@
           value: function getStates() {
             var _this8 = this;
 
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
               _this8.States = result.data.states.data;
             });
@@ -631,7 +631,7 @@
           value: function getLGAs(id) {
             var _this9 = this;
 
-            this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
               _this9.LGA = result.data.lgas.data;
             });
@@ -641,7 +641,7 @@
           value: function getAreas(id) {
             var _this10 = this;
 
-            this.dataservice.getAreas(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
               _this10.Areas = result.data.areas.data;
             });
@@ -661,7 +661,7 @@
           value: function getVillages() {
             var _this12 = this;
 
-            this.dataservice.getVillages().valueChanges.subscribe(function (result) {
+            this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
               _this12.Villages = result.data.villages.data;
             });

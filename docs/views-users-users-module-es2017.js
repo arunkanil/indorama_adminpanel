@@ -267,25 +267,25 @@ let UserDetailComponent = class UserDetailComponent {
         });
     }
     getCrops() {
-        this.dataservice.getCrops().valueChanges.subscribe((result) => {
+        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getCrops", result.data.crops.data);
             this.Crops = result.data.crops.data;
         });
     }
     getStates() {
-        this.dataservice.getStates().valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getStates", result.data.states.data);
             this.States = result.data.states.data;
         });
     }
     getLGAs(id) {
-        this.dataservice.getLGAs(id).valueChanges.subscribe((result) => {
+        this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getLGAs", result.data.lgas.data);
             this.LGA = result.data.lgas.data;
         });
     }
     getAreas(id) {
-        this.dataservice.getAreas(id).valueChanges.subscribe((result) => {
+        this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getAreas", result.data.areas.data);
             this.Areas = result.data.areas.data;
         });
@@ -307,7 +307,7 @@ let UserDetailComponent = class UserDetailComponent {
         });
     }
     getVillages(id) {
-        this.dataservice.getVillages(id).valueChanges.subscribe((result) => {
+        this.dataservice.getVillages(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getVillages", result.data.villages.data);
             this.Villages = result.data.villages.data;
         });
@@ -633,25 +633,25 @@ let UsersComponent = class UsersComponent {
         return this.commentForm.controls;
     }
     getStates() {
-        this.dataservice.getStates().valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getStates", result.data.states.data);
             this.States = result.data.states.data;
         });
     }
     getLGAs(id) {
-        this.dataservice.getLGAs(id).valueChanges.subscribe((result) => {
+        this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getLGAs", result.data.lgas.data);
             this.LGA = result.data.lgas.data;
         });
     }
     getAreas(id) {
-        this.dataservice.getAreas(id).valueChanges.subscribe((result) => {
+        this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getAreas", result.data.areas.data);
             this.Areas = result.data.areas.data;
         });
     }
     getVillages(id) {
-        this.dataservice.getVillages(id).valueChanges.subscribe((result) => {
+        this.dataservice.getVillages(1, 10000, "", id).valueChanges.subscribe((result) => {
             console.log("getVillages", result.data.villages.data);
             this.Villages = result.data.villages.data;
         });

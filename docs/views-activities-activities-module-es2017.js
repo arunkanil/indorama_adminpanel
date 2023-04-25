@@ -346,7 +346,7 @@ let ActivitiesComponent = class ActivitiesComponent {
             }
             this.rowData = result.data.activities.data;
         });
-        this.dataservice.getStates().valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
             console.log("getStates", result.data.states.data);
             this.States = result.data.states.data;
         });
@@ -387,12 +387,12 @@ let ActivitiesComponent = class ActivitiesComponent {
         });
     }
     getCrops() {
-        this.dataservice.getCrops().valueChanges.subscribe((result) => {
+        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
             this.Crops = result.data.crops.data;
         });
     }
     getStates() {
-        this.dataservice.getStates(1, 10000).valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
             this.States = result.data.states.data;
         });
     }

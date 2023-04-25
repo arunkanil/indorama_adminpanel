@@ -200,19 +200,19 @@
               console.log(_this.maplink);
               _this.loading = false;
             });
-            this.dataservice.getCrops().valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
               _this.Crops = result.data.crops.data;
             });
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
               _this.States = result.data.states.data;
             });
-            this.dataservice.getAreas().valueChanges.subscribe(function (result) {
+            this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
               _this.Areas = result.data.areas.data;
             });
-            this.dataservice.getVillages().valueChanges.subscribe(function (result) {
+            this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
               _this.Villages = result.data.villages.data;
             });
@@ -262,7 +262,7 @@
           value: function getLGAs(id) {
             var _this3 = this;
 
-            this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
               _this3.LGA = result.data.lgas.data;
             });
@@ -8508,19 +8508,19 @@
 
               _this21.loading = false;
             });
-            this.dataservice.getCrops().valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getCrops", result.data.crops.data);
               _this21.Crops = result.data.crops.data;
             });
-            this.dataservice.getStates().valueChanges.subscribe(function (result) {
+            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getStates", result.data.states.data);
               _this21.States = result.data.states.data;
             });
-            this.dataservice.getAreas().valueChanges.subscribe(function (result) {
+            this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getAreas", result.data.areas.data);
               _this21.Areas = result.data.areas.data;
             });
-            this.dataservice.getVillages().valueChanges.subscribe(function (result) {
+            this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe(function (result) {
               console.log("getVillages", result.data.villages.data);
               _this21.Villages = result.data.villages.data;
             });
@@ -8598,7 +8598,7 @@
           value: function getLGAs(id) {
             var _this25 = this;
 
-            this.dataservice.getLGAs(id).valueChanges.subscribe(function (result) {
+            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
               console.log("getLGAs", result.data.lgas.data);
               _this25.LGA = result.data.lgas.data;
             });
