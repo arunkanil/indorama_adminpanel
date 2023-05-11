@@ -271,9 +271,9 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const environment = {
     production: false,
-    apiUrl: "https://indoramaapp.untanglestrategy.com"
+    // apiUrl: "https://indoramaapp.untanglestrategy.com"
     // apiUrl: "https://indorama-uat.untanglestrategy.com:883",
-    // apiUrl: "http://localhost:1337"
+    apiUrl: "http://localhost:1337"
     // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
 };
 
@@ -3466,6 +3466,15 @@ const GetActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
           ActivityType
           Time
           createdAt
+          agronomist
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
         }
       }
     }
@@ -3522,6 +3531,15 @@ query getActivities($id: ID) {
           Time
           createdAt
           updatedAt
+          agronomist
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
         }
       }
     }
@@ -3541,6 +3559,8 @@ const CreateActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $area: ID
     $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
     $Time: String
+    $village: ID
+    $agronomist: String
   ) {
     createActivity(
       data: {
@@ -3556,6 +3576,8 @@ const CreateActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         area: $area
         ActivityType: $ActivityType
         Time: $Time
+        village: $village
+        agronomist: $agronomist
       }
     ) {
       data {
@@ -3578,6 +3600,15 @@ const CreateActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
           PlannedFarmDay
           Reason
           area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          agronomist
+          village {
             data {
               id
               attributes {
@@ -3606,6 +3637,8 @@ const UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $area: ID
     $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
     $Time: String
+    $village: ID
+    $agronomist: String
     $id: ID!
   ) {
     updateActivity(
@@ -3623,6 +3656,8 @@ const UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         area: $area
         ActivityType: $ActivityType
         Time: $Time
+        village: $village
+        agronomist: $agronomist
       }
     ) {
       data {
@@ -3645,6 +3680,15 @@ const UpdateActivity = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
           PlannedFarmDay
           Reason
           area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          agronomist
+          village {
             data {
               id
               attributes {
