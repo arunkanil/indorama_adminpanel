@@ -1570,6 +1570,14 @@ const UsersQuery = gql`
           Latitude
           Longitude
           UserType
+          referred_agronomist {
+            data {
+              id
+                attributes {
+                    Name
+                 }
+              }
+          }
           prof_pic {
             data {
               attributes {
@@ -1820,6 +1828,15 @@ const GetSingleRetailerQuery = gql`
           updatedAt
           blocked
           ContactNumber
+          referred_agronomist {
+          data {
+            id
+            attributes {
+                  username
+                  Name
+                }
+             }
+          }
         }
       }
     }

@@ -55,10 +55,7 @@ export class UsersComponent {
     this.loading = true;
     console.log(this.router);
     this.getRetailers();
-    this.getAreas();
-    this.getLGAs();
     this.getStates();
-    this.getVillages();
   }
   setForm() {
     this.commentForm = this.fb.group({

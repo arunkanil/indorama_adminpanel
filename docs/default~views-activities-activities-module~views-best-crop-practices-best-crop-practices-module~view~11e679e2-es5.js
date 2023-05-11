@@ -424,18 +424,17 @@
           filterOptions: ["contains"],
           buttons: ["reset"]
         }
-      }, // {
-      //   field: "attributes.email",
-      //   headerName: "Email",
-      //   minWidth: 150,
-      //   resizable: true,
-      //   filter: "agTextColumnFilter",
-      //   filterParams: {
-      //     filterOptions: ["contains"],
-      //     buttons: ["reset"],
-      //   },
-      // },
-      {
+      }, {
+        field: "attributes.referred_agronomist.data.attributes.Name",
+        headerName: "Referred Agronomist",
+        minWidth: 150,
+        resizable: true,
+        filter: "agTextColumnFilter",
+        filterParams: {
+          filterOptions: ["contains"],
+          buttons: ["reset"]
+        }
+      }, {
         field: "attributes.UserType",
         headerName: "Category",
         resizable: true,

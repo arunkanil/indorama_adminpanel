@@ -2064,6 +2064,14 @@ const UsersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
           Latitude
           Longitude
           UserType
+          referred_agronomist {
+            data {
+              id
+                attributes {
+                    Name
+                 }
+              }
+          }
           prof_pic {
             data {
               attributes {
@@ -2314,6 +2322,15 @@ const GetSingleRetailerQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"
           updatedAt
           blocked
           ContactNumber
+          referred_agronomist {
+          data {
+            id
+            attributes {
+                  username
+                  Name
+                }
+             }
+          }
         }
       }
     }
