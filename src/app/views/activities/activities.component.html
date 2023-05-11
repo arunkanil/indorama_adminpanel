@@ -178,9 +178,25 @@
                   ngModel
                   name="area"
                   formControlName="area"
+                  (change)="filterVillage($event)"
                 >
                   <option value="" disabled selected hidden>Choose...</option>
                   <option *ngFor="let item of Areas" value="{{ item.id }}">
+                    {{ item.attributes.Name }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="village">Village</label>
+                <select
+                  class="form-control"
+                  id="village"
+                  ngModel
+                  name="village"
+                  formControlName="village"
+                >
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option *ngFor="let item of Villages" value="{{ item.id }}">
                     {{ item.attributes.Name }}
                   </option>
                 </select>
@@ -230,6 +246,25 @@
                 <div
                   *ngIf="
                     checkSpecialCharacters(activitiesForm.value.FarmerName)
+                  "
+                  class="danger"
+                >
+                  Special characters not permitted
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="Agronomist">Agronomist name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="Agronomist"
+                  name="Agronomist"
+                  formControlName="Agronomist"
+                  placeholder="Enter name"
+                />
+                <div
+                  *ngIf="
+                    checkSpecialCharacters(activitiesForm.value.Agronomist)
                   "
                   class="danger"
                 >

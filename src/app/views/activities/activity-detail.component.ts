@@ -33,6 +33,7 @@ export class ActivityDetailComponent implements OnInit {
   Areas: any = [];
   States: any = [];
   LGA: any = [];
+  Villages: any = [];
   Crops: any = [];
   flag;
   maplink;
@@ -45,8 +46,10 @@ export class ActivityDetailComponent implements OnInit {
     state:["", Validators.required],
     lga:["", Validators.required],
     area: ["", Validators.required],
+    village: [""],
     crop: ["", Validators.required],
     FarmerName: [""],
+    Agronomist: [""],
     PlannedFarmDay: [""],
     ConditionOfCrop: [""],
     Date: ["", Validators.required],
@@ -60,8 +63,6 @@ export class ActivityDetailComponent implements OnInit {
     });
     this.getActivity();
     this.getStates();
-    this.getLGAs();
-    this.getAreas();
     this.getCrops();
   }
   getActivity() {
@@ -70,6 +71,9 @@ export class ActivityDetailComponent implements OnInit {
       .valueChanges.subscribe((result: any) => {
         console.log("getActivity", result?.data?.activity?.data);
         this.details = result?.data?.activity?.data;
+        this.getLGAs(this.details?.attributes?.area?.data?.attributes?.lga?.data?.attributes?.state?.data?.id);
+        this.getAreas(this.details?.attributes?.area?.data?.attributes?.lga?.data?.id);
+        this.getVillages(this.details?.attributes?.area?.data?.id);
         this.activitiesForm = this.fb.group({
           ActivityType: [
             this.details?.attributes?.ActivityType,
@@ -90,6 +94,8 @@ export class ActivityDetailComponent implements OnInit {
           Date: [this.details?.attributes?.Date, Validators.required],
           Time: [this.details?.attributes?.Time,],
           Reason: [this.details?.attributes?.Reason],
+          Agronomist: [this.details?.attributes?.Agronomist],
+          village: [this.details?.attributes?.village?.data?.id],
         });
         this.maplink =
           "https://maps.google.com/?q=" +
@@ -111,6 +117,14 @@ export class ActivityDetailComponent implements OnInit {
       this.Areas = result.data.areas.data;
     });
   }
+  getVillages(areaid?) {
+    this.dataservice
+      .getVillages(1, 10000, "",areaid)
+      .valueChanges.subscribe((result: any) => {
+      console.log("getVillages", result.data.villages.data);
+      this.Villages = result.data.villages.data;
+    });
+  }
   getStates() {
     this.dataservice.getStates(1,10000).valueChanges.subscribe((result: any) => {
       this.States = result.data.states.data;
@@ -128,6 +142,10 @@ export class ActivityDetailComponent implements OnInit {
 
   filterLGA(event) {
     this.getLGAs(event.target.value);
+  }
+
+  filterVillage(event) {
+    this.getVillages(event.target.value);
   }
 
   returnActivityType(data) {

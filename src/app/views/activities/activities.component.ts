@@ -39,6 +39,7 @@ export class ActivitiesComponent {
   LGA: any = [];
   Areas: any = [];
   Crops: any = [];
+  Villages: any = [];
   file: any = null;
 
   activitiesForm = this.fb.group({
@@ -47,6 +48,7 @@ export class ActivitiesComponent {
     Longitude: [""],
     state: ["", Validators.required],
     lga: ["", Validators.required],
+    village: [""],
     NoOfAttendees: [
       "",
       [Validators.max(9999999), Validators.min(1)],
@@ -54,6 +56,7 @@ export class ActivitiesComponent {
     area: ["", Validators.required],
     crop: ["", Validators.required],
     FarmerName: ["", Validators.pattern("[a-zA-Z ]*")],
+    Agronomist: ["", Validators.pattern("[a-zA-Z ]*")],
     PlannedFarmDay: [""],
     ConditionOfCrop: [""],
     Date: ["", Validators.required],
@@ -79,7 +82,6 @@ export class ActivitiesComponent {
     this.loading = true;
     this.getActivities();
     this.getCrops();
-    this.getAreas();
     this.getStates();
   }
   checkSpecialCharacters(data) {
@@ -104,6 +106,11 @@ export class ActivitiesComponent {
 
   filterLGA(event) {
     this.getLGAs(event.target.value);
+  }
+
+  filterVillage(event) {
+    console.log(event);
+    this.getVillages(event.target.value);
   }
 
 
@@ -176,6 +183,14 @@ export class ActivitiesComponent {
   getAreas(lgaid?) {
     this.dataservice.getAreas(1,10000, "", lgaid).valueChanges.subscribe((result: any) => {
       this.Areas = result.data.areas.data;
+    });
+  }
+  getVillages(areaid?) {
+    this.dataservice
+      .getVillages(1, 10000, "",areaid)
+      .valueChanges.subscribe((result: any) => {
+      console.log("getVillages", result.data.villages.data);
+      this.Villages = result.data.villages.data;
     });
   }
   onGridReady(params) {

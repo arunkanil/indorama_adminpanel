@@ -1421,6 +1421,17 @@ export const ActivitiesColumn = [
     },
   },
   {
+    field: "attributes.village.data.attributes.Name",
+    headerName: "Village",
+    resizable: true,
+    sortable: true,
+    filter: "agTextColumnFilter",
+    filterParams: {
+      filterOptions: ["contains"],
+      buttons: ["reset"],
+    },
+  },
+  {
     field: "attributes.area.data.attributes.Name",
     headerName: "Area",
     resizable: true,
@@ -1456,6 +1467,17 @@ export const ActivitiesColumn = [
   {
     field: "attributes.NoOfAttendees",
     headerName: "No. of attendees",
+    resizable: true,
+    sortable: true,
+    filter: "agTextColumnFilter",
+    filterParams: {
+      filterOptions: ["contains"],
+      buttons: ["reset"],
+    },
+  },
+  {
+    field: "attributes.agronomist",
+    headerName: "Agronomist",
     resizable: true,
     sortable: true,
     filter: "agTextColumnFilter",

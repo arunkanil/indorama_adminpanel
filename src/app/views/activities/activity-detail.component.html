@@ -56,6 +56,10 @@
                   <td>{{ details?.attributes?.Time }}</td>
                 </tr>
                 <tr>
+                  <td>Village</td>
+                  <td>{{ details?.attributes?.village?.data?.attributes?.Name }}</td>
+                </tr>
+                <tr>
                   <td>City</td>
                   <td>{{ details?.attributes?.area?.data?.attributes?.Name }}</td>
                 </tr>
@@ -78,6 +82,10 @@
                 <tr>
                   <td>Farmer Name</td>
                   <td>{{ details?.attributes?.FarmerName }}</td>
+                </tr>
+                <tr>
+                  <td>Agronomist Name</td>
+                  <td>{{ details?.attributes?.agronomist }}</td>
                 </tr>
                 <tr>
                   <td>Crop</td>
@@ -201,9 +209,27 @@
                           ngModel
                           name="area"
                           formControlName="area"
+                          (change)="filterVillage($event)"
                         >
                           <option value="" disabled selected hidden>Choose...</option>
                           <option *ngFor="let item of Areas" value="{{ item.id }}">
+                            {{ item.attributes.Name }}
+                          </option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="village">Village <span class="danger">*</span></label>
+                        <select
+                          class="form-control"
+                          id="village"
+                          required
+                          ngModel
+                          name="village"
+                          formControlName="village"
+                        >
+                          <option value="" disabled selected hidden>Choose...</option>
+                          <option *ngFor="let item of Villages" value="{{ item.id }}">
                             {{ item.attributes.Name }}
                           </option>
                         </select>
@@ -241,6 +267,17 @@
                           id="FarmerName"
                           name="FarmerName"
                           formControlName="FarmerName"
+                          placeholder="Enter name"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="Agronomist">Agronomist name</label>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="Agronomist"
+                          name="Agronomist"
+                          formControlName="Agronomist"
                           placeholder="Enter name"
                         />
                       </div>

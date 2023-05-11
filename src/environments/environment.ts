@@ -5,8 +5,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "https://indoramaapp.untanglestrategy.com"
+  // apiUrl: "https://indoramaapp.untanglestrategy.com"
   // apiUrl: "https://indorama-uat.untanglestrategy.com:883",
-  // apiUrl: "http://localhost:1337"
+  apiUrl: "http://localhost:1337"
   // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
 };

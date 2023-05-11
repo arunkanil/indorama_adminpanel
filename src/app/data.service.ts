@@ -2972,6 +2972,15 @@ const GetActivities = gql`
           ActivityType
           Time
           createdAt
+          agronomist
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
         }
       }
     }
@@ -3028,6 +3037,15 @@ query getActivities($id: ID) {
           Time
           createdAt
           updatedAt
+          agronomist
+          village {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
         }
       }
     }
@@ -3047,6 +3065,8 @@ const CreateActivities = gql`
     $area: ID
     $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
     $Time: String
+    $village: ID
+    $agronomist: String
   ) {
     createActivity(
       data: {
@@ -3062,6 +3082,8 @@ const CreateActivities = gql`
         area: $area
         ActivityType: $ActivityType
         Time: $Time
+        village: $village
+        agronomist: $agronomist
       }
     ) {
       data {
@@ -3084,6 +3106,15 @@ const CreateActivities = gql`
           PlannedFarmDay
           Reason
           area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          agronomist
+          village {
             data {
               id
               attributes {
@@ -3112,6 +3143,8 @@ const UpdateActivity = gql`
     $area: ID
     $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
     $Time: String
+    $village: ID
+    $agronomist: String
     $id: ID!
   ) {
     updateActivity(
@@ -3129,6 +3162,8 @@ const UpdateActivity = gql`
         area: $area
         ActivityType: $ActivityType
         Time: $Time
+        village: $village
+        agronomist: $agronomist
       }
     ) {
       data {
@@ -3151,6 +3186,15 @@ const UpdateActivity = gql`
           PlannedFarmDay
           Reason
           area {
+            data {
+              id
+              attributes {
+                Name
+              }
+            }
+          }
+          agronomist
+          village {
             data {
               id
               attributes {
