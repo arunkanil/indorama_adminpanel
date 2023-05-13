@@ -203,7 +203,7 @@
           this.btnLoading = false;
           this.disableNextButton = false;
           this.disablePrevButton = true;
-          this.searchTerm = ""; // disableNextButton = false;
+          this.searchTerm = ''; // disableNextButton = false;
           // disablePrevButton = true;
           // meta;
           // pageSize = 20;
@@ -225,31 +225,31 @@
             statusRenderer: new _utils_StatusRenderer__WEBPACK_IMPORTED_MODULE_7__["ActionRenderer"]()
           };
           this.stateForm = this.fb.group({
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
           this.lgaForm = this.fb.group({
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
           this.areaForm = this.fb.group({
-            area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            PostalCode: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            PostalCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
           this.marketForm = this.fb.group({
-            market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
           this.cropForm = this.fb.group({
-            crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
           this.villageForm = this.fb.group({
-            village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            lga: [""],
-            state: [""]
+            village: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            lga: [''],
+            state: ['']
           });
           this.selectedYear = new Date().getFullYear();
           this.years = [];
@@ -258,7 +258,7 @@
           this.context = {
             componentParent: this
           };
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(mastersComponent, [{
@@ -270,12 +270,12 @@
             console.log(this.router.url);
 
             switch (this.router.url) {
-              case "/masters/Villages":
+              case '/masters/Villages':
                 this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["VillageMasterColumn"]);
                 this.dataservice.getVillages(this.count, this.pageSize).valueChanges.subscribe(function (result) {
                   var _a, _b;
 
-                  console.log("getVillages", result.data.villages.data);
+                  console.log('getVillages', result.data.villages.data);
                   _this.rowData = result.data.villages.data;
                   _this.meta = result.data.villages.meta;
 
@@ -286,12 +286,12 @@
                 });
                 break;
 
-              case "/masters/Cities":
+              case '/masters/Cities':
                 this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["AreaMasterColumn"]);
                 this.dataservice.getAreas(this.count, this.pageSize).valueChanges.subscribe(function (result) {
                   var _a, _b;
 
-                  console.log("getAreas", result.data.areas.data);
+                  console.log('getAreas', result.data.areas.data);
                   _this.rowData = result.data.areas.data;
                   _this.meta = result.data.areas.meta;
 
@@ -302,12 +302,12 @@
                 });
                 break;
 
-              case "/masters/LGA":
+              case '/masters/LGA':
                 this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["LGAMasterColumn"]);
                 this.dataservice.getLGAs(this.count, this.pageSize).valueChanges.subscribe(function (result) {
                   var _a, _b;
 
-                  console.log("getLGAs", result.data.lgas.data);
+                  console.log('getLGAs', result.data.lgas.data);
                   _this.rowData = result.data.lgas.data;
                   _this.meta = result.data.lgas.meta;
 
@@ -318,12 +318,12 @@
                 });
                 break;
 
-              case "/masters/States":
+              case '/masters/States':
                 this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["StateMasterColumn"]);
                 this.dataservice.getStates(this.count, this.pageSize).valueChanges.subscribe(function (result) {
                   var _a, _b;
 
-                  console.log("getStates", result.data.states.data);
+                  console.log('getStates', result.data.states.data);
                   _this.rowData = result.data.states.data;
                   _this.meta = result.data.states.meta;
 
@@ -334,12 +334,12 @@
                 });
                 break;
 
-              case "/masters/Markets":
+              case '/masters/Markets':
                 this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["MarketMasterColumn"]);
                 this.dataservice.getMarkets(this.count, this.pageSize).valueChanges.subscribe(function (result) {
                   var _a, _b;
 
-                  console.log("getMarkets", result.data.markets.data);
+                  console.log('getMarkets', result.data.markets.data);
                   _this.rowData = result.data.markets.data;
                   _this.meta = result.data.markets.meta;
 
@@ -350,12 +350,12 @@
                 });
                 break;
 
-              case "/masters/Crops":
+              case '/masters/Crops':
                 this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["CropMasterColumn"]);
                 this.dataservice.getCrops(this.count, this.pageSize).valueChanges.subscribe(function (result) {
                   var _a, _b;
 
-                  console.log("getCrops", result.data.crops.data);
+                  console.log('getCrops', result.data.crops.data);
                   _this.rowData = result.data.crops.data;
                   _this.meta = result.data.crops.meta;
 
@@ -393,30 +393,30 @@
         }, {
           key: "loadData",
           value: function loadData(count, pageSize, searchTerm) {
-            var masterUrl = "";
+            var masterUrl = '';
 
             switch (this.router.url) {
-              case "/masters/Villages":
+              case '/masters/Villages':
                 this.getVillages(count, pageSize, searchTerm);
                 break;
 
-              case "/masters/States":
+              case '/masters/States':
                 this.getStates(count, pageSize, searchTerm);
                 break;
 
-              case "/masters/Cities":
+              case '/masters/Cities':
                 this.getAreas(count, pageSize, searchTerm);
                 break;
 
-              case "/masters/LGA":
+              case '/masters/LGA':
                 this.getLGAs(count, pageSize, searchTerm);
                 break;
 
-              case "/masters/Markets":
+              case '/masters/Markets':
                 this.getMarkets(count, pageSize, searchTerm);
                 break;
 
-              case "/masters/Crops":
+              case '/masters/Crops':
                 this.getCrops(count, pageSize, searchTerm);
                 break;
             }
@@ -459,31 +459,31 @@
           value: function downloadExcel() {
             var _this2 = this;
 
-            var masterUrl = "";
+            var masterUrl = '';
 
             switch (this.router.url) {
-              case "/masters/Villages":
-                masterUrl = "villages";
+              case '/masters/Villages':
+                masterUrl = 'villages';
                 break;
 
-              case "/masters/States":
-                masterUrl = "states";
+              case '/masters/States':
+                masterUrl = 'states';
                 break;
 
-              case "/masters/Cities":
-                masterUrl = "cities";
+              case '/masters/Cities':
+                masterUrl = 'cities';
                 break;
 
-              case "/masters/LGA":
-                masterUrl = "lgas";
+              case '/masters/LGA':
+                masterUrl = 'lgas';
                 break;
 
-              case "/masters/Markets":
-                masterUrl = "markets";
+              case '/masters/Markets':
+                masterUrl = 'markets';
                 break;
 
-              case "/masters/Crops":
-                masterUrl = "crops";
+              case '/masters/Crops':
+                masterUrl = 'crops';
                 break;
             }
 
@@ -495,11 +495,11 @@
               resp = result.body;
               console.log(result);
 
-              if (result.status === 200 && result.body.status == "Success") {
+              if (result.status === 200 && result.body.status == 'Success') {
                 _this2.toastr.success(result.body.message);
 
                 _this2.btnLoading = false;
-                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), '_blank');
               } else {
                 _this2.btnLoading = false;
 
@@ -513,10 +513,10 @@
             var _this3 = this;
 
             this.dataservice.getCrops(count, pageSize, searchTerm).valueChanges.subscribe(function (result) {
-              console.log("getCrops2Function", result.data.crops.data);
+              console.log('getCrops2Function', result.data.crops.data);
               _this3.Crops = result.data.crops.data;
 
-              if (_this3.router.url === "/masters/Crops") {
+              if (_this3.router.url === '/masters/Crops') {
                 _this3.rowData = result.data.crops.data;
                 _this3.meta = result.data.crops.meta;
               }
@@ -528,10 +528,10 @@
             var _this4 = this;
 
             this.dataservice.getStates(count, pageSize, searchTerm).valueChanges.subscribe(function (result) {
-              console.log("getStates2Function", result.data.states.data);
+              console.log('getStates2Function', result.data.states.data);
               _this4.States = result.data.states.data;
 
-              if (_this4.router.url === "/masters/States") {
+              if (_this4.router.url === '/masters/States') {
                 _this4.rowData = result.data.states.data;
                 _this4.meta = result.data.states.meta;
               }
@@ -543,10 +543,10 @@
             var _this5 = this;
 
             this.dataservice.getLGAs(count, pageSize, searchTerm, stateid).valueChanges.subscribe(function (result) {
-              console.log("getLGAs2Function", result.data.lgas.data);
+              console.log('getLGAs2Function', result.data.lgas.data);
               _this5.LGA = result.data.lgas.data;
 
-              if (_this5.router.url === "/masters/LGA") {
+              if (_this5.router.url === '/masters/LGA') {
                 _this5.rowData = result.data.lgas.data;
                 _this5.meta = result.data.lgas.meta;
               }
@@ -558,10 +558,10 @@
             var _this6 = this;
 
             this.dataservice.getAreas(count, pageSize, searchTerm, lgaid).valueChanges.subscribe(function (result) {
-              console.log("getAreas2Function", result.data.areas.data);
+              console.log('getAreas2Function', result.data.areas.data);
               _this6.Areas = result.data.areas.data;
 
-              if (_this6.router.url === "/masters/Cities") {
+              if (_this6.router.url === '/masters/Cities') {
                 _this6.rowData = result.data.areas.data;
                 _this6.meta = result.data.areas.meta;
               }
@@ -573,10 +573,10 @@
             var _this7 = this;
 
             this.dataservice.getVillages(count, pageSize, searchTerm, areaid).valueChanges.subscribe(function (result) {
-              console.log("getVillages2Function", result.data.villages.data);
+              console.log('getVillages2Function', result.data.villages.data);
               _this7.Villages = result.data.villages.data;
 
-              if (_this7.router.url === "/masters/Villages") {
+              if (_this7.router.url === '/masters/Villages') {
                 _this7.rowData = result.data.villages.data;
                 _this7.meta = result.data.villages.meta;
               }
@@ -588,10 +588,10 @@
             var _this8 = this;
 
             this.dataservice.getMarkets(count, pageSize, searchTerm).valueChanges.subscribe(function (result) {
-              console.log("getMarkets2Function", result.data.markets.data);
+              console.log('getMarkets2Function', result.data.markets.data);
               _this8.Markets = result.data.markets.data;
 
-              if (_this8.router.url === "/masters/Markets") {
+              if (_this8.router.url === '/masters/Markets') {
                 _this8.rowData = result.data.markets.data;
                 _this8.meta = result.data.markets.meta;
               }
@@ -607,8 +607,8 @@
         }, {
           key: "onRowClicked",
           value: function onRowClicked(event) {
-            console.log("row", event);
-            alert("Parent Component Method from " + event + "!"); // this.router.navigate(
+            console.log('row', event);
+            alert('Parent Component Method from ' + event + '!'); // this.router.navigate(
             //   ["/cropprices/kp_customer_details", event.data.id, this.router.url],
             //   {
             //     state: { data: event.data },
@@ -639,7 +639,7 @@
             var _a, _b, _c, _d, _e, _f, _g, _h;
 
             switch (this.router.url) {
-              case "/masters/Villages":
+              case '/masters/Villages':
                 this.villageModal.show();
 
                 if (data) {
@@ -651,16 +651,16 @@
                   });
                 } else {
                   this.villageForm = this.fb.group({
-                    village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                    area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                    lga: [""],
-                    state: [""]
+                    village: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                    area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                    lga: [''],
+                    state: ['']
                   });
                 }
 
                 break;
 
-              case "/masters/Cities":
+              case '/masters/Cities':
                 this.areaModal.show();
 
                 if (data) {
@@ -672,16 +672,16 @@
                   });
                 } else {
                   this.areaForm = this.fb.group({
-                    area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                    PostalCode: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                    lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                    state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+                    area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                    PostalCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                    lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                    state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
                   });
                 }
 
                 break;
 
-              case "/masters/LGA":
+              case '/masters/LGA':
                 this.lgaModal.show();
 
                 if (data) {
@@ -691,14 +691,14 @@
                   });
                 } else {
                   this.lgaForm = this.fb.group({
-                    lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                    state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+                    lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                    state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
                   });
                 }
 
                 break;
 
-              case "/masters/States":
+              case '/masters/States':
                 this.stateModal.show();
 
                 if (data) {
@@ -707,13 +707,13 @@
                   });
                 } else {
                   this.stateForm = this.fb.group({
-                    state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+                    state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
                   });
                 }
 
                 break;
 
-              case "/masters/Markets":
+              case '/masters/Markets':
                 this.marketModal.show();
 
                 if (data) {
@@ -723,14 +723,14 @@
                   });
                 } else {
                   this.marketForm = this.fb.group({
-                    market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                    state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+                    market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                    state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
                   });
                 }
 
                 break;
 
-              case "/masters/Crops":
+              case '/masters/Crops':
                 this.cropModal.show();
 
                 if (data) {
@@ -741,8 +741,8 @@
                   this.imageUrl = ((_e = (_d = (_c = this.selectedRows[0].attributes.Image) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.attributes) === null || _e === void 0 ? void 0 : _e.url) ? "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl) + ((_h = (_g = (_f = this.selectedRows[0].attributes.Image) === null || _f === void 0 ? void 0 : _f.data) === null || _g === void 0 ? void 0 : _g.attributes) === null || _h === void 0 ? void 0 : _h.url) : null;
                 } else {
                   this.cropForm = this.fb.group({
-                    crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                    Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+                    crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                    Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
                   });
                   this.imageUrl = null;
                 }
@@ -818,10 +818,10 @@
             if (!this.disableButton) {
               this.dataservice.UpdateState(this.stateForm.value, this.selectedRows[0].id).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.updateState) {
-                  _this9.toastr.success("Success!");
+                  _this9.toastr.success('Success!');
 
                   _this9.gridApi.deselectAll();
 
@@ -830,24 +830,24 @@
                   _this9.stateForm.reset();
 
                   _this9.dataservice.getStates(_this9.count, _this9.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getStates", result.data.states.data);
+                    console.log('getStates', result.data.states.data);
                     _this9.rowData = result.data.states.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this9.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this9.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this9.toastr.error("Failed. Please check the fields!");
+                    _this9.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
             } else {
               this.dataservice.AddStates(this.stateForm.value).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.createState) {
-                  _this9.toastr.success("Success!");
+                  _this9.toastr.success('Success!');
 
                   _this9.gridApi.deselectAll();
 
@@ -856,20 +856,20 @@
                   _this9.stateForm.reset();
 
                   _this9.dataservice.getStates(_this9.count, _this9.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getStates", result.data.states.data);
+                    console.log('getStates', result.data.states.data);
                     _this9.rowData = result.data.states.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this9.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this9.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this9.toastr.error("Failed. Please check the fields!");
+                    _this9.toastr.error('Failed. Please check the fields!');
                   }
                 }
               }, function (error) {
                 console.log(error);
 
-                _this9.toastr.error("Failed.");
+                _this9.toastr.error('Failed.');
               });
             }
           }
@@ -884,10 +884,10 @@
             if (!this.disableButton) {
               this.dataservice.UpdateLGA(this.lgaForm.value, this.selectedRows[0].id).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.updateLga) {
-                  _this10.toastr.success("Success!");
+                  _this10.toastr.success('Success!');
 
                   _this10.gridApi.deselectAll();
 
@@ -896,24 +896,24 @@
                   _this10.lgaForm.reset();
 
                   _this10.dataservice.getLGAs(_this10.count, _this10.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getLGAs", result.data.lgas.data);
+                    console.log('getLGAs', result.data.lgas.data);
                     _this10.rowData = result.data.lgas.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this10.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this10.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this10.toastr.error("Failed. Please check the fields!");
+                    _this10.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
             } else {
               this.dataservice.AddLGA(this.lgaForm.value).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.createLga) {
-                  _this10.toastr.success("Success!");
+                  _this10.toastr.success('Success!');
 
                   _this10.gridApi.deselectAll();
 
@@ -922,14 +922,14 @@
                   _this10.lgaForm.reset();
 
                   _this10.dataservice.getLGAs(_this10.count, _this10.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getLGAs", result.data.lgas.data);
+                    console.log('getLGAs', result.data.lgas.data);
                     _this10.rowData = result.data.lgas.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this10.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this10.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this10.toastr.error("Failed. Please check the fields!");
+                    _this10.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
@@ -946,10 +946,10 @@
             if (!this.disableButton) {
               this.dataservice.UpdateArea(this.areaForm.value, this.selectedRows[0].id).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.updateArea) {
-                  _this11.toastr.success("Success!");
+                  _this11.toastr.success('Success!');
 
                   _this11.gridApi.deselectAll();
 
@@ -958,24 +958,24 @@
                   _this11.areaForm.reset();
 
                   _this11.dataservice.getAreas(_this11.count, _this11.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getAreas", result.data.areas.data);
+                    console.log('getAreas', result.data.areas.data);
                     _this11.rowData = result.data.areas.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this11.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this11.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this11.toastr.error("Failed. Please check the fields!");
+                    _this11.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
             } else {
               this.dataservice.AddArea(this.areaForm.value).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.createArea) {
-                  _this11.toastr.success("Success!");
+                  _this11.toastr.success('Success!');
 
                   _this11.gridApi.deselectAll();
 
@@ -984,14 +984,14 @@
                   _this11.areaForm.reset();
 
                   _this11.dataservice.getAreas(_this11.count, _this11.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getAreas", result.data.areas.data);
+                    console.log('getAreas', result.data.areas.data);
                     _this11.rowData = result.data.areas.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this11.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this11.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this11.toastr.error("Failed. Please check the fields!");
+                    _this11.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
@@ -1008,10 +1008,10 @@
             if (!this.disableButton) {
               this.dataservice.UpdateMarket(this.marketForm.value, this.selectedRows[0].id).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.updateMarket) {
-                  _this12.toastr.success("Success!");
+                  _this12.toastr.success('Success!');
 
                   _this12.gridApi.deselectAll();
 
@@ -1020,24 +1020,24 @@
                   _this12.marketForm.reset();
 
                   _this12.dataservice.getMarkets(_this12.count, _this12.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getMarkets", result.data.markets.data);
+                    console.log('getMarkets', result.data.markets.data);
                     _this12.rowData = result.data.markets.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this12.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this12.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this12.toastr.error("Failed. Please check the fields!");
+                    _this12.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
             } else {
               this.dataservice.AddMarket(this.marketForm.value).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.createMarket) {
-                  _this12.toastr.success("Success!");
+                  _this12.toastr.success('Success!');
 
                   _this12.gridApi.deselectAll();
 
@@ -1046,14 +1046,14 @@
                   _this12.marketForm.reset();
 
                   _this12.dataservice.getMarkets(_this12.count, _this12.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getMarkets", result.data.markets.data);
+                    console.log('getMarkets', result.data.markets.data);
                     _this12.rowData = result.data.markets.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this12.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this12.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this12.toastr.error("Failed. Please check the fields!");
+                    _this12.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
@@ -1078,10 +1078,10 @@
 
                     _this13.dataservice.UpdateCrop(_this13.cropForm.value, _this13.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                       resp = result.data;
-                      console.log("response", result);
+                      console.log('response', result);
 
                       if (result.data.updateCrop) {
-                        _this13.toastr.success("Success!");
+                        _this13.toastr.success('Success!');
 
                         _this13.gridApi.deselectAll();
 
@@ -1092,16 +1092,16 @@
                         _this13.btnLoading = false;
 
                         _this13.dataservice.getCrops(_this13.count, _this13.pageSize).valueChanges.subscribe(function (result) {
-                          console.log("getCrops", result.data.crops.data);
+                          console.log('getCrops', result.data.crops.data);
                           _this13.rowData = result.data.crops.data;
                         });
                       } else {
-                        if (result.errors[0].extensions.error.name == "ValidationError") {
-                          _this13.toastr.error("Can't be added as the value already exists");
+                        if (result.errors[0].extensions.error.name == 'ValidationError') {
+                          _this13.toastr.error('Can\'t be added as the value already exists');
 
                           _this13.btnLoading = false;
                         } else {
-                          _this13.toastr.error("Failed. Please check the fields!");
+                          _this13.toastr.error('Failed. Please check the fields!');
 
                           _this13.btnLoading = false;
                         }
@@ -1114,10 +1114,10 @@
               } else {
                 this.dataservice.UpdateCrop(this.cropForm.value, this.selectedRows[0].id, null).subscribe(function (result) {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.updateCrop) {
-                    _this13.toastr.success("Success!");
+                    _this13.toastr.success('Success!');
 
                     _this13.gridApi.deselectAll();
 
@@ -1126,14 +1126,14 @@
                     _this13.cropForm.reset();
 
                     _this13.dataservice.getCrops(_this13.count, _this13.pageSize).valueChanges.subscribe(function (result) {
-                      console.log("getCrops", result.data.crops.data);
+                      console.log('getCrops', result.data.crops.data);
                       _this13.rowData = result.data.crops.data;
                     });
                   } else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                      _this13.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                      _this13.toastr.error('Can\'t be added as the value already exists');
                     } else {
-                      _this13.toastr.error("Failed. Please check the fields!");
+                      _this13.toastr.error('Failed. Please check the fields!');
                     }
                   }
                 });
@@ -1147,10 +1147,10 @@
 
                   _this13.dataservice.AddCrop(_this13.cropForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
 
                     if (result.data.createCrop) {
-                      _this13.toastr.success("Success!");
+                      _this13.toastr.success('Success!');
 
                       _this13.gridApi.deselectAll();
 
@@ -1159,14 +1159,14 @@
                       _this13.cropForm.reset();
 
                       _this13.dataservice.getCrops(_this13.count, _this13.pageSize).valueChanges.subscribe(function (result) {
-                        console.log("getCrops", result.data.crops.data);
+                        console.log('getCrops', result.data.crops.data);
                         _this13.rowData = result.data.crops.data;
                       });
                     } else {
-                      if (result.errors[0].extensions.error.name == "ValidationError") {
-                        _this13.toastr.error("Can't be added as the value already exists");
+                      if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        _this13.toastr.error('Can\'t be added as the value already exists');
                       } else {
-                        _this13.toastr.error("Failed. Please check the fields!");
+                        _this13.toastr.error('Failed. Please check the fields!');
                       }
                     }
                   });
@@ -1185,10 +1185,10 @@
             if (!this.disableButton) {
               this.dataservice.Updatevillage(this.villageForm.value, this.selectedRows[0].id).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.updateVillage) {
-                  _this14.toastr.success("Success!");
+                  _this14.toastr.success('Success!');
 
                   _this14.gridApi.deselectAll();
 
@@ -1197,24 +1197,24 @@
                   _this14.villageForm.reset();
 
                   _this14.dataservice.getVillages(_this14.count, _this14.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getVillages", result.data.villages.data);
+                    console.log('getVillages', result.data.villages.data);
                     _this14.rowData = result.data.villages.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this14.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this14.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this14.toastr.error("Failed. Please check the fields!");
+                    _this14.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
             } else {
               this.dataservice.Addvillage(this.villageForm.value).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.createVillage) {
-                  _this14.toastr.success("Success!");
+                  _this14.toastr.success('Success!');
 
                   _this14.gridApi.deselectAll();
 
@@ -1223,14 +1223,14 @@
                   _this14.villageForm.reset();
 
                   _this14.dataservice.getVillages(_this14.count, _this14.pageSize).valueChanges.subscribe(function (result) {
-                    console.log("getVillages", result.data.villages.data);
+                    console.log('getVillages', result.data.villages.data);
                     _this14.rowData = result.data.villages.data;
                   });
                 } else {
-                  if (result.errors[0].extensions.error.name == "ValidationError") {
-                    _this14.toastr.error("Can't be added as the value already exists");
+                  if (result.errors[0].extensions.error.name == 'ValidationError') {
+                    _this14.toastr.error('Can\'t be added as the value already exists');
                   } else {
-                    _this14.toastr.error("Failed. Please check the fields!");
+                    _this14.toastr.error('Failed. Please check the fields!');
                   }
                 }
               });
@@ -1262,12 +1262,12 @@
             console.log(this.lgaForm.value);
 
             switch (this.router.url) {
-              case "/masters/Villages":
+              case '/masters/Villages':
                 this.dataservice.deleteVillage(this.selectedRows[0].id).subscribe(function (result) {
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.deleteVillage) {
-                    _this15.toastr.success("Success!");
+                    _this15.toastr.success('Success!');
 
                     _this15.gridApi.deselectAll();
 
@@ -1277,17 +1277,17 @@
                       _this15.rowData = result.data.villages.data;
                     });
                   } else {
-                    _this15.toastr.error("Failed!");
+                    _this15.toastr.error('Failed!');
                   }
                 });
                 break;
 
-              case "/masters/Cities":
+              case '/masters/Cities':
                 this.dataservice.deleteArea(this.selectedRows[0].id).subscribe(function (result) {
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.deleteArea) {
-                    _this15.toastr.success("Success!");
+                    _this15.toastr.success('Success!');
 
                     _this15.gridApi.deselectAll();
 
@@ -1297,17 +1297,17 @@
                       _this15.rowData = result.data.areas.data;
                     });
                   } else {
-                    _this15.toastr.error("Failed!");
+                    _this15.toastr.error('Failed!');
                   }
                 });
                 break;
 
-              case "/masters/LGA":
+              case '/masters/LGA':
                 this.dataservice.deleteLGA(this.selectedRows[0].id).subscribe(function (result) {
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.deleteLga) {
-                    _this15.toastr.success("Success!");
+                    _this15.toastr.success('Success!');
 
                     _this15.gridApi.deselectAll();
 
@@ -1317,17 +1317,17 @@
                       _this15.rowData = result.data.lgas.data;
                     });
                   } else {
-                    _this15.toastr.error("Failed!");
+                    _this15.toastr.error('Failed!');
                   }
                 });
                 break;
 
-              case "/masters/States":
+              case '/masters/States':
                 this.dataservice.deleteState(this.selectedRows[0].id).subscribe(function (result) {
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.deleteState) {
-                    _this15.toastr.success("Success!");
+                    _this15.toastr.success('Success!');
 
                     _this15.gridApi.deselectAll();
 
@@ -1337,17 +1337,17 @@
                       _this15.rowData = result.data.states.data;
                     });
                   } else {
-                    _this15.toastr.error("Failed!");
+                    _this15.toastr.error('Failed!');
                   }
                 });
                 break;
 
-              case "/masters/Markets":
+              case '/masters/Markets':
                 this.dataservice.deleteMarket(this.selectedRows[0].id).subscribe(function (result) {
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.deleteMarket) {
-                    _this15.toastr.success("Success!");
+                    _this15.toastr.success('Success!');
 
                     _this15.gridApi.deselectAll();
 
@@ -1357,17 +1357,17 @@
                       _this15.rowData = result.data.markets.data;
                     });
                   } else {
-                    _this15.toastr.error("Failed!");
+                    _this15.toastr.error('Failed!');
                   }
                 });
                 break;
 
-              case "/masters/Crops":
+              case '/masters/Crops':
                 this.dataservice.deleteCrop(this.selectedRows[0].id).subscribe(function (result) {
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.deleteCrop) {
-                    _this15.toastr.success("Success!");
+                    _this15.toastr.success('Success!');
 
                     _this15.gridApi.deselectAll();
 
@@ -1377,7 +1377,7 @@
                       _this15.rowData = result.data.crops.data;
                     });
                   } else {
-                    _this15.toastr.error("Failed!");
+                    _this15.toastr.error('Failed!');
                   }
                 });
                 break;
@@ -1405,31 +1405,31 @@
       mastersComponent.propDecorators = {
         stateModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["stateModal"]
+          args: ['stateModal']
         }],
         lgaModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["lgaModal"]
+          args: ['lgaModal']
         }],
         villageModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["villageModal"]
+          args: ['villageModal']
         }],
         marketModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["marketModal"]
+          args: ['marketModal']
         }],
         areaModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["areaModal"]
+          args: ['areaModal']
         }],
         cropModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["cropModal"]
+          args: ['cropModal']
         }],
         deleteModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["deleteModal"]
+          args: ['deleteModal']
         }],
         searchInput: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],

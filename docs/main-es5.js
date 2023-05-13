@@ -78,14 +78,14 @@
 
           this.http = http;
           this.toastr = toastr;
-          this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem("currentUser")));
+          this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem('currentUser')));
           this.currentUser = this.currentUserSubject.asObservable();
         }
 
         _createClass(AuthenticationService, [{
           key: "currentUserValue",
           get: function get() {
-            console.log("curentuser", this.currentUserSubject);
+            console.log('curentuser', this.currentUserSubject);
             return this.currentUserSubject.value;
           }
         }, {
@@ -97,20 +97,20 @@
               // login successful if there's a jwt token in the response
               console.log(user);
 
-              if (user.jwt && (user.user.UserType == "Admin" || user.user.UserType == "Marketing")) {
+              if (user.jwt && (user.user.UserType == 'Admin' || user.user.UserType == 'Marketing')) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem("token", user.jwt);
-                localStorage.setItem("username", user.user.username);
-                localStorage.setItem("uid", user.user.id);
-                localStorage.setItem("user_type", user.user.UserType);
-                localStorage.setItem("email", user.user.email);
-                localStorage.setItem("name", user.user.Name);
-                localStorage.setItem("phone_number", user.user.ContactNumber);
-                localStorage.setItem("currentUser", JSON.stringify(user));
+                localStorage.setItem('token', user.jwt);
+                localStorage.setItem('username', user.user.username);
+                localStorage.setItem('uid', user.user.id);
+                localStorage.setItem('user_type', user.user.UserType);
+                localStorage.setItem('email', user.user.email);
+                localStorage.setItem('name', user.user.Name);
+                localStorage.setItem('phone_number', user.user.ContactNumber);
+                localStorage.setItem('currentUser', JSON.stringify(user));
 
                 _this.currentUserSubject.next(user);
               } else {
-                _this.toastr.error("You're not authorized");
+                _this.toastr.error('You\'re not authorized');
               }
 
               return user;
@@ -120,8 +120,8 @@
           key: "logout",
           value: function logout() {
             // remove user from local storage to log user out
-            localStorage.removeItem("currentUser");
-            localStorage.removeItem("token");
+            localStorage.removeItem('currentUser');
+            localStorage.removeItem('token');
             this.currentUserSubject.next(null);
           }
         }]);
@@ -138,7 +138,7 @@
       };
 
       AuthenticationService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: "root"
+        providedIn: 'root'
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"]])], AuthenticationService);
       /***/
     },
@@ -381,9 +381,9 @@
 
       var environment = {
         production: false,
-        // apiUrl: "https://indoramaapp.untanglestrategy.com"
-        // apiUrl: "https://indorama-uat.untanglestrategy.com:883",
-        apiUrl: "http://localhost:1337" // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
+        apiUrl: 'https://indoramaapp.untanglestrategy.com' // apiUrl: "https://indorama-uat.untanglestrategy.com:883",
+        // apiUrl: 'http://localhost:1337'
+        // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
 
       };
       /***/
@@ -488,7 +488,7 @@
           this.router = router;
           this.authenticationService = authenticationService;
           this.sidebarMinimized = false;
-          this.userName = localStorage.getItem("username");
+          this.userName = localStorage.getItem('username');
           this.navItems = _nav__WEBPACK_IMPORTED_MODULE_5__["navItems"].filter(function (item) {
             return item.role === localStorage.getItem('user_type') || item.role === '';
           });
@@ -525,7 +525,7 @@
       };
 
       DefaultLayoutComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        selector: "app-dashboard",
+        selector: 'app-dashboard',
         template: _raw_loader_default_layout_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"], _views_login_authentication_service__WEBPACK_IMPORTED_MODULE_4__["AuthenticationService"]])], DefaultLayoutComponent);
       /***/
@@ -620,18 +620,18 @@
           this.toastr = toastr;
           this.loginForm = {};
           this.result = {};
-          this.error = "";
+          this.error = '';
           this.loading = false;
 
           if (this.authenticationService.currentUserValue) {
-            this.router.navigate(["/"]);
+            this.router.navigate(['/']);
           }
         }
 
         _createClass(LoginComponent, [{
           key: "ngOnInit",
           value: function ngOnInit() {
-            this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+            this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
           }
         }, {
           key: "onSubmit",
@@ -642,14 +642,14 @@
             this.loginForm = this.usForm.value;
             console.log(this.loginForm);
             this.loading = true;
-            this.router.navigate(["/dashboard"]); // this.toastr.success("Login successful");
+            this.router.navigate(['/dashboard']); // this.toastr.success("Login successful");
 
             this.authenticationService.login(this.loginForm).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["first"])()).subscribe(function (data) {
               _this3.loading = false;
 
               _this3.router.navigate([_this3.returnUrl]);
 
-              _this3.toastr.success("Login successful");
+              _this3.toastr.success('Login successful');
             }, function (error) {
               _this3.error = error;
               _this3.loading = false;
@@ -680,11 +680,11 @@
       LoginComponent.propDecorators = {
         usForm: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["usForm"]
+          args: ['usForm']
         }]
       };
       LoginComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        selector: "app-dashboard",
+        selector: 'app-dashboard',
         template: _raw_loader_login_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"], _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"], _authentication_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticationService"], ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"]])], LoginComponent);
       /***/
@@ -769,7 +769,7 @@
 
       var _UpdateLGA = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $state: ID, $id: ID!, $isDelete: Boolean) {\n    updateLga(\n      id: $id\n      data: { Name: $Name, isDelete: $isDelete, state: $state }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          state {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          areas {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
 
-      var Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {\n    villages(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: { area: { lga: { id: { eq: $id } } }, Name:{ containsi:$searchTerm} }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n                PostalCode\n                lga {\n                  data {\n                    id\n                    attributes {\n                      Name\n                      state {\n                        data {\n                          id\n                          attributes {\n                            Name\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n          localizations {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n        __typename\n      }\n    }\n  }\n"])));
+      var Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  query ($lgaId: ID, $page: Int, $pageSize: Int, $searchTerm:String) {\n    villages(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: { area: { lga: { id: { eq: $lgaId } } }, Name:{ containsi:$searchTerm} }\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n                PostalCode\n                lga {\n                  data {\n                    id\n                    attributes {\n                      Name\n                      state {\n                        data {\n                          id\n                          attributes {\n                            Name\n                          }\n                        }\n                      }\n                    }\n                  }\n                }\n              }\n            }\n          }\n          localizations {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n        __typename\n      }\n    }\n  }\n"])));
       var VillageMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $area: ID) {\n    createVillage(data: { Name: $Name, area: $area }) {\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var UpdateVillage = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject16 || (_templateObject16 = _taggedTemplateLiteral(["\n  mutation ($Name: String, $area: ID, $id: ID!, $isDelete: Boolean) {\n    updateVillage(\n      id: $id\n      data: { Name: $Name, area: $area, isDelete: $isDelete }\n    ) {\n      data {\n        id\n        attributes {\n          Name\n          area {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n          isDelete\n        }\n      }\n    }\n  }\n"])));
       var Areasquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"](_templateObject17 || (_templateObject17 = _taggedTemplateLiteral(["\n  query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {\n    areas(\n      pagination: { page: $page, pageSize: $pageSize }\n      sort: \"createdAt:desc\"\n      filters: { lga: { id: { eq: $id } }, Name:{containsi:$searchTerm}}\n    ) {\n      meta {\n        pagination {\n          total\n          page\n          pageSize\n          pageCount\n        }\n      }\n      data {\n        id\n        attributes {\n          Name\n          PostalCode\n          lga {\n            data {\n              id\n              attributes {\n                Name\n                state {\n                  data {\n                    id\n                    attributes {\n                      Name\n                    }\n                  }\n                }\n              }\n            }\n          }\n          villages {\n            data {\n              id\n              attributes {\n                Name\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
@@ -892,7 +892,7 @@
         _createClass(DataService, [{
           key: "handleError",
           value: function handleError(error) {
-            var errorMessage = "Unknown error!";
+            var errorMessage = 'Unknown error!';
             console.log(error); // if (error.error instanceof ErrorEvent) {
             //   // Client-side errors
             //   errorMessage = `Error: ${error.error.message}`;
@@ -901,7 +901,9 @@
             //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
             // }
 
-            if (error.error.message) this.toastr.error(error.error.message);
+            if (error.error.message) {
+              this.toastr.error(error.error.message);
+            }
 
             if (error.status !== 200) {
               this.toastr.error(error.error.error.Message);
@@ -913,7 +915,7 @@
           key: "Login",
           value: function Login(data) {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.post(this.baseURL + "/auth/login/", data, httpOptions1);
           }
@@ -921,7 +923,7 @@
           key: "createRetailer",
           value: function createRetailer(data) {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.post(this.baseURL + "/api/users", data, httpOptions1);
           }
@@ -934,9 +936,9 @@
           key: "getSurveyDetails",
           value: function getSurveyDetails(data) {
             var httpOptions1 = {
-              observe: "response",
+              observe: 'response',
               headers: {
-                Authorization: "Bearer ".concat(localStorage.getItem("token"))
+                Authorization: "Bearer ".concat(localStorage.getItem('token'))
               }
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/survey-forms/").concat(data, "?populate=Fields"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
@@ -945,7 +947,7 @@
           key: "downloadActivities",
           value: function downloadActivities(data) {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/activity/download?fromDate=").concat(data.fromDate, "&toDate=").concat(data.toDate), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -953,7 +955,7 @@
           key: "downloadCropPrices",
           value: function downloadCropPrices() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/crop-prices"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -961,7 +963,7 @@
           key: "downloadFarmDemos",
           value: function downloadFarmDemos() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/download-farm-demos"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -969,7 +971,7 @@
           key: "downloadIndoramaUpdates",
           value: function downloadIndoramaUpdates() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/indorama-updates"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -977,7 +979,7 @@
           key: "downloadMarketplace",
           value: function downloadMarketplace() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/marketplace"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -985,7 +987,7 @@
           key: "downloadMaster",
           value: function downloadMaster(masterType) {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/").concat(masterType), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -993,7 +995,7 @@
           key: "downloadStates",
           value: function downloadStates() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/states"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1001,7 +1003,7 @@
           key: "downloadLgas",
           value: function downloadLgas() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/lgas"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1009,7 +1011,7 @@
           key: "downloadCities",
           value: function downloadCities() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/cities"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1017,7 +1019,7 @@
           key: "downloadVillages",
           value: function downloadVillages() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/villages"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1025,7 +1027,7 @@
           key: "downloadMarkets",
           value: function downloadMarkets() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/markets"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1033,7 +1035,7 @@
           key: "downloadCrops",
           value: function downloadCrops() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/crops"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1041,7 +1043,7 @@
           key: "downloadUsers",
           value: function downloadUsers() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/activity/download-users"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1049,7 +1051,7 @@
           key: "downloadRetailers",
           value: function downloadRetailers() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/activity/retailers-download"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1057,7 +1059,7 @@
           key: "downloadSMSCampaigns",
           value: function downloadSMSCampaigns() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/sms-campaigns"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1065,7 +1067,7 @@
           key: "downloadSoilTests",
           value: function downloadSoilTests() {
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/excel-download/soiltest"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
           }
@@ -1073,9 +1075,9 @@
           key: "downloadResponses",
           value: function downloadResponses(data) {
             var httpOptions1 = {
-              observe: "response",
+              observe: 'response',
               headers: {
-                Authorization: "Bearer ".concat(localStorage.getItem("token"))
+                Authorization: "Bearer ".concat(localStorage.getItem('token'))
               }
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/survey-result/download?surveyForm=").concat(data), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
@@ -1084,9 +1086,9 @@
           key: "getSoilTestStats",
           value: function getSoilTestStats(data, fromDate, toDate) {
             var httpOptions1 = {
-              observe: "response",
+              observe: 'response',
               headers: {
-                Authorization: "Bearer ".concat(localStorage.getItem("token"))
+                Authorization: "Bearer ".concat(localStorage.getItem('token'))
               }
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/dashboard-soil-npk?stateId=").concat(data, "&fromDate=").concat(fromDate, "T00:00:00.000Z&toDate=").concat(toDate, "T23:59:59.000Z"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
@@ -1095,9 +1097,9 @@
           key: "getFarmDemoYieldStats",
           value: function getFarmDemoYieldStats(data, fromDate, toDate) {
             var httpOptions1 = {
-              observe: "response",
+              observe: 'response',
               headers: {
-                Authorization: "Bearer ".concat(localStorage.getItem("token"))
+                Authorization: "Bearer ".concat(localStorage.getItem('token'))
               }
             };
             return this.http.get("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl, "/api/dashboard-farm-demo?stateId=").concat(data, "&fromDate=").concat(fromDate, "T00:00:00.000Z&toDate=").concat(toDate, "T23:59:59.000Z"), httpOptions1).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_6__["catchError"])(this.handleError));
@@ -1107,7 +1109,7 @@
           value: function getDashboardStats(data, fromDate, toDate) {
             return this.apollo.watchQuery({
               query: _getDashboardStats,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 state: data,
                 fromDate: "".concat(fromDate, "T00:00:00.000Z"),
@@ -1120,7 +1122,7 @@
           value: function getCropPricesDashboard(id, market, fromDate, toDate) {
             return this.apollo.watchQuery({
               query: _getCropPricesDashboard,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 id: id,
                 market: market,
@@ -1134,7 +1136,7 @@
           value: function getFarmDemoStatsDashboard(state, status, fromDate, toDate) {
             return this.apollo.watchQuery({
               query: _getFarmDemoStatsDashboard,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 state: state,
                 status: status,
@@ -1148,7 +1150,7 @@
           value: function getPendingRetailerApprovals() {
             return this.apollo.watchQuery({
               query: _getPendingRetailerApprovals,
-              fetchPolicy: "no-cache"
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1156,7 +1158,7 @@
           value: function getApprovalCropPrices() {
             return this.apollo.watchQuery({
               query: readApprovalCropPrices,
-              fetchPolicy: "no-cache"
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1164,7 +1166,7 @@
           value: function getallChats(limit, start, key, isAskIndorama) {
             return this.apollo.watchQuery({
               query: _getallChats,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 limit: limit,
                 start: start,
@@ -1178,7 +1180,7 @@
           value: function getSurveys(limit, start, key) {
             return this.apollo.watchQuery({
               query: _getSurveys,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 limit: limit,
                 start: start,
@@ -1191,7 +1193,7 @@
           value: function getSmsCampaigns(page, pageSize, id) {
             return this.apollo.watchQuery({
               query: _getSmsCampaigns,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 page: page,
                 pageSize: pageSize,
@@ -1204,7 +1206,7 @@
           value: function createSMSCampaign(data) {
             return this.apollo.mutate({
               mutation: _createSMSCampaign,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 message: data.message,
                 state: data.state ? data.state : undefined,
@@ -1220,7 +1222,7 @@
           value: function getSurveyResults(id) {
             return this.apollo.watchQuery({
               query: _getSurveyResults,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 limit: 10000,
                 id: id
@@ -1232,7 +1234,7 @@
           value: function createSurveys(SurveyTitle, SurveyDescription, Fields) {
             return this.apollo.mutate({
               mutation: CreateSurveys,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 SurveyTitle: SurveyTitle,
                 SurveyDescription: SurveyDescription,
@@ -1248,7 +1250,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -1259,7 +1261,7 @@
               variables: {
                 id: id
               },
-              fetchPolicy: "no-cache"
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1267,7 +1269,7 @@
           value: function getFarmDemos(page, pageSize) {
             return this.apollo.watchQuery({
               query: FarmDemosQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 page: page,
                 pageSize: pageSize
@@ -1282,7 +1284,7 @@
               variables: {
                 id: id
               },
-              fetchPolicy: "no-cache"
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1290,7 +1292,7 @@
           value: function getCrops(page, pageSize, searchTerm) {
             return this.apollo.watchQuery({
               query: CropsQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 page: page,
                 pageSize: pageSize,
@@ -1303,7 +1305,7 @@
           value: function getStates(page, pageSize, searchTerm) {
             return this.apollo.watchQuery({
               query: StatesQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 page: page,
                 pageSize: pageSize,
@@ -1316,7 +1318,7 @@
           value: function getLGAs(page, pageSize, searchTerm, id) {
             return this.apollo.watchQuery({
               query: LGAquery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 id: id,
                 page: page,
@@ -1327,12 +1329,12 @@
           }
         }, {
           key: "getVillages",
-          value: function getVillages(page, pageSize, searchTerm, id) {
+          value: function getVillages(page, pageSize, searchTerm, lgaid) {
             return this.apollo.watchQuery({
               query: Villagesquery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
-                id: id,
+                id: lgaid,
                 page: page,
                 pageSize: pageSize,
                 searchTerm: searchTerm
@@ -1344,7 +1346,7 @@
           value: function getAreas(page, pageSize, searchTerm, id) {
             return this.apollo.watchQuery({
               query: Areasquery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 id: id,
                 page: page,
@@ -1358,7 +1360,7 @@
           value: function getMarkets(page, pageSize, searchTerm, id) {
             return this.apollo.watchQuery({
               query: MarketQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 id: id,
                 page: page,
@@ -1372,7 +1374,7 @@
           value: function getCropPrices(page, pageSize, PublicationState, publishedAt, Rejected) {
             return this.apollo.watchQuery({
               query: CropPricesQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 page: page,
                 pageSize: pageSize,
@@ -1387,7 +1389,7 @@
           value: function getRetailers(page, pageSize, confirmed, blocked) {
             return this.apollo.watchQuery({
               query: RetailerQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 page: page,
                 pageSize: pageSize,
@@ -1401,7 +1403,7 @@
           value: function getRetailerCategories() {
             return this.apollo.watchQuery({
               query: _getRetailerCategories,
-              fetchPolicy: "no-cache"
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1413,12 +1415,12 @@
             };
 
             if (UserType != null) {
-              variables["UserType"] = UserType;
+              variables['UserType'] = UserType;
             }
 
             return this.apollo.watchQuery({
               query: UsersQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: variables
             });
           }
@@ -1427,7 +1429,7 @@
           value: function getUsersLarge(UserType, data) {
             return this.apollo.watchQuery({
               query: queryUsersLarge,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 UserType: UserType,
                 village: data.village ? data.village : null,
@@ -1442,7 +1444,7 @@
           value: function getsoilTests(page, pageSize) {
             return this.apollo.watchQuery({
               query: SoilTestQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 page: page,
                 pageSize: pageSize
@@ -1454,7 +1456,7 @@
           value: function getsingleSoilTests(id) {
             return this.apollo.watchQuery({
               query: SingleSoilTestQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 id: id
               }
@@ -1465,7 +1467,7 @@
           value: function getsingleRetailer(id) {
             return this.apollo.watchQuery({
               query: GetSingleRetailerQuery,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 id: id
               }
@@ -1489,11 +1491,11 @@
                 dateOfHarvesting: farmdemo.dateOfHarvesting,
                 season: farmdemo.Season,
                 Status: farmdemo.Status,
-                isPesticidesUsed: farmdemo.isPesticidesUsed == "true" ? true : false,
+                isPesticidesUsed: farmdemo.isPesticidesUsed == 'true' ? true : false,
                 images: farmdemo.images
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1504,8 +1506,8 @@
               variables: {
                 Name: state.state
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1517,8 +1519,8 @@
                 Name: lga.lga,
                 state: lga.state
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1531,8 +1533,8 @@
                 lga: area.lga,
                 PostalCode: area.PostalCode
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1544,8 +1546,8 @@
                 Name: market.market,
                 state: market.state
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1557,8 +1559,8 @@
                 Name: crop.crop,
                 image: image
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1570,8 +1572,8 @@
                 Name: village.village,
                 area: village.area
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1586,11 +1588,11 @@
                 state: price.state,
                 market: price.market,
                 image: image,
-                user: parseInt(localStorage.getItem("uid")),
+                user: parseInt(localStorage.getItem('uid')),
                 published: new Date()
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1603,8 +1605,8 @@
                 Body: price.Body,
                 Images: imageid ? imageid : price.Image
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1618,8 +1620,8 @@
                 cropImage: imageid,
                 media: media
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1638,8 +1640,8 @@
                 category: parseInt(price.category),
                 description: price.description
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1659,8 +1661,8 @@
                 category: parseInt(price.category),
                 description: price.description
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1672,8 +1674,8 @@
                 id: id,
                 images: imageid
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1695,8 +1697,8 @@
                 ActivityType: price.ActivityType,
                 Time: price.Time
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1707,8 +1709,8 @@
               variables: {
                 user: id
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1723,8 +1725,8 @@
                 page: page,
                 pageSize: pageSize
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1737,8 +1739,8 @@
                 pageSize: pageSize,
                 categoryFilter: categoryFilter
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1749,8 +1751,8 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1763,7 +1765,7 @@
                 pageSize: pageSize,
                 cropFilter: cropFilter
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -1771,12 +1773,12 @@
           value: function getActivities(page, pageSize) {
             return this.apollo.watchQuery({
               query: GetActivities,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 page: page,
                 pageSize: pageSize
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -1784,11 +1786,11 @@
           value: function getActivity(id) {
             return this.apollo.watchQuery({
               query: GetSingleActivity,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -1796,11 +1798,11 @@
           value: function getMarketplaceCategories(id) {
             return this.apollo.watchQuery({
               query: GetMarketplaceCategories,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -1812,8 +1814,8 @@
                 areas: data.area,
                 user: id
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1832,8 +1834,8 @@
                 Rejected: Rejected,
                 image: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1859,8 +1861,8 @@
                 RecommendedNPKQty: result.RecommendedNPKQty,
                 RecommendedUreaQty: result.RecommendedUreaQty
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1886,8 +1888,8 @@
                 RecommendedNPKQty: result.RecommendedNPKQty,
                 RecommendedUreaQty: result.RecommendedUreaQty
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1901,8 +1903,8 @@
                 id: id,
                 image: Imageid
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1915,8 +1917,8 @@
                 isDelete: data.isDelete,
                 id: id
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1930,8 +1932,8 @@
                 isDelete: data.isDelete,
                 id: id
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1945,8 +1947,8 @@
                 isDelete: data.isDelete,
                 id: id
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1961,8 +1963,8 @@
                 isDelete: area.isDelete,
                 id: id
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1976,8 +1978,8 @@
                 isDelete: village.isDelete,
                 id: id
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -1997,8 +1999,8 @@
                 status: test.Status,
                 nutrient: test.nutrient
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2035,8 +2037,8 @@
                 Status: data.Status,
                 dateOfHarvesting: data.DateOfHarvesting
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2055,13 +2057,13 @@
                 lga: data.lga,
                 bio: data.Bio,
                 agronomist_lgas: data.agronomist_lgas,
-                blocked: data.blocked == "true" ? true : false,
+                blocked: data.blocked == 'true' ? true : false,
                 confirmed: data.confirmed,
                 UserType: data === null || data === void 0 ? void 0 : data.UserType,
                 contactNumber: data.ContactNumber
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2073,8 +2075,8 @@
                 id: id,
                 prof_pic: image
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2086,8 +2088,8 @@
                 id: id,
                 images: image
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2104,8 +2106,8 @@
                 retailer_category: retailer_category,
                 retailers: retailer
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2123,8 +2125,8 @@
                 retailer_category: retailer_category,
                 retailer: retailer
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2139,8 +2141,8 @@
                 Body: price === null || price === void 0 ? void 0 : price.Body,
                 Images: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2163,8 +2165,8 @@
                 ActivityType: price.ActivityType,
                 Time: price.Time
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2176,13 +2178,13 @@
 
             for (var i = 0; i < file.length; i++) {
               // formData.append("file[]",  file[i]);
-              formData.append("files", file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
+              formData.append('files', file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
             } // formData.append("files", file, file?.name);
 
 
             console.log(formData);
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.post(this.baseURL + "/api/upload", formData, httpOptions1);
           }
@@ -2195,13 +2197,13 @@
 
             for (var i = 0; i < file.length; i++) {
               // formData.append("file[]",  file[i]);
-              formData.append("file", file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
+              formData.append('file', file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
             } // formData.append("files", file, file?.name);
 
 
             console.log(formData);
             var httpOptions1 = {
-              observe: "response"
+              observe: 'response'
             };
             return this.http.post(this.baseURL + "/api/activity/upload", formData, httpOptions1);
           }
@@ -2213,7 +2215,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2224,7 +2226,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2235,7 +2237,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2246,7 +2248,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2257,7 +2259,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2268,7 +2270,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2279,7 +2281,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2290,7 +2292,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2301,7 +2303,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2312,7 +2314,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2323,7 +2325,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2334,7 +2336,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2345,7 +2347,7 @@
               variables: {
                 id: id
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }, {
@@ -2353,7 +2355,7 @@
           value: function getDashboardAd() {
             return this.apollo.watchQuery({
               query: _getDashboardAd,
-              fetchPolicy: "no-cache"
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2361,7 +2363,7 @@
           value: function getRetailerAd() {
             return this.apollo.watchQuery({
               query: _getRetailerAd,
-              fetchPolicy: "no-cache"
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2373,8 +2375,8 @@
                 // clickUrl: url,
                 imageId: image
               },
-              errorPolicy: "all",
-              fetchPolicy: "no-cache"
+              errorPolicy: 'all',
+              fetchPolicy: 'no-cache'
             });
           }
         }, {
@@ -2382,12 +2384,12 @@
           value: function updateDashboardAd(url, image) {
             return this.apollo.mutate({
               mutation: _updateDashboardAd,
-              fetchPolicy: "no-cache",
+              fetchPolicy: 'no-cache',
               variables: {
                 // clickUrl: url,
                 imageId: image
               },
-              errorPolicy: "all"
+              errorPolicy: 'all'
             });
           }
         }]);
@@ -2406,7 +2408,7 @@
       };
 
       DataService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: "root"
+        providedIn: 'root'
       }), Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], apollo_angular__WEBPACK_IMPORTED_MODULE_5__["Apollo"], ngx_toastr__WEBPACK_IMPORTED_MODULE_7__["ToastrService"]])], DataService);
       /***/
     },
@@ -2938,93 +2940,93 @@
       //   role: "",
       // },
       {
-        name: "Activities",
-        url: "/activities/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Marketplace",
-        url: "/marketplace/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Indorama Updates",
-        url: "/indorama_updates/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "SMS Campaigns",
-        url: "/sms-campaigns/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Farm Demo",
-        url: "/farmdemo/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Soil Analysis",
-        url: "/soiltest/customers",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Crop Prices",
-        url: "/cropprices/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Retailers",
-        url: "/retailers/all",
-        icon: "icon-cursor",
-        role: ""
-      }, {
-        name: "Users",
-        url: "/users/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Best crop practices",
-        url: "/best-crop-practices/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Surveys",
-        url: "/surveys/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Chat",
-        url: "/chat/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Advertisement",
-        url: "/advertisement/all",
-        icon: "icon-cursor",
-        role: "Admin"
-      }, {
-        name: "Masters",
-        url: "/soiltest/enquiries",
+        name: 'Activities',
+        url: '/activities/all',
         icon: 'icon-cursor',
-        role: "Admin",
+        role: 'Admin'
+      }, {
+        name: 'Marketplace',
+        url: '/marketplace/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Indorama Updates',
+        url: '/indorama_updates/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'SMS Campaigns',
+        url: '/sms-campaigns/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Farm Demo',
+        url: '/farmdemo/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Soil Analysis',
+        url: '/soiltest/customers',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Crop Prices',
+        url: '/cropprices/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Retailers',
+        url: '/retailers/all',
+        icon: 'icon-cursor',
+        role: ''
+      }, {
+        name: 'Users',
+        url: '/users/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Best crop practices',
+        url: '/best-crop-practices/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Surveys',
+        url: '/surveys/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Chat',
+        url: '/chat/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Advertisement',
+        url: '/advertisement/all',
+        icon: 'icon-cursor',
+        role: 'Admin'
+      }, {
+        name: 'Masters',
+        url: '/soiltest/enquiries',
+        icon: 'icon-cursor',
+        role: 'Admin',
         children: [{
-          name: "States",
-          url: "/masters/States"
+          name: 'States',
+          url: '/masters/States'
         }, {
-          name: "LGA",
-          url: "/masters/LGA"
+          name: 'LGA',
+          url: '/masters/LGA'
         }, {
-          name: "City",
-          url: "/masters/Cities"
+          name: 'City',
+          url: '/masters/Cities'
         }, {
-          name: "Villages",
-          url: "/masters/Villages"
+          name: 'Villages',
+          url: '/masters/Villages'
         }, {
-          name: "Markets",
-          url: "/masters/Markets"
+          name: 'Markets',
+          url: '/masters/Markets'
         }, {
-          name: "Crops",
-          url: "/masters/Crops"
+          name: 'Crops',
+          url: '/masters/Crops'
         }]
       }];
       /***/

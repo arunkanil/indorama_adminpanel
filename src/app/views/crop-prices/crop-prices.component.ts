@@ -1,16 +1,16 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
 // import { ActionRenderer } from "../../utils/StatusRenderer";
 
-import { CropPricesColumn } from "../../constants/columnMetadata";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { environment } from "../../../environments/environment";
+import { CropPricesColumn } from '../../constants/columnMetadata';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "crop-prices.component.html",
+  templateUrl: 'crop-prices.component.html',
 })
 export class CropPricesComponent {
   rowSelection: string;
@@ -21,19 +21,19 @@ export class CropPricesComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...CropPricesColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
-  @ViewChild("cropPriceModal") public cropPriceModal: ModalDirective;
-  @ViewChild("approveModal") public approveModal: ModalDirective;
+  @ViewChild('cropPriceModal') public cropPriceModal: ModalDirective;
+  @ViewChild('approveModal') public approveModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
   disableButton = true;
   disableNextButton = false;
   disablePrevButton = true;
-  selectedList = "All";
+  selectedList = 'All';
   listCheck = false;
-  publicationState = "PREVIEW";
+  publicationState = 'PREVIEW';
   toApprove = undefined;
   isRejected = undefined;
   columnDefs = [];
@@ -47,12 +47,12 @@ export class CropPricesComponent {
   to = 20;
   count = 1;
   cropPriceForm = this.fb.group({
-    crop: ["", Validators.required],
-    state: ["", Validators.required],
-    market: ["", Validators.required],
-    Price: ["", Validators.required],
-    Unit: ["", Validators.required],
-    Image: [""],
+    crop: ['', Validators.required],
+    state: ['', Validators.required],
+    market: ['', Validators.required],
+    Price: ['', Validators.required],
+    Unit: ['', Validators.required],
+    Image: [''],
   });
   // frameworkComponents = {
   //   statusRenderer: ActionRenderer,
@@ -96,7 +96,7 @@ export class CropPricesComponent {
       });
   }
   getCrops() {
-    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
+    this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result: any) => {
       this.Crops = result.data.crops.data;
     });
   }
@@ -146,14 +146,14 @@ export class CropPricesComponent {
       });
   }
   getStates() {
-    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
+    this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getStates', result.data.states.data);
       this.States = result.data.states.data;
     });
   }
   getMarkets(id?) {
-    this.dataservice.getMarkets(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getMarkets", result.data.markets.data);
+    this.dataservice.getMarkets(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getMarkets', result.data.markets.data);
       this.Markets = result.data.markets.data;
     });
   }
@@ -162,23 +162,23 @@ export class CropPricesComponent {
   }
   toggleCropPrices(data) {
     switch (data) {
-      case "Rejected":
-        this.selectedList = "Rejected";
-        this.publicationState = "PREVIEW";
+      case 'Rejected':
+        this.selectedList = 'Rejected';
+        this.publicationState = 'PREVIEW';
         this.toApprove = null;
         this.isRejected = true;
         this.getCropPrices();
         break;
-      case "Approvalpending":
-        this.selectedList = "Pending";
-        this.publicationState = "PREVIEW";
+      case 'Approvalpending':
+        this.selectedList = 'Pending';
+        this.publicationState = 'PREVIEW';
         this.toApprove = null;
         this.isRejected = false;
         this.getCropPrices();
         break;
-      case "All":
-        this.selectedList = "All";
-        this.publicationState = "PREVIEW";
+      case 'All':
+        this.selectedList = 'All';
+        this.publicationState = 'PREVIEW';
         this.toApprove = undefined;
         this.isRejected = undefined;
         this.getCropPrices();
@@ -205,7 +205,7 @@ export class CropPricesComponent {
     this.gridApi.sizeColumnsToFit();
   }
   onRowClicked(event: any) {
-    console.log("row", event.data);
+    console.log('row', event.data);
   }
   onSelectionChanged(event: any) {
     this.selectedRows = this.gridApi.getSelectedRows();
@@ -218,14 +218,14 @@ export class CropPricesComponent {
   // On file Select
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
     console.log(this.file);
   }
   approveOrReject(check) {
     let published = null;
-    if (!check) published = new Date();
+    if (!check) { published = new Date(); }
     this.dataservice
       .UpdateCropPrice(
         undefined,
@@ -236,9 +236,9 @@ export class CropPricesComponent {
       )
       .subscribe(
         (result: any) => {
-          console.log("response", result);
+          console.log('response', result);
           if (result.data.updateCropPrice) {
-            this.toastr.success("Success!");
+            this.toastr.success('Success!');
             this.getCropPrices();
             this.file = null;
             this.approveModal.hide();
@@ -247,7 +247,7 @@ export class CropPricesComponent {
           }
         },
         (error) => {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
           this.btnLoading = false;
         }
       );
@@ -261,10 +261,10 @@ export class CropPricesComponent {
       .subscribe((result: any) => {
         resp = result.body;
         console.log(result);
-        if (result.status === 200 && result.body.status == "Success") {
+        if (result.status === 200 && result.body.status == 'Success') {
           this.toastr.success(result.body.message);
           this.btnLoading = false;
-          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+          window.open(`${environment.apiUrl}${result?.body?.path}`, '_blank');
         } else {
           this.btnLoading = false;
           this.toastr.error(result.body.message);
@@ -307,12 +307,12 @@ export class CropPricesComponent {
         : null;
     } else {
       this.cropPriceForm = this.fb.group({
-        crop: ["", Validators.required],
-        state: ["", Validators.required],
-        market: ["", Validators.required],
-        Price: ["", Validators.required],
-        Unit: ["", Validators.required],
-        Image: ["", Validators.required],
+        crop: ['', Validators.required],
+        state: ['', Validators.required],
+        market: ['', Validators.required],
+        Price: ['', Validators.required],
+        Unit: ['', Validators.required],
+        Image: ['', Validators.required],
       });
       this.imageUrl = null;
     }
@@ -335,9 +335,9 @@ export class CropPricesComponent {
               .subscribe(
                 (result: any) => {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
                   if (result.data.updateCropPrice) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.getCropPrices();
                     this.file = null;
                     this.cropPriceModal.hide();
@@ -347,7 +347,7 @@ export class CropPricesComponent {
                   }
                 },
                 (error) => {
-                  this.toastr.error("Failed. Please check the fields!");
+                  this.toastr.error('Failed. Please check the fields!');
                   this.btnLoading = false;
                 }
               );
@@ -363,9 +363,9 @@ export class CropPricesComponent {
           .subscribe(
             (result: any) => {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
               if (result.data.updateCropPrice) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.getCropPrices();
                 this.file = null;
                 this.cropPriceModal.hide();
@@ -375,7 +375,7 @@ export class CropPricesComponent {
               }
             },
             (error) => {
-              this.toastr.error("Failed. Please check the fields!");
+              this.toastr.error('Failed. Please check the fields!');
               this.btnLoading = false;
             }
           );
@@ -389,9 +389,9 @@ export class CropPricesComponent {
             .subscribe(
               (result: any) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.createCropPrice) {
-                  this.toastr.success("Success!");
+                  this.toastr.success('Success!');
                   this.getCropPrices();
                   this.file = null;
                   this.cropPriceModal.hide();
@@ -401,12 +401,12 @@ export class CropPricesComponent {
                 this.btnLoading = false;
               },
               (error) => {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
                 this.btnLoading = false;
               }
             );
         } else {
-          this.toastr.error("Image failed to upload!");
+          this.toastr.error('Image failed to upload!');
         }
       });
     }

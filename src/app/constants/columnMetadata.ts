@@ -1,17 +1,17 @@
-import { ActionRenderer } from "../utils/StatusRenderer";
+import { ActionRenderer } from '../utils/StatusRenderer';
 
-export var filterParams = {
+export let filterParams = {
   suppressAndOrCondition: true,
   comparator: function (filterLocalDateAtMidnight, cellValue) {
-    var dateAsString = new Date(cellValue).toLocaleDateString("en-IN");
-    if (dateAsString == null) return -1;
-    var dateParts = dateAsString.split("/");
-    var cellDate = new Date(
+    const dateAsString = new Date(cellValue).toLocaleDateString('en-IN');
+    if (dateAsString == null) { return -1; }
+    const dateParts = dateAsString.split('/');
+    const cellDate = new Date(
       Number(dateParts[2]),
       Number(dateParts[1]) - 1,
       Number(dateParts[0])
     );
-    console.log(cellValue, "ddd", cellDate, "ddd", filterLocalDateAtMidnight);
+    console.log(cellValue, 'ddd', cellDate, 'ddd', filterLocalDateAtMidnight);
     if (filterLocalDateAtMidnight.getTime() === cellDate.getTime()) {
       return 0;
     }
@@ -23,102 +23,102 @@ export var filterParams = {
     }
   },
   browserDatePicker: true,
-  buttons: ["reset"],
+  buttons: ['reset'],
 };
 
 function monthRenderer(params) {
   switch (params.data.MarriageMonth) {
     case 0:
-      return "January";
+      return 'January';
     case 1:
-      return "February";
+      return 'February';
     case 2:
-      return "March";
+      return 'March';
     case 3:
-      return "April";
+      return 'April';
     case 4:
-      return "May";
+      return 'May';
     case 5:
-      return "June";
+      return 'June';
     case 6:
-      return "July";
+      return 'July';
     case 7:
-      return "August";
+      return 'August';
     case 8:
-      return "September";
+      return 'September';
     case 9:
-      return "October";
+      return 'October';
     case 10:
-      return "November";
+      return 'November';
     case 11:
-      return "December";
+      return 'December';
   }
 }
 function dateRenderer(params) {
-  let value =
+  const value =
     params.data.Address?.post_office?.Name +
-    " " +
+    ' ' +
     params.data.Address?.post_office?.Pincode;
-  if (value != "undefined undefined") {
+  if (value != 'undefined undefined') {
     return value;
-  } else return "No data";
+  } else { return 'No data'; }
 }
 
 export const AgentsColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     resizable: true,
     sortable: true,
   },
   {
-    field: "farmerName",
-    headerName: "Farmer Name",
+    field: 'farmerName',
+    headerName: 'Farmer Name',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "Crop",
-    headerName: "Crop",
+    field: 'Crop',
+    headerName: 'Crop',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "Date",
-    headerName: "Date",
+    field: 'Date',
+    headerName: 'Date',
     resizable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "Agronomist",
-    headerName: "Agronomist",
+    field: 'Agronomist',
+    headerName: 'Agronomist',
     minWidth: 150,
     resizable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "Status",
-    headerName: "Status",
+    field: 'Status',
+    headerName: 'Status',
     minWidth: 100,
     resizable: true,
     sortable: true,
@@ -127,8 +127,8 @@ export const AgentsColumn = [
     // filterParams: filterParams,
   },
   {
-    field: "Action",
-    headerName: "Actions",
+    field: 'Action',
+    headerName: 'Actions',
     minWidth: 100,
     resizable: true,
     sortable: true,
@@ -139,35 +139,35 @@ export const AgentsColumn = [
 ];
 export const RetailersColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Name",
-    headerName: "Business Name",
+    field: 'attributes.Name',
+    headerName: 'Business Name',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.username",
-    headerName: "Username",
+    field: 'attributes.username',
+    headerName: 'Username',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   // {
@@ -182,75 +182,75 @@ export const RetailersColumn = [
   //   },
   // },
   {
-    field: "attributes.retailer_categories.data",
-    headerName: "Category",
+    field: 'attributes.retailer_categories.data',
+    headerName: 'Category',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      let x = "";
+      let x = '';
       for (let i = 0; i < data.value.length; i++) {
-        x = x + data.value[i].attributes.CategoryName + ",";
+        x = x + data.value[i].attributes.CategoryName + ',';
       }
       return x;
     },
     // width : "auto"
   },
   {
-    field: "attributes.village.data.attributes.Name",
-    headerName: "Village",
+    field: 'attributes.village.data.attributes.Name',
+    headerName: 'Village',
     sortable: true,
     minWidth: 150,
     resizable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.lga.data.attributes.Name",
-    headerName: "LGA",
+    field: 'attributes.lga.data.attributes.Name',
+    headerName: 'LGA',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.lga.data.attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.lga.data.attributes.state.data.attributes.Name',
+    headerName: 'State',
     minWidth: 150,
     resizable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.confirmed",
-    headerName: "Approval Status",
+    field: 'attributes.confirmed',
+    headerName: 'Approval Status',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     valueGetter: (data) => {
-      if (data.data.attributes.blocked === true) return "Rejected";
+      if (data.data.attributes.blocked === true) { return 'Rejected'; }
       else if (data.data.attributes.confirmed === true) {
-        return "Approved";
+        return 'Approved';
       } else if (data.data.attributes.confirmed === false) {
-        return "Pending";
+        return 'Pending';
       }
       console.log(data.data.attributes);
     },
@@ -259,199 +259,199 @@ export const RetailersColumn = [
 ];
 export const UsersColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Name",
-    headerName: "Name",
+    field: 'attributes.Name',
+    headerName: 'Name',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.username",
-    headerName: "Username",
+    field: 'attributes.username',
+    headerName: 'Username',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.referred_agronomist.data.attributes.Name",
-    headerName: "Referred Agronomist",
+    field: 'attributes.referred_agronomist.data.attributes.Name',
+    headerName: 'Referred Agronomist',
     minWidth: 150,
     resizable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.UserType",
-    headerName: "Category",
+    field: 'attributes.UserType',
+    headerName: 'Category',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     // width : "auto"
   },
   {
-    field: "attributes.village.data.attributes.Name",
-    headerName: "Village",
+    field: 'attributes.village.data.attributes.Name',
+    headerName: 'Village',
     sortable: true,
     minWidth: 150,
     resizable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.lga.data.attributes.Name",
-    headerName: "LGA",
+    field: 'attributes.lga.data.attributes.Name',
+    headerName: 'LGA',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.lga.data.attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.lga.data.attributes.state.data.attributes.Name',
+    headerName: 'State',
     minWidth: 150,
     resizable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
 ];
 export const FarmDemoColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     width: 120,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return "FHTY" + data.value;
+      return 'FHTY' + data.value;
     },
   },
   {
-    field: "attributes.Farmer",
-    headerName: "Farmer Name",
+    field: 'attributes.Farmer',
+    headerName: 'Farmer Name',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.crop.data.attributes.Name",
-    headerName: "Crop Name",
+    field: 'attributes.crop.data.attributes.Name',
+    headerName: 'Crop Name',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.state.data.attributes.Name',
+    headerName: 'State',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.lgas.data.attributes.Name",
-    headerName: "LGA",
+    field: 'attributes.lgas.data.attributes.Name',
+    headerName: 'LGA',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.Status",
-    headerName: "Status",
+    field: 'attributes.Status',
+    headerName: 'Status',
     resizable: true,
     sortable: true,
     width: 150,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.AreaOfField",
-    headerName: "Area of Field",
+    field: 'attributes.AreaOfField',
+    headerName: 'Area of Field',
     sortable: true,
     resizable: true,
-    filter: "agDateColumnFilter",
+    filter: 'agDateColumnFilter',
     filterParams: filterParams,
     // cellRenderer: fullNameGetter,
   },
   {
-    field: "attributes.Season",
-    headerName: "Season",
+    field: 'attributes.Season',
+    headerName: 'Season',
     sortable: true,
     resizable: true,
-    filter: "agDateColumnFilter",
+    filter: 'agDateColumnFilter',
     filterParams: filterParams,
     // cellRenderer: fullNameGetter,
   },
   {
-    field: "attributes.DateOfHarvesting",
-    headerName: "Date of Harvesting",
+    field: 'attributes.DateOfHarvesting',
+    headerName: 'Date of Harvesting',
     resizable: true,
-    filter: "agDateColumnFilter",
+    filter: 'agDateColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toDateString() : "";
+      return data.value ? new Date(data.value).toDateString() : '';
     },
   },
   // {
@@ -469,94 +469,94 @@ export const FarmDemoColumn = [
 ];
 export const SoilHomeColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     width: 100,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "CropName",
-    headerName: "Crop Name",
+    field: 'CropName',
+    headerName: 'Crop Name',
     // minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "State",
-    headerName: "State",
+    field: 'State',
+    headerName: 'State',
     // minWidth: 120,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     // filterParams: filterParams,
   },
   {
-    field: "Market",
-    headerName: "Market",
+    field: 'Market',
+    headerName: 'Market',
     // minWidth: 120,
     resizable: true,
     sortable: true,
     // cellRenderer : monthRenderer
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "Unit",
-    headerName: "Unit",
+    field: 'Unit',
+    headerName: 'Unit',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
-    width: "auto",
+    width: 'auto',
   },
   {
-    field: "Price",
-    headerName: "Price",
+    field: 'Price',
+    headerName: 'Price',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
-    width: "auto",
+    width: 'auto',
   },
   {
-    field: "Addedon",
-    headerName: "Added on",
+    field: 'Addedon',
+    headerName: 'Added on',
     sortable: true,
     minWidth: 150,
     resizable: true,
-    filter: "agDateColumnFilter",
+    filter: 'agDateColumnFilter',
     filterParams: filterParams,
     // cellRenderer: fullNameGetter,
   },
   {
-    field: "Action",
-    headerName: "Actions",
+    field: 'Action',
+    headerName: 'Actions',
     minWidth: 100,
     resizable: true,
     sortable: true,
@@ -590,107 +590,107 @@ export const SoilHomeColumn = [
 ];
 export const SoilAnalysisColumns = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     width: 130,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return "STR" + data.value;
+      return 'STR' + data.value;
     },
   },
   {
-    field: "attributes.Farmer.data.attributes.Name",
-    headerName: "Farmer Name",
+    field: 'attributes.Farmer.data.attributes.Name',
+    headerName: 'Farmer Name',
     // minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.lga.data.attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.lga.data.attributes.state.data.attributes.Name',
+    headerName: 'State',
     // minWidth: 120,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     // filterParams: filterParams,
   },
   {
-    field: "attributes.lga.data.attributes.Name",
-    headerName: "LGA",
+    field: 'attributes.lga.data.attributes.Name',
+    headerName: 'LGA',
     // minWidth: 120,
     resizable: true,
     sortable: true,
     // cellRenderer : monthRenderer
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.area.data.attributes.Name",
-    headerName: "City",
+    field: 'attributes.area.data.attributes.Name',
+    headerName: 'City',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
-    width: "auto",
+    width: 'auto',
   },
   {
-    field: "attributes.nutrient",
-    headerName: "Testing for",
+    field: 'attributes.nutrient',
+    headerName: 'Testing for',
     sortable: true,
     minWidth: 150,
     resizable: true,
-    filter: "agDateColumnFilter",
+    filter: 'agDateColumnFilter',
     filterParams: filterParams,
     // cellRenderer: fullNameGetter,
   },
   {
-    field: "attributes.Status",
-    headerName: "Status",
+    field: 'attributes.Status',
+    headerName: 'Status',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
-    width: "auto",
+    width: 'auto',
     cellRenderer: (data) => {
-      return data.value.replaceAll("_", " ");
+      return data.value.replaceAll('_', ' ');
     },
   },
   {
-    field: "attributes.createdAt",
-    headerName: "Requested on",
+    field: 'attributes.createdAt',
+    headerName: 'Requested on',
     sortable: true,
     minWidth: 150,
     resizable: true,
-    filter: "agDateColumnFilter",
+    filter: 'agDateColumnFilter',
     filterParams: filterParams,
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toString() : "";
+      return data.value ? new Date(data.value).toString() : '';
     },
   },
 ];
@@ -698,34 +698,34 @@ export function dateConverter(date) {
   if (date) {
     return new Date(date);
   } else {
-    return "No data";
+    return 'No data';
   }
 }
 export function dateConverterMin(date) {
   if (date) {
     return new Date(date).toDateString();
   } else {
-    return "No data";
+    return 'No data';
   }
 }
 export const StateMasterColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Name",
-    headerName: "State",
+    field: 'attributes.Name',
+    headerName: 'State',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   // {
@@ -739,33 +739,33 @@ export const StateMasterColumn = [
 ];
 export const LGAMasterColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Name",
-    headerName: "LGA",
+    field: 'attributes.Name',
+    headerName: 'LGA',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.state.data.attributes.Name',
+    headerName: 'State',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   // {
@@ -779,55 +779,55 @@ export const LGAMasterColumn = [
 ];
 export const AreaMasterColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Name",
-    headerName: "City",
+    field: 'attributes.Name',
+    headerName: 'City',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.PostalCode",
-    headerName: "Postal Code",
+    field: 'attributes.PostalCode',
+    headerName: 'Postal Code',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.lga.data.attributes.Name",
-    headerName: "LGA",
+    field: 'attributes.lga.data.attributes.Name',
+    headerName: 'LGA',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.lga.data.attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.lga.data.attributes.state.data.attributes.Name',
+    headerName: 'State',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   // {
@@ -841,56 +841,56 @@ export const AreaMasterColumn = [
 ];
 export const VillageMasterColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Name",
-    headerName: "Village",
+    field: 'attributes.Name',
+    headerName: 'Village',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.area.data.attributes.Name",
-    headerName: "City",
+    field: 'attributes.area.data.attributes.Name',
+    headerName: 'City',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.area.data.attributes.lga.data.attributes.Name",
-    headerName: "LGA",
+    field: 'attributes.area.data.attributes.lga.data.attributes.Name',
+    headerName: 'LGA',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
     field:
-      "attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name",
-    headerName: "state",
+      'attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name',
+    headerName: 'state',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   // {
@@ -904,33 +904,33 @@ export const VillageMasterColumn = [
 ];
 export const MarketMasterColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Name",
-    headerName: "Market",
+    field: 'attributes.Name',
+    headerName: 'Market',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.state.data.attributes.Name',
+    headerName: 'State',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   // {
@@ -944,22 +944,22 @@ export const MarketMasterColumn = [
 ];
 export const CropMasterColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Name",
-    headerName: "Crop",
+    field: 'attributes.Name',
+    headerName: 'Crop',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   // {
@@ -974,125 +974,128 @@ export const CropMasterColumn = [
 ];
 export const CropPricesColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.crop.data.attributes.Name",
-    headerName: "Crop",
+    field: 'attributes.crop.data.attributes.Name',
+    headerName: 'Crop',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.market.data.attributes.Name",
-    headerName: "Market",
+    field: 'attributes.market.data.attributes.Name',
+    headerName: 'Market',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.state.data.attributes.Name',
+    headerName: 'State',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.Price",
-    headerName: "Price",
+    field: 'attributes.Price',
+    headerName: 'Price',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.Unit",
-    headerName: "Unit",
+    field: 'attributes.Unit',
+    headerName: 'Unit',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes",
-    headerName: "Status",
+    field: 'attributes',
+    headerName: 'Status',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      console.log(data.value, "cellrenderer");
-      if (data.value.Rejected == true && data.value.publishedAt == null)
-        return "Rejected";
-      if (data.value.Rejected == false && data.value.publishedAt == null)
-        return "Pending";
-      if (data.value.Rejected == false && data.value.publishedAt !== null)
-        return "Approved";
+      console.log(data.value, 'cellrenderer');
+      if (data.value.Rejected == true && data.value.publishedAt == null) {
+        return 'Rejected';
+      }
+      if (data.value.Rejected == false && data.value.publishedAt == null) {
+        return 'Pending';
+      }
+      if (data.value.Rejected == false && data.value.publishedAt !== null) {
+        return 'Approved';
+      }
     },
   },
   {
-    field: "attributes.user.data.attributes.Name",
-    headerName: "Created by",
+    field: 'attributes.user.data.attributes.Name',
+    headerName: 'Created by',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.createdAt",
-    headerName: "Created at",
+    field: 'attributes.createdAt',
+    headerName: 'Created at',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toString() : "";
+      return data.value ? new Date(data.value).toString() : '';
     },
   },
   {
-    field: "attributes.publishedAt",
-    headerName: "Published at",
+    field: 'attributes.publishedAt',
+    headerName: 'Published at',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toString() : "Not Published";
+      return data.value ? new Date(data.value).toString() : 'Not Published';
     },
   },
   // {
@@ -1106,8 +1109,8 @@ export const CropPricesColumn = [
 ];
 export const SmsColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
@@ -1115,63 +1118,63 @@ export const SmsColumn = [
     sortable: true,
   },
   {
-    field: "attributes.message",
-    headerName: "Message",
+    field: 'attributes.message',
+    headerName: 'Message',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.createdAt",
-    headerName: "Created at",
+    field: 'attributes.createdAt',
+    headerName: 'Created at',
     resizable: true,
     maxWidth: 250,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toString() : "";
+      return data.value ? new Date(data.value).toString() : '';
     },
   },
 ];
 export const DeliveryReportColumn = [
   {
-    valueGetter: "node.rowIndex + 1",
-    headerName: "No.",
+    valueGetter: 'node.rowIndex + 1',
+    headerName: 'No.',
     resizable: true,
     maxWidth: 100,
     sortable: true,
   },
   {
-    field: "recipient",
-    headerName: "Recipient",
+    field: 'recipient',
+    headerName: 'Recipient',
     minWidth: 150,
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "delivery_status",
-    headerName: "Delivery status",
+    field: 'delivery_status',
+    headerName: 'Delivery status',
     resizable: true,
     maxWidth: 250,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     // cellRenderer: (data) => {
     //   return data.value ? new Date(data.value).toString() : "";
@@ -1180,91 +1183,91 @@ export const DeliveryReportColumn = [
 ];
 export const MarketplaceColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.marketplace_category.data.attributes.CategoryName",
-    headerName: "Category",
+    field: 'attributes.marketplace_category.data.attributes.CategoryName',
+    headerName: 'Category',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.ItemName",
-    headerName: "Title",
+    field: 'attributes.ItemName',
+    headerName: 'Title',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.AvailableQty",
-    headerName: "Quantity",
+    field: 'attributes.AvailableQty',
+    headerName: 'Quantity',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.Price",
-    headerName: "Price",
+    field: 'attributes.Price',
+    headerName: 'Price',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.Unit",
-    headerName: "Unit",
+    field: 'attributes.Unit',
+    headerName: 'Unit',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.seller.data.attributes.Name",
-    headerName: "Listed by",
+    field: 'attributes.seller.data.attributes.Name',
+    headerName: 'Listed by',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.createdAt",
-    headerName: "Created at",
+    field: 'attributes.createdAt',
+    headerName: 'Created at',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toString() : "";
+      return data.value ? new Date(data.value).toString() : '';
     },
   },
   // {
@@ -1295,36 +1298,36 @@ export const MarketplaceColumn = [
 
 export const IndoramaUpdatesColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.Title",
-    headerName: "Title",
+    field: 'attributes.Title',
+    headerName: 'Title',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.createdAt",
-    headerName: "Created at",
+    field: 'attributes.createdAt',
+    headerName: 'Created at',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toString() : "";
+      return data.value ? new Date(data.value).toString() : '';
     },
   },
   // {
@@ -1339,165 +1342,154 @@ export const IndoramaUpdatesColumn = [
 
 export const SurveysColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.SurveyTitle",
-    headerName: "Survey Title",
+    field: 'attributes.SurveyTitle',
+    headerName: 'Survey Title',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.createdAt",
-    headerName: "Created at",
+    field: 'attributes.createdAt',
+    headerName: 'Created at',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toString() : "";
+      return data.value ? new Date(data.value).toString() : '';
     },
   },
 ];
 export const ActivitiesColumn = [
   {
-    field: "id",
-    headerName: "ID",
+    field: 'id',
+    headerName: 'ID',
     checkboxSelection: true,
     headerCheckboxSelection: true,
     resizable: true,
     sortable: true,
   },
   {
-    field: "attributes.ActivityType",
-    headerName: "Activity type",
+    field: 'attributes.ActivityType',
+    headerName: 'Activity type',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value.replace(/([A-Z])/g, " $1").trim();
+      return data.value.replace(/([A-Z])/g, ' $1').trim();
     },
   },
   {
-    field: "attributes.Date",
-    headerName: "Date",
+    field: 'attributes.Date',
+    headerName: 'Date',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toDateString() : "";
+      return data.value ? new Date(data.value).toDateString() : '';
     },
   },
   {
-    field: "attributes.Time",
-    headerName: "Time",
+    field: 'attributes.Time',
+    headerName: 'Time',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.village.data.attributes.Name",
-    headerName: "Village",
+    field: 'attributes.village.data.attributes.Name',
+    headerName: 'Village',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.area.data.attributes.Name",
-    headerName: "Area",
+    field: 'attributes.area.data.attributes.lga.data.attributes.Name',
+    headerName: 'LGA',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.area.data.attributes.lga.data.attributes.Name",
-    headerName: "LGA",
+    field: 'attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name',
+    headerName: 'State',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name",
-    headerName: "State",
+    field: 'attributes.NoOfAttendees',
+    headerName: 'No. of attendees',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.NoOfAttendees",
-    headerName: "No. of attendees",
+    field: 'attributes.agronomist',
+    headerName: 'Agronomist',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
   },
   {
-    field: "attributes.agronomist",
-    headerName: "Agronomist",
+    field: 'attributes.createdAt',
+    headerName: 'Created at',
     resizable: true,
     sortable: true,
-    filter: "agTextColumnFilter",
+    filter: 'agTextColumnFilter',
     filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
-    },
-  },
-  {
-    field: "attributes.createdAt",
-    headerName: "Created at",
-    resizable: true,
-    sortable: true,
-    filter: "agTextColumnFilter",
-    filterParams: {
-      filterOptions: ["contains"],
-      buttons: ["reset"],
+      filterOptions: ['contains'],
+      buttons: ['reset'],
     },
     cellRenderer: (data) => {
-      return data.value ? new Date(data.value).toString() : "";
+      return data.value ? new Date(data.value).toString() : '';
     },
   },
 ];

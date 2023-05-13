@@ -180,7 +180,7 @@
           this.pageSize = 10;
           this.count = 0;
           this.key = null;
-          this.selectedList = "All Chats";
+          this.selectedList = 'All Chats';
           this.listCheck = false;
           this.baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl;
         }
@@ -202,7 +202,7 @@
               var _a;
 
               _this.chatData = _this.chatData.concat((_a = result === null || result === void 0 ? void 0 : result.data) === null || _a === void 0 ? void 0 : _a.chats.data);
-              console.log("getallChats", _this.chatData);
+              console.log('getallChats', _this.chatData);
               _this.loading = false;
             });
           }
@@ -211,12 +211,12 @@
           value: function toggleChat(data) {
             if (data) {
               this.chatData = [];
-              this.selectedList = "Ask Indorama";
+              this.selectedList = 'Ask Indorama';
               this.listCheck = data;
               this.getallChats(this.pageSize, 0, undefined, true);
             } else {
               this.chatData = [];
-              this.selectedList = "All Chats";
+              this.selectedList = 'All Chats';
               this.listCheck = data;
               this.getallChats(this.pageSize, 0, undefined, false);
             }
@@ -275,7 +275,7 @@
             this.dataservice.getChatMessages(data.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c;
 
-              console.log("getChatMessages", (_b = (_a = result === null || result === void 0 ? void 0 : result.data) === null || _a === void 0 ? void 0 : _a.chat) === null || _b === void 0 ? void 0 : _b.data);
+              console.log('getChatMessages', (_b = (_a = result === null || result === void 0 ? void 0 : result.data) === null || _a === void 0 ? void 0 : _a.chat) === null || _b === void 0 ? void 0 : _b.data);
               _this2.messageData = (_c = result === null || result === void 0 ? void 0 : result.data) === null || _c === void 0 ? void 0 : _c.chat.data;
               _this2.messageLoading = false;
               _this2;

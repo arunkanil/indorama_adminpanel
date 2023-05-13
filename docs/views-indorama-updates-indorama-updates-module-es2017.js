@@ -167,9 +167,9 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
         this.orders = {};
         this.columnDefs = [];
         this.newsForm = this.fb.group({
-            Title: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Body: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: [""],
+            Title: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Body: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: [''],
         });
         this.rowData = [];
         this.selectedRows = [];
@@ -178,7 +178,7 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
         this.filter = {};
         this.file = null;
         this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["IndoramaUpdatesColumn"]];
-        this.rowSelection = "single";
+        this.rowSelection = 'single';
     }
     ngOnInit() {
         this.loading = true;
@@ -210,10 +210,10 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
             var _a;
             resp = result.body;
             console.log(result);
-            if (result.status === 200 && result.body.status == "Success") {
+            if (result.status === 200 && result.body.status == 'Success') {
                 this.toastr.success(result.body.message);
                 this.btnLoading = false;
-                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, "_blank");
+                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, '_blank');
             }
             else {
                 this.btnLoading = false;
@@ -262,7 +262,7 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
         this.gridApi.sizeColumnsToFit();
     }
     onRowClicked(event) {
-        console.log("row", event.data);
+        console.log('row', event.data);
     }
     onSelectionChanged(event) {
         this.selectedRows = this.gridApi.getSelectedRows();
@@ -276,7 +276,7 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
     // On file Select
     onChange(event) {
         this.file = [];
-        for (var i = 0; i < event.target.files.length; i++) {
+        for (let i = 0; i < event.target.files.length; i++) {
             this.file.push(event.target.files[i]);
         }
     }
@@ -298,9 +298,9 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
         }
         else {
             this.newsForm = this.fb.group({
-                Title: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Body: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Title: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Body: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             });
             this.imageUrl = null;
         }
@@ -311,16 +311,16 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
             .UpdateIndoramaUpdates({ isDelete: true }, this.selectedRows[0].id, null)
             .subscribe((result) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateNewsAndUpdate) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.getUpdates();
                 this.file = null;
                 this.deleteModal.hide();
                 this.gridApi.deselectAll();
             }
             else {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
             }
         });
     }
@@ -338,9 +338,9 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                             .UpdateIndoramaUpdates(this.newsForm.value, this.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id)
                             .subscribe((result) => {
                             resp = result.data;
-                            console.log("response", result);
+                            console.log('response', result);
                             if (result.data.updateNewsAndUpdate) {
-                                this.toastr.success("Success!");
+                                this.toastr.success('Success!');
                                 this.file = null;
                                 this.getUpdates();
                                 this.btnLoading = false;
@@ -349,7 +349,7 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                                 this.gridApi.deselectAll();
                             }
                             else {
-                                this.toastr.error("Failed. Please check the fields!");
+                                this.toastr.error('Failed. Please check the fields!');
                                 this.btnLoading = false;
                             }
                         });
@@ -361,9 +361,9 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                     .UpdateIndoramaUpdates(this.newsForm.value, this.selectedRows[0].id, null)
                     .subscribe((result) => {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.updateNewsAndUpdate) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.file = null;
                         this.btnLoading = false;
                         this.cropPriceModal.hide();
@@ -372,7 +372,7 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                         this.getUpdates();
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                         this.btnLoading = false;
                     }
                 });
@@ -387,9 +387,9 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                         .AddIndoramaUpdates(this.newsForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id)
                         .subscribe((result) => {
                         resp = result.data;
-                        console.log("response", result);
+                        console.log('response', result);
                         if (result.data.createNewsAndUpdate) {
-                            this.toastr.success("Success!");
+                            this.toastr.success('Success!');
                             this.file = null;
                             this.cropPriceModal.hide();
                             this.newsForm.reset();
@@ -398,13 +398,13 @@ let IndoramaUpdatesComponent = class IndoramaUpdatesComponent {
                             this.gridApi.deselectAll();
                         }
                         else {
-                            this.toastr.error("Failed. Please check the fields!");
+                            this.toastr.error('Failed. Please check the fields!');
                             this.btnLoading = false;
                         }
                     });
                 }
                 else {
-                    this.toastr.error("Image failed to upload!");
+                    this.toastr.error('Image failed to upload!');
                     this.btnLoading = false;
                 }
             });
@@ -418,9 +418,9 @@ IndoramaUpdatesComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 IndoramaUpdatesComponent.propDecorators = {
-    cropPriceModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["cropPriceModal",] }],
-    detailsModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["detailsModal",] }],
-    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }]
+    cropPriceModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['cropPriceModal',] }],
+    detailsModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['detailsModal',] }],
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['deleteModal',] }]
 };
 IndoramaUpdatesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

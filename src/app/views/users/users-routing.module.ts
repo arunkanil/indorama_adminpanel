@@ -7,7 +7,7 @@ import { UserDetailComponent } from './user-detail.component';
 const routes: Routes = [
   {
     path: '',
-    
+
     children: [
       {
         path: '',

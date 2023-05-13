@@ -86,8 +86,8 @@
           this.orders = {};
           this.baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].apiUrl;
           this.advertisementForm = this.fb.group({
-            clickUrl: [""],
-            File: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            clickUrl: [''],
+            File: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
           this.rowData = [];
           this.file = null;
@@ -106,11 +106,11 @@
             var _this = this;
 
             this.dataservice.getDashboardAd().valueChanges.subscribe(function (result) {
-              console.log("advertisement", result.data.advertisement.data);
+              console.log('advertisement', result.data.advertisement.data);
               _this.advertisement = result.data.advertisement.data;
             });
             this.dataservice.getRetailerAd().valueChanges.subscribe(function (result) {
-              console.log("retailerAdvertisement", result.data.retailerAdvertisement.data);
+              console.log('retailerAdvertisement', result.data.retailerAdvertisement.data);
               _this.retailerAdvertisement = result.data.retailerAdvertisement.data;
             });
           } // On file Select
@@ -153,10 +153,10 @@
                 if (_this2.check == true) {
                   _this2.dataservice.updateRetailerAd((_c = (_b = _this2.advertisementForm) === null || _b === void 0 ? void 0 : _b.value) === null || _c === void 0 ? void 0 : _c.clickUrl, file).subscribe(function (result) {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
 
                     if (result.data.updateRetailerAdvertisement) {
-                      _this2.toastr.success("Success!");
+                      _this2.toastr.success('Success!');
 
                       _this2.getAdvertisements();
 
@@ -164,7 +164,7 @@
 
                       _this2.advertisementModal.hide();
                     } else {
-                      _this2.toastr.error("Failed. Please check the fields!");
+                      _this2.toastr.error('Failed. Please check the fields!');
 
                       _this2.btnLoading = false;
                     }
@@ -172,10 +172,10 @@
                 } else {
                   _this2.dataservice.updateDashboardAd((_e = (_d = _this2.advertisementForm) === null || _d === void 0 ? void 0 : _d.value) === null || _e === void 0 ? void 0 : _e.clickUrl, file).subscribe(function (result) {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
 
                     if (result.data.updateAdvertisement) {
-                      _this2.toastr.success("Success!");
+                      _this2.toastr.success('Success!');
 
                       _this2.getAdvertisements();
 
@@ -183,14 +183,14 @@
 
                       _this2.advertisementModal.hide();
                     } else {
-                      _this2.toastr.error("Failed. Please check the fields!");
+                      _this2.toastr.error('Failed. Please check the fields!');
 
                       _this2.btnLoading = false;
                     }
                   });
                 }
               } else {
-                _this2.toastr.error("Image failed to upload!");
+                _this2.toastr.error('Image failed to upload!');
 
                 _this2.btnLoading = false;
               }
@@ -216,7 +216,7 @@
       AdvertisementComponent.propDecorators = {
         advertisementModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["advertisementModal"]
+          args: ['advertisementModal']
         }]
       };
       AdvertisementComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

@@ -1,12 +1,12 @@
-import { Component,ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { environment } from "../../../environments/environment";
-import { DataService } from "../../data.service";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { environment } from '../../../environments/environment';
+import { DataService } from '../../data.service';
 
 @Component({
-  templateUrl: "chat.component.html",
-  styleUrls: ["./chat.component.css"],
+  templateUrl: 'chat.component.html',
+  styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent {
   constructor(
@@ -24,7 +24,7 @@ export class ChatComponent {
   pageSize = 10;
   count = 0;
   key = null;
-  selectedList = "All Chats";
+  selectedList = 'All Chats';
   listCheck = false;
   baseURL = environment.apiUrl;
 
@@ -39,19 +39,19 @@ export class ChatComponent {
       .getallChats(limit, start, key, isAskIndorama)
       .valueChanges.subscribe((result: any) => {
         this.chatData = this.chatData.concat(result?.data?.chats.data);
-        console.log("getallChats", this.chatData);
+        console.log('getallChats', this.chatData);
         this.loading = false;
       });
   }
   toggleChat(data) {
     if (data) {
       this.chatData = [];
-      this.selectedList = "Ask Indorama";
+      this.selectedList = 'Ask Indorama';
       this.listCheck = data;
       this.getallChats(this.pageSize, 0, undefined, true);
     } else {
       this.chatData = [];
-      this.selectedList = "All Chats";
+      this.selectedList = 'All Chats';
       this.listCheck = data;
       this.getallChats(this.pageSize, 0, undefined, false);
     }
@@ -94,10 +94,10 @@ export class ChatComponent {
     this.dataservice
       .getChatMessages(data.id)
       .valueChanges.subscribe((result: any) => {
-        console.log("getChatMessages", result?.data?.chat?.data);
+        console.log('getChatMessages', result?.data?.chat?.data);
         this.messageData = result?.data?.chat.data;
         this.messageLoading = false;
-        this
+        this;
       });
   }
 }

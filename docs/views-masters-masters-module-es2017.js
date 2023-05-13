@@ -105,7 +105,7 @@ let mastersComponent = class mastersComponent {
         this.btnLoading = false;
         this.disableNextButton = false;
         this.disablePrevButton = true;
-        this.searchTerm = "";
+        this.searchTerm = '';
         // disableNextButton = false;
         // disablePrevButton = true;
         // meta;
@@ -127,48 +127,48 @@ let mastersComponent = class mastersComponent {
             statusRenderer: new _utils_StatusRenderer__WEBPACK_IMPORTED_MODULE_7__["ActionRenderer"](),
         };
         this.stateForm = this.fb.group({
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
         this.lgaForm = this.fb.group({
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
         this.areaForm = this.fb.group({
-            area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            PostalCode: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            PostalCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
         this.marketForm = this.fb.group({
-            market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
         this.cropForm = this.fb.group({
-            crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
         this.villageForm = this.fb.group({
-            village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            lga: [""],
-            state: [""],
+            village: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            lga: [''],
+            state: [''],
         });
         this.selectedYear = new Date().getFullYear();
         this.years = [];
         this.filter = {};
         this.selectedRows = [];
         this.context = { componentParent: this };
-        this.rowSelection = "single";
+        this.rowSelection = 'single';
     }
     ngOnInit() {
         this.loading = true;
         console.log(this.router.url);
         switch (this.router.url) {
-            case "/masters/Villages":
+            case '/masters/Villages':
                 this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["VillageMasterColumn"]];
                 this.dataservice.getVillages(this.count, this.pageSize).valueChanges.subscribe((result) => {
                     var _a, _b;
-                    console.log("getVillages", result.data.villages.data);
+                    console.log('getVillages', result.data.villages.data);
                     this.rowData = result.data.villages.data;
                     this.meta = result.data.villages.meta;
                     if (((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
@@ -177,11 +177,11 @@ let mastersComponent = class mastersComponent {
                     }
                 });
                 break;
-            case "/masters/Cities":
+            case '/masters/Cities':
                 this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["AreaMasterColumn"]];
                 this.dataservice.getAreas(this.count, this.pageSize).valueChanges.subscribe((result) => {
                     var _a, _b;
-                    console.log("getAreas", result.data.areas.data);
+                    console.log('getAreas', result.data.areas.data);
                     this.rowData = result.data.areas.data;
                     this.meta = result.data.areas.meta;
                     if (((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
@@ -190,11 +190,11 @@ let mastersComponent = class mastersComponent {
                     }
                 });
                 break;
-            case "/masters/LGA":
+            case '/masters/LGA':
                 this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["LGAMasterColumn"]];
                 this.dataservice.getLGAs(this.count, this.pageSize).valueChanges.subscribe((result) => {
                     var _a, _b;
-                    console.log("getLGAs", result.data.lgas.data);
+                    console.log('getLGAs', result.data.lgas.data);
                     this.rowData = result.data.lgas.data;
                     this.meta = result.data.lgas.meta;
                     if (((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
@@ -203,11 +203,11 @@ let mastersComponent = class mastersComponent {
                     }
                 });
                 break;
-            case "/masters/States":
+            case '/masters/States':
                 this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["StateMasterColumn"]];
                 this.dataservice.getStates(this.count, this.pageSize).valueChanges.subscribe((result) => {
                     var _a, _b;
-                    console.log("getStates", result.data.states.data);
+                    console.log('getStates', result.data.states.data);
                     this.rowData = result.data.states.data;
                     this.meta = result.data.states.meta;
                     if (((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
@@ -216,11 +216,11 @@ let mastersComponent = class mastersComponent {
                     }
                 });
                 break;
-            case "/masters/Markets":
+            case '/masters/Markets':
                 this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["MarketMasterColumn"]];
                 this.dataservice.getMarkets(this.count, this.pageSize).valueChanges.subscribe((result) => {
                     var _a, _b;
-                    console.log("getMarkets", result.data.markets.data);
+                    console.log('getMarkets', result.data.markets.data);
                     this.rowData = result.data.markets.data;
                     this.meta = result.data.markets.meta;
                     if (((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
@@ -229,11 +229,11 @@ let mastersComponent = class mastersComponent {
                     }
                 });
                 break;
-            case "/masters/Crops":
+            case '/masters/Crops':
                 this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["CropMasterColumn"]];
                 this.dataservice.getCrops(this.count, this.pageSize).valueChanges.subscribe((result) => {
                     var _a, _b;
-                    console.log("getCrops", result.data.crops.data);
+                    console.log('getCrops', result.data.crops.data);
                     this.rowData = result.data.crops.data;
                     this.meta = result.data.crops.meta;
                     if (((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
@@ -263,24 +263,24 @@ let mastersComponent = class mastersComponent {
         this.search();
     }
     loadData(count, pageSize, searchTerm) {
-        let masterUrl = "";
+        const masterUrl = '';
         switch (this.router.url) {
-            case "/masters/Villages":
+            case '/masters/Villages':
                 this.getVillages(count, pageSize, searchTerm);
                 break;
-            case "/masters/States":
+            case '/masters/States':
                 this.getStates(count, pageSize, searchTerm);
                 break;
-            case "/masters/Cities":
+            case '/masters/Cities':
                 this.getAreas(count, pageSize, searchTerm);
                 break;
-            case "/masters/LGA":
+            case '/masters/LGA':
                 this.getLGAs(count, pageSize, searchTerm);
                 break;
-            case "/masters/Markets":
+            case '/masters/Markets':
                 this.getMarkets(count, pageSize, searchTerm);
                 break;
-            case "/masters/Crops":
+            case '/masters/Crops':
                 this.getCrops(count, pageSize, searchTerm);
                 break;
         }
@@ -311,25 +311,25 @@ let mastersComponent = class mastersComponent {
         this.loadData(this.count, this.pageSize, this.searchTerm);
     }
     downloadExcel() {
-        let masterUrl = "";
+        let masterUrl = '';
         switch (this.router.url) {
-            case "/masters/Villages":
-                masterUrl = "villages";
+            case '/masters/Villages':
+                masterUrl = 'villages';
                 break;
-            case "/masters/States":
-                masterUrl = "states";
+            case '/masters/States':
+                masterUrl = 'states';
                 break;
-            case "/masters/Cities":
-                masterUrl = "cities";
+            case '/masters/Cities':
+                masterUrl = 'cities';
                 break;
-            case "/masters/LGA":
-                masterUrl = "lgas";
+            case '/masters/LGA':
+                masterUrl = 'lgas';
                 break;
-            case "/masters/Markets":
-                masterUrl = "markets";
+            case '/masters/Markets':
+                masterUrl = 'markets';
                 break;
-            case "/masters/Crops":
-                masterUrl = "crops";
+            case '/masters/Crops':
+                masterUrl = 'crops';
                 break;
         }
         let resp = {};
@@ -340,10 +340,10 @@ let mastersComponent = class mastersComponent {
             var _a;
             resp = result.body;
             console.log(result);
-            if (result.status === 200 && result.body.status == "Success") {
+            if (result.status === 200 && result.body.status == 'Success') {
                 this.toastr.success(result.body.message);
                 this.btnLoading = false;
-                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, "_blank");
+                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, '_blank');
             }
             else {
                 this.btnLoading = false;
@@ -353,9 +353,9 @@ let mastersComponent = class mastersComponent {
     }
     getCrops(count, pageSize, searchTerm) {
         this.dataservice.getCrops(count, pageSize, searchTerm).valueChanges.subscribe((result) => {
-            console.log("getCrops2Function", result.data.crops.data);
+            console.log('getCrops2Function', result.data.crops.data);
             this.Crops = result.data.crops.data;
-            if (this.router.url === "/masters/Crops") {
+            if (this.router.url === '/masters/Crops') {
                 this.rowData = result.data.crops.data;
                 this.meta = result.data.crops.meta;
             }
@@ -363,9 +363,9 @@ let mastersComponent = class mastersComponent {
     }
     getStates(count, pageSize, searchTerm) {
         this.dataservice.getStates(count, pageSize, searchTerm).valueChanges.subscribe((result) => {
-            console.log("getStates2Function", result.data.states.data);
+            console.log('getStates2Function', result.data.states.data);
             this.States = result.data.states.data;
-            if (this.router.url === "/masters/States") {
+            if (this.router.url === '/masters/States') {
                 this.rowData = result.data.states.data;
                 this.meta = result.data.states.meta;
             }
@@ -373,9 +373,9 @@ let mastersComponent = class mastersComponent {
     }
     getLGAs(count, pageSize, searchTerm, stateid) {
         this.dataservice.getLGAs(count, pageSize, searchTerm, stateid).valueChanges.subscribe((result) => {
-            console.log("getLGAs2Function", result.data.lgas.data);
+            console.log('getLGAs2Function', result.data.lgas.data);
             this.LGA = result.data.lgas.data;
-            if (this.router.url === "/masters/LGA") {
+            if (this.router.url === '/masters/LGA') {
                 this.rowData = result.data.lgas.data;
                 this.meta = result.data.lgas.meta;
             }
@@ -383,9 +383,9 @@ let mastersComponent = class mastersComponent {
     }
     getAreas(count, pageSize, searchTerm, lgaid) {
         this.dataservice.getAreas(count, pageSize, searchTerm, lgaid).valueChanges.subscribe((result) => {
-            console.log("getAreas2Function", result.data.areas.data);
+            console.log('getAreas2Function', result.data.areas.data);
             this.Areas = result.data.areas.data;
-            if (this.router.url === "/masters/Cities") {
+            if (this.router.url === '/masters/Cities') {
                 this.rowData = result.data.areas.data;
                 this.meta = result.data.areas.meta;
             }
@@ -395,9 +395,9 @@ let mastersComponent = class mastersComponent {
         this.dataservice
             .getVillages(count, pageSize, searchTerm, areaid)
             .valueChanges.subscribe((result) => {
-            console.log("getVillages2Function", result.data.villages.data);
+            console.log('getVillages2Function', result.data.villages.data);
             this.Villages = result.data.villages.data;
-            if (this.router.url === "/masters/Villages") {
+            if (this.router.url === '/masters/Villages') {
                 this.rowData = result.data.villages.data;
                 this.meta = result.data.villages.meta;
             }
@@ -405,9 +405,9 @@ let mastersComponent = class mastersComponent {
     }
     getMarkets(count, pageSize, searchTerm) {
         this.dataservice.getMarkets(count, pageSize, searchTerm).valueChanges.subscribe((result) => {
-            console.log("getMarkets2Function", result.data.markets.data);
+            console.log('getMarkets2Function', result.data.markets.data);
             this.Markets = result.data.markets.data;
-            if (this.router.url === "/masters/Markets") {
+            if (this.router.url === '/masters/Markets') {
                 this.rowData = result.data.markets.data;
                 this.meta = result.data.markets.meta;
             }
@@ -419,8 +419,8 @@ let mastersComponent = class mastersComponent {
         this.gridApi.sizeColumnsToFit();
     }
     onRowClicked(event) {
-        console.log("row", event);
-        alert("Parent Component Method from " + event + "!");
+        console.log('row', event);
+        alert('Parent Component Method from ' + event + '!');
         // this.router.navigate(
         //   ["/cropprices/kp_customer_details", event.data.id, this.router.url],
         //   {
@@ -447,7 +447,7 @@ let mastersComponent = class mastersComponent {
     openModal(data) {
         var _a, _b, _c, _d, _e, _f, _g, _h;
         switch (this.router.url) {
-            case "/masters/Villages":
+            case '/masters/Villages':
                 this.villageModal.show();
                 if (data) {
                     this.villageForm = this.fb.group({
@@ -470,14 +470,14 @@ let mastersComponent = class mastersComponent {
                 }
                 else {
                     this.villageForm = this.fb.group({
-                        village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        lga: [""],
-                        state: [""],
+                        village: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        lga: [''],
+                        state: [''],
                     });
                 }
                 break;
-            case "/masters/Cities":
+            case '/masters/Cities':
                 this.areaModal.show();
                 if (data) {
                     this.areaForm = this.fb.group({
@@ -499,14 +499,14 @@ let mastersComponent = class mastersComponent {
                 }
                 else {
                     this.areaForm = this.fb.group({
-                        area: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        PostalCode: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        area: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        PostalCode: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
                     });
                 }
                 break;
-            case "/masters/LGA":
+            case '/masters/LGA':
                 this.lgaModal.show();
                 if (data) {
                     this.lgaForm = this.fb.group({
@@ -519,12 +519,12 @@ let mastersComponent = class mastersComponent {
                 }
                 else {
                     this.lgaForm = this.fb.group({
-                        lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
                     });
                 }
                 break;
-            case "/masters/States":
+            case '/masters/States':
                 this.stateModal.show();
                 if (data) {
                     this.stateForm = this.fb.group({
@@ -533,11 +533,11 @@ let mastersComponent = class mastersComponent {
                 }
                 else {
                     this.stateForm = this.fb.group({
-                        state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
                     });
                 }
                 break;
-            case "/masters/Markets":
+            case '/masters/Markets':
                 this.marketModal.show();
                 if (data) {
                     this.marketForm = this.fb.group({
@@ -550,12 +550,12 @@ let mastersComponent = class mastersComponent {
                 }
                 else {
                     this.marketForm = this.fb.group({
-                        market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
                     });
                 }
                 break;
-            case "/masters/Crops":
+            case '/masters/Crops':
                 this.cropModal.show();
                 if (data) {
                     this.cropForm = this.fb.group({
@@ -570,8 +570,8 @@ let mastersComponent = class mastersComponent {
                 }
                 else {
                     this.cropForm = this.fb.group({
-                        crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                        Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                        Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
                     });
                     this.imageUrl = null;
                 }
@@ -581,7 +581,7 @@ let mastersComponent = class mastersComponent {
     // On file Select
     onChange(event) {
         this.file = [];
-        for (var i = 0; i < event.target.files.length; i++) {
+        for (let i = 0; i < event.target.files.length; i++) {
             this.file.push(event.target.files[i]);
         }
         console.log(this.file);
@@ -635,25 +635,25 @@ let mastersComponent = class mastersComponent {
                 .UpdateState(this.stateForm.value, this.selectedRows[0].id)
                 .subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.updateState) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.stateModal.hide();
                     this.stateForm.reset();
                     this.dataservice
                         .getStates(this.count, this.pageSize)
                         .valueChanges.subscribe((result) => {
-                        console.log("getStates", result.data.states.data);
+                        console.log('getStates', result.data.states.data);
                         this.rowData = result.data.states.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -661,30 +661,30 @@ let mastersComponent = class mastersComponent {
         else {
             this.dataservice.AddStates(this.stateForm.value).subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.createState) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.stateModal.hide();
                     this.stateForm.reset();
                     this.dataservice
                         .getStates(this.count, this.pageSize)
                         .valueChanges.subscribe((result) => {
-                        console.log("getStates", result.data.states.data);
+                        console.log('getStates', result.data.states.data);
                         this.rowData = result.data.states.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             }, (error) => {
                 console.log(error);
-                this.toastr.error("Failed.");
+                this.toastr.error('Failed.');
             });
         }
     }
@@ -696,23 +696,23 @@ let mastersComponent = class mastersComponent {
                 .UpdateLGA(this.lgaForm.value, this.selectedRows[0].id)
                 .subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.updateLga) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.lgaModal.hide();
                     this.lgaForm.reset();
                     this.dataservice.getLGAs(this.count, this.pageSize).valueChanges.subscribe((result) => {
-                        console.log("getLGAs", result.data.lgas.data);
+                        console.log('getLGAs', result.data.lgas.data);
                         this.rowData = result.data.lgas.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -720,23 +720,23 @@ let mastersComponent = class mastersComponent {
         else {
             this.dataservice.AddLGA(this.lgaForm.value).subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.createLga) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.lgaModal.hide();
                     this.lgaForm.reset();
                     this.dataservice.getLGAs(this.count, this.pageSize).valueChanges.subscribe((result) => {
-                        console.log("getLGAs", result.data.lgas.data);
+                        console.log('getLGAs', result.data.lgas.data);
                         this.rowData = result.data.lgas.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -750,25 +750,25 @@ let mastersComponent = class mastersComponent {
                 .UpdateArea(this.areaForm.value, this.selectedRows[0].id)
                 .subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.updateArea) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.areaModal.hide();
                     this.areaForm.reset();
                     this.dataservice
                         .getAreas(this.count, this.pageSize)
                         .valueChanges.subscribe((result) => {
-                        console.log("getAreas", result.data.areas.data);
+                        console.log('getAreas', result.data.areas.data);
                         this.rowData = result.data.areas.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -776,23 +776,23 @@ let mastersComponent = class mastersComponent {
         else {
             this.dataservice.AddArea(this.areaForm.value).subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.createArea) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.areaModal.hide();
                     this.areaForm.reset();
                     this.dataservice.getAreas(this.count, this.pageSize).valueChanges.subscribe((result) => {
-                        console.log("getAreas", result.data.areas.data);
+                        console.log('getAreas', result.data.areas.data);
                         this.rowData = result.data.areas.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -806,25 +806,25 @@ let mastersComponent = class mastersComponent {
                 .UpdateMarket(this.marketForm.value, this.selectedRows[0].id)
                 .subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.updateMarket) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.marketModal.hide();
                     this.marketForm.reset();
                     this.dataservice
                         .getMarkets(this.count, this.pageSize)
                         .valueChanges.subscribe((result) => {
-                        console.log("getMarkets", result.data.markets.data);
+                        console.log('getMarkets', result.data.markets.data);
                         this.rowData = result.data.markets.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -834,25 +834,25 @@ let mastersComponent = class mastersComponent {
                 .AddMarket(this.marketForm.value)
                 .subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.createMarket) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.marketModal.hide();
                     this.marketForm.reset();
                     this.dataservice
                         .getMarkets(this.count, this.pageSize)
                         .valueChanges.subscribe((result) => {
-                        console.log("getMarkets", result.data.markets.data);
+                        console.log('getMarkets', result.data.markets.data);
                         this.rowData = result.data.markets.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -872,9 +872,9 @@ let mastersComponent = class mastersComponent {
                             .UpdateCrop(this.cropForm.value, this.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id)
                             .subscribe((result) => {
                             resp = result.data;
-                            console.log("response", result);
+                            console.log('response', result);
                             if (result.data.updateCrop) {
-                                this.toastr.success("Success!");
+                                this.toastr.success('Success!');
                                 this.gridApi.deselectAll();
                                 this.cropModal.hide();
                                 this.cropForm.reset();
@@ -882,18 +882,18 @@ let mastersComponent = class mastersComponent {
                                 this.dataservice
                                     .getCrops(this.count, this.pageSize)
                                     .valueChanges.subscribe((result) => {
-                                    console.log("getCrops", result.data.crops.data);
+                                    console.log('getCrops', result.data.crops.data);
                                     this.rowData = result.data.crops.data;
                                 });
                             }
                             else {
                                 if (result.errors[0].extensions.error.name ==
-                                    "ValidationError") {
-                                    this.toastr.error("Can't be added as the value already exists");
+                                    'ValidationError') {
+                                    this.toastr.error('Can\'t be added as the value already exists');
                                     this.btnLoading = false;
                                 }
                                 else {
-                                    this.toastr.error("Failed. Please check the fields!");
+                                    this.toastr.error('Failed. Please check the fields!');
                                     this.btnLoading = false;
                                 }
                             }
@@ -908,25 +908,25 @@ let mastersComponent = class mastersComponent {
                     .UpdateCrop(this.cropForm.value, this.selectedRows[0].id, null)
                     .subscribe((result) => {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.updateCrop) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.gridApi.deselectAll();
                         this.cropModal.hide();
                         this.cropForm.reset();
                         this.dataservice
                             .getCrops(this.count, this.pageSize)
                             .valueChanges.subscribe((result) => {
-                            console.log("getCrops", result.data.crops.data);
+                            console.log('getCrops', result.data.crops.data);
                             this.rowData = result.data.crops.data;
                         });
                     }
                     else {
-                        if (result.errors[0].extensions.error.name == "ValidationError") {
-                            this.toastr.error("Can't be added as the value already exists");
+                        if (result.errors[0].extensions.error.name == 'ValidationError') {
+                            this.toastr.error('Can\'t be added as the value already exists');
                         }
                         else {
-                            this.toastr.error("Failed. Please check the fields!");
+                            this.toastr.error('Failed. Please check the fields!');
                         }
                     }
                 });
@@ -941,25 +941,25 @@ let mastersComponent = class mastersComponent {
                         .AddCrop(this.cropForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id)
                         .subscribe((result) => {
                         resp = result.data;
-                        console.log("response", result);
+                        console.log('response', result);
                         if (result.data.createCrop) {
-                            this.toastr.success("Success!");
+                            this.toastr.success('Success!');
                             this.gridApi.deselectAll();
                             this.cropModal.hide();
                             this.cropForm.reset();
                             this.dataservice
                                 .getCrops(this.count, this.pageSize)
                                 .valueChanges.subscribe((result) => {
-                                console.log("getCrops", result.data.crops.data);
+                                console.log('getCrops', result.data.crops.data);
                                 this.rowData = result.data.crops.data;
                             });
                         }
                         else {
-                            if (result.errors[0].extensions.error.name == "ValidationError") {
-                                this.toastr.error("Can't be added as the value already exists");
+                            if (result.errors[0].extensions.error.name == 'ValidationError') {
+                                this.toastr.error('Can\'t be added as the value already exists');
                             }
                             else {
-                                this.toastr.error("Failed. Please check the fields!");
+                                this.toastr.error('Failed. Please check the fields!');
                             }
                         }
                     });
@@ -975,25 +975,25 @@ let mastersComponent = class mastersComponent {
                 .Updatevillage(this.villageForm.value, this.selectedRows[0].id)
                 .subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.updateVillage) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.villageModal.hide();
                     this.villageForm.reset();
                     this.dataservice
                         .getVillages(this.count, this.pageSize)
                         .valueChanges.subscribe((result) => {
-                        console.log("getVillages", result.data.villages.data);
+                        console.log('getVillages', result.data.villages.data);
                         this.rowData = result.data.villages.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -1003,25 +1003,25 @@ let mastersComponent = class mastersComponent {
                 .Addvillage(this.villageForm.value)
                 .subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.createVillage) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.gridApi.deselectAll();
                     this.villageModal.hide();
                     this.villageForm.reset();
                     this.dataservice
                         .getVillages(this.count, this.pageSize)
                         .valueChanges.subscribe((result) => {
-                        console.log("getVillages", result.data.villages.data);
+                        console.log('getVillages', result.data.villages.data);
                         this.rowData = result.data.villages.data;
                     });
                 }
                 else {
-                    if (result.errors[0].extensions.error.name == "ValidationError") {
-                        this.toastr.error("Can't be added as the value already exists");
+                    if (result.errors[0].extensions.error.name == 'ValidationError') {
+                        this.toastr.error('Can\'t be added as the value already exists');
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                     }
                 }
             });
@@ -1048,13 +1048,13 @@ let mastersComponent = class mastersComponent {
         // });
         console.log(this.lgaForm.value);
         switch (this.router.url) {
-            case "/masters/Villages":
+            case '/masters/Villages':
                 this.dataservice
                     .deleteVillage(this.selectedRows[0].id)
                     .subscribe((result) => {
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.deleteVillage) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.gridApi.deselectAll();
                         this.deleteModal.hide();
                         this.dataservice
@@ -1064,17 +1064,17 @@ let mastersComponent = class mastersComponent {
                         });
                     }
                     else {
-                        this.toastr.error("Failed!");
+                        this.toastr.error('Failed!');
                     }
                 });
                 break;
-            case "/masters/Cities":
+            case '/masters/Cities':
                 this.dataservice
                     .deleteArea(this.selectedRows[0].id)
                     .subscribe((result) => {
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.deleteArea) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.gridApi.deselectAll();
                         this.deleteModal.hide();
                         this.dataservice
@@ -1084,17 +1084,17 @@ let mastersComponent = class mastersComponent {
                         });
                     }
                     else {
-                        this.toastr.error("Failed!");
+                        this.toastr.error('Failed!');
                     }
                 });
                 break;
-            case "/masters/LGA":
+            case '/masters/LGA':
                 this.dataservice
                     .deleteLGA(this.selectedRows[0].id)
                     .subscribe((result) => {
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.deleteLga) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.gridApi.deselectAll();
                         this.deleteModal.hide();
                         this.dataservice
@@ -1104,17 +1104,17 @@ let mastersComponent = class mastersComponent {
                         });
                     }
                     else {
-                        this.toastr.error("Failed!");
+                        this.toastr.error('Failed!');
                     }
                 });
                 break;
-            case "/masters/States":
+            case '/masters/States':
                 this.dataservice
                     .deleteState(this.selectedRows[0].id)
                     .subscribe((result) => {
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.deleteState) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.gridApi.deselectAll();
                         this.deleteModal.hide();
                         this.dataservice
@@ -1124,17 +1124,17 @@ let mastersComponent = class mastersComponent {
                         });
                     }
                     else {
-                        this.toastr.error("Failed!");
+                        this.toastr.error('Failed!');
                     }
                 });
                 break;
-            case "/masters/Markets":
+            case '/masters/Markets':
                 this.dataservice
                     .deleteMarket(this.selectedRows[0].id)
                     .subscribe((result) => {
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.deleteMarket) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.gridApi.deselectAll();
                         this.deleteModal.hide();
                         this.dataservice
@@ -1144,17 +1144,17 @@ let mastersComponent = class mastersComponent {
                         });
                     }
                     else {
-                        this.toastr.error("Failed!");
+                        this.toastr.error('Failed!');
                     }
                 });
                 break;
-            case "/masters/Crops":
+            case '/masters/Crops':
                 this.dataservice
                     .deleteCrop(this.selectedRows[0].id)
                     .subscribe((result) => {
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.deleteCrop) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.gridApi.deselectAll();
                         this.deleteModal.hide();
                         this.dataservice
@@ -1164,7 +1164,7 @@ let mastersComponent = class mastersComponent {
                         });
                     }
                     else {
-                        this.toastr.error("Failed!");
+                        this.toastr.error('Failed!');
                     }
                 });
                 break;
@@ -1179,13 +1179,13 @@ mastersComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 mastersComponent.propDecorators = {
-    stateModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["stateModal",] }],
-    lgaModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["lgaModal",] }],
-    villageModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["villageModal",] }],
-    marketModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["marketModal",] }],
-    areaModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["areaModal",] }],
-    cropModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["cropModal",] }],
-    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }],
+    stateModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['stateModal',] }],
+    lgaModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['lgaModal',] }],
+    villageModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['villageModal',] }],
+    marketModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['marketModal',] }],
+    areaModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['areaModal',] }],
+    cropModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['cropModal',] }],
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['deleteModal',] }],
     searchInput: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['searchInput', { static: true },] }]
 };
 mastersComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([

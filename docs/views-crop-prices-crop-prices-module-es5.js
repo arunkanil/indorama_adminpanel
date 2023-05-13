@@ -265,9 +265,9 @@
           this.disableButton = true;
           this.disableNextButton = false;
           this.disablePrevButton = true;
-          this.selectedList = "All";
+          this.selectedList = 'All';
           this.listCheck = false;
-          this.publicationState = "PREVIEW";
+          this.publicationState = 'PREVIEW';
           this.toApprove = undefined;
           this.isRejected = undefined;
           this.columnDefs = [];
@@ -279,12 +279,12 @@
           this.to = 20;
           this.count = 1;
           this.cropPriceForm = this.fb.group({
-            crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: [""]
+            crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: ['']
           }); // frameworkComponents = {
           //   statusRenderer: ActionRenderer,
           // };
@@ -296,7 +296,7 @@
           this.filter = {};
           this.file = null;
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["CropPricesColumn"]);
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(CropPricesComponent, [{
@@ -335,7 +335,7 @@
           value: function getCrops() {
             var _this2 = this;
 
-            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe(function (result) {
               _this2.Crops = result.data.crops.data;
             });
           }
@@ -387,8 +387,8 @@
           value: function getStates() {
             var _this5 = this;
 
-            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getStates", result.data.states.data);
+            this.dataservice.getStates(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getStates', result.data.states.data);
               _this5.States = result.data.states.data;
             });
           }
@@ -397,8 +397,8 @@
           value: function getMarkets(id) {
             var _this6 = this;
 
-            this.dataservice.getMarkets(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getMarkets", result.data.markets.data);
+            this.dataservice.getMarkets(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getMarkets', result.data.markets.data);
               _this6.Markets = result.data.markets.data;
             });
           }
@@ -411,25 +411,25 @@
           key: "toggleCropPrices",
           value: function toggleCropPrices(data) {
             switch (data) {
-              case "Rejected":
-                this.selectedList = "Rejected";
-                this.publicationState = "PREVIEW";
+              case 'Rejected':
+                this.selectedList = 'Rejected';
+                this.publicationState = 'PREVIEW';
                 this.toApprove = null;
                 this.isRejected = true;
                 this.getCropPrices();
                 break;
 
-              case "Approvalpending":
-                this.selectedList = "Pending";
-                this.publicationState = "PREVIEW";
+              case 'Approvalpending':
+                this.selectedList = 'Pending';
+                this.publicationState = 'PREVIEW';
                 this.toApprove = null;
                 this.isRejected = false;
                 this.getCropPrices();
                 break;
 
-              case "All":
-                this.selectedList = "All";
-                this.publicationState = "PREVIEW";
+              case 'All':
+                this.selectedList = 'All';
+                this.publicationState = 'PREVIEW';
                 this.toApprove = undefined;
                 this.isRejected = undefined;
                 this.getCropPrices();
@@ -459,7 +459,7 @@
         }, {
           key: "onRowClicked",
           value: function onRowClicked(event) {
-            console.log("row", event.data);
+            console.log('row', event.data);
           }
         }, {
           key: "onSelectionChanged",
@@ -490,12 +490,16 @@
             var _this7 = this;
 
             var published = null;
-            if (!check) published = new Date();
+
+            if (!check) {
+              published = new Date();
+            }
+
             this.dataservice.UpdateCropPrice(undefined, this.selectedRows[0].id, undefined, check, published).subscribe(function (result) {
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.updateCropPrice) {
-                _this7.toastr.success("Success!");
+                _this7.toastr.success('Success!');
 
                 _this7.getCropPrices();
 
@@ -508,7 +512,7 @@
                 _this7.btnLoading = false;
               }
             }, function (error) {
-              _this7.toastr.error("Failed. Please check the fields!");
+              _this7.toastr.error('Failed. Please check the fields!');
 
               _this7.btnLoading = false;
             });
@@ -526,11 +530,11 @@
               resp = result.body;
               console.log(result);
 
-              if (result.status === 200 && result.body.status == "Success") {
+              if (result.status === 200 && result.body.status == 'Success') {
                 _this8.toastr.success(result.body.message);
 
                 _this8.btnLoading = false;
-                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), '_blank');
               } else {
                 _this8.btnLoading = false;
 
@@ -563,12 +567,12 @@
               this.imageUrl = ((_e = (_d = (_c = this.selectedRows[0].attributes.Image) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.attributes) === null || _e === void 0 ? void 0 : _e.url) ? "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl) + ((_h = (_g = (_f = this.selectedRows[0].attributes.Image) === null || _f === void 0 ? void 0 : _f.data) === null || _g === void 0 ? void 0 : _g.attributes) === null || _h === void 0 ? void 0 : _h.url) : null;
             } else {
               this.cropPriceForm = this.fb.group({
-                crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+                crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
               });
               this.imageUrl = null;
             }
@@ -592,10 +596,10 @@
 
                     _this9.dataservice.UpdateCropPrice(_this9.cropPriceForm.value, _this9.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                       resp = result.data;
-                      console.log("response", result);
+                      console.log('response', result);
 
                       if (result.data.updateCropPrice) {
-                        _this9.toastr.success("Success!");
+                        _this9.toastr.success('Success!');
 
                         _this9.getCropPrices();
 
@@ -610,7 +614,7 @@
                         _this9.btnLoading = false;
                       }
                     }, function (error) {
-                      _this9.toastr.error("Failed. Please check the fields!");
+                      _this9.toastr.error('Failed. Please check the fields!');
 
                       _this9.btnLoading = false;
                     });
@@ -619,10 +623,10 @@
               } else {
                 this.dataservice.UpdateCropPrice(this.cropPriceForm.value, this.selectedRows[0].id, null).subscribe(function (result) {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.updateCropPrice) {
-                    _this9.toastr.success("Success!");
+                    _this9.toastr.success('Success!');
 
                     _this9.getCropPrices();
 
@@ -637,7 +641,7 @@
                     _this9.btnLoading = false;
                   }
                 }, function (error) {
-                  _this9.toastr.error("Failed. Please check the fields!");
+                  _this9.toastr.error('Failed. Please check the fields!');
 
                   _this9.btnLoading = false;
                 });
@@ -651,10 +655,10 @@
 
                   _this9.dataservice.AddCropPrice(_this9.cropPriceForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
 
                     if (result.data.createCropPrice) {
-                      _this9.toastr.success("Success!");
+                      _this9.toastr.success('Success!');
 
                       _this9.getCropPrices();
 
@@ -669,12 +673,12 @@
 
                     _this9.btnLoading = false;
                   }, function (error) {
-                    _this9.toastr.error("Failed. Please check the fields!");
+                    _this9.toastr.error('Failed. Please check the fields!');
 
                     _this9.btnLoading = false;
                   });
                 } else {
-                  _this9.toastr.error("Image failed to upload!");
+                  _this9.toastr.error('Image failed to upload!');
                 }
               });
             }
@@ -699,11 +703,11 @@
       CropPricesComponent.propDecorators = {
         cropPriceModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["cropPriceModal"]
+          args: ['cropPriceModal']
         }],
         approveModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["approveModal"]
+          args: ['approveModal']
         }]
       };
       CropPricesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

@@ -1,22 +1,22 @@
-import { Component, ViewChild } from "@angular/core";
-import { NgForm } from "@angular/forms";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { first } from "rxjs/operators";
-import { DataService } from "../../data.service";
-import { AuthenticationService } from "./authentication.service";
+import { Component, ViewChild } from '@angular/core';
+import { NgForm } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { first } from 'rxjs/operators';
+import { DataService } from '../../data.service';
+import { AuthenticationService } from './authentication.service';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "login.component.html",
+  selector: 'app-dashboard',
+  templateUrl: 'login.component.html',
 })
 export class LoginComponent {
-  @ViewChild("usForm") usForm: NgForm;
+  @ViewChild('usForm') usForm: NgForm;
 
   loginForm: any = {};
   result: any = {};
   returnUrl: string;
-  error = "";
+  error = '';
   loading = false;
 
   constructor(
@@ -27,19 +27,19 @@ export class LoginComponent {
     private toastr: ToastrService
   ) {
     if (this.authenticationService.currentUserValue) {
-      this.router.navigate(["/"]);
+      this.router.navigate(['/']);
     }
   }
 
   ngOnInit(): void {
-    this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
   onSubmit() {
     this.loading = true;
     this.loginForm = this.usForm.value;
     console.log(this.loginForm);
     this.loading = true;
-    this.router.navigate(["/dashboard"]);
+    this.router.navigate(['/dashboard']);
     // this.toastr.success("Login successful");
     this.authenticationService
       .login(this.loginForm)
@@ -48,7 +48,7 @@ export class LoginComponent {
         (data) => {
           this.loading = false;
           this.router.navigate([this.returnUrl]);
-          this.toastr.success("Login successful");
+          this.toastr.success('Login successful');
         },
         (error) => {
           this.error = error;

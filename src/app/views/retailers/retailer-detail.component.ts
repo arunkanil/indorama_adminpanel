@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
-import { dateConverter } from "../../constants/columnMetadata";
-import { environment } from "../../../environments/environment";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { dateConverter } from '../../constants/columnMetadata';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "retailer-detail.component.html",
+  templateUrl: 'retailer-detail.component.html',
 })
 export class RetailerDetailComponent implements OnInit {
   constructor(
@@ -18,16 +18,16 @@ export class RetailerDetailComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {}
-  @ViewChild("myModal") public myModal: ModalDirective;
-  @ViewChild("resultModal") public resultModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
-  @ViewChild("addProductModal") public addProductModal: ModalDirective;
-  @ViewChild("approveModal") public approveModal: ModalDirective;
+  @ViewChild('myModal') public myModal: ModalDirective;
+  @ViewChild('resultModal') public resultModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
+  @ViewChild('addProductModal') public addProductModal: ModalDirective;
+  @ViewChild('approveModal') public approveModal: ModalDirective;
 
   id: any;
   baseURL = environment.apiUrl;
   loading = true;
-  btnText = "Approve / Reject";
+  btnText = 'Approve / Reject';
   disableButton = true;
   details: any = [];
   btnLoading = false;
@@ -44,31 +44,31 @@ export class RetailerDetailComponent implements OnInit {
   flag;
   deleteObj;
   agentForm = this.fb.group({
-    ContactNumber: ["", Validators.required],
+    ContactNumber: ['', Validators.required],
     // username: ["", Validators.required],
-    Name: ["", Validators.required],
+    Name: ['', Validators.required],
     // email: ["", Validators.required],
-    password: [""],
-    Farmer: ["", Validators.required],
-    retailer_categories: ["", Validators.required],
-    Bio: ["", Validators.required],
-    state: ["", Validators.required],
-    village: ["", Validators.required],
-    lga: ["", Validators.required],
-    Latitude: ["", Validators.required],
-    Longitude: ["", Validators.required],
+    password: [''],
+    Farmer: ['', Validators.required],
+    retailer_categories: ['', Validators.required],
+    Bio: ['', Validators.required],
+    state: ['', Validators.required],
+    village: ['', Validators.required],
+    lga: ['', Validators.required],
+    Latitude: ['', Validators.required],
+    Longitude: ['', Validators.required],
   });
   resultForm = this.fb.group({
-    id: [""],
-    itemName: ["", Validators.required],
-    price: ["", Validators.required],
-    unit: ["", Validators.required],
+    id: [''],
+    itemName: ['', Validators.required],
+    price: ['', Validators.required],
+    unit: ['', Validators.required],
   });
   productForm = this.fb.group({
-    Image: ["", Validators.required],
-    itemName: ["", Validators.required],
-    price: ["", Validators.required],
-    unit: ["", Validators.required],
+    Image: ['', Validators.required],
+    itemName: ['', Validators.required],
+    price: ['', Validators.required],
+    unit: ['', Validators.required],
   });
   ngOnInit(): void {
     this.getLists();
@@ -80,7 +80,7 @@ export class RetailerDetailComponent implements OnInit {
     this.getFarmers();
     this.getRetailers();
     this.activatedRouter.params.subscribe((params) => {
-      this.id = params["id"];
+      this.id = params['id'];
     });
     this.getTest();
   }
@@ -92,7 +92,7 @@ export class RetailerDetailComponent implements OnInit {
       .getsingleRetailer(this.id)
       .valueChanges.subscribe((result: any) => {
         console.log(
-          "getsingleRetailer",
+          'getsingleRetailer',
           result.data.usersPermissionsUsers.data[0]
         );
         this.details = result.data.usersPermissionsUsers.data[0];
@@ -110,7 +110,7 @@ export class RetailerDetailComponent implements OnInit {
             this.details?.attributes?.lga?.data?.attributes?.state?.data?.id,
             Validators.required,
           ],
-          password: [""],
+          password: [''],
           lga: [this.details?.attributes?.lga?.data?.id, Validators.required],
           village: [
             this.details?.attributes?.village?.data?.id,
@@ -123,11 +123,11 @@ export class RetailerDetailComponent implements OnInit {
         });
         if (this.details?.attributes?.blocked === true) {
           this.disableButton = true;
-          this.btnText = "Rejected";
+          this.btnText = 'Rejected';
         } else if (this.details?.attributes?.confirmed === true) {
           {
             this.disableButton = true;
-            this.btnText = "Approved";
+            this.btnText = 'Approved';
           }
         } else if (this.details?.attributes?.confirmed === false) {
           return (this.disableButton = false);
@@ -136,26 +136,26 @@ export class RetailerDetailComponent implements OnInit {
       });
   }
   getCrops() {
-    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
+    this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getCrops', result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
   }
   getStates() {
-    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
+    this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getStates', result.data.states.data);
       this.States = result.data.states.data;
     });
   }
   getLGAs(id?) {
-    this.dataservice.getLGAs(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+    this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getLGAs', result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
   getAreas(id?) {
-    this.dataservice.getAreas(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
+    this.dataservice.getAreas(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getAreas', result.data.areas.data);
       this.Areas = result.data.areas.data;
     });
   }
@@ -163,21 +163,21 @@ export class RetailerDetailComponent implements OnInit {
     this.dataservice
       .getRetailerCategories()
       .valueChanges.subscribe((result: any) => {
-        console.log("getRetailers", result.data.retailerCategories.data);
+        console.log('getRetailers', result.data.retailerCategories.data);
         this.Retailers = result.data.retailerCategories.data;
       });
   }
   getFarmers() {
     this.dataservice
-      .getUsers(undefined, undefined, "Farmer")
+      .getUsers(undefined, undefined, 'Farmer')
       .valueChanges.subscribe((result: any) => {
-        console.log("getFarmers", result.data.usersPermissionsUsers.data);
+        console.log('getFarmers', result.data.usersPermissionsUsers.data);
         this.Farmers = result.data.usersPermissionsUsers.data;
       });
   }
   getVillages(id?) {
-    this.dataservice.getVillages(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getVillages", result.data.villages.data);
+    this.dataservice.getVillages(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getVillages', result.data.villages.data);
       this.Villages = result.data.villages.data;
     });
   }
@@ -202,14 +202,14 @@ export class RetailerDetailComponent implements OnInit {
     }
     this.dataservice.UpdateRetailer(payload, this.id).subscribe(
       (result: any) => {
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.updateUsersPermissionsUser) {
-          this.toastr.success("Updated successfully!");
+          this.toastr.success('Updated successfully!');
           this.btnLoading = false;
           this.approveModal.hide();
           this.getTest();
         } else {
-          this.toastr.error("Something went wrong!");
+          this.toastr.error('Something went wrong!');
           this.btnLoading = false;
         }
       },
@@ -271,14 +271,14 @@ export class RetailerDetailComponent implements OnInit {
     this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe(
       (result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.updateUsersPermissionsUser) {
-          this.toastr.success("Retailer updated successfully!");
+          this.toastr.success('Retailer updated successfully!');
           this.btnLoading = false;
           this.myModal.hide();
           this.getTest();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
           this.btnLoading = false;
         }
       },
@@ -288,7 +288,7 @@ export class RetailerDetailComponent implements OnInit {
     );
   }
   ResultSubmit() {
-    console.log("edit", this.resultForm.value);
+    console.log('edit', this.resultForm.value);
     this.btnLoading = true;
     let resp = {};
     console.log(this.resultForm.value);
@@ -301,14 +301,14 @@ export class RetailerDetailComponent implements OnInit {
       .subscribe(
         (result: any) => {
           resp = result.data;
-          console.log("response", result);
+          console.log('response', result);
           if (result.data.updateRetailerProduct) {
-            this.toastr.success("Product updated successfully!");
+            this.toastr.success('Product updated successfully!');
             this.btnLoading = false;
             this.resultModal.hide();
             this.getTest();
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            this.toastr.error('Failed. Please check the fields!');
             this.btnLoading = false;
           }
         },
@@ -319,7 +319,7 @@ export class RetailerDetailComponent implements OnInit {
   }
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
     console.log(this.file);
@@ -339,18 +339,18 @@ export class RetailerDetailComponent implements OnInit {
           .UpdateRetailerPic(this.id, response.body[0]?.id)
           .subscribe((result: any) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateUsersPermissionsUser) {
-              this.toastr.success("Success!");
+              this.toastr.success('Success!');
               this.file = null;
               this.getTest();
               this.addProductModal.hide();
             } else {
-              this.toastr.error("Failed!");
+              this.toastr.error('Failed!');
             }
           });
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
       }
     });
   }
@@ -370,15 +370,15 @@ export class RetailerDetailComponent implements OnInit {
           .subscribe(
             (result: any) => {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
               if (result.data.createRetailerProduct) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.btnLoading = false;
                 this.file = null;
                 this.getTest();
                 this.addProductModal.hide();
               } else {
-                this.toastr.error("Failed!");
+                this.toastr.error('Failed!');
                 this.btnLoading = false;
               }
             },
@@ -387,7 +387,7 @@ export class RetailerDetailComponent implements OnInit {
             }
           );
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
         this.btnLoading = false;
       }
     });
@@ -396,13 +396,13 @@ export class RetailerDetailComponent implements OnInit {
     this.dataservice
       .deleteProduct(this.deleteObj.id)
       .subscribe((result: any) => {
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.deleteRetailerProduct) {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.deleteModal.hide();
           this.getTest();
         } else {
-          this.toastr.error("Failed!");
+          this.toastr.error('Failed!');
         }
       });
   }

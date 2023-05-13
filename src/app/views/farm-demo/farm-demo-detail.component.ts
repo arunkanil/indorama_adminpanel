@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import {
   dateConverter,
   dateConverterMin,
-} from "../../constants/columnMetadata";
-import { environment } from "../../../environments/environment";
+} from '../../constants/columnMetadata';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "farm-demo-detail.component.html",
+  templateUrl: 'farm-demo-detail.component.html',
 })
 export class FarmDemoDetailComponent implements OnInit {
   constructor(
@@ -21,9 +21,9 @@ export class FarmDemoDetailComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {}
-  @ViewChild("myModal") public myModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
-  @ViewChild("commentModal") public commentModal: ModalDirective;
+  @ViewChild('myModal') public myModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
+  @ViewChild('commentModal') public commentModal: ModalDirective;
 
   id: any;
   loading = true;
@@ -33,7 +33,7 @@ export class FarmDemoDetailComponent implements OnInit {
   dateConverterMin = dateConverterMin;
   btnLoading = false;
   groups: any = [];
-  maplink: any = "";
+  maplink: any = '';
   Villages: any = [];
   LGA: any = [];
   Areas: any = [];
@@ -44,27 +44,27 @@ export class FarmDemoDetailComponent implements OnInit {
   fullImage;
   impactYield;
   editForm = this.fb.group({
-    lga: ["", Validators.required],
-    state: ["", Validators.required],
-    Crops: ["", Validators.required],
-    Farmer: ["", Validators.required],
-    AreaOfField: ["", Validators.required],
-    Season: ["", Validators.required],
-    isPesticidesUsed: [""],
-    FarmLocationLongitude: ["", Validators.required],
-    FarmLocationLatitude: ["", Validators.required],
-    Status: ["", Validators.required],
-    Yield_I: [""],
-    DateOfSowing_I: [""],
-    DateOfDemonstration_I: [""],
-    FirstUreaApplication_I: [""],
-    SecondUreaApplication_I: [""],
-    Yield_F: [""],
-    DateOfSowing_F: [""],
-    DateOfDemonstration_F: [""],
-    FirstUreaApplication_F: [""],
-    SecondUreaApplication_F: [""],
-    DateOfHarvesting: [""],
+    lga: ['', Validators.required],
+    state: ['', Validators.required],
+    Crops: ['', Validators.required],
+    Farmer: ['', Validators.required],
+    AreaOfField: ['', Validators.required],
+    Season: ['', Validators.required],
+    isPesticidesUsed: [''],
+    FarmLocationLongitude: ['', Validators.required],
+    FarmLocationLatitude: ['', Validators.required],
+    Status: ['', Validators.required],
+    Yield_I: [''],
+    DateOfSowing_I: [''],
+    DateOfDemonstration_I: [''],
+    FirstUreaApplication_I: [''],
+    SecondUreaApplication_I: [''],
+    Yield_F: [''],
+    DateOfSowing_F: [''],
+    DateOfDemonstration_F: [''],
+    FirstUreaApplication_F: [''],
+    SecondUreaApplication_F: [''],
+    DateOfHarvesting: [''],
   });
 
   ngOnInit(): void {
@@ -73,9 +73,9 @@ export class FarmDemoDetailComponent implements OnInit {
   }
   dispPesticides(data) {
     if (data) {
-      return "Yes";
+      return 'Yes';
     } else {
-      return "No";
+      return 'No';
     }
   }
   getLists() {
@@ -86,13 +86,13 @@ export class FarmDemoDetailComponent implements OnInit {
     // });
 
     this.activatedRouter.params.subscribe((params) => {
-      this.id = params["id"];
+      this.id = params['id'];
     });
     this.dataservice
       .getSingleFarmDemo(this.id)
       .valueChanges.subscribe((result: any) => {
         this.details = result.data.farmDemo.data;
-        console.log("getSingleFarmDemo", this.details);
+        console.log('getSingleFarmDemo', this.details);
 
         this.editForm = this.fb.group({
           lga: [
@@ -158,28 +158,20 @@ export class FarmDemoDetailComponent implements OnInit {
           100
         ).toFixed(2);
         this.maplink =
-          "https://maps.google.com/?q=" +
+          'https://maps.google.com/?q=' +
           result.data?.farmDemo?.data?.attributes.FarmLocationLatitude?.toString() +
-          "," +
+          ',' +
           result.data?.farmDemo?.data?.attributes.FarmLocationLongitude?.toString();
         console.log(this.maplink);
         this.loading = false;
       });
-    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
+    this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getCrops', result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
-    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
+    this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getStates', result.data.states.data);
       this.States = result.data.states.data;
-    });
-    this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
-      this.Areas = result.data.areas.data;
-    });
-    this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getVillages", result.data.villages.data);
-      this.Villages = result.data.villages.data;
     });
   }
 
@@ -192,14 +184,14 @@ export class FarmDemoDetailComponent implements OnInit {
       .subscribe(
         (result: any) => {
           resp = result.data;
-          console.log("response", result);
+          console.log('response', result);
           if (result.data.updateFarmDemo) {
-            this.toastr.success("Farm demo edited successfully!");
+            this.toastr.success('Farm demo edited successfully!');
             this.btnLoading = false;
             this.myModal.hide();
             this.getLists();
           } else {
-            this.toastr.error("Failed. Please check the fields!");
+            this.toastr.error('Failed. Please check the fields!');
             this.btnLoading = false;
           }
         },
@@ -216,73 +208,73 @@ export class FarmDemoDetailComponent implements OnInit {
     this.getLGAs(event.target.value);
   }
   getLGAs(id?) {
-    this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+    this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getLGAs', result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
   deleteFarmDemo() {
     this.dataservice.deleteFarmDemo(this.id).subscribe(
       (result: any) => {
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.deleteFarmDemo) {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.deleteModal.hide();
-          this.router.navigate(["/farmdemo/all"]);
+          this.router.navigate(['/farmdemo/all']);
         } else {
-          this.toastr.error("Failed!");
+          this.toastr.error('Failed!');
         }
       },
       (error) => {
-        this.toastr.error("Something went wrong!");
+        this.toastr.error('Something went wrong!');
       }
     );
   }
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
   }
   uploadPic() {
     let resp = {};
-    let imgarray = Array.from(
+    const imgarray = Array.from(
       this.details?.attributes?.Images?.data,
       (x: any) => x.id
     );
     this.dataservice.upload(this.file).subscribe((response: any) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log(response);
         imgarray.push(response.body[0]?.id);
         this.dataservice
           .AddFarmdemoPic(this.id, imgarray)
           .subscribe((result: any) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateFarmDemo) {
-              this.toastr.success("Success!");
+              this.toastr.success('Success!');
               this.file = null;
               this.getLists();
             } else {
-              this.toastr.error("Failed!");
+              this.toastr.error('Failed!');
             }
           });
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
       }
     });
   }
   removePic(data) {
     let resp = {};
-    if (confirm("Are you sure?")) {
+    if (confirm('Are you sure?')) {
       this.dataservice.deleteFile(data.id).subscribe((result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.deleteUploadFile) {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.getLists();
         } else {
-          this.toastr.error("Failed!");
+          this.toastr.error('Failed!');
         }
       });
     }

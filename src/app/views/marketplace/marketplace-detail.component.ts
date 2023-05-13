@@ -1,17 +1,17 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import {
   dateConverter,
   dateConverterMin,
-} from "../../constants/columnMetadata";
-import { environment } from "../../../environments/environment";
+} from '../../constants/columnMetadata';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "marketplace-detail.component.html",
+  templateUrl: 'marketplace-detail.component.html',
 })
 export class MarketplaceDetailComponent implements OnInit {
   constructor(
@@ -21,9 +21,9 @@ export class MarketplaceDetailComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {}
-  @ViewChild("editModal") public editModal: ModalDirective;
-  @ViewChild("resultModal") public resultModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
+  @ViewChild('editModal') public editModal: ModalDirective;
+  @ViewChild('resultModal') public resultModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
 
   id: any;
   baseURL = environment.apiUrl;
@@ -37,20 +37,20 @@ export class MarketplaceDetailComponent implements OnInit {
   Categories: any = [];
 
   productForm = this.fb.group({
-    itemName: ["", Validators.required],
+    itemName: ['', Validators.required],
     // images: ["", Validators.required],
     // userId: [localStorage.getItem("uid")],
-    contactNumber: ["", Validators.required],
-    price: ["", Validators.required],
-    availableQty: ["", Validators.required],
-    unit: ["", Validators.required],
-    category: ["", Validators.required],
-    description: ["", Validators.required],
+    contactNumber: ['', Validators.required],
+    price: ['', Validators.required],
+    availableQty: ['', Validators.required],
+    unit: ['', Validators.required],
+    category: ['', Validators.required],
+    description: ['', Validators.required],
   });
 
   ngOnInit(): void {
     this.activatedRouter.params.subscribe((params) => {
-      this.id = params["id"];
+      this.id = params['id'];
     });
     this.getSingleMarketplaceProduct();
     this.getCategories();
@@ -60,7 +60,7 @@ export class MarketplaceDetailComponent implements OnInit {
       .getSingleMarketplaceProduct(this.id)
       .valueChanges.subscribe((result: any) => {
         console.log(
-          "getSingleMarketplaceProduct",
+          'getSingleMarketplaceProduct',
           result.data.marketplaceProduct.data
         );
         this.details = result.data.marketplaceProduct.data;
@@ -95,7 +95,7 @@ export class MarketplaceDetailComponent implements OnInit {
     this.dataservice
       .getMarketplaceCategories()
       .valueChanges.subscribe((result: any) => {
-        console.log("getCategories", result.data.marketplaceCategories.data);
+        console.log('getCategories', result.data.marketplaceCategories.data);
         this.Categories = result.data.marketplaceCategories.data;
       });
   }
@@ -110,7 +110,7 @@ export class MarketplaceDetailComponent implements OnInit {
   // On file Select
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
     console.log(this.file);
@@ -123,14 +123,14 @@ export class MarketplaceDetailComponent implements OnInit {
       .updateMarketplaceProduct(this.productForm.value, this.id)
       .subscribe((result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.updateMarketplaceProduct) {
-          this.toastr.success("Activity updated successfully!");
+          this.toastr.success('Activity updated successfully!');
           this.editModal.hide();
           this.btnLoading = false;
           this.getSingleMarketplaceProduct();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
           this.btnLoading = false;
         }
       });
@@ -148,18 +148,18 @@ export class MarketplaceDetailComponent implements OnInit {
           )
           .subscribe((result: any) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateMarketplaceProduct) {
-              this.toastr.success("Activity updated successfully!");
+              this.toastr.success('Activity updated successfully!');
               this.btnLoading = false;
               this.dataservice.getSingleMarketplaceProduct(this.id).refetch();
             } else {
-              this.toastr.error("Failed. Please check the fields!");
+              this.toastr.error('Failed. Please check the fields!');
               this.btnLoading = false;
             }
           });
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
         this.btnLoading = false;
       }
     });
@@ -168,13 +168,13 @@ export class MarketplaceDetailComponent implements OnInit {
     this.dataservice
       .DeleteMarketplaceProduct(this.id)
       .subscribe((result: any) => {
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.deleteMarketplaceProduct) {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.deleteModal.hide();
-          this.router.navigate(["/marketplace/all"]);
+          this.router.navigate(['/marketplace/all']);
         } else {
-          this.toastr.error("Failed!");
+          this.toastr.error('Failed!');
         }
       });
   }

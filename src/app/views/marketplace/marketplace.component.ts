@@ -1,14 +1,14 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { MarketplaceColumn } from "../../constants/columnMetadata";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { environment } from "../../../environments/environment";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { MarketplaceColumn } from '../../constants/columnMetadata';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "marketplace.component.html",
+  templateUrl: 'marketplace.component.html',
 })
 export class MarketplaceComponent {
   rowSelection: string;
@@ -19,11 +19,11 @@ export class MarketplaceComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...MarketplaceColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
-  @ViewChild("productModal") public productModal: ModalDirective;
-  @ViewChild("detailsModal") public detailsModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
+  @ViewChild('productModal') public productModal: ModalDirective;
+  @ViewChild('detailsModal') public detailsModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
@@ -38,15 +38,15 @@ export class MarketplaceComponent {
   Categories: any = [];
 
   productForm = this.fb.group({
-    itemName: ["", Validators.required],
-    images: ["", Validators.required],
-    userId: [localStorage.getItem("uid")],
-    contactNumber: ["", Validators.required],
-    price: ["", Validators.required],
-    availableQty: ["", Validators.required],
-    unit: ["", Validators.required],
-    category: ["", Validators.required],
-    description: ["", Validators.required],
+    itemName: ['', Validators.required],
+    images: ['', Validators.required],
+    userId: [localStorage.getItem('uid')],
+    contactNumber: ['', Validators.required],
+    price: ['', Validators.required],
+    availableQty: ['', Validators.required],
+    unit: ['', Validators.required],
+    category: ['', Validators.required],
+    description: ['', Validators.required],
   });
   rowData: any = [];
   selectedRows: any = [];
@@ -83,10 +83,10 @@ export class MarketplaceComponent {
       .subscribe((result: any) => {
         resp = result.body;
         console.log(result);
-        if (result.status === 200 && result.body.status == "Success") {
+        if (result.status === 200 && result.body.status == 'Success') {
           this.toastr.success(result.body.message);
           this.btnLoading = false;
-          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+          window.open(`${environment.apiUrl}${result?.body?.path}`, '_blank');
         } else {
           this.btnLoading = false;
           this.toastr.error(result.body.message);
@@ -132,7 +132,7 @@ export class MarketplaceComponent {
     this.dataservice
       .getMarketplaceCategories()
       .valueChanges.subscribe((result: any) => {
-        console.log("getCategories", result.data.marketplaceCategories.data);
+        console.log('getCategories', result.data.marketplaceCategories.data);
         this.Categories = result.data.marketplaceCategories.data;
       });
   }
@@ -142,12 +142,12 @@ export class MarketplaceComponent {
     this.gridApi.sizeColumnsToFit();
   }
   onRowClicked(event: any) {
-    console.log("row", event.data);
+    console.log('row', event.data);
   }
   onSelectionChanged(event: any) {
     this.selectedRows = this.gridApi.getSelectedRows();
     this.router.navigate(
-      ["/marketplace/marketplace_details", this.selectedRows[0]?.id],
+      ['/marketplace/marketplace_details', this.selectedRows[0]?.id],
       {
         state: { data: this.selectedRows },
       }
@@ -156,7 +156,7 @@ export class MarketplaceComponent {
   // On file Select
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
     console.log(this.file);
@@ -178,9 +178,9 @@ export class MarketplaceComponent {
           )
           .subscribe((result: any) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.createMarketplaceProduct) {
-              this.toastr.success("Success!");
+              this.toastr.success('Success!');
               this.dataservice.getMarketplace(1, this.pageSize).refetch();
               window.location.reload();
               this.file = null;
@@ -189,12 +189,12 @@ export class MarketplaceComponent {
               this.gridApi.deselectAll();
               this.btnLoading = false;
             } else {
-              this.toastr.error("Failed. Please check the fields!");
+              this.toastr.error('Failed. Please check the fields!');
               this.btnLoading = false;
             }
           });
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
         this.btnLoading = false;
       }
     });

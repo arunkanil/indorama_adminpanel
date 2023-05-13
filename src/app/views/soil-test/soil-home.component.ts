@@ -1,14 +1,14 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { ModalDirective } from "ngx-bootstrap/modal";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
-import { SoilAnalysisColumns } from "../../constants/columnMetadata";
-import { environment } from "../../../environments/environment";
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { SoilAnalysisColumns } from '../../constants/columnMetadata';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "soil-home.component.html",
+  templateUrl: 'soil-home.component.html',
 })
 export class SoilHomeComponent {
   rowSelection: string;
@@ -19,10 +19,10 @@ export class SoilHomeComponent {
     private toastr: ToastrService
     ) {
     this.columnDefs = [...SoilAnalysisColumns];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
 
-  @ViewChild("myModal") public myModal: ModalDirective;
+  @ViewChild('myModal') public myModal: ModalDirective;
   loading = true;
   btnLoading = false;
   disableNextButton = false;
@@ -42,8 +42,8 @@ export class SoilHomeComponent {
   }
   getLists() {
     this.loading = true;
-    this.dataservice.getsoilTests(1,this.pageSize).valueChanges.subscribe((result: any) => {
-      console.log("getCustomers", result.data.soilTests.data);
+    this.dataservice.getsoilTests(1, this.pageSize).valueChanges.subscribe((result: any) => {
+      console.log('getCustomers', result.data.soilTests.data);
       this.rowData = result.data.soilTests.data;
       this.meta = result.data.soilTests.meta;
       if (this.meta?.pagination?.pageCount <= 1) {
@@ -63,10 +63,10 @@ export class SoilHomeComponent {
       .subscribe((result: any) => {
         resp = result.body;
         console.log(result);
-        if (result.status === 200 && result.body.status == "Success") {
+        if (result.status === 200 && result.body.status == 'Success') {
           this.toastr.success(result.body.message);
           this.btnLoading = false;
-          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+          window.open(`${environment.apiUrl}${result?.body?.path}`, '_blank');
         } else {
           this.btnLoading = false;
           this.toastr.error(result.body.message);
@@ -113,9 +113,9 @@ export class SoilHomeComponent {
     this.gridColumnApi = params.columnApi;
   }
   onSelectionChanged(event) {
-    var selectedRows = this.gridApi.getSelectedRows();
+    let selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows);
-    this.router.navigate(["/soiltest/test_details",selectedRows[0].id], {
+    this.router.navigate(['/soiltest/test_details', selectedRows[0].id], {
       state: { data: selectedRows },
     });
   }

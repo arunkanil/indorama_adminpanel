@@ -1,34 +1,34 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
-import { dateConverter } from "../../constants/columnMetadata";
-import { BaseChartDirective } from "ng2-charts";
-import { ChartConfiguration } from "chart.js";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { dateConverter } from '../../constants/columnMetadata';
+import { BaseChartDirective } from 'ng2-charts';
+import { ChartConfiguration } from 'chart.js';
 import {
   ChartComponent,
   ApexAxisChartSeries,
   ApexChart,
   ApexXAxis,
   ApexTitleSubtitle,
-} from "ng-apexcharts";
-import { environment } from "../../../environments/environment";
+} from 'ng-apexcharts';
+import { environment } from '../../../environments/environment';
 
-export type ChartOptions = {
+export interface ChartOptions {
   series: ApexNonAxisChartSeries;
   chart: ApexChart;
   responsive: ApexResponsive[];
   labels: any;
-};
+}
 
 const unique = (value, index, self) => {
   return self.indexOf(value) === index;
 };
 
 @Component({
-  templateUrl: "surveys-detail.component.html",
+  templateUrl: 'surveys-detail.component.html',
 })
 export class SurveyDetailsComponent implements OnInit {
   constructor(
@@ -41,7 +41,7 @@ export class SurveyDetailsComponent implements OnInit {
     this.chartOptions = {
       chart: {
         width: 580,
-        type: "pie",
+        type: 'pie',
       },
       series: [],
       labels: [],
@@ -53,16 +53,16 @@ export class SurveyDetailsComponent implements OnInit {
               width: 200,
             },
             legend: {
-              position: "bottom",
+              position: 'bottom',
             },
           },
         },
       ],
     };
   }
-  @ViewChild("chart") chart: ChartComponent;
+  @ViewChild('chart') chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
   // @ViewChild(BaseChartDirective) chart: BaseChartDirective | undefined;
 
   id: any;
@@ -73,18 +73,18 @@ export class SurveyDetailsComponent implements OnInit {
   currentQues;
   dateConverter = dateConverter;
 
-  public pieChartType = "pie";
-  public pieChartOptions: ChartConfiguration["options"] = {
+  public pieChartType = 'pie';
+  public pieChartOptions: ChartConfiguration['options'] = {
     responsive: true,
 
     plugins: {
       legend: {
         display: true,
-        position: "top",
+        position: 'top',
       },
       datalabels: {
         formatter: (value, ctx) => {
-          console.log(value, "datalabels", ctx);
+          console.log(value, 'datalabels', ctx);
           if (ctx.chart.data.labels) {
             return ctx.chart.data.labels[ctx.dataIndex];
           }
@@ -96,39 +96,39 @@ export class SurveyDetailsComponent implements OnInit {
 
   async ngOnInit() {
     this.activatedRouter.params.subscribe((params) => {
-      this.id = params["id"];
+      this.id = params['id'];
     });
     this.getSurveyDetails();
   }
   async getSurveyDetails() {
-    console.log("start getSurveyDetails");
+    console.log('start getSurveyDetails');
     this.dataservice.getSurveyDetails(this.id).subscribe((result: any) => {
-      console.log("getSurveyDetails", result.body.data);
+      console.log('getSurveyDetails', result.body.data);
       this.questions = result.body.data;
-      console.log("finished getSurveyDetails");
+      console.log('finished getSurveyDetails');
       this.getSurveyResults();
     });
   }
   async getSurveyResults() {
-    let data = {};
-    console.log("start getSurveyResults");
+    const data = {};
+    console.log('start getSurveyResults');
     this.dataservice
       .getSurveyResults(this.id)
       .valueChanges.subscribe((result: any) => {
         this.rowData = result.data.surveyResults.data;
-        console.log("getSurveyResults", this.rowData);
-        let Fields = this.questions?.attributes?.Fields;
-        console.log(Fields, "fields");
+        console.log('getSurveyResults', this.rowData);
+        const Fields = this.questions?.attributes?.Fields;
+        console.log(Fields, 'fields');
         for (let i = 0; i < Fields.length; i++) {
-          let ans = this.rowData.map(
+          const ans = this.rowData.map(
             (x) => x.attributes.SurveyResponse[Fields[i].FieldKey]
           );
-          let unique_ans = this.rowData
+          const unique_ans = this.rowData
             .map((x) => x.attributes.SurveyResponse[Fields[i].FieldKey])
             .filter(unique);
 
           let count = 0;
-          let counted_obj = {};
+          const counted_obj = {};
           for (let j = 0; j < unique_ans.length; j++) {
             count = 0;
             for (let k = 0; k < ans.length; k++) {
@@ -142,25 +142,25 @@ export class SurveyDetailsComponent implements OnInit {
           data[Fields[i].FieldKey] = counted_obj;
         }
         this.resultsProcessed = data;
-        console.log(this.resultsProcessed, "resultsProcessed");
+        console.log(this.resultsProcessed, 'resultsProcessed');
         // this.chart?.update();
       });
   }
   returnQuesType(data) {
-    if (data == "survey.survey-selection-component") {
-      return "Dropdown";
+    if (data == 'survey.survey-selection-component') {
+      return 'Dropdown';
     } else {
-      return "Text";
+      return 'Text';
     }
   }
   returnFieldType(data) {
     switch (data) {
-      case "TextLong":
-        return "Long Answer";
-      case "TextShort":
-        return "Short Answer";
-      case "Selection":
-        return "Selection";
+      case 'TextLong':
+        return 'Long Answer';
+      case 'TextShort':
+        return 'Short Answer';
+      case 'Selection':
+        return 'Selection';
     }
   }
   loadResponses(data) {
@@ -172,7 +172,7 @@ export class SurveyDetailsComponent implements OnInit {
       this.chartOptions.labels = Object.keys(this.resultsProcessed[data]);
     } else {
       // return [];
-      this.toastr.error("No data");
+      this.toastr.error('No data');
     }
   }
   returnChartdata(data) {
@@ -185,13 +185,13 @@ export class SurveyDetailsComponent implements OnInit {
   }
   deleteSurvey() {
     this.dataservice.deleteSurvey(this.id).subscribe((result: any) => {
-      console.log("response", result);
+      console.log('response', result);
       if (result.data.deleteSurveyForm) {
-        this.toastr.success("Success!");
+        this.toastr.success('Success!');
         this.deleteModal.hide();
-        this.router.navigate(["/surveys/all"]);
+        this.router.navigate(['/surveys/all']);
       } else {
-        this.toastr.error("Failed!");
+        this.toastr.error('Failed!');
       }
     });
   }
@@ -202,14 +202,14 @@ export class SurveyDetailsComponent implements OnInit {
     this.btnLoading = true;
     this.dataservice.downloadResponses(this.id).subscribe(
       (result: any) => {
-        console.log("downloadResponses", result.body);
-        let url = `${environment.apiUrl}` + result.body.path;
+        console.log('downloadResponses', result.body);
+        const url = `${environment.apiUrl}` + result.body.path;
         this.btnLoading = false;
-        window.open(url, "_blank");
+        window.open(url, '_blank');
       },
       (error) => {
         this.btnLoading = true;
-        this.toastr.error("Failed!");
+        this.toastr.error('Failed!');
       }
     );
   }

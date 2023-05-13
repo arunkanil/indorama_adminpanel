@@ -44,7 +44,7 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
         this.dateConverterMin = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverterMin"];
         this.btnLoading = false;
         this.groups = [];
-        this.maplink = "";
+        this.maplink = '';
         this.Villages = [];
         this.LGA = [];
         this.Areas = [];
@@ -53,27 +53,27 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
         this.Crops = [];
         this.file = null;
         this.editForm = this.fb.group({
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Crops: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Farmer: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            AreaOfField: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Season: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            isPesticidesUsed: [""],
-            FarmLocationLongitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            FarmLocationLatitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Status: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Yield_I: [""],
-            DateOfSowing_I: [""],
-            DateOfDemonstration_I: [""],
-            FirstUreaApplication_I: [""],
-            SecondUreaApplication_I: [""],
-            Yield_F: [""],
-            DateOfSowing_F: [""],
-            DateOfDemonstration_F: [""],
-            FirstUreaApplication_F: [""],
-            SecondUreaApplication_F: [""],
-            DateOfHarvesting: [""],
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Crops: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Farmer: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            AreaOfField: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Season: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            isPesticidesUsed: [''],
+            FarmLocationLongitude: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            FarmLocationLatitude: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Status: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Yield_I: [''],
+            DateOfSowing_I: [''],
+            DateOfDemonstration_I: [''],
+            FirstUreaApplication_I: [''],
+            SecondUreaApplication_I: [''],
+            Yield_F: [''],
+            DateOfSowing_F: [''],
+            DateOfDemonstration_F: [''],
+            FirstUreaApplication_F: [''],
+            SecondUreaApplication_F: [''],
+            DateOfHarvesting: [''],
         });
     }
     ngOnInit() {
@@ -82,10 +82,10 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
     }
     dispPesticides(data) {
         if (data) {
-            return "Yes";
+            return 'Yes';
         }
         else {
-            return "No";
+            return 'No';
         }
     }
     getLists() {
@@ -95,14 +95,14 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
         //   this.groups = result.data.groups;
         // });
         this.activatedRouter.params.subscribe((params) => {
-            this.id = params["id"];
+            this.id = params['id'];
         });
         this.dataservice
             .getSingleFarmDemo(this.id)
             .valueChanges.subscribe((result) => {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50;
             this.details = result.data.farmDemo.data;
-            console.log("getSingleFarmDemo", this.details);
+            console.log('getSingleFarmDemo', this.details);
             this.editForm = this.fb.group({
                 lga: [
                     Number((_d = (_c = (_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.lgas) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.id),
@@ -163,26 +163,18 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
             this.impactYield = (((((_36 = (_35 = (_34 = this.details) === null || _34 === void 0 ? void 0 : _34.attributes) === null || _35 === void 0 ? void 0 : _35.IndoramaPractise) === null || _36 === void 0 ? void 0 : _36.Yield) - ((_39 = (_38 = (_37 = this.details) === null || _37 === void 0 ? void 0 : _37.attributes) === null || _38 === void 0 ? void 0 : _38.FarmerPractise) === null || _39 === void 0 ? void 0 : _39.Yield)) / ((_42 = (_41 = (_40 = this.details) === null || _40 === void 0 ? void 0 : _40.attributes) === null || _41 === void 0 ? void 0 : _41.FarmerPractise) === null || _42 === void 0 ? void 0 : _42.Yield)) *
                 100).toFixed(2);
             this.maplink =
-                "https://maps.google.com/?q=" + ((_46 = (_45 = (_44 = (_43 = result.data) === null || _43 === void 0 ? void 0 : _43.farmDemo) === null || _44 === void 0 ? void 0 : _44.data) === null || _45 === void 0 ? void 0 : _45.attributes.FarmLocationLatitude) === null || _46 === void 0 ? void 0 : _46.toString()) +
-                    "," + ((_50 = (_49 = (_48 = (_47 = result.data) === null || _47 === void 0 ? void 0 : _47.farmDemo) === null || _48 === void 0 ? void 0 : _48.data) === null || _49 === void 0 ? void 0 : _49.attributes.FarmLocationLongitude) === null || _50 === void 0 ? void 0 : _50.toString());
+                'https://maps.google.com/?q=' + ((_46 = (_45 = (_44 = (_43 = result.data) === null || _43 === void 0 ? void 0 : _43.farmDemo) === null || _44 === void 0 ? void 0 : _44.data) === null || _45 === void 0 ? void 0 : _45.attributes.FarmLocationLatitude) === null || _46 === void 0 ? void 0 : _46.toString()) +
+                    ',' + ((_50 = (_49 = (_48 = (_47 = result.data) === null || _47 === void 0 ? void 0 : _47.farmDemo) === null || _48 === void 0 ? void 0 : _48.data) === null || _49 === void 0 ? void 0 : _49.attributes.FarmLocationLongitude) === null || _50 === void 0 ? void 0 : _50.toString());
             console.log(this.maplink);
             this.loading = false;
         });
-        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getCrops", result.data.crops.data);
+        this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result) => {
+            console.log('getCrops', result.data.crops.data);
             this.Crops = result.data.crops.data;
         });
-        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getStates", result.data.states.data);
+        this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result) => {
+            console.log('getStates', result.data.states.data);
             this.States = result.data.states.data;
-        });
-        this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getAreas", result.data.areas.data);
-            this.Areas = result.data.areas.data;
-        });
-        this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getVillages", result.data.villages.data);
-            this.Villages = result.data.villages.data;
         });
     }
     FormSubmit() {
@@ -193,15 +185,15 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
             .UpdateFarmDemo(this.editForm.value, this.details.id)
             .subscribe((result) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateFarmDemo) {
-                this.toastr.success("Farm demo edited successfully!");
+                this.toastr.success('Farm demo edited successfully!');
                 this.btnLoading = false;
                 this.myModal.hide();
                 this.getLists();
             }
             else {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
                 this.btnLoading = false;
             }
         }, (error) => {
@@ -216,73 +208,73 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
         this.getLGAs(event.target.value);
     }
     getLGAs(id) {
-        this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result) => {
-            console.log("getLGAs", result.data.lgas.data);
+        this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result) => {
+            console.log('getLGAs', result.data.lgas.data);
             this.LGA = result.data.lgas.data;
         });
     }
     deleteFarmDemo() {
         this.dataservice.deleteFarmDemo(this.id).subscribe((result) => {
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.deleteFarmDemo) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.deleteModal.hide();
-                this.router.navigate(["/farmdemo/all"]);
+                this.router.navigate(['/farmdemo/all']);
             }
             else {
-                this.toastr.error("Failed!");
+                this.toastr.error('Failed!');
             }
         }, (error) => {
-            this.toastr.error("Something went wrong!");
+            this.toastr.error('Something went wrong!');
         });
     }
     onChange(event) {
         this.file = [];
-        for (var i = 0; i < event.target.files.length; i++) {
+        for (let i = 0; i < event.target.files.length; i++) {
             this.file.push(event.target.files[i]);
         }
     }
     uploadPic() {
         var _a, _b, _c;
         let resp = {};
-        let imgarray = Array.from((_c = (_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Images) === null || _c === void 0 ? void 0 : _c.data, (x) => x.id);
+        const imgarray = Array.from((_c = (_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Images) === null || _c === void 0 ? void 0 : _c.data, (x) => x.id);
         this.dataservice.upload(this.file).subscribe((response) => {
             var _a;
-            if (response.status == 200) {
+            if (response.status === 200) {
                 console.log(response);
                 imgarray.push((_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id);
                 this.dataservice
                     .AddFarmdemoPic(this.id, imgarray)
                     .subscribe((result) => {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.updateFarmDemo) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.file = null;
                         this.getLists();
                     }
                     else {
-                        this.toastr.error("Failed!");
+                        this.toastr.error('Failed!');
                     }
                 });
             }
             else {
-                this.toastr.error("Image failed to upload!");
+                this.toastr.error('Image failed to upload!');
             }
         });
     }
     removePic(data) {
         let resp = {};
-        if (confirm("Are you sure?")) {
+        if (confirm('Are you sure?')) {
             this.dataservice.deleteFile(data.id).subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.deleteUploadFile) {
-                    this.toastr.success("Success!");
+                    this.toastr.success('Success!');
                     this.getLists();
                 }
                 else {
-                    this.toastr.error("Failed!");
+                    this.toastr.error('Failed!');
                 }
             });
         }
@@ -296,9 +288,9 @@ FarmDemoDetailComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"] }
 ];
 FarmDemoDetailComponent.propDecorators = {
-    myModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["myModal",] }],
-    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }],
-    commentModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["commentModal",] }]
+    myModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['myModal',] }],
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['deleteModal',] }],
+    commentModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['commentModal',] }]
 };
 FarmDemoDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -5434,17 +5426,17 @@ let FarmDemoComponent = class FarmDemoComponent {
         this.toastr = toastr;
         this.addForm = this.fb.group({
             // Villages: ["", Validators.required],
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
             // Areas: ["", Validators.required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Crops: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Farmer: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            AreaOfField: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Season: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            isPesticidesUsed: [""],
-            FarmLocationLongitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            FarmLocationLatitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Status: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Crops: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Farmer: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            AreaOfField: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Season: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            isPesticidesUsed: [''],
+            FarmLocationLongitude: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            FarmLocationLatitude: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Status: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
         });
         this.loading = false;
         this.btnLoading = false;
@@ -5463,7 +5455,7 @@ let FarmDemoComponent = class FarmDemoComponent {
         this.Markets = [];
         this.Crops = [];
         this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["FarmDemoColumn"]];
-        this.rowSelection = "single";
+        this.rowSelection = 'single';
     }
     ngOnInit() {
         this.getLists();
@@ -5475,7 +5467,7 @@ let FarmDemoComponent = class FarmDemoComponent {
             .getFarmDemos(1, this.pageSize)
             .valueChanges.subscribe((result) => {
             var _a, _b, _c, _d, _e, _f;
-            console.log("getFarmDemos", result.data.farmDemos.data);
+            console.log('getFarmDemos', result.data.farmDemos.data);
             this.rowData = result.data.farmDemos.data;
             this.meta = result.data.farmDemos.meta;
             if (((_b = (_a = this.meta) === null || _a === void 0 ? void 0 : _a.pagination) === null || _b === void 0 ? void 0 : _b.pageCount) <= 1) {
@@ -5487,21 +5479,13 @@ let FarmDemoComponent = class FarmDemoComponent {
             }
             this.loading = false;
         });
-        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getCrops", result.data.crops.data);
+        this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result) => {
+            console.log('getCrops', result.data.crops.data);
             this.Crops = result.data.crops.data;
         });
-        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getStates", result.data.states.data);
+        this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result) => {
+            console.log('getStates', result.data.states.data);
             this.States = result.data.states.data;
-        });
-        this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getAreas", result.data.areas.data);
-            this.Areas = result.data.areas.data;
-        });
-        this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getVillages", result.data.villages.data);
-            this.Villages = result.data.villages.data;
         });
     }
     downloadExcel() {
@@ -5513,10 +5497,10 @@ let FarmDemoComponent = class FarmDemoComponent {
             var _a;
             resp = result.body;
             console.log(result);
-            if (result.status === 200 && result.body.status == "Success") {
+            if (result.status === 200 && result.body.status == 'Success') {
                 this.toastr.success(result.body.message);
                 this.btnLoading = false;
-                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, "_blank");
+                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, '_blank');
             }
             else {
                 this.btnLoading = false;
@@ -5560,8 +5544,8 @@ let FarmDemoComponent = class FarmDemoComponent {
         });
     }
     getLGAs(id) {
-        this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe((result) => {
-            console.log("getLGAs", result.data.lgas.data);
+        this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result) => {
+            console.log('getLGAs', result.data.lgas.data);
             this.LGA = result.data.lgas.data;
         });
     }
@@ -5570,9 +5554,9 @@ let FarmDemoComponent = class FarmDemoComponent {
         this.gridColumnApi = params.columnApi;
     }
     onSelectionChanged(event) {
-        var selectedRows = this.gridApi.getSelectedRows();
+        let selectedRows = this.gridApi.getSelectedRows();
         console.log(selectedRows);
-        this.router.navigate(["/farmdemo/demo_details", selectedRows[0].id], {
+        this.router.navigate(['/farmdemo/demo_details', selectedRows[0].id], {
             state: { data: selectedRows },
         });
     }
@@ -5585,16 +5569,16 @@ let FarmDemoComponent = class FarmDemoComponent {
         console.log(this.addForm.value);
         this.dataservice.AddFarmdemo(this.addForm.value).subscribe((result) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.createFarmDemo) {
-                this.toastr.success("Farm demo added successfully!");
+                this.toastr.success('Farm demo added successfully!');
                 this.btnLoading = false;
                 this.getLists();
                 this.myModal.hide();
                 this.addForm.reset();
             }
             else {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
                 this.btnLoading = false;
             }
         }, (error) => {
@@ -5609,7 +5593,7 @@ FarmDemoComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_4__["ToastrService"] }
 ];
 FarmDemoComponent.propDecorators = {
-    myModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["myModal",] }]
+    myModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['myModal',] }]
 };
 FarmDemoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

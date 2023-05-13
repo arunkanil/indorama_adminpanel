@@ -40,11 +40,11 @@ let AuthenticationService = class AuthenticationService {
     constructor(http, toastr) {
         this.http = http;
         this.toastr = toastr;
-        this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem("currentUser")));
+        this.currentUserSubject = new rxjs__WEBPACK_IMPORTED_MODULE_3__["BehaviorSubject"](JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
     }
     get currentUserValue() {
-        console.log("curentuser", this.currentUserSubject);
+        console.log('curentuser', this.currentUserSubject);
         return this.currentUserSubject.value;
     }
     login(data) {
@@ -53,28 +53,28 @@ let AuthenticationService = class AuthenticationService {
             .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((user) => {
             // login successful if there's a jwt token in the response
             console.log(user);
-            if (user.jwt && (user.user.UserType == "Admin" || user.user.UserType == "Marketing")) {
+            if (user.jwt && (user.user.UserType == 'Admin' || user.user.UserType == 'Marketing')) {
                 // store user details and jwt token in local storage to keep user logged in between page refreshes
-                localStorage.setItem("token", user.jwt);
-                localStorage.setItem("username", user.user.username);
-                localStorage.setItem("uid", user.user.id);
-                localStorage.setItem("user_type", user.user.UserType);
-                localStorage.setItem("email", user.user.email);
-                localStorage.setItem("name", user.user.Name);
-                localStorage.setItem("phone_number", user.user.ContactNumber);
-                localStorage.setItem("currentUser", JSON.stringify(user));
+                localStorage.setItem('token', user.jwt);
+                localStorage.setItem('username', user.user.username);
+                localStorage.setItem('uid', user.user.id);
+                localStorage.setItem('user_type', user.user.UserType);
+                localStorage.setItem('email', user.user.email);
+                localStorage.setItem('name', user.user.Name);
+                localStorage.setItem('phone_number', user.user.ContactNumber);
+                localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
             }
             else {
-                this.toastr.error("You're not authorized");
+                this.toastr.error('You\'re not authorized');
             }
             return user;
         }));
     }
     logout() {
         // remove user from local storage to log user out
-        localStorage.removeItem("currentUser");
-        localStorage.removeItem("token");
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('token');
         this.currentUserSubject.next(null);
     }
 };
@@ -83,7 +83,7 @@ AuthenticationService.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"] }
 ];
 AuthenticationService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: "root" }),
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({ providedIn: 'root' }),
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], ngx_toastr__WEBPACK_IMPORTED_MODULE_6__["ToastrService"]])
 ], AuthenticationService);
 
@@ -271,9 +271,9 @@ __webpack_require__.r(__webpack_exports__);
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 const environment = {
     production: false,
-    // apiUrl: "https://indoramaapp.untanglestrategy.com"
+    apiUrl: 'https://indoramaapp.untanglestrategy.com'
     // apiUrl: "https://indorama-uat.untanglestrategy.com:883",
-    apiUrl: "http://localhost:1337"
+    // apiUrl: 'http://localhost:1337'
     // apiUrl: "https://farmgrow.indoramafertilizers.com:88"
 };
 
@@ -341,7 +341,7 @@ let DefaultLayoutComponent = class DefaultLayoutComponent {
         this.router = router;
         this.authenticationService = authenticationService;
         this.sidebarMinimized = false;
-        this.userName = localStorage.getItem("username");
+        this.userName = localStorage.getItem('username');
         this.navItems = _nav__WEBPACK_IMPORTED_MODULE_5__["navItems"].filter((item) => item.role === localStorage.getItem('user_type') || item.role === '');
         this.authenticationService.currentUser.subscribe((x) => (this.currentUser = x));
         // console.log("constructor",this.currentUser.user.UserType)
@@ -362,7 +362,7 @@ DefaultLayoutComponent.ctorParameters = () => [
 ];
 DefaultLayoutComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        selector: "app-dashboard",
+        selector: 'app-dashboard',
         template: _raw_loader_default_layout_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
     }),
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
@@ -423,21 +423,21 @@ let LoginComponent = class LoginComponent {
         this.toastr = toastr;
         this.loginForm = {};
         this.result = {};
-        this.error = "";
+        this.error = '';
         this.loading = false;
         if (this.authenticationService.currentUserValue) {
-            this.router.navigate(["/"]);
+            this.router.navigate(['/']);
         }
     }
     ngOnInit() {
-        this.returnUrl = this.route.snapshot.queryParams["returnUrl"] || "/";
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
     onSubmit() {
         this.loading = true;
         this.loginForm = this.usForm.value;
         console.log(this.loginForm);
         this.loading = true;
-        this.router.navigate(["/dashboard"]);
+        this.router.navigate(['/dashboard']);
         // this.toastr.success("Login successful");
         this.authenticationService
             .login(this.loginForm)
@@ -445,7 +445,7 @@ let LoginComponent = class LoginComponent {
             .subscribe((data) => {
             this.loading = false;
             this.router.navigate([this.returnUrl]);
-            this.toastr.success("Login successful");
+            this.toastr.success('Login successful');
         }, (error) => {
             this.error = error;
             this.loading = false;
@@ -462,11 +462,11 @@ LoginComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 LoginComponent.propDecorators = {
-    usForm: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["usForm",] }]
+    usForm: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['usForm',] }]
 };
 LoginComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
-        selector: "app-dashboard",
+        selector: 'app-dashboard',
         template: _raw_loader_login_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
     }),
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_7__["DataService"],
@@ -1122,11 +1122,11 @@ const UpdateLGA = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
   }
 `;
 const Villagesquery = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
-  query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
+  query ($lgaId: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
     villages(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { area: { lga: { id: { eq: $id } } }, Name:{ containsi:$searchTerm} }
+      filters: { area: { lga: { id: { eq: $lgaId } } }, Name:{ containsi:$searchTerm} }
     ) {
       meta {
         pagination {
@@ -4439,7 +4439,7 @@ let DataService = class DataService {
         this.params = new URLSearchParams();
     }
     handleError(error) {
-        let errorMessage = "Unknown error!";
+        const errorMessage = 'Unknown error!';
         console.log(error);
         // if (error.error instanceof ErrorEvent) {
         //   // Client-side errors
@@ -4448,8 +4448,9 @@ let DataService = class DataService {
         //   // Server-side errors
         //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
         // }
-        if (error.error.message)
+        if (error.error.message) {
             this.toastr.error(error.error.message);
+        }
         if (error.status !== 200) {
             this.toastr.error(error.error.error.Message);
             this.toastr.error(error.error.message);
@@ -4458,13 +4459,13 @@ let DataService = class DataService {
     }
     Login(data) {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http.post(this.baseURL + `/auth/login/`, data, httpOptions1);
     }
     createRetailer(data) {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http.post(this.baseURL + `/api/users`, data, httpOptions1);
     }
@@ -4475,9 +4476,9 @@ let DataService = class DataService {
     }
     getSurveyDetails(data) {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         };
         return this.http
@@ -4486,7 +4487,7 @@ let DataService = class DataService {
     }
     downloadActivities(data) {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/activity/download?fromDate=${data.fromDate}&toDate=${data.toDate}`, httpOptions1)
@@ -4494,7 +4495,7 @@ let DataService = class DataService {
     }
     downloadCropPrices() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/crop-prices`, httpOptions1)
@@ -4502,7 +4503,7 @@ let DataService = class DataService {
     }
     downloadFarmDemos() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/download-farm-demos`, httpOptions1)
@@ -4510,7 +4511,7 @@ let DataService = class DataService {
     }
     downloadIndoramaUpdates() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/indorama-updates`, httpOptions1)
@@ -4518,7 +4519,7 @@ let DataService = class DataService {
     }
     downloadMarketplace() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/marketplace`, httpOptions1)
@@ -4526,7 +4527,7 @@ let DataService = class DataService {
     }
     downloadMaster(masterType) {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/${masterType}`, httpOptions1)
@@ -4534,7 +4535,7 @@ let DataService = class DataService {
     }
     downloadStates() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/states`, httpOptions1)
@@ -4542,7 +4543,7 @@ let DataService = class DataService {
     }
     downloadLgas() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/lgas`, httpOptions1)
@@ -4550,7 +4551,7 @@ let DataService = class DataService {
     }
     downloadCities() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/cities`, httpOptions1)
@@ -4558,7 +4559,7 @@ let DataService = class DataService {
     }
     downloadVillages() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/villages`, httpOptions1)
@@ -4566,7 +4567,7 @@ let DataService = class DataService {
     }
     downloadMarkets() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/markets`, httpOptions1)
@@ -4574,7 +4575,7 @@ let DataService = class DataService {
     }
     downloadCrops() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/crops`, httpOptions1)
@@ -4582,7 +4583,7 @@ let DataService = class DataService {
     }
     downloadUsers() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/activity/download-users`, httpOptions1)
@@ -4590,7 +4591,7 @@ let DataService = class DataService {
     }
     downloadRetailers() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/activity/retailers-download`, httpOptions1)
@@ -4598,7 +4599,7 @@ let DataService = class DataService {
     }
     downloadSMSCampaigns() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/sms-campaigns`, httpOptions1)
@@ -4606,7 +4607,7 @@ let DataService = class DataService {
     }
     downloadSoilTests() {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http
             .get(`${_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].apiUrl}/api/excel-download/soiltest`, httpOptions1)
@@ -4614,9 +4615,9 @@ let DataService = class DataService {
     }
     downloadResponses(data) {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         };
         return this.http
@@ -4625,9 +4626,9 @@ let DataService = class DataService {
     }
     getSoilTestStats(data, fromDate, toDate) {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         };
         return this.http
@@ -4636,9 +4637,9 @@ let DataService = class DataService {
     }
     getFarmDemoYieldStats(data, fromDate, toDate) {
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
             headers: {
-                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                Authorization: `Bearer ${localStorage.getItem('token')}`,
             },
         };
         return this.http
@@ -4648,7 +4649,7 @@ let DataService = class DataService {
     getDashboardStats(data, fromDate, toDate) {
         return this.apollo.watchQuery({
             query: getDashboardStats,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 state: data,
                 fromDate: `${fromDate}T00:00:00.000Z`,
@@ -4659,7 +4660,7 @@ let DataService = class DataService {
     getCropPricesDashboard(id, market, fromDate, toDate) {
         return this.apollo.watchQuery({
             query: getCropPricesDashboard,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 id: id,
                 market: market,
@@ -4671,7 +4672,7 @@ let DataService = class DataService {
     getFarmDemoStatsDashboard(state, status, fromDate, toDate) {
         return this.apollo.watchQuery({
             query: getFarmDemoStatsDashboard,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 state: state,
                 status: status,
@@ -4683,19 +4684,19 @@ let DataService = class DataService {
     getPendingRetailerApprovals() {
         return this.apollo.watchQuery({
             query: getPendingRetailerApprovals,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
         });
     }
     getApprovalCropPrices() {
         return this.apollo.watchQuery({
             query: readApprovalCropPrices,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
         });
     }
     getallChats(limit, start, key, isAskIndorama) {
         return this.apollo.watchQuery({
             query: getallChats,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 limit: limit,
                 start: start,
@@ -4707,7 +4708,7 @@ let DataService = class DataService {
     getSurveys(limit, start, key) {
         return this.apollo.watchQuery({
             query: getSurveys,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 limit: limit,
                 start: start,
@@ -4718,7 +4719,7 @@ let DataService = class DataService {
     getSmsCampaigns(page, pageSize, id) {
         return this.apollo.watchQuery({
             query: getSmsCampaigns,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 page: page,
                 pageSize: pageSize,
@@ -4729,7 +4730,7 @@ let DataService = class DataService {
     createSMSCampaign(data) {
         return this.apollo.mutate({
             mutation: createSMSCampaign,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 message: data.message,
                 state: data.state ? data.state : undefined,
@@ -4743,7 +4744,7 @@ let DataService = class DataService {
     getSurveyResults(id) {
         return this.apollo.watchQuery({
             query: getSurveyResults,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 limit: 10000,
                 id: id,
@@ -4753,7 +4754,7 @@ let DataService = class DataService {
     createSurveys(SurveyTitle, SurveyDescription, Fields) {
         return this.apollo.mutate({
             mutation: CreateSurveys,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 SurveyTitle: SurveyTitle,
                 SurveyDescription: SurveyDescription,
@@ -4767,7 +4768,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     getChatMessages(id) {
@@ -4776,13 +4777,13 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
         });
     }
     getFarmDemos(page, pageSize) {
         return this.apollo.watchQuery({
             query: FarmDemosQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 page: page,
                 pageSize: pageSize,
@@ -4795,13 +4796,13 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
         });
     }
     getCrops(page, pageSize, searchTerm) {
         return this.apollo.watchQuery({
             query: CropsQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 page: page,
                 pageSize: pageSize,
@@ -4812,7 +4813,7 @@ let DataService = class DataService {
     getStates(page, pageSize, searchTerm) {
         return this.apollo.watchQuery({
             query: StatesQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 page: page,
                 pageSize: pageSize,
@@ -4823,7 +4824,7 @@ let DataService = class DataService {
     getLGAs(page, pageSize, searchTerm, id) {
         return this.apollo.watchQuery({
             query: LGAquery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 id: id,
                 page: page,
@@ -4832,12 +4833,12 @@ let DataService = class DataService {
             },
         });
     }
-    getVillages(page, pageSize, searchTerm, id) {
+    getVillages(page, pageSize, searchTerm, lgaid) {
         return this.apollo.watchQuery({
             query: Villagesquery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
-                id: id,
+                id: lgaid,
                 page: page,
                 pageSize: pageSize,
                 searchTerm: searchTerm,
@@ -4847,7 +4848,7 @@ let DataService = class DataService {
     getAreas(page, pageSize, searchTerm, id) {
         return this.apollo.watchQuery({
             query: Areasquery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 id: id,
                 page: page,
@@ -4859,7 +4860,7 @@ let DataService = class DataService {
     getMarkets(page, pageSize, searchTerm, id) {
         return this.apollo.watchQuery({
             query: MarketQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 id: id,
                 page: page,
@@ -4871,7 +4872,7 @@ let DataService = class DataService {
     getCropPrices(page, pageSize, PublicationState, publishedAt, Rejected) {
         return this.apollo.watchQuery({
             query: CropPricesQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 page: page,
                 pageSize: pageSize,
@@ -4884,7 +4885,7 @@ let DataService = class DataService {
     getRetailers(page, pageSize, confirmed, blocked) {
         return this.apollo.watchQuery({
             query: RetailerQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 page: page,
                 pageSize: pageSize,
@@ -4896,27 +4897,27 @@ let DataService = class DataService {
     getRetailerCategories() {
         return this.apollo.watchQuery({
             query: getRetailerCategories,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
         });
     }
     getUsers(page, pageSize, UserType) {
-        let variables = {
+        const variables = {
             page: page,
             pageSize: pageSize,
         };
         if (UserType != null) {
-            variables["UserType"] = UserType;
+            variables['UserType'] = UserType;
         }
         return this.apollo.watchQuery({
             query: UsersQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: variables,
         });
     }
     getUsersLarge(UserType, data) {
         return this.apollo.watchQuery({
             query: queryUsersLarge,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 UserType: UserType,
                 village: data.village ? data.village : null,
@@ -4929,7 +4930,7 @@ let DataService = class DataService {
     getsoilTests(page, pageSize) {
         return this.apollo.watchQuery({
             query: SoilTestQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 page: page,
                 pageSize: pageSize,
@@ -4939,7 +4940,7 @@ let DataService = class DataService {
     getsingleSoilTests(id) {
         return this.apollo.watchQuery({
             query: SingleSoilTestQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 id: id,
             },
@@ -4948,7 +4949,7 @@ let DataService = class DataService {
     getsingleRetailer(id) {
         return this.apollo.watchQuery({
             query: GetSingleRetailerQuery,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 id: id,
             },
@@ -4970,11 +4971,11 @@ let DataService = class DataService {
                 dateOfHarvesting: farmdemo.dateOfHarvesting,
                 season: farmdemo.Season,
                 Status: farmdemo.Status,
-                isPesticidesUsed: farmdemo.isPesticidesUsed == "true" ? true : false,
+                isPesticidesUsed: farmdemo.isPesticidesUsed == 'true' ? true : false,
                 images: farmdemo.images,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddStates(state) {
@@ -4983,8 +4984,8 @@ let DataService = class DataService {
             variables: {
                 Name: state.state,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddLGA(lga) {
@@ -4994,8 +4995,8 @@ let DataService = class DataService {
                 Name: lga.lga,
                 state: lga.state,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddArea(area) {
@@ -5006,8 +5007,8 @@ let DataService = class DataService {
                 lga: area.lga,
                 PostalCode: area.PostalCode,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddMarket(market) {
@@ -5017,8 +5018,8 @@ let DataService = class DataService {
                 Name: market.market,
                 state: market.state,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddCrop(crop, image) {
@@ -5028,8 +5029,8 @@ let DataService = class DataService {
                 Name: crop.crop,
                 image: image,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     Addvillage(village) {
@@ -5039,8 +5040,8 @@ let DataService = class DataService {
                 Name: village.village,
                 area: village.area,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddCropPrice(price, image) {
@@ -5053,11 +5054,11 @@ let DataService = class DataService {
                 state: price.state,
                 market: price.market,
                 image: image,
-                user: parseInt(localStorage.getItem("uid")),
+                user: parseInt(localStorage.getItem('uid')),
                 published: new Date(),
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddIndoramaUpdates(price, imageid) {
@@ -5068,8 +5069,8 @@ let DataService = class DataService {
                 Body: price.Body,
                 Images: imageid ? imageid : price.Image,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     createBestCropPractise(price, imageid, media) {
@@ -5081,8 +5082,8 @@ let DataService = class DataService {
                 cropImage: imageid,
                 media: media,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     createMarketplaceProduct(price, imageid) {
@@ -5099,8 +5100,8 @@ let DataService = class DataService {
                 category: parseInt(price.category),
                 description: price.description,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     updateMarketplaceProduct(price, id, imageid) {
@@ -5118,8 +5119,8 @@ let DataService = class DataService {
                 category: parseInt(price.category),
                 description: price.description,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     updateMarketplaceProductImg(id, imageid) {
@@ -5129,8 +5130,8 @@ let DataService = class DataService {
                 id: id,
                 images: imageid,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     createActivity(price) {
@@ -5152,8 +5153,8 @@ let DataService = class DataService {
                 ActivityType: price.ActivityType,
                 Time: price.Time,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     getAgronomist(id) {
@@ -5162,8 +5163,8 @@ let DataService = class DataService {
             variables: {
                 user: id,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     getIndoramaUpdates(id, page, pageSize) {
@@ -5176,8 +5177,8 @@ let DataService = class DataService {
                 page: page,
                 pageSize: pageSize,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     getMarketplace(pageNumber, pageSize, categoryFilter) {
@@ -5188,8 +5189,8 @@ let DataService = class DataService {
                 pageSize: pageSize,
                 categoryFilter: categoryFilter,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     getSingleMarketplaceProduct(id) {
@@ -5198,8 +5199,8 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     getBestCropPractises(page, pageSize, cropFilter) {
@@ -5210,38 +5211,38 @@ let DataService = class DataService {
                 pageSize: pageSize,
                 cropFilter: cropFilter,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     getActivities(page, pageSize) {
         return this.apollo.watchQuery({
             query: GetActivities,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 page: page,
                 pageSize: pageSize,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     getActivity(id) {
         return this.apollo.watchQuery({
             query: GetSingleActivity,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     getMarketplaceCategories(id) {
         return this.apollo.watchQuery({
             query: GetMarketplaceCategories,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     createAgronomist(data, id) {
@@ -5251,8 +5252,8 @@ let DataService = class DataService {
                 areas: data.area,
                 user: id,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateCropPrice(price, id, imageid, Rejected, published) {
@@ -5269,8 +5270,8 @@ let DataService = class DataService {
                 Rejected: Rejected,
                 image: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddSoilTestResult(result) {
@@ -5294,8 +5295,8 @@ let DataService = class DataService {
                 RecommendedNPKQty: result.RecommendedNPKQty,
                 RecommendedUreaQty: result.RecommendedUreaQty,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateSoilTestResult(result) {
@@ -5319,8 +5320,8 @@ let DataService = class DataService {
                 RecommendedNPKQty: result.RecommendedNPKQty,
                 RecommendedUreaQty: result.RecommendedUreaQty,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateCrop(crop, id, Imageid) {
@@ -5332,8 +5333,8 @@ let DataService = class DataService {
                 id: id,
                 image: Imageid,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateState(data, id) {
@@ -5344,8 +5345,8 @@ let DataService = class DataService {
                 isDelete: data.isDelete,
                 id: id,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateLGA(data, id) {
@@ -5357,8 +5358,8 @@ let DataService = class DataService {
                 isDelete: data.isDelete,
                 id: id,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateMarket(data, id) {
@@ -5370,8 +5371,8 @@ let DataService = class DataService {
                 isDelete: data.isDelete,
                 id: id,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateArea(area, id) {
@@ -5384,8 +5385,8 @@ let DataService = class DataService {
                 isDelete: area.isDelete,
                 id: id,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     Updatevillage(village, id) {
@@ -5397,8 +5398,8 @@ let DataService = class DataService {
                 isDelete: village.isDelete,
                 id: id,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateSoilTest(test, soilTestId) {
@@ -5416,8 +5417,8 @@ let DataService = class DataService {
                 status: test.Status,
                 nutrient: test.nutrient,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateFarmDemo(data, id) {
@@ -5452,8 +5453,8 @@ let DataService = class DataService {
                 Status: data.Status,
                 dateOfHarvesting: data.DateOfHarvesting,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateRetailer(data, id) {
@@ -5470,13 +5471,13 @@ let DataService = class DataService {
                 lga: data.lga,
                 bio: data.Bio,
                 agronomist_lgas: data.agronomist_lgas,
-                blocked: data.blocked == "true" ? true : false,
+                blocked: data.blocked == 'true' ? true : false,
                 confirmed: data.confirmed,
                 UserType: data === null || data === void 0 ? void 0 : data.UserType,
                 contactNumber: data.ContactNumber,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateRetailerPic(id, image) {
@@ -5486,8 +5487,8 @@ let DataService = class DataService {
                 id: id,
                 prof_pic: image,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     AddFarmdemoPic(id, image) {
@@ -5497,8 +5498,8 @@ let DataService = class DataService {
                 id: id,
                 images: image,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     addRetailerProducts(data, retailer_category, retailer, image) {
@@ -5513,8 +5514,8 @@ let DataService = class DataService {
                 retailer_category: retailer_category,
                 retailers: retailer,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateRetailerProducts(data, retailer_category, retailer) {
@@ -5530,8 +5531,8 @@ let DataService = class DataService {
                 retailer_category: retailer_category,
                 retailer: retailer,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     UpdateIndoramaUpdates(price, id, imageid) {
@@ -5544,8 +5545,8 @@ let DataService = class DataService {
                 Body: price === null || price === void 0 ? void 0 : price.Body,
                 Images: imageid ? imageid : price === null || price === void 0 ? void 0 : price.Image,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     updateActivity(price, id) {
@@ -5566,35 +5567,35 @@ let DataService = class DataService {
                 ActivityType: price.ActivityType,
                 Time: price.Time,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     upload(file) {
         var _a;
         const formData = new FormData();
-        for (var i = 0; i < file.length; i++) {
+        for (let i = 0; i < file.length; i++) {
             // formData.append("file[]",  file[i]);
-            formData.append("files", file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
+            formData.append('files', file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
         }
         // formData.append("files", file, file?.name);
         console.log(formData);
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http.post(this.baseURL + `/api/upload`, formData, httpOptions1);
     }
     uploadActivities(file) {
         var _a;
         const formData = new FormData();
-        for (var i = 0; i < file.length; i++) {
+        for (let i = 0; i < file.length; i++) {
             // formData.append("file[]",  file[i]);
-            formData.append("file", file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
+            formData.append('file', file[i], (_a = file[i]) === null || _a === void 0 ? void 0 : _a.name);
         }
         // formData.append("files", file, file?.name);
         console.log(formData);
         const httpOptions1 = {
-            observe: "response",
+            observe: 'response',
         };
         return this.http.post(this.baseURL + `/api/activity/upload`, formData, httpOptions1);
     }
@@ -5604,7 +5605,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteVillage(id) {
@@ -5613,7 +5614,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteLGA(id) {
@@ -5622,7 +5623,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteState(id) {
@@ -5631,7 +5632,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteMarket(id) {
@@ -5640,7 +5641,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteCrop(id) {
@@ -5649,7 +5650,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteFarmDemo(id) {
@@ -5658,7 +5659,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteProduct(id) {
@@ -5667,7 +5668,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteFile(id) {
@@ -5676,7 +5677,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteUser(id) {
@@ -5685,7 +5686,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteBestPractice(id) {
@@ -5694,7 +5695,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     deleteActivity(id) {
@@ -5703,7 +5704,7 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     DeleteMarketplaceProduct(id) {
@@ -5712,19 +5713,19 @@ let DataService = class DataService {
             variables: {
                 id: id,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
     getDashboardAd() {
         return this.apollo.watchQuery({
             query: getDashboardAd,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
         });
     }
     getRetailerAd() {
         return this.apollo.watchQuery({
             query: getRetailerAd,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
         });
     }
     updateRetailerAd(url, image) {
@@ -5734,19 +5735,19 @@ let DataService = class DataService {
                 // clickUrl: url,
                 imageId: image,
             },
-            errorPolicy: "all",
-            fetchPolicy: "no-cache",
+            errorPolicy: 'all',
+            fetchPolicy: 'no-cache',
         });
     }
     updateDashboardAd(url, image) {
         return this.apollo.mutate({
             mutation: updateDashboardAd,
-            fetchPolicy: "no-cache",
+            fetchPolicy: 'no-cache',
             variables: {
                 // clickUrl: url,
                 imageId: image,
             },
-            errorPolicy: "all",
+            errorPolicy: 'all',
         });
     }
 };
@@ -5757,7 +5758,7 @@ DataService.ctorParameters = () => [
 ];
 DataService = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: "root",
+        providedIn: 'root',
     }),
     Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"],
         apollo_angular__WEBPACK_IMPORTED_MODULE_5__["Apollo"],
@@ -6076,112 +6077,112 @@ const navItems = [
     //   role: "",
     // },
     {
-        name: "Activities",
-        url: "/activities/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Marketplace",
-        url: "/marketplace/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Indorama Updates",
-        url: "/indorama_updates/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "SMS Campaigns",
-        url: "/sms-campaigns/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Farm Demo",
-        url: "/farmdemo/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Soil Analysis",
-        url: "/soiltest/customers",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Crop Prices",
-        url: "/cropprices/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Retailers",
-        url: "/retailers/all",
-        icon: "icon-cursor",
-        role: "",
-    },
-    {
-        name: "Users",
-        url: "/users/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Best crop practices",
-        url: "/best-crop-practices/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Surveys",
-        url: "/surveys/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Chat",
-        url: "/chat/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Advertisement",
-        url: "/advertisement/all",
-        icon: "icon-cursor",
-        role: "Admin",
-    },
-    {
-        name: "Masters",
-        url: "/soiltest/enquiries",
+        name: 'Activities',
+        url: '/activities/all',
         icon: 'icon-cursor',
-        role: "Admin",
+        role: 'Admin',
+    },
+    {
+        name: 'Marketplace',
+        url: '/marketplace/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Indorama Updates',
+        url: '/indorama_updates/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'SMS Campaigns',
+        url: '/sms-campaigns/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Farm Demo',
+        url: '/farmdemo/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Soil Analysis',
+        url: '/soiltest/customers',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Crop Prices',
+        url: '/cropprices/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Retailers',
+        url: '/retailers/all',
+        icon: 'icon-cursor',
+        role: '',
+    },
+    {
+        name: 'Users',
+        url: '/users/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Best crop practices',
+        url: '/best-crop-practices/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Surveys',
+        url: '/surveys/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Chat',
+        url: '/chat/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Advertisement',
+        url: '/advertisement/all',
+        icon: 'icon-cursor',
+        role: 'Admin',
+    },
+    {
+        name: 'Masters',
+        url: '/soiltest/enquiries',
+        icon: 'icon-cursor',
+        role: 'Admin',
         children: [
             {
-                name: "States",
-                url: "/masters/States",
+                name: 'States',
+                url: '/masters/States',
             },
             {
-                name: "LGA",
-                url: "/masters/LGA",
+                name: 'LGA',
+                url: '/masters/LGA',
             },
             {
-                name: "City",
-                url: "/masters/Cities",
+                name: 'City',
+                url: '/masters/Cities',
             },
             {
-                name: "Villages",
-                url: "/masters/Villages",
+                name: 'Villages',
+                url: '/masters/Villages',
             },
             {
-                name: "Markets",
-                url: "/masters/Markets",
+                name: 'Markets',
+                url: '/masters/Markets',
             },
             {
-                name: "Crops",
-                url: "/masters/Crops",
+                name: 'Crops',
+                url: '/masters/Crops',
             },
         ],
     },

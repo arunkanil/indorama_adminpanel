@@ -106,7 +106,7 @@
           this.dateConverterMin = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverterMin"];
           this.btnLoading = false;
           this.groups = [];
-          this.maplink = "";
+          this.maplink = '';
           this.Villages = [];
           this.LGA = [];
           this.Areas = [];
@@ -115,27 +115,27 @@
           this.Crops = [];
           this.file = null;
           this.editForm = this.fb.group({
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Crops: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Farmer: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            AreaOfField: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Season: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            isPesticidesUsed: [""],
-            FarmLocationLongitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            FarmLocationLatitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Status: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Yield_I: [""],
-            DateOfSowing_I: [""],
-            DateOfDemonstration_I: [""],
-            FirstUreaApplication_I: [""],
-            SecondUreaApplication_I: [""],
-            Yield_F: [""],
-            DateOfSowing_F: [""],
-            DateOfDemonstration_F: [""],
-            FirstUreaApplication_F: [""],
-            SecondUreaApplication_F: [""],
-            DateOfHarvesting: [""]
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Crops: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Farmer: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            AreaOfField: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Season: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            isPesticidesUsed: [''],
+            FarmLocationLongitude: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            FarmLocationLatitude: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Status: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Yield_I: [''],
+            DateOfSowing_I: [''],
+            DateOfDemonstration_I: [''],
+            FirstUreaApplication_I: [''],
+            SecondUreaApplication_I: [''],
+            Yield_F: [''],
+            DateOfSowing_F: [''],
+            DateOfDemonstration_F: [''],
+            FirstUreaApplication_F: [''],
+            SecondUreaApplication_F: [''],
+            DateOfHarvesting: ['']
           });
         }
 
@@ -149,9 +149,9 @@
           key: "dispPesticides",
           value: function dispPesticides(data) {
             if (data) {
-              return "Yes";
+              return 'Yes';
             } else {
-              return "No";
+              return 'No';
             }
           }
         }, {
@@ -165,13 +165,13 @@
             // });
 
             this.activatedRouter.params.subscribe(function (params) {
-              _this.id = params["id"];
+              _this.id = params['id'];
             });
             this.dataservice.getSingleFarmDemo(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4, _5, _6, _7, _8, _9, _10, _11, _12, _13, _14, _15, _16, _17, _18, _19, _20, _21, _22, _23, _24, _25, _26, _27, _28, _29, _30, _31, _32, _33, _34, _35, _36, _37, _38, _39, _40, _41, _42, _43, _44, _45, _46, _47, _48, _49, _50;
 
               _this.details = result.data.farmDemo.data;
-              console.log("getSingleFarmDemo", _this.details);
+              console.log('getSingleFarmDemo', _this.details);
               _this.editForm = _this.fb.group({
                 lga: [Number((_d = (_c = (_b = (_a = _this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.lgas) === null || _c === void 0 ? void 0 : _c.data) === null || _d === void 0 ? void 0 : _d.id), _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 state: [Number((_h = (_g = (_f = (_e = _this.details) === null || _e === void 0 ? void 0 : _e.attributes) === null || _f === void 0 ? void 0 : _f.state) === null || _g === void 0 ? void 0 : _g.data) === null || _h === void 0 ? void 0 : _h.id), _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
@@ -196,25 +196,17 @@
                 DateOfHarvesting: [(_33 = (_32 = _this.details) === null || _32 === void 0 ? void 0 : _32.attributes) === null || _33 === void 0 ? void 0 : _33.DateOfHarvesting]
               });
               _this.impactYield = ((((_36 = (_35 = (_34 = _this.details) === null || _34 === void 0 ? void 0 : _34.attributes) === null || _35 === void 0 ? void 0 : _35.IndoramaPractise) === null || _36 === void 0 ? void 0 : _36.Yield) - ((_39 = (_38 = (_37 = _this.details) === null || _37 === void 0 ? void 0 : _37.attributes) === null || _38 === void 0 ? void 0 : _38.FarmerPractise) === null || _39 === void 0 ? void 0 : _39.Yield)) / ((_42 = (_41 = (_40 = _this.details) === null || _40 === void 0 ? void 0 : _40.attributes) === null || _41 === void 0 ? void 0 : _41.FarmerPractise) === null || _42 === void 0 ? void 0 : _42.Yield) * 100).toFixed(2);
-              _this.maplink = "https://maps.google.com/?q=" + ((_46 = (_45 = (_44 = (_43 = result.data) === null || _43 === void 0 ? void 0 : _43.farmDemo) === null || _44 === void 0 ? void 0 : _44.data) === null || _45 === void 0 ? void 0 : _45.attributes.FarmLocationLatitude) === null || _46 === void 0 ? void 0 : _46.toString()) + "," + ((_50 = (_49 = (_48 = (_47 = result.data) === null || _47 === void 0 ? void 0 : _47.farmDemo) === null || _48 === void 0 ? void 0 : _48.data) === null || _49 === void 0 ? void 0 : _49.attributes.FarmLocationLongitude) === null || _50 === void 0 ? void 0 : _50.toString());
+              _this.maplink = 'https://maps.google.com/?q=' + ((_46 = (_45 = (_44 = (_43 = result.data) === null || _43 === void 0 ? void 0 : _43.farmDemo) === null || _44 === void 0 ? void 0 : _44.data) === null || _45 === void 0 ? void 0 : _45.attributes.FarmLocationLatitude) === null || _46 === void 0 ? void 0 : _46.toString()) + ',' + ((_50 = (_49 = (_48 = (_47 = result.data) === null || _47 === void 0 ? void 0 : _47.farmDemo) === null || _48 === void 0 ? void 0 : _48.data) === null || _49 === void 0 ? void 0 : _49.attributes.FarmLocationLongitude) === null || _50 === void 0 ? void 0 : _50.toString());
               console.log(_this.maplink);
               _this.loading = false;
             });
-            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getCrops", result.data.crops.data);
+            this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getCrops', result.data.crops.data);
               _this.Crops = result.data.crops.data;
             });
-            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getStates", result.data.states.data);
+            this.dataservice.getStates(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getStates', result.data.states.data);
               _this.States = result.data.states.data;
-            });
-            this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getAreas", result.data.areas.data);
-              _this.Areas = result.data.areas.data;
-            });
-            this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getVillages", result.data.villages.data);
-              _this.Villages = result.data.villages.data;
             });
           }
         }, {
@@ -227,10 +219,10 @@
             console.log(this.editForm.value);
             this.dataservice.UpdateFarmDemo(this.editForm.value, this.details.id).subscribe(function (result) {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.updateFarmDemo) {
-                _this2.toastr.success("Farm demo edited successfully!");
+                _this2.toastr.success('Farm demo edited successfully!');
 
                 _this2.btnLoading = false;
 
@@ -238,7 +230,7 @@
 
                 _this2.getLists();
               } else {
-                _this2.toastr.error("Failed. Please check the fields!");
+                _this2.toastr.error('Failed. Please check the fields!');
 
                 _this2.btnLoading = false;
               }
@@ -262,8 +254,8 @@
           value: function getLGAs(id) {
             var _this3 = this;
 
-            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getLGAs", result.data.lgas.data);
+            this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getLGAs', result.data.lgas.data);
               _this3.LGA = result.data.lgas.data;
             });
           }
@@ -273,19 +265,19 @@
             var _this4 = this;
 
             this.dataservice.deleteFarmDemo(this.id).subscribe(function (result) {
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.deleteFarmDemo) {
-                _this4.toastr.success("Success!");
+                _this4.toastr.success('Success!');
 
                 _this4.deleteModal.hide();
 
-                _this4.router.navigate(["/farmdemo/all"]);
+                _this4.router.navigate(['/farmdemo/all']);
               } else {
-                _this4.toastr.error("Failed!");
+                _this4.toastr.error('Failed!');
               }
             }, function (error) {
-              _this4.toastr.error("Something went wrong!");
+              _this4.toastr.error('Something went wrong!');
             });
           }
         }, {
@@ -311,26 +303,26 @@
             this.dataservice.upload(this.file).subscribe(function (response) {
               var _a;
 
-              if (response.status == 200) {
+              if (response.status === 200) {
                 console.log(response);
                 imgarray.push((_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id);
 
                 _this5.dataservice.AddFarmdemoPic(_this5.id, imgarray).subscribe(function (result) {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.updateFarmDemo) {
-                    _this5.toastr.success("Success!");
+                    _this5.toastr.success('Success!');
 
                     _this5.file = null;
 
                     _this5.getLists();
                   } else {
-                    _this5.toastr.error("Failed!");
+                    _this5.toastr.error('Failed!');
                   }
                 });
               } else {
-                _this5.toastr.error("Image failed to upload!");
+                _this5.toastr.error('Image failed to upload!');
               }
             });
           }
@@ -341,17 +333,17 @@
 
             var resp = {};
 
-            if (confirm("Are you sure?")) {
+            if (confirm('Are you sure?')) {
               this.dataservice.deleteFile(data.id).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.deleteUploadFile) {
-                  _this6.toastr.success("Success!");
+                  _this6.toastr.success('Success!');
 
                   _this6.getLists();
                 } else {
-                  _this6.toastr.error("Failed!");
+                  _this6.toastr.error('Failed!');
                 }
               });
             }
@@ -378,15 +370,15 @@
       FarmDemoDetailComponent.propDecorators = {
         myModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["myModal"]
+          args: ['myModal']
         }],
         deleteModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["deleteModal"]
+          args: ['deleteModal']
         }],
         commentModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["commentModal"]
+          args: ['commentModal']
         }]
       };
       FarmDemoDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -8446,17 +8438,17 @@
           this.toastr = toastr;
           this.addForm = this.fb.group({
             // Villages: ["", Validators.required],
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
             // Areas: ["", Validators.required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Crops: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Farmer: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            AreaOfField: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Season: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            isPesticidesUsed: [""],
-            FarmLocationLongitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            FarmLocationLatitude: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Status: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Crops: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Farmer: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            AreaOfField: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Season: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            isPesticidesUsed: [''],
+            FarmLocationLongitude: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            FarmLocationLatitude: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Status: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
           });
           this.loading = false;
           this.btnLoading = false;
@@ -8475,7 +8467,7 @@
           this.Markets = [];
           this.Crops = [];
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["FarmDemoColumn"]);
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(FarmDemoComponent, [{
@@ -8493,7 +8485,7 @@
             this.dataservice.getFarmDemos(1, this.pageSize).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f;
 
-              console.log("getFarmDemos", result.data.farmDemos.data);
+              console.log('getFarmDemos', result.data.farmDemos.data);
               _this21.rowData = result.data.farmDemos.data;
               _this21.meta = result.data.farmDemos.meta;
 
@@ -8508,21 +8500,13 @@
 
               _this21.loading = false;
             });
-            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getCrops", result.data.crops.data);
+            this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getCrops', result.data.crops.data);
               _this21.Crops = result.data.crops.data;
             });
-            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getStates", result.data.states.data);
+            this.dataservice.getStates(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getStates', result.data.states.data);
               _this21.States = result.data.states.data;
-            });
-            this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getAreas", result.data.areas.data);
-              _this21.Areas = result.data.areas.data;
-            });
-            this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getVillages", result.data.villages.data);
-              _this21.Villages = result.data.villages.data;
             });
           }
         }, {
@@ -8538,11 +8522,11 @@
               resp = result.body;
               console.log(result);
 
-              if (result.status === 200 && result.body.status == "Success") {
+              if (result.status === 200 && result.body.status == 'Success') {
                 _this22.toastr.success(result.body.message);
 
                 _this22.btnLoading = false;
-                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), '_blank');
               } else {
                 _this22.btnLoading = false;
 
@@ -8598,8 +8582,8 @@
           value: function getLGAs(id) {
             var _this25 = this;
 
-            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getLGAs", result.data.lgas.data);
+            this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getLGAs', result.data.lgas.data);
               _this25.LGA = result.data.lgas.data;
             });
           }
@@ -8614,7 +8598,7 @@
           value: function onSelectionChanged(event) {
             var selectedRows = this.gridApi.getSelectedRows();
             console.log(selectedRows);
-            this.router.navigate(["/farmdemo/demo_details", selectedRows[0].id], {
+            this.router.navigate(['/farmdemo/demo_details', selectedRows[0].id], {
               state: {
                 data: selectedRows
               }
@@ -8635,10 +8619,10 @@
             console.log(this.addForm.value);
             this.dataservice.AddFarmdemo(this.addForm.value).subscribe(function (result) {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.createFarmDemo) {
-                _this26.toastr.success("Farm demo added successfully!");
+                _this26.toastr.success('Farm demo added successfully!');
 
                 _this26.btnLoading = false;
 
@@ -8648,7 +8632,7 @@
 
                 _this26.addForm.reset();
               } else {
-                _this26.toastr.error("Failed. Please check the fields!");
+                _this26.toastr.error('Failed. Please check the fields!');
 
                 _this26.btnLoading = false;
               }
@@ -8676,7 +8660,7 @@
       FarmDemoComponent.propDecorators = {
         myModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["myModal"]
+          args: ['myModal']
         }]
       };
       FarmDemoComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

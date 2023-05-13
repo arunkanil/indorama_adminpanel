@@ -1,14 +1,14 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { CropPricesColumn } from "../../constants/columnMetadata";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { environment } from "../../../environments/environment";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { CropPricesColumn } from '../../constants/columnMetadata';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "best-crop-practices.component.html",
+  templateUrl: 'best-crop-practices.component.html',
 })
 export class BestCropPracticesComponent {
   rowSelection: string;
@@ -19,25 +19,25 @@ export class BestCropPracticesComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...CropPricesColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
-  @ViewChild("practicesModal") public practicesModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
+  @ViewChild('practicesModal') public practicesModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
   disableButton = true;
-  title = "Verification";
+  title = 'Verification';
   orders: any = {};
   columnDefs = [];
   Crops: any = [];
   imageUrl;
   baseURL = environment.apiUrl;
   practicesForm = this.fb.group({
-    crop: ["", Validators.required],
-    content: ["", Validators.required],
-    File: ["", Validators.required],
-    Image: ["", Validators.required],
+    crop: ['', Validators.required],
+    content: ['', Validators.required],
+    File: ['', Validators.required],
+    Image: ['', Validators.required],
   });
   rowData: any = [];
   selectedRows: any = [];
@@ -54,14 +54,14 @@ export class BestCropPracticesComponent {
   }
   getBestCropPractises() {
     this.dataservice
-      .getBestCropPractises(1,1000)
+      .getBestCropPractises(1, 1000)
       .valueChanges.subscribe((result: any) => {
         this.rowData = result.data.bestCropPractises.data;
         console.log(this.rowData);
       });
   }
   getCrops() {
-    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
+    this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result: any) => {
       this.Crops = result.data.crops.data;
     });
   }
@@ -69,12 +69,12 @@ export class BestCropPracticesComponent {
   onChange(event: any, check) {
     if (check == true) {
       this.file = [];
-      for (var i = 0; i < event.target.files.length; i++) {
+      for (let i = 0; i < event.target.files.length; i++) {
         this.file.push(event.target.files[i]);
       }
     } else {
       this.image = [];
-      for (var i = 0; i < event.target.files.length; i++) {
+      for (let i = 0; i < event.target.files.length; i++) {
         this.image.push(event.target.files[i]);
       }
     }
@@ -88,13 +88,13 @@ export class BestCropPracticesComponent {
     this.dataservice
       .deleteBestPractice(this.deleteId)
       .subscribe((result: any) => {
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.deleteBestCropPractise) {
           this.dataservice.getBestCropPractises().refetch();
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.deleteModal.hide();
         } else {
-          this.toastr.error("Failed!");
+          this.toastr.error('Failed!');
         }
       });
   }
@@ -116,25 +116,25 @@ export class BestCropPracticesComponent {
               .createBestCropPractise(this.practicesForm.value, image, file)
               .subscribe((result: any) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.createBestCropPractise) {
-                  this.toastr.success("Success!");
+                  this.toastr.success('Success!');
                   this.practicesForm.reset();
                   this.dataservice.getBestCropPractises().refetch();
                   this.practicesModal.hide();
                   this.btnLoading = false;
                 } else {
-                  this.toastr.error("Failed. Please check the fields!");
+                  this.toastr.error('Failed. Please check the fields!');
                   this.btnLoading = false;
                 }
               });
           } else {
-            this.toastr.error("Image failed to upload!");
+            this.toastr.error('Image failed to upload!');
             this.btnLoading = false;
           }
         });
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
         this.btnLoading = false;
       }
     });

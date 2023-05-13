@@ -164,16 +164,16 @@
           this.loading = true;
           this.btnLoading = false;
           this.disableButton = true;
-          this.title = "Verification";
+          this.title = 'Verification';
           this.orders = {};
           this.columnDefs = [];
           this.Crops = [];
           this.baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl;
           this.practicesForm = this.fb.group({
-            crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            content: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            File: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            content: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            File: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
           this.rowData = [];
           this.selectedRows = [];
@@ -181,7 +181,7 @@
           this.file = null;
           this.image = null;
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["CropPricesColumn"]);
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(BestCropPracticesComponent, [{
@@ -207,7 +207,7 @@
           value: function getCrops() {
             var _this2 = this;
 
-            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
+            this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe(function (result) {
               _this2.Crops = result.data.crops.data;
             });
           } // On file Select
@@ -224,8 +224,8 @@
             } else {
               this.image = [];
 
-              for (var i = 0; i < event.target.files.length; i++) {
-                this.image.push(event.target.files[i]);
+              for (var _i = 0; _i < event.target.files.length; _i++) {
+                this.image.push(event.target.files[_i]);
               }
             }
 
@@ -243,16 +243,16 @@
             var _this3 = this;
 
             this.dataservice.deleteBestPractice(this.deleteId).subscribe(function (result) {
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.deleteBestCropPractise) {
                 _this3.dataservice.getBestCropPractises().refetch();
 
-                _this3.toastr.success("Success!");
+                _this3.toastr.success('Success!');
 
                 _this3.deleteModal.hide();
               } else {
-                _this3.toastr.error("Failed!");
+                _this3.toastr.error('Failed!');
               }
             });
           }
@@ -282,10 +282,10 @@
 
                     _this4.dataservice.createBestCropPractise(_this4.practicesForm.value, image, file).subscribe(function (result) {
                       resp = result.data;
-                      console.log("response", result);
+                      console.log('response', result);
 
                       if (result.data.createBestCropPractise) {
-                        _this4.toastr.success("Success!");
+                        _this4.toastr.success('Success!');
 
                         _this4.practicesForm.reset();
 
@@ -295,19 +295,19 @@
 
                         _this4.btnLoading = false;
                       } else {
-                        _this4.toastr.error("Failed. Please check the fields!");
+                        _this4.toastr.error('Failed. Please check the fields!');
 
                         _this4.btnLoading = false;
                       }
                     });
                   } else {
-                    _this4.toastr.error("Image failed to upload!");
+                    _this4.toastr.error('Image failed to upload!');
 
                     _this4.btnLoading = false;
                   }
                 });
               } else {
-                _this4.toastr.error("Image failed to upload!");
+                _this4.toastr.error('Image failed to upload!');
 
                 _this4.btnLoading = false;
               }
@@ -333,11 +333,11 @@
       BestCropPracticesComponent.propDecorators = {
         practicesModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["practicesModal"]
+          args: ['practicesModal']
         }],
         deleteModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["deleteModal"]
+          args: ['deleteModal']
         }]
       };
       BestCropPracticesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

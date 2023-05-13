@@ -1,18 +1,18 @@
-import { Component, ViewChild } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
+import { Component, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
 // import { ActionRenderer } from "../../utils/StatusRenderer";
 import {
   dateConverter,
   dateConverterMin,
   DeliveryReportColumn,
-} from "../../constants/columnMetadata";
-import { ModalDirective } from "ngx-bootstrap/modal";
+} from '../../constants/columnMetadata';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
-  templateUrl: "sms-campaigns-detail.component.html",
+  templateUrl: 'sms-campaigns-detail.component.html',
 })
 export class SMSCampaignsDetailComponent {
   rowSelection: string;
@@ -24,10 +24,10 @@ export class SMSCampaignsDetailComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...DeliveryReportColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
-  @ViewChild("messageModal") public messageModal: ModalDirective;
-  @ViewChild("detailsModal") public detailsModal: ModalDirective;
+  @ViewChild('messageModal') public messageModal: ModalDirective;
+  @ViewChild('detailsModal') public detailsModal: ModalDirective;
   dateConverter = dateConverter;
   dateConverterMin = dateConverterMin;
   loading = true;
@@ -41,16 +41,16 @@ export class SMSCampaignsDetailComponent {
 
   messageForm = this.fb.group({
     isAllFarmers: [false],
-    message: ["", Validators.required],
-    village: [""],
-    area: [""],
-    lga: [""],
-    state: [""],
+    message: ['', Validators.required],
+    village: [''],
+    area: [''],
+    lga: [''],
+    state: [''],
   });
   ngOnInit(): void {
     this.loading = true;
     this.activatedRouter.params.subscribe((params) => {
-      this.id = params["id"];
+      this.id = params['id'];
     });
     console.log(this.router);
     this.getSmsCampaigns();
@@ -78,14 +78,14 @@ export class SMSCampaignsDetailComponent {
       )
       .subscribe(
         (result: any) => {
-          console.log("getDeliveryReports", result);
+          console.log('getDeliveryReports', result);
           this.rowData = result.data;
           this.btnLoading = false;
         },
         (error) => {
-          console.error("error caught in component",error);
+          console.error('error caught in component', error);
           this.btnLoading = false;
-          this.toastr.error("Unable to fetch data");
+          this.toastr.error('Unable to fetch data');
         }
       );
   }

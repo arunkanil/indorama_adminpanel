@@ -2819,8 +2819,8 @@ let DashboardComponent = class DashboardComponent {
         this.States = [];
         this.pendingApprovals = [];
         this.pendingCropPrices = [];
-        this.CropPriceFlag = "false";
-        this.ApprovalsFlag = "false";
+        this.CropPriceFlag = 'false';
+        this.ApprovalsFlag = 'false';
         this.Crops = [];
         this.Markets = [];
         this.cropPrices = [];
@@ -2830,19 +2830,19 @@ let DashboardComponent = class DashboardComponent {
         this.fromDate_CropPrices = new Date();
         this.toDate_FarmDemo = new Date().toISOString().substr(0, 10);
         this.fromDate_FarmDemo = new Date();
-        this.selectedCrop = { attributes: { Name: "Crop" } };
-        this.selectedMarket = { attributes: { Name: "Market" } };
-        this.selectedState = { attributes: { Name: "State" } };
-        this.selectedStateST = { attributes: { Name: "State" } };
-        this.selectedStateFD = { attributes: { Name: "State" } };
-        this.radioModel = "Month";
+        this.selectedCrop = { attributes: { Name: 'Crop' } };
+        this.selectedMarket = { attributes: { Name: 'Market' } };
+        this.selectedState = { attributes: { Name: 'State' } };
+        this.selectedStateST = { attributes: { Name: 'State' } };
+        this.selectedStateFD = { attributes: { Name: 'State' } };
+        this.radioModel = 'Month';
         // mainChart
         this.mainChartElements = 27;
         this.mainChartData1 = [];
         this.mainChartData = [
             {
                 data: this.mainChartData1,
-                label: "Price",
+                label: 'Price',
             },
         ];
         /* tslint:disable:max-line-length */
@@ -2853,8 +2853,8 @@ let DashboardComponent = class DashboardComponent {
                 enabled: false,
                 custom: _coreui_coreui_plugin_chartjs_custom_tooltips__WEBPACK_IMPORTED_MODULE_4__["CustomTooltips"],
                 intersect: true,
-                mode: "index",
-                position: "nearest",
+                mode: 'index',
+                position: 'nearest',
                 callbacks: {
                     labelColor: function (tooltipItem, chart) {
                         return {
@@ -2897,27 +2897,27 @@ let DashboardComponent = class DashboardComponent {
         this.mainChartColours = [
             {
                 // brandInfo
-                backgroundColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["hexToRgba"])(Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])("--info"), 10),
-                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])("--info"),
-                pointHoverBackgroundColor: "#fff",
+                backgroundColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["hexToRgba"])(Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--info'), 10),
+                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--info'),
+                pointHoverBackgroundColor: '#fff',
             },
             {
                 // brandSuccess
-                backgroundColor: "transparent",
-                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])("--success"),
-                pointHoverBackgroundColor: "#fff",
+                backgroundColor: 'transparent',
+                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--success'),
+                pointHoverBackgroundColor: '#fff',
             },
             {
                 // brandDanger
-                backgroundColor: "transparent",
-                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])("--danger"),
-                pointHoverBackgroundColor: "#fff",
+                backgroundColor: 'transparent',
+                borderColor: Object(_coreui_coreui_dist_js_coreui_utilities__WEBPACK_IMPORTED_MODULE_3__["getStyle"])('--danger'),
+                pointHoverBackgroundColor: '#fff',
                 borderWidth: 1,
                 borderDash: [8, 5],
             },
         ];
         this.mainChartLegend = false;
-        this.mainChartType = "line";
+        this.mainChartType = 'line';
         this.barChartOptions = {
             scaleShowVerticalLines: false,
             responsive: true,
@@ -2943,17 +2943,17 @@ let DashboardComponent = class DashboardComponent {
                 ],
             },
         };
-        this.barChartType = "bar";
+        this.barChartType = 'bar';
         this.barChartLegend = true;
         this.barChartLabels = [
-            "Very Low",
-            "Low",
-            "Medium",
-            "High",
-            "Very High",
+            'Very Low',
+            'Low',
+            'Medium',
+            'High',
+            'Very High',
         ];
         this.barChartData = [];
-        this.barChartLabels_farmdemo = ["Yield"];
+        this.barChartLabels_farmdemo = ['Yield'];
         this.barChartData_farmdemo = [];
     }
     ngOnInit() {
@@ -2985,10 +2985,10 @@ let DashboardComponent = class DashboardComponent {
         }
     }
     getData() {
-        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
+        this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result) => {
             this.Crops = result.data.crops.data;
         });
-        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
+        this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result) => {
             this.States = result.data.states.data;
         });
         this.dataservice
@@ -3009,8 +3009,8 @@ let DashboardComponent = class DashboardComponent {
         });
     }
     getMarkets(id) {
-        this.dataservice.getMarkets(1, 10000, "", id).valueChanges.subscribe((result) => {
-            console.log("getMarkets", result.data.markets.data);
+        this.dataservice.getMarkets(1, 10000, '', id).valueChanges.subscribe((result) => {
+            console.log('getMarkets', result.data.markets.data);
             this.Markets = result.data.markets.data;
         });
     }
@@ -3030,13 +3030,13 @@ let DashboardComponent = class DashboardComponent {
         this.getCropPrices(event);
     }
     clearFilter() {
-        this.selectedCrop = { attributes: { Name: "Crop" } };
-        this.selectedMarket = { attributes: { Name: "Market" } };
-        this.selectedState = { attributes: { Name: "State" } };
+        this.selectedCrop = { attributes: { Name: 'Crop' } };
+        this.selectedMarket = { attributes: { Name: 'Market' } };
+        this.selectedState = { attributes: { Name: 'State' } };
         this.mainChartData = [
             {
                 data: [],
-                label: "Price",
+                label: 'Price',
             },
         ];
     }
@@ -3052,11 +3052,11 @@ let DashboardComponent = class DashboardComponent {
             this.mainChartData = [
                 {
                     data: this.mainChartData1,
-                    label: "Price",
+                    label: 'Price',
                 },
             ];
         }, (error) => {
-            console.log("downloadResponses", error);
+            console.log('downloadResponses', error);
         });
     }
     getSoilTestStats(event) {
@@ -3070,28 +3070,28 @@ let DashboardComponent = class DashboardComponent {
             .getSoilTestStats(event.id, this.fromDate, this.toDate)
             .subscribe((result) => {
             var _a;
-            console.log(result.body, "result");
-            let keys = ["very_low", "low", "medium", "high", "very_high"];
-            let nutrients = ["nitrogen_N", "phosphorous_P", "pottassium_K"];
+            console.log(result.body, 'result');
+            const keys = ['very_low', 'low', 'medium', 'high', 'very_high'];
+            const nutrients = ['nitrogen_N', 'phosphorous_P', 'pottassium_K'];
             this.barChartData = [];
             for (let j = 0; j < nutrients.length; j++) {
-                let count = [];
+                const count = [];
                 for (let i = 0; i < keys.length; i++) {
                     count.push(result.body[nutrients[j]][keys[i]].length);
                 }
-                let labeldata = nutrients[j].split("_");
+                const labeldata = nutrients[j].split('_');
                 this.barChartData.push({ data: count, label: labeldata[0] });
                 console.log(count, nutrients[j], this.barChartData);
             }
             (_a = this.chart) === null || _a === void 0 ? void 0 : _a.update();
         }, (error) => {
-            console.log("downloadResponses", error);
+            console.log('downloadResponses', error);
         });
     }
     getFarmDemoStatsDashboard(data) {
         this.selectedStateFD = data;
         this.dataservice
-            .getFarmDemoStatsDashboard(data.id, "ONGOING", this.fromDate_FarmDemo, this.toDate_FarmDemo)
+            .getFarmDemoStatsDashboard(data.id, 'ONGOING', this.fromDate_FarmDemo, this.toDate_FarmDemo)
             .valueChanges.subscribe((result) => {
             this.FarmDemoStats = result.data;
         });
@@ -3105,19 +3105,19 @@ let DashboardComponent = class DashboardComponent {
                     data: [
                         parseInt(result.body.farmDemoYieldTrend.indorama_practice_yield_avg),
                     ],
-                    label: "Indorama practice yield",
+                    label: 'Indorama practice yield',
                 },
                 {
                     data: [
                         parseInt(result.body.farmDemoYieldTrend.farmer_practice_yield_avg),
                     ],
-                    label: "Farmer practice yield",
+                    label: 'Farmer practice yield',
                 },
             ];
             console.log(this.barChartData_farmdemo);
             (_a = this.chart) === null || _a === void 0 ? void 0 : _a.update();
         }, (error) => {
-            console.log("downloadResponses", error);
+            console.log('downloadResponses', error);
         });
     }
     navigateViewAll(path) {

@@ -282,36 +282,36 @@
           this.file = null;
           this.dispArea = false;
           this.agentForm = this.fb.group({
-            ContactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            ContactNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
             // username: ["", Validators.required],
-            blocked: [""],
-            Name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            blocked: [''],
+            Name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
             // email: ["", Validators.required],
-            Farmer: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            UserType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Bio: [""],
-            password: [""],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            Latitude: [""],
-            Longitude: [""]
+            Farmer: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            UserType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Bio: [''],
+            password: [''],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            village: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            Latitude: [''],
+            Longitude: ['']
           });
           this.resultForm = this.fb.group({
-            id: [""],
-            itemName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+            id: [''],
+            itemName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
           });
           this.areaForm = this.fb.group({
-            state: [""],
-            agronomist_lgas: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+            state: [''],
+            agronomist_lgas: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
           });
           this.productForm = this.fb.group({
-            Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            itemName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+            Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            itemName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
           });
         }
 
@@ -329,7 +329,7 @@
             this.getFarmers();
             this.getRetailers();
             this.activatedRouter.params.subscribe(function (params) {
-              _this.id = params["id"];
+              _this.id = params['id'];
             });
             this.getTest();
           }
@@ -346,7 +346,7 @@
             this.dataservice.getsingleRetailer(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4;
 
-              console.log("getsingleRetailer", result.data.usersPermissionsUsers.data[0]);
+              console.log('getsingleRetailer', result.data.usersPermissionsUsers.data[0]);
               _this2.details = result.data.usersPermissionsUsers.data[0];
               _this2.agentForm = _this2.fb.group({
                 ContactNumber: [(_a = _this2.details.attributes) === null || _a === void 0 ? void 0 : _a.ContactNumber, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
@@ -358,12 +358,12 @@
                 state: [(_m = (_l = (_k = (_j = (_h = (_g = (_f = _this2.details) === null || _f === void 0 ? void 0 : _f.attributes) === null || _g === void 0 ? void 0 : _g.lga) === null || _h === void 0 ? void 0 : _h.data) === null || _j === void 0 ? void 0 : _j.attributes) === null || _k === void 0 ? void 0 : _k.state) === null || _l === void 0 ? void 0 : _l.data) === null || _m === void 0 ? void 0 : _m.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 lga: [(_r = (_q = (_p = (_o = _this2.details) === null || _o === void 0 ? void 0 : _o.attributes) === null || _p === void 0 ? void 0 : _p.lga) === null || _q === void 0 ? void 0 : _q.data) === null || _r === void 0 ? void 0 : _r.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
                 village: [(_v = (_u = (_t = (_s = _this2.details) === null || _s === void 0 ? void 0 : _s.attributes) === null || _t === void 0 ? void 0 : _t.village) === null || _u === void 0 ? void 0 : _u.data) === null || _v === void 0 ? void 0 : _v.id, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-                password: [""],
+                password: [''],
                 blocked: [(_x = (_w = _this2.details) === null || _w === void 0 ? void 0 : _w.attributes) === null || _x === void 0 ? void 0 : _x.blocked],
                 UserType: [(_z = (_y = _this2.details) === null || _y === void 0 ? void 0 : _y.attributes) === null || _z === void 0 ? void 0 : _z.UserType, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
               });
               _this2.loading = false;
-              _this2.dispArea = ((_1 = (_0 = _this2.details) === null || _0 === void 0 ? void 0 : _0.attributes) === null || _1 === void 0 ? void 0 : _1.UserType) == "Agronomist" ? true : false;
+              _this2.dispArea = ((_1 = (_0 = _this2.details) === null || _0 === void 0 ? void 0 : _0.attributes) === null || _1 === void 0 ? void 0 : _1.UserType) == 'Agronomist' ? true : false;
 
               if (_this2.dispArea == true) {
                 _this2.agronomists = (_4 = (_3 = (_2 = _this2.details) === null || _2 === void 0 ? void 0 : _2.attributes) === null || _3 === void 0 ? void 0 : _3.agronomist_lgas) === null || _4 === void 0 ? void 0 : _4.data; // this.dataservice
@@ -380,8 +380,8 @@
           value: function getCrops() {
             var _this3 = this;
 
-            this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getCrops", result.data.crops.data);
+            this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getCrops', result.data.crops.data);
               _this3.Crops = result.data.crops.data;
             });
           }
@@ -390,8 +390,8 @@
           value: function getStates() {
             var _this4 = this;
 
-            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getStates", result.data.states.data);
+            this.dataservice.getStates(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getStates', result.data.states.data);
               _this4.States = result.data.states.data;
             });
           }
@@ -400,8 +400,8 @@
           value: function getLGAs(id) {
             var _this5 = this;
 
-            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getLGAs", result.data.lgas.data);
+            this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getLGAs', result.data.lgas.data);
               _this5.LGA = result.data.lgas.data;
             });
           }
@@ -410,8 +410,8 @@
           value: function getAreas(id) {
             var _this6 = this;
 
-            this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getAreas", result.data.areas.data);
+            this.dataservice.getAreas(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getAreas', result.data.areas.data);
               _this6.Areas = result.data.areas.data;
             });
           }
@@ -421,7 +421,7 @@
             var _this7 = this;
 
             this.dataservice.getRetailerCategories().valueChanges.subscribe(function (result) {
-              console.log("getRetailers", result.data.retailerCategories.data);
+              console.log('getRetailers', result.data.retailerCategories.data);
               _this7.Retailers = result.data.retailerCategories.data;
             });
           }
@@ -430,8 +430,8 @@
           value: function getFarmers() {
             var _this8 = this;
 
-            this.dataservice.getUsers(undefined, undefined, "Farmer").valueChanges.subscribe(function (result) {
-              console.log("getFarmers", result.data.usersPermissionsUsers.data);
+            this.dataservice.getUsers(undefined, undefined, 'Farmer').valueChanges.subscribe(function (result) {
+              console.log('getFarmers', result.data.usersPermissionsUsers.data);
               _this8.Farmers = result.data.usersPermissionsUsers.data;
             });
           }
@@ -440,8 +440,8 @@
           value: function getVillages(id) {
             var _this9 = this;
 
-            this.dataservice.getVillages(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getVillages", result.data.villages.data);
+            this.dataservice.getVillages(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getVillages', result.data.villages.data);
               _this9.Villages = result.data.villages.data;
             });
           }
@@ -487,10 +487,10 @@
             console.log(this.agentForm.value);
             this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe(function (result) {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.updateUsersPermissionsUser) {
-                _this10.toastr.success("User updated successfully!");
+                _this10.toastr.success('User updated successfully!');
 
                 _this10.btnLoading = false;
 
@@ -498,7 +498,7 @@
 
                 _this10.getTest();
               } else {
-                _this10.toastr.error("Failed. Please check the fields!");
+                _this10.toastr.error('Failed. Please check the fields!');
 
                 _this10.btnLoading = false;
               }
@@ -513,21 +513,21 @@
 
             var _a, _b, _c, _d;
 
-            console.log("edit", this.resultForm.value);
+            console.log('edit', this.resultForm.value);
             var resp = {};
             console.log(this.resultForm.value);
             this.dataservice.UpdateRetailerProducts(this.resultForm.value, (_d = (_c = (_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.retailer_categories) === null || _c === void 0 ? void 0 : _c.data[0]) === null || _d === void 0 ? void 0 : _d.id, this.id).subscribe(function (result) {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.updateRetailerProduct) {
-                _this11.toastr.success("Product updated successfully!");
+                _this11.toastr.success('Product updated successfully!');
 
                 _this11.resultModal.hide();
 
                 _this11.getTest();
               } else {
-                _this11.toastr.error("Failed. Please check the fields!");
+                _this11.toastr.error('Failed. Please check the fields!');
               }
             });
           }
@@ -571,10 +571,10 @@
 
                 _this12.dataservice.UpdateRetailerPic(_this12.id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.updateUsersPermissionsUser) {
-                    _this12.toastr.success("Success!");
+                    _this12.toastr.success('Success!');
 
                     _this12.file = null;
 
@@ -582,11 +582,11 @@
 
                     _this12.addProductModal.hide();
                   } else {
-                    _this12.toastr.error("Failed!");
+                    _this12.toastr.error('Failed!');
                   }
                 });
               } else {
-                _this12.toastr.error("Image failed to upload!");
+                _this12.toastr.error('Image failed to upload!');
               }
             });
           }
@@ -599,16 +599,16 @@
             console.log(this.areaForm.value);
             this.dataservice.UpdateRetailer(this.areaForm.value, this.id).subscribe(function (result) {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.updateUsersPermissionsUser) {
-                _this13.toastr.success("User updated successfully!");
+                _this13.toastr.success('User updated successfully!');
 
                 _this13.areaModal.hide();
 
                 _this13.getTest();
               } else {
-                _this13.toastr.error("Failed. Please check the fields!");
+                _this13.toastr.error('Failed. Please check the fields!');
               }
             });
           }
@@ -626,10 +626,10 @@
 
                 _this14.dataservice.addRetailerProducts(_this14.productForm.value, (_d = (_c = (_b = (_a = _this14.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.retailer_categories) === null || _c === void 0 ? void 0 : _c.data[0]) === null || _d === void 0 ? void 0 : _d.id, _this14.id, (_e = response.body[0]) === null || _e === void 0 ? void 0 : _e.id).subscribe(function (result) {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.createRetailerProduct) {
-                    _this14.toastr.success("Success!");
+                    _this14.toastr.success('Success!');
 
                     _this14.file = null;
 
@@ -637,11 +637,11 @@
 
                     _this14.addProductModal.hide();
                   } else {
-                    _this14.toastr.error("Failed!");
+                    _this14.toastr.error('Failed!');
                   }
                 });
               } else {
-                _this14.toastr.error("Image failed to upload!");
+                _this14.toastr.error('Image failed to upload!');
               }
             });
           }
@@ -652,22 +652,22 @@
 
             var _a, _b;
 
-            if (((_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.UserType) !== "Agronomist") {
+            if (((_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.UserType) !== 'Agronomist') {
               this.dataservice.deleteUser(this.id).subscribe(function (result) {
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.deleteUsersPermissionsUser) {
-                  _this15.toastr.success("Success!");
+                  _this15.toastr.success('Success!');
 
                   _this15.deleteModal.hide();
 
-                  _this15.router.navigate(["/users/all"]);
+                  _this15.router.navigate(['/users/all']);
                 } else {
-                  _this15.toastr.error("Failed!");
+                  _this15.toastr.error('Failed!');
                 }
               });
             } else {
-              this.toastr.error("Can't delete Agronomist. Try setting as blocked.");
+              this.toastr.error('Can\'t delete Agronomist. Try setting as blocked.');
             }
           }
         }]);
@@ -692,23 +692,23 @@
       UserDetailComponent.propDecorators = {
         myModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["myModal"]
+          args: ['myModal']
         }],
         areaModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["areaModal"]
+          args: ['areaModal']
         }],
         resultModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["resultModal"]
+          args: ['resultModal']
         }],
         deleteModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["deleteModal"]
+          args: ['deleteModal']
         }],
         addProductModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["addProductModal"]
+          args: ['addProductModal']
         }]
       };
       UserDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -846,7 +846,7 @@
           this.filter = {};
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["UsersColumn"]);
           this.setForm();
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(UsersComponent, [{
@@ -861,17 +861,17 @@
           key: "setForm",
           value: function setForm() {
             this.commentForm = this.fb.group({
-              UserType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              username: ["", [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(3), _utils_username_validator__WEBPACK_IMPORTED_MODULE_9__["UsernameValidator"].cannotContainSpace]],
-              email: ["nodata@email.com"],
-              password: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              Name: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              Gender: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              Age: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              ContactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              lga: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              village: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-              state: [""]
+              UserType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              username: ['', [_angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].minLength(3), _utils_username_validator__WEBPACK_IMPORTED_MODULE_9__["UsernameValidator"].cannotContainSpace]],
+              email: ['nodata@email.com'],
+              password: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              Name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              Gender: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              Age: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              ContactNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              lga: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              village: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+              state: ['']
             });
           }
         }, {
@@ -884,8 +884,8 @@
           value: function getStates() {
             var _this16 = this;
 
-            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getStates", result.data.states.data);
+            this.dataservice.getStates(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getStates', result.data.states.data);
               _this16.States = result.data.states.data;
             });
           }
@@ -894,8 +894,8 @@
           value: function getLGAs(id) {
             var _this17 = this;
 
-            this.dataservice.getLGAs(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getLGAs", result.data.lgas.data);
+            this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getLGAs', result.data.lgas.data);
               _this17.LGA = result.data.lgas.data;
             });
           }
@@ -904,8 +904,8 @@
           value: function getAreas(id) {
             var _this18 = this;
 
-            this.dataservice.getAreas(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getAreas", result.data.areas.data);
+            this.dataservice.getAreas(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getAreas', result.data.areas.data);
               _this18.Areas = result.data.areas.data;
             });
           }
@@ -914,8 +914,8 @@
           value: function getVillages(id) {
             var _this19 = this;
 
-            this.dataservice.getVillages(1, 10000, "", id).valueChanges.subscribe(function (result) {
-              console.log("getVillages", result.data.villages.data);
+            this.dataservice.getVillages(1, 10000, '', id).valueChanges.subscribe(function (result) {
+              console.log('getVillages', result.data.villages.data);
               _this19.Villages = result.data.villages.data;
             });
           }
@@ -953,11 +953,11 @@
               resp = result.body;
               console.log(result);
 
-              if (result.status === 200 && result.body.status == "Success") {
+              if (result.status === 200 && result.body.status == 'Success') {
                 _this21.toastr.success(result.body.message);
 
                 _this21.btnLoading = false;
-                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), '_blank');
               } else {
                 _this21.btnLoading = false;
 
@@ -1028,7 +1028,7 @@
         }, {
           key: "onRowClicked",
           value: function onRowClicked(event) {
-            console.log("row", event.data); // this.router.navigate(
+            console.log('row', event.data); // this.router.navigate(
             //   ["/cropprices/kp_customer_details", event.data.id, this.router.url],
             //   {
             //     state: { data: event.data },
@@ -1040,7 +1040,7 @@
           value: function onSelectionChanged(event) {
             var selectedRows = this.gridApi.getSelectedRows();
             console.log(selectedRows, event);
-            this.router.navigate(["/users/user_details", selectedRows[0].id], {
+            this.router.navigate(['/users/user_details', selectedRows[0].id], {
               state: {
                 data: selectedRows
               }
@@ -1061,10 +1061,10 @@
             var resp = {};
             this.dataservice.createRetailer(this.commentForm.value).subscribe(function (result) {
               resp = result;
-              console.log("response", result);
+              console.log('response', result);
 
               if (result) {
-                _this24.toastr.success("User added successfully!");
+                _this24.toastr.success('User added successfully!');
 
                 _this24.btnLoading = false;
 
@@ -1074,7 +1074,7 @@
 
                 _this24.getRetailers();
               } else {
-                _this24.toastr.error("Failed. Please check the fields!");
+                _this24.toastr.error('Failed. Please check the fields!');
 
                 _this24.btnLoading = false;
               }
@@ -1102,11 +1102,11 @@
       UsersComponent.propDecorators = {
         commentModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["commentModal"]
+          args: ['commentModal']
         }],
         detailsModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["detailsModal"]
+          args: ['detailsModal']
         }]
       };
       UsersComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

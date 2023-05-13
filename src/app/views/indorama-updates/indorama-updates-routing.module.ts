@@ -5,7 +5,7 @@ import { IndoramaUpdatesComponent } from './indorama-updates.component';
 const routes: Routes = [
   {
     path: '',
-    
+
     children: [
       {
         path: '',

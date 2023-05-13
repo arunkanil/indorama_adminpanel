@@ -1,18 +1,18 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
 // import { ActionRenderer } from "../../utils/StatusRenderer";
 
-import { RetailersColumn } from "../../constants/columnMetadata";
-import { filter } from "rxjs/operators";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { UsernameValidator } from "../../utils/username.validator";
-import { environment } from "../../../environments/environment";
+import { RetailersColumn } from '../../constants/columnMetadata';
+import { filter } from 'rxjs/operators';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { UsernameValidator } from '../../utils/username.validator';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "retailers.component.html",
+  templateUrl: 'retailers.component.html',
 })
 export class RetailersComponent {
   rowSelection: string;
@@ -24,10 +24,10 @@ export class RetailersComponent {
   ) {
     this.columnDefs = [...RetailersColumn];
     this.setForm();
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
-  @ViewChild("commentModal") public commentModal: ModalDirective;
-  @ViewChild("detailsModal") public detailsModal: ModalDirective;
+  @ViewChild('commentModal') public commentModal: ModalDirective;
+  @ViewChild('detailsModal') public detailsModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
@@ -35,7 +35,7 @@ export class RetailersComponent {
   blocked = undefined;
   disableNextButton = false;
   disablePrevButton = true;
-  selectedList = "All";
+  selectedList = 'All';
   meta;
   pageSize = 20;
   from = 1;
@@ -69,8 +69,8 @@ export class RetailersComponent {
     this.getVillages();
   }
   getStates() {
-    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
+    this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getStates', result.data.states.data);
       this.States = result.data.states.data;
     });
   }
@@ -83,10 +83,10 @@ export class RetailersComponent {
       .subscribe((result: any) => {
         resp = result.body;
         console.log(result);
-        if (result.status === 200 && result.body.status == "Success") {
+        if (result.status === 200 && result.body.status == 'Success') {
           this.toastr.success(result.body.message);
           this.btnLoading = false;
-          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+          window.open(`${environment.apiUrl}${result?.body?.path}`, '_blank');
         } else {
           this.btnLoading = false;
           this.toastr.error(result.body.message);
@@ -95,44 +95,44 @@ export class RetailersComponent {
   }
   setForm() {
     this.commentForm = this.fb.group({
-      UserType: ["Retailer"],
+      UserType: ['Retailer'],
       username: [
-        "",
+        '',
         [
           Validators.required,
           Validators.minLength(4),
           UsernameValidator.cannotContainSpace,
         ],
       ],
-      email: ["nodata@email.com"],
-      password: ["", Validators.required],
-      Name: ["", Validators.required],
-      Gender: ["", Validators.required],
-      Age: ["", Validators.required],
-      ContactNumber: ["", Validators.required],
-      lga: ["", Validators.required],
-      village: ["", Validators.required],
-      state: [""],
+      email: ['nodata@email.com'],
+      password: ['', Validators.required],
+      Name: ['', Validators.required],
+      Gender: ['', Validators.required],
+      Age: ['', Validators.required],
+      ContactNumber: ['', Validators.required],
+      lga: ['', Validators.required],
+      village: ['', Validators.required],
+      state: [''],
     });
   }
   get f() {
     return this.commentForm.controls;
   }
   getLGAs(id?) {
-    this.dataservice.getLGAs(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+    this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getLGAs', result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
   getAreas(id?) {
-    this.dataservice.getAreas(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
+    this.dataservice.getAreas(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getAreas', result.data.areas.data);
       this.Areas = result.data.areas.data;
     });
   }
   getVillages(id?) {
-    this.dataservice.getVillages(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getVillages", result.data.villages.data);
+    this.dataservice.getVillages(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getVillages', result.data.villages.data);
       this.Villages = result.data.villages.data;
     });
   }
@@ -198,7 +198,7 @@ export class RetailersComponent {
     this.gridApi.sizeColumnsToFit();
   }
   onRowClicked(event: any) {
-    console.log("row", event.data);
+    console.log('row', event.data);
     // this.router.navigate(
     //   ["/cropprices/kp_customer_details", event.data.id, this.router.url],
     //   {
@@ -208,26 +208,26 @@ export class RetailersComponent {
   }
   toggleCropPrices(data) {
     switch (data) {
-      case "Rejected":
-        this.selectedList = "Rejected";
+      case 'Rejected':
+        this.selectedList = 'Rejected';
         this.blocked = true;
         this.confirmed = undefined;
         this.getRetailers();
         break;
-      case "Approvalpending":
-        this.selectedList = "Pending";
+      case 'Approvalpending':
+        this.selectedList = 'Pending';
         this.blocked = false;
         this.confirmed = false;
         this.getRetailers();
         break;
-      case "Approved":
-        this.selectedList = "Approved";
+      case 'Approved':
+        this.selectedList = 'Approved';
         this.blocked = false;
         this.confirmed = true;
         this.getRetailers();
         break;
-      case "All":
-        this.selectedList = "All";
+      case 'All':
+        this.selectedList = 'All';
         this.blocked = undefined;
         this.confirmed = undefined;
         this.getRetailers();
@@ -249,9 +249,9 @@ export class RetailersComponent {
     // }
   }
   onSelectionChanged(event: any) {
-    var selectedRows = this.gridApi.getSelectedRows();
+    let selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows, event);
-    this.router.navigate(["/retailers/retailer_details", selectedRows[0].id], {
+    this.router.navigate(['/retailers/retailer_details', selectedRows[0].id], {
       state: { data: selectedRows },
     });
   }
@@ -265,15 +265,15 @@ export class RetailersComponent {
     this.dataservice.createRetailer(this.commentForm.value).subscribe(
       (result: any) => {
         resp = result;
-        console.log("response", result);
+        console.log('response', result);
         if (result) {
-          this.toastr.success("Retailer added successfully!");
+          this.toastr.success('Retailer added successfully!');
           this.btnLoading = false;
           this.commentModal.hide();
           this.setForm();
           this.getRetailers();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
           this.btnLoading = false;
         }
       },

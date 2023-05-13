@@ -195,21 +195,21 @@ let MarketplaceComponent = class MarketplaceComponent {
         this.columnDefs = [];
         this.Categories = [];
         this.productForm = this.fb.group({
-            itemName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            images: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            userId: [localStorage.getItem("uid")],
-            contactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            availableQty: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            category: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            description: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            itemName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            images: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            userId: [localStorage.getItem('uid')],
+            contactNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            availableQty: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            category: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            description: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
         this.rowData = [];
         this.selectedRows = [];
         this.file = [];
         this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["MarketplaceColumn"]];
-        this.rowSelection = "single";
+        this.rowSelection = 'single';
     }
     ngOnInit() {
         this.loading = true;
@@ -242,10 +242,10 @@ let MarketplaceComponent = class MarketplaceComponent {
             var _a;
             resp = result.body;
             console.log(result);
-            if (result.status === 200 && result.body.status == "Success") {
+            if (result.status === 200 && result.body.status == 'Success') {
                 this.toastr.success(result.body.message);
                 this.btnLoading = false;
-                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, "_blank");
+                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, '_blank');
             }
             else {
                 this.btnLoading = false;
@@ -292,7 +292,7 @@ let MarketplaceComponent = class MarketplaceComponent {
         this.dataservice
             .getMarketplaceCategories()
             .valueChanges.subscribe((result) => {
-            console.log("getCategories", result.data.marketplaceCategories.data);
+            console.log('getCategories', result.data.marketplaceCategories.data);
             this.Categories = result.data.marketplaceCategories.data;
         });
     }
@@ -302,19 +302,19 @@ let MarketplaceComponent = class MarketplaceComponent {
         this.gridApi.sizeColumnsToFit();
     }
     onRowClicked(event) {
-        console.log("row", event.data);
+        console.log('row', event.data);
     }
     onSelectionChanged(event) {
         var _a;
         this.selectedRows = this.gridApi.getSelectedRows();
-        this.router.navigate(["/marketplace/marketplace_details", (_a = this.selectedRows[0]) === null || _a === void 0 ? void 0 : _a.id], {
+        this.router.navigate(['/marketplace/marketplace_details', (_a = this.selectedRows[0]) === null || _a === void 0 ? void 0 : _a.id], {
             state: { data: this.selectedRows },
         });
     }
     // On file Select
     onChange(event) {
         this.file = [];
-        for (var i = 0; i < event.target.files.length; i++) {
+        for (let i = 0; i < event.target.files.length; i++) {
             this.file.push(event.target.files[i]);
         }
         console.log(this.file);
@@ -333,9 +333,9 @@ let MarketplaceComponent = class MarketplaceComponent {
                     .createMarketplaceProduct(this.productForm.value, response.body.map((a) => a.id))
                     .subscribe((result) => {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.createMarketplaceProduct) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.dataservice.getMarketplace(1, this.pageSize).refetch();
                         window.location.reload();
                         this.file = null;
@@ -345,13 +345,13 @@ let MarketplaceComponent = class MarketplaceComponent {
                         this.btnLoading = false;
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                         this.btnLoading = false;
                     }
                 });
             }
             else {
-                this.toastr.error("Image failed to upload!");
+                this.toastr.error('Image failed to upload!');
                 this.btnLoading = false;
             }
         });
@@ -364,9 +364,9 @@ MarketplaceComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 MarketplaceComponent.propDecorators = {
-    productModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["productModal",] }],
-    detailsModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["detailsModal",] }],
-    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }]
+    productModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['productModal',] }],
+    detailsModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['detailsModal',] }],
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['deleteModal',] }]
 };
 MarketplaceComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -428,20 +428,20 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
         this.file = [];
         this.Categories = [];
         this.productForm = this.fb.group({
-            itemName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            itemName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
             // images: ["", Validators.required],
             // userId: [localStorage.getItem("uid")],
-            contactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            availableQty: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            category: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            description: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            contactNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            availableQty: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            category: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            description: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
         });
     }
     ngOnInit() {
         this.activatedRouter.params.subscribe((params) => {
-            this.id = params["id"];
+            this.id = params['id'];
         });
         this.getSingleMarketplaceProduct();
         this.getCategories();
@@ -451,7 +451,7 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
             .getSingleMarketplaceProduct(this.id)
             .valueChanges.subscribe((result) => {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j;
-            console.log("getSingleMarketplaceProduct", result.data.marketplaceProduct.data);
+            console.log('getSingleMarketplaceProduct', result.data.marketplaceProduct.data);
             this.details = result.data.marketplaceProduct.data;
             this.productForm = this.fb.group({
                 itemName: [(_a = this.details.attributes) === null || _a === void 0 ? void 0 : _a.ItemName, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
@@ -484,7 +484,7 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
         this.dataservice
             .getMarketplaceCategories()
             .valueChanges.subscribe((result) => {
-            console.log("getCategories", result.data.marketplaceCategories.data);
+            console.log('getCategories', result.data.marketplaceCategories.data);
             this.Categories = result.data.marketplaceCategories.data;
         });
     }
@@ -499,7 +499,7 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
     // On file Select
     onChange(event) {
         this.file = [];
-        for (var i = 0; i < event.target.files.length; i++) {
+        for (let i = 0; i < event.target.files.length; i++) {
             this.file.push(event.target.files[i]);
         }
         console.log(this.file);
@@ -512,15 +512,15 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
             .updateMarketplaceProduct(this.productForm.value, this.id)
             .subscribe((result) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateMarketplaceProduct) {
-                this.toastr.success("Activity updated successfully!");
+                this.toastr.success('Activity updated successfully!');
                 this.editModal.hide();
                 this.btnLoading = false;
                 this.getSingleMarketplaceProduct();
             }
             else {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
                 this.btnLoading = false;
             }
         });
@@ -535,20 +535,20 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
                     .updateMarketplaceProductImg(this.id, response.body.map((a) => a.id))
                     .subscribe((result) => {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.updateMarketplaceProduct) {
-                        this.toastr.success("Activity updated successfully!");
+                        this.toastr.success('Activity updated successfully!');
                         this.btnLoading = false;
                         this.dataservice.getSingleMarketplaceProduct(this.id).refetch();
                     }
                     else {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                         this.btnLoading = false;
                     }
                 });
             }
             else {
-                this.toastr.error("Image failed to upload!");
+                this.toastr.error('Image failed to upload!');
                 this.btnLoading = false;
             }
         });
@@ -557,14 +557,14 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
         this.dataservice
             .DeleteMarketplaceProduct(this.id)
             .subscribe((result) => {
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.deleteMarketplaceProduct) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.deleteModal.hide();
-                this.router.navigate(["/marketplace/all"]);
+                this.router.navigate(['/marketplace/all']);
             }
             else {
-                this.toastr.error("Failed!");
+                this.toastr.error('Failed!');
             }
         });
     }
@@ -577,9 +577,9 @@ MarketplaceDetailComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 MarketplaceDetailComponent.propDecorators = {
-    editModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["editModal",] }],
-    resultModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["resultModal",] }],
-    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }]
+    editModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['editModal',] }],
+    resultModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['resultModal',] }],
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['deleteModal',] }]
 };
 MarketplaceDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

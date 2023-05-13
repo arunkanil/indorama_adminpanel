@@ -1,12 +1,12 @@
-import { Component, OnInit } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
-import { dateConverter } from "../../constants/columnMetadata";
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { dateConverter } from '../../constants/columnMetadata';
 
 @Component({
-  templateUrl: "surveys-add.component.html",
+  templateUrl: 'surveys-add.component.html',
 })
 export class NewSurveyComponent implements OnInit {
   constructor(
@@ -26,46 +26,46 @@ export class NewSurveyComponent implements OnInit {
   SurveyDescription;
   SurveyTitle;
   addForm = this.fb.group({
-    FieldName: ["", Validators.required],
-    __typename: ["", Validators.required],
-    FieldType: ["", Validators.required],
-    FieldKey: [""],
+    FieldName: ['', Validators.required],
+    __typename: ['', Validators.required],
+    FieldType: ['', Validators.required],
+    FieldKey: [''],
     Mandatory: [false],
-    Values: [""],
+    Values: [''],
   });
 
   ngOnInit(): void {
     this.activatedRouter.params.subscribe((params) => {
-      this.id = params["id"];
+      this.id = params['id'];
     });
   }
   questionSubmit() {
     console.log(this.addForm.value);
     this.addForm.value.FieldKey = this.addForm.value.FieldName.replace(
       /[^A-Z0-9]/gi,
-      "_"
+      '_'
     );
     if (this.addForm?.value?.Values?.length > 0) {
-      this.addForm.value.Values = this.addForm?.value?.Values?.split(",");
+      this.addForm.value.Values = this.addForm?.value?.Values?.split(',');
     }
     this.questions.push(this.addForm.value);
     this.addForm = this.fb.group({
-      FieldName: ["", Validators.required],
-      __typename: ["", Validators.required],
-      FieldType: ["", Validators.required],
-      FieldKey: [""],
+      FieldName: ['', Validators.required],
+      __typename: ['', Validators.required],
+      FieldType: ['', Validators.required],
+      FieldKey: [''],
       Mandatory: [false],
-      Values: [""],
+      Values: [''],
     });
     console.log(this.questions);
   }
   onQuestionTypeChange(event) {
-    if (event.target.value == "ComponentSurveySurveyTextComponent") {
+    if (event.target.value == 'ComponentSurveySurveyTextComponent') {
       this.isText = true;
     } else {
       this.isText = false;
     }
-    this.addForm.value.FieldType = "";
+    this.addForm.value.FieldType = '';
     console.log(event.target.value, this.isText);
   }
   deleteQuestion(item) {
@@ -88,20 +88,20 @@ export class NewSurveyComponent implements OnInit {
         .subscribe(
           (result: any) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.createSurveyForm) {
-              this.toastr.success("Farm demo added successfully!");
+              this.toastr.success('Farm demo added successfully!');
               this.btnLoading = false;
-              this.router.navigate(["/surveys/all"]);
+              this.router.navigate(['/surveys/all']);
             }
           },
           (error) => {
-            this.toastr.error("Failed. Please check the fields!");
+            this.toastr.error('Failed. Please check the fields!');
             this.btnLoading = false;
           }
         );
     } else {
-      this.toastr.error("Please add both title & description");
+      this.toastr.error('Please add both title & description');
       this.btnLoading = false;
     }
   }

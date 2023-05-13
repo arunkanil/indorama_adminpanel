@@ -1,14 +1,14 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
-import { FarmDemoColumn } from "../../constants/columnMetadata";
-import { environment } from "../../../environments/environment";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { FarmDemoColumn } from '../../constants/columnMetadata';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "farm-demo.component.html",
+  templateUrl: 'farm-demo.component.html',
 })
 export class FarmDemoComponent {
   rowSelection: string;
@@ -19,23 +19,23 @@ export class FarmDemoComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...FarmDemoColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
 
-  @ViewChild("myModal") public myModal: ModalDirective;
+  @ViewChild('myModal') public myModal: ModalDirective;
   addForm = this.fb.group({
     // Villages: ["", Validators.required],
-    lga: ["", Validators.required],
+    lga: ['', Validators.required],
     // Areas: ["", Validators.required],
-    state: ["", Validators.required],
-    Crops: ["", Validators.required],
-    Farmer: ["", Validators.required],
-    AreaOfField: ["", Validators.required],
-    Season: ["", Validators.required],
-    isPesticidesUsed: [""],
-    FarmLocationLongitude: ["", Validators.required],
-    FarmLocationLatitude: ["", Validators.required],
-    Status: ["", Validators.required],
+    state: ['', Validators.required],
+    Crops: ['', Validators.required],
+    Farmer: ['', Validators.required],
+    AreaOfField: ['', Validators.required],
+    Season: ['', Validators.required],
+    isPesticidesUsed: [''],
+    FarmLocationLongitude: ['', Validators.required],
+    FarmLocationLatitude: ['', Validators.required],
+    Status: ['', Validators.required],
   });
   loading = false;
   btnLoading = false;
@@ -66,7 +66,7 @@ export class FarmDemoComponent {
     this.dataservice
       .getFarmDemos(1, this.pageSize)
       .valueChanges.subscribe((result: any) => {
-        console.log("getFarmDemos", result.data.farmDemos.data);
+        console.log('getFarmDemos', result.data.farmDemos.data);
         this.rowData = result.data.farmDemos.data;
         this.meta = result.data.farmDemos.meta;
         if (this.meta?.pagination?.pageCount <= 1) {
@@ -78,21 +78,13 @@ export class FarmDemoComponent {
         }
         this.loading = false;
       });
-    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
+    this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getCrops', result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
-    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
+    this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getStates', result.data.states.data);
       this.States = result.data.states.data;
-    });
-    this.dataservice.getAreas(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
-      this.Areas = result.data.areas.data;
-    });
-    this.dataservice.getVillages(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getVillages", result.data.villages.data);
-      this.Villages = result.data.villages.data;
     });
   }
 
@@ -104,10 +96,10 @@ export class FarmDemoComponent {
       .subscribe((result: any) => {
         resp = result.body;
         console.log(result);
-        if (result.status === 200 && result.body.status == "Success") {
+        if (result.status === 200 && result.body.status == 'Success') {
           this.toastr.success(result.body.message);
           this.btnLoading = false;
-          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+          window.open(`${environment.apiUrl}${result?.body?.path}`, '_blank');
         } else {
           this.btnLoading = false;
           this.toastr.error(result.body.message);
@@ -150,8 +142,8 @@ export class FarmDemoComponent {
       });
   }
   getLGAs(id?) {
-    this.dataservice.getLGAs(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+    this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getLGAs', result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
@@ -160,9 +152,9 @@ export class FarmDemoComponent {
     this.gridColumnApi = params.columnApi;
   }
   onSelectionChanged(event) {
-    var selectedRows = this.gridApi.getSelectedRows();
+    let selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows);
-    this.router.navigate(["/farmdemo/demo_details", selectedRows[0].id], {
+    this.router.navigate(['/farmdemo/demo_details', selectedRows[0].id], {
       state: { data: selectedRows },
     });
   }
@@ -177,15 +169,15 @@ export class FarmDemoComponent {
     this.dataservice.AddFarmdemo(this.addForm.value).subscribe(
       (result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.createFarmDemo) {
-          this.toastr.success("Farm demo added successfully!");
+          this.toastr.success('Farm demo added successfully!');
           this.btnLoading = false;
           this.getLists();
           this.myModal.hide();
           this.addForm.reset();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
           this.btnLoading = false;
         }
       },

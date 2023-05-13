@@ -1,15 +1,15 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
 // import { ActionRenderer } from "../../utils/StatusRenderer";
-import { SmsColumn } from "../../constants/columnMetadata";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { environment } from "../../../environments/environment";
+import { SmsColumn } from '../../constants/columnMetadata';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "sms-campaigns.component.html",
+  templateUrl: 'sms-campaigns.component.html',
 })
 export class SMSCampaignsComponent {
   rowSelection: string;
@@ -20,10 +20,10 @@ export class SMSCampaignsComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...SmsColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
-  @ViewChild("messageModal") public messageModal: ModalDirective;
-  @ViewChild("detailsModal") public detailsModal: ModalDirective;
+  @ViewChild('messageModal') public messageModal: ModalDirective;
+  @ViewChild('detailsModal') public detailsModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
@@ -51,11 +51,11 @@ export class SMSCampaignsComponent {
 
   messageForm = this.fb.group({
     isAllFarmers: [false],
-    message: ["", Validators.required],
-    village: [""],
-    area: [""],
-    lga: [""],
-    state: [""],
+    message: ['', Validators.required],
+    village: [''],
+    area: [''],
+    lga: [''],
+    state: [''],
   });
   ngOnInit(): void {
     this.loading = true;
@@ -117,28 +117,28 @@ export class SMSCampaignsComponent {
       });
   }
   getStates() {
-    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
+    this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getStates', result.data.states.data);
       this.States = result.data.states.data;
     });
   }
   getLGAs(stateid?) {
-    this.dataservice.getLGAs(1, 10000, "",stateid).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+    this.dataservice.getLGAs(1, 10000, '', stateid).valueChanges.subscribe((result: any) => {
+      console.log('getLGAs', result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
   getAreas(lgaid?) {
-    this.dataservice.getAreas(1, 10000, "",lgaid).valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
+    this.dataservice.getAreas(1, 10000, '', lgaid).valueChanges.subscribe((result: any) => {
+      console.log('getAreas', result.data.areas.data);
       this.Areas = result.data.areas.data;
     });
   }
-  getVillages(areaid?) {
+  getVillages(lgaid?) {
     this.dataservice
-      .getVillages(1, 10000, "",areaid)
+      .getVillages(1, 10000, '', lgaid)
       .valueChanges.subscribe((result: any) => {
-        console.log("getVillages", result.data.villages.data);
+        console.log('getVillages', result.data.villages.data);
         this.Villages = result.data.villages.data;
       });
   }
@@ -151,10 +151,10 @@ export class SMSCampaignsComponent {
       .subscribe((result: any) => {
         resp = result.body;
         console.log(result);
-        if (result.status === 200 && result.body.status == "Success") {
+        if (result.status === 200 && result.body.status == 'Success') {
           this.toastr.success(result.body.message);
           this.btnLoading = false;
-          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+          window.open(`${environment.apiUrl}${result?.body?.path}`, '_blank');
         } else {
           this.btnLoading = false;
           this.toastr.error(result.body.message);
@@ -165,6 +165,7 @@ export class SMSCampaignsComponent {
     this.getLGAs(event.target.value);
   }
   filterArea(event) {
+    this.filterVillage(event);
     this.getAreas(event.target.value);
   }
   filterVillage(event) {
@@ -176,7 +177,7 @@ export class SMSCampaignsComponent {
     this.gridApi.sizeColumnsToFit();
   }
   onRowClicked(event: any) {
-    console.log("row", event.data);
+    console.log('row', event.data);
   }
   onSelectionChanged(event: any) {
     this.selectedRows = this.gridApi.getSelectedRows();
@@ -185,7 +186,7 @@ export class SMSCampaignsComponent {
     } else {
       this.disableButton = true;
     }
-    this.router.navigate(["/sms-campaigns/details", this.selectedRows[0].id], {
+    this.router.navigate(['/sms-campaigns/details', this.selectedRows[0].id], {
       state: { data: this.selectedRows },
     });
     console.log(this.selectedRows, this.selectedRows[0]);
@@ -195,17 +196,17 @@ export class SMSCampaignsComponent {
   }
   sendMessage() {
     this.btnLoading = true;
-    console.log(this.messageForm.value, "sendmessage");
+    console.log(this.messageForm.value, 'sendmessage');
     this.dataservice.createSMSCampaign(this.messageForm.value).subscribe(
       (result: any) => {
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.createSmsCampaign) {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.btnLoading = false;
           this.messageModal.hide();
           this.getSmsCampaigns();
         } else {
-          this.toastr.error("Failed!");
+          this.toastr.error('Failed!');
           this.btnLoading = false;
         }
       },

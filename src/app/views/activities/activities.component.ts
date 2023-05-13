@@ -1,14 +1,14 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { ActivitiesColumn } from "../../constants/columnMetadata";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { environment } from "../../../environments/environment";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { ActivitiesColumn } from '../../constants/columnMetadata';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "activities.component.html",
+  templateUrl: 'activities.component.html',
 })
 export class ActivitiesComponent {
   rowSelection: string;
@@ -19,12 +19,12 @@ export class ActivitiesComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...ActivitiesColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
-  @ViewChild("activitiesModal") public activitiesModal: ModalDirective;
-  @ViewChild("downloadActivitiesModal")
+  @ViewChild('activitiesModal') public activitiesModal: ModalDirective;
+  @ViewChild('downloadActivitiesModal')
   public downloadActivitiesModal: ModalDirective;
-  @ViewChild("uploadActivitiesModal")
+  @ViewChild('uploadActivitiesModal')
   public uploadActivitiesModal: ModalDirective;
 
   loading = true;
@@ -37,38 +37,36 @@ export class ActivitiesComponent {
   columnDefs = [];
   States: any = [];
   LGA: any = [];
-  Areas: any = [];
   Crops: any = [];
   Villages: any = [];
   file: any = null;
 
   activitiesForm = this.fb.group({
-    ActivityType: ["", Validators.required],
-    Latitude: [""],
-    Longitude: [""],
-    state: ["", Validators.required],
-    lga: ["", Validators.required],
-    village: [""],
+    ActivityType: ['', Validators.required],
+    Latitude: [''],
+    Longitude: [''],
+    state: ['', Validators.required],
+    lga: ['', Validators.required],
+    village: [''],
     NoOfAttendees: [
-      "",
+      '',
       [Validators.max(9999999), Validators.min(1)],
     ],
-    area: ["", Validators.required],
-    crop: ["", Validators.required],
-    FarmerName: ["", Validators.pattern("[a-zA-Z ]*")],
-    Agronomist: ["", Validators.pattern("[a-zA-Z ]*")],
-    PlannedFarmDay: [""],
-    ConditionOfCrop: [""],
-    Date: ["", Validators.required],
-    Time: [""],
-    Reason: [""],
+    crop: ['', Validators.required],
+    FarmerName: ['', Validators.pattern('[a-zA-Z ]*')],
+    Agronomist: ['', Validators.pattern('[a-zA-Z ]*')],
+    PlannedFarmDay: [''],
+    ConditionOfCrop: [''],
+    Date: ['', Validators.required],
+    Time: [''],
+    Reason: [''],
   });
   downloadExcelForm = this.fb.group({
-    fromDate: ["", Validators.required],
-    toDate: ["", Validators.required],
+    fromDate: ['', Validators.required],
+    toDate: ['', Validators.required],
   });
   uploadExcelForm = this.fb.group({
-    File: ["", Validators.required],
+    File: ['', Validators.required],
   });
   rowData: any = [];
   meta;
@@ -85,7 +83,7 @@ export class ActivitiesComponent {
     this.getStates();
   }
   checkSpecialCharacters(data) {
-    let format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+    const format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
     if (format.test(data)) {
       return true;
     } else {
@@ -94,15 +92,12 @@ export class ActivitiesComponent {
   }
 
   getLGAs(id?) {
-    this.dataservice.getLGAs(1,10000,"",id).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+    this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getLGAs', result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
 
-  filterArea(event) {
-    this.getAreas(event.target.value);
-  }
 
   filterLGA(event) {
     this.getLGAs(event.target.value);
@@ -115,7 +110,7 @@ export class ActivitiesComponent {
 
 
   getActivities() {
-    console.log("jshdbfkjhsdfkjsdf");
+    console.log('jshdbfkjhsdfkjsdf');
     this.dataservice
       .getActivities(1, this.pageSize)
       .valueChanges.subscribe((result: any) => {
@@ -130,8 +125,8 @@ export class ActivitiesComponent {
         this.rowData = result.data.activities.data;
       });
 
-      this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
-        console.log("getStates", result.data.states.data);
+      this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
+        console.log('getStates', result.data.states.data);
         this.States = result.data.states.data;
       });
   }
@@ -171,25 +166,20 @@ export class ActivitiesComponent {
       });
   }
   getCrops() {
-    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
+    this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result: any) => {
       this.Crops = result.data.crops.data;
     });
   }
   getStates() {
-    this.dataservice.getStates(1,10000, "").valueChanges.subscribe((result: any) => {
+    this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
       this.States = result.data.states.data;
     });
   }
-  getAreas(lgaid?) {
-    this.dataservice.getAreas(1,10000, "", lgaid).valueChanges.subscribe((result: any) => {
-      this.Areas = result.data.areas.data;
-    });
-  }
-  getVillages(areaid?) {
+  getVillages(lgaid?) {
     this.dataservice
-      .getVillages(1, 10000, "",areaid)
+      .getVillages(1, 10000, '', lgaid)
       .valueChanges.subscribe((result: any) => {
-      console.log("getVillages", result.data.villages.data);
+      console.log('getVillages', result.data.villages.data);
       this.Villages = result.data.villages.data;
     });
   }
@@ -199,18 +189,18 @@ export class ActivitiesComponent {
     this.gridApi.sizeColumnsToFit();
   }
   onRowClicked(event: any) {
-    console.log("row", event.data);
+    console.log('row', event.data);
   }
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
     console.log(this.file);
   }
   onSelectionChanged(event: any) {
-    let selectedRows = this.gridApi.getSelectedRows();
-    this.router.navigate(["/activities/activity_details", selectedRows[0].id], {
+    const selectedRows = this.gridApi.getSelectedRows();
+    this.router.navigate(['/activities/activity_details', selectedRows[0].id], {
       state: { data: selectedRows },
     });
   }
@@ -218,7 +208,7 @@ export class ActivitiesComponent {
     this.activitiesModal.show();
   }
   activitiesSubmit() {
-    console.log("Values before submit", this.activitiesForm.value);
+    console.log('Values before submit', this.activitiesForm.value);
     let resp = {};
     this.btnLoading = true;
     this.dataservice
@@ -226,14 +216,14 @@ export class ActivitiesComponent {
       .subscribe((result: any) => {
         resp = result.data;
         if (result.data.createActivity) {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.getActivities();
           this.activitiesForm.reset();
           this.btnLoading = false;
           this.activitiesModal.hide();
           this.gridApi.deselectAll();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
           this.btnLoading = false;
         }
       });
@@ -247,10 +237,10 @@ export class ActivitiesComponent {
       .subscribe((result: any) => {
         resp = result.body;
         console.log(result);
-        if (result.status === 200 && result.body.status == "Success") {
+        if (result.status === 200 && result.body.status === 'Success') {
           this.toastr.success(result.body.message);
           this.btnLoading = false;
-          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+          window.open(`${environment.apiUrl}${result?.body?.path}`, '_blank');
         } else {
           this.btnLoading = false;
           this.toastr.error(result.body.message);
@@ -258,16 +248,16 @@ export class ActivitiesComponent {
       });
   }
   uploadActivities() {
-    let resp = {};
+    const resp = {};
     this.dataservice.uploadActivities(this.file).subscribe((response: any) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log(response);
-        this.toastr.success("Success!");
+        this.toastr.success('Success!');
         this.file = null;
         this.getActivities();
         this.uploadActivitiesModal.hide();
       } else {
-        this.toastr.error("Failed!");
+        this.toastr.error('Failed!');
       }
     });
   }

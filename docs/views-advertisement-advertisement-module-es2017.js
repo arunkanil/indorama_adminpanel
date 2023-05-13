@@ -40,8 +40,8 @@ let AdvertisementComponent = class AdvertisementComponent {
         this.orders = {};
         this.baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_8__["environment"].apiUrl;
         this.advertisementForm = this.fb.group({
-            clickUrl: [""],
-            File: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            clickUrl: [''],
+            File: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
         this.rowData = [];
         this.file = null;
@@ -53,18 +53,18 @@ let AdvertisementComponent = class AdvertisementComponent {
     }
     getAdvertisements() {
         this.dataservice.getDashboardAd().valueChanges.subscribe((result) => {
-            console.log("advertisement", result.data.advertisement.data);
+            console.log('advertisement', result.data.advertisement.data);
             this.advertisement = result.data.advertisement.data;
         });
         this.dataservice.getRetailerAd().valueChanges.subscribe((result) => {
-            console.log("retailerAdvertisement", result.data.retailerAdvertisement.data);
+            console.log('retailerAdvertisement', result.data.retailerAdvertisement.data);
             this.retailerAdvertisement = result.data.retailerAdvertisement.data;
         });
     }
     // On file Select
     onChange(event) {
         this.file = [];
-        for (var i = 0; i < event.target.files.length; i++) {
+        for (let i = 0; i < event.target.files.length; i++) {
             this.file.push(event.target.files[i]);
         }
         console.log(this.file);
@@ -90,15 +90,15 @@ let AdvertisementComponent = class AdvertisementComponent {
                         .updateRetailerAd((_c = (_b = this.advertisementForm) === null || _b === void 0 ? void 0 : _b.value) === null || _c === void 0 ? void 0 : _c.clickUrl, file)
                         .subscribe((result) => {
                         resp = result.data;
-                        console.log("response", result);
+                        console.log('response', result);
                         if (result.data.updateRetailerAdvertisement) {
-                            this.toastr.success("Success!");
+                            this.toastr.success('Success!');
                             this.getAdvertisements();
                             this.btnLoading = false;
                             this.advertisementModal.hide();
                         }
                         else {
-                            this.toastr.error("Failed. Please check the fields!");
+                            this.toastr.error('Failed. Please check the fields!');
                             this.btnLoading = false;
                         }
                     });
@@ -108,22 +108,22 @@ let AdvertisementComponent = class AdvertisementComponent {
                         .updateDashboardAd((_e = (_d = this.advertisementForm) === null || _d === void 0 ? void 0 : _d.value) === null || _e === void 0 ? void 0 : _e.clickUrl, file)
                         .subscribe((result) => {
                         resp = result.data;
-                        console.log("response", result);
+                        console.log('response', result);
                         if (result.data.updateAdvertisement) {
-                            this.toastr.success("Success!");
+                            this.toastr.success('Success!');
                             this.getAdvertisements();
                             this.btnLoading = false;
                             this.advertisementModal.hide();
                         }
                         else {
-                            this.toastr.error("Failed. Please check the fields!");
+                            this.toastr.error('Failed. Please check the fields!');
                             this.btnLoading = false;
                         }
                     });
                 }
             }
             else {
-                this.toastr.error("Image failed to upload!");
+                this.toastr.error('Image failed to upload!');
                 this.btnLoading = false;
             }
         });
@@ -136,7 +136,7 @@ AdvertisementComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 AdvertisementComponent.propDecorators = {
-    advertisementModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["advertisementModal",] }]
+    advertisementModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['advertisementModal',] }]
 };
 AdvertisementComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

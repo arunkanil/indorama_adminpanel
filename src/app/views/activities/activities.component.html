@@ -159,29 +159,12 @@
                   ngModel
                   name="lga"
                   formControlName="lga"
-                  (change)="filterArea($event)"
+                  (change)="filterVillage($event)"
                 >
                   <option value="" disabled selected hidden>
                     Choose...
                   </option>
                   <option *ngFor="let item of LGA" value="{{ item.id }}">
-                    {{ item.attributes.Name }}
-                  </option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label for="area">City <span class="danger">*</span></label>
-                <select
-                  class="form-control"
-                  id="area"
-                  required
-                  ngModel
-                  name="area"
-                  formControlName="area"
-                  (change)="filterVillage($event)"
-                >
-                  <option value="" disabled selected hidden>Choose...</option>
-                  <option *ngFor="let item of Areas" value="{{ item.id }}">
                     {{ item.attributes.Name }}
                   </option>
                 </select>
@@ -233,25 +216,7 @@
               </div>
             </div>
             <div class="col">
-              <div class="form-group">
-                <label for="FarmerName">Farmer name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="FarmerName"
-                  name="FarmerName"
-                  formControlName="FarmerName"
-                  placeholder="Enter name"
-                />
-                <div
-                  *ngIf="
-                    checkSpecialCharacters(activitiesForm.value.FarmerName)
-                  "
-                  class="danger"
-                >
-                  Special characters not permitted
-                </div>
-              </div>
+
               <div class="form-group">
                 <label for="Agronomist">Agronomist name</label>
                 <input

@@ -1,14 +1,14 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { IndoramaUpdatesColumn } from "../../constants/columnMetadata";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { environment } from "../../../environments/environment";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { IndoramaUpdatesColumn } from '../../constants/columnMetadata';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "indorama-updates.component.html",
+  templateUrl: 'indorama-updates.component.html',
 })
 export class IndoramaUpdatesComponent {
   rowSelection: string;
@@ -19,11 +19,11 @@ export class IndoramaUpdatesComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...IndoramaUpdatesColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
-  @ViewChild("cropPriceModal") public cropPriceModal: ModalDirective;
-  @ViewChild("detailsModal") public detailsModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
+  @ViewChild('cropPriceModal') public cropPriceModal: ModalDirective;
+  @ViewChild('detailsModal') public detailsModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
   baseURL = environment.apiUrl;
   loading = true;
   btnLoading = false;
@@ -40,9 +40,9 @@ export class IndoramaUpdatesComponent {
   imageUrl;
 
   newsForm = this.fb.group({
-    Title: ["", Validators.required],
-    Body: ["", Validators.required],
-    Image: [""],
+    Title: ['', Validators.required],
+    Body: ['', Validators.required],
+    Image: [''],
   });
   rowData: any = [];
   selectedRows: any = [];
@@ -81,10 +81,10 @@ export class IndoramaUpdatesComponent {
       .subscribe((result: any) => {
         resp = result.body;
         console.log(result);
-        if (result.status === 200 && result.body.status == "Success") {
+        if (result.status === 200 && result.body.status == 'Success') {
           this.toastr.success(result.body.message);
           this.btnLoading = false;
-          window.open(`${environment.apiUrl}${result?.body?.path}`, "_blank");
+          window.open(`${environment.apiUrl}${result?.body?.path}`, '_blank');
         } else {
           this.btnLoading = false;
           this.toastr.error(result.body.message);
@@ -132,7 +132,7 @@ export class IndoramaUpdatesComponent {
     this.gridApi.sizeColumnsToFit();
   }
   onRowClicked(event: any) {
-    console.log("row", event.data);
+    console.log('row', event.data);
   }
   onSelectionChanged(event: any) {
     this.selectedRows = this.gridApi.getSelectedRows();
@@ -145,7 +145,7 @@ export class IndoramaUpdatesComponent {
   // On file Select
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
   }
@@ -168,9 +168,9 @@ export class IndoramaUpdatesComponent {
         : null;
     } else {
       this.newsForm = this.fb.group({
-        Title: ["", Validators.required],
-        Body: ["", Validators.required],
-        Image: ["", Validators.required],
+        Title: ['', Validators.required],
+        Body: ['', Validators.required],
+        Image: ['', Validators.required],
       });
       this.imageUrl = null;
     }
@@ -181,15 +181,15 @@ export class IndoramaUpdatesComponent {
       .UpdateIndoramaUpdates({ isDelete: true }, this.selectedRows[0].id, null)
       .subscribe((result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.updateNewsAndUpdate) {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.getUpdates();
           this.file = null;
           this.deleteModal.hide();
           this.gridApi.deselectAll();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
         }
       });
   }
@@ -210,9 +210,9 @@ export class IndoramaUpdatesComponent {
               )
               .subscribe((result: any) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.updateNewsAndUpdate) {
-                  this.toastr.success("Success!");
+                  this.toastr.success('Success!');
                   this.file = null;
                   this.getUpdates();
                   this.btnLoading = false;
@@ -220,7 +220,7 @@ export class IndoramaUpdatesComponent {
                   this.newsForm.reset();
                   this.gridApi.deselectAll();
                 } else {
-                  this.toastr.error("Failed. Please check the fields!");
+                  this.toastr.error('Failed. Please check the fields!');
                   this.btnLoading = false;
                 }
               });
@@ -235,9 +235,9 @@ export class IndoramaUpdatesComponent {
           )
           .subscribe((result: any) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateNewsAndUpdate) {
-              this.toastr.success("Success!");
+              this.toastr.success('Success!');
               this.file = null;
               this.btnLoading = false;
               this.cropPriceModal.hide();
@@ -245,7 +245,7 @@ export class IndoramaUpdatesComponent {
               this.gridApi.deselectAll();
               this.getUpdates();
             } else {
-              this.toastr.error("Failed. Please check the fields!");
+              this.toastr.error('Failed. Please check the fields!');
               this.btnLoading = false;
             }
           });
@@ -258,9 +258,9 @@ export class IndoramaUpdatesComponent {
             .AddIndoramaUpdates(this.newsForm.value, response.body[0]?.id)
             .subscribe((result: any) => {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
               if (result.data.createNewsAndUpdate) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.file = null;
                 this.cropPriceModal.hide();
                 this.newsForm.reset();
@@ -268,12 +268,12 @@ export class IndoramaUpdatesComponent {
                 this.getUpdates();
                 this.gridApi.deselectAll();
               } else {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
                 this.btnLoading = false;
               }
             });
         } else {
-          this.toastr.error("Image failed to upload!");
+          this.toastr.error('Image failed to upload!');
           this.btnLoading = false;
         }
       });

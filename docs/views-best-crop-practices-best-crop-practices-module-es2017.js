@@ -90,16 +90,16 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
         this.loading = true;
         this.btnLoading = false;
         this.disableButton = true;
-        this.title = "Verification";
+        this.title = 'Verification';
         this.orders = {};
         this.columnDefs = [];
         this.Crops = [];
         this.baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl;
         this.practicesForm = this.fb.group({
-            crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            content: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            File: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            content: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            File: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
         });
         this.rowData = [];
         this.selectedRows = [];
@@ -107,7 +107,7 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
         this.file = null;
         this.image = null;
         this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["CropPricesColumn"]];
-        this.rowSelection = "single";
+        this.rowSelection = 'single';
     }
     ngOnInit() {
         this.loading = true;
@@ -124,7 +124,7 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
         });
     }
     getCrops() {
-        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
+        this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result) => {
             this.Crops = result.data.crops.data;
         });
     }
@@ -132,13 +132,13 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
     onChange(event, check) {
         if (check == true) {
             this.file = [];
-            for (var i = 0; i < event.target.files.length; i++) {
+            for (let i = 0; i < event.target.files.length; i++) {
                 this.file.push(event.target.files[i]);
             }
         }
         else {
             this.image = [];
-            for (var i = 0; i < event.target.files.length; i++) {
+            for (let i = 0; i < event.target.files.length; i++) {
                 this.image.push(event.target.files[i]);
             }
         }
@@ -152,14 +152,14 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
         this.dataservice
             .deleteBestPractice(this.deleteId)
             .subscribe((result) => {
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.deleteBestCropPractise) {
                 this.dataservice.getBestCropPractises().refetch();
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.deleteModal.hide();
             }
             else {
-                this.toastr.error("Failed!");
+                this.toastr.error('Failed!');
             }
         });
     }
@@ -183,28 +183,28 @@ let BestCropPracticesComponent = class BestCropPracticesComponent {
                             .createBestCropPractise(this.practicesForm.value, image, file)
                             .subscribe((result) => {
                             resp = result.data;
-                            console.log("response", result);
+                            console.log('response', result);
                             if (result.data.createBestCropPractise) {
-                                this.toastr.success("Success!");
+                                this.toastr.success('Success!');
                                 this.practicesForm.reset();
                                 this.dataservice.getBestCropPractises().refetch();
                                 this.practicesModal.hide();
                                 this.btnLoading = false;
                             }
                             else {
-                                this.toastr.error("Failed. Please check the fields!");
+                                this.toastr.error('Failed. Please check the fields!');
                                 this.btnLoading = false;
                             }
                         });
                     }
                     else {
-                        this.toastr.error("Image failed to upload!");
+                        this.toastr.error('Image failed to upload!');
                         this.btnLoading = false;
                     }
                 });
             }
             else {
-                this.toastr.error("Image failed to upload!");
+                this.toastr.error('Image failed to upload!');
                 this.btnLoading = false;
             }
         });
@@ -217,8 +217,8 @@ BestCropPracticesComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 BestCropPracticesComponent.propDecorators = {
-    practicesModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["practicesModal",] }],
-    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }]
+    practicesModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['practicesModal',] }],
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['deleteModal',] }]
 };
 BestCropPracticesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

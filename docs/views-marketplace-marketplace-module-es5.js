@@ -302,21 +302,21 @@
           this.columnDefs = [];
           this.Categories = [];
           this.productForm = this.fb.group({
-            itemName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            images: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            userId: [localStorage.getItem("uid")],
-            contactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            availableQty: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            category: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            description: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+            itemName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            images: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            userId: [localStorage.getItem('uid')],
+            contactNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            availableQty: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            category: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            description: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
           });
           this.rowData = [];
           this.selectedRows = [];
           this.file = [];
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["MarketplaceColumn"]);
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(MarketplaceComponent, [{
@@ -361,11 +361,11 @@
               resp = result.body;
               console.log(result);
 
-              if (result.status === 200 && result.body.status == "Success") {
+              if (result.status === 200 && result.body.status == 'Success') {
                 _this2.toastr.success(result.body.message);
 
                 _this2.btnLoading = false;
-                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), '_blank');
               } else {
                 _this2.btnLoading = false;
 
@@ -422,7 +422,7 @@
             var _this5 = this;
 
             this.dataservice.getMarketplaceCategories().valueChanges.subscribe(function (result) {
-              console.log("getCategories", result.data.marketplaceCategories.data);
+              console.log('getCategories', result.data.marketplaceCategories.data);
               _this5.Categories = result.data.marketplaceCategories.data;
             });
           }
@@ -436,7 +436,7 @@
         }, {
           key: "onRowClicked",
           value: function onRowClicked(event) {
-            console.log("row", event.data);
+            console.log('row', event.data);
           }
         }, {
           key: "onSelectionChanged",
@@ -444,7 +444,7 @@
             var _a;
 
             this.selectedRows = this.gridApi.getSelectedRows();
-            this.router.navigate(["/marketplace/marketplace_details", (_a = this.selectedRows[0]) === null || _a === void 0 ? void 0 : _a.id], {
+            this.router.navigate(['/marketplace/marketplace_details', (_a = this.selectedRows[0]) === null || _a === void 0 ? void 0 : _a.id], {
               state: {
                 data: this.selectedRows
               }
@@ -483,10 +483,10 @@
                   return a.id;
                 })).subscribe(function (result) {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.createMarketplaceProduct) {
-                    _this6.toastr.success("Success!");
+                    _this6.toastr.success('Success!');
 
                     _this6.dataservice.getMarketplace(1, _this6.pageSize).refetch();
 
@@ -501,13 +501,13 @@
 
                     _this6.btnLoading = false;
                   } else {
-                    _this6.toastr.error("Failed. Please check the fields!");
+                    _this6.toastr.error('Failed. Please check the fields!');
 
                     _this6.btnLoading = false;
                   }
                 });
               } else {
-                _this6.toastr.error("Image failed to upload!");
+                _this6.toastr.error('Image failed to upload!');
 
                 _this6.btnLoading = false;
               }
@@ -533,15 +533,15 @@
       MarketplaceComponent.propDecorators = {
         productModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["productModal"]
+          args: ['productModal']
         }],
         detailsModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["detailsModal"]
+          args: ['detailsModal']
         }],
         deleteModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["deleteModal"]
+          args: ['deleteModal']
         }]
       };
       MarketplaceComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -640,15 +640,15 @@
           this.file = [];
           this.Categories = [];
           this.productForm = this.fb.group({
-            itemName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            itemName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
             // images: ["", Validators.required],
             // userId: [localStorage.getItem("uid")],
-            contactNumber: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            availableQty: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            category: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
-            description: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
+            contactNumber: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            availableQty: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            category: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
+            description: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
           });
         }
 
@@ -658,7 +658,7 @@
             var _this7 = this;
 
             this.activatedRouter.params.subscribe(function (params) {
-              _this7.id = params["id"];
+              _this7.id = params['id'];
             });
             this.getSingleMarketplaceProduct();
             this.getCategories();
@@ -671,7 +671,7 @@
             this.dataservice.getSingleMarketplaceProduct(this.id).valueChanges.subscribe(function (result) {
               var _a, _b, _c, _d, _e, _f, _g, _h, _j;
 
-              console.log("getSingleMarketplaceProduct", result.data.marketplaceProduct.data);
+              console.log('getSingleMarketplaceProduct', result.data.marketplaceProduct.data);
               _this8.details = result.data.marketplaceProduct.data;
               _this8.productForm = _this8.fb.group({
                 itemName: [(_a = _this8.details.attributes) === null || _a === void 0 ? void 0 : _a.ItemName, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required],
@@ -694,7 +694,7 @@
             var _this9 = this;
 
             this.dataservice.getMarketplaceCategories().valueChanges.subscribe(function (result) {
-              console.log("getCategories", result.data.marketplaceCategories.data);
+              console.log('getCategories', result.data.marketplaceCategories.data);
               _this9.Categories = result.data.marketplaceCategories.data;
             });
           }
@@ -732,10 +732,10 @@
             console.log(this.productForm.value);
             this.dataservice.updateMarketplaceProduct(this.productForm.value, this.id).subscribe(function (result) {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.updateMarketplaceProduct) {
-                _this10.toastr.success("Activity updated successfully!");
+                _this10.toastr.success('Activity updated successfully!');
 
                 _this10.editModal.hide();
 
@@ -743,7 +743,7 @@
 
                 _this10.getSingleMarketplaceProduct();
               } else {
-                _this10.toastr.error("Failed. Please check the fields!");
+                _this10.toastr.error('Failed. Please check the fields!');
 
                 _this10.btnLoading = false;
               }
@@ -764,22 +764,22 @@
                   return a.id;
                 })).subscribe(function (result) {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.updateMarketplaceProduct) {
-                    _this11.toastr.success("Activity updated successfully!");
+                    _this11.toastr.success('Activity updated successfully!');
 
                     _this11.btnLoading = false;
 
                     _this11.dataservice.getSingleMarketplaceProduct(_this11.id).refetch();
                   } else {
-                    _this11.toastr.error("Failed. Please check the fields!");
+                    _this11.toastr.error('Failed. Please check the fields!');
 
                     _this11.btnLoading = false;
                   }
                 });
               } else {
-                _this11.toastr.error("Image failed to upload!");
+                _this11.toastr.error('Image failed to upload!');
 
                 _this11.btnLoading = false;
               }
@@ -791,16 +791,16 @@
             var _this12 = this;
 
             this.dataservice.DeleteMarketplaceProduct(this.id).subscribe(function (result) {
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.deleteMarketplaceProduct) {
-                _this12.toastr.success("Success!");
+                _this12.toastr.success('Success!');
 
                 _this12.deleteModal.hide();
 
-                _this12.router.navigate(["/marketplace/all"]);
+                _this12.router.navigate(['/marketplace/all']);
               } else {
-                _this12.toastr.error("Failed!");
+                _this12.toastr.error('Failed!');
               }
             });
           }
@@ -826,15 +826,15 @@
       MarketplaceDetailComponent.propDecorators = {
         editModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["editModal"]
+          args: ['editModal']
         }],
         resultModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["resultModal"]
+          args: ['resultModal']
         }],
         deleteModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["deleteModal"]
+          args: ['deleteModal']
         }]
       };
       MarketplaceDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

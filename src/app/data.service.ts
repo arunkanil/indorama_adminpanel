@@ -1,15 +1,15 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
-} from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { environment } from "../environments/environment";
-import { Apollo, gql } from "apollo-angular";
-import { catchError } from "rxjs/operators";
-import { ToastrService } from "ngx-toastr";
-import { idText } from "typescript";
+} from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { environment } from '../environments/environment';
+import { Apollo, gql } from 'apollo-angular';
+import { catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { idText } from 'typescript';
 
 const FarmDemosQuery = gql`
   query ($page: Int, $pageSize: Int) {
@@ -628,11 +628,11 @@ const UpdateLGA = gql`
 `;
 
 const Villagesquery = gql`
-  query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
+  query ($lgaId: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
     villages(
       pagination: { page: $page, pageSize: $pageSize }
       sort: "createdAt:desc"
-      filters: { area: { lga: { id: { eq: $id } } }, Name:{ containsi:$searchTerm} }
+      filters: { area: { lga: { id: { eq: $lgaId } } }, Name:{ containsi:$searchTerm} }
     ) {
       meta {
         pagination {
@@ -3937,7 +3937,7 @@ const readApprovalCropPrices = gql`
   }
 `;
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class DataService {
   baseURL = environment.apiUrl;
@@ -3950,7 +3950,7 @@ export class DataService {
   ) { }
 
   handleError(error: HttpErrorResponse) {
-    let errorMessage = "Unknown error!";
+    const errorMessage = 'Unknown error!';
     console.log(error);
     // if (error.error instanceof ErrorEvent) {
     //   // Client-side errors
@@ -3959,7 +3959,7 @@ export class DataService {
     //   // Server-side errors
     //   errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
     // }
-    if (error.error.message) this.toastr.error(error.error.message);
+    if (error.error.message) { this.toastr.error(error.error.message); }
     if (error.status !== 200) {
       this.toastr.error(error.error.error.Message);
       this.toastr.error(error.error.message);
@@ -3969,13 +3969,13 @@ export class DataService {
 
   Login(data): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
     };
     return this.http.post(this.baseURL + `/auth/login/`, data, httpOptions1);
   }
   createRetailer(data): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
     };
     return this.http.post(this.baseURL + `/api/users`, data, httpOptions1);
   }
@@ -3988,9 +3988,9 @@ export class DataService {
   }
   getSurveyDetails(data): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
     return this.http
@@ -4002,7 +4002,7 @@ export class DataService {
   }
   downloadActivities(data): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4017,7 +4017,7 @@ export class DataService {
 
   downloadCropPrices(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4032,7 +4032,7 @@ export class DataService {
 
   downloadFarmDemos(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4047,7 +4047,7 @@ export class DataService {
 
   downloadIndoramaUpdates(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4063,7 +4063,7 @@ export class DataService {
 
   downloadMarketplace(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4079,7 +4079,7 @@ export class DataService {
   downloadMaster(masterType): Observable<any> {
 
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4094,7 +4094,7 @@ export class DataService {
 
   downloadStates(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4109,7 +4109,7 @@ export class DataService {
 
   downloadLgas(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4124,7 +4124,7 @@ export class DataService {
 
   downloadCities(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4139,7 +4139,7 @@ export class DataService {
 
   downloadVillages(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4154,7 +4154,7 @@ export class DataService {
 
   downloadMarkets(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4169,7 +4169,7 @@ export class DataService {
 
   downloadCrops(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4184,7 +4184,7 @@ export class DataService {
 
   downloadUsers(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4199,7 +4199,7 @@ export class DataService {
 
   downloadRetailers(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4215,7 +4215,7 @@ export class DataService {
 
   downloadSMSCampaigns(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4231,7 +4231,7 @@ export class DataService {
 
   downloadSoilTests(): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       // headers: {
       //   Authorization: `Bearer ${localStorage.getItem("token")}`,
       // },
@@ -4246,9 +4246,9 @@ export class DataService {
 
   downloadResponses(data): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
     return this.http
@@ -4261,9 +4261,9 @@ export class DataService {
 
   getSoilTestStats(data, fromDate?, toDate?): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
     return this.http
@@ -4275,9 +4275,9 @@ export class DataService {
   }
   getFarmDemoYieldStats(data, fromDate?, toDate?): Observable<any> {
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
       },
     };
     return this.http
@@ -4290,7 +4290,7 @@ export class DataService {
   getDashboardStats(data?, fromDate?, toDate?) {
     return this.apollo.watchQuery({
       query: getDashboardStats,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         state: data,
         fromDate: `${fromDate}T00:00:00.000Z`,
@@ -4301,7 +4301,7 @@ export class DataService {
   getCropPricesDashboard(id, market?, fromDate?, toDate?) {
     return this.apollo.watchQuery({
       query: getCropPricesDashboard,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         id: id,
         market: market,
@@ -4313,7 +4313,7 @@ export class DataService {
   getFarmDemoStatsDashboard(state?, status?, fromDate?, toDate?) {
     return this.apollo.watchQuery({
       query: getFarmDemoStatsDashboard,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         state: state,
         status: status,
@@ -4325,19 +4325,19 @@ export class DataService {
   getPendingRetailerApprovals() {
     return this.apollo.watchQuery({
       query: getPendingRetailerApprovals,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     });
   }
   getApprovalCropPrices() {
     return this.apollo.watchQuery({
       query: readApprovalCropPrices,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     });
   }
   getallChats(limit?, start?, key?, isAskIndorama?) {
     return this.apollo.watchQuery({
       query: getallChats,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         limit: limit,
         start: start,
@@ -4349,7 +4349,7 @@ export class DataService {
   getSurveys(limit?, start?, key?) {
     return this.apollo.watchQuery({
       query: getSurveys,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         limit: limit,
         start: start,
@@ -4360,7 +4360,7 @@ export class DataService {
   getSmsCampaigns(page?, pageSize?, id?) {
     return this.apollo.watchQuery({
       query: getSmsCampaigns,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         page: page,
         pageSize: pageSize,
@@ -4371,7 +4371,7 @@ export class DataService {
   createSMSCampaign(data) {
     return this.apollo.mutate({
       mutation: createSMSCampaign,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         message: data.message,
         state: data.state ? data.state : undefined,
@@ -4385,7 +4385,7 @@ export class DataService {
   getSurveyResults(id) {
     return this.apollo.watchQuery({
       query: getSurveyResults,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         limit: 10000,
         id: id,
@@ -4395,7 +4395,7 @@ export class DataService {
   createSurveys(SurveyTitle, SurveyDescription, Fields) {
     return this.apollo.mutate({
       mutation: CreateSurveys,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         SurveyTitle: SurveyTitle,
         SurveyDescription: SurveyDescription,
@@ -4409,7 +4409,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   getChatMessages(id) {
@@ -4418,13 +4418,13 @@ export class DataService {
       variables: {
         id: id,
       },
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     });
   }
   getFarmDemos(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: FarmDemosQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         page: page,
         pageSize: pageSize,
@@ -4437,13 +4437,13 @@ export class DataService {
       variables: {
         id: id,
       },
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     });
   }
   getCrops(page?, pageSize?, searchTerm?) {
     return this.apollo.watchQuery({
       query: CropsQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         page: page,
         pageSize: pageSize,
@@ -4454,7 +4454,7 @@ export class DataService {
   getStates(page?, pageSize?, searchTerm?) {
     return this.apollo.watchQuery({
       query: StatesQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         page: page,
         pageSize: pageSize,
@@ -4465,7 +4465,7 @@ export class DataService {
   getLGAs(page?, pageSize?, searchTerm?, id?) {
     return this.apollo.watchQuery({
       query: LGAquery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         id: id,
         page: page,
@@ -4474,12 +4474,12 @@ export class DataService {
       },
     });
   }
-  getVillages(page?, pageSize?, searchTerm?, id?) {
+  getVillages(page?, pageSize?, searchTerm?, lgaid?) {
     return this.apollo.watchQuery({
       query: Villagesquery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
-        id: id,
+        id: lgaid,
         page: page,
         pageSize: pageSize,
         searchTerm: searchTerm,
@@ -4489,7 +4489,7 @@ export class DataService {
   getAreas(page?, pageSize?, searchTerm?, id?) {
     return this.apollo.watchQuery({
       query: Areasquery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         id: id,
         page: page,
@@ -4501,7 +4501,7 @@ export class DataService {
   getMarkets(page?, pageSize?,  searchTerm?, id?) {
     return this.apollo.watchQuery({
       query: MarketQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         id: id,
         page: page,
@@ -4513,7 +4513,7 @@ export class DataService {
   getCropPrices(page?, pageSize?, PublicationState?, publishedAt?, Rejected?) {
     return this.apollo.watchQuery({
       query: CropPricesQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         page: page,
         pageSize: pageSize,
@@ -4526,7 +4526,7 @@ export class DataService {
   getRetailers(page?, pageSize?, confirmed?, blocked?) {
     return this.apollo.watchQuery({
       query: RetailerQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         page: page,
         pageSize: pageSize,
@@ -4538,30 +4538,30 @@ export class DataService {
   getRetailerCategories() {
     return this.apollo.watchQuery({
       query: getRetailerCategories,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     });
   }
   getUsers(page?, pageSize?, UserType?) {
 
-    let variables = {
+    const variables = {
       page: page,
       pageSize: pageSize,
     };
 
     if (UserType != null) {
-      variables["UserType"] = UserType;
+      variables['UserType'] = UserType;
     }
 
     return this.apollo.watchQuery({
       query: UsersQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: variables,
     });
   }
   getUsersLarge(UserType?, data?) {
     return this.apollo.watchQuery({
       query: queryUsersLarge,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         UserType: UserType,
         village: data.village ? data.village : null,
@@ -4574,7 +4574,7 @@ export class DataService {
   getsoilTests(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: SoilTestQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         page: page,
         pageSize: pageSize,
@@ -4584,7 +4584,7 @@ export class DataService {
   getsingleSoilTests(id) {
     return this.apollo.watchQuery({
       query: SingleSoilTestQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         id: id,
       },
@@ -4593,7 +4593,7 @@ export class DataService {
   getsingleRetailer(id) {
     return this.apollo.watchQuery({
       query: GetSingleRetailerQuery,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         id: id,
       },
@@ -4616,11 +4616,11 @@ export class DataService {
         dateOfHarvesting: farmdemo.dateOfHarvesting,
         season: farmdemo.Season,
         Status: farmdemo.Status,
-        isPesticidesUsed: farmdemo.isPesticidesUsed == "true" ? true : false,
+        isPesticidesUsed: farmdemo.isPesticidesUsed == 'true' ? true : false,
         images: farmdemo.images,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
 
@@ -4630,8 +4630,8 @@ export class DataService {
       variables: {
         Name: state.state,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   AddLGA(lga) {
@@ -4641,8 +4641,8 @@ export class DataService {
         Name: lga.lga,
         state: lga.state,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   AddArea(area) {
@@ -4653,8 +4653,8 @@ export class DataService {
         lga: area.lga,
         PostalCode: area.PostalCode,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   AddMarket(market) {
@@ -4664,8 +4664,8 @@ export class DataService {
         Name: market.market,
         state: market.state,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   AddCrop(crop, image) {
@@ -4675,8 +4675,8 @@ export class DataService {
         Name: crop.crop,
         image: image,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   Addvillage(village) {
@@ -4686,8 +4686,8 @@ export class DataService {
         Name: village.village,
         area: village.area,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   AddCropPrice(price, image) {
@@ -4700,11 +4700,11 @@ export class DataService {
         state: price.state,
         market: price.market,
         image: image,
-        user: parseInt(localStorage.getItem("uid")),
+        user: parseInt(localStorage.getItem('uid')),
         published: new Date(),
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   AddIndoramaUpdates(price, imageid) {
@@ -4715,8 +4715,8 @@ export class DataService {
         Body: price.Body,
         Images: imageid ? imageid : price.Image,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   createBestCropPractise(price, imageid, media) {
@@ -4728,8 +4728,8 @@ export class DataService {
         cropImage: imageid,
         media: media,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   createMarketplaceProduct(price, imageid) {
@@ -4746,8 +4746,8 @@ export class DataService {
         category: parseInt(price.category),
         description: price.description,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   updateMarketplaceProduct(price, id, imageid?) {
@@ -4765,8 +4765,8 @@ export class DataService {
         category: parseInt(price.category),
         description: price.description,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   updateMarketplaceProductImg(id, imageid?) {
@@ -4776,8 +4776,8 @@ export class DataService {
         id: id,
         images: imageid,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   createActivity(price) {
@@ -4799,8 +4799,8 @@ export class DataService {
         ActivityType: price.ActivityType,
         Time: price.Time,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   getAgronomist(id?) {
@@ -4809,8 +4809,8 @@ export class DataService {
       variables: {
         user: id,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   getIndoramaUpdates(id?, page?, pageSize?) {
@@ -4823,8 +4823,8 @@ export class DataService {
         page: page,
         pageSize: pageSize,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   getMarketplace(pageNumber?, pageSize?, categoryFilter?) {
@@ -4835,8 +4835,8 @@ export class DataService {
         pageSize: pageSize,
         categoryFilter: categoryFilter,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   getSingleMarketplaceProduct(id) {
@@ -4845,8 +4845,8 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   getBestCropPractises(page?, pageSize?, cropFilter?) {
@@ -4857,39 +4857,39 @@ export class DataService {
         pageSize: pageSize,
         cropFilter: cropFilter,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
       // fetchPolicy: "no-cache",
     });
   }
   getActivities(page?, pageSize?) {
     return this.apollo.watchQuery({
       query: GetActivities,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         page: page,
         pageSize: pageSize,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   getActivity(id?) {
     return this.apollo.watchQuery({
       query: GetSingleActivity,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   getMarketplaceCategories(id?) {
     return this.apollo.watchQuery({
       query: GetMarketplaceCategories,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   createAgronomist(data, id) {
@@ -4899,8 +4899,8 @@ export class DataService {
         areas: data.area,
         user: id,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateCropPrice(price, id, imageid, Rejected?, published?) {
@@ -4917,8 +4917,8 @@ export class DataService {
         Rejected: Rejected,
         image: imageid ? imageid : price?.Image,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   AddSoilTestResult(result) {
@@ -4942,8 +4942,8 @@ export class DataService {
         RecommendedNPKQty: result.RecommendedNPKQty,
         RecommendedUreaQty: result.RecommendedUreaQty,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateSoilTestResult(result) {
@@ -4967,8 +4967,8 @@ export class DataService {
         RecommendedNPKQty: result.RecommendedNPKQty,
         RecommendedUreaQty: result.RecommendedUreaQty,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateCrop(crop, id, Imageid) {
@@ -4980,8 +4980,8 @@ export class DataService {
         id: id,
         image: Imageid,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateState(data, id) {
@@ -4992,8 +4992,8 @@ export class DataService {
         isDelete: data.isDelete,
         id: id,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateLGA(data, id) {
@@ -5005,8 +5005,8 @@ export class DataService {
         isDelete: data.isDelete,
         id: id,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateMarket(data, id) {
@@ -5018,8 +5018,8 @@ export class DataService {
         isDelete: data.isDelete,
         id: id,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateArea(area, id) {
@@ -5032,8 +5032,8 @@ export class DataService {
         isDelete: area.isDelete,
         id: id,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   Updatevillage(village, id) {
@@ -5045,8 +5045,8 @@ export class DataService {
         isDelete: village.isDelete,
         id: id,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateSoilTest(test, soilTestId) {
@@ -5064,8 +5064,8 @@ export class DataService {
         status: test.Status,
         nutrient: test.nutrient,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateFarmDemo(data, id) {
@@ -5100,8 +5100,8 @@ export class DataService {
         Status: data.Status,
         dateOfHarvesting: data.DateOfHarvesting,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateRetailer(data, id) {
@@ -5118,13 +5118,13 @@ export class DataService {
         lga: data.lga,
         bio: data.Bio,
         agronomist_lgas: data.agronomist_lgas,
-        blocked: data.blocked == "true" ? true : false,
+        blocked: data.blocked == 'true' ? true : false,
         confirmed: data.confirmed,
         UserType: data?.UserType,
         contactNumber: data.ContactNumber,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateRetailerPic(id, image) {
@@ -5134,8 +5134,8 @@ export class DataService {
         id: id,
         prof_pic: image,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   AddFarmdemoPic(id, image) {
@@ -5145,8 +5145,8 @@ export class DataService {
         id: id,
         images: image,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   addRetailerProducts(data, retailer_category, retailer, image) {
@@ -5161,8 +5161,8 @@ export class DataService {
         retailer_category: retailer_category,
         retailers: retailer,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateRetailerProducts(data, retailer_category, retailer) {
@@ -5178,8 +5178,8 @@ export class DataService {
         retailer_category: retailer_category,
         retailer: retailer,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   UpdateIndoramaUpdates(price?, id?, imageid?) {
@@ -5192,8 +5192,8 @@ export class DataService {
         Body: price?.Body,
         Images: imageid ? imageid : price?.Image,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   updateActivity(price, id) {
@@ -5214,33 +5214,33 @@ export class DataService {
         ActivityType: price.ActivityType,
         Time: price.Time,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   upload(file: any): Observable<any> {
     const formData = new FormData();
-    for (var i = 0; i < file.length; i++) {
+    for (let i = 0; i < file.length; i++) {
       // formData.append("file[]",  file[i]);
-      formData.append("files", file[i], file[i]?.name);
+      formData.append('files', file[i], file[i]?.name);
     }
     // formData.append("files", file, file?.name);
     console.log(formData);
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
     };
     return this.http.post(this.baseURL + `/api/upload`, formData, httpOptions1);
   }
   uploadActivities(file: any): Observable<any> {
     const formData = new FormData();
-    for (var i = 0; i < file.length; i++) {
+    for (let i = 0; i < file.length; i++) {
       // formData.append("file[]",  file[i]);
-      formData.append("file", file[i], file[i]?.name);
+      formData.append('file', file[i], file[i]?.name);
     }
     // formData.append("files", file, file?.name);
     console.log(formData);
     const httpOptions1: Object = {
-      observe: "response",
+      observe: 'response',
     };
     return this.http.post(
       this.baseURL + `/api/activity/upload`,
@@ -5254,7 +5254,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteVillage(id) {
@@ -5263,7 +5263,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteLGA(id) {
@@ -5272,7 +5272,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteState(id) {
@@ -5281,7 +5281,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteMarket(id) {
@@ -5290,7 +5290,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteCrop(id) {
@@ -5299,7 +5299,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteFarmDemo(id) {
@@ -5308,7 +5308,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteProduct(id) {
@@ -5317,7 +5317,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteFile(id) {
@@ -5326,7 +5326,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteUser(id) {
@@ -5335,7 +5335,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteBestPractice(id) {
@@ -5344,7 +5344,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   deleteActivity(id) {
@@ -5353,7 +5353,7 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   DeleteMarketplaceProduct(id) {
@@ -5362,19 +5362,19 @@ export class DataService {
       variables: {
         id: id,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
   getDashboardAd() {
     return this.apollo.watchQuery({
       query: getDashboardAd,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     });
   }
   getRetailerAd() {
     return this.apollo.watchQuery({
       query: getRetailerAd,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
     });
   }
   updateRetailerAd(url, image) {
@@ -5384,19 +5384,19 @@ export class DataService {
         // clickUrl: url,
         imageId: image,
       },
-      errorPolicy: "all",
-      fetchPolicy: "no-cache",
+      errorPolicy: 'all',
+      fetchPolicy: 'no-cache',
     });
   }
   updateDashboardAd(url, image) {
     return this.apollo.mutate({
       mutation: updateDashboardAd,
-      fetchPolicy: "no-cache",
+      fetchPolicy: 'no-cache',
       variables: {
         // clickUrl: url,
         imageId: image,
       },
-      errorPolicy: "all",
+      errorPolicy: 'all',
     });
   }
 }

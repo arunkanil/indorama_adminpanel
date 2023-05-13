@@ -7,7 +7,7 @@ import { AuthGuard } from '../login/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    
+
     children: [
       {
         path: '',

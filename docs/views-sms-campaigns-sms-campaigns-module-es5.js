@@ -118,7 +118,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>SMS Campaigns</h2>\n      <div>\n        <button\n            type=\"button\"\n            class=\"btn btn-outline-primary\"\n            data-toggle=\"modal\"\n            (click)=\"downloadExcel()\"\n          >\n            Download excel\n          </button>\n        <!-- <button\n          type=\"button\"\n          class=\"btn btn-danger\"\n          data-toggle=\"modal\"\n          [disabled]=\"disableButton\"\n          (click)=\"openModal()\"\n        >\n          Delete\n        </button> -->\n        <!-- <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\n          (click)=\"openModal('Edit')\">\n          Edit\n        </button> -->\n        <button\n          type=\"button\"\n          [disabled]=\"!disableButton\"\n          class=\"btn btn-primary\"\n          data-toggle=\"modal\"\n          (click)=\"openModal()\"\n        >\n          Create new campaign\n        </button>\n      </div>\n    </div>\n    <!-- <p class=\"text-muted mx-3\">\n      To approve a crop price simply select and edit the record without\n      modifying the data\n    </p> -->\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            (gridReady)=\"onGridReady($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #messageModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">New Campaign</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"messageModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"messageForm\" (ngSubmit)=\"sendMessage()\">\n          <div class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label class=\"switch\">\n                  <input\n                    type=\"checkbox\"\n                    id=\"isAllFarmers\"\n                    maxlength=\"160\"\n                    name=\"isAllFarmers\"\n                    formControlName=\"isAllFarmers\"\n                  />\n                  <div class=\"slider round\">\n                    <span class=\"on\">Filter</span>\n                    <span class=\"off\">All</span>\n                  </div>\n                </label>\n              </div>\n            </div>\n          </div>\n          <div *ngIf=\"messageForm.value?.isAllFarmers\" class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"state\">State</label>\n                <select\n                  class=\"form-control\"\n                  id=\"state\"\n                  ngModel\n                  (change)=\"filterLGA($event)\"\n                  name=\"state\"\n                  formControlName=\"state\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"area\">City</label>\n                <select\n                  class=\"form-control\"\n                  id=\"area\"\n                  ngModel\n                  (change)=\"filterVillage($event)\"\n                  name=\"area\"\n                  formControlName=\"area\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n            </div>\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"lga\">LGA</label>\n                <select\n                  class=\"form-control\"\n                  id=\"lga\"\n                  ngModel\n                  (change)=\"filterArea($event)\"\n                  name=\"lga\"\n                  formControlName=\"lga\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"village\">Village</label>\n                <select\n                  class=\"form-control\"\n                  id=\"village\"\n                  ngModel\n                  name=\"village\"\n                  formControlName=\"village\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Villages\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n            </div>\n          </div>\n          <!-- <div class=\"form-group\">Farmers selected : {{ NoOfContacts }}</div>\n          <div class=\"form-group\">\n            <button\n              type=\"button\"\n              class=\"btn btn-secondary\"\n              (click)=\"clearSearch()\"\n            >\n              Clear\n            </button>\n            <button\n              type=\"button\"\n              class=\"btn btn-primary ml-2\"\n              (click)=\"getUsers()\"\n            >\n              <span\n                *ngIf=\"btnLoading\"\n                class=\"spinner-border spinner-border-sm\"\n                role=\"status\"\n                aria-hidden=\"true\"\n              ></span>\n              Search\n            </button>\n          </div> -->\n          <div class=\"form-group\">\n            <label for=\"name\">Message body</label>\n            <textarea\n              rows=\"5\"\n              class=\"form-control\"\n              id=\"message\"\n              maxlength=\"160\"\n              name=\"message\"\n              formControlName=\"message\"\n              placeholder=\"Max 160 characters\"\n            ></textarea>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"messageModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !messageForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Create\n          </button>\n        </form>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div\n      class=\"card-header\"\n      style=\"display: flex; justify-content: space-between\"\n    >\n      <h2>SMS Campaigns</h2>\n      <div>\n        <button\n            type=\"button\"\n            class=\"btn btn-outline-primary\"\n            data-toggle=\"modal\"\n            (click)=\"downloadExcel()\"\n          >\n            Download excel\n          </button>\n        <!-- <button\n          type=\"button\"\n          class=\"btn btn-danger\"\n          data-toggle=\"modal\"\n          [disabled]=\"disableButton\"\n          (click)=\"openModal()\"\n        >\n          Delete\n        </button> -->\n        <!-- <button type=\"button\" [disabled]=\"disableButton\" class=\"btn btn-info\" data-toggle=\"modal\"\n          (click)=\"openModal('Edit')\">\n          Edit\n        </button> -->\n        <button\n          type=\"button\"\n          [disabled]=\"!disableButton\"\n          class=\"btn btn-primary\"\n          data-toggle=\"modal\"\n          (click)=\"openModal()\"\n        >\n          Create new campaign\n        </button>\n      </div>\n    </div>\n    <!-- <p class=\"text-muted mx-3\">\n      To approve a crop price simply select and edit the record without\n      modifying the data\n    </p> -->\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular\n            #agGrid\n            style=\"width: 100%; height: 65vh\"\n            id=\"myGrid\"\n            class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\"\n            [rowData]=\"rowData\"\n            [rowSelection]=\"rowSelection\"\n            (selectionChanged)=\"onSelectionChanged($event)\"\n            (gridReady)=\"onGridReady($event)\"\n            animateRows=\"true\"\n          >\n          </ag-grid-angular>\n          <span class=\"float-left mt-3\">{{from}} to {{to}}  of {{meta?.pagination?.total}}</span>\n          <button\n            type=\"button\"\n            [disabled]=\"disableNextButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadNext()\"\n          >\n            Next\n          </button>\n          <span class=\"float-right mt-3\"\n            >Page {{ meta?.pagination?.page }} of\n            {{ meta?.pagination?.pageCount }}</span\n          >\n          <button\n            type=\"button\"\n            [disabled]=\"disablePrevButton\"\n            class=\"btn btn-primary float-right m-2\"\n            (click)=\"loadPrev()\"\n          >\n            Prev\n          </button>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n<div\n  bsModal\n  #messageModal=\"bs-modal\"\n  class=\"modal fade\"\n  tabindex=\"-1\"\n  role=\"dialog\"\n  aria-labelledby=\"myModalLabel\"\n  aria-hidden=\"true\"\n>\n  <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\n    <div class=\"modal-content\">\n      <div class=\"modal-header\">\n        <h4 class=\"modal-title\">New Campaign</h4>\n        <button\n          type=\"button\"\n          class=\"close\"\n          (click)=\"messageModal.hide()\"\n          aria-label=\"Close\"\n        >\n          <span aria-hidden=\"true\">&times;</span>\n        </button>\n      </div>\n      <div class=\"modal-body\">\n        <form [formGroup]=\"messageForm\" (ngSubmit)=\"sendMessage()\">\n          <div class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label class=\"switch\">\n                  <input\n                    type=\"checkbox\"\n                    id=\"isAllFarmers\"\n                    maxlength=\"160\"\n                    name=\"isAllFarmers\"\n                    formControlName=\"isAllFarmers\"\n                  />\n                  <div class=\"slider round\">\n                    <span class=\"on\">Filter</span>\n                    <span class=\"off\">All</span>\n                  </div>\n                </label>\n              </div>\n            </div>\n          </div>\n          <div *ngIf=\"messageForm.value?.isAllFarmers\" class=\"row\">\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"state\">State</label>\n                <select\n                  class=\"form-control\"\n                  id=\"state\"\n                  ngModel\n                  (change)=\"filterLGA($event)\"\n                  name=\"state\"\n                  formControlName=\"state\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of States\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"area\">City</label>\n                <select\n                  class=\"form-control\"\n                  id=\"area\"\n                  ngModel\n                  name=\"area\"\n                  formControlName=\"area\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Areas\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n            </div>\n            <div class=\"col\">\n              <div class=\"form-group\">\n                <label for=\"lga\">LGA</label>\n                <select\n                  class=\"form-control\"\n                  id=\"lga\"\n                  ngModel\n                  (change)=\"filterArea($event)\"\n                  name=\"lga\"\n                  formControlName=\"lga\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of LGA\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n              <div class=\"form-group\">\n                <label for=\"village\">Village</label>\n                <select\n                  class=\"form-control\"\n                  id=\"village\"\n                  ngModel\n                  name=\"village\"\n                  formControlName=\"village\"\n                >\n                  <option value=\"\" disabled selected hidden>Choose...</option>\n                  <option *ngFor=\"let item of Villages\" value=\"{{ item.id }}\">\n                    {{ item.attributes.Name }}\n                  </option>\n                </select>\n              </div>\n            </div>\n          </div>\n          <!-- <div class=\"form-group\">Farmers selected : {{ NoOfContacts }}</div>\n          <div class=\"form-group\">\n            <button\n              type=\"button\"\n              class=\"btn btn-secondary\"\n              (click)=\"clearSearch()\"\n            >\n              Clear\n            </button>\n            <button\n              type=\"button\"\n              class=\"btn btn-primary ml-2\"\n              (click)=\"getUsers()\"\n            >\n              <span\n                *ngIf=\"btnLoading\"\n                class=\"spinner-border spinner-border-sm\"\n                role=\"status\"\n                aria-hidden=\"true\"\n              ></span>\n              Search\n            </button>\n          </div> -->\n          <div class=\"form-group\">\n            <label for=\"name\">Message body</label>\n            <textarea\n              rows=\"5\"\n              class=\"form-control\"\n              id=\"message\"\n              maxlength=\"160\"\n              name=\"message\"\n              formControlName=\"message\"\n              placeholder=\"Max 160 characters\"\n            ></textarea>\n          </div>\n          <button\n            type=\"button\"\n            class=\"btn btn-secondary\"\n            (click)=\"messageModal.hide()\"\n          >\n            Close\n          </button>\n          <button\n            type=\"submit\"\n            class=\"btn btn-primary ml-2\"\n            [disabled]=\"btnLoading || !messageForm.valid\"\n          >\n            <span\n              *ngIf=\"btnLoading\"\n              class=\"spinner-border spinner-border-sm\"\n              role=\"status\"\n              aria-hidden=\"true\"\n            ></span>\n            Create\n          </button>\n        </form>\n      </div>\n    </div>\n    <!-- /.modal-content -->\n  </div>\n  <!-- /.modal-dialog -->\n</div>\n";
       /***/
     },
 
@@ -224,14 +224,14 @@
           this.filter = {};
           this.messageForm = this.fb.group({
             isAllFarmers: [false],
-            message: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            village: [""],
-            area: [""],
-            lga: [""],
-            state: [""]
+            message: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            village: [''],
+            area: [''],
+            lga: [''],
+            state: ['']
           });
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["SmsColumn"]);
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(SMSCampaignsComponent, [{
@@ -314,8 +314,8 @@
           value: function getStates() {
             var _this4 = this;
 
-            this.dataservice.getStates(1, 10000, "").valueChanges.subscribe(function (result) {
-              console.log("getStates", result.data.states.data);
+            this.dataservice.getStates(1, 10000, '').valueChanges.subscribe(function (result) {
+              console.log('getStates', result.data.states.data);
               _this4.States = result.data.states.data;
             });
           }
@@ -324,8 +324,8 @@
           value: function getLGAs(stateid) {
             var _this5 = this;
 
-            this.dataservice.getLGAs(1, 10000, "", stateid).valueChanges.subscribe(function (result) {
-              console.log("getLGAs", result.data.lgas.data);
+            this.dataservice.getLGAs(1, 10000, '', stateid).valueChanges.subscribe(function (result) {
+              console.log('getLGAs', result.data.lgas.data);
               _this5.LGA = result.data.lgas.data;
             });
           }
@@ -334,18 +334,18 @@
           value: function getAreas(lgaid) {
             var _this6 = this;
 
-            this.dataservice.getAreas(1, 10000, "", lgaid).valueChanges.subscribe(function (result) {
-              console.log("getAreas", result.data.areas.data);
+            this.dataservice.getAreas(1, 10000, '', lgaid).valueChanges.subscribe(function (result) {
+              console.log('getAreas', result.data.areas.data);
               _this6.Areas = result.data.areas.data;
             });
           }
         }, {
           key: "getVillages",
-          value: function getVillages(areaid) {
+          value: function getVillages(lgaid) {
             var _this7 = this;
 
-            this.dataservice.getVillages(1, 10000, "", areaid).valueChanges.subscribe(function (result) {
-              console.log("getVillages", result.data.villages.data);
+            this.dataservice.getVillages(1, 10000, '', lgaid).valueChanges.subscribe(function (result) {
+              console.log('getVillages', result.data.villages.data);
               _this7.Villages = result.data.villages.data;
             });
           }
@@ -362,11 +362,11 @@
               resp = result.body;
               console.log(result);
 
-              if (result.status === 200 && result.body.status == "Success") {
+              if (result.status === 200 && result.body.status == 'Success') {
                 _this8.toastr.success(result.body.message);
 
                 _this8.btnLoading = false;
-                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), '_blank');
               } else {
                 _this8.btnLoading = false;
 
@@ -382,6 +382,7 @@
         }, {
           key: "filterArea",
           value: function filterArea(event) {
+            this.filterVillage(event);
             this.getAreas(event.target.value);
           }
         }, {
@@ -399,7 +400,7 @@
         }, {
           key: "onRowClicked",
           value: function onRowClicked(event) {
-            console.log("row", event.data);
+            console.log('row', event.data);
           }
         }, {
           key: "onSelectionChanged",
@@ -412,7 +413,7 @@
               this.disableButton = true;
             }
 
-            this.router.navigate(["/sms-campaigns/details", this.selectedRows[0].id], {
+            this.router.navigate(['/sms-campaigns/details', this.selectedRows[0].id], {
               state: {
                 data: this.selectedRows
               }
@@ -430,12 +431,12 @@
             var _this9 = this;
 
             this.btnLoading = true;
-            console.log(this.messageForm.value, "sendmessage");
+            console.log(this.messageForm.value, 'sendmessage');
             this.dataservice.createSMSCampaign(this.messageForm.value).subscribe(function (result) {
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.createSmsCampaign) {
-                _this9.toastr.success("Success!");
+                _this9.toastr.success('Success!');
 
                 _this9.btnLoading = false;
 
@@ -443,7 +444,7 @@
 
                 _this9.getSmsCampaigns();
               } else {
-                _this9.toastr.error("Failed!");
+                _this9.toastr.error('Failed!');
 
                 _this9.btnLoading = false;
               }
@@ -471,11 +472,11 @@
       SMSCampaignsComponent.propDecorators = {
         messageModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["messageModal"]
+          args: ['messageModal']
         }],
         detailsModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["detailsModal"]
+          args: ['detailsModal']
         }]
       };
       SMSCampaignsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
@@ -569,14 +570,14 @@
           this.details = [];
           this.messageForm = this.fb.group({
             isAllFarmers: [false],
-            message: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            village: [""],
-            area: [""],
-            lga: [""],
-            state: [""]
+            message: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            village: [''],
+            area: [''],
+            lga: [''],
+            state: ['']
           });
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["DeliveryReportColumn"]);
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(SMSCampaignsDetailComponent, [{
@@ -586,7 +587,7 @@
 
             this.loading = true;
             this.activatedRouter.params.subscribe(function (params) {
-              _this10.id = params["id"];
+              _this10.id = params['id'];
             });
             console.log(this.router);
             this.getSmsCampaigns();
@@ -617,14 +618,14 @@
 
             this.btnLoading = true;
             this.dataservice.fetchMessage((_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.apiKey, (_f = (_e = (_d = (_c = this.details) === null || _c === void 0 ? void 0 : _c.attributes) === null || _d === void 0 ? void 0 : _d.SMSGatewayResponse) === null || _e === void 0 ? void 0 : _e.data) === null || _f === void 0 ? void 0 : _f.message_id).subscribe(function (result) {
-              console.log("getDeliveryReports", result);
+              console.log('getDeliveryReports', result);
               _this12.rowData = result.data;
               _this12.btnLoading = false;
             }, function (error) {
-              console.error("error caught in component", error);
+              console.error('error caught in component', error);
               _this12.btnLoading = false;
 
-              _this12.toastr.error("Unable to fetch data");
+              _this12.toastr.error('Unable to fetch data');
             });
           }
         }]);
@@ -649,11 +650,11 @@
       SMSCampaignsDetailComponent.propDecorators = {
         messageModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["messageModal"]
+          args: ['messageModal']
         }],
         detailsModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["detailsModal"]
+          args: ['detailsModal']
         }]
       };
       SMSCampaignsDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

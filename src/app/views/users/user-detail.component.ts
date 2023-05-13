@@ -1,14 +1,14 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
-import { dateConverter } from "../../constants/columnMetadata";
-import { environment } from "../../../environments/environment";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
+import { dateConverter } from '../../constants/columnMetadata';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "user-detail.component.html",
+  templateUrl: 'user-detail.component.html',
 })
 export class UserDetailComponent implements OnInit {
   constructor(
@@ -18,11 +18,11 @@ export class UserDetailComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {}
-  @ViewChild("myModal") public myModal: ModalDirective;
-  @ViewChild("areaModal") public areaModal: ModalDirective;
-  @ViewChild("resultModal") public resultModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
-  @ViewChild("addProductModal") public addProductModal: ModalDirective;
+  @ViewChild('myModal') public myModal: ModalDirective;
+  @ViewChild('areaModal') public areaModal: ModalDirective;
+  @ViewChild('resultModal') public resultModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
+  @ViewChild('addProductModal') public addProductModal: ModalDirective;
 
   id: any;
   baseURL = environment.apiUrl;
@@ -44,36 +44,36 @@ export class UserDetailComponent implements OnInit {
   flag;
   deleteObj;
   agentForm = this.fb.group({
-    ContactNumber: ["", Validators.required],
+    ContactNumber: ['', Validators.required],
     // username: ["", Validators.required],
-    blocked: [""],
-    Name: ["", Validators.required],
+    blocked: [''],
+    Name: ['', Validators.required],
     // email: ["", Validators.required],
-    Farmer: ["", Validators.required],
-    UserType: ["", Validators.required],
-    Bio: [""],
-    password: [""],
-    state: ["", Validators.required],
-    village: ["", Validators.required],
-    lga: ["", Validators.required],
-    Latitude: [""],
-    Longitude: [""],
+    Farmer: ['', Validators.required],
+    UserType: ['', Validators.required],
+    Bio: [''],
+    password: [''],
+    state: ['', Validators.required],
+    village: ['', Validators.required],
+    lga: ['', Validators.required],
+    Latitude: [''],
+    Longitude: [''],
   });
   resultForm = this.fb.group({
-    id: [""],
-    itemName: ["", Validators.required],
-    price: ["", Validators.required],
-    unit: ["", Validators.required],
+    id: [''],
+    itemName: ['', Validators.required],
+    price: ['', Validators.required],
+    unit: ['', Validators.required],
   });
   areaForm = this.fb.group({
-    state: [""],
-    agronomist_lgas: ["", Validators.required],
+    state: [''],
+    agronomist_lgas: ['', Validators.required],
   });
   productForm = this.fb.group({
-    Image: ["", Validators.required],
-    itemName: ["", Validators.required],
-    price: ["", Validators.required],
-    unit: ["", Validators.required],
+    Image: ['', Validators.required],
+    itemName: ['', Validators.required],
+    price: ['', Validators.required],
+    unit: ['', Validators.required],
   });
   ngOnInit(): void {
     this.getLists();
@@ -85,7 +85,7 @@ export class UserDetailComponent implements OnInit {
     this.getFarmers();
     this.getRetailers();
     this.activatedRouter.params.subscribe((params) => {
-      this.id = params["id"];
+      this.id = params['id'];
     });
     this.getTest();
   }
@@ -97,7 +97,7 @@ export class UserDetailComponent implements OnInit {
       .getsingleRetailer(this.id)
       .valueChanges.subscribe((result: any) => {
         console.log(
-          "getsingleRetailer",
+          'getsingleRetailer',
           result.data.usersPermissionsUsers.data[0]
         );
         this.details = result.data.usersPermissionsUsers.data[0];
@@ -120,13 +120,13 @@ export class UserDetailComponent implements OnInit {
             this.details?.attributes?.village?.data?.id,
             Validators.required,
           ],
-          password: [""],
+          password: [''],
           blocked: [this.details?.attributes?.blocked],
           UserType: [this.details?.attributes?.UserType, Validators.required],
         });
         this.loading = false;
         this.dispArea =
-          this.details?.attributes?.UserType == "Agronomist" ? true : false;
+          this.details?.attributes?.UserType == 'Agronomist' ? true : false;
         if (this.dispArea == true) {
           this.agronomists = this.details?.attributes?.agronomist_lgas?.data;
           // this.dataservice
@@ -139,26 +139,26 @@ export class UserDetailComponent implements OnInit {
       });
   }
   getCrops() {
-    this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
+    this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getCrops', result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
   }
   getStates() {
-    this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result: any) => {
-      console.log("getStates", result.data.states.data);
+    this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {
+      console.log('getStates', result.data.states.data);
       this.States = result.data.states.data;
     });
   }
   getLGAs(id?) {
-    this.dataservice.getLGAs(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+    this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getLGAs', result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
   getAreas(id?) {
-    this.dataservice.getAreas(1, 10000, "",id).valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
+    this.dataservice.getAreas(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getAreas', result.data.areas.data);
       this.Areas = result.data.areas.data;
     });
   }
@@ -166,21 +166,21 @@ export class UserDetailComponent implements OnInit {
     this.dataservice
       .getRetailerCategories()
       .valueChanges.subscribe((result: any) => {
-        console.log("getRetailers", result.data.retailerCategories.data);
+        console.log('getRetailers', result.data.retailerCategories.data);
         this.Retailers = result.data.retailerCategories.data;
       });
   }
   getFarmers() {
     this.dataservice
-      .getUsers(undefined, undefined, "Farmer")
+      .getUsers(undefined, undefined, 'Farmer')
       .valueChanges.subscribe((result: any) => {
-        console.log("getFarmers", result.data.usersPermissionsUsers.data);
+        console.log('getFarmers', result.data.usersPermissionsUsers.data);
         this.Farmers = result.data.usersPermissionsUsers.data;
       });
   }
   getVillages(id?) {
-    this.dataservice.getVillages(1, 10000, "", id).valueChanges.subscribe((result: any) => {
-      console.log("getVillages", result.data.villages.data);
+    this.dataservice.getVillages(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getVillages', result.data.villages.data);
       this.Villages = result.data.villages.data;
     });
   }
@@ -213,14 +213,14 @@ export class UserDetailComponent implements OnInit {
     this.dataservice.UpdateRetailer(this.agentForm.value, this.id).subscribe(
       (result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.updateUsersPermissionsUser) {
-          this.toastr.success("User updated successfully!");
+          this.toastr.success('User updated successfully!');
           this.btnLoading = false;
           this.myModal.hide();
           this.getTest();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
           this.btnLoading = false;
         }
       },
@@ -230,7 +230,7 @@ export class UserDetailComponent implements OnInit {
     );
   }
   ResultSubmit() {
-    console.log("edit", this.resultForm.value);
+    console.log('edit', this.resultForm.value);
     let resp = {};
     console.log(this.resultForm.value);
     this.dataservice
@@ -241,19 +241,19 @@ export class UserDetailComponent implements OnInit {
       )
       .subscribe((result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.updateRetailerProduct) {
-          this.toastr.success("Product updated successfully!");
+          this.toastr.success('Product updated successfully!');
           this.resultModal.hide();
           this.getTest();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
         }
       });
   }
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
     console.log(this.file);
@@ -276,18 +276,18 @@ export class UserDetailComponent implements OnInit {
           .UpdateRetailerPic(this.id, response.body[0]?.id)
           .subscribe((result: any) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateUsersPermissionsUser) {
-              this.toastr.success("Success!");
+              this.toastr.success('Success!');
               this.file = null;
               this.getTest();
               this.addProductModal.hide();
             } else {
-              this.toastr.error("Failed!");
+              this.toastr.error('Failed!');
             }
           });
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
       }
     });
   }
@@ -298,13 +298,13 @@ export class UserDetailComponent implements OnInit {
       .UpdateRetailer(this.areaForm.value, this.id)
       .subscribe((result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.updateUsersPermissionsUser) {
-          this.toastr.success("User updated successfully!");
+          this.toastr.success('User updated successfully!');
           this.areaModal.hide();
           this.getTest();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
         }
       });
   }
@@ -322,35 +322,35 @@ export class UserDetailComponent implements OnInit {
           )
           .subscribe((result: any) => {
             resp = result.data;
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.createRetailerProduct) {
-              this.toastr.success("Success!");
+              this.toastr.success('Success!');
               this.file = null;
               this.getTest();
               this.addProductModal.hide();
             } else {
-              this.toastr.error("Failed!");
+              this.toastr.error('Failed!');
             }
           });
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
       }
     });
   }
   deleteProduct() {
-    if (this.details?.attributes?.UserType !== "Agronomist") {
+    if (this.details?.attributes?.UserType !== 'Agronomist') {
       this.dataservice.deleteUser(this.id).subscribe((result: any) => {
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.deleteUsersPermissionsUser) {
-          this.toastr.success("Success!");
+          this.toastr.success('Success!');
           this.deleteModal.hide();
-          this.router.navigate(["/users/all"]);
+          this.router.navigate(['/users/all']);
         } else {
-          this.toastr.error("Failed!");
+          this.toastr.error('Failed!');
         }
       });
     } else {
-      this.toastr.error("Can't delete Agronomist. Try setting as blocked.");
+      this.toastr.error('Can\'t delete Agronomist. Try setting as blocked.');
     }
   }
 }

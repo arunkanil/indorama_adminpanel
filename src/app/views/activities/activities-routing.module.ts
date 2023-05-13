@@ -6,7 +6,7 @@ import { ActivityDetailComponent } from './activity-detail.component';
 const routes: Routes = [
   {
     path: '',
-    
+
     children: [
       {
         path: '',

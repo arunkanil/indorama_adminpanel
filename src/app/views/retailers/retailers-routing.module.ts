@@ -8,7 +8,7 @@ import { RetailerDetailComponent } from './retailer-detail.component';
 const routes: Routes = [
   {
     path: '',
-    
+
     children: [
       {
         path: '',

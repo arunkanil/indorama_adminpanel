@@ -269,9 +269,9 @@
           this.orders = {};
           this.columnDefs = [];
           this.newsForm = this.fb.group({
-            Title: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Body: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: [""]
+            Title: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Body: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: ['']
           });
           this.rowData = [];
           this.selectedRows = [];
@@ -280,7 +280,7 @@
           this.filter = {};
           this.file = null;
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["IndoramaUpdatesColumn"]);
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(IndoramaUpdatesComponent, [{
@@ -324,11 +324,11 @@
               resp = result.body;
               console.log(result);
 
-              if (result.status === 200 && result.body.status == "Success") {
+              if (result.status === 200 && result.body.status == 'Success') {
                 _this2.toastr.success(result.body.message);
 
                 _this2.btnLoading = false;
-                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), "_blank");
+                window.open("".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl).concat((_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path), '_blank');
               } else {
                 _this2.btnLoading = false;
 
@@ -389,7 +389,7 @@
         }, {
           key: "onRowClicked",
           value: function onRowClicked(event) {
-            console.log("row", event.data);
+            console.log('row', event.data);
           }
         }, {
           key: "onSelectionChanged",
@@ -429,9 +429,9 @@
               this.imageUrl = ((_e = (_d = (_c = this.selectedRows[0].attributes.Images) === null || _c === void 0 ? void 0 : _c.data[0]) === null || _d === void 0 ? void 0 : _d.attributes) === null || _e === void 0 ? void 0 : _e.url) ? "".concat(this.baseURL) + ((_h = (_g = (_f = this.selectedRows[0].attributes.Images) === null || _f === void 0 ? void 0 : _f.data[0]) === null || _g === void 0 ? void 0 : _g.attributes) === null || _h === void 0 ? void 0 : _h.url) : null;
             } else {
               this.newsForm = this.fb.group({
-                Title: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Body: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
+                Title: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Body: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required]
               });
               this.imageUrl = null;
             }
@@ -446,10 +446,10 @@
               isDelete: true
             }, this.selectedRows[0].id, null).subscribe(function (result) {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.updateNewsAndUpdate) {
-                _this5.toastr.success("Success!");
+                _this5.toastr.success('Success!');
 
                 _this5.getUpdates();
 
@@ -459,7 +459,7 @@
 
                 _this5.gridApi.deselectAll();
               } else {
-                _this5.toastr.error("Failed. Please check the fields!");
+                _this5.toastr.error('Failed. Please check the fields!');
               }
             });
           }
@@ -482,10 +482,10 @@
 
                     _this6.dataservice.UpdateIndoramaUpdates(_this6.newsForm.value, _this6.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                       resp = result.data;
-                      console.log("response", result);
+                      console.log('response', result);
 
                       if (result.data.updateNewsAndUpdate) {
-                        _this6.toastr.success("Success!");
+                        _this6.toastr.success('Success!');
 
                         _this6.file = null;
 
@@ -499,7 +499,7 @@
 
                         _this6.gridApi.deselectAll();
                       } else {
-                        _this6.toastr.error("Failed. Please check the fields!");
+                        _this6.toastr.error('Failed. Please check the fields!');
 
                         _this6.btnLoading = false;
                       }
@@ -509,10 +509,10 @@
               } else {
                 this.dataservice.UpdateIndoramaUpdates(this.newsForm.value, this.selectedRows[0].id, null).subscribe(function (result) {
                   resp = result.data;
-                  console.log("response", result);
+                  console.log('response', result);
 
                   if (result.data.updateNewsAndUpdate) {
-                    _this6.toastr.success("Success!");
+                    _this6.toastr.success('Success!');
 
                     _this6.file = null;
                     _this6.btnLoading = false;
@@ -525,7 +525,7 @@
 
                     _this6.getUpdates();
                   } else {
-                    _this6.toastr.error("Failed. Please check the fields!");
+                    _this6.toastr.error('Failed. Please check the fields!');
 
                     _this6.btnLoading = false;
                   }
@@ -540,10 +540,10 @@
 
                   _this6.dataservice.AddIndoramaUpdates(_this6.newsForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
 
                     if (result.data.createNewsAndUpdate) {
-                      _this6.toastr.success("Success!");
+                      _this6.toastr.success('Success!');
 
                       _this6.file = null;
 
@@ -557,13 +557,13 @@
 
                       _this6.gridApi.deselectAll();
                     } else {
-                      _this6.toastr.error("Failed. Please check the fields!");
+                      _this6.toastr.error('Failed. Please check the fields!');
 
                       _this6.btnLoading = false;
                     }
                   });
                 } else {
-                  _this6.toastr.error("Image failed to upload!");
+                  _this6.toastr.error('Image failed to upload!');
 
                   _this6.btnLoading = false;
                 }
@@ -590,15 +590,15 @@
       IndoramaUpdatesComponent.propDecorators = {
         cropPriceModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["cropPriceModal"]
+          args: ['cropPriceModal']
         }],
         detailsModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["detailsModal"]
+          args: ['detailsModal']
         }],
         deleteModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["deleteModal"]
+          args: ['deleteModal']
         }]
       };
       IndoramaUpdatesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

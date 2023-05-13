@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
-import { Router, ActivatedRoute } from "@angular/router";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { FormBuilder, Validators } from "@angular/forms";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { FormBuilder, Validators } from '@angular/forms';
 import {
   dateConverter,
   dateConverterMin,
-} from "../../constants/columnMetadata";
+} from '../../constants/columnMetadata';
 
 @Component({
-  templateUrl: "activity-detail.component.html",
+  templateUrl: 'activity-detail.component.html',
 })
 export class ActivityDetailComponent implements OnInit {
   constructor(
@@ -20,9 +20,9 @@ export class ActivityDetailComponent implements OnInit {
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {}
-  @ViewChild("editModal") public editModal: ModalDirective;
-  @ViewChild("resultModal") public resultModal: ModalDirective;
-  @ViewChild("deleteModal") public deleteModal: ModalDirective;
+  @ViewChild('editModal') public editModal: ModalDirective;
+  @ViewChild('resultModal') public resultModal: ModalDirective;
+  @ViewChild('deleteModal') public deleteModal: ModalDirective;
 
   id: any;
   loading = true;
@@ -39,27 +39,26 @@ export class ActivityDetailComponent implements OnInit {
   maplink;
 
   activitiesForm = this.fb.group({
-    ActivityType: ["", Validators.required],
-    Latitude: [""],
-    Longitude: [""],
-    NoOfAttendees: [""],
-    state:["", Validators.required],
-    lga:["", Validators.required],
-    area: ["", Validators.required],
-    village: [""],
-    crop: ["", Validators.required],
-    FarmerName: [""],
-    Agronomist: [""],
-    PlannedFarmDay: [""],
-    ConditionOfCrop: [""],
-    Date: ["", Validators.required],
-    Time: [""],
-    Reason: [""],
+    ActivityType: ['', Validators.required],
+    Latitude: [''],
+    Longitude: [''],
+    NoOfAttendees: [''],
+    state: ['', Validators.required],
+    lga: ['', Validators.required],
+    village: [''],
+    crop: ['', Validators.required],
+    FarmerName: [''],
+    Agronomist: [''],
+    PlannedFarmDay: [''],
+    ConditionOfCrop: [''],
+    Date: ['', Validators.required],
+    Time: [''],
+    Reason: [''],
   });
 
   ngOnInit(): void {
     this.activatedRouter.params.subscribe((params) => {
-      this.id = params["id"];
+      this.id = params['id'];
     });
     this.getActivity();
     this.getStates();
@@ -69,10 +68,9 @@ export class ActivityDetailComponent implements OnInit {
     this.dataservice
       .getActivity(this.id)
       .valueChanges.subscribe((result: any) => {
-        console.log("getActivity", result?.data?.activity?.data);
+        console.log('getActivity', result?.data?.activity?.data);
         this.details = result?.data?.activity?.data;
         this.getLGAs(this.details?.attributes?.area?.data?.attributes?.lga?.data?.attributes?.state?.data?.id);
-        this.getAreas(this.details?.attributes?.area?.data?.attributes?.lga?.data?.id);
         this.getVillages(this.details?.attributes?.area?.data?.id);
         this.activitiesForm = this.fb.group({
           ActivityType: [
@@ -84,62 +82,52 @@ export class ActivityDetailComponent implements OnInit {
           NoOfAttendees: [
             this.details?.attributes?.NoOfAttendees,
           ],
-          state:[this.details?.attributes?.area?.data?.attributes?.lga?.data?.attributes?.state?.data?.id, Validators.required],
-          lga:[this.details?.attributes?.area?.data?.attributes?.lga?.data?.id, Validators.required],
+          state: [this.details?.attributes?.area?.data?.attributes?.lga?.data?.attributes?.state?.data?.id, Validators.required],
+          lga: [this.details?.attributes?.area?.data?.attributes?.lga?.data?.id, Validators.required],
           area: [this.details?.attributes?.area?.data?.id, Validators.required],
           crop: [this.details?.attributes?.crop?.data?.id],
           FarmerName: [this.details?.attributes?.FarmerName],
           PlannedFarmDay: [this.details?.attributes?.PlannedFarmDay],
           ConditionOfCrop: [this.details?.attributes?.ConditionOfCrop],
           Date: [this.details?.attributes?.Date, Validators.required],
-          Time: [this.details?.attributes?.Time,],
+          Time: [this.details?.attributes?.Time, ],
           Reason: [this.details?.attributes?.Reason],
           Agronomist: [this.details?.attributes?.Agronomist],
           village: [this.details?.attributes?.village?.data?.id],
         });
         this.maplink =
-          "https://maps.google.com/?q=" +
+          'https://maps.google.com/?q=' +
           this.details?.attributes?.Latitude?.toString() +
-          "," +
+          ',' +
           this.details?.attributes?.Longitude?.toString();
         this.loading = false;
       });
   }
   getCrops() {
-    this.dataservice.getCrops(1,1000).valueChanges.subscribe((result: any) => {
-      console.log("getCrops", result.data.crops.data);
+    this.dataservice.getCrops(1, 1000).valueChanges.subscribe((result: any) => {
+      console.log('getCrops', result.data.crops.data);
       this.Crops = result.data.crops.data;
     });
   }
-  getAreas(id?) {
-    this.dataservice.getAreas(1,10000,"",id).valueChanges.subscribe((result: any) => {
-      console.log("getAreas", result.data.areas.data);
-      this.Areas = result.data.areas.data;
-    });
-  }
-  getVillages(areaid?) {
+  getVillages(lgaid?) {
     this.dataservice
-      .getVillages(1, 10000, "",areaid)
+      .getVillages(1, 10000, '', lgaid)
       .valueChanges.subscribe((result: any) => {
-      console.log("getVillages", result.data.villages.data);
+      console.log('getVillages', result.data.villages.data);
       this.Villages = result.data.villages.data;
     });
   }
   getStates() {
-    this.dataservice.getStates(1,10000).valueChanges.subscribe((result: any) => {
+    this.dataservice.getStates(1, 10000).valueChanges.subscribe((result: any) => {
       this.States = result.data.states.data;
     });
   }
   getLGAs(id?) {
-    this.dataservice.getLGAs(1,10000,"",id).valueChanges.subscribe((result: any) => {
-      console.log("getLGAs", result.data.lgas.data);
+    this.dataservice.getLGAs(1, 10000, '', id).valueChanges.subscribe((result: any) => {
+      console.log('getLGAs', result.data.lgas.data);
       this.LGA = result.data.lgas.data;
     });
   }
-  filterArea(event) {
-    this.getAreas(event.target.value);
-  }
-
   filterLGA(event) {
     this.getLGAs(event.target.value);
   }
@@ -149,7 +137,7 @@ export class ActivityDetailComponent implements OnInit {
   }
 
   returnActivityType(data) {
-    if(data) return data.replace(/([A-Z])/g, " $1").trim();
+    if (data) { return data.replace(/([A-Z])/g, ' $1').trim(); }
   }
   dateConvertor(date) {
     return new Date(date);
@@ -167,27 +155,27 @@ export class ActivityDetailComponent implements OnInit {
       .updateActivity(this.activitiesForm.value, this.id)
       .subscribe((result: any) => {
         resp = result.data;
-        console.log("response", result);
+        console.log('response', result);
         if (result.data.updateActivity) {
-          this.toastr.success("Activity updated successfully!");
+          this.toastr.success('Activity updated successfully!');
           this.btnLoading = false;
           this.editModal.hide();
           this.getActivity();
         } else {
-          this.toastr.error("Failed. Please check the fields!");
+          this.toastr.error('Failed. Please check the fields!');
           this.btnLoading = false;
         }
       });
   }
   deleteActivity() {
     this.dataservice.deleteActivity(this.id).subscribe((result: any) => {
-      console.log("response", result);
+      console.log('response', result);
       if (result.data.deleteActivity) {
-        this.toastr.success("Success!");
+        this.toastr.success('Success!');
         this.deleteModal.hide();
-        this.router.navigate(["/activities/all"]);
+        this.router.navigate(['/activities/all']);
       } else {
-        this.toastr.error("Failed!");
+        this.toastr.error('Failed!');
       }
     });
   }

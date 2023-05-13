@@ -163,9 +163,9 @@ let CropPricesComponent = class CropPricesComponent {
         this.disableButton = true;
         this.disableNextButton = false;
         this.disablePrevButton = true;
-        this.selectedList = "All";
+        this.selectedList = 'All';
         this.listCheck = false;
-        this.publicationState = "PREVIEW";
+        this.publicationState = 'PREVIEW';
         this.toApprove = undefined;
         this.isRejected = undefined;
         this.columnDefs = [];
@@ -177,12 +177,12 @@ let CropPricesComponent = class CropPricesComponent {
         this.to = 20;
         this.count = 1;
         this.cropPriceForm = this.fb.group({
-            crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: [""],
+            crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: [''],
         });
         // frameworkComponents = {
         //   statusRenderer: ActionRenderer,
@@ -194,7 +194,7 @@ let CropPricesComponent = class CropPricesComponent {
         this.filter = {};
         this.file = null;
         this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["CropPricesColumn"]];
-        this.rowSelection = "single";
+        this.rowSelection = 'single';
     }
     ngOnInit() {
         this.loading = true;
@@ -221,7 +221,7 @@ let CropPricesComponent = class CropPricesComponent {
         });
     }
     getCrops() {
-        this.dataservice.getCrops(1, 10000, "").valueChanges.subscribe((result) => {
+        this.dataservice.getCrops(1, 10000, '').valueChanges.subscribe((result) => {
             this.Crops = result.data.crops.data;
         });
     }
@@ -261,14 +261,14 @@ let CropPricesComponent = class CropPricesComponent {
         });
     }
     getStates() {
-        this.dataservice.getStates(1, 10000, "").valueChanges.subscribe((result) => {
-            console.log("getStates", result.data.states.data);
+        this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result) => {
+            console.log('getStates', result.data.states.data);
             this.States = result.data.states.data;
         });
     }
     getMarkets(id) {
-        this.dataservice.getMarkets(1, 10000, "", id).valueChanges.subscribe((result) => {
-            console.log("getMarkets", result.data.markets.data);
+        this.dataservice.getMarkets(1, 10000, '', id).valueChanges.subscribe((result) => {
+            console.log('getMarkets', result.data.markets.data);
             this.Markets = result.data.markets.data;
         });
     }
@@ -277,23 +277,23 @@ let CropPricesComponent = class CropPricesComponent {
     }
     toggleCropPrices(data) {
         switch (data) {
-            case "Rejected":
-                this.selectedList = "Rejected";
-                this.publicationState = "PREVIEW";
+            case 'Rejected':
+                this.selectedList = 'Rejected';
+                this.publicationState = 'PREVIEW';
                 this.toApprove = null;
                 this.isRejected = true;
                 this.getCropPrices();
                 break;
-            case "Approvalpending":
-                this.selectedList = "Pending";
-                this.publicationState = "PREVIEW";
+            case 'Approvalpending':
+                this.selectedList = 'Pending';
+                this.publicationState = 'PREVIEW';
                 this.toApprove = null;
                 this.isRejected = false;
                 this.getCropPrices();
                 break;
-            case "All":
-                this.selectedList = "All";
-                this.publicationState = "PREVIEW";
+            case 'All':
+                this.selectedList = 'All';
+                this.publicationState = 'PREVIEW';
                 this.toApprove = undefined;
                 this.isRejected = undefined;
                 this.getCropPrices();
@@ -319,7 +319,7 @@ let CropPricesComponent = class CropPricesComponent {
         this.gridApi.sizeColumnsToFit();
     }
     onRowClicked(event) {
-        console.log("row", event.data);
+        console.log('row', event.data);
     }
     onSelectionChanged(event) {
         this.selectedRows = this.gridApi.getSelectedRows();
@@ -333,21 +333,22 @@ let CropPricesComponent = class CropPricesComponent {
     // On file Select
     onChange(event) {
         this.file = [];
-        for (var i = 0; i < event.target.files.length; i++) {
+        for (let i = 0; i < event.target.files.length; i++) {
             this.file.push(event.target.files[i]);
         }
         console.log(this.file);
     }
     approveOrReject(check) {
         let published = null;
-        if (!check)
+        if (!check) {
             published = new Date();
+        }
         this.dataservice
             .UpdateCropPrice(undefined, this.selectedRows[0].id, undefined, check, published)
             .subscribe((result) => {
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.updateCropPrice) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.getCropPrices();
                 this.file = null;
                 this.approveModal.hide();
@@ -355,7 +356,7 @@ let CropPricesComponent = class CropPricesComponent {
                 this.btnLoading = false;
             }
         }, (error) => {
-            this.toastr.error("Failed. Please check the fields!");
+            this.toastr.error('Failed. Please check the fields!');
             this.btnLoading = false;
         });
     }
@@ -368,10 +369,10 @@ let CropPricesComponent = class CropPricesComponent {
             var _a;
             resp = result.body;
             console.log(result);
-            if (result.status === 200 && result.body.status == "Success") {
+            if (result.status === 200 && result.body.status == 'Success') {
                 this.toastr.success(result.body.message);
                 this.btnLoading = false;
-                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, "_blank");
+                window.open(`${_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].apiUrl}${(_a = result === null || result === void 0 ? void 0 : result.body) === null || _a === void 0 ? void 0 : _a.path}`, '_blank');
             }
             else {
                 this.btnLoading = false;
@@ -412,12 +413,12 @@ let CropPricesComponent = class CropPricesComponent {
         }
         else {
             this.cropPriceForm = this.fb.group({
-                crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-                Image: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+                Image: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             });
             this.imageUrl = null;
         }
@@ -436,9 +437,9 @@ let CropPricesComponent = class CropPricesComponent {
                             .UpdateCropPrice(this.cropPriceForm.value, this.selectedRows[0].id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id)
                             .subscribe((result) => {
                             resp = result.data;
-                            console.log("response", result);
+                            console.log('response', result);
                             if (result.data.updateCropPrice) {
-                                this.toastr.success("Success!");
+                                this.toastr.success('Success!');
                                 this.getCropPrices();
                                 this.file = null;
                                 this.cropPriceModal.hide();
@@ -447,7 +448,7 @@ let CropPricesComponent = class CropPricesComponent {
                                 this.btnLoading = false;
                             }
                         }, (error) => {
-                            this.toastr.error("Failed. Please check the fields!");
+                            this.toastr.error('Failed. Please check the fields!');
                             this.btnLoading = false;
                         });
                     }
@@ -458,9 +459,9 @@ let CropPricesComponent = class CropPricesComponent {
                     .UpdateCropPrice(this.cropPriceForm.value, this.selectedRows[0].id, null)
                     .subscribe((result) => {
                     resp = result.data;
-                    console.log("response", result);
+                    console.log('response', result);
                     if (result.data.updateCropPrice) {
-                        this.toastr.success("Success!");
+                        this.toastr.success('Success!');
                         this.getCropPrices();
                         this.file = null;
                         this.cropPriceModal.hide();
@@ -469,7 +470,7 @@ let CropPricesComponent = class CropPricesComponent {
                         this.btnLoading = false;
                     }
                 }, (error) => {
-                    this.toastr.error("Failed. Please check the fields!");
+                    this.toastr.error('Failed. Please check the fields!');
                     this.btnLoading = false;
                 });
             }
@@ -483,9 +484,9 @@ let CropPricesComponent = class CropPricesComponent {
                         .AddCropPrice(this.cropPriceForm.value, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id)
                         .subscribe((result) => {
                         resp = result.data;
-                        console.log("response", result);
+                        console.log('response', result);
                         if (result.data.createCropPrice) {
-                            this.toastr.success("Success!");
+                            this.toastr.success('Success!');
                             this.getCropPrices();
                             this.file = null;
                             this.cropPriceModal.hide();
@@ -494,12 +495,12 @@ let CropPricesComponent = class CropPricesComponent {
                         }
                         this.btnLoading = false;
                     }, (error) => {
-                        this.toastr.error("Failed. Please check the fields!");
+                        this.toastr.error('Failed. Please check the fields!');
                         this.btnLoading = false;
                     });
                 }
                 else {
-                    this.toastr.error("Image failed to upload!");
+                    this.toastr.error('Image failed to upload!');
                 }
             });
         }
@@ -512,8 +513,8 @@ CropPricesComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 CropPricesComponent.propDecorators = {
-    cropPriceModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["cropPriceModal",] }],
-    approveModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["approveModal",] }]
+    cropPriceModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['cropPriceModal',] }],
+    approveModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['approveModal',] }]
 };
 CropPricesComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

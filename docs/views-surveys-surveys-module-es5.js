@@ -1201,12 +1201,12 @@
           this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["dateConverter"];
           this.questions = [];
           this.addForm = this.fb.group({
-            FieldName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            __typename: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            FieldType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            FieldKey: [""],
+            FieldName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            __typename: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            FieldType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            FieldKey: [''],
             Mandatory: [false],
-            Values: [""]
+            Values: ['']
           });
         }
 
@@ -1216,7 +1216,7 @@
             var _this3 = this;
 
             this.activatedRouter.params.subscribe(function (params) {
-              _this3.id = params["id"];
+              _this3.id = params['id'];
             });
           }
         }, {
@@ -1225,33 +1225,33 @@
             var _a, _b, _c, _d, _e, _f;
 
             console.log(this.addForm.value);
-            this.addForm.value.FieldKey = this.addForm.value.FieldName.replace(/[^A-Z0-9]/gi, "_");
+            this.addForm.value.FieldKey = this.addForm.value.FieldName.replace(/[^A-Z0-9]/gi, '_');
 
             if (((_c = (_b = (_a = this.addForm) === null || _a === void 0 ? void 0 : _a.value) === null || _b === void 0 ? void 0 : _b.Values) === null || _c === void 0 ? void 0 : _c.length) > 0) {
-              this.addForm.value.Values = (_f = (_e = (_d = this.addForm) === null || _d === void 0 ? void 0 : _d.value) === null || _e === void 0 ? void 0 : _e.Values) === null || _f === void 0 ? void 0 : _f.split(",");
+              this.addForm.value.Values = (_f = (_e = (_d = this.addForm) === null || _d === void 0 ? void 0 : _d.value) === null || _e === void 0 ? void 0 : _e.Values) === null || _f === void 0 ? void 0 : _f.split(',');
             }
 
             this.questions.push(this.addForm.value);
             this.addForm = this.fb.group({
-              FieldName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-              __typename: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-              FieldType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-              FieldKey: [""],
+              FieldName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+              __typename: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+              FieldType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+              FieldKey: [''],
               Mandatory: [false],
-              Values: [""]
+              Values: ['']
             });
             console.log(this.questions);
           }
         }, {
           key: "onQuestionTypeChange",
           value: function onQuestionTypeChange(event) {
-            if (event.target.value == "ComponentSurveySurveyTextComponent") {
+            if (event.target.value == 'ComponentSurveySurveyTextComponent') {
               this.isText = true;
             } else {
               this.isText = false;
             }
 
-            this.addForm.value.FieldType = "";
+            this.addForm.value.FieldType = '';
             console.log(event.target.value, this.isText);
           }
         }, {
@@ -1282,22 +1282,22 @@
             if (this.SurveyTitle && this.SurveyDescription) {
               this.dataservice.createSurveys(this.SurveyTitle, this.SurveyDescription, this.questions).subscribe(function (result) {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
 
                 if (result.data.createSurveyForm) {
-                  _this4.toastr.success("Farm demo added successfully!");
+                  _this4.toastr.success('Farm demo added successfully!');
 
                   _this4.btnLoading = false;
 
-                  _this4.router.navigate(["/surveys/all"]);
+                  _this4.router.navigate(['/surveys/all']);
                 }
               }, function (error) {
-                _this4.toastr.error("Failed. Please check the fields!");
+                _this4.toastr.error('Failed. Please check the fields!');
 
                 _this4.btnLoading = false;
               });
             } else {
-              this.toastr.error("Please add both title & description");
+              this.toastr.error('Please add both title & description');
               this.btnLoading = false;
             }
           }
@@ -1508,12 +1508,12 @@
           this.count = 1;
           this.columnDefs = [];
           this.cropPriceForm = this.fb.group({
-            crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: [""]
+            crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: ['']
           });
           this.rowData = [];
           this.selectedRows = [];
@@ -1522,7 +1522,7 @@
           this.filter = {};
           this.file = null;
           this.columnDefs = _toConsumableArray(_constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["SurveysColumn"]);
-          this.rowSelection = "single";
+          this.rowSelection = 'single';
         }
 
         _createClass(SurveysComponent, [{
@@ -1606,19 +1606,19 @@
         }, {
           key: "onRowClicked",
           value: function onRowClicked(event) {
-            console.log("row", event.data);
+            console.log('row', event.data);
           }
         }, {
           key: "goToNewSurvey",
           value: function goToNewSurvey() {
-            this.router.navigate(["/surveys/new_survey"]);
+            this.router.navigate(['/surveys/new_survey']);
           }
         }, {
           key: "onSelectionChanged",
           value: function onSelectionChanged(event) {
             this.selectedRows = this.gridApi.getSelectedRows();
             console.log(this.selectedRows);
-            this.router.navigate(["/surveys/survey_details", this.selectedRows[0].id], {
+            this.router.navigate(['/surveys/survey_details', this.selectedRows[0].id], {
               state: {
                 data: this.selectedRows
               }
@@ -1743,17 +1743,17 @@
           this.rowData = [];
           this.questions = {};
           this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverter"];
-          this.pieChartType = "pie";
+          this.pieChartType = 'pie';
           this.pieChartOptions = {
             responsive: true,
             plugins: {
               legend: {
                 display: true,
-                position: "top"
+                position: 'top'
               },
               datalabels: {
                 formatter: function formatter(value, ctx) {
-                  console.log(value, "datalabels", ctx);
+                  console.log(value, 'datalabels', ctx);
 
                   if (ctx.chart.data.labels) {
                     return ctx.chart.data.labels[ctx.dataIndex];
@@ -1766,7 +1766,7 @@
           this.chartOptions = {
             chart: {
               width: 580,
-              type: "pie"
+              type: 'pie'
             },
             series: [],
             labels: [],
@@ -1777,7 +1777,7 @@
                   width: 200
                 },
                 legend: {
-                  position: "bottom"
+                  position: 'bottom'
                 }
               }
             }]
@@ -1795,7 +1795,7 @@
                   switch (_context.prev = _context.next) {
                     case 0:
                       this.activatedRouter.params.subscribe(function (params) {
-                        _this8.id = params["id"];
+                        _this8.id = params['id'];
                       });
                       this.getSurveyDetails();
 
@@ -1823,11 +1823,11 @@
                 while (1) {
                   switch (_context2.prev = _context2.next) {
                     case 0:
-                      console.log("start getSurveyDetails");
+                      console.log('start getSurveyDetails');
                       this.dataservice.getSurveyDetails(this.id).subscribe(function (result) {
-                        console.log("getSurveyDetails", result.body.data);
+                        console.log('getSurveyDetails', result.body.data);
                         _this9.questions = result.body.data;
-                        console.log("finished getSurveyDetails");
+                        console.log('finished getSurveyDetails');
 
                         _this9.getSurveyResults();
                       });
@@ -1858,14 +1858,14 @@
                   switch (_context3.prev = _context3.next) {
                     case 0:
                       data = {};
-                      console.log("start getSurveyResults");
+                      console.log('start getSurveyResults');
                       this.dataservice.getSurveyResults(this.id).valueChanges.subscribe(function (result) {
                         var _a, _b;
 
                         _this10.rowData = result.data.surveyResults.data;
-                        console.log("getSurveyResults", _this10.rowData);
+                        console.log('getSurveyResults', _this10.rowData);
                         var Fields = (_b = (_a = _this10.questions) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Fields;
-                        console.log(Fields, "fields");
+                        console.log(Fields, 'fields');
 
                         var _loop = function _loop(i) {
                           var ans = _this10.rowData.map(function (x) {
@@ -1899,7 +1899,7 @@
                         }
 
                         _this10.resultsProcessed = data;
-                        console.log(_this10.resultsProcessed, "resultsProcessed"); // this.chart?.update();
+                        console.log(_this10.resultsProcessed, 'resultsProcessed'); // this.chart?.update();
                       });
 
                     case 3:
@@ -1919,24 +1919,24 @@
         }, {
           key: "returnQuesType",
           value: function returnQuesType(data) {
-            if (data == "survey.survey-selection-component") {
-              return "Dropdown";
+            if (data == 'survey.survey-selection-component') {
+              return 'Dropdown';
             } else {
-              return "Text";
+              return 'Text';
             }
           }
         }, {
           key: "returnFieldType",
           value: function returnFieldType(data) {
             switch (data) {
-              case "TextLong":
-                return "Long Answer";
+              case 'TextLong':
+                return 'Long Answer';
 
-              case "TextShort":
-                return "Short Answer";
+              case 'TextShort':
+                return 'Short Answer';
 
-              case "Selection":
-                return "Selection";
+              case 'Selection':
+                return 'Selection';
             }
           }
         }, {
@@ -1950,7 +1950,7 @@
               this.chartOptions.labels = Object.keys(this.resultsProcessed[data]);
             } else {
               // return [];
-              this.toastr.error("No data");
+              this.toastr.error('No data');
             }
           }
         }, {
@@ -1969,16 +1969,16 @@
             var _this11 = this;
 
             this.dataservice.deleteSurvey(this.id).subscribe(function (result) {
-              console.log("response", result);
+              console.log('response', result);
 
               if (result.data.deleteSurveyForm) {
-                _this11.toastr.success("Success!");
+                _this11.toastr.success('Success!');
 
                 _this11.deleteModal.hide();
 
-                _this11.router.navigate(["/surveys/all"]);
+                _this11.router.navigate(['/surveys/all']);
               } else {
-                _this11.toastr.error("Failed!");
+                _this11.toastr.error('Failed!');
               }
             });
           }
@@ -1994,14 +1994,14 @@
 
             this.btnLoading = true;
             this.dataservice.downloadResponses(this.id).subscribe(function (result) {
-              console.log("downloadResponses", result.body);
+              console.log('downloadResponses', result.body);
               var url = "".concat(_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl) + result.body.path;
               _this12.btnLoading = false;
-              window.open(url, "_blank");
+              window.open(url, '_blank');
             }, function (error) {
               _this12.btnLoading = true;
 
-              _this12.toastr.error("Failed!");
+              _this12.toastr.error('Failed!');
             });
           }
         }]);
@@ -2026,11 +2026,11 @@
       SurveyDetailsComponent.propDecorators = {
         chart: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["chart"]
+          args: ['chart']
         }],
         deleteModal: [{
           type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"],
-          args: ["deleteModal"]
+          args: ['deleteModal']
         }]
       };
       SurveyDetailsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

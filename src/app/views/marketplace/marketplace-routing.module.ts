@@ -6,7 +6,7 @@ import { MarketplaceComponent } from './marketplace.component';
 const routes: Routes = [
   {
     path: '',
-    
+
     children: [
       {
         path: '',

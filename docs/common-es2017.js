@@ -12,7 +12,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UsernameValidator", function() { return UsernameValidator; });
 class UsernameValidator {
     static cannotContainSpace(control) {
-        if (control.value.indexOf(" ") >= 0) {
+        if (control.value.indexOf(' ') >= 0) {
             return { cannotContainSpace: true };
         }
         return null;

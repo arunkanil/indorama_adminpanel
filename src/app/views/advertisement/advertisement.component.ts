@@ -1,13 +1,13 @@
-import { Component, ViewChild } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { ModalDirective } from "ngx-bootstrap/modal";
-import { environment } from "../../../environments/environment";
+import { Component, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { environment } from '../../../environments/environment';
 
 @Component({
-  templateUrl: "advertisement.component.html",
+  templateUrl: 'advertisement.component.html',
 })
 export class AdvertisementComponent {
   rowSelection: string;
@@ -17,7 +17,7 @@ export class AdvertisementComponent {
     private fb: FormBuilder,
     private toastr: ToastrService
   ) {}
-  @ViewChild("advertisementModal") public advertisementModal: ModalDirective;
+  @ViewChild('advertisementModal') public advertisementModal: ModalDirective;
 
   loading = true;
   btnLoading = false;
@@ -26,8 +26,8 @@ export class AdvertisementComponent {
   baseURL = environment.apiUrl;
 
   advertisementForm = this.fb.group({
-    clickUrl: [""],
-    File: ["", Validators.required],
+    clickUrl: [''],
+    File: ['', Validators.required],
   });
 
   rowData: any = [];
@@ -43,12 +43,12 @@ export class AdvertisementComponent {
   }
   getAdvertisements() {
     this.dataservice.getDashboardAd().valueChanges.subscribe((result: any) => {
-      console.log("advertisement", result.data.advertisement.data);
+      console.log('advertisement', result.data.advertisement.data);
       this.advertisement = result.data.advertisement.data;
     });
     this.dataservice.getRetailerAd().valueChanges.subscribe((result: any) => {
       console.log(
-        "retailerAdvertisement",
+        'retailerAdvertisement',
         result.data.retailerAdvertisement.data
       );
       this.retailerAdvertisement = result.data.retailerAdvertisement.data;
@@ -57,7 +57,7 @@ export class AdvertisementComponent {
   // On file Select
   onChange(event: any) {
     this.file = [];
-    for (var i = 0; i < event.target.files.length; i++) {
+    for (let i = 0; i < event.target.files.length; i++) {
       this.file.push(event.target.files[i]);
     }
     console.log(this.file);
@@ -82,14 +82,14 @@ export class AdvertisementComponent {
             .updateRetailerAd(this.advertisementForm?.value?.clickUrl, file)
             .subscribe((result: any) => {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
               if (result.data.updateRetailerAdvertisement) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.getAdvertisements();
                 this.btnLoading = false;
                 this.advertisementModal.hide();
               } else {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
                 this.btnLoading = false;
               }
             });
@@ -98,20 +98,20 @@ export class AdvertisementComponent {
             .updateDashboardAd(this.advertisementForm?.value?.clickUrl, file)
             .subscribe((result: any) => {
               resp = result.data;
-              console.log("response", result);
+              console.log('response', result);
               if (result.data.updateAdvertisement) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.getAdvertisements();
                 this.btnLoading = false;
                 this.advertisementModal.hide();
               } else {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
                 this.btnLoading = false;
               }
             });
         }
       } else {
-        this.toastr.error("Image failed to upload!");
+        this.toastr.error('Image failed to upload!');
         this.btnLoading = false;
       }
     });

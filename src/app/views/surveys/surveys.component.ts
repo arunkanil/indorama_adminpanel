@@ -1,12 +1,12 @@
-import { Component } from "@angular/core";
-import { Router } from "@angular/router";
-import { FormBuilder, Validators } from "@angular/forms";
-import { ToastrService } from "ngx-toastr";
-import { DataService } from "../../data.service";
-import { SurveysColumn } from "../../constants/columnMetadata";
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { DataService } from '../../data.service';
+import { SurveysColumn } from '../../constants/columnMetadata';
 
 @Component({
-  templateUrl: "surveys.component.html",
+  templateUrl: 'surveys.component.html',
 })
 export class SurveysComponent {
   rowSelection: string;
@@ -17,7 +17,7 @@ export class SurveysComponent {
     private toastr: ToastrService
   ) {
     this.columnDefs = [...SurveysColumn];
-    this.rowSelection = "single";
+    this.rowSelection = 'single';
   }
 
   loading = true;
@@ -33,12 +33,12 @@ export class SurveysComponent {
   columnDefs = [];
 
   cropPriceForm = this.fb.group({
-    crop: ["", Validators.required],
-    state: ["", Validators.required],
-    market: ["", Validators.required],
-    Price: ["", Validators.required],
-    Unit: ["", Validators.required],
-    Image: [""],
+    crop: ['', Validators.required],
+    state: ['', Validators.required],
+    market: ['', Validators.required],
+    Price: ['', Validators.required],
+    Unit: ['', Validators.required],
+    Image: [''],
   });
   rowData: any = [];
   selectedRows: any = [];
@@ -110,15 +110,15 @@ export class SurveysComponent {
     this.gridApi.sizeColumnsToFit();
   }
   onRowClicked(event: any) {
-    console.log("row", event.data);
+    console.log('row', event.data);
   }
-  goToNewSurvey(){
-    this.router.navigate(["/surveys/new_survey"]);
+  goToNewSurvey() {
+    this.router.navigate(['/surveys/new_survey']);
   }
   onSelectionChanged(event: any) {
     this.selectedRows = this.gridApi.getSelectedRows();
     console.log(this.selectedRows);
-    this.router.navigate(["/surveys/survey_details", this.selectedRows[0].id], {
+    this.router.navigate(['/surveys/survey_details', this.selectedRows[0].id], {
       state: { data: this.selectedRows },
     });
   }

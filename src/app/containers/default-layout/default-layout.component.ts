@@ -1,17 +1,17 @@
-import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { User } from "../../models/user";
-import { AuthenticationService } from "../../views/login/authentication.service";
-import { navItems } from "../../_nav";
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from '../../models/user';
+import { AuthenticationService } from '../../views/login/authentication.service';
+import { navItems } from '../../_nav';
 
 @Component({
-  selector: "app-dashboard",
-  templateUrl: "./default-layout.component.html",
+  selector: 'app-dashboard',
+  templateUrl: './default-layout.component.html',
 })
 export class DefaultLayoutComponent {
   currentUser: User;
   public sidebarMinimized = false;
-  userName = localStorage.getItem("username");
+  userName = localStorage.getItem('username');
   constructor(
     private router: Router,
     private authenticationService: AuthenticationService

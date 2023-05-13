@@ -7,7 +7,7 @@ import { SurveysComponent } from './surveys.component';
 const routes: Routes = [
   {
     path: '',
-    
+
     children: [
       {
         path: '',
@@ -30,7 +30,7 @@ const routes: Routes = [
           // roles: 'MANAGER',
           title: 'New Survey'
         }
-      },{
+      }, {
         path: 'survey_details/:id',
         // canActivate: [AuthGuard],
         component: SurveyDetailsComponent,

@@ -7,7 +7,7 @@ import { SMSCampaignsDetailComponent } from './sms-campaigns-detail.component';
 const routes: Routes = [
   {
     path: '',
-    
+
     children: [
       {
         path: '',

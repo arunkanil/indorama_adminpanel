@@ -739,45 +739,45 @@ let NewSurveyComponent = class NewSurveyComponent {
         this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["dateConverter"];
         this.questions = [];
         this.addForm = this.fb.group({
-            FieldName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            __typename: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            FieldType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            FieldKey: [""],
+            FieldName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            __typename: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            FieldType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            FieldKey: [''],
             Mandatory: [false],
-            Values: [""],
+            Values: [''],
         });
     }
     ngOnInit() {
         this.activatedRouter.params.subscribe((params) => {
-            this.id = params["id"];
+            this.id = params['id'];
         });
     }
     questionSubmit() {
         var _a, _b, _c, _d, _e, _f;
         console.log(this.addForm.value);
-        this.addForm.value.FieldKey = this.addForm.value.FieldName.replace(/[^A-Z0-9]/gi, "_");
+        this.addForm.value.FieldKey = this.addForm.value.FieldName.replace(/[^A-Z0-9]/gi, '_');
         if (((_c = (_b = (_a = this.addForm) === null || _a === void 0 ? void 0 : _a.value) === null || _b === void 0 ? void 0 : _b.Values) === null || _c === void 0 ? void 0 : _c.length) > 0) {
-            this.addForm.value.Values = (_f = (_e = (_d = this.addForm) === null || _d === void 0 ? void 0 : _d.value) === null || _e === void 0 ? void 0 : _e.Values) === null || _f === void 0 ? void 0 : _f.split(",");
+            this.addForm.value.Values = (_f = (_e = (_d = this.addForm) === null || _d === void 0 ? void 0 : _d.value) === null || _e === void 0 ? void 0 : _e.Values) === null || _f === void 0 ? void 0 : _f.split(',');
         }
         this.questions.push(this.addForm.value);
         this.addForm = this.fb.group({
-            FieldName: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            __typename: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            FieldType: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            FieldKey: [""],
+            FieldName: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            __typename: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            FieldType: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            FieldKey: [''],
             Mandatory: [false],
-            Values: [""],
+            Values: [''],
         });
         console.log(this.questions);
     }
     onQuestionTypeChange(event) {
-        if (event.target.value == "ComponentSurveySurveyTextComponent") {
+        if (event.target.value == 'ComponentSurveySurveyTextComponent') {
             this.isText = true;
         }
         else {
             this.isText = false;
         }
-        this.addForm.value.FieldType = "";
+        this.addForm.value.FieldType = '';
         console.log(event.target.value, this.isText);
     }
     deleteQuestion(item) {
@@ -799,19 +799,19 @@ let NewSurveyComponent = class NewSurveyComponent {
                 .createSurveys(this.SurveyTitle, this.SurveyDescription, this.questions)
                 .subscribe((result) => {
                 resp = result.data;
-                console.log("response", result);
+                console.log('response', result);
                 if (result.data.createSurveyForm) {
-                    this.toastr.success("Farm demo added successfully!");
+                    this.toastr.success('Farm demo added successfully!');
                     this.btnLoading = false;
-                    this.router.navigate(["/surveys/all"]);
+                    this.router.navigate(['/surveys/all']);
                 }
             }, (error) => {
-                this.toastr.error("Failed. Please check the fields!");
+                this.toastr.error('Failed. Please check the fields!');
                 this.btnLoading = false;
             });
         }
         else {
-            this.toastr.error("Please add both title & description");
+            this.toastr.error('Please add both title & description');
             this.btnLoading = false;
         }
     }
@@ -966,12 +966,12 @@ let SurveysComponent = class SurveysComponent {
         this.count = 1;
         this.columnDefs = [];
         this.cropPriceForm = this.fb.group({
-            crop: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            state: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            market: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Price: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Unit: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
-            Image: [""],
+            crop: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            state: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            market: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Unit: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            Image: [''],
         });
         this.rowData = [];
         this.selectedRows = [];
@@ -980,7 +980,7 @@ let SurveysComponent = class SurveysComponent {
         this.filter = {};
         this.file = null;
         this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_7__["SurveysColumn"]];
-        this.rowSelection = "single";
+        this.rowSelection = 'single';
     }
     ngOnInit() {
         this.loading = true;
@@ -1044,15 +1044,15 @@ let SurveysComponent = class SurveysComponent {
         this.gridApi.sizeColumnsToFit();
     }
     onRowClicked(event) {
-        console.log("row", event.data);
+        console.log('row', event.data);
     }
     goToNewSurvey() {
-        this.router.navigate(["/surveys/new_survey"]);
+        this.router.navigate(['/surveys/new_survey']);
     }
     onSelectionChanged(event) {
         this.selectedRows = this.gridApi.getSelectedRows();
         console.log(this.selectedRows);
-        this.router.navigate(["/surveys/survey_details", this.selectedRows[0].id], {
+        this.router.navigate(['/surveys/survey_details', this.selectedRows[0].id], {
             state: { data: this.selectedRows },
         });
     }
@@ -1124,17 +1124,17 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         this.rowData = [];
         this.questions = {};
         this.dateConverter = _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_8__["dateConverter"];
-        this.pieChartType = "pie";
+        this.pieChartType = 'pie';
         this.pieChartOptions = {
             responsive: true,
             plugins: {
                 legend: {
                     display: true,
-                    position: "top",
+                    position: 'top',
                 },
                 datalabels: {
                     formatter: (value, ctx) => {
-                        console.log(value, "datalabels", ctx);
+                        console.log(value, 'datalabels', ctx);
                         if (ctx.chart.data.labels) {
                             return ctx.chart.data.labels[ctx.dataIndex];
                         }
@@ -1146,7 +1146,7 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         this.chartOptions = {
             chart: {
                 width: 580,
-                type: "pie",
+                type: 'pie',
             },
             series: [],
             labels: [],
@@ -1158,7 +1158,7 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
                             width: 200,
                         },
                         legend: {
-                            position: "bottom",
+                            position: 'bottom',
                         },
                     },
                 },
@@ -1167,37 +1167,37 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
     }
     async ngOnInit() {
         this.activatedRouter.params.subscribe((params) => {
-            this.id = params["id"];
+            this.id = params['id'];
         });
         this.getSurveyDetails();
     }
     async getSurveyDetails() {
-        console.log("start getSurveyDetails");
+        console.log('start getSurveyDetails');
         this.dataservice.getSurveyDetails(this.id).subscribe((result) => {
-            console.log("getSurveyDetails", result.body.data);
+            console.log('getSurveyDetails', result.body.data);
             this.questions = result.body.data;
-            console.log("finished getSurveyDetails");
+            console.log('finished getSurveyDetails');
             this.getSurveyResults();
         });
     }
     async getSurveyResults() {
-        let data = {};
-        console.log("start getSurveyResults");
+        const data = {};
+        console.log('start getSurveyResults');
         this.dataservice
             .getSurveyResults(this.id)
             .valueChanges.subscribe((result) => {
             var _a, _b;
             this.rowData = result.data.surveyResults.data;
-            console.log("getSurveyResults", this.rowData);
-            let Fields = (_b = (_a = this.questions) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Fields;
-            console.log(Fields, "fields");
+            console.log('getSurveyResults', this.rowData);
+            const Fields = (_b = (_a = this.questions) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.Fields;
+            console.log(Fields, 'fields');
             for (let i = 0; i < Fields.length; i++) {
-                let ans = this.rowData.map((x) => x.attributes.SurveyResponse[Fields[i].FieldKey]);
-                let unique_ans = this.rowData
+                const ans = this.rowData.map((x) => x.attributes.SurveyResponse[Fields[i].FieldKey]);
+                const unique_ans = this.rowData
                     .map((x) => x.attributes.SurveyResponse[Fields[i].FieldKey])
                     .filter(unique);
                 let count = 0;
-                let counted_obj = {};
+                const counted_obj = {};
                 for (let j = 0; j < unique_ans.length; j++) {
                     count = 0;
                     for (let k = 0; k < ans.length; k++) {
@@ -1210,26 +1210,26 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
                 data[Fields[i].FieldKey] = counted_obj;
             }
             this.resultsProcessed = data;
-            console.log(this.resultsProcessed, "resultsProcessed");
+            console.log(this.resultsProcessed, 'resultsProcessed');
             // this.chart?.update();
         });
     }
     returnQuesType(data) {
-        if (data == "survey.survey-selection-component") {
-            return "Dropdown";
+        if (data == 'survey.survey-selection-component') {
+            return 'Dropdown';
         }
         else {
-            return "Text";
+            return 'Text';
         }
     }
     returnFieldType(data) {
         switch (data) {
-            case "TextLong":
-                return "Long Answer";
-            case "TextShort":
-                return "Short Answer";
-            case "Selection":
-                return "Selection";
+            case 'TextLong':
+                return 'Long Answer';
+            case 'TextShort':
+                return 'Short Answer';
+            case 'Selection':
+                return 'Selection';
         }
     }
     loadResponses(data) {
@@ -1242,7 +1242,7 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
         }
         else {
             // return [];
-            this.toastr.error("No data");
+            this.toastr.error('No data');
         }
     }
     returnChartdata(data) {
@@ -1256,14 +1256,14 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
     }
     deleteSurvey() {
         this.dataservice.deleteSurvey(this.id).subscribe((result) => {
-            console.log("response", result);
+            console.log('response', result);
             if (result.data.deleteSurveyForm) {
-                this.toastr.success("Success!");
+                this.toastr.success('Success!');
                 this.deleteModal.hide();
-                this.router.navigate(["/surveys/all"]);
+                this.router.navigate(['/surveys/all']);
             }
             else {
-                this.toastr.error("Failed!");
+                this.toastr.error('Failed!');
             }
         });
     }
@@ -1273,13 +1273,13 @@ let SurveyDetailsComponent = class SurveyDetailsComponent {
     downloadResponses() {
         this.btnLoading = true;
         this.dataservice.downloadResponses(this.id).subscribe((result) => {
-            console.log("downloadResponses", result.body);
-            let url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl}` + result.body.path;
+            console.log('downloadResponses', result.body);
+            const url = `${_environments_environment__WEBPACK_IMPORTED_MODULE_10__["environment"].apiUrl}` + result.body.path;
             this.btnLoading = false;
-            window.open(url, "_blank");
+            window.open(url, '_blank');
         }, (error) => {
             this.btnLoading = true;
-            this.toastr.error("Failed!");
+            this.toastr.error('Failed!');
         });
     }
 };
@@ -1291,8 +1291,8 @@ SurveyDetailsComponent.ctorParameters = () => [
     { type: ngx_toastr__WEBPACK_IMPORTED_MODULE_5__["ToastrService"] }
 ];
 SurveyDetailsComponent.propDecorators = {
-    chart: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["chart",] }],
-    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["deleteModal",] }]
+    chart: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['chart',] }],
+    deleteModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ['deleteModal',] }]
 };
 SurveyDetailsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({

@@ -110,7 +110,7 @@ let ChatComponent = class ChatComponent {
         this.pageSize = 10;
         this.count = 0;
         this.key = null;
-        this.selectedList = "All Chats";
+        this.selectedList = 'All Chats';
         this.listCheck = false;
         this.baseURL = _environments_environment__WEBPACK_IMPORTED_MODULE_6__["environment"].apiUrl;
     }
@@ -126,20 +126,20 @@ let ChatComponent = class ChatComponent {
             .valueChanges.subscribe((result) => {
             var _a;
             this.chatData = this.chatData.concat((_a = result === null || result === void 0 ? void 0 : result.data) === null || _a === void 0 ? void 0 : _a.chats.data);
-            console.log("getallChats", this.chatData);
+            console.log('getallChats', this.chatData);
             this.loading = false;
         });
     }
     toggleChat(data) {
         if (data) {
             this.chatData = [];
-            this.selectedList = "Ask Indorama";
+            this.selectedList = 'Ask Indorama';
             this.listCheck = data;
             this.getallChats(this.pageSize, 0, undefined, true);
         }
         else {
             this.chatData = [];
-            this.selectedList = "All Chats";
+            this.selectedList = 'All Chats';
             this.listCheck = data;
             this.getallChats(this.pageSize, 0, undefined, false);
         }
@@ -179,7 +179,7 @@ let ChatComponent = class ChatComponent {
             .getChatMessages(data.id)
             .valueChanges.subscribe((result) => {
             var _a, _b, _c;
-            console.log("getChatMessages", (_b = (_a = result === null || result === void 0 ? void 0 : result.data) === null || _a === void 0 ? void 0 : _a.chat) === null || _b === void 0 ? void 0 : _b.data);
+            console.log('getChatMessages', (_b = (_a = result === null || result === void 0 ? void 0 : result.data) === null || _a === void 0 ? void 0 : _a.chat) === null || _b === void 0 ? void 0 : _b.data);
             this.messageData = (_c = result === null || result === void 0 ? void 0 : result.data) === null || _c === void 0 ? void 0 : _c.chat.data;
             this.messageLoading = false;
             this;
