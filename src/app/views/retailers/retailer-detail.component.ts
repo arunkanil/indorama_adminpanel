@@ -215,6 +215,7 @@ export class RetailerDetailComponent implements OnInit {
       },
       (error) => {
         this.btnLoading = false;
+        console.log('error', error);
       }
     );
     // let published = null;
@@ -284,6 +285,7 @@ export class RetailerDetailComponent implements OnInit {
       },
       (error) => {
         this.btnLoading = false;
+        console.log('error', error);
       }
     );
   }
@@ -333,7 +335,7 @@ export class RetailerDetailComponent implements OnInit {
   uploadProfPic() {
     let resp = {};
     this.dataservice.upload(this.file).subscribe((response: any) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log(response);
         this.dataservice
           .UpdateRetailerPic(this.id, response.body[0]?.id)
@@ -358,7 +360,7 @@ export class RetailerDetailComponent implements OnInit {
     let resp = {};
     this.btnLoading = true;
     this.dataservice.upload(this.file).subscribe((response: any) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log(response);
         this.dataservice
           .addRetailerProducts(

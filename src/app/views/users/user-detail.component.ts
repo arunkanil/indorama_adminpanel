@@ -126,7 +126,7 @@ export class UserDetailComponent implements OnInit {
         });
         this.loading = false;
         this.dispArea =
-          this.details?.attributes?.UserType == 'Agronomist' ? true : false;
+          this.details?.attributes?.UserType === 'Agronomist' ? true : false;
         if (this.dispArea == true) {
           this.agronomists = this.details?.attributes?.agronomist_lgas?.data;
           // this.dataservice

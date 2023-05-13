@@ -338,7 +338,7 @@ export class DashboardComponent implements OnInit {
             {
               data: [
                 parseInt(
-                  result.body.farmDemoYieldTrend.indorama_practice_yield_avg
+                  result.body.farmDemoYieldTrend.indorama_practice_yield_avg, 10
                 ),
               ],
               label: 'Indorama practice yield',

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ChatComponent } from './chat.component';
-import { AuthGuard } from '../login/auth.guard';
 
 const routes: Routes = [
   {

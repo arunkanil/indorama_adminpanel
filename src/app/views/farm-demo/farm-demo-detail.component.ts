@@ -197,6 +197,7 @@ export class FarmDemoDetailComponent implements OnInit {
         },
         (error) => {
           this.btnLoading = false;
+          console.log('error', error);
         }
       );
   }
@@ -227,6 +228,7 @@ export class FarmDemoDetailComponent implements OnInit {
       },
       (error) => {
         this.toastr.error('Something went wrong!');
+        console.log('error', error);
       }
     );
   }

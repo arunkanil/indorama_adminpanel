@@ -254,6 +254,7 @@ export class SoilTestDetailComponent implements OnInit {
       },
       (error) => {
         this.btnLoading = false;
+        console.log(error);
       }
     );
   }
@@ -285,6 +286,7 @@ export class SoilTestDetailComponent implements OnInit {
         },
         (error) => {
           this.btnLoading = false;
+          console.log(error);
         }
       );
     } else {
@@ -307,6 +309,7 @@ export class SoilTestDetailComponent implements OnInit {
         },
         (error) => {
           this.btnLoading = false;
+          console.log(error);
         }
       );
     }

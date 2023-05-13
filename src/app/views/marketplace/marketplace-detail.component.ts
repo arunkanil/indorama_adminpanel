@@ -139,7 +139,7 @@ export class MarketplaceDetailComponent implements OnInit {
     let resp = {};
     this.btnLoading = true;
     this.dataservice.upload(this.file).subscribe((response: any) => {
-      if (response.status == 200) {
+      if (response.status === 200) {
         console.log(response);
         this.dataservice
           .updateMarketplaceProductImg(

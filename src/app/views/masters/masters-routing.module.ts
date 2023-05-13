@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { mastersComponent } from './masters.component';
-import { AuthGuard } from '../login/auth.guard';
 
 const routes: Routes = [
   {
@@ -75,4 +74,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+// tslint:disable-next-line:class-name
 export class mastersRoutingModule {}

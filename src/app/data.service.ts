@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import {
   HttpClient,
   HttpErrorResponse,
-  HttpHeaders,
 } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { environment } from '../environments/environment';
 import { Apollo, gql } from 'apollo-angular';
 import { catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
-import { idText } from 'typescript';
 
 const FarmDemosQuery = gql`
   query ($page: Int, $pageSize: Int) {
@@ -4616,7 +4614,7 @@ export class DataService {
         dateOfHarvesting: farmdemo.dateOfHarvesting,
         season: farmdemo.Season,
         Status: farmdemo.Status,
-        isPesticidesUsed: farmdemo.isPesticidesUsed == 'true' ? true : false,
+        isPesticidesUsed: farmdemo.isPesticidesUsed === 'true' ? true : false,
         images: farmdemo.images,
       },
       errorPolicy: 'all',
@@ -4700,7 +4698,7 @@ export class DataService {
         state: price.state,
         market: price.market,
         image: image,
-        user: parseInt(localStorage.getItem('uid')),
+        user: parseInt(localStorage.getItem('uid'), 10 ),
         published: new Date(),
       },
       errorPolicy: 'all',
@@ -4741,9 +4739,9 @@ export class DataService {
         userId: price.userId,
         contactNumber: String(price.contactNumber),
         price: price.price,
-        availableQty: parseInt(price.availableQty),
+        availableQty: parseInt(price.availableQty, 10),
         unit: price.unit,
-        category: parseInt(price.category),
+        category: parseInt(price.category, 10),
         description: price.description,
       },
       errorPolicy: 'all',
@@ -4760,9 +4758,9 @@ export class DataService {
         // userId: price.userId,
         contactNumber: String(price.contactNumber),
         price: price.price,
-        availableQty: parseInt(price.availableQty),
+        availableQty: parseInt(price.availableQty, 10),
         unit: price.unit,
-        category: parseInt(price.category),
+        category: parseInt(price.category, 10),
         description: price.description,
       },
       errorPolicy: 'all',
@@ -4788,7 +4786,7 @@ export class DataService {
         Date: price.Date,
         Latitude: parseFloat(price.Latitude),
         Longitude: parseFloat(price.Longitude),
-        NoOfAttendees: parseInt(price.NoOfAttendees),
+        NoOfAttendees: parseInt(price.NoOfAttendees, 10),
         crop: price.crop ? price.crop : undefined,
         ConditionOfCrop: price.ConditionOfCrop
           ? price.ConditionOfCrop
@@ -5118,7 +5116,7 @@ export class DataService {
         lga: data.lga,
         bio: data.Bio,
         agronomist_lgas: data.agronomist_lgas,
-        blocked: data.blocked == 'true' ? true : false,
+        blocked: data.blocked === 'true' ? true : false,
         confirmed: data.confirmed,
         UserType: data?.UserType,
         contactNumber: data.ContactNumber,
@@ -5154,7 +5152,7 @@ export class DataService {
       mutation: createdRetailerProducts,
       variables: {
         ItemName: data.itemName,
-        Price: parseInt(data.price),
+        Price: parseInt(data.price, 10),
         Unit: data.unit,
         Images: image,
         isApproved: true,
@@ -5171,7 +5169,7 @@ export class DataService {
       variables: {
         productId: data.id,
         itemName: data.itemName,
-        price: parseInt(data.price),
+        price: parseInt(data.price, 10),
         unit: data.unit,
         // images: data.,
         isApproved: true,
@@ -5205,7 +5203,7 @@ export class DataService {
         Date: price.Date,
         Latitude: parseFloat(price.Latitude),
         Longitude: parseFloat(price.Longitude),
-        NoOfAttendees: parseInt(price.NoOfAttendees),
+        NoOfAttendees: parseInt(price.NoOfAttendees, 10),
         crop: price.crop,
         ConditionOfCrop: price.ConditionOfCrop,
         PlannedFarmDay: price.PlannedFarmDay,
