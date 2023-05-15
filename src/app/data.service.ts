@@ -3066,6 +3066,8 @@ query getActivities($id: ID) {
     }
   }
 `;
+
+
 const CreateActivities = gql`
   mutation (
     $FarmerName: String
@@ -3081,7 +3083,7 @@ const CreateActivities = gql`
     $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
     $Time: String
     $village: ID
-    $agronomist: String
+    $Agronomist: String
   ) {
     createActivity(
       data: {
@@ -3098,7 +3100,7 @@ const CreateActivities = gql`
         ActivityType: $ActivityType
         Time: $Time
         village: $village
-        agronomist: $agronomist
+        agronomist: $Agronomist
       }
     ) {
       data {

@@ -3577,7 +3577,7 @@ const CreateActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
     $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
     $Time: String
     $village: ID
-    $agronomist: String
+    $Agronomist: String
   ) {
     createActivity(
       data: {
@@ -3594,7 +3594,7 @@ const CreateActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
         ActivityType: $ActivityType
         Time: $Time
         village: $village
-        agronomist: $agronomist
+        agronomist: $Agronomist
       }
     ) {
       data {

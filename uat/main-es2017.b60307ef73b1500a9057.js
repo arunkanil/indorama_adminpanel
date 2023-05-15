@@ -3002,7 +3002,7 @@ query getActivities($id: ID) {
     $ActivityType: ENUM_ACTIVITY_ACTIVITYTYPE
     $Time: String
     $village: ID
-    $agronomist: String
+    $Agronomist: String
   ) {
     createActivity(
       data: {
@@ -3019,7 +3019,7 @@ query getActivities($id: ID) {
         ActivityType: $ActivityType
         Time: $Time
         village: $village
-        agronomist: $agronomist
+        agronomist: $Agronomist
       }
     ) {
       data {
