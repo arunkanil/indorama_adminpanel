@@ -757,7 +757,7 @@
             var resp = {};
             this.btnLoading = true;
             this.dataservice.upload(this.file).subscribe(function (response) {
-              if (response.status == 200) {
+              if (response.status === 200) {
                 console.log(response);
 
                 _this11.dataservice.updateMarketplaceProductImg(_this11.id, response.body.map(function (a) {

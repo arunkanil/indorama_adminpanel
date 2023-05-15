@@ -1334,7 +1334,7 @@
               query: Villagesquery,
               fetchPolicy: 'no-cache',
               variables: {
-                id: lgaid,
+                lgaId: lgaid,
                 page: page,
                 pageSize: pageSize,
                 searchTerm: searchTerm
@@ -1491,7 +1491,7 @@
                 dateOfHarvesting: farmdemo.dateOfHarvesting,
                 season: farmdemo.Season,
                 Status: farmdemo.Status,
-                isPesticidesUsed: farmdemo.isPesticidesUsed == 'true' ? true : false,
+                isPesticidesUsed: farmdemo.isPesticidesUsed === 'true' ? true : false,
                 images: farmdemo.images
               },
               errorPolicy: 'all',
@@ -1588,7 +1588,7 @@
                 state: price.state,
                 market: price.market,
                 image: image,
-                user: parseInt(localStorage.getItem('uid')),
+                user: parseInt(localStorage.getItem('uid'), 10),
                 published: new Date()
               },
               errorPolicy: 'all',
@@ -1635,9 +1635,9 @@
                 userId: price.userId,
                 contactNumber: String(price.contactNumber),
                 price: price.price,
-                availableQty: parseInt(price.availableQty),
+                availableQty: parseInt(price.availableQty, 10),
                 unit: price.unit,
-                category: parseInt(price.category),
+                category: parseInt(price.category, 10),
                 description: price.description
               },
               errorPolicy: 'all',
@@ -1656,9 +1656,9 @@
                 // userId: price.userId,
                 contactNumber: String(price.contactNumber),
                 price: price.price,
-                availableQty: parseInt(price.availableQty),
+                availableQty: parseInt(price.availableQty, 10),
                 unit: price.unit,
-                category: parseInt(price.category),
+                category: parseInt(price.category, 10),
                 description: price.description
               },
               errorPolicy: 'all',
@@ -1688,7 +1688,7 @@
                 Date: price.Date,
                 Latitude: parseFloat(price.Latitude),
                 Longitude: parseFloat(price.Longitude),
-                NoOfAttendees: parseInt(price.NoOfAttendees),
+                NoOfAttendees: parseInt(price.NoOfAttendees, 10),
                 crop: price.crop ? price.crop : undefined,
                 ConditionOfCrop: price.ConditionOfCrop ? price.ConditionOfCrop : undefined,
                 PlannedFarmDay: price.PlannedFarmDay ? price.PlannedFarmDay : undefined,
@@ -2057,7 +2057,7 @@
                 lga: data.lga,
                 bio: data.Bio,
                 agronomist_lgas: data.agronomist_lgas,
-                blocked: data.blocked == 'true' ? true : false,
+                blocked: data.blocked === 'true' ? true : false,
                 confirmed: data.confirmed,
                 UserType: data === null || data === void 0 ? void 0 : data.UserType,
                 contactNumber: data.ContactNumber
@@ -2099,7 +2099,7 @@
               mutation: createdRetailerProducts,
               variables: {
                 ItemName: data.itemName,
-                Price: parseInt(data.price),
+                Price: parseInt(data.price, 10),
                 Unit: data.unit,
                 Images: image,
                 isApproved: true,
@@ -2118,7 +2118,7 @@
               variables: {
                 productId: data.id,
                 itemName: data.itemName,
-                price: parseInt(data.price),
+                price: parseInt(data.price, 10),
                 unit: data.unit,
                 // images: data.,
                 isApproved: true,
@@ -2156,7 +2156,7 @@
                 Date: price.Date,
                 Latitude: parseFloat(price.Latitude),
                 Longitude: parseFloat(price.Longitude),
-                NoOfAttendees: parseInt(price.NoOfAttendees),
+                NoOfAttendees: parseInt(price.NoOfAttendees, 10),
                 crop: price.crop,
                 ConditionOfCrop: price.ConditionOfCrop,
                 PlannedFarmDay: price.PlannedFarmDay,

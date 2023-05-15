@@ -560,6 +560,7 @@ let SoilTestDetailComponent = class SoilTestDetailComponent {
             }
         }, (error) => {
             this.btnLoading = false;
+            console.log(error);
         });
     }
     filterLGA(event) {
@@ -589,6 +590,7 @@ let SoilTestDetailComponent = class SoilTestDetailComponent {
                 }
             }, (error) => {
                 this.btnLoading = false;
+                console.log(error);
             });
         }
         else {
@@ -610,6 +612,7 @@ let SoilTestDetailComponent = class SoilTestDetailComponent {
                 }
             }, (error) => {
                 this.btnLoading = false;
+                console.log(error);
             });
         }
     }

@@ -363,7 +363,7 @@
                 UserType: [(_z = (_y = _this2.details) === null || _y === void 0 ? void 0 : _y.attributes) === null || _z === void 0 ? void 0 : _z.UserType, _angular_forms__WEBPACK_IMPORTED_MODULE_7__["Validators"].required]
               });
               _this2.loading = false;
-              _this2.dispArea = ((_1 = (_0 = _this2.details) === null || _0 === void 0 ? void 0 : _0.attributes) === null || _1 === void 0 ? void 0 : _1.UserType) == 'Agronomist' ? true : false;
+              _this2.dispArea = ((_1 = (_0 = _this2.details) === null || _0 === void 0 ? void 0 : _0.attributes) === null || _1 === void 0 ? void 0 : _1.UserType) === 'Agronomist' ? true : false;
 
               if (_this2.dispArea == true) {
                 _this2.agronomists = (_4 = (_3 = (_2 = _this2.details) === null || _2 === void 0 ? void 0 : _2.attributes) === null || _3 === void 0 ? void 0 : _3.agronomist_lgas) === null || _4 === void 0 ? void 0 : _4.data; // this.dataservice

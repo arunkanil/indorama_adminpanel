@@ -1555,7 +1555,8 @@
       mastersRoutingModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
         imports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"].forChild(routes)],
         exports: [_angular_router__WEBPACK_IMPORTED_MODULE_2__["RouterModule"]]
-      })], mastersRoutingModule);
+      }) // tslint:disable-next-line:class-name
+      ], mastersRoutingModule);
       /***/
     }
   }]);

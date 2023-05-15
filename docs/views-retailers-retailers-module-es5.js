@@ -842,6 +842,7 @@
               }
             }, function (error) {
               _this19.btnLoading = false;
+              console.log('error', error);
             }); // let published = null;
             // if (!check) published = new Date();
             // this.dataservice
@@ -924,6 +925,7 @@
               }
             }, function (error) {
               _this20.btnLoading = false;
+              console.log('error', error);
             });
           }
         }, {
@@ -988,7 +990,7 @@
             this.dataservice.upload(this.file).subscribe(function (response) {
               var _a;
 
-              if (response.status == 200) {
+              if (response.status === 200) {
                 console.log(response);
 
                 _this22.dataservice.UpdateRetailerPic(_this22.id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id).subscribe(function (result) {
@@ -1022,7 +1024,7 @@
             this.dataservice.upload(this.file).subscribe(function (response) {
               var _a, _b, _c, _d, _e;
 
-              if (response.status == 200) {
+              if (response.status === 200) {
                 console.log(response);
 
                 _this23.dataservice.addRetailerProducts(_this23.productForm.value, (_d = (_c = (_b = (_a = _this23.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.retailer_categories) === null || _c === void 0 ? void 0 : _c.data[0]) === null || _d === void 0 ? void 0 : _d.id, _this23.id, (_e = response.body[0]) === null || _e === void 0 ? void 0 : _e.id).subscribe(function (result) {

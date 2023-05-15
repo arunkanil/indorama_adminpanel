@@ -198,6 +198,7 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
             }
         }, (error) => {
             this.btnLoading = false;
+            console.log('error', error);
         });
     }
     showImages(url) {
@@ -226,6 +227,7 @@ let FarmDemoDetailComponent = class FarmDemoDetailComponent {
             }
         }, (error) => {
             this.toastr.error('Something went wrong!');
+            console.log('error', error);
         });
     }
     onChange(event) {

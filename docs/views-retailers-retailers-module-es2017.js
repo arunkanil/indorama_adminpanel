@@ -614,6 +614,7 @@ let RetailerDetailComponent = class RetailerDetailComponent {
             }
         }, (error) => {
             this.btnLoading = false;
+            console.log('error', error);
         });
         // let published = null;
         // if (!check) published = new Date();
@@ -682,6 +683,7 @@ let RetailerDetailComponent = class RetailerDetailComponent {
             }
         }, (error) => {
             this.btnLoading = false;
+            console.log('error', error);
         });
     }
     ResultSubmit() {
@@ -726,7 +728,7 @@ let RetailerDetailComponent = class RetailerDetailComponent {
         let resp = {};
         this.dataservice.upload(this.file).subscribe((response) => {
             var _a;
-            if (response.status == 200) {
+            if (response.status === 200) {
                 console.log(response);
                 this.dataservice
                     .UpdateRetailerPic(this.id, (_a = response.body[0]) === null || _a === void 0 ? void 0 : _a.id)
@@ -754,7 +756,7 @@ let RetailerDetailComponent = class RetailerDetailComponent {
         this.btnLoading = true;
         this.dataservice.upload(this.file).subscribe((response) => {
             var _a, _b, _c, _d, _e;
-            if (response.status == 200) {
+            if (response.status === 200) {
                 console.log(response);
                 this.dataservice
                     .addRetailerProducts(this.productForm.value, (_d = (_c = (_b = (_a = this.details) === null || _a === void 0 ? void 0 : _a.attributes) === null || _b === void 0 ? void 0 : _b.retailer_categories) === null || _c === void 0 ? void 0 : _c.data[0]) === null || _d === void 0 ? void 0 : _d.id, this.id, (_e = response.body[0]) === null || _e === void 0 ? void 0 : _e.id)

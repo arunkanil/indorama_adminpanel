@@ -236,6 +236,7 @@
               }
             }, function (error) {
               _this2.btnLoading = false;
+              console.log('error', error);
             });
           }
         }, {
@@ -278,6 +279,8 @@
               }
             }, function (error) {
               _this4.toastr.error('Something went wrong!');
+
+              console.log('error', error);
             });
           }
         }, {

@@ -529,7 +529,7 @@ let MarketplaceDetailComponent = class MarketplaceDetailComponent {
         let resp = {};
         this.btnLoading = true;
         this.dataservice.upload(this.file).subscribe((response) => {
-            if (response.status == 200) {
+            if (response.status === 200) {
                 console.log(response);
                 this.dataservice
                     .updateMarketplaceProductImg(this.id, response.body.map((a) => a.id))

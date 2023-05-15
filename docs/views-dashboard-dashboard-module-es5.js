@@ -3786,7 +3786,7 @@
               var _a;
 
               _this6.barChartData_farmdemo = [{
-                data: [parseInt(result.body.farmDemoYieldTrend.indorama_practice_yield_avg)],
+                data: [parseInt(result.body.farmDemoYieldTrend.indorama_practice_yield_avg, 10)],
                 label: 'Indorama practice yield'
               }, {
                 data: [parseInt(result.body.farmDemoYieldTrend.farmer_practice_yield_avg)],

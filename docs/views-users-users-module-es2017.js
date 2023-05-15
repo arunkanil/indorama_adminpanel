@@ -254,7 +254,7 @@ let UserDetailComponent = class UserDetailComponent {
             });
             this.loading = false;
             this.dispArea =
-                ((_1 = (_0 = this.details) === null || _0 === void 0 ? void 0 : _0.attributes) === null || _1 === void 0 ? void 0 : _1.UserType) == 'Agronomist' ? true : false;
+                ((_1 = (_0 = this.details) === null || _0 === void 0 ? void 0 : _0.attributes) === null || _1 === void 0 ? void 0 : _1.UserType) === 'Agronomist' ? true : false;
             if (this.dispArea == true) {
                 this.agronomists = (_4 = (_3 = (_2 = this.details) === null || _2 === void 0 ? void 0 : _2.attributes) === null || _3 === void 0 ? void 0 : _3.agronomist_lgas) === null || _4 === void 0 ? void 0 : _4.data;
                 // this.dataservice

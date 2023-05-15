@@ -3103,7 +3103,7 @@ let DashboardComponent = class DashboardComponent {
             this.barChartData_farmdemo = [
                 {
                     data: [
-                        parseInt(result.body.farmDemoYieldTrend.indorama_practice_yield_avg),
+                        parseInt(result.body.farmDemoYieldTrend.indorama_practice_yield_avg, 10),
                     ],
                     label: 'Indorama practice yield',
                 },
