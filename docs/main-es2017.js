@@ -5152,6 +5152,8 @@ let DataService = class DataService {
                 area: price.area,
                 ActivityType: price.ActivityType,
                 Time: price.Time,
+                Agronomist: price.Agronomist,
+                village: price.village,
             },
             errorPolicy: 'all',
             fetchPolicy: 'no-cache',
