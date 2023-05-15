@@ -4477,7 +4477,7 @@ export class DataService {
       query: Villagesquery,
       fetchPolicy: 'no-cache',
       variables: {
-        id: lgaid,
+        lgaId: lgaid,
         page: page,
         pageSize: pageSize,
         searchTerm: searchTerm,
