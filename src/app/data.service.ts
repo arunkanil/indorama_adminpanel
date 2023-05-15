@@ -529,7 +529,7 @@ const LGAquery = gql`
   query ($id: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
     lgas(
       pagination: { page: $page, pageSize: $pageSize }
-      sort: "createdAt:desc"
+      sort: "Name:asc"
       filters: { state: { id: { eq: $id } }, Name:{containsi:$searchTerm} }
     ) {
       meta {
@@ -629,7 +629,7 @@ const Villagesquery = gql`
   query ($lgaId: ID, $page: Int, $pageSize: Int, $searchTerm:String) {
     villages(
       pagination: { page: $page, pageSize: $pageSize }
-      sort: "createdAt:desc"
+      sort: "Name:asc"
       filters: { area: { lga: { id: { eq: $lgaId } } }, Name:{ containsi:$searchTerm} }
     ) {
       meta {
