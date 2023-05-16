@@ -59,7 +59,7 @@ function dateRenderer(params) {
     params.data.Address?.post_office?.Name +
     ' ' +
     params.data.Address?.post_office?.Pincode;
-  if (value != 'undefined undefined') {
+  if (value !== 'undefined undefined') {
     return value;
   } else { return 'No data'; }
 }
@@ -246,8 +246,7 @@ export const RetailersColumn = [
       buttons: ['reset'],
     },
     valueGetter: (data) => {
-      if (data.data.attributes.blocked === true) { return 'Rejected'; }
-      else if (data.data.attributes.confirmed === true) {
+      if (data.data.attributes.blocked === true) { return 'Rejected'; } else if (data.data.attributes.confirmed === true) {
         return 'Approved';
       } else if (data.data.attributes.confirmed === false) {
         return 'Pending';
@@ -1048,13 +1047,13 @@ export const CropPricesColumn = [
     },
     cellRenderer: (data) => {
       console.log(data.value, 'cellrenderer');
-      if (data.value.Rejected == true && data.value.publishedAt == null) {
+      if (data.value.Rejected === true && data.value.publishedAt == null) {
         return 'Rejected';
       }
-      if (data.value.Rejected == false && data.value.publishedAt == null) {
+      if (data.value.Rejected === false && data.value.publishedAt == null) {
         return 'Pending';
       }
-      if (data.value.Rejected == false && data.value.publishedAt !== null) {
+      if (data.value.Rejected === false && data.value.publishedAt !== null) {
         return 'Approved';
       }
     },
@@ -1435,7 +1434,7 @@ export const ActivitiesColumn = [
     },
   },
   {
-    field: 'attributes.area.data.attributes.lga.data.attributes.Name',
+    field: 'attributes.village.data.attributes.area.data.attributes.lga.data.attributes.Name',
     headerName: 'LGA',
     resizable: true,
     sortable: true,
@@ -1446,7 +1445,7 @@ export const ActivitiesColumn = [
     },
   },
   {
-    field: 'attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name',
+    field: 'attributes.village.data.attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name',
     headerName: 'State',
     resizable: true,
     sortable: true,

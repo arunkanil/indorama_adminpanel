@@ -47,7 +47,7 @@ export class ActivitiesComponent {
     Longitude: [''],
     state: ['', Validators.required],
     lga: ['', Validators.required],
-    village: [''],
+    village: ['', Validators.required],
     NoOfAttendees: [
       '',
       [Validators.max(9999999), Validators.min(1)],

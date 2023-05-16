@@ -45,7 +45,7 @@ export class ActivityDetailComponent implements OnInit {
     NoOfAttendees: [''],
     state: ['', Validators.required],
     lga: ['', Validators.required],
-    village: [''],
+    village: ['', Validators.required],
     crop: ['', Validators.required],
     FarmerName: [''],
     Agronomist: [''],
@@ -82,9 +82,8 @@ export class ActivityDetailComponent implements OnInit {
           NoOfAttendees: [
             this.details?.attributes?.NoOfAttendees,
           ],
-          state: [this.details?.attributes?.area?.data?.attributes?.lga?.data?.attributes?.state?.data?.id, Validators.required],
-          lga: [this.details?.attributes?.area?.data?.attributes?.lga?.data?.id, Validators.required],
-          area: [this.details?.attributes?.area?.data?.id, Validators.required],
+          state: [this.details?.attributes?.village?.data?.attributes?.area?.data?.attributes?.lga?.data?.attributes?.state?.data?.id, Validators.required],
+          lga: [this.details?.attributes?.village?.data?.attributes?.area?.data?.attributes?.lga?.data?.id, Validators.required],
           crop: [this.details?.attributes?.crop?.data?.id],
           FarmerName: [this.details?.attributes?.FarmerName],
           PlannedFarmDay: [this.details?.attributes?.PlannedFarmDay],
@@ -92,7 +91,7 @@ export class ActivityDetailComponent implements OnInit {
           Date: [this.details?.attributes?.Date, Validators.required],
           Time: [this.details?.attributes?.Time, ],
           Reason: [this.details?.attributes?.Reason],
-          Agronomist: [this.details?.attributes?.Agronomist],
+          Agronomist: [this.details?.attributes?.agronomist],
           village: [this.details?.attributes?.village?.data?.id],
         });
         this.maplink =

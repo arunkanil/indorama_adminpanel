@@ -2993,6 +2993,30 @@ const GetActivities = gql`
               id
               attributes {
                 Name
+                area {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      lga {
+                        data {
+                          id
+                          attributes {
+                            Name
+                            state {
+                              data {
+                                id
+                                attributes {
+                                  Name
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -3058,6 +3082,30 @@ query getActivities($id: ID) {
               id
               attributes {
                 Name
+                area {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      lga {
+                        data {
+                          id
+                          attributes {
+                            Name
+                            state {
+                              data {
+                                id
+                                attributes {
+                                  Name
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
