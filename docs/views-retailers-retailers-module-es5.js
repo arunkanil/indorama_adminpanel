@@ -150,11 +150,10 @@
           value: function ngOnInit() {
             this.loading = true;
             console.log(this.router);
-            this.getRetailers();
-            this.getAreas();
-            this.getLGAs();
-            this.getStates();
-            this.getVillages();
+            this.getRetailers(); // this.getAreas();
+            // this.getLGAs();
+            // this.getStates();
+            // this.getVillages();
           }
         }, {
           key: "getStates",
@@ -668,14 +667,14 @@
           value: function ngOnInit() {
             var _this10 = this;
 
-            this.getLists();
-            this.getAreas();
-            this.getCrops();
-            this.getLGAs();
-            this.getStates();
-            this.getVillages();
-            this.getFarmers();
-            this.getRetailers();
+            this.getLists(); // this.getAreas();
+            // this.getCrops();
+            // this.getLGAs();
+
+            this.getStates(); // this.getVillages();
+            // this.getFarmers();
+            // this.getRetailers();
+
             this.activatedRouter.params.subscribe(function (params) {
               _this10.id = params['id'];
             });

@@ -17,7 +17,7 @@ export class RetailerDetailComponent implements OnInit {
     private router: Router,
     private fb: FormBuilder,
     private toastr: ToastrService
-  ) {}
+  ) { }
   @ViewChild('myModal') public myModal: ModalDirective;
   @ViewChild('resultModal') public resultModal: ModalDirective;
   @ViewChild('deleteModal') public deleteModal: ModalDirective;
@@ -72,13 +72,13 @@ export class RetailerDetailComponent implements OnInit {
   });
   ngOnInit(): void {
     this.getLists();
-    this.getAreas();
-    this.getCrops();
-    this.getLGAs();
+    // this.getAreas();
+    // this.getCrops();
+    // this.getLGAs();
     this.getStates();
-    this.getVillages();
-    this.getFarmers();
-    this.getRetailers();
+    // this.getVillages();
+    // this.getFarmers();
+    // this.getRetailers();
     this.activatedRouter.params.subscribe((params) => {
       this.id = params['id'];
     });

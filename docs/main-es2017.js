@@ -3489,6 +3489,30 @@ const GetActivities = apollo_angular__WEBPACK_IMPORTED_MODULE_5__["gql"] `
               id
               attributes {
                 Name
+                area {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      lga {
+                        data {
+                          id
+                          attributes {
+                            Name
+                            state {
+                              data {
+                                id
+                                attributes {
+                                  Name
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -3554,6 +3578,30 @@ query getActivities($id: ID) {
               id
               attributes {
                 Name
+                area {
+                  data {
+                    id
+                    attributes {
+                      Name
+                      lga {
+                        data {
+                          id
+                          attributes {
+                            Name
+                            state {
+                              data {
+                                id
+                                attributes {
+                                  Name
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           }
@@ -4971,7 +5019,7 @@ let DataService = class DataService {
                 dateOfHarvesting: farmdemo.dateOfHarvesting,
                 season: farmdemo.Season,
                 Status: farmdemo.Status,
-                isPesticidesUsed: farmdemo.isPesticidesUsed === 'true' ? true : false,
+                isPesticidesUsed: farmdemo.isPesticidesUsed === 'true',
                 images: farmdemo.images,
             },
             errorPolicy: 'all',
@@ -5473,7 +5521,7 @@ let DataService = class DataService {
                 lga: data.lga,
                 bio: data.Bio,
                 agronomist_lgas: data.agronomist_lgas,
-                blocked: data.blocked === 'true' ? true : false,
+                blocked: data.blocked === 'true',
                 confirmed: data.confirmed,
                 UserType: data === null || data === void 0 ? void 0 : data.UserType,
                 contactNumber: data.ContactNumber,
@@ -5568,6 +5616,8 @@ let DataService = class DataService {
                 area: price.area,
                 ActivityType: price.ActivityType,
                 Time: price.Time,
+                agronomist: price.Agronomist,
+                village: price.village,
             },
             errorPolicy: 'all',
             fetchPolicy: 'no-cache',

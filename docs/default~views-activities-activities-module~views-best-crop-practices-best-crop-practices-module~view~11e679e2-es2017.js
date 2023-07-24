@@ -88,7 +88,7 @@ function dateRenderer(params) {
     var _a, _b, _c, _d;
     const value = ((_b = (_a = params.data.Address) === null || _a === void 0 ? void 0 : _a.post_office) === null || _b === void 0 ? void 0 : _b.Name) +
         ' ' + ((_d = (_c = params.data.Address) === null || _c === void 0 ? void 0 : _c.post_office) === null || _d === void 0 ? void 0 : _d.Pincode);
-    if (value != 'undefined undefined') {
+    if (value !== 'undefined undefined') {
         return value;
     }
     else {
@@ -983,13 +983,13 @@ const CropPricesColumn = [
         },
         cellRenderer: (data) => {
             console.log(data.value, 'cellrenderer');
-            if (data.value.Rejected == true && data.value.publishedAt == null) {
+            if (data.value.Rejected === true && data.value.publishedAt == null) {
                 return 'Rejected';
             }
-            if (data.value.Rejected == false && data.value.publishedAt == null) {
+            if (data.value.Rejected === false && data.value.publishedAt == null) {
                 return 'Pending';
             }
-            if (data.value.Rejected == false && data.value.publishedAt !== null) {
+            if (data.value.Rejected === false && data.value.publishedAt !== null) {
                 return 'Approved';
             }
         },
@@ -1325,7 +1325,7 @@ const ActivitiesColumn = [
         },
     },
     {
-        field: 'attributes.area.data.attributes.lga.data.attributes.Name',
+        field: 'attributes.village.data.attributes.area.data.attributes.lga.data.attributes.Name',
         headerName: 'LGA',
         resizable: true,
         sortable: true,
@@ -1336,7 +1336,7 @@ const ActivitiesColumn = [
         },
     },
     {
-        field: 'attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name',
+        field: 'attributes.village.data.attributes.area.data.attributes.lga.data.attributes.state.data.attributes.Name',
         headerName: 'State',
         resizable: true,
         sortable: true,

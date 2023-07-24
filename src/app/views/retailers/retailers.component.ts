@@ -63,10 +63,10 @@ export class RetailersComponent {
     this.loading = true;
     console.log(this.router);
     this.getRetailers();
-    this.getAreas();
-    this.getLGAs();
-    this.getStates();
-    this.getVillages();
+    // this.getAreas();
+    // this.getLGAs();
+    // this.getStates();
+    // this.getVillages();
   }
   getStates() {
     this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result: any) => {

@@ -83,10 +83,10 @@ let RetailersComponent = class RetailersComponent {
         this.loading = true;
         console.log(this.router);
         this.getRetailers();
-        this.getAreas();
-        this.getLGAs();
-        this.getStates();
-        this.getVillages();
+        // this.getAreas();
+        // this.getLGAs();
+        // this.getStates();
+        // this.getVillages();
     }
     getStates() {
         this.dataservice.getStates(1, 10000, '').valueChanges.subscribe((result) => {
@@ -471,13 +471,13 @@ let RetailerDetailComponent = class RetailerDetailComponent {
     }
     ngOnInit() {
         this.getLists();
-        this.getAreas();
-        this.getCrops();
-        this.getLGAs();
+        // this.getAreas();
+        // this.getCrops();
+        // this.getLGAs();
         this.getStates();
-        this.getVillages();
-        this.getFarmers();
-        this.getRetailers();
+        // this.getVillages();
+        // this.getFarmers();
+        // this.getRetailers();
         this.activatedRouter.params.subscribe((params) => {
             this.id = params['id'];
         });
